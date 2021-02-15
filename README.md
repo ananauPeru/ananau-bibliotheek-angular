@@ -16,7 +16,7 @@ This repository houses an Angular application that can communicate with a corres
 ### Installing
 
 1. Fire up the backend server
-2. Make sure the API URL in environment.ts and/or environment.prod.ts is pointing at the correct hostname and port
+2. Make sure the API URL in `environment.ts` and/or `environment.prod.ts` is pointing at the correct hostname and port
 3. In the project, run the following command: 
 
 ```bash
@@ -37,7 +37,11 @@ ng serve
 
 ## Contributing
 
-This is a public repository, but please only commit to the master or other already existing branches if you have Añañau's explicit consent. Making feature branches and pull requests is - of course - allowed.
+1. Fork it (<https://github.com/ananauPeru/ananau-bibliotheek-angular/fork>)
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
 
 ## Authors
 
