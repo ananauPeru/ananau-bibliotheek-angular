@@ -31,9 +31,9 @@
                 <div class="form-group">
                   <label>{{'beschikbaar' | translate}}:</label>
                   <select class="form-control" name="beschikbaar" formControlName="beschikbaar" id="beschikbaar">
-                    <option value="beiden" selected translate>Beiden</option>
-                    <option value="ja" translate>Ja</option>
-                    <option value="nee" translate>Neen</option>
+                    <option value="beiden" selected>{{'beiden' | translate}}</option>
+                    <option value="ja">{{'ja' | translate}}</option>
+                    <option value="nee">{{'neen' | translate}}</option>
                   </select>
                 </div>
               </div>
@@ -49,7 +49,7 @@
                   <label>{{'categorie' | translate}}:</label>
                   <select class="form-control" id="categorie" formControlName="categorie">
                     <option value="-1" selected>{{'geenGeselecteerd' | translate}}</option>
-                    <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{itemCategorieen[key]}}</option>
+                    <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{key | translate}}</option>
                   </select>
                 </div>
               </div>
