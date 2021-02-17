@@ -46,6 +46,21 @@ export class ItemService {
     );
   }
 
+  getItemByIdOrName$(idOrName: string): Observable<Item> {
+    return this.http.get(`${environment.apiUrl}/Item/byIdOrName/${idOrName}`).pipe(
+      catchError(error => {
+        if (error.status == 401) {
+          this.accountService.logout();
+          this.translate.get('tokenVerstreken').subscribe((text: string) => { this.router.navigate([`/login`], { state: { errorMessage: text } }) });;
+        }
+        return throwError(error);
+      }),
+      map((item: any): Item => {
+        return Item.fromJSON(item);
+      })
+    );
+  }
+
   deleteItem$(item: Item): Observable<Item> {
     return this.http.delete(`${environment.apiUrl}/Item/${item.id}`).pipe(
       catchError(error => {

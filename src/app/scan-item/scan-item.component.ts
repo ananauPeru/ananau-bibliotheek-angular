@@ -41,7 +41,7 @@ export class ScanItemComponent implements OnInit {
     })
   }
 
-  scanItem() {
+  borrowOrBringBackItem() {
     this.errorMessage = null;
     this.succesMessage = null;
     this.ontleenService.scanItemIn$(this.geselecteerdItem.id).subscribe(
@@ -79,13 +79,18 @@ export class ScanItemComponent implements OnInit {
     return uitvoer;
   }
 
-  public gekozenItem(naam: string): void {
+  public searchItem(naam: string, scannerUsed = false): void {
     this.itemAanHetLaden = true;
-    this.itemService.getItemByName$(naam).subscribe(
+    var itemObservable: Observable<Item> = null;
+    
+    if (scannerUsed) itemObservable = this.itemService.getItemByIdOrName$(naam);
+    else itemObservable = this.itemService.getItemByName$(naam);
+
+    itemObservable.subscribe(
       val => {
         if (val) {
           this.scanFormulier.setValue({
-            naam: naam
+            naam: val.naam
           });
           this.geselecteerdItem = val;
           this.itemNamenAanHetInladen = false;

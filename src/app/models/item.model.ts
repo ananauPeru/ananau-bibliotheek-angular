@@ -18,7 +18,6 @@ export class Item {
     constructor() { }
 
     static fromJSON(json: any): Item {
-        console.log(json.categorie);
         var item = new Item();
         item.id = json.id;
         item.naam = json.naam;

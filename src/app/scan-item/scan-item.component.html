@@ -11,7 +11,7 @@
       </div>
       <div class="row">
         <div class="col-12 col-md-6">
-          <zxing-scanner (scanSuccess)="gekozenItem($event)"></zxing-scanner>
+          <zxing-scanner (scanSuccess)="searchItem($event, true)"></zxing-scanner>
         </div>
         <div class="col-12 col-md-5">
           <form [formGroup]="scanFormulier">
@@ -20,7 +20,7 @@
           </form>
           <table class="table" *ngIf="!itemNamenAanHetInladen && geselecteerdItem ==null">
             <tbody>
-              <tr *ngFor="let item of zoekResultaat" class="tableHoverLink" (click)="gekozenItem(item.naam)">
+              <tr *ngFor="let item of zoekResultaat" class="tableHoverLink" (click)="searchItem(item.naam)">
                 <td>{{ item.naam }}</td>
               </tr>
             </tbody>
@@ -31,9 +31,9 @@
             </div>
           </div>
 
-          <button *ngIf="geselecteerdItem !=null && geselecteerdItem.beschikbaar" (click)="scanItem()" type="submit"
+          <button *ngIf="geselecteerdItem !=null && geselecteerdItem.beschikbaar" (click)="borrowOrBringBackItem()" type="submit"
             class="btn btn-primary marginTop10 width100" tranlsate>{{'ontleenDitItem' | translate}}</button>
-          <button *ngIf="geselecteerdItem !=null && !geselecteerdItem.beschikbaar" (click)="scanItem()" type="submit"
+          <button *ngIf="geselecteerdItem !=null && !geselecteerdItem.beschikbaar" (click)="borrowOrBringBackItem()" type="submit"
             class="btn btn-primary marginTop10 width100" tranlsate>{{'brengItemTerug' | translate}}</button>
           <app-item-info [item]=geselecteerdItem [itemAanHetLaden]=itemAanHetLaden></app-item-info>
         </div>
