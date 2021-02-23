@@ -28,8 +28,7 @@ export class ItemsBeherenComponent implements OnInit {
   public aantalItems: number = 25;
   public totaalAantalItemsBeschikaar;
   public gearchiveerd: boolean = false;
-  public itemCategorieen = ItemCategorie
-  public itemCategorieenSleutels = Object.keys(ItemCategorie)
+  public itemCategorieenSleutels = Object.keys(ItemCategorie);
   public categorieFilter: number = -1;
 
   constructor(private itemService: ItemService, public router: Router, private fb: FormBuilder, public translate: TranslateService) { }

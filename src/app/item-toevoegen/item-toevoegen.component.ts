@@ -15,9 +15,8 @@ export class ItemToevoegenComponent implements OnInit {
 
   public itemToevoegenFormulier: FormGroup;
   public successMessage: string = null;
-  public errorMessage: string = null; 
-  public itemCategorieen = ItemCategorie
-  public itemCategorieenSleutels = Object.keys(ItemCategorie)
+  public errorMessage: string = null;
+  public itemCategorieenSleutels = Object.keys(ItemCategorie);
 
   constructor(public router: Router, private fb: FormBuilder, private itemService: ItemService, public translate: TranslateService) {
   }

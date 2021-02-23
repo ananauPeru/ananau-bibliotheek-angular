@@ -37,11 +37,11 @@ export class ScanItemComponent implements OnInit {
 
   ngOnInit() {
     this.scanFormulier = this.fb.group({
-      naam: ['', [Validators.required], this.serverSideValidateUsername(this.itemService.getItemContainsWordInName$)]
+      naam: ['', [Validators.required], this.checkItemExistence(this.itemService.getItemContainsWordInName$)]
     })
   }
 
-  scanItem() {
+  borrowOrBringBackItem() {
     this.errorMessage = null;
     this.succesMessage = null;
     this.ontleenService.scanItemIn$(this.geselecteerdItem.id).subscribe(
@@ -79,13 +79,18 @@ export class ScanItemComponent implements OnInit {
     return uitvoer;
   }
 
-  public gekozenItem(naam: string): void {
+  public searchItem(idOrName: string, scannerUsed = false): void {
     this.itemAanHetLaden = true;
-    this.itemService.getItemByName$(naam).subscribe(
+    var itemObservable: Observable<Item> = null;
+    
+    if (scannerUsed) itemObservable = this.itemService.getItemByIdOrName$(idOrName);
+    else itemObservable = this.itemService.getItemById$(idOrName);
+
+    itemObservable.subscribe(
       val => {
         if (val) {
           this.scanFormulier.setValue({
-            naam: naam
+            naam: val.naam
           });
           this.geselecteerdItem = val;
           this.itemNamenAanHetInladen = false;
@@ -100,8 +105,8 @@ export class ScanItemComponent implements OnInit {
     this.itemAanHetLaden = false;
   }
 
-  serverSideValidateUsername(
-    checkAvailabilityFn: (n: string) => Observable<Item[]>
+  checkItemExistence(
+    ItemExistenceCheckingFn: (n: string) => Observable<Item[]>
   ): ValidatorFn {
     return (control: AbstractControl): Observable<{ [key: string]: any }> => {
       document.getElementById("zoekVeld").style.cssText = "";
@@ -109,7 +114,7 @@ export class ScanItemComponent implements OnInit {
       this.geselecteerdItem = null;
       this.errorMessage = null;
       this.succesMessage = null;
-      return checkAvailabilityFn(control.value).pipe(
+      return ItemExistenceCheckingFn(control.value).pipe(
         catchError(error => {
           // this.errorMessage = error.error;
           document.getElementById("zoekVeld").style.cssText = "border: 1px solid red !important; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px red;";

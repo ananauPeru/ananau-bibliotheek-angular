@@ -16,7 +16,6 @@ export class ItemWijzigenComponent implements OnInit {
   public item: Item;
   public itemWijzigenFormulier: FormGroup;
   public errorMessage: string;
-  public itemCategorieen = ItemCategorie;
   public itemCategorieenSleutels = Object.keys(ItemCategorie);
 
   constructor(

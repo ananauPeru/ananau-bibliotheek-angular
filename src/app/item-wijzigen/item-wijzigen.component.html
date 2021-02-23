@@ -38,7 +38,7 @@
             <div class="col-12 col-sm-6 col-md-4">
               <label for="categorie" class="marginTop10">{{'categorie' | translate}}:</label>
               <select class="form-control" id="categorie" formControlName="categorie">
-                <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{itemCategorieen[key]}}</option>
+                <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{key | translate}}</option>
               </select>
             </div>
             <div class="col-12">

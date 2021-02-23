@@ -1,12 +1,12 @@
 export enum ItemCategorie {
-	geenCategorie = "No category",
+	geenCategorie = "geenCategorie",
 	comunicación = "comunicación",
 	matematicas = "matematicas",
-	estimulaciónTemprana = "estimulación temprana",
+	estimulaciónTemprana = "estimulaciónTemprana",
 	juegos = "juegos",
 	geografía = "geografía",
 	música = "música",
-	actividadesSocioEducativas = "actividades socio educativas",
+	actividadesSocioEducativas = "actividadesSocioEducativas",
 	stem = "stem",
 	inglés = "inglés",
 	otro = "otro"

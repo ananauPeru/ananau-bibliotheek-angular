@@ -1,28 +1,50 @@
-# AnanauBibliotheek
+# Añañau library system - frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
+This Angular application serves as an online libary management tool for [Añañau](https://ananau.org/), a nonprofit organization based in Peru. Users can register and afterwards log in with a personal account to get access to the application, search through the different items already present in the library, add items themselves and scan items using a QR code as to borrow or return them. The application also provides every user with a personal overview of his or her 'items in possession' and borrow history.
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This repository houses an Angular application that can communicate with a corresponding backend. The backend is an ASP.NET Core web API project and can be found [here](https://github.com/ananauPeru/ananau-bibliotheek-api)
 
-## Code scaffolding
+### Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Node.js
+* Npm package manager
+* SQL Server
+* Local server running ASP.NET Core web API project
 
-## Build
+### Installing
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+1. Fire up the backend server
+2. Make sure the API URL in `environment.ts` and/or `environment.prod.ts` is pointing at the correct hostname and port
+3. In the project, run the following command: 
 
-## Running unit tests
+```bash
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+4. Finally, run the application:
 
-## Running end-to-end tests
+```bash
+ng serve
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Built With
 
-## Further help
+* [Angular](https://angular.io/) - The web framework used
+* [ZXing](https://github.com/zxing/zxing) - Library used for QR code scanning
+* [angular2-qrcode](https://github.com/SuperiorJT/angular2-qrcode) - Library used for QR code generation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# ananau-bibliotheek
+## Contributing
+
+1. Fork it (<https://github.com/ananauPeru/ananau-bibliotheek-angular/fork>)
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## Authors
+
+* **Lucas Vermeulen** - *Major work* - [GitHub profile](https://github.com/lucasverm)
+
+See also the list of [contributors](https://github.com/ananauPeru/ananau-bibliotheek-angular/graphs/contributors) who participated in this project.
