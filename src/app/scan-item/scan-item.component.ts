@@ -83,7 +83,7 @@ export class ScanItemComponent implements OnInit {
     this.itemAanHetLaden = true;
     var itemObservable: Observable<Item> = null;
     
-    if (scannerUsed) itemObservable = this.itemService.getItemByIdOrName$(idOrName);
+    if (scannerUsed) itemObservable = this.itemService.getItemById$(idOrName);
     else itemObservable = this.itemService.getItemById$(idOrName);
 
     itemObservable.subscribe(
