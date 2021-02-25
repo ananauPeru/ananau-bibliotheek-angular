@@ -1,4 +1,8 @@
 <app-topbar>
-  <app-sidemenu></app-sidemenu>
-  <router-outlet></router-outlet>
+  <div class="row">
+    <app-sidemenu class="col-12 col-md-2"></app-sidemenu>
+    <div class="col-12 col-md-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </app-topbar>
