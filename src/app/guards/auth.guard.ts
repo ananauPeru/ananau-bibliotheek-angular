@@ -7,8 +7,8 @@ import {
     Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AccountService } from '../services/account.service';
-import { Gebruiker } from '../models/gebruiker.model';
+import { AccountService } from '../account/data-services/account.service';
+import { Gebruiker } from '../account/models/gebruiker.model';
 
 @Injectable({
     providedIn: 'root',
@@ -27,12 +27,12 @@ export class AuthGuard implements CanActivate {
         const currentUser: Gebruiker = this.authService.user.value;
         if (currentUser) {
             if (next.data.roles && next.data.roles.indexOf(currentUser.type) === -1) {
-                this.router.navigate(['/login']);
+                this.router.navigate(['/account/login']);
                 return false;
             }
             return true;
         }
-        this.router.navigate(['/login']);
+        this.router.navigate(['/account/login']);
         return false;
     }
 }

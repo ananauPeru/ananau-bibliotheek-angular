@@ -1,0 +1,63 @@
+<!--<ng-container *ngIf="!loading; else loadingError">-->
+<div class="row">
+  <div class="col-12 col-md-10">
+    <form [formGroup]="itemWijzigenFormulier" (ngSubmit)='itemWijzigen()'>
+      <div class="row">
+        <div class="col-12">
+          <h1>{{'itemWijzigen' | translate}}</h1>
+        </div>
+        <div class="col-12">
+          <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+            {{errorMessage}}
+          </div>
+        </div>
+        <div class="col-12">
+
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-md-4">
+              <label for="naam" class="marginTop10">{{'naam' | translate}}:</label>
+              <input type="text" class="form-control" id="naam" formControlName="naam">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="merk" class="marginTop10">{{'merk'| translate}}:</label>
+              <input type="text" class="form-control" id="merk" formControlName="merk">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="materiaal" class="marginTop10">{{'materiaal' | translate}}:</label>
+              <input type="text" class="form-control" id="materiaal" formControlName="materiaal">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="inhoud" class="marginTop10">{{'inhoud' | translate}}:</label>
+              <input type="text" class="form-control" id="inhoud" formControlName="inhoud">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="aankoopDatum" class="marginTop10">{{'aankoopDatum' | translate}}:</label>
+              <input type="date" class="form-control" id="aankoopDatum" formControlName="aankoopDatum">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="categorie" class="marginTop10">{{'categorie' | translate}}:</label>
+              <select class="form-control" id="categorie" formControlName="categorie">
+                <option *ngFor="let key of itemCategorieenSleutels" [value]="key">{{key | translate}}</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary marginTop10 width100"
+                [disabled]='!itemWijzigenFormulier.valid'>{{'itemWijzigen' | translate}}!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--</ng-container>-->
+<ng-template #loadingError>
+  <div class="row">
+    <div class="col-2 offset-5 text-center">
+      <div class="spinner-border spinner" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>

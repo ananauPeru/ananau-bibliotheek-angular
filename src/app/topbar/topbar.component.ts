@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AccountService } from '../services/account.service';
-import { Gebruiker } from '../models/gebruiker.model';
+import { AccountService } from '../account/data-services/account.service';
+import { Gebruiker } from '../account/models/gebruiker.model';
 
 @Component({
   selector: 'app-topbar',
@@ -22,7 +22,7 @@ export class TopbarComponent implements OnInit {
 
   public afmelden(): void {
     this.accountService.logout();
-    this.router.navigate([`/login`])
+    this.router.navigate([`/account/login`])
   }
 
 }
