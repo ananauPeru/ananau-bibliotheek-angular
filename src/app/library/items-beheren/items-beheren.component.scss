@@ -19,6 +19,18 @@ td {
   }
 }
 
+tbody {
+  tr {
+    cursor: pointer;
+  }
+}
+
+.hoverUnderline {
+  a {
+    cursor: pointer;
+  }
+}
+
 .editButtons {
   padding: 0px 2px;
   background-color: transparent !important;
