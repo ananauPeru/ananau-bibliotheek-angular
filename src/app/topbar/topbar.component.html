@@ -14,9 +14,9 @@
 
 <ng-template #nietaangemeld>
   <div class="col-3 text-right verticalAlign">
-    <a class="btn btn-primary geleButton" *ngIf="(router.url == '/register') || (router.url  =='/wachtwoordvergeten')"
-      [routerLink]="['/login']" id="login">{{'login' | translate}}</a>
-    <a class="btn btn-primary geleButton" *ngIf="(router.url == '/login')" [routerLink]="['/register']"
+    <a class="btn btn-primary geleButton" *ngIf="(router.url == '/account/register') || (router.url  =='/account/forgot-password')"
+      [routerLink]="['/account/login']" id="login">{{'login' | translate}}</a>
+    <a class="btn btn-primary geleButton" *ngIf="(router.url == '/account/login')" [routerLink]="['/account/register']"
       id="register">{{'registreer' | translate}}</a>
   </div>
 </ng-template>

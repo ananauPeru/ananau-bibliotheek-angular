@@ -1,0 +1,52 @@
+<ng-container *ngIf="!loading; else loadingError">
+  <div class="row">
+    <div class="col-12 col-md-10">
+      <div class="card marginTop10">
+        <div class="card-header">
+          <h3 class="d-inline"> <i class="fa fa-fw fa-book"></i><strong> Overview</strong></h3>
+        </div>
+        <div class="card-body">
+          <div class="col-12">
+            <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+              {{errorMessage}}
+            </div>
+            <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{'itemsInBezit' | translate}}:</h5>
+            <div class="row align-bottom">
+              <div class="col-12">
+                <button *ngIf="totaalOntleendeItems > 10" [disabled]="vanafOntleendeItems <= 0"
+                  (click)="veranderOntleendeItemsScope(-1)"><i class="fas fa-arrow-left"></i></button>
+                <button *ngIf="totaalOntleendeItems > 10"
+                  [disabled]="totaalOntleendeItems < (vanafOntleendeItems + hoeveelheidOntleendeItems)"
+                  (click)="veranderOntleendeItemsScope(1)"><i class="fas fa-arrow-right"></i></button>
+                <app-uitgeleende-boeken-tabel [items]=ontleendeItems [startNummer]=vanafOntleendeItems>
+                </app-uitgeleende-boeken-tabel>
+              </div>
+            </div>
+            <h5 class="card-title"><i class="fa fa-fw fa-search"></i> {{'ontleenHistorie' | translate}}: </h5>
+            <div class="row align-bottom">
+              <div class="col-12">
+                <button *ngIf="totaalHistoriek > 10" [disabled]="vanafHistoriek <= 0"
+                  (click)="veranderHistoriekScope(-1)"><i class="fas fa-arrow-left"></i></button>
+                <button *ngIf="totaalHistoriek > 10"
+                  [disabled]="totaalHistoriek < (vanafHistoriek + hoeveelheidHistoriek)"
+                  (click)="veranderHistoriekScope(1)"><i class="fas fa-arrow-right"></i></button>
+                <app-uitgeleende-boeken-tabel [items]=ontleendeHistorieItems [startNummer]=vanafHistoriek>
+                </app-uitgeleende-boeken-tabel>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loadingError>
+  <div class="row">
+    <div class="col-2 offset-5 text-center">
+      <div class="spinner-border spinner" role="status">
+        <span class="sr-only" translate>Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
