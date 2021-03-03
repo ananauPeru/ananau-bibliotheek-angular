@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Scans & passport photo</h2>
+  <div class="container">
+    <form [formGroup]="scansForm">
+      <input
+        placeholder="Scan international passport"
+        type="file"
+        formControlName="internationalPassport"
+        required
+      />
+      <input
+        placeholder="Scan certificate of good conduct"
+        type="file"
+        formControlName="goodConductCertificate"
+        required
+      />
+      <input
+        placeholder="Scan diploma"
+        type="file"
+        formControlName="diploma"
+        required
+      />
+    </form>
+  </div>
+</div>

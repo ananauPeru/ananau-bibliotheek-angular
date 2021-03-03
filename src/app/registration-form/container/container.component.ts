@@ -58,7 +58,11 @@ export class ContainerComponent implements OnInit {
         appartmentEndDate: ["", Validators.required],
         weeksSpanish: ["", Validators.required],
       }),
-      scansForm: this.fb.group({}),
+      scansForm: this.fb.group({
+        internationalPassport: ["", Validators.required],
+        goodConductCertificate: ["", Validators.required],
+        diploma: ["", Validators.required],
+      }),
       questionsForm: this.fb.group({}),
     });
   }

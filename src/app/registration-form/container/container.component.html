@@ -87,7 +87,9 @@
         role="tabpanel"
         aria-labelledby="scans-tab"
       >
-        Scans
+        <app-scan-uploads
+          [(scansForm)]="formContainer.controls.scansForm"
+        ></app-scan-uploads>
       </div>
       <div
         class="tab-pane fade"
