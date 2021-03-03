@@ -2,20 +2,30 @@
   <h2>Scans & passport photo</h2>
   <div class="container">
     <form [formGroup]="scansForm">
+      <label for="scansInternationalPassport" class="form-label"
+        >Scan international passport</label
+      >
       <input
-        placeholder="Scan international passport"
+        class="form-control"
+        id="scansInternationalPassport"
         type="file"
         formControlName="internationalPassport"
         required
       />
+      <label for="scansGoodConductCertificate" class="form-label"
+        >Scan certificate of good conduct</label
+      >
       <input
-        placeholder="Scan certificate of good conduct"
+        class="form-control"
+        id="scansGoodConductCertificate"
         type="file"
         formControlName="goodConductCertificate"
         required
       />
+      <label for="scansDiploma" class="form-label">Scan diploma</label>
       <input
-        placeholder="Scan diploma"
+        class="form-control"
+        id="scansDiploma"
         type="file"
         formControlName="diploma"
         required

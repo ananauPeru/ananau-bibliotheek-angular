@@ -2,15 +2,30 @@
   <h2>Some extra questions</h2>
   <div class="container">
     <form [formGroup]="questionsForm">
+      <label for="questionsOther" class="form-label"
+        >Do you have any further questions?</label
+      >
       <textarea
-        placeholder="Do you have any further questions?"
+        class="form-control"
+        id="questionsOther"
         formControlName="otherQuestions"
       ></textarea>
+      <label for="questionsWhyAnanau" class="form-label"
+        >Why did you choose Añañau to apply for volunteering/internship?</label
+      >
       <textarea
-        placeholder="Why did you choose Añanau to apply for volunteering/internship?"
+        class="form-control"
+        id="questionsWhyAnanau"
         formControlName="whyAnanau"
       ></textarea>
-      <select formControlName="firstHeard">
+      <label for="questionsFirstHeard" class="form-label"
+        >Where did you first hear of Añañau?</label
+      >
+      <select
+        class="form-select"
+        id="questionsFirstHeard"
+        formControlName="firstHeard"
+      >
         <option value="0" selected>--</option>
         <option value="1">Website</option>
         <option value="2">Facebook</option>

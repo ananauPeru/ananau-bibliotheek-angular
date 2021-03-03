@@ -3,51 +3,63 @@
   <div class="container">
     <h3>General</h3>
     <form [formGroup]="personalForm.controls.general">
+      <label for="generalFirstName" class="form-label">First name</label>
       <input
-        placeholder="First name"
-        type="text"
+        class="form-control"
+        id="generalFirstName"
         formControlName="firstName"
         required
       />
+      <label for="generalLastName" class="form-label">Last name</label>
       <input
-        placeholder="Last name"
-        type="text"
+        class="form-control"
+        id="generalLastName"
         formControlName="lastName"
         required
       />
+      <label for="generalEmail" class="form-label">Email</label>
       <input
-        placeholder="Email"
+        class="form-control"
+        id="generalEmail"
         type="email"
         formControlName="email"
         required
       />
+      <label for="generalPhone" class="form-label">Phone number</label>
       <input
-        placeholder="Phone number"
-        type="text"
+        class="form-control"
+        id="generalPhone"
         formControlName="phone"
         required
       />
+      <label for="generalBirthdate" class="form-label">Date of birth</label>
       <input
-        placeholder="Date of birth"
+        class="form-control"
+        id="generalBirthdate"
         type="date"
         formControlName="dateOfBirth"
         required
       />
+      <label for="generalBirthplace" class="form-label">Birthplace</label>
       <input
-        placeholder="Birthplace"
-        type="text"
+        class="form-control"
+        id="generalBirthplace"
         formControlName="birthplace"
         required
       />
+      <label for="generalNationality" class="form-label">Nationality</label>
       <input
-        placeholder="Nationality"
-        type="text"
+        class="form-control"
+        id="generalNationality"
         formControlName="nationality"
         required
       />
+      <label for="generalPassportNumber" class="form-label"
+        >Passport number</label
+      >
       <input
-        placeholder="Passport number"
-        type="text"
+        class="form-control"
+        id="generalPassportNumber"
         formControlName="passportNumber"
         required
       />
@@ -56,33 +68,38 @@
   <div class="container">
     <h3>Address</h3>
     <form [formGroup]="personalForm.controls.address">
+      <label for="addressStreet" class="form-label">Street</label>
       <input
-        placeholder="Street"
-        type="text"
+        class="form-control"
+        id="addressStreet"
         formControlName="street"
         required
       />
+      <label for="addressHouseNumber" class="form-label">House number</label>
       <input
-        placeholder="House number"
-        type="text"
+        class="form-control"
+        id="addressHouseNumber"
         formControlName="houseNumber"
         required
       />
+      <label for="addressMailbox" class="form-label">Mailbox</label>
       <input
-        placeholder="Mailbox"
-        type="text"
+        class="form-control"
+        id="addressMailbox"
         formControlName="mailbox"
         required
       />
+      <label for="addressPostalCode" class="form-label">Postal code</label>
       <input
-        placeholder="Postal code"
-        type="text"
+        class="form-control"
+        id="addressPostalCode"
         formControlName="postalCode"
         required
       />
+      <label for="addressTownship" class="form-label">Township</label>
       <input
-        placeholder="Township"
-        type="text"
+        class="form-control"
+        id="addressTownship"
         formControlName="township"
         required
       />
@@ -95,33 +112,39 @@
       an emergency.
     </p>
     <form [formGroup]="personalForm.controls.contactPerson">
+      <label for="contactPersonFirstName" class="form-label">First name</label>
       <input
-        placeholder="Fist name"
-        type="text"
+        class="form-control"
+        id="contactPersonFirstName"
         formControlName="firstName"
         required
       />
+      <label for="contactPersonLastName" class="form-label">Last name</label>
       <input
-        placeholder="Last name"
-        type="text"
+        class="form-control"
+        id="contactPersonLastName"
         formControlName="lastName"
         required
       />
+      <label for="contactPersonRelation" class="form-label">Relation</label>
       <input
-        placeholder="Relation to contact person"
-        type="text"
+        class="form-control"
+        id="contactPersonRelation"
         formControlName="relation"
         required
       />
+      <label for="contactPersonEmail" class="form-label">Email</label>
       <input
-        placeholder="Email"
+        class="form-control"
+        id="contactPersonEmail"
         type="email"
         formControlName="email"
         required
       />
+      <label for="contactPersonPhone" class="form-label">Phone number</label>
       <input
-        placeholder="Phone number"
-        type="text"
+        class="form-control"
+        id="contactPersonPhone"
         formControlName="phone"
         required
       />
@@ -130,43 +153,84 @@
   <div class="container">
     <h3>Medical details</h3>
     <form [formGroup]="personalForm.controls.medical">
-      <textarea placeholder="Allergies" formControlName="allergies"></textarea>
+      <label for="medicalAllergies" class="form-label">Allergies</label>
       <textarea
-        placeholder="Medical conditions"
+        class="form-control"
+        id="medicalAllergies"
+        formControlName="allergies"
+        rows="3"
+      ></textarea>
+      <label for="medicalConditions" class="form-label"
+        >Medical conditions</label
+      >
+      <textarea
+        class="form-control"
+        id="medicalConditions"
         formControlName="medicalConditions"
+        rows="3"
       ></textarea>
     </form>
   </div>
   <div class="container">
     <h3>Volunteering work / internship information</h3>
     <form [formGroup]="personalForm.controls.volunteering">
+      <label for="volunteeringOccupation" class="form-label"
+        >Eductation/profession</label
+      >
       <input
-        placeholder="Education/profession"
-        type="text"
+        class="form-control"
+        id="volunteeringOccupation"
         formControlName="occupation"
         required
       />
+      <label for="volunteeringExperiences" class="form-label"
+        >If applicable, describe your previous experiences with
+        volunteering</label
+      >
       <textarea
-        placeholder="If applicable, describe your previous experiences with volunteering."
+        class="form-control"
+        id="volunteeringExperiences"
         formControlName="experiences"
+        rows="3"
       ></textarea>
+      <label for="volunteeringLevelSpanish" class="form-label"
+        >Describe your level of Spanish</label
+      >
       <textarea
-        placeholder="Describe your level of Spanish."
+        class="form-control"
+        id="volunteeringLevelSpanish"
         formControlName="levelSpanish"
+        rows="3"
         required
       ></textarea>
+      <label for="volunteeringTasks" class="form-label"
+        >What tasks would you like to work on withtin the organisation?</label
+      >
       <textarea
-        placeholder="What tasks would you like to work on within the organisation?"
+        class="form-control"
+        id="volunteeringTasks"
         formControlName="tasks"
+        rows="3"
         required
       ></textarea>
+      <label for="volunteeringExpectations" class="form-label"
+        >What are your expectations of the volunteering/internship?</label
+      >
       <textarea
-        placeholder="What are your expectations?"
+        class="form-control"
+        id="volunteeringExpectations"
         formControlName="expectations"
+        rows="3"
       ></textarea>
+      <label for="volunteeringProposals" class="form-label"
+        >Do you have any proposals concerning your work within the
+        organisation?</label
+      >
       <textarea
-        placeholder="Do you have any proposals concerning your work within the organisation?"
+        class="form-control"
+        id="volunteeringProposals"
         formControlName="proposals"
+        rows="3"
       ></textarea>
     </form>
   </div>

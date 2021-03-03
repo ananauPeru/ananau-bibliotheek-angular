@@ -2,32 +2,52 @@
   <h2>Organizational information</h2>
   <div class="container">
     <form [formGroup]="organizationalForm">
+      <label for="organizationalStartDate" class="form-label"
+        >Proposed start date of internship/volunteering</label
+      >
       <input
-        placeholder="Proposed start date internship/volunteering"
+        class="form-control"
+        id="organizationalStartDate"
         type="date"
         formControlName="startDate"
         required
       />
+      <label for="organizationalEndDate" class="form-label"
+        >Proposed end date of internship/volunteering</label
+      >
       <input
-        placeholder="Proposed end date internship/volunteering"
+        class="form-control"
+        id="organizationalEndDate"
         type="date"
         formControlName="endDate"
         required
       />
+      <label for="organizationalAppartmentStartDate" class="form-label"
+        >Proposed start date for appartment stay</label
+      >
       <input
-        placeholder="Proposed start date for appartment stay"
+        class="form-control"
+        id="organizationalAppartmentStartDate"
         type="date"
         formControlName="appartmentStartDate"
         required
       />
+      <label for="organizationalAppartmentEndDate" class="form-label"
+        >Proposed end date for appartment stay</label
+      >
       <input
-        placeholder="Proposed end date for appartment stay"
+        class="form-control"
+        id="organizationalAppartmentEndDate"
         type="date"
         formControlName="appartmentEndDate"
         required
       />
+      <label for="organizationalWeeksSpanish" class="form-label"
+        >Amount of weeks for Spanish lessons</label
+      >
       <input
-        placeholder="Amount of weeks for Spanish lessons"
+        class="form-control"
+        id="organizationalWeeksSpanish"
         type="number"
         formControlName="weeksSpanish"
         required
