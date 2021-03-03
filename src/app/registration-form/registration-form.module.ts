@@ -3,6 +3,8 @@ import { CommonModule } from "@angular/common";
 import { ContainerComponent } from "./container/container.component";
 import { RouterModule, Routes } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
+import { PersonalInformationComponent } from "./personal-information/personal-information.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [
   {
@@ -12,8 +14,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ContainerComponent],
-  imports: [CommonModule, TranslateModule, RouterModule.forChild(routes)],
+  declarations: [ContainerComponent, PersonalInformationComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    RouterModule.forChild(routes),
+  ],
   exports: [ContainerComponent],
 })
 export class RegistrationFormModule {}

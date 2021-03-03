@@ -1,112 +1,120 @@
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button
-      class="nav-link active"
-      id="personal-tab"
-      data-bs-toggle="tab"
-      data-bs-target="#personal"
-      type="button"
-      role="tab"
-      aria-controls="personal"
-      aria-selected="true"
-    >
-      Personal
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button
-      class="nav-link"
-      id="organizational-tab"
-      data-bs-toggle="tab"
-      data-bs-target="#organizational"
-      type="button"
-      role="tab"
-      aria-controls="organizational"
-      aria-selected="false"
-    >
-      Organizational
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button
-      class="nav-link"
-      id="scans-tab"
-      data-bs-toggle="tab"
-      data-bs-target="#scans"
-      type="button"
-      role="tab"
-      aria-controls="scans"
-      aria-selected="false"
-    >
-      Scans
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button
-      class="nav-link"
-      id="questions-tab"
-      data-bs-toggle="tab"
-      data-bs-target="#questions"
-      type="button"
-      role="tab"
-      aria-controls="questions"
-      aria-selected="false"
-    >
-      Questions
-    </button>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div
-    class="tab-pane fade show active"
-    id="personal"
-    role="tabpanel"
-    aria-labelledby="personal-tab"
-  >
-    Personal
-  </div>
-  <div
-    class="tab-pane fade"
-    id="organizational"
-    role="tabpanel"
-    aria-labelledby="organizational-tab"
-  >
-    Organizational
-  </div>
-  <div
-    class="tab-pane fade"
-    id="scans"
-    role="tabpanel"
-    aria-labelledby="scans-tab"
-  >
-    Scans
-  </div>
-  <div
-    class="tab-pane fade"
-    id="questions"
-    role="tabpanel"
-    aria-labelledby="questions-tab"
-  >
-    Questions
-  </div>
-</div>
+<div class="container">
+  <h1>Registration</h1>
 
-<div class="container bg-light rounded p-3">
-  <div class="row">
-    <div class="col">
-      <div class="progress">
-        <div
-          class="progress-bar w-75 bg-success"
-          role="progressbar"
-          aria-valuenow="75"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
+  <form [formGroup]="formContainer" (ngSubmit)="onSumbit()">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="personal-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#personal"
+          type="button"
+          role="tab"
+          aria-controls="personal"
+          aria-selected="true"
+        >
+          Personal
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="organizational-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#organizational"
+          type="button"
+          role="tab"
+          aria-controls="organizational"
+          aria-selected="false"
+        >
+          Organizational
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="scans-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#scans"
+          type="button"
+          role="tab"
+          aria-controls="scans"
+          aria-selected="false"
+        >
+          Scans
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="questions-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#questions"
+          type="button"
+          role="tab"
+          aria-controls="questions"
+          aria-selected="false"
+        >
+          Questions
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="personal"
+        role="tabpanel"
+        aria-labelledby="personal-tab"
+      >
+        <app-personal-information
+          [(personalForm)]="formContainer.controls.personalForm"
+        ></app-personal-information>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="organizational"
+        role="tabpanel"
+        aria-labelledby="organizational-tab"
+      >
+        Organizational
+      </div>
+      <div
+        class="tab-pane fade"
+        id="scans"
+        role="tabpanel"
+        aria-labelledby="scans-tab"
+      >
+        Scans
+      </div>
+      <div
+        class="tab-pane fade"
+        id="questions"
+        role="tabpanel"
+        aria-labelledby="questions-tab"
+      >
+        Questions
       </div>
     </div>
-    <div class="col-3">
-      <button type="button" class="btn btn-outline-success">Save</button>
-      <button type="button" class="btn btn-success">Send</button>
+
+    <div class="container bg-light rounded p-3">
+      <div class="row">
+        <div class="col">
+          <div class="progress">
+            <div
+              class="progress-bar w-75 bg-success"
+              role="progressbar"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+        </div>
+        <div class="col-3">
+          <button type="button" class="btn btn-outline-success">Save</button>
+          <button type="submit" class="btn btn-success">Send</button>
+        </div>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

@@ -1,0 +1,173 @@
+<div class="container">
+  <h2>Personal information</h2>
+  <div class="container">
+    <h3>General</h3>
+    <form [formGroup]="personalForm.controls.general">
+      <input
+        placeholder="First name"
+        type="text"
+        formControlName="firstName"
+        required
+      />
+      <input
+        placeholder="Last name"
+        type="text"
+        formControlName="lastName"
+        required
+      />
+      <input
+        placeholder="Email"
+        type="email"
+        formControlName="email"
+        required
+      />
+      <input
+        placeholder="Phone number"
+        type="text"
+        formControlName="phone"
+        required
+      />
+      <input
+        placeholder="Date of birth"
+        type="date"
+        formControlName="dateOfBirth"
+        required
+      />
+      <input
+        placeholder="Birthplace"
+        type="text"
+        formControlName="birthplace"
+        required
+      />
+      <input
+        placeholder="Nationality"
+        type="text"
+        formControlName="nationality"
+        required
+      />
+      <input
+        placeholder="Passport number"
+        type="text"
+        formControlName="passportNumber"
+        required
+      />
+    </form>
+  </div>
+  <div class="container">
+    <h3>Address</h3>
+    <form [formGroup]="personalForm.controls.address">
+      <input
+        placeholder="Street"
+        type="text"
+        formControlName="street"
+        required
+      />
+      <input
+        placeholder="House number"
+        type="text"
+        formControlName="houseNumber"
+        required
+      />
+      <input
+        placeholder="Mailbox"
+        type="text"
+        formControlName="mailbox"
+        required
+      />
+      <input
+        placeholder="Postal code"
+        type="text"
+        formControlName="postalCode"
+        required
+      />
+      <input
+        placeholder="Township"
+        type="text"
+        formControlName="township"
+        required
+      />
+    </form>
+  </div>
+  <div class="container">
+    <h3>Contact person</h3>
+    <p>
+      Your contact person is the person we should be able to contact in case of
+      an emergency.
+    </p>
+    <form [formGroup]="personalForm.controls.contactPerson">
+      <input
+        placeholder="Fist name"
+        type="text"
+        formControlName="firstName"
+        required
+      />
+      <input
+        placeholder="Last name"
+        type="text"
+        formControlName="lastName"
+        required
+      />
+      <input
+        placeholder="Relation to contact person"
+        type="text"
+        formControlName="relation"
+        required
+      />
+      <input
+        placeholder="Email"
+        type="email"
+        formControlName="email"
+        required
+      />
+      <input
+        placeholder="Phone number"
+        type="text"
+        formControlName="phone"
+        required
+      />
+    </form>
+  </div>
+  <div class="container">
+    <h3>Medical details</h3>
+    <form [formGroup]="personalForm.controls.medical">
+      <textarea placeholder="Allergies" formControlName="allergies"></textarea>
+      <textarea
+        placeholder="Medical conditions"
+        formControlName="medicalConditions"
+      ></textarea>
+    </form>
+  </div>
+  <div class="container">
+    <h3>Volunteering work / internship information</h3>
+    <form [formGroup]="personalForm.controls.volunteering">
+      <input
+        placeholder="Education/profession"
+        type="text"
+        formControlName="occupation"
+        required
+      />
+      <textarea
+        placeholder="If applicable, describe your previous experiences with volunteering."
+        formControlName="experiences"
+      ></textarea>
+      <textarea
+        placeholder="Describe your level of Spanish."
+        formControlName="levelSpanish"
+        required
+      ></textarea>
+      <textarea
+        placeholder="What tasks would you like to work on within the organisation?"
+        formControlName="tasks"
+        required
+      ></textarea>
+      <textarea
+        placeholder="What are your expectations?"
+        formControlName="expectations"
+      ></textarea>
+      <textarea
+        placeholder="Do you have any proposals concerning your work within the organisation?"
+        formControlName="proposals"
+      ></textarea>
+    </form>
+  </div>
+</div>
