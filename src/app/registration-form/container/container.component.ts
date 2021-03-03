@@ -51,7 +51,13 @@ export class ContainerComponent implements OnInit {
           proposals: [""],
         }),
       }),
-      organizationalForm: this.fb.group({}),
+      organizationalForm: this.fb.group({
+        startDate: ["", Validators.required],
+        endDate: ["", Validators.required],
+        appartmentStartDate: ["", Validators.required],
+        appartmentEndDate: ["", Validators.required],
+        weeksSpanish: ["", Validators.required],
+      }),
       scansForm: this.fb.group({}),
       questionsForm: this.fb.group({}),
     });

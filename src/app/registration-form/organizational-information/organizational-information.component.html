@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Organizational information</h2>
+  <div class="container">
+    <form [formGroup]="organizationalForm">
+      <input
+        placeholder="Proposed start date internship/volunteering"
+        type="date"
+        formControlName="startDate"
+        required
+      />
+      <input
+        placeholder="Proposed end date internship/volunteering"
+        type="date"
+        formControlName="endDate"
+        required
+      />
+      <input
+        placeholder="Proposed start date for appartment stay"
+        type="date"
+        formControlName="appartmentStartDate"
+        required
+      />
+      <input
+        placeholder="Proposed end date for appartment stay"
+        type="date"
+        formControlName="appartmentEndDate"
+        required
+      />
+      <input
+        placeholder="Amount of weeks for Spanish lessons"
+        type="number"
+        formControlName="weeksSpanish"
+        required
+      />
+    </form>
+  </div>
+</div>
