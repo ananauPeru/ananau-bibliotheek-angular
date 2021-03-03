@@ -63,7 +63,11 @@ export class ContainerComponent implements OnInit {
         goodConductCertificate: ["", Validators.required],
         diploma: ["", Validators.required],
       }),
-      questionsForm: this.fb.group({}),
+      questionsForm: this.fb.group({
+        otherQuestions: [""],
+        whyAnanau: [""],
+        firstHeard: [""],
+      }),
     });
   }
 

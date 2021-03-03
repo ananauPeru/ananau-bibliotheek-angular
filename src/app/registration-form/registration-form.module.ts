@@ -7,6 +7,7 @@ import { PersonalInformationComponent } from "./personal-information/personal-in
 import { ReactiveFormsModule } from "@angular/forms";
 import { OrganizationalInformationComponent } from './organizational-information/organizational-information.component';
 import { ScanUploadsComponent } from './scan-uploads/scan-uploads.component';
+import { QuestionsComponent } from './questions/questions.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ContainerComponent, PersonalInformationComponent, OrganizationalInformationComponent, ScanUploadsComponent],
+  declarations: [ContainerComponent, PersonalInformationComponent, OrganizationalInformationComponent, ScanUploadsComponent, QuestionsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

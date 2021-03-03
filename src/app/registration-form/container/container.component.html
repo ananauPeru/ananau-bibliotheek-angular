@@ -97,7 +97,9 @@
         role="tabpanel"
         aria-labelledby="questions-tab"
       >
-        Questions
+        <app-questions
+          [(questionsForm)]="formContainer.controls.questionsForm"
+        ></app-questions>
       </div>
     </div>
 

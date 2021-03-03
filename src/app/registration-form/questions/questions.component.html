@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Some extra questions</h2>
+  <div class="container">
+    <form [formGroup]="questionsForm">
+      <textarea
+        placeholder="Do you have any further questions?"
+        formControlName="otherQuestions"
+      ></textarea>
+      <textarea
+        placeholder="Why did you choose Añanau to apply for volunteering/internship?"
+        formControlName="whyAnanau"
+      ></textarea>
+      <select formControlName="firstHeard">
+        <option value="0" selected>--</option>
+        <option value="1">Website</option>
+        <option value="2">Facebook</option>
+        <option value="3">Instagram</option>
+        <option value="4">Other person</option>
+        <option value="5">Newsletter</option>
+      </select>
+    </form>
+  </div>
+</div>
