@@ -15,6 +15,7 @@ import {
 })
 export class ContainerComponent implements OnInit {
   public formContainer: FormGroup;
+  public formProgress: number;
 
   constructor(private fb: FormBuilder) {}
 
@@ -75,6 +76,14 @@ export class ContainerComponent implements OnInit {
         whyAnanau: [""],
         firstHeard: [""],
       }),
+    });
+
+    const counts = ContainerComponent.countFields(this.formContainer);
+    this.formProgress = counts.requiredAndValid / counts.required;
+
+    this.formContainer.valueChanges.subscribe(() => {
+      const counts = ContainerComponent.countFields(this.formContainer);
+      this.formProgress = counts.requiredAndValid / counts.required;
     });
   }
 
