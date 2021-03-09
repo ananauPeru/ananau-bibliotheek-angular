@@ -15,6 +15,18 @@
           aria-selected="true"
         >
           Personal
+          <span
+            *ngIf="
+              personalFormProgress.required -
+                personalFormProgress.requiredAndValid >
+              0
+            "
+            class="badge bg-secondary"
+            >{{
+              personalFormProgress.required -
+                personalFormProgress.requiredAndValid
+            }}</span
+          >
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -29,6 +41,18 @@
           aria-selected="false"
         >
           Organizational
+          <span
+            *ngIf="
+              organizationalFormProgress.required -
+                organizationalFormProgress.requiredAndValid >
+              0
+            "
+            class="badge bg-secondary"
+            >{{
+              organizationalFormProgress.required -
+                organizationalFormProgress.requiredAndValid
+            }}</span
+          >
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -43,6 +67,16 @@
           aria-selected="false"
         >
           Scans
+          <span
+            *ngIf="
+              scansFormProgress.required - scansFormProgress.requiredAndValid >
+              0
+            "
+            class="badge bg-secondary"
+            >{{
+              scansFormProgress.required - scansFormProgress.requiredAndValid
+            }}</span
+          >
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -57,6 +91,18 @@
           aria-selected="false"
         >
           Questions
+          <span
+            *ngIf="
+              questionsFormProgress.required -
+                questionsFormProgress.requiredAndValid >
+              0
+            "
+            class="badge bg-secondary"
+            >{{
+              questionsFormProgress.required -
+                questionsFormProgress.requiredAndValid
+            }}</span
+          >
         </button>
       </li>
     </ul>

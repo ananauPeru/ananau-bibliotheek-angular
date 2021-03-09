@@ -51,6 +51,27 @@ export class ContainerComponent implements OnInit {
       scansForm: this.fb.group({}),
       questionsForm: this.fb.group({}),
     });
+
+    this.personalFormProgress = {
+      all: 0,
+      required: 0,
+      requiredAndValid: 0,
+    };
+    this.organizationalFormProgress = {
+      all: 0,
+      required: 0,
+      requiredAndValid: 0,
+    };
+    this.scansFormProgress = {
+      all: 0,
+      required: 0,
+      requiredAndValid: 0,
+    };
+    this.questionsFormProgress = {
+      all: 0,
+      required: 0,
+      requiredAndValid: 0,
+    };
   }
 
   onSumbit() {
