@@ -5,7 +5,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { FormTarget } from "../models/form-target";
@@ -17,8 +16,27 @@ import { FormTarget } from "../models/form-target";
 })
 export class ContainerComponent implements OnInit {
   public formContainer: FormGroup;
-  public formProgress: number;
   public target: FormTarget;
+  public personalFormProgress: {
+    all: number;
+    required: number;
+    requiredAndValid: number;
+  };
+  public organizationalFormProgress: {
+    all: number;
+    required: number;
+    requiredAndValid: number;
+  };
+  public scansFormProgress: {
+    all: number;
+    required: number;
+    requiredAndValid: number;
+  };
+  public questionsFormProgress: {
+    all: number;
+    required: number;
+    requiredAndValid: number;
+  };
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.route.data.subscribe((data) => {
@@ -28,69 +46,10 @@ export class ContainerComponent implements OnInit {
 
   ngOnInit() {
     this.formContainer = this.fb.group({
-      personalForm: this.fb.group({
-        general: this.fb.group({
-          firstName: ["", [Validators.required]],
-          lastName: ["", [Validators.required]],
-          email: ["", [Validators.required, Validators.email]],
-          phone: ["", [Validators.required]],
-          dateOfBirth: ["", Validators.required],
-          birthplace: ["", Validators.required],
-          nationality: ["", Validators.required],
-          passportNumber: ["", Validators.required],
-        }),
-        address: this.fb.group({
-          street: ["", Validators.required],
-          houseNumber: ["", Validators.required],
-          mailbox: [""],
-          postalCode: ["", Validators.required],
-          township: ["", Validators.required],
-        }),
-        contactPerson: this.fb.group({
-          firstName: ["", Validators.required],
-          lastName: ["", Validators.required],
-          relation: ["", Validators.required],
-          email: ["", [Validators.required, Validators.email]],
-          phone: ["", Validators.required],
-        }),
-        medical: this.fb.group({
-          allergies: [""],
-          medicalConditions: [""],
-        }),
-        volunteering: this.fb.group({
-          occupation: ["", Validators.required],
-          experiences: [""],
-          levelSpanish: ["", Validators.required],
-          tasks: ["", Validators.required],
-          expectations: [""],
-          proposals: [""],
-        }),
-      }),
-      organizationalForm: this.fb.group({
-        startDate: ["", Validators.required],
-        endDate: ["", Validators.required],
-        appartmentStartDate: ["", Validators.required],
-        appartmentEndDate: ["", Validators.required],
-        weeksSpanish: ["", Validators.required],
-      }),
-      scansForm: this.fb.group({
-        internationalPassport: ["", Validators.required],
-        goodConductCertificate: ["", Validators.required],
-        diploma: ["", Validators.required],
-      }),
-      questionsForm: this.fb.group({
-        otherQuestions: [""],
-        whyAnanau: [""],
-        firstHeard: [""],
-      }),
-    });
-
-    const counts = ContainerComponent.countFields(this.formContainer);
-    this.formProgress = counts.requiredAndValid / counts.required;
-
-    this.formContainer.valueChanges.subscribe(() => {
-      const counts = ContainerComponent.countFields(this.formContainer);
-      this.formProgress = counts.requiredAndValid / counts.required;
+      personalForm: this.fb.group({}),
+      organizationalForm: this.fb.group({}),
+      scansForm: this.fb.group({}),
+      questionsForm: this.fb.group({}),
     });
   }
 

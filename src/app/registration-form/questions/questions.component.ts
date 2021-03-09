@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { ContainerComponent } from "../container/container.component";
 
 @Component({
   selector: "app-questions",
@@ -9,13 +10,31 @@ import { FormGroup } from "@angular/forms";
 export class QuestionsComponent implements OnInit {
   @Input() public questionsForm: FormGroup;
   @Output() public questionsFormChange = new EventEmitter<FormGroup>();
+  @Output() public questionsFormCounted = new EventEmitter<{
+    all: number;
+    required: number;
+    requiredAndValid: number;
+  }>();
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    // When the form is changed, the parent form is also updated
-    this.questionsForm.valueChanges.subscribe(() => {
-      this.questionsFormChange.emit(this.questionsForm);
+    this.questionsForm = this.fb.group({
+      otherQuestions: [""],
+      whyAnanau: [""],
+      firstHeard: [""],
     });
+
+    this.emitForm();
+
+    // When the form is changed, the parent form is also updated
+    this.questionsForm.valueChanges.subscribe(() => this.emitForm());
+  }
+
+  private emitForm() {
+    this.questionsFormChange.emit(this.questionsForm);
+    this.questionsFormCounted.emit(
+      ContainerComponent.countFields(this.questionsForm)
+    );
   }
 }

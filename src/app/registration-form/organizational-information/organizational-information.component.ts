@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ContainerComponent } from "../container/container.component";
 
 @Component({
   selector: "app-organizational-information",
@@ -9,13 +10,33 @@ import { FormGroup } from "@angular/forms";
 export class OrganizationalInformationComponent implements OnInit {
   @Input() public organizationalForm: FormGroup;
   @Output() public organizationalFormChange = new EventEmitter<FormGroup>();
+  @Output() public organizationalFormCounted = new EventEmitter<{
+    all: number;
+    required: number;
+    requiredAndValid: number;
+  }>();
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    // When the form is changed, the parent form is also updated
-    this.organizationalForm.valueChanges.subscribe(() => {
-      this.organizationalFormChange.emit(this.organizationalForm);
+    this.organizationalForm = this.fb.group({
+      startDate: ["", Validators.required],
+      endDate: ["", Validators.required],
+      appartmentStartDate: ["", Validators.required],
+      appartmentEndDate: ["", Validators.required],
+      weeksSpanish: ["", Validators.required],
     });
+
+    this.emitForm();
+
+    // When the form is changed, the parent form is also updated
+    this.organizationalForm.valueChanges.subscribe(() => this.emitForm());
+  }
+
+  private emitForm() {
+    this.organizationalFormChange.emit(this.organizationalForm);
+    this.organizationalFormCounted.emit(
+      ContainerComponent.countFields(this.organizationalForm)
+    );
   }
 }

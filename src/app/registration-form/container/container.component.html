@@ -69,6 +69,7 @@
       >
         <app-personal-information
           [(personalForm)]="formContainer.controls.personalForm"
+          (personalFormCounted)="personalFormProgress = $event"
         ></app-personal-information>
       </div>
       <div
@@ -79,6 +80,7 @@
       >
         <app-organizational-information
           [(organizationalForm)]="formContainer.controls.organizationalForm"
+          (organizationalFormCounted)="organizationalFormProgress = $event"
         ></app-organizational-information>
       </div>
       <div
@@ -89,6 +91,7 @@
       >
         <app-scan-uploads
           [(scansForm)]="formContainer.controls.scansForm"
+          (scansFormCounted)="scansFormProgress = $event"
         ></app-scan-uploads>
       </div>
       <div
@@ -99,6 +102,7 @@
       >
         <app-questions
           [(questionsForm)]="formContainer.controls.questionsForm"
+          (questionsFormCounted)="questionsFormProgress = $event"
         ></app-questions>
       </div>
     </div>
@@ -110,9 +114,27 @@
             <div
               class="progress-bar bg-success"
               role="progressbar"
-              [style.width]="formProgress | percent"
+              [style.width]="
+                (personalFormProgress.requiredAndValid +
+                  organizationalFormProgress.requiredAndValid +
+                  scansFormProgress.requiredAndValid +
+                  questionsFormProgress.requiredAndValid) /
+                  (personalFormProgress.required +
+                    organizationalFormProgress.required +
+                    scansFormProgress.required +
+                    questionsFormProgress.required) | percent
+              "
             >
-              {{ formProgress | percent }}
+              {{
+                (personalFormProgress.requiredAndValid +
+                  organizationalFormProgress.requiredAndValid +
+                  scansFormProgress.requiredAndValid +
+                  questionsFormProgress.requiredAndValid) /
+                  (personalFormProgress.required +
+                    organizationalFormProgress.required +
+                    scansFormProgress.required +
+                    questionsFormProgress.required) | percent
+              }}
             </div>
           </div>
         </div>

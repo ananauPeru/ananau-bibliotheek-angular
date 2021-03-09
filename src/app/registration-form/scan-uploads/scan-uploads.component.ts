@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ContainerComponent } from "../container/container.component";
 
 @Component({
   selector: "app-scan-uploads",
@@ -9,13 +10,29 @@ import { FormGroup } from "@angular/forms";
 export class ScanUploadsComponent implements OnInit {
   @Input() public scansForm: FormGroup;
   @Output() public scansFormChange = new EventEmitter<FormGroup>();
+  @Output() public scansFormCounted = new EventEmitter<{
+    all: number;
+    required: number;
+    requiredAndValid: number;
+  }>();
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    // When the form is changed, the parent form is also updated
-    this.scansForm.valueChanges.subscribe(() => {
-      this.scansFormChange.emit(this.scansForm);
+    this.scansForm = this.fb.group({
+      internationalPassport: ["", Validators.required],
+      goodConductCertificate: ["", Validators.required],
+      diploma: ["", Validators.required],
     });
+
+    this.emitForm();
+
+    // When the form is changed, the parent form is also updated
+    this.scansForm.valueChanges.subscribe(() => this.emitForm());
+  }
+
+  private emitForm() {
+    this.scansFormChange.emit(this.scansForm);
+    this.scansFormCounted.emit(ContainerComponent.countFields(this.scansForm));
   }
 }
