@@ -42,7 +42,7 @@ export class AccountService {
     public login(email: string, password: string): Observable<boolean> {
         return this.http
             .post(
-                `${environment.apiUrl}/Gebruiker`,
+                `${environment.apiUrl}/user`,
                 { email, password },
                 { responseType: 'text' }
             )
@@ -65,11 +65,11 @@ export class AccountService {
             );
     }
 
-    public registreer(voornaam: string, achternaam: string, telefoonNummer: string, email: string, password: string, passwordConfirmation: string, geboorteDatum: Date): Observable<boolean> {
+    public registreer(firstName: string, lastName: string, phone: string, email: string, password: string, passwordConfirmation: string, dateOfBirth: Date): Observable<boolean> {
         return this.http
             .post(
-                `${environment.apiUrl}/Gebruiker/register`,
-                { voornaam, achternaam, telefoonNummer, email, password, passwordConfirmation, geboorteDatum },
+                `${environment.apiUrl}/user/register`,
+                { firstName, lastName, phone, email, password, passwordConfirmation, dateOfBirth },
                 { responseType: 'text' }
             )
             .pipe(
@@ -94,7 +94,7 @@ export class AccountService {
     public updateGebruiker(id: string, voornaam: string, achternaam: string, telefoonNummer: string, email: string, geboorteDatum: Date): Observable<Gebruiker> {
         return this.http
             .put(
-                `${environment.apiUrl}/Gebruiker/${id}`,
+                `${environment.apiUrl}/user/${id}`,
                 { id, voornaam, achternaam, telefoonNummer, email, geboorteDatum },
                 { responseType: 'text' }
             )
@@ -136,7 +136,7 @@ export class AccountService {
 
     checkUserNameAvailability = (email: string): Observable<boolean> => {
         return this.http.get<boolean>(
-            `${environment.apiUrl}/Gebruiker/checkusername`,
+            `${environment.apiUrl}/user/checkusername`,
             {
                 params: { email }
             }
