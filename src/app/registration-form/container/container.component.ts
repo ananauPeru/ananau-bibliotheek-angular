@@ -7,6 +7,8 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { FormTarget } from "../models/form-target";
 
 @Component({
   selector: "app-container",
@@ -16,8 +18,13 @@ import {
 export class ContainerComponent implements OnInit {
   public formContainer: FormGroup;
   public formProgress: number;
+  public target: FormTarget;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+    this.route.data.subscribe((data) => {
+      this.target = data["target"] ? data["target"] : FormTarget.VOLUNTEER;
+    });
+  }
 
   ngOnInit() {
     this.formContainer = this.fb.group({
