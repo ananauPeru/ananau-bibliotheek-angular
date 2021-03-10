@@ -21,7 +21,7 @@ export class QuestionsComponent implements OnInit {
   ngOnInit() {
     this.questionsForm = this.fb.group({
       otherQuestions: [""],
-      whyAnanau: [""],
+      experience: [""],
       firstHeard: [""],
     });
 

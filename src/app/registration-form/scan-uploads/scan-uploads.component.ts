@@ -23,6 +23,7 @@ export class ScanUploadsComponent implements OnInit {
       internationalPassport: ["", Validators.required],
       goodConductCertificate: ["", Validators.required],
       diploma: ["", Validators.required],
+      passportPhoto: ["", Validators.required],
     });
 
     this.emitForm();

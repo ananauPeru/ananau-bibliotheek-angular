@@ -20,11 +20,14 @@ export class OrganizationalInformationComponent implements OnInit {
 
   ngOnInit() {
     this.organizationalForm = this.fb.group({
-      startDate: ["", Validators.required],
-      endDate: ["", Validators.required],
-      appartmentStartDate: ["", Validators.required],
-      appartmentEndDate: ["", Validators.required],
-      weeksSpanish: ["", Validators.required],
+      dates: this.fb.group({}),
+      spanish: this.fb.group({
+        level: ["", Validators.required],
+        weeks: [""],
+      }),
+      info: this.fb.group({
+        proposals: [""],
+      }),
     });
 
     this.emitForm();

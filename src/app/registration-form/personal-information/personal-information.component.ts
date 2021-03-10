@@ -48,14 +48,6 @@ export class PersonalInformationComponent implements OnInit {
         allergies: [""],
         medicalConditions: [""],
       }),
-      volunteering: this.fb.group({
-        occupation: ["", Validators.required],
-        experiences: [""],
-        levelSpanish: ["", Validators.required],
-        tasks: ["", Validators.required],
-        expectations: [""],
-        proposals: [""],
-      }),
     });
 
     this.emitForm();
