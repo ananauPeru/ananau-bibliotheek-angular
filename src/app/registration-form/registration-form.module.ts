@@ -8,28 +8,28 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { OrganizationalInformationComponent } from "./organizational-information/organizational-information.component";
 import { ScanUploadsComponent } from "./scan-uploads/scan-uploads.component";
 import { QuestionsComponent } from "./questions/questions.component";
-import { FormTarget } from "./models/form-target";
+import { FormRole } from "./models/form-role";
 
 const routes: Routes = [
   {
     path: "student",
     component: ContainerComponent,
     data: {
-      target: FormTarget.STUDENT,
+      role: FormRole.STUDENT,
     },
   },
   {
     path: "volunteer",
     component: ContainerComponent,
     data: {
-      target: FormTarget.VOLUNTEER,
+      role: FormRole.VOLUNTEER,
     },
   },
   {
     path: "",
     component: ContainerComponent,
     data: {
-      target: FormTarget.VOLUNTEER,
+      role: FormRole.VOLUNTEER,
     },
   },
 ];

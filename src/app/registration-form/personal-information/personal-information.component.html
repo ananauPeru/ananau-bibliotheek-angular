@@ -25,6 +25,20 @@
         formControlName="email"
         required
       />
+      <label
+        *ngIf="role === 'Student'"
+        for="generalSchoolEmail"
+        class="form-label"
+        >School email</label
+      >
+      <input
+        *ngIf="role === 'Student'"
+        class="form-control"
+        id="generalSchoolEmail"
+        type="email"
+        formControlName="schoolEmail"
+        required
+      />
       <label for="generalPhone" class="form-label">Phone number</label>
       <input
         class="form-control"

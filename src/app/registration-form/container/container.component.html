@@ -116,6 +116,7 @@
         <app-personal-information
           [(personalForm)]="formContainer.controls.personalForm"
           (personalFormCounted)="personalFormProgress = $event"
+          [role]="role"
         ></app-personal-information>
       </div>
       <div
@@ -127,6 +128,7 @@
         <app-organizational-information
           [(organizationalForm)]="formContainer.controls.organizationalForm"
           (organizationalFormCounted)="organizationalFormProgress = $event"
+          [role]="role"
         ></app-organizational-information>
       </div>
       <div
@@ -149,6 +151,7 @@
         <app-questions
           [(questionsForm)]="formContainer.controls.questionsForm"
           (questionsFormCounted)="questionsFormProgress = $event"
+          [role]="role"
         ></app-questions>
       </div>
     </div>

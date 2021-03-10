@@ -9,6 +9,7 @@
         class="form-control"
         id="questionsOther"
         formControlName="otherQuestions"
+        rows="3"
       ></textarea>
       <label for="questionsExperience" class="form-label"
         >Do you have any experience with volunteering? If so, please
@@ -18,6 +19,18 @@
         class="form-control"
         id="questionsExperience"
         formControlName="experience"
+        rows="3"
+      ></textarea>
+      <label for="questionsWhyAnanau" class="form-label"
+        >Why did you choose Añañau to apply for{{
+          role === "Student" ? " your internship" : " volunteering"
+        }}?</label
+      >
+      <textarea
+        class="form-control"
+        id="questionsWhyAnanau"
+        formControlName="whyAnanau"
+        rows="3"
       ></textarea>
       <label for="questionsFirstHeard" class="form-label"
         >Where did you first hear of Añañau?</label
@@ -33,7 +46,8 @@
         <option value="3">Instagram</option>
         <option value="4">Other person</option>
         <option value="5">Newsletter</option>
-        <option value="6">Other</option>
+        <option *ngIf="role === 'Student'" value="6">Through school</option>
+        <option value="7">Other</option>
       </select>
     </form>
   </div>

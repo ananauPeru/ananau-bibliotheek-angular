@@ -7,7 +7,7 @@ import {
   FormGroup,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { FormTarget } from "../models/form-target";
+import { FormRole } from "../models/form-role";
 
 @Component({
   selector: "app-container",
@@ -16,7 +16,7 @@ import { FormTarget } from "../models/form-target";
 })
 export class ContainerComponent implements OnInit {
   public formContainer: FormGroup;
-  public target: FormTarget;
+  public role: FormRole;
   public personalFormProgress: {
     all: number;
     required: number;
@@ -40,7 +40,7 @@ export class ContainerComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.route.data.subscribe((data) => {
-      this.target = data["target"] ? data["target"] : FormTarget.VOLUNTEER;
+      this.role = data["role"] ? data["role"] : FormRole.VOLUNTEER;
     });
   }
 

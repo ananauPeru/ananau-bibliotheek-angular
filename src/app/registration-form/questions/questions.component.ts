@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ContainerComponent } from "../container/container.component";
+import { FormRole } from "../models/form-role";
 
 @Component({
   selector: "app-questions",
@@ -15,6 +16,7 @@ export class QuestionsComponent implements OnInit {
     required: number;
     requiredAndValid: number;
   }>();
+  @Input() public role: FormRole;
 
   constructor(private fb: FormBuilder) {}
 
@@ -22,6 +24,7 @@ export class QuestionsComponent implements OnInit {
     this.questionsForm = this.fb.group({
       otherQuestions: [""],
       experience: [""],
+      whyAnanau: [""],
       firstHeard: [""],
     });
 

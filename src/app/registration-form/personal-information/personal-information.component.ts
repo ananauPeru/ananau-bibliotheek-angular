@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ContainerComponent } from "../container/container.component";
+import { FormRole } from "../models/form-role";
 
 @Component({
   selector: "app-personal-information",
@@ -15,6 +16,7 @@ export class PersonalInformationComponent implements OnInit {
     required: number;
     requiredAndValid: number;
   }>();
+  @Input() public role: FormRole;
 
   constructor(private fb: FormBuilder) {}
 
@@ -49,6 +51,15 @@ export class PersonalInformationComponent implements OnInit {
         medicalConditions: [""],
       }),
     });
+
+    // Add controls only targeted to students
+    if (this.role === FormRole.STUDENT) {
+      const general = this.personalForm.get("general") as FormGroup;
+      general.addControl(
+        "schoolEmail",
+        this.fb.control("", [Validators.required, Validators.email])
+      );
+    }
 
     this.emitForm();
 
