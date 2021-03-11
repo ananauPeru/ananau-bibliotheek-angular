@@ -1,0 +1,197 @@
+<div class="container">
+  <h1>Registration</h1>
+
+  <form [formGroup]="formContainer" (ngSubmit)="onSumbit()">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="personal-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#personal"
+          type="button"
+          role="tab"
+          aria-controls="personal"
+          aria-selected="true"
+        >
+          Personal
+          <span
+            *ngIf="
+              personalFormProgress.required -
+                personalFormProgress.requiredAndValid >
+              0
+            "
+            class="badge bg-secondary"
+            >{{
+              personalFormProgress.required -
+                personalFormProgress.requiredAndValid
+            }}</span
+          >
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="organizational-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#organizational"
+          type="button"
+          role="tab"
+          aria-controls="organizational"
+          aria-selected="false"
+        >
+          Organizational
+          <span
+            *ngIf="
+              organizationalFormProgress.required -
+                organizationalFormProgress.requiredAndValid >
+              0
+            "
+            class="badge bg-secondary"
+            >{{
+              organizationalFormProgress.required -
+                organizationalFormProgress.requiredAndValid
+            }}</span
+          >
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="scans-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#scans"
+          type="button"
+          role="tab"
+          aria-controls="scans"
+          aria-selected="false"
+        >
+          Scans
+          <span
+            *ngIf="
+              scansFormProgress.required - scansFormProgress.requiredAndValid >
+              0
+            "
+            class="badge bg-secondary"
+            >{{
+              scansFormProgress.required - scansFormProgress.requiredAndValid
+            }}</span
+          >
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="questions-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#questions"
+          type="button"
+          role="tab"
+          aria-controls="questions"
+          aria-selected="false"
+        >
+          Questions
+          <span
+            *ngIf="
+              questionsFormProgress.required -
+                questionsFormProgress.requiredAndValid >
+              0
+            "
+            class="badge bg-secondary"
+            >{{
+              questionsFormProgress.required -
+                questionsFormProgress.requiredAndValid
+            }}</span
+          >
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="personal"
+        role="tabpanel"
+        aria-labelledby="personal-tab"
+      >
+        <app-personal-information
+          [(personalForm)]="formContainer.controls.personalForm"
+          (personalFormCounted)="personalFormProgress = $event"
+          [role]="role"
+        ></app-personal-information>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="organizational"
+        role="tabpanel"
+        aria-labelledby="organizational-tab"
+      >
+        <app-organizational-information
+          [(organizationalForm)]="formContainer.controls.organizationalForm"
+          (organizationalFormCounted)="organizationalFormProgress = $event"
+          [role]="role"
+        ></app-organizational-information>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="scans"
+        role="tabpanel"
+        aria-labelledby="scans-tab"
+      >
+        <app-scan-uploads
+          [(scansForm)]="formContainer.controls.scansForm"
+          (scansFormCounted)="scansFormProgress = $event"
+        ></app-scan-uploads>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="questions"
+        role="tabpanel"
+        aria-labelledby="questions-tab"
+      >
+        <app-questions
+          [(questionsForm)]="formContainer.controls.questionsForm"
+          (questionsFormCounted)="questionsFormProgress = $event"
+          [role]="role"
+        ></app-questions>
+      </div>
+    </div>
+
+    <div class="container progress-bar-container bg-light rounded p-3">
+      <div class="row">
+        <div class="col">
+          <div class="progress">
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              [style.width]="
+                (personalFormProgress.requiredAndValid +
+                  organizationalFormProgress.requiredAndValid +
+                  scansFormProgress.requiredAndValid +
+                  questionsFormProgress.requiredAndValid) /
+                  (personalFormProgress.required +
+                    organizationalFormProgress.required +
+                    scansFormProgress.required +
+                    questionsFormProgress.required) | percent
+              "
+            >
+              {{
+                (personalFormProgress.requiredAndValid +
+                  organizationalFormProgress.requiredAndValid +
+                  scansFormProgress.requiredAndValid +
+                  questionsFormProgress.requiredAndValid) /
+                  (personalFormProgress.required +
+                    organizationalFormProgress.required +
+                    scansFormProgress.required +
+                    questionsFormProgress.required) | percent
+              }}
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-outline-success">Save</button>
+          <button type="submit" class="btn btn-success">Send</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

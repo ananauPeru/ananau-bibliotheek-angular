@@ -1,0 +1,181 @@
+<div class="container">
+  <h2>Organizational information</h2>
+  <div class="container">
+    <h3>Dates</h3>
+    <form [formGroup]="organizationalForm.controls.dates">
+      <label for="datesStartDate" class="form-label"
+        >Proposed start date for
+        {{ role === "Student" ? " internship" : " volunteering" }}
+      </label>
+      <input
+        class="form-control"
+        id="datesStartDate"
+        type="date"
+        formControlName="startDate"
+        required
+      />
+      <label for="datesEndDate" class="form-label"
+        >Proposed end date for
+        {{ role === "Student" ? " internship" : " volunteering" }}
+      </label>
+      <input
+        class="form-control"
+        id="datesEndDate"
+        type="date"
+        formControlName="endDate"
+        required
+      />
+      <label
+        *ngIf="role === 'Student'"
+        for="datesLeaveStartDate"
+        class="form-label"
+      >
+        Proposed start date of optional leave period
+        <p>
+          <small>
+            This is determined in consultation with your school and the
+            organization. It is strongly recommended and requested to plan this
+            period of leave at the end of the internship.
+          </small>
+        </p>
+      </label>
+      <input
+        *ngIf="role === 'Student'"
+        class="form-control"
+        id="datesLeaveStartDate"
+        type="date"
+        formControlName="leaveStartDate"
+      />
+      <label
+        *ngIf="role === 'Student'"
+        for="datesLeaveEndDate"
+        class="form-label"
+      >
+        Proposed end date of optional leave period
+        <p>
+          <small>
+            This is determined in consultation with your school and the
+            organization. It is strongly recommended and requested to plan this
+            period of leave at the end of the internship.
+          </small>
+        </p>
+      </label>
+      <input
+        *ngIf="role === 'Student'"
+        class="form-control"
+        id="datesLeaveEndDate"
+        type="date"
+        formControlName="leaveEndDate"
+      />
+    </form>
+  </div>
+  <div class="container">
+    <h3>Spanish</h3>
+    <form [formGroup]="organizationalForm.controls.spanish">
+      <label for="spanishLevel" class="form-label"
+        >Describe your level of Spanish</label
+      >
+      <textarea
+        class="form-control"
+        id="spanishLevel"
+        formControlName="level"
+        rows="3"
+        required
+      ></textarea>
+      <label for="spanishWeeks" class="form-label">
+        Amount of weeks for Spanish lessons
+        <p>
+          <small>
+            If you do not yet speak a basic level of Spanish, it is mandatory to
+            take a minimum of 4 weeks of Spanish lessons. If you already have a
+            basis, the lessons are without obligation, but always recommended to
+            improve your level.
+          </small>
+        </p>
+      </label>
+      <input
+        class="form-control"
+        id="spanishWeeks"
+        type="number"
+        formControlName="weeks"
+      />
+    </form>
+  </div>
+  <div class="container">
+    <h3>Info</h3>
+    <form [formGroup]="organizationalForm.controls.info">
+      <label for="infoOccupation" class="form-label"
+        >Describe your
+        {{ role === "Student" ? " study programme" : " profession" }}
+      </label>
+      <textarea
+        class="form-control"
+        id="infoOccupation"
+        formControlName="occupation"
+        rows="3"
+        required
+      ></textarea>
+      <label *ngIf="role === 'Student'" for="infoDegree" class="form-label"
+        >Current degree</label
+      >
+      <input
+        *ngIf="role === 'Student'"
+        class="form-control"
+        id="infoDegree"
+        formControlName="degree"
+        required
+      />
+      <label
+        *ngIf="role === 'Student'"
+        for="infoInternshipContext"
+        class="form-label"
+        >Internship context</label
+      >
+      <select
+        *ngIf="role === 'Student'"
+        class="form-select"
+        id="infoInternshipContext"
+        formControlName="internshipContext"
+        required
+      >
+        <option value="0" selected>--</option>
+        <option value="1">Internship project</option>
+        <option value="2">(Bachelor's) thesis</option>
+        <option value="3">Other</option>
+      </select>
+      <label for="infoTasks" class="form-label">{{
+        role === "Student"
+          ? "What tasks does your school want you to accomplish or what tasks would you like to work on within the organization?"
+          : "What tasks would you like to work on within the organization?"
+      }}</label>
+      <textarea
+        class="form-control"
+        id="infoTasks"
+        formControlName="tasks"
+        rows="3"
+        required
+      ></textarea>
+      <label for="infoExpecations" class="form-label"
+        >What are your expectations of your possible
+        {{ role === "Student" ? " internship " : " volunteering work " }}
+        at Añañau?</label
+      >
+      <textarea
+        class="form-control"
+        id="infoExpecations"
+        formControlName="expectations"
+        rows="3"
+      ></textarea>
+      <label for="infoProposals" class="form-label"
+        >Do you have any proposals concerning your work within the
+        organization?</label
+      >
+      <textarea
+        class="form-control"
+        id="infoProposals"
+        formControlName="proposals"
+        rows="3"
+      ></textarea>
+    </form>
+  </div>
+</div>

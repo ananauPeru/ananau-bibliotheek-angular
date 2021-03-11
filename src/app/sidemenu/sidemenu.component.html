@@ -1,14 +1,51 @@
 <div class="row">
-  <div [routerLink]="['/library/overview']" class="col-12 col-sm-3 col-md-12 menu-item">
-    <p><i class="fas fa-book d-inline d-md-none d-lg-inline d-xl-inline"></i>{{'overview' | translate}}</p>
+  <div class="menu-item">
+    <p>Library</p>
   </div>
-  <div [routerLink]="['/library/scan']" class="col-12 col-sm-3 col-md-12 menu-item">
-    <p><i class="fas fa-qrcode d-inline d-md-none d-lg-inline d-xl-inline"></i>{{'itemScannen' | translate}}</p>
+  <div class="row">
+    <div
+      [routerLink]="['/library/overview']"
+      class="col-12 col-sm-3 col-md-12 menu-item"
+    >
+      <p>
+        <i class="fas fa-book d-inline d-md-none d-lg-inline d-xl-inline"></i
+        >{{ "overview" | translate }}
+      </p>
+    </div>
+    <div
+      [routerLink]="['/library/scan']"
+      class="col-12 col-sm-3 col-md-12 menu-item"
+    >
+      <p>
+        <i class="fas fa-qrcode d-inline d-md-none d-lg-inline d-xl-inline"></i
+        >{{ "itemScannen" | translate }}
+      </p>
+    </div>
+    <div
+      [routerLink]="['/library/management']"
+      class="col-12 col-sm-3 col-md-12 menu-item"
+    >
+      <p>
+        <i class="fas fa-globe d-inline d-md-none d-lg-inline d-xl-inline"></i
+        >{{ "itemsBeheren" | translate }}
+      </p>
+    </div>
+    <div
+      [routerLink]="['/account']"
+      class="col-12 col-sm-3 col-md-12 menu-item"
+    >
+      <p>
+        <i class="fas fa-user d-inline d-md-none d-lg-inline d-xl-inline"></i
+        >{{ "mijnAccount" | translate }}
+      </p>
+    </div>
   </div>
-  <div [routerLink]="['/library/management']" class="col-12 col-sm-3 col-md-12 menu-item">
-    <p><i class="fas fa-globe d-inline d-md-none d-lg-inline d-xl-inline"></i>{{'itemsBeheren' | translate}}</p>
+
+  <div class="menu-item" [routerLink]="['/registration/volunteer']">
+    <p>Registration <small>(volunteer)</small></p>
   </div>
-  <div [routerLink]="['/account']" class="col-12 col-sm-3 col-md-12 menu-item">
-    <p><i class="fas fa-user d-inline d-md-none d-lg-inline d-xl-inline"></i>{{'mijnAccount'  | translate}}</p>
+
+  <div class="menu-item" [routerLink]="['/registration/student']">
+    <p>Registration <small>(student)</small></p>
   </div>
 </div>

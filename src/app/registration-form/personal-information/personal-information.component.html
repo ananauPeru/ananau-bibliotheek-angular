@@ -1,0 +1,187 @@
+<div class="container">
+  <h2>Personal information</h2>
+  <div class="container">
+    <h3>General</h3>
+    <form [formGroup]="personalForm.controls.general">
+      <label for="generalFirstName" class="form-label">First name</label>
+      <input
+        class="form-control"
+        id="generalFirstName"
+        formControlName="firstName"
+        required
+      />
+      <label for="generalLastName" class="form-label">Last name</label>
+      <input
+        class="form-control"
+        id="generalLastName"
+        formControlName="lastName"
+        required
+      />
+      <label for="generalEmail" class="form-label">Email</label>
+      <input
+        class="form-control"
+        id="generalEmail"
+        type="email"
+        formControlName="email"
+        required
+      />
+      <label
+        *ngIf="role === 'Student'"
+        for="generalSchoolEmail"
+        class="form-label"
+        >School email</label
+      >
+      <input
+        *ngIf="role === 'Student'"
+        class="form-control"
+        id="generalSchoolEmail"
+        type="email"
+        formControlName="schoolEmail"
+        required
+      />
+      <label for="generalPhone" class="form-label">Phone number</label>
+      <input
+        class="form-control"
+        id="generalPhone"
+        formControlName="phone"
+        required
+      />
+      <label for="generalBirthdate" class="form-label">Date of birth</label>
+      <input
+        class="form-control"
+        id="generalBirthdate"
+        type="date"
+        formControlName="dateOfBirth"
+        required
+      />
+      <label for="generalBirthplace" class="form-label">Birthplace</label>
+      <input
+        class="form-control"
+        id="generalBirthplace"
+        formControlName="birthplace"
+        required
+      />
+      <label for="generalNationality" class="form-label">Nationality</label>
+      <input
+        class="form-control"
+        id="generalNationality"
+        formControlName="nationality"
+        required
+      />
+      <label for="generalPassportNumber" class="form-label"
+        >Passport number</label
+      >
+      <input
+        class="form-control"
+        id="generalPassportNumber"
+        formControlName="passportNumber"
+        required
+      />
+    </form>
+  </div>
+  <div class="container">
+    <h3>Address</h3>
+    <form [formGroup]="personalForm.controls.address">
+      <label for="addressStreet" class="form-label">Street</label>
+      <input
+        class="form-control"
+        id="addressStreet"
+        formControlName="street"
+        required
+      />
+      <label for="addressHouseNumber" class="form-label">House number</label>
+      <input
+        class="form-control"
+        id="addressHouseNumber"
+        formControlName="houseNumber"
+        required
+      />
+      <label for="addressMailbox" class="form-label">Mailbox</label>
+      <input
+        class="form-control"
+        id="addressMailbox"
+        formControlName="mailbox"
+      />
+      <label for="addressPostalCode" class="form-label">Postal code</label>
+      <input
+        class="form-control"
+        id="addressPostalCode"
+        formControlName="postalCode"
+        required
+      />
+      <label for="addressTownship" class="form-label">Township</label>
+      <input
+        class="form-control"
+        id="addressTownship"
+        formControlName="township"
+        required
+      />
+    </form>
+  </div>
+  <div class="container">
+    <h3>Contact person</h3>
+    <p>
+      Your contact person is the person we should be able to contact in case of
+      an emergency.
+    </p>
+    <form [formGroup]="personalForm.controls.contactPerson">
+      <label for="contactPersonFirstName" class="form-label">First name</label>
+      <input
+        class="form-control"
+        id="contactPersonFirstName"
+        formControlName="firstName"
+        required
+      />
+      <label for="contactPersonLastName" class="form-label">Last name</label>
+      <input
+        class="form-control"
+        id="contactPersonLastName"
+        formControlName="lastName"
+        required
+      />
+      <label for="contactPersonRelation" class="form-label">Relation</label>
+      <input
+        class="form-control"
+        id="contactPersonRelation"
+        formControlName="relation"
+        required
+      />
+      <label for="contactPersonEmail" class="form-label">Email</label>
+      <input
+        class="form-control"
+        id="contactPersonEmail"
+        type="email"
+        formControlName="email"
+        required
+      />
+      <label for="contactPersonPhone" class="form-label">Phone number</label>
+      <input
+        class="form-control"
+        id="contactPersonPhone"
+        formControlName="phone"
+        required
+      />
+    </form>
+  </div>
+  <div class="container">
+    <h3>Medical details</h3>
+    <form [formGroup]="personalForm.controls.medical">
+      <label for="medicalAllergies" class="form-label">Allergies</label>
+      <textarea
+        class="form-control"
+        id="medicalAllergies"
+        formControlName="allergies"
+        rows="3"
+      ></textarea>
+      <label for="medicalConditions" class="form-label"
+        >Medical conditions</label
+      >
+      <textarea
+        class="form-control"
+        id="medicalConditions"
+        formControlName="medicalConditions"
+        rows="3"
+      ></textarea>
+    </form>
+  </div>
+</div>
