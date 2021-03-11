@@ -56,6 +56,8 @@ export class AccountWijzigenComponent implements OnInit {
         this.gebruiker.geboorteDatum.toISOString().substring(0, 10),
         [Validators.required],
       ],
+      country: [this.gebruiker.country, [Validators.required]],
+      nationality: [this.gebruiker.nationality, [Validators.required]],
     })
   }
 
@@ -71,6 +73,8 @@ export class AccountWijzigenComponent implements OnInit {
       lastName: this.accountWijzigenFormulier.value.achternaam,
       phone: this.accountWijzigenFormulier.value.telefoon,
       dateOfBirth: this.accountWijzigenFormulier.value.geboorteDatum,
+      country: this.accountWijzigenFormulier.value.country,
+      nationality: this.accountWijzigenFormulier.value.nationality,
     }
 
     this.accountService.updateGebruiker(userDto).subscribe(
