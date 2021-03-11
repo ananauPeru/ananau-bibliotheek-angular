@@ -66,7 +66,7 @@ export class AccountWijzigenComponent implements OnInit {
 
     let userDto: UserDTO = {
       userId: Number(this.gebruiker.id),
-      email: this.accountWijzigenFormulier.value.email,
+      email: email,
       firstName: this.accountWijzigenFormulier.value.voornaam,
       lastName: this.accountWijzigenFormulier.value.achternaam,
       phone: this.accountWijzigenFormulier.value.telefoon,
