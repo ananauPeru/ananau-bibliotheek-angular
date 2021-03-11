@@ -9,6 +9,7 @@ import { OrganizationalInformationComponent } from "./organizational-information
 import { ScanUploadsComponent } from "./scan-uploads/scan-uploads.component";
 import { QuestionsComponent } from "./questions/questions.component";
 import { FormRole } from "./models/form-role";
+import { MarkAsteriskDirective } from "./directives/mark-asterisk.directive";
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
     OrganizationalInformationComponent,
     ScanUploadsComponent,
     QuestionsComponent,
+    MarkAsteriskDirective,
   ],
   imports: [
     CommonModule,
