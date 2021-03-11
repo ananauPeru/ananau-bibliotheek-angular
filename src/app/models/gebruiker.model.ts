@@ -15,13 +15,13 @@ export class Gebruiker {
         //json = {id: 3,voornaam: "string",achternaam: "string",email: "string", wachtwoord: "string",geboorteDatum: "Date",telefoonNummer: "String",type: "String"}
         var gebruiker = new Gebruiker();
         gebruiker.id = json.id;
-        gebruiker.voornaam = json.voornaam;
-        gebruiker.achternaam = json.achternaam;
+        gebruiker.voornaam = json.userDetail.firstName;
+        gebruiker.achternaam = json.userDetail.lastName;
         gebruiker.email = json.email;
         gebruiker.wachtwoord = "";
         gebruiker.type = "user";
-        gebruiker.geboorteDatum = new Date(json.geboorteDatum);
-        gebruiker.telefoonNummer = json.telefoonNummer;
+        gebruiker.geboorteDatum = new Date(json.userDetail.dateOfBirth);
+        gebruiker.telefoonNummer = json.phone;
         if (json.gebruikerItems != undefined) {
             gebruiker.gebruikerItems = json.gebruikerItems.map(GebruikerItem.fromJSON);
         }

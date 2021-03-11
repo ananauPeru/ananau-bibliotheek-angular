@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import {UserDTO} from '../_dto/UserDTO';
 
 @Injectable({
     providedIn: 'root'
@@ -51,7 +52,10 @@ export class AccountService {
                     if (token) {
                         const local = JSON.parse(token);
                         localStorage.setItem(this._tokenKey, local.token);
+                        console.log(local.user)
                         var angularGebruiker = Gebruiker.fromJSON(local.user)
+                        console.log("Logged in!")
+                        console.log(angularGebruiker)
                         localStorage.setItem(
                             'loggedUser',
                             JSON.stringify(angularGebruiker)
@@ -91,11 +95,11 @@ export class AccountService {
             );
     }
 
-    public updateGebruiker(id: string, voornaam: string, achternaam: string, telefoonNummer: string, email: string, geboorteDatum: Date): Observable<Gebruiker> {
+    public updateGebruiker(userDTO:UserDTO): Observable<Gebruiker> {
         return this.http
             .put(
-                `${environment.apiUrl}/user/${id}`,
-                { id, voornaam, achternaam, telefoonNummer, email, geboorteDatum },
+                `${environment.apiUrl}/user/${userDTO.userId}`,
+                userDTO,
                 { responseType: 'text' }
             )
             .pipe(
