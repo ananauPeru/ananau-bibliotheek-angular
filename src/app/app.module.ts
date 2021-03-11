@@ -1,15 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { httpInterceptorProviders } from './http-inceptors';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { SidemenuComponent } from './sidemenu/sidemenu.component';
-import { TopbarComponent } from './topbar/topbar.component';
-import { TaalWijzigenComponent } from './taal-wijzigen/taal-wijzigen.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { httpInterceptorProviders } from "./http-inceptors";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { SidemenuComponent } from "./sidemenu/sidemenu.component";
+import { TopbarComponent } from "./topbar/topbar.component";
+import { TaalWijzigenComponent } from "./taal-wijzigen/taal-wijzigen.component";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { AccountService } from "./account/data-services/account.service";
+import { AccountModule } from "./account/account.module";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -20,7 +22,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TopbarComponent,
     PageNotFoundComponent,
     SidemenuComponent,
-    TaalWijzigenComponent
+    TaalWijzigenComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,11 +32,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+        deps: [HttpClient],
+      },
+    }),
   ],
-  providers: [httpInterceptorProviders],
-  bootstrap: [AppComponent]
+  providers: [AccountService, httpInterceptorProviders],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

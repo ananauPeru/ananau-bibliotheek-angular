@@ -8,9 +8,7 @@ import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { UserDTO } from "../_dto/UserDTO";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class AccountService {
   private readonly _tokenKey = "currentUser";
   public user: BehaviorSubject<Gebruiker>;

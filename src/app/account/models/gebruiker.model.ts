@@ -13,15 +13,26 @@ export class Gebruiker {
   static fromJSON(json: any): Gebruiker {
     var gebruiker = new Gebruiker();
     gebruiker.id = json.id;
-    gebruiker.voornaam = json.userDetail.firstName;
-    gebruiker.achternaam = json.userDetail.lastName;
     gebruiker.email = json.email;
     gebruiker.wachtwoord = "";
     gebruiker.type = "user";
-    gebruiker.geboorteDatum = new Date(json.userDetail.dateOfBirth);
-    gebruiker.telefoonNummer = json.userDetail.phone;
-    gebruiker.country = json.userDetail.country;
-    gebruiker.nationality = json.userDetail.nationality;
+
+    if (json.userDetail) {
+      gebruiker.voornaam = json.userDetail.firstName;
+      gebruiker.achternaam = json.userDetail.lastName;
+      gebruiker.geboorteDatum = new Date(json.userDetail.dateOfBirth);
+      gebruiker.telefoonNummer = json.userDetail.phone;
+      gebruiker.country = json.userDetail.country;
+      gebruiker.nationality = json.userDetail.nationality;
+    } else {
+      gebruiker.voornaam = json.voornaam;
+      gebruiker.achternaam = json.achternaam;
+      gebruiker.geboorteDatum = new Date(json.geboorteDatum);
+      gebruiker.telefoonNummer = json.telefoonNummer;
+      gebruiker.country = json.country;
+      gebruiker.nationality = json.nationality;
+    }
+
     return gebruiker;
   }
 }
