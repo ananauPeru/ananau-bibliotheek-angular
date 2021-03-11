@@ -21,7 +21,7 @@ export class Gebruiker {
         gebruiker.wachtwoord = "";
         gebruiker.type = "user";
         gebruiker.geboorteDatum = new Date(json.userDetail.dateOfBirth);
-        gebruiker.telefoonNummer = json.phone;
+        gebruiker.telefoonNummer = json.userDetail.phone;
         if (json.gebruikerItems != undefined) {
             gebruiker.gebruikerItems = json.gebruikerItems.map(GebruikerItem.fromJSON);
         }
