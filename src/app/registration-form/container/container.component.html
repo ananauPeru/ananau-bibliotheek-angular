@@ -189,7 +189,20 @@
         </div>
         <div class="col-2">
           <button type="button" class="btn btn-outline-success">Save</button>
-          <button type="submit" class="btn btn-success">Send</button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="
+              !(
+                formContainer.controls.personalForm.valid &&
+                formContainer.controls.organizationalForm.valid &&
+                formContainer.controls.scansForm.valid &&
+                formContainer.controls.questionsForm.valid
+              )
+            "
+          >
+            Send
+          </button>
         </div>
       </div>
     </div>
