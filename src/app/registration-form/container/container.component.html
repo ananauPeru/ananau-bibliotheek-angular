@@ -191,7 +191,7 @@
           <button type="button" class="btn btn-outline-success">Save</button>
           <button
             type="submit"
-            class="btn btn-success"
+            class="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
           >
@@ -227,28 +227,51 @@
         ></button>
       </div>
       <div class="modal-body">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique
-        saepe, neque quod voluptates nisi dicta impedit. Quisquam repudiandae
-        alias laboriosam? Aperiam doloribus quam corporis nisi voluptatem est
-        ipsum ut voluptates. Porro sit, dolores minus aut earum quod sunt
-        ratione veritatis, modi atque sapiente, nesciunt exercitationem maxime
-        iusto! Ab, aspernatur obcaecati sed, rerum commodi in sapiente,
-        blanditiis quae fugiat quis labore? Quisquam nesciunt maiores sint ipsa
-        sunt temporibus ducimus vel corporis! Praesentium, eaque ea, velit est
-        veritatis odio amet minima accusamus iusto cum eligendi animi obcaecati
-        voluptatibus a, laboriosam ipsa nostrum! Vitae suscipit itaque minima
-        voluptas sequi aperiam ducimus pariatur nam. Labore maiores vel eos quas
-        laudantium nisi! Fuga beatae, ea accusamus earum obcaecati optio
-        consequatur asperiores velit, accusantium unde veritatis. Nulla earum
-        repellat ea aspernatur sapiente ipsa sed in temporibus quo cupiditate,
-        nisi repellendus doloribus inventore alias dolores neque et maiores
-        voluptates nobis dolor. Et sunt ut nesciunt iusto reprehenderit.
+        <div class="container">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique
+          saepe, neque quod voluptates nisi dicta impedit. Quisquam repudiandae
+          alias laboriosam? Aperiam doloribus quam corporis nisi voluptatem est
+          ipsum ut voluptates. Porro sit, dolores minus aut earum quod sunt
+          ratione veritatis, modi atque sapiente, nesciunt exercitationem maxime
+          iusto! Ab, aspernatur obcaecati sed, rerum commodi in sapiente,
+          blanditiis quae fugiat quis labore? Quisquam nesciunt maiores sint
+          ipsa sunt temporibus ducimus vel corporis! Praesentium, eaque ea,
+          velit est veritatis odio amet minima accusamus iusto cum eligendi
+          animi obcaecati voluptatibus a, laboriosam ipsa nostrum! Vitae
+          suscipit itaque minima voluptas sequi aperiam ducimus pariatur nam.
+          Labore maiores vel eos quas laudantium nisi! Fuga beatae, ea accusamus
+          earum obcaecati optio consequatur asperiores velit, accusantium unde
+          veritatis. Nulla earum repellat ea aspernatur sapiente ipsa sed in
+          temporibus quo cupiditate, nisi repellendus doloribus inventore alias
+          dolores neque et maiores voluptates nobis dolor. Et sunt ut nesciunt
+          iusto reprehenderit.
+        </div>
+        <div class="container position-relative">
+          <div class="form-check position-absolute top-0 end-0">
+            <input
+              [formControl]="agreementControl"
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="agreementCheckbox"
+            />
+            <label class="form-check-label" for="agreementCheckbox">
+              I agree with the terms mentioned above
+            </label>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
+          Cancel
         </button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!agreementControl.valid"
+        >
+          Send
+        </button>
       </div>
     </div>
   </div>

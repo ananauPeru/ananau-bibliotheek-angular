@@ -6,6 +6,7 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
+  Validators,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { FormRole } from "../models/form-role";
@@ -17,6 +18,7 @@ import { FormRole } from "../models/form-role";
 })
 export class ContainerComponent implements OnInit {
   public formContainer: FormGroup;
+  public agreementControl: FormControl;
   public role: FormRole;
   public personalFormProgress: {
     all: number;
@@ -52,6 +54,8 @@ export class ContainerComponent implements OnInit {
       scansForm: this.fb.group({}),
       questionsForm: this.fb.group({}),
     });
+
+    this.agreementControl = this.fb.control(false, Validators.requiredTrue);
 
     this.personalFormProgress = {
       all: 0,
