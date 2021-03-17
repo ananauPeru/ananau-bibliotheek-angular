@@ -10,6 +10,19 @@
         formControlName="firstName"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('firstName')['errors'] &&
+          personalForm.controls.general.get('firstName').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.general.get("firstName")["errors"]
+          )
+        }}
+      </div>
       <label for="generalLastName" class="form-label">Last name</label>
       <input
         class="form-control"
@@ -17,6 +30,19 @@
         formControlName="lastName"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('lastName')['errors'] &&
+          personalForm.controls.general.get('lastName').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.general.get("lastName")["errors"]
+          )
+        }}
+      </div>
       <label for="generalEmail" class="form-label">Email</label>
       <input
         class="form-control"
@@ -25,6 +51,17 @@
         formControlName="email"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('email')['errors'] &&
+          personalForm.controls.general.get('email').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(personalForm.controls.general.get("email")["errors"])
+        }}
+      </div>
       <label
         *ngIf="role === 'Student'"
         for="generalSchoolEmail"
@@ -39,6 +76,20 @@
         formControlName="schoolEmail"
         required
       />
+      <div
+        *ngIf="
+          role === 'Student' &&
+          personalForm.controls.general.get('schoolEmail')['errors'] &&
+          personalForm.controls.general.get('schoolEmail').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.general.get("schoolEmail")["errors"]
+          )
+        }}
+      </div>
       <label for="generalPhone" class="form-label">Phone number</label>
       <input
         class="form-control"
@@ -46,6 +97,17 @@
         formControlName="phone"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('phone')['errors'] &&
+          personalForm.controls.general.get('phone').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(personalForm.controls.general.get("phone")["errors"])
+        }}
+      </div>
       <label for="generalBirthdate" class="form-label">Date of birth</label>
       <input
         class="form-control"
@@ -54,6 +116,19 @@
         formControlName="dateOfBirth"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('dateOfBirth')['errors'] &&
+          personalForm.controls.general.get('dateOfBirth').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.general.get("dateOfBirth")["errors"]
+          )
+        }}
+      </div>
       <label for="generalBirthplace" class="form-label">Birthplace</label>
       <input
         class="form-control"
@@ -61,6 +136,19 @@
         formControlName="birthplace"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('birthplace')['errors'] &&
+          personalForm.controls.general.get('birthplace').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.general.get("birthplace")["errors"]
+          )
+        }}
+      </div>
       <label for="generalNationality" class="form-label">Nationality</label>
       <input
         class="form-control"
@@ -68,6 +156,19 @@
         formControlName="nationality"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('nationality')['errors'] &&
+          personalForm.controls.general.get('nationality').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.general.get("nationality")["errors"]
+          )
+        }}
+      </div>
       <label for="generalPassportNumber" class="form-label"
         >Passport number</label
       >
@@ -77,6 +178,19 @@
         formControlName="passportNumber"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('passportNumber')['errors'] &&
+          personalForm.controls.general.get('passportNumber').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.general.get("passportNumber")["errors"]
+          )
+        }}
+      </div>
     </form>
   </div>
   <div class="container">
@@ -89,6 +203,17 @@
         formControlName="street"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.address.get('street')['errors'] &&
+          personalForm.controls.address.get('street').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(personalForm.controls.address.get("street")["errors"])
+        }}
+      </div>
       <label for="addressHouseNumber" class="form-label">House number</label>
       <input
         class="form-control"
@@ -96,12 +221,38 @@
         formControlName="houseNumber"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.address.get('houseNumber')['errors'] &&
+          personalForm.controls.address.get('houseNumber').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.address.get("houseNumber")["errors"]
+          )
+        }}
+      </div>
       <label for="addressMailbox" class="form-label">Mailbox</label>
       <input
         class="form-control"
         id="addressMailbox"
         formControlName="mailbox"
       />
+      <div
+        *ngIf="
+          personalForm.controls.address.get('mailbox')['errors'] &&
+          personalForm.controls.addres.get('mailbox').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.address.get("mailbox")["errors"]
+          )
+        }}
+      </div>
       <label for="addressPostalCode" class="form-label">Postal code</label>
       <input
         class="form-control"
@@ -109,6 +260,19 @@
         formControlName="postalCode"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.address.get('postalCode')['errors'] &&
+          personalForm.controls.address.get('postalCode').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.address.get("postalCode")["errors"]
+          )
+        }}
+      </div>
       <label for="addressTownship" class="form-label">Township</label>
       <input
         class="form-control"
@@ -116,6 +280,19 @@
         formControlName="township"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.address.get('township')['errors'] &&
+          personalForm.controls.address.get('township').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.address.get("township")["errors"]
+          )
+        }}
+      </div>
     </form>
   </div>
   <div class="container">
@@ -132,6 +309,19 @@
         formControlName="firstName"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.contactPerson.get('firstName')['errors'] &&
+          personalForm.controls.contactPerson.get('firstName').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.contactPerson.get("firstName")["errors"]
+          )
+        }}
+      </div>
       <label for="contactPersonLastName" class="form-label">Last name</label>
       <input
         class="form-control"
@@ -139,6 +329,19 @@
         formControlName="lastName"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.contactPerson.get('lastName')['errors'] &&
+          personalForm.controls.contactPerson.get('lastName').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.contactPerson.get("lastName")["errors"]
+          )
+        }}
+      </div>
       <label for="contactPersonRelation" class="form-label">Relation</label>
       <input
         class="form-control"
@@ -146,6 +349,19 @@
         formControlName="relation"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.contactPerson.get('relation')['errors'] &&
+          personalForm.controls.contactPerson.get('relation').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.contactPerson.get("relation")["errors"]
+          )
+        }}
+      </div>
       <label for="contactPersonEmail" class="form-label">Email</label>
       <input
         class="form-control"
@@ -154,6 +370,19 @@
         formControlName="email"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.contactPerson.get('email')['errors'] &&
+          personalForm.controls.contactPerson.get('email').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.contactPerson.get("email")["errors"]
+          )
+        }}
+      </div>
       <label for="contactPersonPhone" class="form-label">Phone number</label>
       <input
         class="form-control"
@@ -161,6 +390,19 @@
         formControlName="phone"
         required
       />
+      <div
+        *ngIf="
+          personalForm.controls.contactPerson.get('phone')['errors'] &&
+          personalForm.controls.contactPerson.get('phone').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.contactPerson.get("phone")["errors"]
+          )
+        }}
+      </div>
     </form>
   </div>
   <div class="container">
@@ -173,6 +415,19 @@
         formControlName="allergies"
         rows="3"
       ></textarea>
+      <div
+        *ngIf="
+          personalForm.controls.medical.get('allergies')['errors'] &&
+          personalForm.controls.medical.get('allergies').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.medical.get("allergies")["errors"]
+          )
+        }}
+      </div>
       <label for="medicalConditions" class="form-label"
         >Medical conditions</label
       >
@@ -182,6 +437,19 @@
         formControlName="medicalConditions"
         rows="3"
       ></textarea>
+      <div
+        *ngIf="
+          personalForm.controls.medical.get('medicalConditions')['errors'] &&
+          personalForm.controls.medical.get('medicalConditions').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.medical.get("medicalConditions")["errors"]
+          )
+        }}
+      </div>
     </form>
   </div>
 </div>

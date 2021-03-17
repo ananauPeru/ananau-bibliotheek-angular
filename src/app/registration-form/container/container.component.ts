@@ -5,6 +5,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { FormRole } from "../models/form-role";
@@ -76,6 +77,18 @@ export class ContainerComponent implements OnInit {
 
   onSumbit() {
     console.log(ContainerComponent.countFields(this.formContainer));
+  }
+
+  static getErrorMessage(errors: ValidationErrors): string {
+    if (errors.required) {
+      return "This field is required";
+    } else if (errors.email) {
+      return "This field expects an email address";
+    } else if (errors.minlength) {
+      return `This field expects at least ${errors.minlength.requiredLength} characters`;
+    } else {
+      return "This field is not filled in correctly";
+    }
   }
 
   /**

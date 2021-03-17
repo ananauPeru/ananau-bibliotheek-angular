@@ -12,6 +12,15 @@
         formControlName="internationalPassport"
         required
       />
+      <div
+        *ngIf="
+          scansForm.get('internationalPassport')['errors'] &&
+          scansForm.get('internationalPassport').touched
+        "
+        class="text-danger"
+      >
+        {{ getErrorMessage(scansForm.get("internationalPassport")["errors"]) }}
+      </div>
       <label for="scansGoodConductCertificate" class="form-label">
         Scan certificate of good conduct type II
         <p>
@@ -27,6 +36,15 @@
         formControlName="goodConductCertificate"
         required
       />
+      <div
+        *ngIf="
+          scansForm.get('goodConductCertificate')['errors'] &&
+          scansForm.get('goodConductCertificate').touched
+        "
+        class="text-danger"
+      >
+        {{ getErrorMessage(scansForm.get("goodConductCertificate")["errors"]) }}
+      </div>
       <label for="scansDiploma" class="form-label"
         >Scan diploma or certificate education</label
       >
@@ -37,6 +55,14 @@
         formControlName="diploma"
         required
       />
+      <div
+        *ngIf="
+          scansForm.get('diploma')['errors'] && scansForm.get('diploma').touched
+        "
+        class="text-danger"
+      >
+        {{ getErrorMessage(scansForm.get("diploma")["errors"]) }}
+      </div>
       <label for="scansPassportPhoto" class="form-label">Passport photo</label>
       <input
         class="form-control"
@@ -45,6 +71,15 @@
         formControlName="passportPhoto"
         required
       />
+      <div
+        *ngIf="
+          scansForm.get('passportPhoto')['errors'] &&
+          scansForm.get('passportPhoto').touched
+        "
+        class="text-danger"
+      >
+        {{ getErrorMessage(scansForm.get("passportPhoto")["errors"]) }}
+      </div>
     </form>
   </div>
 </div>

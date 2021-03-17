@@ -11,6 +11,15 @@
         formControlName="otherQuestions"
         rows="3"
       ></textarea>
+      <div
+        *ngIf="
+          questionsForm.get('otherQuestions')['errors'] &&
+          questionsForm.get('otherQuestions').touched
+        "
+        class="text-danger"
+      >
+        {{ getErrorMessage(questionsForm.get("otherQuestions")["errors"]) }}
+      </div>
       <label for="questionsExperience" class="form-label"
         >Do you have any experience with volunteering? If so, please
         describe.</label
@@ -21,6 +30,15 @@
         formControlName="experience"
         rows="3"
       ></textarea>
+      <div
+        *ngIf="
+          questionsForm.get('experience')['errors'] &&
+          questionsForm.get('experience').touched
+        "
+        class="text-danger"
+      >
+        {{ getErrorMessage(questionsForm.get("experience")["errors"]) }}
+      </div>
       <label for="questionsWhyAnanau" class="form-label"
         >Why did you choose Añañau to apply for{{
           role === "Student" ? " your internship" : " volunteering"
@@ -32,6 +50,15 @@
         formControlName="whyAnanau"
         rows="3"
       ></textarea>
+      <div
+        *ngIf="
+          questionsForm.get('whyAnanau')['errors'] &&
+          questionsForm.get('whyAnanau').touched
+        "
+        class="text-danger"
+      >
+        {{ getErrorMessage(questionsForm.get("whyAnanau")["errors"]) }}
+      </div>
       <label for="questionsFirstHeard" class="form-label"
         >Where did you first hear of Añañau?</label
       >
@@ -49,6 +76,15 @@
         <option *ngIf="role === 'Student'" value="6">Through school</option>
         <option value="7">Other</option>
       </select>
+      <div
+        *ngIf="
+          questionsForm.get('firstHeard')['errors'] &&
+          questionsForm.get('firstHeard').touched
+        "
+        class="text-danger"
+      >
+        {{ getErrorMessage(questionsForm.get("firstHeard")["errors"]) }}
+      </div>
     </form>
   </div>
 </div>
