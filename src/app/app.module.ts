@@ -1,73 +1,74 @@
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ClipboardModule } from 'ngx-clipboard';
+import { TranslateModule } from '@ngx-translate/core';
+import { InlineSVGModule } from 'ng-inline-svg';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { TopbarComponent } from './topbar/topbar.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RegistreerComponent } from './registreer/registreer.component';
-import { WachtwoordvergetenComponent } from './wachtwoordvergeten/wachtwoordvergeten.component';
-import { OverviewComponent } from './overview/overview.component';
-import { httpInterceptorProviders } from './http-inceptors';
-import { UitgeleendeBoekenTabelComponent } from './uitgeleende-boeken-tabel/uitgeleende-boeken-tabel.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SidemenuComponent } from './sidemenu/sidemenu.component';
-import { ItemPageComponent } from './item-page/item-page.component';
-import { GebruikerItemsTabelComponent } from './gebruiker-items-tabel/gebruiker-items-tabel.component';
-import { ScanItemComponent } from './scan-item/scan-item.component';
-import { QRCodeModule } from 'angular2-qrcode';
-import { ItemInfoComponent } from './item-info/item-info.component';
-import { AccountWijzigenComponent } from './account-wijzigen/account-wijzigen.component';
-import { ItemsBeherenComponent } from './items-beheren/items-beheren.component';
-import { ItemToevoegenComponent } from './item-toevoegen/item-toevoegen.component';
-import { ItemWijzigenComponent } from './item-wijzigen/item-wijzigen.component';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TaalWijzigenComponent } from './taal-wijzigen/taal-wijzigen.component'
+import { AuthService } from './modules/auth/_services/auth.service';
+import { environment } from 'src/environments/environment';
+// Highlight JS
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/splash-screen.module';
+// #fake-start#
+import { FakeAPIService } from './_fake/fake-api.service';
+// #fake-end#
 
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+function appInitializer(authService: AuthService) {
+  return () => {
+    return new Promise((resolve) => {
+      authService.getUserByToken().subscribe().add(resolve);
+    });
+  };
 }
+
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    TopbarComponent,
-    RegistreerComponent,
-    WachtwoordvergetenComponent,
-    OverviewComponent,
-    UitgeleendeBoekenTabelComponent,
-    PageNotFoundComponent,
-    SidemenuComponent,
-    ItemPageComponent,
-    GebruikerItemsTabelComponent,
-    ScanItemComponent,
-    ItemInfoComponent,
-    AccountWijzigenComponent,
-    ItemsBeherenComponent,
-    ItemToevoegenComponent,
-    ItemWijzigenComponent,
-    TaalWijzigenComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    SplashScreenModule,
+    TranslateModule.forRoot(),
     HttpClientModule,
-    QRCodeModule,
-    ZXingScannerModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    HighlightModule,
+    ClipboardModule,
+    // #fake-start#
+    environment.isMockEnabled
+      ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
+        passThruUnknownUrl: true,
+        dataEncapsulation: false,
+      })
+      : [],
+    // #fake-end#
+    AppRoutingModule,
+    InlineSVGModule.forRoot(),
+    NgbModule,
   ],
-  providers: [httpInterceptorProviders],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializer,
+      multi: true,
+      deps: [AuthService],
+    },
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        languages: {
+          xml: () => import('highlight.js/lib/languages/xml'),
+          typescript: () => import('highlight.js/lib/languages/typescript'),
+          scss: () => import('highlight.js/lib/languages/scss'),
+          json: () => import('highlight.js/lib/languages/json')
+        },
+      },
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
