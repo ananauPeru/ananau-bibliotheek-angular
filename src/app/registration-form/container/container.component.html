@@ -194,6 +194,14 @@
             class="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
+            [disabled]="
+              !(
+                formContainer.controls.personalForm.valid &&
+                formContainer.controls.organizationalForm.valid &&
+                formContainer.controls.scansForm.valid &&
+                formContainer.controls.questionsForm.valid
+              )
+            "
           >
             Send
           </button>
@@ -276,20 +284,3 @@
     </div>
   </div>
 </div>
-
-<!-- <button
-type="submit"
-class="btn btn-success"
-data-bs-toggle="modal"
-data-bs-target="#staticBackdrop"
-[disabled]="
-  !(
-    formContainer.controls.personalForm.valid &&
-    formContainer.controls.organizationalForm.valid &&
-    formContainer.controls.scansForm.valid &&
-    formContainer.controls.questionsForm.valid
-  )
-"
->
-Send
-</button> -->
