@@ -15,6 +15,7 @@ export class ScanUploadsComponent implements OnInit {
     required: number;
     requiredAndValid: number;
   }>();
+  getErrorMessage = ContainerComponent.getErrorMessage;
 
   constructor(private fb: FormBuilder) {}
 

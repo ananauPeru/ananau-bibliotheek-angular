@@ -5,6 +5,8 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
+  Validators,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { FormRole } from "../models/form-role";
@@ -16,6 +18,7 @@ import { FormRole } from "../models/form-role";
 })
 export class ContainerComponent implements OnInit {
   public formContainer: FormGroup;
+  public agreementControl: FormControl;
   public role: FormRole;
   public personalFormProgress: {
     all: number;
@@ -52,6 +55,8 @@ export class ContainerComponent implements OnInit {
       questionsForm: this.fb.group({}),
     });
 
+    this.agreementControl = this.fb.control(false, Validators.requiredTrue);
+
     this.personalFormProgress = {
       all: 0,
       required: 0,
@@ -76,6 +81,18 @@ export class ContainerComponent implements OnInit {
 
   onSumbit() {
     console.log(ContainerComponent.countFields(this.formContainer));
+  }
+
+  static getErrorMessage(errors: ValidationErrors): string {
+    if (errors.required) {
+      return "This field is required";
+    } else if (errors.email) {
+      return "This field expects an email address";
+    } else if (errors.minlength) {
+      return `This field expects at least ${errors.minlength.requiredLength} characters`;
+    } else {
+      return "This field is not filled in correctly";
+    }
   }
 
   /**

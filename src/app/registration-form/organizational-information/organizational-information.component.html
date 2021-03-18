@@ -14,6 +14,19 @@
         formControlName="startDate"
         required
       />
+      <div
+        *ngIf="
+          organizationalForm.controls.dates.get('startDate')['errors'] &&
+          organizationalForm.controls.dates.get('startDate').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.dates.get("startDate")["errors"]
+          )
+        }}
+      </div>
       <label for="datesEndDate" class="form-label"
         >Proposed end date for
         {{ role === "Student" ? " internship" : " volunteering" }}
@@ -25,6 +38,19 @@
         formControlName="endDate"
         required
       />
+      <div
+        *ngIf="
+          organizationalForm.controls.dates.get('endDate')['errors'] &&
+          organizationalForm.controls.dates.get('endDate').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.dates.get("endDate")["errors"]
+          )
+        }}
+      </div>
       <label
         *ngIf="role === 'Student'"
         for="datesLeaveStartDate"
@@ -46,6 +72,20 @@
         type="date"
         formControlName="leaveStartDate"
       />
+      <div
+        *ngIf="
+          role === 'Student' &&
+          organizationalForm.controls.dates.get('leaveStartDate')['errors'] &&
+          organizationalForm.controls.dates.get('leaveStartDate').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.dates.get("leaveStartDate")["errors"]
+          )
+        }}
+      </div>
       <label
         *ngIf="role === 'Student'"
         for="datesLeaveEndDate"
@@ -67,6 +107,20 @@
         type="date"
         formControlName="leaveEndDate"
       />
+      <div
+        *ngIf="
+          role === 'Student' &&
+          organizationalForm.controls.dates.get('leaveEndDate')['errors'] &&
+          organizationalForm.controls.dates.get('leaveEndDate').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.dates.get("leaveEndDate")["errors"]
+          )
+        }}
+      </div>
     </form>
   </div>
   <div class="container">
@@ -82,6 +136,19 @@
         rows="3"
         required
       ></textarea>
+      <div
+        *ngIf="
+          organizationalForm.controls.spanish.get('level')['errors'] &&
+          organizationalForm.controls.spanish.get('level').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.spanish.get("level")["errors"]
+          )
+        }}
+      </div>
       <label for="spanishWeeks" class="form-label">
         Amount of weeks for Spanish lessons
         <p>
@@ -99,6 +166,19 @@
         type="number"
         formControlName="weeks"
       />
+      <div
+        *ngIf="
+          organizationalForm.controls.spanish.get('weeks')['errors'] &&
+          organizationalForm.controls.spanish.get('weeks').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.spanish.get("weeks")["errors"]
+          )
+        }}
+      </div>
     </form>
   </div>
   <div class="container">
@@ -115,6 +195,19 @@
         rows="3"
         required
       ></textarea>
+      <div
+        *ngIf="
+          organizationalForm.controls.info.get('occupation')['errors'] &&
+          organizationalForm.controls.info.get('occupation').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.info.get("occupation")["errors"]
+          )
+        }}
+      </div>
       <label *ngIf="role === 'Student'" for="infoDegree" class="form-label"
         >Current degree</label
       >
@@ -125,6 +218,20 @@
         formControlName="degree"
         required
       />
+      <div
+        *ngIf="
+          role === 'Student' &&
+          organizationalForm.controls.info.get('degree')['errors'] &&
+          organizationalForm.controls.info.get('degree').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.info.get("degree")["errors"]
+          )
+        }}
+      </div>
       <label
         *ngIf="role === 'Student'"
         for="infoInternshipContext"
@@ -143,6 +250,20 @@
         <option value="2">(Bachelor's) thesis</option>
         <option value="3">Other</option>
       </select>
+      <div
+        *ngIf="
+          role === 'Student' &&
+          organizationalForm.controls.info.get('internshipContext')['errors'] &&
+          organizationalForm.controls.info.get('internshipContext').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.info.get("internshipContext")["errors"]
+          )
+        }}
+      </div>
       <label for="infoTasks" class="form-label">{{
         role === "Student"
           ? "What tasks does your school want you to accomplish or what tasks would you like to work on within the organization?"
@@ -155,6 +276,19 @@
         rows="3"
         required
       ></textarea>
+      <div
+        *ngIf="
+          organizationalForm.controls.info.get('tasks')['errors'] &&
+          organizationalForm.controls.info.get('tasks').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.info.get("tasks")["errors"]
+          )
+        }}
+      </div>
       <label for="infoExpecations" class="form-label"
         >What are your expectations of your possible
         {{ role === "Student" ? " internship " : " volunteering work " }}
@@ -166,6 +300,19 @@
         formControlName="expectations"
         rows="3"
       ></textarea>
+      <div
+        *ngIf="
+          organizationalForm.controls.info.get('expectations')['errors'] &&
+          organizationalForm.controls.info.get('expectations').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.info.get("expectations")["errors"]
+          )
+        }}
+      </div>
       <label for="infoProposals" class="form-label"
         >Do you have any proposals concerning your work within the
         organization?</label
@@ -176,6 +323,19 @@
         formControlName="proposals"
         rows="3"
       ></textarea>
+      <div
+        *ngIf="
+          organizationalForm.controls.info.get('proposals')['errors'] &&
+          organizationalForm.controls.info.get('proposals').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            organizationalForm.controls.info.get("proposals")["errors"]
+          )
+        }}
+      </div>
     </form>
   </div>
 </div>

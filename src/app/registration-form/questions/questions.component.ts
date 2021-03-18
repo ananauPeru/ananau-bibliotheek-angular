@@ -17,6 +17,7 @@ export class QuestionsComponent implements OnInit {
     requiredAndValid: number;
   }>();
   @Input() public role: FormRole;
+  getErrorMessage = ContainerComponent.getErrorMessage;
 
   constructor(private fb: FormBuilder) {}
 
