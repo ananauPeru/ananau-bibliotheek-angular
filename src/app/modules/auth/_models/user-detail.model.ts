@@ -18,20 +18,20 @@ export class UserDetailModel extends AuthModel {
   createdAt: Date
   updatedAt: Date
 
-  setUser(user: any) {
-    this.userDetailId = user.userDetailId
-    this.applicationUserId = user.applicationUserId
-    this.firstName = user.firstName
-    this.middleName = user.middleName
-    this.lastName = user.lastName
-    this.phone = user.phone
-    this.placeOfBirth = user.placeOfBirth
-    this.country = user.country
-    this.nationality = user.nationality
-    this.passportNumber = user.passportNumber
-    this.dateOfBirth = user.dateOfBirth
-    this.createdAt = user.createdAt
-    this.updatedAt = user.updatedAt
+  setUserDetail(userDetail: any) {
+    this.userDetailId = userDetail.userDetailId
+    this.applicationUserId = userDetail.applicationUserId
+    this.firstName = userDetail.firstName
+    this.middleName = userDetail.middleName
+    this.lastName = userDetail.lastName
+    this.phone = userDetail.phone
+    this.placeOfBirth = userDetail.placeOfBirth
+    this.country = userDetail.country
+    this.nationality = userDetail.nationality
+    this.passportNumber = userDetail.passportNumber
+    this.dateOfBirth = userDetail.dateOfBirth
+    this.createdAt = userDetail.createdAt
+    this.updatedAt = userDetail.updatedAt
 
     // this.id = user.id
     // this.userName = user.userName || ''

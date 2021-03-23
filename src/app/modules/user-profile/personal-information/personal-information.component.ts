@@ -39,12 +39,54 @@ export class PersonalInformationComponent implements OnInit, OnDestroy {
   loadForm() {
     this.formGroup = this.fb.group({
       pic: [this.user.pic],
-      firstname: [this.user.firstname, Validators.required],
-      lastname: [this.user.lastname, Validators.required],
-      companyName: [this.user.companyName, Validators.required],
-      phone: [this.user.phone, Validators.required],
-      email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
-      website: [this.user.website, Validators.required]
+      firstname: [
+        this.user.userDetail.firstName,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
+      ],
+      lastname: [
+        this.user.userDetail.lastName,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
+      ],
+      email: [
+        this.user.email,
+        Validators.compose([
+          Validators.required,
+          Validators.email,
+          Validators.minLength(3),
+          Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+        ]),
+      ],
+      phone: [
+        this.user.userDetail.phone,
+        Validators.compose([
+          Validators.required,            
+          Validators.pattern("^[+?][0-9 ]*$"),
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
+      ],
+      dateofbirth: [
+        this.user.userDetail.dateOfBirth,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
+      ],
+      // firstname: [this.user.userDetail.firstName, Validators.required],
+      // lastname: [this.user.userDetail.lastName, Validators.required],
+      // companyName: [this.user.companyName, Validators.required],
+      // phone: [this.user.userDetail.phone, Validators.required],
+      // email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
+      // website: [this.user.website, Validators.required]
     });
   }
 

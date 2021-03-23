@@ -133,16 +133,15 @@
               control: registrationForm.controls['phone']
             }"></ng-container>
       </div>
-    <!-- </div> -->
-    <!--end::Form group-->
+      <!-- </div> -->
+      <!--end::Form group-->
 
-    <!--begin::Form group-->
-    <!-- <div class="row"> -->
+      <!--begin::Form group-->
       <div class="col-12 col-md-6 form-group">
         <label class="font-size-h6 font-weight-bolder text-dark">{{"AUTH.INPUT.DATEOFBIRTH" | translate }}</label>
         <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" (click)="d.toggle()"
-          placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" name="dateofbirth"
-          formControlName="dateofbirth" placeholder="2000-01-01" autocomplete="off" [ngClass]="{
+          placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" name="dateofbirth" formControlName="dateofbirth"
+          placeholder="2000-01-01" autocomplete="off" [ngClass]="{
               'is-invalid': registrationForm.controls['dateofbirth'].invalid && registrationForm.controls['dateofbirth'].dirty
             }" />
         <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{

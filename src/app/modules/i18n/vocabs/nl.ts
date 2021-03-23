@@ -7,6 +7,11 @@ export const locale = {
       SELECT: 'Kies je taal',
     },
 
+    BUTTONS: {
+      SAVE_CHANGES: 'Wijzigingen Opslaan',
+      CANCEL: 'Annuleer',
+    },
+
     // MENU
     MENU: {
       NEW: 'nieuw',
@@ -23,6 +28,9 @@ export const locale = {
       GENERAL: {
         NEW: 'Nieuw hier?',
         TITLE: 'Welkom op Añañau',
+        WELCOMETITLE1: 'Welkom op Asociación ONG Añañau!',
+        WELCOMETITLE2:
+          'Asociación ONG Añañau is een non-profit en niet-gouvernamentele organisatie gericht aan kinderen en jongeren die in extreme armoede en onstabiele familiesituaties leven.',
         OR: 'Of',
         SUBMIT_BUTTON: 'Verzenden',
         CANCEL_BUTTON: 'Annuleer',
@@ -98,12 +106,11 @@ export const locale = {
         PHONE_MINLENGTH: 'Telefoon moet minimaal 3 karakters lang zijn.',
         PHONE_MAXLENGTH: 'Telefoon mag maximaal 360 karakters lang zijn.',
         DATEOFBIRTH_REQUIRED: 'Geboortedatum is verplicht',
-        DATEOFBIRTH_MINLENGTH:
-          'Geboortedatum moet minimaal 3 karakters lang zijn.',
-        DATEOFBIRTH_MAXLENGTH:
-          'Geboortedatum mag maximaal 360 karakters lang zijn.',
+        DATEOFBIRTH_MINLENGTH: 'Geboortedatum moet minimaal 3 karakters lang zijn.',
+        DATEOFBIRTH_MAXLENGTH: 'Geboortedatum mag maximaal 360 karakters lang zijn.',
       },
     },
+
     ECOMMERCE: {
       COMMON: {
         SELECTED_RECORDS_COUNT: 'Selected records count: ',
@@ -143,6 +150,21 @@ export const locale = {
           UPDATE_MESSAGE: 'Customer has been updated',
           ADD_MESSAGE: 'Customer has been created',
         },
+      },
+    },
+
+    PROFILE: {
+      PERSONAL_INFORMATION: {
+        TITLE: 'Persoonlijke Informatie',
+        SUBTITLE: 'Update uw persoonlijke info.',
+      },
+      INPUT: {
+        AVATAR: 'Avatar',
+        FIRSTNAME: 'Voornaam',
+        LASTNAME: 'Naam',
+        PHONE:"Telefoon",
+        EMAIL: 'Email',
+        EMAIL_ALT: 'E-mailadres veranderen is niet mogelijk.',
       },
     },
   },

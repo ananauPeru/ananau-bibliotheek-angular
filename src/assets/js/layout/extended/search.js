@@ -23,7 +23,7 @@ var KTLayoutSearch = function() {
     var _timeout = false;
     var _isProcessing = false;
     var _requestTimeout = 200; // ajax request fire timeout in milliseconds
-    var _spinnerClass = 'spinner spinner-sm spinner-primary';
+    var _spinnerClass = 'spinner spinner-sm spinner-primary spinner-ananau';
     var _resultClass = 'quick-search-has-result';
     var _minLength = 2;
 

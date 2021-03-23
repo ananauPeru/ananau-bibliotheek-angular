@@ -1,0 +1,60 @@
+// Application colors
+$light-green:#008037;
+$green:#0B5F3E;
+$primary:#0B5F3E;
+$dark-green:#194B32;
+
+// Splash screen spinner
+.splash-spinner.path,
+.spinner.spinner-primary,
+.spinner.spinner-ananau {
+  stroke: $green !important;
+}
+
+// Set link color to green!
+a,
+.text-primary,
+.text-primary.font-weight-bolder,
+.navi .navi-item .navi-link.active .navi-text {
+  color: $green !important;
+}
+
+a:hover,
+a:active,
+.text-primary:hover,
+.text-primary.font-weight-bolder:hover,
+.text-primary:active,
+.text-primary.font-weight-bolder:active,
+.text-primary:focus,
+.text-primary.font-weight-bolder:focus,
+.navi .navi-item .navi-link:hover,
+.navi .navi-item .navi-link:hover .navi-text {
+  color: $dark-green !important;
+}
+
+// Light butten -> mostly cancel
+.btn.btn-light-primary:hover {
+  color: white !important;
+  background-color: $dark-green !important;
+}
+
+// Checked checkbox
+.checkbox>input:checked~span {
+  background-color: $dark-green !important;
+}
+
+// Set button color to green
+.btn.btn-primary {
+  border-color: $green !important;
+  background-color: $green !important;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:active {
+  border-color: $dark-green !important;
+  background-color: $dark-green !important;
+}
+
+.navi .navi-item .navi-link.active .navi-icon svg g [fill] {
+  fill: $green !important;
+}

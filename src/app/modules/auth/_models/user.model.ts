@@ -66,16 +66,34 @@ export class UserModel extends AuthModel {
 
   setUser(user: any) {
     this.id = user.id
-    this.userName = user.userName || ''
-    this.password = user.password || ''
-    this.fullname = user.fullname || ''
-    this.email = user.email || ''
-    this.pic = user.pic || './assets/media/users/default.jpg'
-    this.roles = user.roles || []
-    this.occupation = user.occupation || ''
-    this.companyName = user.companyName || ''
-    this.phone = user.phone || ''
-    this.address = user.address
-    this.socialNetworks = user.socialNetworks
+    this.userName = user.userName
+    this.normalizedUserName = user.normalizedUserName
+    this.email = user.email
+    this.normalizedEmail = user.normalizedEmail
+    this.emailConfirmed = user.emailConfirmed
+    this.passwordHash = user.passwordHash
+    this.securityStamp = user.securityStamp
+    this.concurrencyStamp = user.concurrencyStamp
+    this.phoneNumber = user.phoneNumber
+    this.phoneNumberConfirmed = user.phoneNumberConfirmed
+    this.twoFactorEnabled = user.twoFactorEnabled
+    this.lockoutEnd = user.lockoutEnd
+    this.lockoutEnabled = user.lockoutEnabled
+    this.accessFailedCount = user.accessFailedCount
+    this.userDetail = new UserDetailModel()
+    this.userDetail.setUserDetail(user.userDetail)
+
+    // this.id = user.id
+    // this.userName = user.userName || ''
+    // this.password = user.password || ''
+    // this.fullname = user.fullname || ''
+    // this.email = user.email || ''
+    // this.pic = user.pic || './assets/media/users/default.jpg'
+    // this.roles = user.roles || []
+    // this.occupation = user.occupation || ''
+    // this.companyName = user.companyName || ''
+    // this.phone = user.phone || ''
+    // this.address = user.address
+    // this.socialNetworks = user.socialNetworks
   }
 }

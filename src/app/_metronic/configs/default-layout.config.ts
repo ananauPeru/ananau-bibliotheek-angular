@@ -13,7 +13,8 @@ export const DefaultLayoutConfig = {
       theme: {
         base: {
           white: '#ffffff',
-          primary: '#3699FF',
+          // primary: '#3699FF',
+          primary: '#0B5F3E',
           secondary: '#E5EAEE',
           success: '#1BC5BD',
           info: '#8950FC',
@@ -261,4 +262,4 @@ export const DefaultLayoutConfig = {
       display: true,
     },
   },
-};
+}

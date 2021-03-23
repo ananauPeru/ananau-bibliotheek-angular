@@ -7,6 +7,11 @@ export const locale = {
       SELECT: 'Select your language',
     },
 
+    BUTTONS: {
+      SAVE_CHANGES: 'Save Changes',
+      CANCEL: 'Cancel',
+    },
+
     // MENU
     MENU: {
       NEW: 'new',
@@ -24,7 +29,8 @@ export const locale = {
         NEW: 'New here?',
         TITLE: 'Welcome to Añañau',
         WELCOMETITLE1: 'Welcome to Asociación ONG Añañau!',
-        WELCOMETITLE2: 'A nonprofit and non-governmental organization for children and youngsters living in extreme poverty and unstable family',
+        WELCOMETITLE2:
+          'A nonprofit and non-governmental organization for children and youngsters living in extreme poverty and unstable family',
         OR: 'Or',
         SUBMIT_BUTTON: 'Submit',
         CANCEL_BUTTON: 'Cancel',
@@ -146,11 +152,20 @@ export const locale = {
       },
     },
 
-    PROFILE:{
-      PERSONAL_INFORMATION:{
-        TITLE:"Personal Information",
-        SUBTITLE:"Update your personal information",
-      }
-    }
+    PROFILE: {
+      PERSONAL_INFORMATION: {
+        TITLE: 'Personal Information',
+        SUBTITLE: 'Update your personal information',
+      },
+      INPUT: {
+        AVATAR: 'Avatar',
+        FIRSTNAME: 'First Name',
+        LASTNAME: 'Last Name',
+        PHONE:"Telephone",
+        EMAIL: 'Email Address',
+        EMAIL_ALT: 'Changing email address is not possible.',
+        DATEOFBIRTH:"Geboortedatum",
+      },
+    },
   },
 }

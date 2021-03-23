@@ -45,12 +45,12 @@ export class AuthService implements OnDestroy {
   login(email: string, password: string): Observable<UserModel> {
     console.log('LOGGING IN')
     this.isLoadingSubject.next(true)
-    let user: UserModel
+    let user: UserModel = new UserModel()
     return this.authHttpService.login(email, password).pipe(
       map((auth: AuthModel) => {
         console.log(auth)
         const result = this.setAuthFromLocalStorage(auth)
-        user = auth.user
+        user.setUser(auth.user)
         console.log(user)
         return result
       }),
