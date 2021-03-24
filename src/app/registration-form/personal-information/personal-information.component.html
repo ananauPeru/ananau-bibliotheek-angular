@@ -44,24 +44,7 @@
         }}
       </div>
       <label for="generalEmail" class="form-label">Email</label>
-      <input
-        class="form-control"
-        id="generalEmail"
-        type="email"
-        formControlName="email"
-        required
-      />
-      <div
-        *ngIf="
-          personalForm.controls.general.get('email')['errors'] &&
-          personalForm.controls.general.get('email').touched
-        "
-        class="text-danger"
-      >
-        {{
-          getErrorMessage(personalForm.controls.general.get("email")["errors"])
-        }}
-      </div>
+      <input class="form-control" id="generalEmail" type="email" disabled />
       <label
         *ngIf="role === 'Student'"
         for="generalSchoolEmail"

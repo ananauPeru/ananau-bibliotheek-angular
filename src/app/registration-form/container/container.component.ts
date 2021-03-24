@@ -94,7 +94,6 @@ export class ContainerComponent implements OnInit {
     const general = personalForm.get("general") as FormGroup;
     dto.firstName = general.get("firstName").value;
     dto.lastName = general.get("lastName").value;
-    dto.email = general.get("email").value;
     dto.phone = general.get("phone").value;
     dto.dateOfBirth = new Date(general.get("dateOfBirth").value);
     dto.birthplace = general.get("birthplace").value;

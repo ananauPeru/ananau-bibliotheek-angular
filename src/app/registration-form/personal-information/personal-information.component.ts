@@ -26,7 +26,6 @@ export class PersonalInformationComponent implements OnInit {
       general: this.fb.group({
         firstName: ["", [Validators.required]],
         lastName: ["", [Validators.required]],
-        email: ["", [Validators.required, Validators.email]],
         phone: ["", [Validators.required]],
         dateOfBirth: ["", Validators.required],
         birthplace: ["", Validators.required],

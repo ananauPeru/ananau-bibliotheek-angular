@@ -3,7 +3,6 @@ export class RegistrationDTO {
   // General
   firstName: string;
   lastName: string;
-  email: string;
   phone: string;
   dateOfBirth: Date;
   birthplace: string;
