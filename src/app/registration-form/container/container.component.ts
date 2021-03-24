@@ -94,6 +94,7 @@ export class ContainerComponent implements OnInit {
     const general = personalForm.get("general") as FormGroup;
     dto.firstName = general.get("firstName").value;
     dto.lastName = general.get("lastName").value;
+    dto.middleName = general.get("middleName").value;
     dto.phone = general.get("phone").value;
     dto.dateOfBirth = new Date(general.get("dateOfBirth").value);
     dto.birthplace = general.get("birthplace").value;
@@ -106,6 +107,7 @@ export class ContainerComponent implements OnInit {
     dto.mailbox = address.get("mailbox").value;
     dto.postalCode = address.get("postalCode").value;
     dto.township = address.get("township").value;
+    dto.country = address.get("country").value;
 
     const contactPerson = personalForm.get("contactPerson") as FormGroup;
     dto.firstNameContact = contactPerson.get("firstName").value;

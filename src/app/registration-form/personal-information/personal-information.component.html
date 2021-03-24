@@ -23,6 +23,26 @@
           )
         }}
       </div>
+      <label for="generalMiddleName" class="form-label">Middle name</label>
+      <input
+        class="form-control"
+        id="generalMiddleName"
+        formControlName="middleName"
+        required
+      />
+      <div
+        *ngIf="
+          personalForm.controls.general.get('middleName')['errors'] &&
+          personalForm.controls.general.get('middleName').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.general.get("middleName")["errors"]
+          )
+        }}
+      </div>
       <label for="generalLastName" class="form-label">Last name</label>
       <input
         class="form-control"
@@ -273,6 +293,26 @@
         {{
           getErrorMessage(
             personalForm.controls.address.get("township")["errors"]
+          )
+        }}
+      </div>
+      <label for="addressCountry" class="form-label">Country</label>
+      <input
+        class="form-control"
+        id="addressCountry"
+        formControlName="country"
+        required
+      />
+      <div
+        *ngIf="
+          personalForm.controls.address.get('country')['errors'] &&
+          personalForm.controls.address.get('country').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.address.get("country")["errors"]
           )
         }}
       </div>

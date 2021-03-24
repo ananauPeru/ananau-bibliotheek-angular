@@ -25,6 +25,7 @@ export class PersonalInformationComponent implements OnInit {
     this.personalForm = this.fb.group({
       general: this.fb.group({
         firstName: ["", [Validators.required]],
+        middleName: [""],
         lastName: ["", [Validators.required]],
         phone: ["", [Validators.required]],
         dateOfBirth: ["", Validators.required],
@@ -38,6 +39,7 @@ export class PersonalInformationComponent implements OnInit {
         mailbox: [""],
         postalCode: ["", Validators.required],
         township: ["", Validators.required],
+        country: ["", Validators.required],
       }),
       contactPerson: this.fb.group({
         firstName: ["", Validators.required],

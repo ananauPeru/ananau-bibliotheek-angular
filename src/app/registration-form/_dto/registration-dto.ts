@@ -2,6 +2,7 @@ export class RegistrationDTO {
   // PERSONAL INFORMATION
   // General
   firstName: string;
+  middleName: string;
   lastName: string;
   phone: string;
   dateOfBirth: Date;
@@ -15,6 +16,7 @@ export class RegistrationDTO {
   mailbox: string;
   postalCode: string;
   township: string;
+  country: string;
 
   // Contact person
   firstNameContact: string;
