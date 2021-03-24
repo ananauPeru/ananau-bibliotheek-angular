@@ -9,7 +9,10 @@ import {
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
+import { RegistrationService } from "../data-services/registration.service";
 import { FormRole } from "../models/form-role";
+import { RegistrationDTO } from "../_dto/registration-dto";
+import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
 
 @Component({
   selector: "app-container",
@@ -41,7 +44,11 @@ export class ContainerComponent implements OnInit {
     requiredAndValid: number;
   };
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(
+    private registrationService: RegistrationService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute
+  ) {
     this.route.data.subscribe((data) => {
       this.role = data["role"] ? data["role"] : FormRole.VOLUNTEER;
     });
@@ -79,8 +86,86 @@ export class ContainerComponent implements OnInit {
     };
   }
 
-  onSumbit() {
-    console.log(ContainerComponent.countFields(this.formContainer));
+  saveForm(submit: boolean) {
+    let dto = new RegistrationDTO();
+
+    const personalForm = this.formContainer.get("personalForm") as FormGroup;
+
+    const general = personalForm.get("general") as FormGroup;
+    dto.firstName = general.get("firstName").value;
+    dto.lastName = general.get("lastName").value;
+    dto.email = general.get("email").value;
+    dto.phone = general.get("phone").value;
+    dto.dateOfBirth = new Date(general.get("dateOfBirth").value);
+    dto.birthplace = general.get("birthplace").value;
+    dto.nationality = general.get("nationality").value;
+    dto.passportNumber = general.get("passportNumber").value;
+
+    const address = personalForm.get("address") as FormGroup;
+    dto.street = address.get("street").value;
+    dto.houseNumber = address.get("houseNumber").value;
+    dto.mailbox = address.get("mailbox").value;
+    dto.postalCode = address.get("postalCode").value;
+    dto.township = address.get("township").value;
+
+    const contactPerson = personalForm.get("contactPerson") as FormGroup;
+    dto.firstNameContact = contactPerson.get("firstName").value;
+    dto.lastNameContact = contactPerson.get("lastName").value;
+    dto.relation = contactPerson.get("relation").value;
+    dto.emailContact = contactPerson.get("email").value;
+    dto.phoneContact = contactPerson.get("phone").value;
+
+    const medical = personalForm.get("medical") as FormGroup;
+    dto.allergies = medical.get("allergies").value;
+    dto.medicalConditions = medical.get("medicalConditions").value;
+
+    const organizationalForm = this.formContainer.get(
+      "organizationalForm"
+    ) as FormGroup;
+
+    const dates = organizationalForm.get("dates") as FormGroup;
+    dto.startDate = new Date(dates.get("startDate").value);
+    dto.endDate = new Date(dates.get("endDate").value);
+
+    const spanish = organizationalForm.get("spanish") as FormGroup;
+    dto.level = spanish.get("level").value;
+    dto.weeks = Number(spanish.get("weeks").value);
+
+    const info = organizationalForm.get("info") as FormGroup;
+    dto.occupation = info.get("occupation").value;
+    dto.tasks = info.get("tasks").value;
+    dto.expectations = info.get("expectations").value;
+    dto.proposals = info.get("proposals").value;
+
+    const questionsForm = this.formContainer.get("questionsForm") as FormGroup;
+    dto.otherQuestions = questionsForm.get("otherQuestions").value;
+    dto.experience = questionsForm.get("experience").value;
+    dto.whyAnanau = questionsForm.get("whyAnanau").value;
+    dto.firstHeard = questionsForm.get("firstHeard").value;
+
+    if (this.role == FormRole.STUDENT) {
+      let studentDto = dto as RegistrationStudentDTO;
+
+      studentDto.schoolEmail = general.get("schoolEmail").value;
+      studentDto.leaveStartDate = new Date(dates.get("leaveStartDate").value);
+      studentDto.leaveEndDate = new Date(dates.get("leaveEndDate").value);
+      studentDto.degree = info.get("degree").value;
+      studentDto.internshipContext = info.get("internshipContext").value;
+
+      this.registrationService
+        .postStudentRegistration$(studentDto, submit)
+        .subscribe(
+          (registration) => console.log(registration),
+          (error) => console.log(error)
+        );
+    } else {
+      this.registrationService
+        .postVolunteerRegistration$(dto, submit)
+        .subscribe(
+          (registration) => console.log(registration),
+          (error) => console.log(error)
+        );
+    }
   }
 
   static getErrorMessage(errors: ValidationErrors): string {

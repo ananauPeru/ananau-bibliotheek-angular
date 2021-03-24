@@ -188,7 +188,13 @@
           </div>
         </div>
         <div class="col-2">
-          <button type="button" class="btn btn-outline-success">Save</button>
+          <button
+            (click)="saveForm(false)"
+            type="button"
+            class="btn btn-outline-success"
+          >
+            Save
+          </button>
           <button
             type="submit"
             class="btn btn-primary"
@@ -274,6 +280,7 @@
           Cancel
         </button>
         <button
+          (click)="saveForm(true)"
           type="submit"
           class="btn btn-primary"
           [disabled]="!agreementControl.valid"
