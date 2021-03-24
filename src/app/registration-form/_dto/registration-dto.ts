@@ -20,6 +20,7 @@ export class RegistrationDTO {
 
   // Contact person
   firstNameContact: string;
+  middleNameContact: string;
   lastNameContact: string;
   relation: string;
   emailContact: string;

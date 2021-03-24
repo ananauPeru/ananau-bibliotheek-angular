@@ -111,6 +111,7 @@ export class ContainerComponent implements OnInit {
 
     const contactPerson = personalForm.get("contactPerson") as FormGroup;
     dto.firstNameContact = contactPerson.get("firstName").value;
+    dto.middleNameContact = contactPerson.get("middleName").value;
     dto.lastNameContact = contactPerson.get("lastName").value;
     dto.relation = contactPerson.get("relation").value;
     dto.emailContact = contactPerson.get("email").value;

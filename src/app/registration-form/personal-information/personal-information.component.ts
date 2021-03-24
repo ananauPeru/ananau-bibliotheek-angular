@@ -43,6 +43,7 @@ export class PersonalInformationComponent implements OnInit {
       }),
       contactPerson: this.fb.group({
         firstName: ["", Validators.required],
+        middleName: [""],
         lastName: ["", Validators.required],
         relation: ["", Validators.required],
         email: ["", [Validators.required, Validators.email]],

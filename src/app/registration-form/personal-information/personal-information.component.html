@@ -345,6 +345,28 @@
           )
         }}
       </div>
+      <label for="contactPersonMiddleName" class="form-label"
+        >Middle name</label
+      >
+      <input
+        class="form-control"
+        id="contactPersonMiddleName"
+        formControlName="middleName"
+        required
+      />
+      <div
+        *ngIf="
+          personalForm.controls.contactPerson.get('middleName')['errors'] &&
+          personalForm.controls.contactPerson.get('middleName').touched
+        "
+        class="text-danger"
+      >
+        {{
+          getErrorMessage(
+            personalForm.controls.contactPerson.get("middleName")["errors"]
+          )
+        }}
+      </div>
       <label for="contactPersonLastName" class="form-label">Last name</label>
       <input
         class="form-control"
