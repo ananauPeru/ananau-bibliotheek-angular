@@ -17,6 +17,7 @@ const routes: Routes = [
   },
   {
     path: "registration",
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import("./registration-form/registration-form.module").then(
         (mod) => mod.RegistrationFormModule
