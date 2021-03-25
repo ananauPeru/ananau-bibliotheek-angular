@@ -1,4 +1,7 @@
-<div class="container">
+<div
+  *ngIf="initialData$ | async as initialData; else loadingOrError"
+  class="container"
+>
   <h1>Registration</h1>
 
   <form [formGroup]="formContainer">
@@ -117,6 +120,7 @@
           [(personalForm)]="formContainer.controls.personalForm"
           (personalFormCounted)="personalFormProgress = $event"
           [role]="role"
+          [initialData]="initialData"
         ></app-personal-information>
       </div>
       <div
@@ -129,6 +133,7 @@
           [(organizationalForm)]="formContainer.controls.organizationalForm"
           (organizationalFormCounted)="organizationalFormProgress = $event"
           [role]="role"
+          [initialData]="initialData"
         ></app-organizational-information>
       </div>
       <div
@@ -152,6 +157,7 @@
           [(questionsForm)]="formContainer.controls.questionsForm"
           (questionsFormCounted)="questionsFormProgress = $event"
           [role]="role"
+          [initialData]="initialData"
         ></app-questions>
       </div>
     </div>
@@ -291,3 +297,10 @@
     </div>
   </div>
 </div>
+
+<ng-template #loadingOrError>
+  <span *ngIf="errorMessage; else loading"></span>
+  <ng-template #loading>
+    <span>Laden...</span>
+  </ng-template>
+</ng-template>

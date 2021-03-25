@@ -4,6 +4,7 @@ export class RegistrationDTO {
   firstName: string;
   middleName: string;
   lastName: string;
+  email: string;
   phone: string;
   dateOfBirth: Date;
   birthplace: string;

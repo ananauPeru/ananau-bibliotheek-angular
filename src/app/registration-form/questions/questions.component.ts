@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
+import { RegistrationDTO } from "../_dto/registration-dto";
 
 @Component({
   selector: "app-questions",
@@ -17,16 +18,17 @@ export class QuestionsComponent implements OnInit {
     requiredAndValid: number;
   }>();
   @Input() public role: FormRole;
+  @Input() public initialData: RegistrationDTO;
   getErrorMessage = ContainerComponent.getErrorMessage;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.questionsForm = this.fb.group({
-      otherQuestions: [""],
-      experience: [""],
-      whyAnanau: [""],
-      firstHeard: [""],
+      otherQuestions: [this.initialData.otherQuestions],
+      experience: [this.initialData.experience],
+      whyAnanau: [this.initialData.whyAnanau],
+      firstHeard: [this.initialData.firstHeard],
     });
 
     this.emitForm();

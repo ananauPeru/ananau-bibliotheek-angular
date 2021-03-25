@@ -1,7 +1,10 @@
+import { DatePipe } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
+import { RegistrationDTO } from "../_dto/registration-dto";
+import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
 
 @Component({
   selector: "app-organizational-information",
@@ -17,39 +20,89 @@ export class OrganizationalInformationComponent implements OnInit {
     requiredAndValid: number;
   }>();
   @Input() public role: FormRole;
+  @Input() public initialData: RegistrationDTO;
   getErrorMessage = ContainerComponent.getErrorMessage;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.organizationalForm = this.fb.group({
       dates: this.fb.group({
-        startDate: ["", Validators.required],
-        endDate: ["", Validators.required],
+        startDate: [
+          this.initialData.startDate
+            ? this.datePipe.transform(
+                new Date(this.initialData.startDate),
+                "yyyy-MM-dd"
+              )
+            : "",
+          Validators.required,
+        ],
+        endDate: [
+          this.initialData.endDate
+            ? this.datePipe.transform(
+                new Date(this.initialData.endDate),
+                "yyyy-MM-dd"
+              )
+            : "",
+          Validators.required,
+        ],
       }),
       spanish: this.fb.group({
-        level: ["", Validators.required],
-        weeks: [""],
+        level: [this.initialData.level, Validators.required],
+        weeks: [this.initialData.weeks],
       }),
       info: this.fb.group({
-        occupation: ["", Validators.required],
-        tasks: ["", Validators.required],
-        expectations: [""],
-        proposals: [""],
+        occupation: [this.initialData.occupation, Validators.required],
+        tasks: [this.initialData.tasks, Validators.required],
+        expectations: [this.initialData.expectations],
+        proposals: [this.initialData.proposals],
       }),
     });
 
     // Add controls only targeted to students
     if (this.role === FormRole.STUDENT) {
       const dates = this.organizationalForm.get("dates") as FormGroup;
-      dates.addControl("leaveStartDate", this.fb.control(""));
-      dates.addControl("leaveEndDate", this.fb.control(""));
+      dates.addControl(
+        "leaveStartDate",
+        this.fb.control(
+          (this.initialData as RegistrationStudentDTO).leaveStartDate
+            ? this.datePipe.transform(
+                new Date(
+                  (this.initialData as RegistrationStudentDTO).leaveStartDate
+                ),
+                "yyyy-MM-dd"
+              )
+            : ""
+        )
+      );
+      dates.addControl(
+        "leaveEndDate",
+        this.fb.control(
+          (this.initialData as RegistrationStudentDTO).leaveEndDate
+            ? this.datePipe.transform(
+                new Date(
+                  (this.initialData as RegistrationStudentDTO).leaveEndDate
+                ),
+                "yyyy-MM-dd"
+              )
+            : ""
+        )
+      );
 
       const info = this.organizationalForm.get("info") as FormGroup;
-      info.addControl("degree", this.fb.control("", Validators.required));
+      info.addControl(
+        "degree",
+        this.fb.control(
+          (this.initialData as RegistrationStudentDTO).degree,
+          Validators.required
+        )
+      );
       info.addControl(
         "internshipContext",
-        this.fb.control("", Validators.required)
+        this.fb.control(
+          (this.initialData as RegistrationStudentDTO).internshipContext,
+          Validators.required
+        )
       );
     }
 

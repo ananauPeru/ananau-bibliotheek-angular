@@ -20,6 +20,56 @@ export class RegistrationService {
     public translate: TranslateService
   ) {}
 
+  getVolunteerRegistration$(): Observable<RegistrationDTO> {
+    return this.http
+      .get(`${environment.apiUrl}/registrations/volunteer`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            this.accountService.logout();
+            this.translate.get("tokenVerstreken").subscribe((text: string) => {
+              this.router.navigate([`/account/login`], {
+                state: { errorMessage: text },
+              });
+            });
+          }
+          return throwError(error);
+        }),
+        map(
+          (dto: any): RegistrationDTO => {
+            return dto;
+          }
+        )
+      );
+  }
+
+  getStudentRegistration$(): Observable<RegistrationStudentDTO> {
+    return this.http
+      .get(`${environment.apiUrl}/registrations/student`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            this.accountService.logout();
+            this.translate.get("tokenVerstreken").subscribe((text: string) => {
+              this.router.navigate([`/account/login`], {
+                state: { errorMessage: text },
+              });
+            });
+          }
+          return throwError(error);
+        }),
+        map(
+          (dto: any): RegistrationStudentDTO => {
+            return dto;
+          }
+        )
+      );
+  }
+
   postVolunteerRegistration$(
     registration: RegistrationDTO,
     submit: boolean

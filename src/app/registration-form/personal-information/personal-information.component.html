@@ -63,7 +63,12 @@
         }}
       </div>
       <label for="generalEmail" class="form-label">Email</label>
-      <input class="form-control" id="generalEmail" type="email" disabled />
+      <input
+        class="form-control"
+        id="generalEmail"
+        type="email"
+        formControlName="email"
+      />
       <label
         *ngIf="role === 'Student'"
         for="generalSchoolEmail"

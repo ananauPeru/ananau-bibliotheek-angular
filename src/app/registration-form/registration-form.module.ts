@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { ContainerComponent } from "./container/container.component";
 import { RouterModule, Routes } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
@@ -50,6 +50,7 @@ const routes: Routes = [
     TranslateModule,
     RouterModule.forChild(routes),
   ],
+  providers: [DatePipe],
   exports: [ContainerComponent],
 })
 export class RegistrationFormModule {}

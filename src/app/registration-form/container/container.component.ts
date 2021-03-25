@@ -9,6 +9,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
+import { EMPTY, Observable } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { RegistrationService } from "../data-services/registration.service";
 import { FormRole } from "../models/form-role";
 import { RegistrationDTO } from "../_dto/registration-dto";
@@ -23,6 +25,8 @@ export class ContainerComponent implements OnInit {
   public formContainer: FormGroup;
   public agreementControl: FormControl;
   public role: FormRole;
+  public initialData$: Observable<RegistrationDTO>;
+  public errorMessage: string;
   public personalFormProgress: {
     all: number;
     required: number;
@@ -52,6 +56,26 @@ export class ContainerComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.role = data["role"] ? data["role"] : FormRole.VOLUNTEER;
     });
+
+    if (this.role === FormRole.STUDENT) {
+      this.initialData$ = this.registrationService
+        .getStudentRegistration$()
+        .pipe(
+          catchError((error) => {
+            this.errorMessage = error;
+            return EMPTY;
+          })
+        );
+    } else {
+      this.initialData$ = this.registrationService
+        .getVolunteerRegistration$()
+        .pipe(
+          catchError((error) => {
+            this.errorMessage = error;
+            return EMPTY;
+          })
+        );
+    }
   }
 
   ngOnInit() {
@@ -145,7 +169,7 @@ export class ContainerComponent implements OnInit {
     dto.whyAnanau = questionsForm.get("whyAnanau").value;
     dto.firstHeard = questionsForm.get("firstHeard").value;
 
-    if (this.role == FormRole.STUDENT) {
+    if (this.role === FormRole.STUDENT) {
       let studentDto = dto as RegistrationStudentDTO;
 
       studentDto.schoolEmail = general.get("schoolEmail").value;
@@ -158,14 +182,14 @@ export class ContainerComponent implements OnInit {
         .postStudentRegistration$(studentDto, submit)
         .subscribe(
           (registration) => console.log(registration),
-          (error) => console.log(error)
+          (error) => console.error(error)
         );
     } else {
       this.registrationService
         .postVolunteerRegistration$(dto, submit)
         .subscribe(
           (registration) => console.log(registration),
-          (error) => console.log(error)
+          (error) => console.error(error)
         );
     }
   }
