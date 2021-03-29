@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
@@ -6,6 +6,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 // import { AccountService } from "src/app/account/data-services/account.service";
 import { environment } from "src/environments/environment";
+import { AuthModel } from "../../auth/_models/auth.model";
 import { RegistrationDTO } from "../_dto/registration-dto";
 import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
 
@@ -13,17 +14,25 @@ import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
   providedIn: "root",
 })
 export class RegistrationService {
+  private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
+  private httpHeaders: HttpHeaders;
+
   constructor(
     private router: Router,
     // private accountService: AccountService,
     private http: HttpClient,
     public translate: TranslateService
-  ) {}
+  ) {
+    this.httpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${this.getAuthFromLocalStorage().token}`,
+    });
+  }
 
   getVolunteerRegistration$(): Observable<RegistrationDTO> {
     return this.http
       .get(`${environment.apiUrl}/registrations/volunteer`, {
         responseType: "json",
+        headers: this.httpHeaders,
       })
       .pipe(
         catchError((error) => {
@@ -48,6 +57,7 @@ export class RegistrationService {
   getStudentRegistration$(): Observable<RegistrationStudentDTO> {
     return this.http
       .get(`${environment.apiUrl}/registrations/student`, {
+        headers: this.httpHeaders,
         responseType: "json",
       })
       .pipe(
@@ -134,5 +144,20 @@ export class RegistrationService {
           }
         )
       );
+  }
+
+  private getAuthFromLocalStorage(): AuthModel {
+    try {
+      // console.log(localStorage)
+      // console.log(this.authLocalStorageToken)
+      const authData = JSON.parse(
+        localStorage.getItem(this.authLocalStorageToken)
+      );
+      console.log(authData);
+      return authData;
+    } catch (error) {
+      // console.error(error)
+      return undefined;
+    }
   }
 }

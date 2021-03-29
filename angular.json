@@ -32,7 +32,6 @@
                 "input": "src",
                 "output": "/"
               }
-              
             ],
             "styles": [
               "src/styles.scss",
@@ -40,16 +39,17 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -59,7 +59,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [{
+              "budgets": [
+                {
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
@@ -135,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "ananau-bibliotheek"
+  "defaultProject": "ananau-bibliotheek",
+  "cli": {
+    "analytics": "e822eef9-f2fb-4ebd-b1a2-48278d2aea6e"
+  }
 }
