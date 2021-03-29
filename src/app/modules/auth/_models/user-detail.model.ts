@@ -19,6 +19,7 @@ export class UserDetailModel extends AuthModel {
   updatedAt: Date
 
   setUserDetail(userDetail: any) {
+    console.log(userDetail)
     this.userDetailId = userDetail.userDetailId
     this.applicationUserId = userDetail.applicationUserId
     this.firstName = userDetail.firstName

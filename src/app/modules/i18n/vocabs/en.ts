@@ -21,6 +21,10 @@ export const locale = {
       FEATURES: 'Features',
       APPS: 'Apps',
       DASHBOARD: 'Dashboard',
+      LIBRARY: {
+        TITLE: 'Library',
+        OVERVIEW: 'Overview',
+      },
     },
 
     // AUTH PAGES
@@ -161,10 +165,10 @@ export const locale = {
         AVATAR: 'Avatar',
         FIRSTNAME: 'First Name',
         LASTNAME: 'Last Name',
-        PHONE:"Telephone",
+        PHONE: 'Telephone',
         EMAIL: 'Email Address',
         EMAIL_ALT: 'Changing email address is not possible.',
-        DATEOFBIRTH:"Geboortedatum",
+        DATEOFBIRTH: 'Geboortedatum',
       },
     },
   },

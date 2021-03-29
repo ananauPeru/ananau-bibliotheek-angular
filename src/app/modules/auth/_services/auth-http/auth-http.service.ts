@@ -30,11 +30,12 @@ export class AuthHTTPService {
     })
   }
 
-  getUserByToken(token): Observable<UserModel> {
+  getUserByToken(auth): Observable<UserModel> {
+    console.log(auth.token)
     const httpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${auth.token}`,
     })
-    return this.http.get<UserModel>(`${API_USERS_URL}`, {
+    return this.http.get<UserModel>(`${API_USERS_URL}/${auth.user.id}`, {
       headers: httpHeaders,
     })
   }

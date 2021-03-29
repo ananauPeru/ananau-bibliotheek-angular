@@ -12,6 +12,7 @@ export class AuthComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("Auth Module main component")
   }
 
 }

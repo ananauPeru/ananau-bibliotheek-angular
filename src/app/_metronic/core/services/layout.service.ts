@@ -89,9 +89,9 @@ export class LayoutService {
   }
 
   getProp(path: string): any {
-    console.log("getting prop");
-    console.log(path)
-    console.log(objectPath.get(this.layoutConfigSubject.value, path))
+    // console.log("getting prop");
+    // console.log(path)
+    // console.log(objectPath.get(this.layoutConfigSubject.value, path))
     return objectPath.get(this.layoutConfigSubject.value, path);
   }
 
