@@ -1,0 +1,59 @@
+<ng-container *ngIf="!loading; else loadingError">
+  <div class="row">
+    <app-sidemenu class="col-12 col-md-2"></app-sidemenu>
+    <div class="col-12 col-md-10 offset-lg-1 col-lg-8">
+      <h1 class="text-center">{{'accountWijzigen' | translate}}</h1>
+      <form [formGroup]="accountWijzigenFormulier" class="row" (ngSubmit)='accountWijzigen()'>
+        <div class="col-12">
+          <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
+            {{successMessage}}
+          </div>
+          <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+            {{errorMessage}}
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <label for="voornaam" class="marginTop10">{{'voornaam' | translate}}</label>
+          <input type="text" class="form-control" id="voornaam" formControlName="voornaam">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <label for="achternaam" class="marginTop10">{{'achternaam' | translate}}</label>
+          <input type="text" class="form-control" id="achternaam" formControlName="achternaam">
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <label for="telefoon" class="marginTop10">{{'telefoonnummer' | translate}}</label>
+          <input type="tel" class="form-control" id="telefoon" formControlName="telefoon">
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for="geboorteDatum" class="marginTop10">{{'geboorteDatum' | translate}}</label>
+          <input type="date" class="form-control" id="geboorteDatum" formControlName="geboorteDatum">
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="email" class="marginTop10">{{'emailadres' | translate}}</label>
+          <input type="email" class="form-control" id="email" formControlName="email" disabled>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="country" class="marginTop10">{{'country' | translate}}</label>
+          <input type="country" class="form-control" id="country" formControlName="country">
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="nationality" class="marginTop10">{{'nationality' | translate}}</label>
+          <input type="nationality" class="form-control" id="nationality" formControlName="nationality">
+        </div>
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary marginTop10 width100OnlyMobile"
+            [disabled]='!accountWijzigenFormulier.valid'>{{'accountAanpassen' |translate}}!</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-container>
+<ng-template #loadingError>
+  <div class="row">
+    <div class="col-2 offset-5 text-center">
+      <div class="spinner-border spinner" role="status">
+        <span class="sr-only" translate>Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
