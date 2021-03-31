@@ -79,9 +79,6 @@ export class ContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log('container')
-
     this.formContainer = this.fb.group({
       personalForm: this.fb.group({}),
       organizationalForm: this.fb.group({}),
