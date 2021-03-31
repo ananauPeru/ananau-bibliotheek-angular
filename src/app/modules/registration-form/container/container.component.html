@@ -125,7 +125,7 @@
     </div>
   </div>
   <!-- Body -->
-  <div class="card-body pt-2">
+  <div class="card-body">
     <div *ngIf="initialData$ | async as initialData; else loadingOrError">
       <div class="tab-content">
         <div
@@ -134,12 +134,18 @@
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_1"
         >
-          <app-personal-information
-            [(personalForm)]="formContainer.controls.personalForm"
-            (personalFormCounted)="personalFormProgress = $event"
-            [role]="role"
-            [initialData]="initialData"
-          ></app-personal-information>
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-personal-information
+                [(personalForm)]="formContainer.controls.personalForm"
+                (personalFormCounted)="personalFormProgress = $event"
+                [role]="role"
+                [initialData]="initialData"
+              ></app-personal-information>
+            </div>
+            <div class="col-xl-2"></div>
+          </div>
         </div>
         <div
           class="tab-pane fade"
@@ -147,12 +153,22 @@
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_2"
         >
-          <app-organizational-information
-            [(organizationalForm)]="formContainer.controls.organizationalForm"
-            (organizationalFormCounted)="organizationalFormProgress = $event"
-            [role]="role"
-            [initialData]="initialData"
-          ></app-organizational-information>
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-organizational-information
+                [(organizationalForm)]="
+                  formContainer.controls.organizationalForm
+                "
+                (organizationalFormCounted)="
+                  organizationalFormProgress = $event
+                "
+                [role]="role"
+                [initialData]="initialData"
+              ></app-organizational-information>
+            </div>
+            <div class="col-xl-2"></div>
+          </div>
         </div>
         <div
           class="tab-pane fade"
@@ -160,10 +176,16 @@
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_3"
         >
-          <app-scan-uploads
-            [(scansForm)]="formContainer.controls.scansForm"
-            (scansFormCounted)="scansFormProgress = $event"
-          ></app-scan-uploads>
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-scan-uploads
+                [(scansForm)]="formContainer.controls.scansForm"
+                (scansFormCounted)="scansFormProgress = $event"
+              ></app-scan-uploads>
+            </div>
+            <div class="col-xl-2"></div>
+          </div>
         </div>
         <div
           class="tab-pane fade"
@@ -171,12 +193,18 @@
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_4"
         >
-          <app-questions
-            [(questionsForm)]="formContainer.controls.questionsForm"
-            (questionsFormCounted)="questionsFormProgress = $event"
-            [role]="role"
-            [initialData]="initialData"
-          ></app-questions>
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-questions
+                [(questionsForm)]="formContainer.controls.questionsForm"
+                (questionsFormCounted)="questionsFormProgress = $event"
+                [role]="role"
+                [initialData]="initialData"
+              ></app-questions>
+            </div>
+            <div class="col-xl-2"></div>
+          </div>
         </div>
       </div>
     </div>
