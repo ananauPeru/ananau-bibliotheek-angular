@@ -1,5 +1,6 @@
 <div class="my-2">
   <h3 class="text-dark font-weight-bold mb-10">Personal information</h3>
+  <!-- general -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">General</h4>
     <form [formGroup]="personalForm.controls.general">
@@ -18,7 +19,7 @@
               personalForm.controls.general.get('firstName')['errors'] &&
               personalForm.controls.general.get('firstName').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -42,7 +43,7 @@
               personalForm.controls.general.get('middleName')['errors'] &&
               personalForm.controls.general.get('middleName').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -67,7 +68,7 @@
               personalForm.controls.general.get('lastName')['errors'] &&
               personalForm.controls.general.get('lastName').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -105,7 +106,7 @@
               personalForm.controls.general.get('schoolEmail')['errors'] &&
               personalForm.controls.general.get('schoolEmail').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -130,7 +131,7 @@
               personalForm.controls.general.get('phone')['errors'] &&
               personalForm.controls.general.get('phone').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -149,6 +150,7 @@
             id="generalBirthdate"
             type="date"
             formControlName="dateOfBirth"
+            placeholder="yyyy-mm-dd"
             required
           />
           <div
@@ -156,7 +158,7 @@
               personalForm.controls.general.get('dateOfBirth')['errors'] &&
               personalForm.controls.general.get('dateOfBirth').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -181,7 +183,7 @@
               personalForm.controls.general.get('birthplace')['errors'] &&
               personalForm.controls.general.get('birthplace').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -206,7 +208,7 @@
               personalForm.controls.general.get('nationality')['errors'] &&
               personalForm.controls.general.get('nationality').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -231,7 +233,7 @@
               personalForm.controls.general.get('passportNumber')['errors'] &&
               personalForm.controls.general.get('passportNumber').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -244,6 +246,7 @@
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>
+  <!-- address -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">Address</h4>
     <form [formGroup]="personalForm.controls.address">
@@ -262,7 +265,7 @@
               personalForm.controls.address.get('street')['errors'] &&
               personalForm.controls.address.get('street').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -287,7 +290,7 @@
               personalForm.controls.address.get('houseNumber')['errors'] &&
               personalForm.controls.address.get('houseNumber').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -311,7 +314,7 @@
               personalForm.controls.address.get('mailbox')['errors'] &&
               personalForm.controls.addres.get('mailbox').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -336,7 +339,7 @@
               personalForm.controls.address.get('postalCode')['errors'] &&
               personalForm.controls.address.get('postalCode').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -361,7 +364,7 @@
               personalForm.controls.address.get('township')['errors'] &&
               personalForm.controls.address.get('township').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -386,7 +389,7 @@
               personalForm.controls.address.get('country')['errors'] &&
               personalForm.controls.address.get('country').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -399,9 +402,10 @@
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>
+  <!-- contact person -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">Contact person</h4>
-    <p>
+    <p class="text-muted mb-4">
       Your contact person is the person we should be able to contact in case of
       an emergency.
     </p>
@@ -421,7 +425,7 @@
               personalForm.controls.contactPerson.get('firstName')['errors'] &&
               personalForm.controls.contactPerson.get('firstName').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -445,7 +449,7 @@
               personalForm.controls.contactPerson.get('middleName')['errors'] &&
               personalForm.controls.contactPerson.get('middleName').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -470,7 +474,7 @@
               personalForm.controls.contactPerson.get('lastName')['errors'] &&
               personalForm.controls.contactPerson.get('lastName').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -495,7 +499,7 @@
               personalForm.controls.contactPerson.get('relation')['errors'] &&
               personalForm.controls.contactPerson.get('relation').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -521,7 +525,7 @@
               personalForm.controls.contactPerson.get('email')['errors'] &&
               personalForm.controls.contactPerson.get('email').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -546,7 +550,7 @@
               personalForm.controls.contactPerson.get('phone')['errors'] &&
               personalForm.controls.contactPerson.get('phone').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -559,6 +563,7 @@
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>
+  <!-- medical details -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">Medical details</h4>
     <form [formGroup]="personalForm.controls.medical">
@@ -577,7 +582,7 @@
               personalForm.controls.medical.get('allergies')['errors'] &&
               personalForm.controls.medical.get('allergies').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
@@ -604,7 +609,7 @@
               ] &&
               personalForm.controls.medical.get('medicalConditions').touched
             "
-            class="text-danger"
+            class="text-danger form-text"
           >
             {{
               getErrorMessage(
