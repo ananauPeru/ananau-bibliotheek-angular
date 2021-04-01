@@ -43,12 +43,12 @@
                             <i class="fa fa-search"></i>
                         </span>
                     </div>
-                    <input type="email" class="form-control form-control-lg form-control-solid" placeholder="Filter..."
-                        formControlName="email" />
+                    <input (keyup)="applyFilter7($event.target.value)" type="email" class="form-control form-control-lg form-control-solid" placeholder="Filter..."/>
                 </div>
             </div>
             <div class="col-12 col-md-3">
-                <select class="form-control form-control-lg form-control-solid" formControlName="language" placeholder="Category">
+                <select class="form-control form-control-lg form-control-solid"
+                    placeholder="Category">
                     <option value="">Category</option>
                     <option value="id">Category one</option>
                     <option value="idd">Category two</option>
@@ -56,7 +56,8 @@
                 </select>
             </div>
             <div class="col-12 col-md-3">
-                <select class="form-control form-control-lg form-control-solid" formControlName="language" placeholder="Category">
+                <select class="form-control form-control-lg form-control-solid" 
+                    placeholder="Category">
                     <option value="default">Type</option>
                     <option value="id">Book</option>
                     <option value="idd">DVD</option>
@@ -274,7 +275,7 @@
         <div class="d-flex flex-wrap align-items-center mb-10">
 
             <!-- ///////////////////// -->
-            <div class="example-preview flex-grow-1  ">               
+            <div class="example-preview flex-grow-1  ">
                 <div class="example-container ">
                     <mat-paginator #matPaginator7 [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                 </div>

@@ -10,7 +10,7 @@ export class UserDetailModel extends AuthModel {
   middleName: string
   lastName: string
   phone: string
-  placeOfBirth: string
+  birthPlace: string
   country: string
   nationality: string
   passportNumber: string
@@ -26,7 +26,7 @@ export class UserDetailModel extends AuthModel {
     this.middleName = userDetail.middleName
     this.lastName = userDetail.lastName
     this.phone = userDetail.phone
-    this.placeOfBirth = userDetail.placeOfBirth
+    this.birthPlace = userDetail.birthPlace
     this.country = userDetail.country
     this.nationality = userDetail.nationality
     this.passportNumber = userDetail.passportNumber
