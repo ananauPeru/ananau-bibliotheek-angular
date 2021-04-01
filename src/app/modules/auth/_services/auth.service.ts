@@ -6,6 +6,7 @@ import { AuthModel } from '../_models/auth.model'
 import { AuthHTTPService } from './auth-http'
 import { environment } from 'src/environments/environment'
 import { Router } from '@angular/router'
+import { RegisterDTO } from '../_dto/register-dto'
 
 @Injectable({
   providedIn: 'root',
@@ -123,7 +124,7 @@ export class AuthService implements OnDestroy {
   }
 
   // need create new user then login
-  registration(user: UserModel): Observable<any> {
+  registration(user: RegisterDTO): Observable<any> {
     this.isLoadingSubject.next(true)
     return this.authHttpService.createUser(user).pipe(
       map(() => {

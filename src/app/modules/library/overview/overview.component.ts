@@ -95,7 +95,7 @@ export class OverviewComponent implements OnInit {
 
   ngAfterViewInit() {}
 
-  constructor(private http: HttpClient, protected itemService: ItemService) {
+  constructor(private http: HttpClient, public itemService: ItemService) {
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1))
 
     // Assign the data to the data source for the table to render
