@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { UserModel } from '../../_models/user.model'
 import { environment } from '../../../../../environments/environment'
 import { AuthModel } from '../../_models/auth.model'
-import { UserDTO } from 'src/app_old/_dto/UserDTO'
 import { RegisterDTO } from '../../_dto/register-dto'
 
 const API_USERS_URL = `${environment.apiUrl}/user`

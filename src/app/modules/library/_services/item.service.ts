@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { ItemModel } from '../_models/item.model'
 import { ItemHTTPService } from './item-http'
-import { asObservable } from './asObservable'
 
 @Injectable({
   providedIn: 'root',
