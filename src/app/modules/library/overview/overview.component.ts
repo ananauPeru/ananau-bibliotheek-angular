@@ -148,11 +148,37 @@ export class OverviewComponent implements OnInit {
     )
   }
 
-  setItemsPerPage(event?:PageEvent) {
+  // setItemsPerPage(event?: PageEvent) {
+  //   this.itemService.getdata(event).subscribe(
+  //     (response) => {
+  //       if (response.error) {
+  //         // handle error
+  //       } else {
+  //         this.datasource = response.data
+  //         this.pageIndex = response.pageIndex
+  //         this.pageSize = response.pageSize
+  //         this.length = response.length
+  //       }
+  //     },
+  //     (error) => {
+  //       // handle error
+  //     },
+  //   )
+  //   return event
+
+  //   // this.itemsPerPage = event.pageSize
+  //   // console.log(this.itemsPerPage)
+  //   this.paginate()
+  // }
+
+  pageEvents(event: any) {
+    console.log(event.pageIndex);
+    console.log(event.pageSize);
     this.itemsPerPage = event.pageSize
-    console.log(this.itemsPerPage)
     this.paginate()
-  }
+    // The code that you want to execute on clicking on next and previous buttons will be written here.
+ }
+ 
 
   setPage(p: number) {
     this.page = p
