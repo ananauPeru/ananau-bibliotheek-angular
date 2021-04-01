@@ -25,28 +25,17 @@ export class MarkAsteriskDirective implements AfterContentInit {
   // ngOnInit() is not being used to ensure elements marked with the *ngIf directive have also been rendered
   ngAfterContentInit() {
     const inputField = this.el.nativeElement as Node; // input field marked as required
-    let label = inputField.previousSibling; // label predecessing input field
-
-    if (label.nodeType === Node.COMMENT_NODE) {
-      /*
-      some elements are marked with the *ngIf directive and are therefore preceded by
-      the comment below in the compiled DOM
-
-      <!--bindings={
-        "ng-reflect-ng-if": "true"
-      }-->
-
-      the label that's being searched for, proceeds this comment
-      */
-
-      label = label.previousSibling;
-    }
+    const parent = inputField.parentNode; // div containing input field
+    const label = parent.previousSibling; // label predecessing parent
 
     // ensure to only use <label> elements
     if (label.nodeName === "LABEL") {
       const span = this.renderer.createElement("span");
       const text = this.renderer.createText("*");
-      this.renderer.addClass(span, "required-asterisk");
+      this.renderer.setStyle(span, "color", "red");
+      this.renderer.setStyle(span, "font-weight", "bold");
+      this.renderer.setStyle(span, "margin-left", "3px");
+      this.renderer.setStyle(span, "font-size", "1.2em");
       this.renderer.appendChild(span, text);
 
       // if label contains more than just text, ensure <span> element succeeds only text, not (all) other element(s)

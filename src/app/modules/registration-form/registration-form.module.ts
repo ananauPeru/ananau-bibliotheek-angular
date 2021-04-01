@@ -14,6 +14,7 @@ import { LayoutModule } from "src/app/pages/layout.module";
 import { RegistrationFormRoutingModule } from "./registration-form-routing.module";
 import { HttpClientModule } from "@angular/common/http";
 import { RegistrationFormComponent } from "./registration-form.component";
+import { NgxDropzoneModule } from "ngx-dropzone";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { RegistrationFormComponent } from "./registration-form.component";
     TranslationModule,
     LayoutModule,
     HttpClientModule,
+    NgxDropzoneModule,
   ],
   providers: [DatePipe],
   exports: [ContainerComponent],

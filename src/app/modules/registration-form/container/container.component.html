@@ -1,294 +1,287 @@
-<div
-  *ngIf="initialData$ | async as initialData; else loadingOrError"
-  class="container"
->
-  <h1>Registration</h1>
-
-  <form [formGroup]="formContainer">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link active"
-          id="personal-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#personal"
-          type="button"
-          role="tab"
-          aria-controls="personal"
-          aria-selected="true"
-        >
-          Personal
-          <span
-            *ngIf="
-              personalFormProgress.required -
-                personalFormProgress.requiredAndValid >
-              0
-            "
-            class="badge bg-secondary"
-            >{{
-              personalFormProgress.required -
-                personalFormProgress.requiredAndValid
-            }}</span
-          >
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="organizational-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#organizational"
-          type="button"
-          role="tab"
-          aria-controls="organizational"
-          aria-selected="false"
-        >
-          Organizational
-          <span
-            *ngIf="
-              organizationalFormProgress.required -
-                organizationalFormProgress.requiredAndValid >
-              0
-            "
-            class="badge bg-secondary"
-            >{{
-              organizationalFormProgress.required -
-                organizationalFormProgress.requiredAndValid
-            }}</span
-          >
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="scans-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#scans"
-          type="button"
-          role="tab"
-          aria-controls="scans"
-          aria-selected="false"
-        >
-          Scans
-          <span
-            *ngIf="
-              scansFormProgress.required - scansFormProgress.requiredAndValid >
-              0
-            "
-            class="badge bg-secondary"
-            >{{
-              scansFormProgress.required - scansFormProgress.requiredAndValid
-            }}</span
-          >
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="questions-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#questions"
-          type="button"
-          role="tab"
-          aria-controls="questions"
-          aria-selected="false"
-        >
-          Questions
-          <span
-            *ngIf="
-              questionsFormProgress.required -
-                questionsFormProgress.requiredAndValid >
-              0
-            "
-            class="badge bg-secondary"
-            >{{
-              questionsFormProgress.required -
-                questionsFormProgress.requiredAndValid
-            }}</span
-          >
-        </button>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div
-        class="tab-pane fade show active"
-        id="personal"
-        role="tabpanel"
-        aria-labelledby="personal-tab"
-      >
-        <app-personal-information
-          [(personalForm)]="formContainer.controls.personalForm"
-          (personalFormCounted)="personalFormProgress = $event"
-          [role]="role"
-          [initialData]="initialData"
-        ></app-personal-information>
-      </div>
-      <div
-        class="tab-pane fade"
-        id="organizational"
-        role="tabpanel"
-        aria-labelledby="organizational-tab"
-      >
-        <app-organizational-information
-          [(organizationalForm)]="formContainer.controls.organizationalForm"
-          (organizationalFormCounted)="organizationalFormProgress = $event"
-          [role]="role"
-          [initialData]="initialData"
-        ></app-organizational-information>
-      </div>
-      <div
-        class="tab-pane fade"
-        id="scans"
-        role="tabpanel"
-        aria-labelledby="scans-tab"
-      >
-        <app-scan-uploads
-          [(scansForm)]="formContainer.controls.scansForm"
-          (scansFormCounted)="scansFormProgress = $event"
-        ></app-scan-uploads>
-      </div>
-      <div
-        class="tab-pane fade"
-        id="questions"
-        role="tabpanel"
-        aria-labelledby="questions-tab"
-      >
-        <app-questions
-          [(questionsForm)]="formContainer.controls.questionsForm"
-          (questionsFormCounted)="questionsFormProgress = $event"
-          [role]="role"
-          [initialData]="initialData"
-        ></app-questions>
-      </div>
-    </div>
-
-    <div class="container progress-bar-container bg-light rounded p-3">
-      <div class="row">
-        <div class="col">
-          <div class="progress">
-            <div
-              class="progress-bar bg-success"
-              role="progressbar"
-              [style.width]="
-                (personalFormProgress.requiredAndValid +
-                  organizationalFormProgress.requiredAndValid +
-                  scansFormProgress.requiredAndValid +
-                  questionsFormProgress.requiredAndValid) /
-                  (personalFormProgress.required +
-                    organizationalFormProgress.required +
-                    scansFormProgress.required +
-                    questionsFormProgress.required) | percent
+<div class="card card-custom card-sticky gutter-b" id="kt_page_sticky_card">
+  <!-- Header -->
+  <div class="card-header card-header-tabs-line">
+    <div class="card-toolbar mr-4">
+      <ul class="nav nav-tabs nav-bold nav-tabs-line">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_7_1">
+            <span class="nav-icon"><i class="fa fa-user"></i></span>
+            <span class="nav-text">Personal</span>
+            <span
+              *ngIf="
+                personalFormProgress.required -
+                  personalFormProgress.requiredAndValid >
+                0
               "
-            >
-              {{
-                (personalFormProgress.requiredAndValid +
-                  organizationalFormProgress.requiredAndValid +
-                  scansFormProgress.requiredAndValid +
-                  questionsFormProgress.requiredAndValid) /
-                  (personalFormProgress.required +
-                    organizationalFormProgress.required +
-                    scansFormProgress.required +
-                    questionsFormProgress.required) | percent
-              }}
+              class="label label-rounded ml-2"
+              >{{
+                personalFormProgress.required -
+                  personalFormProgress.requiredAndValid
+              }}</span
+            ></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_2">
+            <span class="nav-icon"><i class="fa fa-info-circle"></i></span>
+            <span class="nav-text">Organizational</span>
+            <span
+              *ngIf="
+                organizationalFormProgress.required -
+                  organizationalFormProgress.requiredAndValid >
+                0
+              "
+              class="label label-rounded ml-2"
+              >{{
+                organizationalFormProgress.required -
+                  organizationalFormProgress.requiredAndValid
+              }}</span
+            ></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_3">
+            <span class="nav-icon"><i class="fa fa-file-image"></i></span>
+            <span class="nav-text">Scans</span>
+            <span
+              *ngIf="
+                scansFormProgress.required -
+                  scansFormProgress.requiredAndValid >
+                0
+              "
+              class="label label-rounded ml-2"
+              >{{
+                scansFormProgress.required - scansFormProgress.requiredAndValid
+              }}</span
+            ></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_4">
+            <span class="nav-icon"><i class="fa fa-question-circle"></i></span>
+            <span class="nav-text">Questions</span>
+            <span
+              *ngIf="
+                questionsFormProgress.required -
+                  questionsFormProgress.requiredAndValid >
+                0
+              "
+              class="label label-rounded ml-2"
+              >{{
+                questionsFormProgress.required -
+                  questionsFormProgress.requiredAndValid
+              }}</span
+            ></a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="card-toolbar flex-grow-1">
+      <div class="progress flex-grow-1 mr-2">
+        <div
+          class="progress-bar bg-primary"
+          [style.width]="
+            (personalFormProgress.requiredAndValid +
+              organizationalFormProgress.requiredAndValid +
+              scansFormProgress.requiredAndValid +
+              questionsFormProgress.requiredAndValid) /
+              (personalFormProgress.required +
+                organizationalFormProgress.required +
+                scansFormProgress.required +
+                questionsFormProgress.required) | percent
+          "
+        >
+          {{
+            (personalFormProgress.requiredAndValid +
+              organizationalFormProgress.requiredAndValid +
+              scansFormProgress.requiredAndValid +
+              questionsFormProgress.requiredAndValid) /
+              (personalFormProgress.required +
+                organizationalFormProgress.required +
+                scansFormProgress.required +
+                questionsFormProgress.required) | percent
+          }}
+        </div>
+      </div>
+      <button
+        (click)="saveForm(false)"
+        class="btn btn-light-primary font-weight-bolder mr-2"
+        [ngClass]="{ 'spinner spinner-left': saving }"
+      >
+        Save
+      </button>
+      <button
+        [disabled]="
+          !(
+            formContainer.controls.personalForm.valid &&
+            formContainer.controls.organizationalForm.valid &&
+            formContainer.controls.scansForm.valid &&
+            formContainer.controls.questionsForm.valid
+          )
+        "
+        class="btn btn-primary font-weight-bolder"
+        [ngClass]="{ 'spinner spinner-left': sending }"
+        data-toggle="modal"
+        data-target="#agreement-box"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+  <!-- Body -->
+  <div class="card-body">
+    <div *ngIf="initialData$ | async as initialData; else loadingOrError">
+      <div class="tab-content">
+        <div
+          class="tab-pane fade show active"
+          id="kt_tab_pane_7_1"
+          role="tabpanel"
+          aria-labelledby="kt_tab_pane_7_1"
+        >
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-personal-information
+                [(personalForm)]="formContainer.controls.personalForm"
+                (personalFormCounted)="personalFormProgress = $event"
+                [role]="role"
+                [initialData]="initialData"
+              ></app-personal-information>
             </div>
+            <div class="col-xl-2"></div>
           </div>
         </div>
-        <div class="col-2">
-          <button
-            (click)="saveForm(false)"
-            type="button"
-            class="btn btn-outline-success"
-          >
-            Save
-          </button>
-          <button
-            type="submit"
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-            [disabled]="
-              !(
-                formContainer.controls.personalForm.valid &&
-                formContainer.controls.organizationalForm.valid &&
-                formContainer.controls.scansForm.valid &&
-                formContainer.controls.questionsForm.valid
-              )
-            "
-          >
-            Send
-          </button>
+        <div
+          class="tab-pane fade"
+          id="kt_tab_pane_7_2"
+          role="tabpanel"
+          aria-labelledby="kt_tab_pane_7_2"
+        >
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-organizational-information
+                [(organizationalForm)]="
+                  formContainer.controls.organizationalForm
+                "
+                (organizationalFormCounted)="
+                  organizationalFormProgress = $event
+                "
+                [role]="role"
+                [initialData]="initialData"
+              ></app-organizational-information>
+            </div>
+            <div class="col-xl-2"></div>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="kt_tab_pane_7_3"
+          role="tabpanel"
+          aria-labelledby="kt_tab_pane_7_3"
+        >
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-scan-uploads
+                [(scansForm)]="formContainer.controls.scansForm"
+                (scansFormCounted)="scansFormProgress = $event"
+              ></app-scan-uploads>
+            </div>
+            <div class="col-xl-2"></div>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="kt_tab_pane_7_4"
+          role="tabpanel"
+          aria-labelledby="kt_tab_pane_7_4"
+        >
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-questions
+                [(questionsForm)]="formContainer.controls.questionsForm"
+                (questionsFormCounted)="questionsFormProgress = $event"
+                [role]="role"
+                [initialData]="initialData"
+              ></app-questions>
+            </div>
+            <div class="col-xl-2"></div>
+          </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
 </div>
 
 <!-- Agreement dialog -->
 <div
   class="modal fade"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
+  id="agreement-box"
+  data-backdrop="static"
   tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
+  role="dialog"
+  aria-labelledby="staticBackdrop"
   aria-hidden="true"
 >
   <div
     class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+    role="document"
   >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Terms of agreement</h5>
+        <h5 class="modal-title">Terms of agreement</h5>
         <button
           type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
+          class="close"
+          data-dismiss="modal"
           aria-label="Close"
-        ></button>
+        >
+          <i aria-hidden="true" class="ki ki-close"></i>
+        </button>
       </div>
       <div class="modal-body">
-        <div class="container">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique
-          saepe, neque quod voluptates nisi dicta impedit. Quisquam repudiandae
-          alias laboriosam? Aperiam doloribus quam corporis nisi voluptatem est
-          ipsum ut voluptates. Porro sit, dolores minus aut earum quod sunt
-          ratione veritatis, modi atque sapiente, nesciunt exercitationem maxime
-          iusto! Ab, aspernatur obcaecati sed, rerum commodi in sapiente,
-          blanditiis quae fugiat quis labore? Quisquam nesciunt maiores sint
-          ipsa sunt temporibus ducimus vel corporis! Praesentium, eaque ea,
-          velit est veritatis odio amet minima accusamus iusto cum eligendi
-          animi obcaecati voluptatibus a, laboriosam ipsa nostrum! Vitae
-          suscipit itaque minima voluptas sequi aperiam ducimus pariatur nam.
-          Labore maiores vel eos quas laudantium nisi! Fuga beatae, ea accusamus
-          earum obcaecati optio consequatur asperiores velit, accusantium unde
-          veritatis. Nulla earum repellat ea aspernatur sapiente ipsa sed in
-          temporibus quo cupiditate, nisi repellendus doloribus inventore alias
-          dolores neque et maiores voluptates nobis dolor. Et sunt ut nesciunt
-          iusto reprehenderit.
+        <div class="my-2">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
+          cupiditate facere molestiae, repudiandae quaerat omnis quisquam
+          similique, dolorem vel, inventore recusandae! Iure, hic perspiciatis
+          quos tempora neque expedita iusto facilis! Eum minima facilis iusto,
+          illum atque quas ab ipsum voluptas dignissimos nemo at laboriosam
+          laborum impedit rem recusandae ullam quia doloremque provident non
+          repudiandae, rerum iste. Eius et a excepturi. Sunt tempore ad soluta
+          labore nisi magni molestias fuga natus libero rerum, vero cumque
+          temporibus, quas perspiciatis odit obcaecati vel fugiat eaque error
+          sequi dolorem sapiente earum. Ullam, iusto dignissimos! Architecto
+          eaque, enim asperiores veniam nobis porro non eos obcaecati assumenda
+          illo doloribus voluptate, exercitationem laudantium, cupiditate id
+          tempora accusantium! Eveniet voluptate nulla non, laudantium
+          voluptatum impedit aspernatur quasi accusantium! Placeat, distinctio
+          iure inventore delectus magnam, cupiditate, et doloremque itaque
+          repellat soluta obcaecati ut architecto aliquam quas nesciunt
+          temporibus modi voluptates maxime quae illo consectetur harum dolorum.
+          Ullam, consectetur nihil.
         </div>
-        <div class="container position-relative">
-          <div class="form-check position-absolute top-0 end-0">
-            <input
-              [formControl]="agreementControl"
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="agreementCheckbox"
-            />
-            <label class="form-check-label" for="agreementCheckbox">
-              I agree with the terms mentioned above
-            </label>
-          </div>
+        <div class="my-2">
+          <label class="checkbox">
+            <input [formControl]="agreementControl" type="checkbox" />
+            <span></span>
+            &nbsp;&nbsp;I agree with the terms mentioned above
+          </label>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <button
+          class="btn btn-light-primary font-weight-bolder"
+          data-dismiss="modal"
+        >
           Cancel
         </button>
         <button
           (click)="saveForm(true)"
           type="submit"
-          class="btn btn-primary"
+          class="btn btn-primary font-weight-bolder"
+          data-dismiss="modal"
           [disabled]="!agreementControl.valid"
         >
           Send
@@ -299,8 +292,10 @@
 </div>
 
 <ng-template #loadingOrError>
-  <span *ngIf="errorMessage; else loading"></span>
+  <span *ngIf="errorMessage; else loading" class="text-danger">
+    Something went wrong. Please try again later.
+  </span>
   <ng-template #loading>
-    <span>Laden...</span>
+    <div class="spinner spinner-primary spinner-lg"></div>
   </ng-template>
 </ng-template>
