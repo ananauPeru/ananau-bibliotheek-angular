@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { UserModel } from '../../_models/user.model'
 import { environment } from '../../../../../environments/environment'
 import { AuthModel } from '../../_models/auth.model'
+import { UserDTO } from 'src/app_old/_dto/UserDTO'
+import { RegisterDTO } from '../../_dto/register-dto'
 
 const API_USERS_URL = `${environment.apiUrl}/user`
 
@@ -19,8 +21,8 @@ export class AuthHTTPService {
   }
 
   // CREATE =>  POST: add a new user to the server
-  createUser(user: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(API_USERS_URL, user)
+  createUser(user: RegisterDTO): Observable<RegisterDTO> {
+    return this.http.post<RegisterDTO>(`${API_USERS_URL}/register`, user)
   }
 
   // Your server should check email => If email exists send link to the user and return true | If email doesn't exist return false
