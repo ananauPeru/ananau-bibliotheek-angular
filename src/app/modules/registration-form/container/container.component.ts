@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import {
   AbstractControl,
   FormArray,
@@ -27,6 +27,8 @@ export class ContainerComponent implements OnInit {
   public role: FormRole;
   public initialData$: Observable<RegistrationDTO>;
   public errorMessage: string;
+  public saving: boolean;
+  public sending: boolean;
   public personalFormProgress: {
     all: number;
     required: number;
@@ -51,7 +53,8 @@ export class ContainerComponent implements OnInit {
   constructor(
     private registrationService: RegistrationService,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdRef: ChangeDetectorRef
   ) {
     this.route.data.subscribe((data) => {
       this.role = data["role"] ? data["role"] : FormRole.VOLUNTEER;
@@ -76,6 +79,9 @@ export class ContainerComponent implements OnInit {
           })
         );
     }
+
+    this.saving = false;
+    this.sending = false;
   }
 
   ngOnInit() {
@@ -111,6 +117,9 @@ export class ContainerComponent implements OnInit {
   }
 
   saveForm(submit: boolean) {
+    if (submit) this.sending = !this.sending;
+    else this.saving = !this.saving;
+
     let dto = new RegistrationDTO();
 
     const personalForm = this.formContainer.get("personalForm") as FormGroup;
@@ -181,15 +190,35 @@ export class ContainerComponent implements OnInit {
       this.registrationService
         .postStudentRegistration$(studentDto, submit)
         .subscribe(
-          (registration) => console.log(registration),
-          (error) => console.error(error)
+          (registration) => {
+            this.saving = false;
+            this.sending = false;
+            this.cdRef.detectChanges();
+            console.log(registration);
+          },
+          (error) => {
+            this.saving = false;
+            this.sending = false;
+            this.cdRef.detectChanges();
+            console.error(error);
+          }
         );
     } else {
       this.registrationService
         .postVolunteerRegistration$(dto, submit)
         .subscribe(
-          (registration) => console.log(registration),
-          (error) => console.error(error)
+          (registration) => {
+            this.saving = false;
+            this.sending = false;
+            this.cdRef.detectChanges();
+            console.log(registration);
+          },
+          (error) => {
+            this.saving = false;
+            this.sending = false;
+            this.cdRef.detectChanges();
+            console.error(error);
+          }
         );
     }
   }
