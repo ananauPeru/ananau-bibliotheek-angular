@@ -1,85 +1,157 @@
-<div class="container">
-  <h2>Scans & passport photo</h2>
-  <div class="container">
-    <form [formGroup]="scansForm">
-      <label for="scansInternationalPassport" class="form-label"
-        >Scan international passport</label
-      >
-      <input
-        class="form-control"
-        id="scansInternationalPassport"
-        type="file"
-        formControlName="internationalPassport"
-        required
-      />
-      <div
-        *ngIf="
-          scansForm.get('internationalPassport')['errors'] &&
-          scansForm.get('internationalPassport').touched
-        "
-        class="text-danger"
-      >
-        {{ getErrorMessage(scansForm.get("internationalPassport")["errors"]) }}
+<div class="my-2">
+  <h3 class="text-dark font-weight-bold mb-10">Scans & passport photo</h3>
+  <!-- scans & passport photo -->
+  <div class="my-2">
+    <!-- international passport -->
+    <div class="form-group row">
+      <label class="col-3">Scan international passport</label>
+      <div class="col-9">
+        <div
+          class="custom-dropzone form-control form-control-solid border"
+          ngx-dropzone
+          [accept]="'image/*'"
+          (change)="onSelectInternationalPassportFile($event)"
+          required
+        >
+          <ngx-dropzone-label>
+            <p class="form-text text-muted">
+              Drop your file(s) here or click to select your file(s).
+            </p>
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview
+            ngProjectAs="ngx-dropzone-preview"
+            *ngFor="let f of internationalPassportFiles"
+            [file]="f"
+            [removable]="true"
+            (removed)="onRemoveInternationalPassportFile(f)"
+          >
+          </ngx-dropzone-image-preview>
+        </div>
+        <div
+          *ngIf="
+            scansForm.get('internationalPassport')['errors'] &&
+            scansForm.get('internationalPassport').touched
+          "
+          class="text-danger form-text"
+        >
+          {{
+            getErrorMessage(scansForm.get("internationalPassport")["errors"])
+          }}
+        </div>
       </div>
-      <label for="scansGoodConductCertificate" class="form-label">
-        Scan certificate of good conduct type II
-        <p>
-          <small>
-            You can request this from your city or municipal service.
-          </small>
-        </p>
-      </label>
-      <input
-        class="form-control"
-        id="scansGoodConductCertificate"
-        type="file"
-        formControlName="goodConductCertificate"
-        required
-      />
-      <div
-        *ngIf="
-          scansForm.get('goodConductCertificate')['errors'] &&
-          scansForm.get('goodConductCertificate').touched
-        "
-        class="text-danger"
-      >
-        {{ getErrorMessage(scansForm.get("goodConductCertificate")["errors"]) }}
+    </div>
+    <!-- certificate of good conduct -->
+    <div class="form-group row">
+      <label class="col-3">Scan certificate of good conduct type II</label>
+      <div class="col-9">
+        <div
+          class="custom-dropzone form-control form-control-solid border"
+          ngx-dropzone
+          [accept]="'image/*'"
+          (change)="onSelectGoodConductCertificateFile($event)"
+          required
+        >
+          <ngx-dropzone-label>
+            <p class="form-text text-muted">
+              Drop your file(s) here or click to select your file(s).
+            </p>
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview
+            ngProjectAs="ngx-dropzone-preview"
+            *ngFor="let f of goodConductCertificateFiles"
+            [file]="f"
+            [removable]="true"
+            (removed)="onRemoveGoodConductCertificateFile(f)"
+          >
+          </ngx-dropzone-image-preview>
+        </div>
+        <div
+          *ngIf="
+            scansForm.get('goodConductCertificate')['errors'] &&
+            scansForm.get('goodConductCertificate').touched
+          "
+          class="text-danger form-text"
+        >
+          {{
+            getErrorMessage(scansForm.get("goodConductCertificate")["errors"])
+          }}
+        </div>
+        <span class="form-text text-muted"
+          >You can request this from your city or municipal service.</span
+        >
       </div>
-      <label for="scansDiploma" class="form-label"
-        >Scan diploma or certificate education</label
-      >
-      <input
-        class="form-control"
-        id="scansDiploma"
-        type="file"
-        formControlName="diploma"
-        required
-      />
-      <div
-        *ngIf="
-          scansForm.get('diploma')['errors'] && scansForm.get('diploma').touched
-        "
-        class="text-danger"
-      >
-        {{ getErrorMessage(scansForm.get("diploma")["errors"]) }}
+    </div>
+    <!-- diploma -->
+    <div class="form-group row">
+      <label class="col-3">Scan diploma or certificate education</label>
+      <div class="col-9">
+        <div
+          class="custom-dropzone form-control form-control-solid border"
+          ngx-dropzone
+          [accept]="'image/*'"
+          (change)="onSelectDiplomaFile($event)"
+          required
+        >
+          <ngx-dropzone-label>
+            <p class="form-text text-muted">
+              Drop your file(s) here or click to select your file(s).
+            </p>
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview
+            ngProjectAs="ngx-dropzone-preview"
+            *ngFor="let f of diplomaFiles"
+            [file]="f"
+            [removable]="true"
+            (removed)="onRemoveDiplomaFile(f)"
+          >
+          </ngx-dropzone-image-preview>
+        </div>
+        <div
+          *ngIf="
+            scansForm.get('diploma')['errors'] &&
+            scansForm.get('diploma').touched
+          "
+          class="text-danger form-text"
+        >
+          {{ getErrorMessage(scansForm.get("diploma")["errors"]) }}
+        </div>
       </div>
-      <label for="scansPassportPhoto" class="form-label">Passport photo</label>
-      <input
-        class="form-control"
-        id="scansPassportPhoto"
-        type="file"
-        formControlName="passportPhoto"
-        required
-      />
-      <div
-        *ngIf="
-          scansForm.get('passportPhoto')['errors'] &&
-          scansForm.get('passportPhoto').touched
-        "
-        class="text-danger"
-      >
-        {{ getErrorMessage(scansForm.get("passportPhoto")["errors"]) }}
+    </div>
+    <!-- passport photo -->
+    <div class="form-group row">
+      <label class="col-3">Passport photo</label>
+      <div class="col-9">
+        <div
+          class="custom-dropzone form-control form-control-solid border"
+          ngx-dropzone
+          [accept]="'image/*'"
+          (change)="onSelectPassportPhotoFile($event)"
+          required
+        >
+          <ngx-dropzone-label>
+            <p class="form-text text-muted">
+              Drop your file(s) here or click to select your file(s).
+            </p>
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview
+            ngProjectAs="ngx-dropzone-preview"
+            *ngFor="let f of passportPhotoFiles"
+            [file]="f"
+            [removable]="true"
+            (removed)="onRemovePassportPhotoFile(f)"
+          >
+          </ngx-dropzone-image-preview>
+        </div>
+        <div
+          *ngIf="
+            scansForm.get('passportPhoto')['errors'] &&
+            scansForm.get('passportPhoto').touched
+          "
+          class="text-danger form-text"
+        >
+          {{ getErrorMessage(scansForm.get("passportPhoto")["errors"]) }}
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </div>

@@ -1,90 +1,130 @@
-<div class="container">
-  <h2>Some extra questions</h2>
-  <div class="container">
+<div class="my-2">
+  <h3 class="text-dark font-weight-bold mb-10">Questions</h3>
+  <!-- questions from us -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">
+      Some extra questions from us
+    </h4>
     <form [formGroup]="questionsForm">
-      <label for="questionsOther" class="form-label"
-        >Do you have any further questions?</label
-      >
-      <textarea
-        class="form-control"
-        id="questionsOther"
-        formControlName="otherQuestions"
-        rows="3"
-      ></textarea>
-      <div
-        *ngIf="
-          questionsForm.get('otherQuestions')['errors'] &&
-          questionsForm.get('otherQuestions').touched
-        "
-        class="text-danger"
-      >
-        {{ getErrorMessage(questionsForm.get("otherQuestions")["errors"]) }}
+      <!-- experience -->
+      <div class="form-group row">
+        <label for="questionsExperience" class="col-3"
+          >Do you have any experience with volunteering?</label
+        >
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="questionsExperience"
+            formControlName="experience"
+            rows="3"
+          ></textarea>
+          <div
+            *ngIf="
+              questionsForm.get('experience')['errors'] &&
+              questionsForm.get('experience').touched
+            "
+            class="text-danger"
+          >
+            {{ getErrorMessage(questionsForm.get("experience")["errors"]) }}
+          </div>
+          <span class="form-text text-muted"
+            >In case you already have some sort of experience with volunteering,
+            please describe it here.</span
+          >
+        </div>
       </div>
-      <label for="questionsExperience" class="form-label"
-        >Do you have any experience with volunteering? If so, please
-        describe.</label
-      >
-      <textarea
-        class="form-control"
-        id="questionsExperience"
-        formControlName="experience"
-        rows="3"
-      ></textarea>
-      <div
-        *ngIf="
-          questionsForm.get('experience')['errors'] &&
-          questionsForm.get('experience').touched
-        "
-        class="text-danger"
-      >
-        {{ getErrorMessage(questionsForm.get("experience")["errors"]) }}
+      <!-- why ananau -->
+      <div class="form-group row">
+        <label for="questionsWhyAnanau" class="col-3"
+          >Why did you choose Añañau to apply for{{
+            role === "Student" ? " your internship" : " volunteering"
+          }}?</label
+        >
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="questionsWhyAnanau"
+            formControlName="whyAnanau"
+            rows="3"
+          ></textarea>
+          <div
+            *ngIf="
+              questionsForm.get('whyAnanau')['errors'] &&
+              questionsForm.get('whyAnanau').touched
+            "
+            class="text-danger"
+          >
+            {{ getErrorMessage(questionsForm.get("whyAnanau")["errors"]) }}
+          </div>
+        </div>
       </div>
-      <label for="questionsWhyAnanau" class="form-label"
-        >Why did you choose Añañau to apply for{{
-          role === "Student" ? " your internship" : " volunteering"
-        }}?</label
-      >
-      <textarea
-        class="form-control"
-        id="questionsWhyAnanau"
-        formControlName="whyAnanau"
-        rows="3"
-      ></textarea>
-      <div
-        *ngIf="
-          questionsForm.get('whyAnanau')['errors'] &&
-          questionsForm.get('whyAnanau').touched
-        "
-        class="text-danger"
-      >
-        {{ getErrorMessage(questionsForm.get("whyAnanau")["errors"]) }}
-      </div>
-      <label for="questionsFirstHeard" class="form-label"
-        >Where did you first hear of Añañau?</label
-      >
-      <select
-        class="form-select"
-        id="questionsFirstHeard"
-        formControlName="firstHeard"
-      >
-        <option value="0" selected>--</option>
-        <option value="1">Website</option>
-        <option value="2">Facebook</option>
-        <option value="3">Instagram</option>
-        <option value="4">Other person</option>
-        <option value="5">Newsletter</option>
-        <option *ngIf="role === 'Student'" value="6">Through school</option>
-        <option value="7">Other</option>
-      </select>
-      <div
-        *ngIf="
-          questionsForm.get('firstHeard')['errors'] &&
-          questionsForm.get('firstHeard').touched
-        "
-        class="text-danger"
-      >
-        {{ getErrorMessage(questionsForm.get("firstHeard")["errors"]) }}
+      <!-- where first heard -->
+      <div class="form-group row">
+        <label for="questionsFirstHeard" class="col-3"
+          >Where did you first hear of Añañau?</label
+        >
+        <div class="col-9">
+          <select
+            class="form-control form-control-solid"
+            id="questionsFirstHeard"
+            formControlName="firstHeard"
+          >
+            <option value="0" selected>--</option>
+            <option value="1">Website</option>
+            <option value="2">Facebook</option>
+            <option value="3">Instagram</option>
+            <option value="4">Other person</option>
+            <option value="5">Newsletter</option>
+            <option *ngIf="role === 'Student'" value="6">Through school</option>
+            <option value="7">Other</option>
+          </select>
+          <div
+            *ngIf="
+              questionsForm.get('firstHeard')['errors'] &&
+              questionsForm.get('firstHeard').touched
+            "
+            class="text-danger"
+          >
+            {{ getErrorMessage(questionsForm.get("firstHeard")["errors"]) }}
+          </div>
+        </div>
       </div>
     </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>
+  <!-- questions from you -->
+  <div class="my-2">
+    <div class="card card-custom">
+      <div class="card-body p-0">
+        <div
+          class="flex-grow-1 p-10 pb-40 bg-warning card-rounded flex-grow-1 bgi-no-repeat"
+          style="
+            background-position: calc(100% + 0.5rem) bottom;
+            background-size: 50% auto;
+            background-image: url(./assets/media/svg/illustrations/login-visual-2.svg);
+          "
+        >
+          <h4 class="text-inverse-warning pb-5 font-weight-bolder">
+            Do you have any questions for us?
+          </h4>
+          <p class="text-inverse-warning pb-5 font-size-h5 mr-10">
+            After you have submitted your registration, we will try to contact
+            you as soon as possible. Usually, we will even set up a video call
+            to discuss some things and answer each other's questions. Still, if
+            you already have questions about the registration process or the
+            internship in general, you can always contact us via email or
+            WhatsApp.
+          </p>
+          <a href="#" class="btn btn-pill btn-danger font-weight-bold p-3 mr-3"
+            ><i class="socicon-whatsapp icon-xl p-0"></i
+          ></a>
+          <a
+            href="mailto:info@ananau.org"
+            class="btn btn-pill btn-danger font-weight-bold p-3"
+            ><i class="socicon-mail icon-xl p-0"></i
+          ></a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
