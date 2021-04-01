@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Component, OnInit, ViewChild } from '@angular/core'
+import { FormGroup } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
@@ -81,6 +82,8 @@ export class OverviewComponent implements OnInit {
   @ViewChild('matPaginator7', { static: true }) paginator7: MatPaginator
   @ViewChild('sort7', { static: true }) sort7: MatSort
 
+  formGroup: FormGroup;
+
   ngAfterViewInit() {}
 
   constructor(private http: HttpClient) {
@@ -100,6 +103,7 @@ export class OverviewComponent implements OnInit {
 
   applyFilter7(filterValue: string) {
     this.dataSource7.filter = filterValue.trim().toLowerCase()
+    console.log(this.dataSource7)
 
     if (this.dataSource7.paginator) {
       console.log('paginating')
