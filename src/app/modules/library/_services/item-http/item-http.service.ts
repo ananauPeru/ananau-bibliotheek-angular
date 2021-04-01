@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core'
-import { Observable, throwError } from 'rxjs'
+import { Observable, of, throwError } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../../../environments/environment'
-import { catchError, map } from 'rxjs/operators'
+import { catchError, finalize, map } from 'rxjs/operators'
 import { ItemModel } from '../../_models/item.model'
+import { ItemDTO } from '../../_dto/item-dto'
 
 const API_ITEMS_URL = `${environment.apiUrl}/item`
 
@@ -15,7 +16,7 @@ export class ItemHTTPService {
 
   getAllItems$(): Observable<ItemModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}/getAll`, {
+      .get(`${API_ITEMS_URL}/getall`, {
         responseType: 'json',
       })
       .pipe(
@@ -25,13 +26,22 @@ export class ItemHTTPService {
           }
           return throwError(error)
         }),
-        map(
-          (items: any): ItemModel[] => {
-            console.log(items)
-            return items 
-          },
-        ),
+        map((items: any): ItemModel[] => {
+          console.log(items)
+          return items
+        }),
       )
   }
 
+  // CREATE
+  // server should return the object with ID
+  create(item: ItemDTO): Observable<ItemModel> {
+    return this.http.post<ItemModel>(`${API_ITEMS_URL}`, item).pipe(
+      catchError((err) => {
+        console.error('CREATE ITEM', err)
+        // return of({ id: undefined })
+        return of(null)
+      }),
+    )
+  }
 }
