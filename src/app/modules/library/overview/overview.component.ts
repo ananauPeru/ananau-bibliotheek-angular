@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http'
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormGroup } from '@angular/forms'
-import { MatPaginator } from '@angular/material/paginator'
+import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { ItemService } from '../_services/item.service'
 
 export interface UserData {
-  id: string;
-  name: string;
-  description: string;
-  color: string;
+  id: string
+  name: string
+  description: string
+  color: string
 }
 
 const COLORS: string[] = [
@@ -76,19 +76,26 @@ function createNewUser(id: number): UserData {
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-
 export class OverviewComponent implements OnInit {
+  private itemsPerPage: number = 5
+  private page: number = 1
+
+  // MatPaginator Output
+  pageEvent: PageEvent
+
   dataSource7: MatTableDataSource<UserData>
   displayedColumns7: string[] = ['id', 'name', 'description', 'color']
+
+  category: string = undefined
 
   @ViewChild('matPaginator7', { static: true }) paginator7: MatPaginator
   @ViewChild('sort7', { static: true }) sort7: MatSort
 
-  formGroup: FormGroup;
+  formGroup: FormGroup
 
   ngAfterViewInit() {}
 
-  constructor(private http: HttpClient, private itemService: ItemService) {
+  constructor(private http: HttpClient, protected itemService: ItemService) {
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1))
 
     // Assign the data to the data source for the table to render
@@ -96,22 +103,68 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log(this.itemService.items)
 
     console.log('Library Module main component')
 
     // Example 7
     this.dataSource7.paginator = this.paginator7
     this.dataSource7.sort = this.sort7
+
+    this.applyFilter7('')
   }
 
   applyFilter7(filterValue: string) {
     this.dataSource7.filter = filterValue.trim().toLowerCase()
-    console.log(this.dataSource7)
+    // console.log(this.dataSource7)
 
-    if (this.dataSource7.paginator) {
-      console.log('paginating')
-      this.dataSource7.paginator.firstPage()
+    // if (this.dataSource7.paginator) {
+    //   console.log('paginating')
+    //   this.dataSource7.paginator.firstPage()
+    // }
+
+    this.itemService.filter(
+      filterValue,
+      this.category,
+      this.itemsPerPage,
+      this.page,
+    )
+  }
+
+  applyCategory(category: string) {
+    if (category.length > 0) {
+      this.category = category
+    } else {
+      this.category = undefined
     }
+
+    console.log(this.category)
+
+    this.itemService.filter(
+      this.dataSource7.filter,
+      this.category,
+      this.itemsPerPage,
+      this.page,
+    )
+  }
+
+  setItemsPerPage(event?:PageEvent) {
+    this.itemsPerPage = event.pageSize
+    console.log(this.itemsPerPage)
+    this.paginate()
+  }
+
+  setPage(p: number) {
+    this.page = p
+    this.paginate()
+  }
+
+  paginate() {
+    this.itemService.filter(
+      this.dataSource7.filter,
+      this.category,
+      this.itemsPerPage,
+      this.page,
+    )
   }
 }

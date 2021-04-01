@@ -94,7 +94,7 @@ a:active,
 .aside-menu .menu-nav>.menu-item .menu-submenu .menu-item.menu-item-open>.menu-heading,
 .aside-menu .menu-nav>.menu-item .menu-submenu .menu-item.menu-item-open>.menu-heading:hover,
 .aside-menu .menu-nav>.menu-item .menu-submenu .menu-item.menu-item-open>.menu-link,
-.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item.menu-item-open>.menu-link:hover{
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item.menu-item-open>.menu-link:hover {
   background-color: $dark-green !important;
 }
 
@@ -117,4 +117,9 @@ a:active,
 .aside-menu .menu-nav>.menu-item>.menu-link .menu-icon.svg-icon svg g [fill],
 .brand-dark .brand .btn .svg-icon svg g [fill] {
   fill: white !important;
+}
+
+
+.input-group.input-group-solid .input-group-prepend ~ .form-control.force-pl-5 {
+  padding-left: 10px !important;
 }

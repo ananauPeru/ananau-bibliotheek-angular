@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import { CreateComponent } from './create/create.component';
 import { LibraryComponent } from './library.component';
 import { OverviewComponent } from './overview/overview.component';
 
@@ -7,17 +8,16 @@ import { OverviewComponent } from './overview/overview.component';
 const routes: Routes = [
   {
     path: '',
-    component: LibraryComponent,
+    component: LibraryComponent,   
     children: [
       {
         path: '',
         component: OverviewComponent
       },
-      // {
-      //   path: 'login',
-      //   component: LoginComponent,
-      //   data: {returnUrl: window.location.pathname}
-      // },
+      {
+        path: 'add-item',
+        component: CreateComponent,
+      },
       // {
       //   path: 'registration',
       //   component: RegistrationComponent

@@ -15,7 +15,7 @@ export class ItemHTTPService {
 
   getAllItems$(): Observable<ItemModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}/getAll`, {
+      .get(`${API_ITEMS_URL}/getall`, {
         responseType: 'json',
       })
       .pipe(
