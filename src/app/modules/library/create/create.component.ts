@@ -1,18 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
+import { of } from 'rxjs'
+import { catchError, tap } from 'rxjs/operators'
+import { ItemDTO } from '../_dto/item-dto'
 import { ItemModel } from '../_models/item.model'
 import { ItemHTTPService } from '../_services/item-http'
-
-const EMPTY_ITEM: ItemModel = {
-  id: undefined,
-  category: '',
-  name: '',
-  brand: '',
-  description: '',
-  material: '',
-  photoUrl: '',
-}
 
 @Component({
   selector: 'app-create',
@@ -58,11 +51,11 @@ export class CreateComponent implements OnInit {
       ],
       description: [
         '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(500),
-        ]),
+        // Validators.compose([
+        //   Validators.required,
+        //   Validators.minLength(3),
+        //   Validators.maxLength(500),
+        // ]),
       ],
       photourl: [''],
     })
@@ -79,12 +72,35 @@ export class CreateComponent implements OnInit {
     }
 
     const formValues = this.formGroup.value
+    let item = new ItemDTO()
+    item.name = formValues.name
+    item.brand = formValues.brand
+    item.material = formValues.material
+    item.category = formValues.category
+    item.description = formValues.description
+    this.create(item)
     // this.product = Object.assign(this.product, formValues)
     // if (this.id) {
     //   this.edit()
     // } else {
     //   this.create()
     // }
+  }
+
+  create(item: ItemDTO) {
+    console.log(item)
+    const icreate = this.itemService
+      .create(item)
+      .pipe(
+        tap(() => this.router.navigate(['/library'])),
+        catchError((errorMessage) => {
+          console.error('UPDATE ERROR', errorMessage)
+          // return of(this.item)
+          return errorMessage
+        }),
+      )
+      .subscribe((res) => ( res as ItemModel))
+    // this.subscriptions.push(sbCreate)
   }
 
   // helpers for View

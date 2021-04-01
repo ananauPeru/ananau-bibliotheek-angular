@@ -35,7 +35,7 @@
                         Please enter <b>a Title for this item.</b>
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('name')">
-                        Name was entered correct
+                        <!-- Name was entered correct -->
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">
                         Name is required
@@ -56,7 +56,7 @@
                         Please enter <b>a Brand for this item.</b>
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('brand')">
-                        Brand was entered correct
+                        <!-- Brand was entered correct -->
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'brand')">
                         Brand is required
@@ -71,29 +71,44 @@
             </div>
             <div class="form-group row">
                 <div class="col-6 col-md-6">
-                    <label>Category</label>
-                    <select class="form-control form-control-lg form-control-solid" name="category"
-                        formControlName="category" aria-placeholder="Category" required>
-                        <option value="">Category</option>
-                        <option value="Book">Book</option>
-                        <option value="Music">Music</option>
-                        <option value="nocategory">No Category</option>
-                    </select>
-                    <div class="feedback">Please select a <b>Category.</b></div>
+                    <label>Material</label>
+                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                        placeholder="Material" name='material' [class.is-invalid]="isControlInvalid('material')"
+                        [class.is-valid]="isControlValid('material')" formControlName='material' required />
+                    <div class="feedback" *ngIf="!isControlTouched('material')">
+                        Please enter <b>a Material for this item.</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('material')">
+                        <!-- Material was entered correct -->
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'material')">
+                        Material is required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'material')">
+                        Material should have at least 3 symbols
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'material')">
+                        Material should have maximum 100 symbols
+                    </div>
                 </div>
                 <div class="col-6 col-md-6">
-                    <label>Material</label>
+                    <label>Category</label>
                     <select class="form-control form-control-lg form-control-solid" name="category"
-                        formControlName="category" aria-placeholder="Category" required>
+                        formControlName="category" aria-placeholder="Category"
+                        [class.is-invalid]="isControlInvalid('category')" [class.is-valid]="isControlValid('category')"
+                        required>
                         <option value="">Category</option>
                         <option value="Book">Book</option>
                         <option value="Music">Music</option>
                         <option value="nocategory">No Category</option>
                     </select>
-                    <div class="feedback">Please select a <b>Category.</b></div>
+                    <div class="feedback" *ngIf="!isControlTouched('category')">Please select a <b>Category.</b></div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'category')">
+                        Category is required
+                    </div>
                 </div>
             </div>
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <div class="col-lg-4">
                     <label>Enter Mileage</label>
                     <input type="number" class="form-control form-control-lg form-control-solid" placeholder="Mileage"
@@ -199,14 +214,15 @@
                     </select>
                     <div class="feedback">Please select <b>Condition</b></div>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" class="form-control form-control-solid"
-                    formControlName="description"></textarea>
+                <textarea name="description" class="form-control form-control-lg form-control-solid"
+                    formControlName="description" style="min-height: 250px; padding:13px"
+                    placeholder="Describe the item..."></textarea>
             </div>
             <div class="float-right">
-                <a class="btn btn-default font-weight-bold mr-2" routerLink="/ecommerce/products">Cancel</a>
+                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library">Cancel</a>
                 <button type="submit" class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
                     Save
                 </button>
