@@ -15,24 +15,18 @@ import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
 })
 export class RegistrationService {
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
-  private httpHeaders: HttpHeaders;
 
   constructor(
     private router: Router,
     // private accountService: AccountService,
     private http: HttpClient,
     public translate: TranslateService
-  ) {
-    this.httpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${this.getAuthFromLocalStorage().token}`,
-    });
-  }
+  ) {}
 
   getVolunteerRegistration$(): Observable<RegistrationDTO> {
     return this.http
       .get(`${environment.apiUrl}/registrations/volunteer`, {
         responseType: "json",
-        headers: this.httpHeaders,
       })
       .pipe(
         catchError((error) => {
@@ -57,7 +51,6 @@ export class RegistrationService {
   getStudentRegistration$(): Observable<RegistrationStudentDTO> {
     return this.http
       .get(`${environment.apiUrl}/registrations/student`, {
-        headers: this.httpHeaders,
         responseType: "json",
       })
       .pipe(
