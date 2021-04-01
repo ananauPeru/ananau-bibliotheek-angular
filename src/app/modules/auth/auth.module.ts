@@ -11,6 +11,7 @@ import { AuthComponent } from './auth.component'
 import { TranslationModule } from '../i18n/translation.module'
 import { LayoutModule } from 'src/app/pages/layout.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { httpInterceptorProviders } from 'src/app/http-interceptor'
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     LogoutComponent,
     AuthComponent,
   ],
+  // providers: [httpInterceptorProviders],
   imports: [
     CommonModule,
     TranslationModule,
