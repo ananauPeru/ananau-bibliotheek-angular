@@ -32,7 +32,10 @@ export class MarkAsteriskDirective implements AfterContentInit {
     if (label.nodeName === "LABEL") {
       const span = this.renderer.createElement("span");
       const text = this.renderer.createText("*");
-      this.renderer.addClass(span, "required-asterisk");
+      this.renderer.setStyle(span, "color", "red");
+      this.renderer.setStyle(span, "font-weight", "bold");
+      this.renderer.setStyle(span, "margin-left", "3px");
+      this.renderer.setStyle(span, "font-size", "1.2em");
       this.renderer.appendChild(span, text);
 
       // if label contains more than just text, ensure <span> element succeeds only text, not (all) other element(s)
