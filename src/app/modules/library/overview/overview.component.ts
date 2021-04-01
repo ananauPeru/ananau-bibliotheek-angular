@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
+import { ItemService } from '../_services/item.service'
 
 export interface UserData {
   id: string;
@@ -75,6 +76,7 @@ function createNewUser(id: number): UserData {
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
+
 export class OverviewComponent implements OnInit {
   dataSource7: MatTableDataSource<UserData>
   displayedColumns7: string[] = ['id', 'name', 'description', 'color']
@@ -86,7 +88,7 @@ export class OverviewComponent implements OnInit {
 
   ngAfterViewInit() {}
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private itemService: ItemService) {
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1))
 
     // Assign the data to the data source for the table to render
@@ -94,6 +96,8 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
     console.log('Library Module main component')
 
     // Example 7
