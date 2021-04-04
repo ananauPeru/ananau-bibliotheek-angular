@@ -1,37 +1,34 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { AuthGuard } from "./guards/auth.guard";
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
+import { AuthGuard } from './modules/auth/_services/auth.guard'
 
-const routes: Routes = [
+export const routes: Routes = [
   {
-    path: "library",
+    path: 'auth',
+    loadChildren: () => {
+      console.log('route auth')
+      return import('./modules/auth/auth.module').then((m) => m.AuthModule)
+    },
+  },
+  {
+    path: 'error',
+    loadChildren: () => {
+      console.log('route auth')
+      return import('./modules/errors/errors.module').then(
+        (m) => m.ErrorsModule,
+      )
+    },
+  },
+  {
+    path: '',
     canActivate: [AuthGuard],
-    loadChildren: () =>
-      import("./library/library.module").then((mod) => mod.LibraryModule),
+    loadChildren: () => {
+      console.log('route auth')
+      return import('./pages/layout.module').then((m) => m.LayoutModule)
+    },
   },
-  {
-    path: "account",
-    loadChildren: () =>
-      import("./account/account.module").then((mod) => mod.AccountModule),
-  },
-  {
-    path: "registration",
-    loadChildren: () =>
-      import("./registration-form/registration-form.module").then(
-        (mod) => mod.RegistrationFormModule
-      ),
-  },
-  {
-    path: "",
-    redirectTo: "library/overview",
-    pathMatch: "full",
-  },
-  {
-    path: "**",
-    component: PageNotFoundComponent,
-  },
-];
+  { path: '**', redirectTo: 'error/404' },
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

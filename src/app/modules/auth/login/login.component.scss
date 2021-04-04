@@ -1,0 +1,18 @@
+:host {
+  width: 100%;
+
+  @media (min-width: 992px) {
+    .login-form {
+      width: 100%;
+      max-width: 450px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.spinner.spinner-primary.ml-5 {
+  stroke: #0B5F3E !important;
+}

@@ -1,0 +1,624 @@
+<div class="my-2">
+  <h3 class="text-dark font-weight-bold mb-10">Personal information</h3>
+  <!-- general -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">General</h4>
+    <form [formGroup]="personalForm.controls.general">
+      <!-- first name -->
+      <div class="form-group row">
+        <label for="generalFirstName" class="col-3">First Name</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalFirstName"
+            formControlName="firstName"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('firstName')['errors'] &&
+              personalForm.controls.general.get('firstName').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("firstName")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- middle name -->
+      <div class="form-group row">
+        <label for="generalMiddleName" class="col-3">Middle name</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalMiddleName"
+            formControlName="middleName"
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('middleName')['errors'] &&
+              personalForm.controls.general.get('middleName').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("middleName")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- last name -->
+      <div class="form-group row">
+        <label for="generalLastName" class="col-3">Last name</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalLastName"
+            formControlName="lastName"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('lastName')['errors'] &&
+              personalForm.controls.general.get('lastName').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("lastName")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- email -->
+      <div class="form-group row">
+        <label for="generalEmail" class="col-3">Email</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalEmail"
+            type="email"
+            formControlName="email"
+          />
+        </div>
+      </div>
+      <!-- school email -->
+      <div *ngIf="role === 'Student'" class="form-group row">
+        <label for="generalSchoolEmail" class="col-3">School email</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalSchoolEmail"
+            type="email"
+            formControlName="schoolEmail"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('schoolEmail')['errors'] &&
+              personalForm.controls.general.get('schoolEmail').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("schoolEmail")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- phone -->
+      <div class="form-group row">
+        <label for="generalPhone" class="col-3">Phone number</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalPhone"
+            formControlName="phone"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('phone')['errors'] &&
+              personalForm.controls.general.get('phone').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("phone")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- date of birth -->
+      <div class="form-group row">
+        <label for="generalBirthdate" class="col-3">Date of birth</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalBirthdate"
+            type="date"
+            formControlName="dateOfBirth"
+            placeholder="yyyy-mm-dd"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('dateOfBirth')['errors'] &&
+              personalForm.controls.general.get('dateOfBirth').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("dateOfBirth")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- birthplace -->
+      <div class="form-group row">
+        <label for="generalBirthplace" class="col-3">Birthplace</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalBirthplace"
+            formControlName="birthplace"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('birthplace')['errors'] &&
+              personalForm.controls.general.get('birthplace').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("birthplace")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- nationality -->
+      <div class="form-group row">
+        <label for="generalNationality" class="col-3">Nationality</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalNationality"
+            formControlName="nationality"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('nationality')['errors'] &&
+              personalForm.controls.general.get('nationality').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("nationality")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- passport number -->
+      <div class="form-group row">
+        <label for="generalPassportNumber" class="col-3">Passport number</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="generalPassportNumber"
+            formControlName="passportNumber"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.general.get('passportNumber')['errors'] &&
+              personalForm.controls.general.get('passportNumber').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.general.get("passportNumber")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>
+  <!-- address -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">Address</h4>
+    <form [formGroup]="personalForm.controls.address">
+      <!-- street -->
+      <div class="form-group row">
+        <label for="addressStreet" class="col-3">Street</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="addressStreet"
+            formControlName="street"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.address.get('street')['errors'] &&
+              personalForm.controls.address.get('street').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.address.get("street")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- house number -->
+      <div class="form-group row">
+        <label for="addressHouseNumber" class="col-3">House number</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="addressHouseNumber"
+            formControlName="houseNumber"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.address.get('houseNumber')['errors'] &&
+              personalForm.controls.address.get('houseNumber').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.address.get("houseNumber")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- mailbox -->
+      <div class="form-group row">
+        <label for="addressMailbox" class="col-3">Mailbox</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="addressMailbox"
+            formControlName="mailbox"
+          />
+          <div
+            *ngIf="
+              personalForm.controls.address.get('mailbox')['errors'] &&
+              personalForm.controls.addres.get('mailbox').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.address.get("mailbox")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- postal code -->
+      <div class="form-group row">
+        <label for="addressPostalCode" class="col-3">Postal code</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="addressPostalCode"
+            formControlName="postalCode"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.address.get('postalCode')['errors'] &&
+              personalForm.controls.address.get('postalCode').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.address.get("postalCode")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- township -->
+      <div class="form-group row">
+        <label for="addressTownship" class="col-3">Township</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="addressTownship"
+            formControlName="township"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.address.get('township')['errors'] &&
+              personalForm.controls.address.get('township').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.address.get("township")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- country -->
+      <div class="form-group row">
+        <label for="addressCountry" class="col-3">Country</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="addressCountry"
+            formControlName="country"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.address.get('country')['errors'] &&
+              personalForm.controls.address.get('country').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.address.get("country")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>
+  <!-- contact person -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">Contact person</h4>
+    <p class="text-muted mb-4">
+      Your contact person is the person we should be able to contact in case of
+      an emergency.
+    </p>
+    <form [formGroup]="personalForm.controls.contactPerson">
+      <!-- first name contact -->
+      <div class="form-group row">
+        <label for="contactPersonFirstName" class="col-3">First name</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="contactPersonFirstName"
+            formControlName="firstName"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.contactPerson.get('firstName')['errors'] &&
+              personalForm.controls.contactPerson.get('firstName').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.contactPerson.get("firstName")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- middle name contact -->
+      <div class="form-group row">
+        <label for="contactPersonMiddleName" class="col-3">Middle name</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="contactPersonMiddleName"
+            formControlName="middleName"
+          />
+          <div
+            *ngIf="
+              personalForm.controls.contactPerson.get('middleName')['errors'] &&
+              personalForm.controls.contactPerson.get('middleName').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.contactPerson.get("middleName")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- last name contact -->
+      <div class="form-group row">
+        <label for="contactPersonLastName" class="col-3">Last name</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="contactPersonLastName"
+            formControlName="lastName"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.contactPerson.get('lastName')['errors'] &&
+              personalForm.controls.contactPerson.get('lastName').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.contactPerson.get("lastName")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- relation -->
+      <div class="form-group row">
+        <label for="contactPersonRelation" class="col-3">Relation</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="contactPersonRelation"
+            formControlName="relation"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.contactPerson.get('relation')['errors'] &&
+              personalForm.controls.contactPerson.get('relation').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.contactPerson.get("relation")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- email contact -->
+      <div class="form-group row">
+        <label for="contactPersonEmail" class="col-3">Email</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="contactPersonEmail"
+            type="email"
+            formControlName="email"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.contactPerson.get('email')['errors'] &&
+              personalForm.controls.contactPerson.get('email').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.contactPerson.get("email")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- phone contact -->
+      <div class="form-group row">
+        <label for="contactPersonPhone" class="col-3">Phone number</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="contactPersonPhone"
+            formControlName="phone"
+            required
+          />
+          <div
+            *ngIf="
+              personalForm.controls.contactPerson.get('phone')['errors'] &&
+              personalForm.controls.contactPerson.get('phone').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.contactPerson.get("phone")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>
+  <!-- medical details -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">Medical details</h4>
+    <form [formGroup]="personalForm.controls.medical">
+      <!-- allergies -->
+      <div class="form-group row">
+        <label for="medicalAllergies" class="col-3">Allergies</label>
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="medicalAllergies"
+            formControlName="allergies"
+            rows="3"
+          ></textarea>
+          <div
+            *ngIf="
+              personalForm.controls.medical.get('allergies')['errors'] &&
+              personalForm.controls.medical.get('allergies').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.medical.get("allergies")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- medical conditions -->
+      <div class="form-group row">
+        <label for="medicalConditions" class="col-3">Medical conditions</label>
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="medicalConditions"
+            formControlName="medicalConditions"
+            rows="3"
+          ></textarea>
+          <div
+            *ngIf="
+              personalForm.controls.medical.get('medicalConditions')[
+                'errors'
+              ] &&
+              personalForm.controls.medical.get('medicalConditions').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                personalForm.controls.medical.get("medicalConditions")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

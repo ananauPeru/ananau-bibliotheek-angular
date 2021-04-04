@@ -1,0 +1,404 @@
+<div class="my-2">
+  <h3 class="text-dark font-weight-bold mb-10">Organizational information</h3>
+  <!-- dates -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">Dates</h4>
+    <form [formGroup]="organizationalForm.controls.dates">
+      <!-- start date -->
+      <div class="form-group row">
+        <label for="datesStartDate" class="col-3"
+          >Proposed start date for
+          {{ role === "Student" ? " internship" : " volunteering" }}
+        </label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="datesStartDate"
+            type="date"
+            formControlName="startDate"
+            placeholder="yyyy-mm-dd"
+            required
+          />
+          <div
+            *ngIf="
+              organizationalForm.controls.dates.get('startDate')['errors'] &&
+              organizationalForm.controls.dates.get('startDate').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.dates.get("startDate")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- end date -->
+      <div class="form-group row">
+        <label for="datesEndDate" class="col-3"
+          >Proposed end date for
+          {{ role === "Student" ? " internship" : " volunteering" }}
+        </label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="datesEndDate"
+            type="date"
+            formControlName="endDate"
+            placeholder="yyyy-mm-dd"
+            required
+          />
+          <div
+            *ngIf="
+              organizationalForm.controls.dates.get('endDate')['errors'] &&
+              organizationalForm.controls.dates.get('endDate').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.dates.get("endDate")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- start date period of leave -->
+      <div *ngIf="role === 'Student'" class="form-group row">
+        <label for="datesLeaveStartDate" class="col-3"
+          >Proposed start date of leave period</label
+        >
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="datesLeaveStartDate"
+            type="date"
+            formControlName="leaveStartDate"
+            placeholder="yyyy-mm-dd"
+          />
+          <div
+            *ngIf="
+              organizationalForm.controls.dates.get('leaveStartDate')[
+                'errors'
+              ] &&
+              organizationalForm.controls.dates.get('leaveStartDate').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.dates.get("leaveStartDate")[
+                  "errors"
+                ]
+              )
+            }}
+          </div>
+          <span class="form-text text-muted"
+            >You have the option to schedule a period of leave during your
+            internship. This is determined in consultation with your school and
+            the organization. It is strongly recommended and requested to plan
+            this period of leave at the end of the internship. If you choose not
+            to schedule a period of leave, please leave this field empty.</span
+          >
+        </div>
+      </div>
+      <!-- end date period of leave -->
+      <div *ngIf="role === 'Student'" class="form-group row">
+        <label for="datesLeaveEndDate" class="col-3"
+          >Proposed end date of leave period</label
+        >
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="datesLeaveEndDate"
+            type="date"
+            formControlName="leaveEndDate"
+            placeholder="yyyy-mm-dd"
+          />
+          <div
+            *ngIf="
+              organizationalForm.controls.dates.get('leaveEndDate')['errors'] &&
+              organizationalForm.controls.dates.get('leaveEndDate').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.dates.get("leaveEndDate")["errors"]
+              )
+            }}
+          </div>
+          <span class="form-text text-muted"
+            >You have the option to schedule a period of leave during your
+            internship. This is determined in consultation with your school and
+            the organization. It is strongly recommended and requested to plan
+            this period of leave at the end of the internship. If you choose not
+            to schedule a period of leave, please leave this field empty.</span
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>
+  <!-- spanish -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">Spanish</h4>
+    <form [formGroup]="organizationalForm.controls.spanish">
+      <!-- level -->
+      <div class="form-group row">
+        <label for="spanishLevel" class="col-3"
+          >Describe your level of Spanish</label
+        >
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="spanishLevel"
+            formControlName="level"
+            rows="3"
+            required
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.spanish.get('level')['errors'] &&
+              organizationalForm.controls.spanish.get('level').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.spanish.get("level")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- weeks -->
+      <div class="form-group row">
+        <label for="spanishWeeks" class="col-3"
+          >Number of weeks for Spanish lessons</label
+        >
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="spanishWeeks"
+            type="number"
+            formControlName="weeks"
+          />
+          <div
+            *ngIf="
+              organizationalForm.controls.spanish.get('weeks')['errors'] &&
+              organizationalForm.controls.spanish.get('weeks').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.spanish.get("weeks")["errors"]
+              )
+            }}
+          </div>
+          <span class="form-text text-muted"
+            >If you do not yet speak a basic level of Spanish, it is mandatory
+            to take a minimum of 4 weeks of Spanish lessons. If you already have
+            a basis, the lessons are without obligation, but always recommended
+            to improve your level.</span
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>
+  <!-- info -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">Info</h4>
+    <form [formGroup]="organizationalForm.controls.info">
+      <!-- occupation -->
+      <div class="form-group row">
+        <label for="infoOccupation" class="col-3"
+          >Describe your
+          {{ role === "Student" ? " study programme" : " profession" }}
+        </label>
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="infoOccupation"
+            formControlName="occupation"
+            rows="3"
+            required
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.info.get('occupation')['errors'] &&
+              organizationalForm.controls.info.get('occupation').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.info.get("occupation")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- degree -->
+      <div *ngIf="role === 'Student'" class="form-group row">
+        <label for="infoDegree" class="col-3">Current degree</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="infoDegree"
+            formControlName="degree"
+            required
+          />
+          <div
+            *ngIf="
+              organizationalForm.controls.info.get('degree')['errors'] &&
+              organizationalForm.controls.info.get('degree').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.info.get("degree")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- internship context -->
+      <div *ngIf="role === 'Student'" class="form-group row">
+        <label for="infoInternshipContext" class="col-3"
+          >Internship context</label
+        >
+        <div class="col-9">
+          <select
+            class="form-control form-control-solid"
+            id="infoInternshipContext"
+            formControlName="internshipContext"
+            required
+          >
+            <option value="0" selected>--</option>
+            <option value="1">Internship project</option>
+            <option value="2">(Bachelor's) thesis</option>
+            <option value="3">Other</option>
+          </select>
+          <div
+            *ngIf="
+              organizationalForm.controls.info.get('internshipContext')[
+                'errors'
+              ] &&
+              organizationalForm.controls.info.get('internshipContext').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.info.get("internshipContext")[
+                  "errors"
+                ]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+      <!-- tasks -->
+      <div class="form-group row">
+        <label for="infoTasks" class="col-3"
+          >What tasks would you like to work on?</label
+        >
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="infoTasks"
+            formControlName="tasks"
+            rows="3"
+            required
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.info.get('tasks')['errors'] &&
+              organizationalForm.controls.info.get('tasks').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.info.get("tasks")["errors"]
+              )
+            }}
+          </div>
+          <span class="form-text text-muted">{{
+            role === "Student"
+              ? "Describe the tasks your school expects you to accomplish and/or tell us yourself what tasks you would like to work on within the organization."
+              : "Describe the tasks you would you like to work on within the organization."
+          }}</span>
+        </div>
+      </div>
+      <!-- expectations -->
+      <div class="form-group row">
+        <label for="infoExpecations" class="col-3"
+          >What are your expectations?</label
+        >
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="infoExpecations"
+            formControlName="expectations"
+            rows="3"
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.info.get('expectations')['errors'] &&
+              organizationalForm.controls.info.get('expectations').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.info.get("expectations")["errors"]
+              )
+            }}
+          </div>
+          <span class="form-text text-muted"
+            >Describe your expectations of your possible
+            {{ role === "Student" ? " internship " : " volunteering work " }}
+            at Añañau.</span
+          >
+        </div>
+      </div>
+      <!-- proposals -->
+      <div class="form-group row">
+        <label for="infoProposals" class="col-3"
+          >Do you have any proposals?</label
+        >
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="infoProposals"
+            formControlName="proposals"
+            rows="3"
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.info.get('proposals')['errors'] &&
+              organizationalForm.controls.info.get('proposals').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.info.get("proposals")["errors"]
+              )
+            }}
+          </div>
+          <span class="form-text text-muted"
+            >If you have any proposals concerning your work within the
+            organization, please provide them here.</span
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
