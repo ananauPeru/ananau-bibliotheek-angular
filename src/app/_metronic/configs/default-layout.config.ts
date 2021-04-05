@@ -1,5 +1,5 @@
 export const DefaultLayoutConfig = {
-  demo: 'demo1',
+  demo: "demo1",
   // Javascript Settings
   js: {
     breakpoints: {
@@ -12,71 +12,71 @@ export const DefaultLayoutConfig = {
     colors: {
       theme: {
         base: {
-          white: '#ffffff',
+          white: "#ffffff",
           // primary: '#3699FF',
-          primary: '#0B5F3E',
-          secondary: '#E5EAEE',
-          success: '#1BC5BD',
-          info: '#8950FC',
-          warning: '#FFA800',
-          danger: '#F64E60',
-          light: '#E4E6EF',
-          dark: '#181C32',
+          primary: "#0B5F3E",
+          secondary: "#E5EAEE",
+          success: "#1BC5BD",
+          info: "#8950FC",
+          warning: "#FFA800",
+          danger: "#F64E60",
+          light: "#E4E6EF",
+          dark: "#181C32",
         },
         light: {
-          white: '#ffffff',
-          primary: '#E1F0FF',
-          secondary: '#EBEDF3',
-          success: '#C9F7F5',
-          info: '#EEE5FF',
-          warning: '#FFF4DE',
-          danger: '#FFE2E5',
-          light: '#F3F6F9',
-          dark: '#D6D6E0',
+          white: "#ffffff",
+          primary: "#E1F0FF",
+          secondary: "#EBEDF3",
+          success: "#C9F7F5",
+          info: "#EEE5FF",
+          warning: "#FFF4DE",
+          danger: "#FFE2E5",
+          light: "#F3F6F9",
+          dark: "#D6D6E0",
         },
         inverse: {
-          white: '#ffffff',
-          primary: '#ffffff',
-          secondary: '#3F4254',
-          success: '#ffffff',
-          info: '#ffffff',
-          warning: '#ffffff',
-          danger: '#ffffff',
-          light: '#464E5F',
-          dark: '#ffffff',
+          white: "#ffffff",
+          primary: "#ffffff",
+          secondary: "#3F4254",
+          success: "#ffffff",
+          info: "#ffffff",
+          warning: "#ffffff",
+          danger: "#ffffff",
+          light: "#464E5F",
+          dark: "#ffffff",
         },
       },
       gray: {
-        'gray-100': '#F3F6F9',
-        'gray-200': '#EBEDF3',
-        'gray-300': '#E4E6EF',
-        'gray-400': '#D1D3E0',
-        'gray-500': '#B5B5C3',
-        'gray-600': '#7E8299',
-        'gray-700': '#5E6278',
-        'gray-800': '#3F4254',
-        'gray-900': '#181C32',
+        "gray-100": "#F3F6F9",
+        "gray-200": "#EBEDF3",
+        "gray-300": "#E4E6EF",
+        "gray-400": "#D1D3E0",
+        "gray-500": "#B5B5C3",
+        "gray-600": "#7E8299",
+        "gray-700": "#5E6278",
+        "gray-800": "#3F4254",
+        "gray-900": "#181C32",
       },
     },
-    fontFamily: 'Poppins',
+    fontFamily: "Poppins",
   },
 
   // Base Settins
   self: {
-    layout: 'default', // blank/default page mode
+    layout: "default", // blank/default page mode
   },
 
   // Page loader
   pageLoader: {
-    type: '', // default|spinner-message|spinner-logo
+    type: "", // default|spinner-message|spinner-logo
   },
 
   // Header
   header: {
     self: {
       display: true,
-      width: 'fluid', // fixed|fluid,
-      theme: 'light', // light|dark
+      width: "fluid", // fixed|fluid,
+      theme: "light", // light|dark
       fixed: {
         desktop: true,
         mobile: true,
@@ -87,23 +87,23 @@ export const DefaultLayoutConfig = {
       self: {
         display: true,
         static: true, // static => true | dynamic => true
-        layout: 'default', // tab/default,
+        layout: "default", // tab/default,
         rootArrow: false,
-        iconStyle: 'duotone', // duotone, line, bold, solid
+        iconStyle: "duotone", // duotone, line, bold, solid
       },
 
       desktop: {
         arrow: true,
-        toggle: 'click',
+        toggle: "click",
         submenu: {
-          theme: 'light',
+          theme: "light",
           arrow: true,
         },
       },
 
       mobile: {
         submenu: {
-          theme: 'dark',
+          theme: "dark",
           accordion: true,
         },
       },
@@ -115,29 +115,29 @@ export const DefaultLayoutConfig = {
     display: true,
     displayDesc: true,
     displayDaterangepicker: true,
-    layoutVersion: 'v1', // [1..6]
+    layoutVersion: "v1", // [1..6]
     fixed: true,
-    width: 'fluid', // fixed|fluid,
+    width: "fluid", // fixed|fluid,
     clear: false,
-    style: 'solid', // transparent/solid
+    style: "solid", // transparent/solid
   },
 
   // Content
   content: {
-    width: 'fixed', // fluid|fixed
+    width: "fixed", // fluid|fixed
   },
 
   // Brand
   brand: {
     self: {
-      theme: 'dark', // light/dark
+      theme: "dark", // light/dark
     },
   },
 
   // Aside
   aside: {
     self: {
-      theme: 'dark', // light/dark
+      theme: "dark", // light/dark
       display: true,
       fixed: true,
       minimize: {
@@ -157,7 +157,7 @@ export const DefaultLayoutConfig = {
       static: true, // static => true | dynamic => true
       dropdown: false, // ok
       scroll: true, // ok
-      iconStyle: 'duotone', // duotone, line, bold, solid
+      iconStyle: "duotone", // duotone, line, bold, solid
       submenu: {
         accordion: true, //
         dropdown: {
@@ -171,7 +171,7 @@ export const DefaultLayoutConfig = {
   // Footer
   footer: {
     display: true,
-    width: 'fluid',
+    width: "fluid",
     fixed: true,
   },
 
@@ -179,46 +179,46 @@ export const DefaultLayoutConfig = {
   extras: {
     // Search
     search: {
-      display: true,
-      layout: 'dropdown', // offcanvas, dropdown,
+      display: false,
+      layout: "dropdown", // offcanvas, dropdown,
       offcanvas: {
-        direction: 'right',
+        direction: "right",
       },
     },
 
     // Notifications
     notifications: {
-      display: true,
-      layout: 'dropdown', // offcanvas, dropdown,
+      display: false,
+      layout: "dropdown", // offcanvas, dropdown,
       dropdown: {
-        style: 'dark', // light|dark
+        style: "dark", // light|dark
       },
       offcanvas: {
-        direction: 'right',
+        direction: "right",
       },
     },
 
-    // Quick Actionss
+    // Quick Actions
     quickActions: {
-      display: true,
-      layout: 'dropdown', // offcanvas, dropdown,
+      display: false,
+      layout: "dropdown", // offcanvas, dropdown,
       dropdown: {
-        style: 'dark', // light|dark
+        style: "dark", // light|dark
       },
       offcanvas: {
-        direction: 'right',
+        direction: "right",
       },
     },
 
     // User
     user: {
       display: true,
-      layout: 'offcanvas', // offcanvas, dropdown,
+      layout: "offcanvas", // offcanvas, dropdown,
       dropdown: {
-        style: 'dark', // light|dark
+        style: "dark", // light|dark
       },
       offcanvas: {
-        direction: 'right',
+        direction: "right",
       },
     },
 
@@ -229,32 +229,32 @@ export const DefaultLayoutConfig = {
 
     // Cart
     cart: {
-      display: true,
-      layout: 'dropdown', // offcanvas, dropdown,
+      display: false,
+      layout: "dropdown", // offcanvas, dropdown,
       offcanvas: {
-        direction: 'right',
+        direction: "right",
       },
       dropdown: {
-        style: 'dark', // light|dark
+        style: "dark", // light|dark
       },
     },
 
     // Chat
     chat: {
-      display: true,
+      display: false,
     },
 
     // Quick Panel
     quickPanel: {
-      display: true,
+      display: false,
       offcanvas: {
-        direction: 'right',
+        direction: "right",
       },
     },
 
     // Page Toolbar
     toolbar: {
-      display: true,
+      display: false,
     },
 
     // Scrolltop
@@ -262,4 +262,4 @@ export const DefaultLayoutConfig = {
       display: true,
     },
   },
-}
+};
