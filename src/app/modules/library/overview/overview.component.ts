@@ -5,6 +5,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { ItemService } from '../_services/item.service'
+import { AuthUtil } from '../../../_utils/auth_util'
 
 export interface UserData {
   id: string
@@ -76,7 +77,7 @@ function createNewUser(id: number): UserData {
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent extends AuthUtil implements OnInit {
   private itemsPerPage: number = 5
   private page: number = 1
 
@@ -96,6 +97,7 @@ export class OverviewComponent implements OnInit {
   ngAfterViewInit() {}
 
   constructor(private http: HttpClient, public itemService: ItemService) {
+    super()
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1))
 
     // Assign the data to the data source for the table to render
