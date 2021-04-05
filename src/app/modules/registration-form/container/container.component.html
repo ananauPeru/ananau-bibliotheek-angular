@@ -6,7 +6,9 @@
         <li class="nav-item">
           <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_7_1">
             <span class="nav-icon"><i class="fa fa-user"></i></span>
-            <span class="nav-text">Personal</span>
+            <span class="nav-text">{{
+              "REGISTRATION.GENERAL.PERSONAL" | translate
+            }}</span>
             <span
               *ngIf="
                 personalFormProgress.required -
@@ -24,7 +26,9 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_2">
             <span class="nav-icon"><i class="fa fa-info-circle"></i></span>
-            <span class="nav-text">Organizational</span>
+            <span class="nav-text">{{
+              "REGISTRATION.GENERAL.ORGANIZATIONAL" | translate
+            }}</span>
             <span
               *ngIf="
                 organizationalFormProgress.required -
@@ -42,7 +46,9 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_3">
             <span class="nav-icon"><i class="fa fa-file-image"></i></span>
-            <span class="nav-text">Scans</span>
+            <span class="nav-text">{{
+              "REGISTRATION.GENERAL.SCANS" | translate
+            }}</span>
             <span
               *ngIf="
                 scansFormProgress.required -
@@ -59,7 +65,9 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_4">
             <span class="nav-icon"><i class="fa fa-question-circle"></i></span>
-            <span class="nav-text">Questions</span>
+            <span class="nav-text">{{
+              "REGISTRATION.GENERAL.QUESTIONS" | translate
+            }}</span>
             <span
               *ngIf="
                 questionsFormProgress.required -
@@ -108,7 +116,7 @@
         class="btn btn-light-primary font-weight-bolder mr-2"
         [ngClass]="{ 'spinner spinner-left': saving }"
       >
-        Save
+        {{ "REGISTRATION.GENERAL.SAVE" | translate }}
       </button>
       <button
         [disabled]="
@@ -124,7 +132,7 @@
         data-toggle="modal"
         data-target="#agreement-box"
       >
-        Send
+        {{ "REGISTRATION.GENERAL.SEND" | translate }}
       </button>
     </div>
   </div>
@@ -293,7 +301,7 @@
 
 <ng-template #loadingOrError>
   <span *ngIf="errorMessage; else loading" class="text-danger">
-    Something went wrong. Please try again later.
+    {{ "ERRORS.TRY_AGAIN" | translate }}
   </span>
   <ng-template #loading>
     <div class="spinner spinner-primary spinner-lg"></div>

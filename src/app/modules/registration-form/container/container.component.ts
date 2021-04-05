@@ -9,6 +9,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
 import { EMPTY, Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { RegistrationService } from "../data-services/registration.service";
@@ -223,15 +224,20 @@ export class ContainerComponent implements OnInit {
     }
   }
 
-  static getErrorMessage(errors: ValidationErrors): string {
+  static getErrorMessage(
+    errors: ValidationErrors,
+    translate: TranslateService
+  ): string {
     if (errors.required) {
-      return "This field is required";
+      return translate.instant("REGISTRATION.GENERAL.ERRORS.REQUIRED");
     } else if (errors.email) {
-      return "This field expects an email address";
+      return translate.instant("REGISTRATION.GENERAL.ERRORS.EMAIL");
     } else if (errors.minlength) {
-      return `This field expects at least ${errors.minlength.requiredLength} characters`;
+      return translate.instant("REGISTRATION.GENERAL.ERRORS.CHARACTERS", {
+        value: errors.minlength.requiredLength,
+      });
     } else {
-      return "This field is not filled in correctly";
+      return translate.instant("REGISTRATION.GENERAL.ERRORS.INCORRECT");
     }
   }
 

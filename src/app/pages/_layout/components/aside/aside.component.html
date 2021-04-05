@@ -122,7 +122,7 @@
       <!-- USER MANAGEMENT -->
       <!-- begin::section -->
       <li class="menu-section">
-        <h4 class="menu-text">User management</h4>
+        <h4 class="menu-text">{{ "MENU.MANAGEMENT.TITLE" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
       </li>
       <!-- end:: section -->
@@ -134,7 +134,7 @@
       >
         <a
           class="menu-link"
-          routerLink="/registration-form"
+          routerLink="/registration-form/volunteer"
           routerLinkActive="active"
         >
           <span
@@ -142,7 +142,11 @@
             cacheSVG="true"
             class="svg-icon menu-icon"
           ></span>
-          <span class="menu-text">Registration Form (volunteer)</span>
+          <span class="menu-text"
+            >{{ "MENU.MANAGEMENT.REGISTRATION" | translate }} ({{
+              "REGISTRATION.GENERAL.VOLUNTEER" | translate
+            }})</span
+          >
         </a>
       </li>
       <!-- end::1 Level -->
@@ -162,7 +166,11 @@
             cacheSVG="true"
             class="svg-icon menu-icon"
           ></span>
-          <span class="menu-text">Registration Form (student)</span>
+          <span class="menu-text"
+            >{{ "MENU.MANAGEMENT.REGISTRATION" | translate }} ({{
+              "REGISTRATION.GENERAL.STUDENT" | translate
+            }})</span
+          >
         </a>
       </li>
       <!-- end::1 Level -->

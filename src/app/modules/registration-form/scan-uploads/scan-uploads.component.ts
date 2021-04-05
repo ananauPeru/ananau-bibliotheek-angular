@@ -4,8 +4,10 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ContainerComponent } from "../container/container.component";
 
@@ -26,9 +28,8 @@ export class ScanUploadsComponent implements OnInit {
   @Output() public goodConductCertificateFiles = new Array<File>();
   @Output() public diplomaFiles = new Array<File>();
   @Output() public passportPhotoFiles = new Array<File>();
-  public getErrorMessage = ContainerComponent.getErrorMessage;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private translate: TranslateService) {}
 
   ngOnInit() {
     this.scansForm = this.fb.group({
@@ -42,6 +43,10 @@ export class ScanUploadsComponent implements OnInit {
 
     // When the form is changed, the parent form is also updated
     this.scansForm.valueChanges.subscribe(() => this.emitForm());
+  }
+
+  getErrorMessage(errors: ValidationErrors): string {
+    return ContainerComponent.getErrorMessage(errors, this.translate);
   }
 
   public onSelectInternationalPassportFile(event: NgxDropzoneChangeEvent) {

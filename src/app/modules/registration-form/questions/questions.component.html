@@ -1,16 +1,18 @@
 <div class="my-2">
-  <h3 class="text-dark font-weight-bold mb-10">Questions</h3>
+  <h3 class="text-dark font-weight-bold mb-10">
+    {{ "REGISTRATION.QUESTIONS.TITLE" | translate }}
+  </h3>
   <!-- questions from us -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">
-      Some extra questions from us
+      {{ "REGISTRATION.QUESTIONS.EXTRA.TITLE" | translate }}
     </h4>
     <form [formGroup]="questionsForm">
       <!-- experience -->
       <div class="form-group row">
-        <label for="questionsExperience" class="col-3"
-          >Do you have any experience with volunteering?</label
-        >
+        <label for="questionsExperience" class="col-3">{{
+          "REGISTRATION.QUESTIONS.EXTRA.EXPERIENCE" | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -27,19 +29,19 @@
           >
             {{ getErrorMessage(questionsForm.get("experience")["errors"]) }}
           </div>
-          <span class="form-text text-muted"
-            >In case you already have some sort of experience with volunteering,
-            please describe it here.</span
-          >
+          <span class="form-text text-muted">{{
+            "REGISTRATION.QUESTIONS.EXTRA.EXPERIENCE_INFO" | translate
+          }}</span>
         </div>
       </div>
       <!-- why ananau -->
       <div class="form-group row">
-        <label for="questionsWhyAnanau" class="col-3"
-          >Why did you choose Añañau to apply for{{
-            role === "Student" ? " your internship" : " volunteering"
-          }}?</label
-        >
+        <label for="questionsWhyAnanau" class="col-3">{{
+          (role === "Student"
+            ? "REGISTRATION.QUESTIONS.EXTRA.WHY_ANANAU_STUDENT"
+            : "REGISTRATION.QUESTIONS.EXTRA.WHY_ANANAU_VOLUNTEER"
+          ) | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -60,9 +62,9 @@
       </div>
       <!-- where first heard -->
       <div class="form-group row">
-        <label for="questionsFirstHeard" class="col-3"
-          >Where did you first hear of Añañau?</label
-        >
+        <label for="questionsFirstHeard" class="col-3">{{
+          "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.TITLE" | translate
+        }}</label>
         <div class="col-9">
           <select
             class="form-control form-control-solid"
@@ -70,13 +72,41 @@
             formControlName="firstHeard"
           >
             <option value="0" selected>--</option>
-            <option value="1">Website</option>
-            <option value="2">Facebook</option>
-            <option value="3">Instagram</option>
-            <option value="4">Other person</option>
-            <option value="5">Newsletter</option>
-            <option *ngIf="role === 'Student'" value="6">Through school</option>
-            <option value="7">Other</option>
+            <option value="1">
+              {{
+                "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.WEBSITE" | translate
+              }}
+            </option>
+            <option value="2">
+              {{
+                "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.FACEBOOK" | translate
+              }}
+            </option>
+            <option value="3">
+              {{
+                "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.INSTAGRAM" | translate
+              }}
+            </option>
+            <option value="4">
+              {{
+                "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.OTHER_PERSON"
+                  | translate
+              }}
+            </option>
+            <option value="5">
+              {{
+                "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.NEWSLETTER"
+                  | translate
+              }}
+            </option>
+            <option *ngIf="role === 'Student'" value="6">
+              {{
+                "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.SCHOOL" | translate
+              }}
+            </option>
+            <option value="7">
+              {{ "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.OTHER" | translate }}
+            </option>
           </select>
           <div
             *ngIf="
@@ -105,15 +135,10 @@
           "
         >
           <h4 class="text-inverse-warning pb-5 font-weight-bolder">
-            Do you have any questions for us?
+            {{ "REGISTRATION.QUESTIONS.CONTACT.TITLE" | translate }}
           </h4>
           <p class="text-inverse-warning pb-5 font-size-h5 mr-10">
-            After you have submitted your registration, we will try to contact
-            you as soon as possible. Usually, we will even set up a video call
-            to discuss some things and answer each other's questions. Still, if
-            you already have questions about the registration process or the
-            internship in general, you can always contact us via email or
-            WhatsApp.
+            {{ "REGISTRATION.QUESTIONS.CONTACT.INFO" | translate }}
           </p>
           <a
             href="https://wa.link/2rxr5u"

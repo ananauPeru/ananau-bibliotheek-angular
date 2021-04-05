@@ -1,15 +1,21 @@
 <div class="my-2">
-  <h3 class="text-dark font-weight-bold mb-10">Organizational information</h3>
+  <h3 class="text-dark font-weight-bold mb-10">
+    {{ "REGISTRATION.ORGANIZATIONAL.TITLE" | translate }}
+  </h3>
   <!-- dates -->
   <div class="my-2">
-    <h4 class="text-dark font-weight-bold mb-4">Dates</h4>
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.ORGANIZATIONAL.DATES.TITLE" | translate }}
+    </h4>
     <form [formGroup]="organizationalForm.controls.dates">
       <!-- start date -->
       <div class="form-group row">
-        <label for="datesStartDate" class="col-3"
-          >Proposed start date for
-          {{ role === "Student" ? " internship" : " volunteering" }}
-        </label>
+        <label for="datesStartDate" class="col-3">{{
+          (role === "Student"
+            ? "REGISTRATION.ORGANIZATIONAL.DATES.START_STUDENT"
+            : "REGISTRATION.ORGANIZATIONAL.DATES.START_VOLUNTEER"
+          ) | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -36,9 +42,13 @@
       </div>
       <!-- end date -->
       <div class="form-group row">
-        <label for="datesEndDate" class="col-3"
-          >Proposed end date for
-          {{ role === "Student" ? " internship" : " volunteering" }}
+        <label for="datesEndDate" class="col-3">
+          {{
+            (role === "Student"
+              ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
+              : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
+            ) | translate
+          }}
         </label>
         <div class="col-9">
           <input
@@ -66,9 +76,9 @@
       </div>
       <!-- start date period of leave -->
       <div *ngIf="role === 'Student'" class="form-group row">
-        <label for="datesLeaveStartDate" class="col-3"
-          >Proposed start date of leave period</label
-        >
+        <label for="datesLeaveStartDate" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_START" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -94,20 +104,16 @@
               )
             }}
           </div>
-          <span class="form-text text-muted"
-            >You have the option to schedule a period of leave during your
-            internship. This is determined in consultation with your school and
-            the organization. It is strongly recommended and requested to plan
-            this period of leave at the end of the internship. If you choose not
-            to schedule a period of leave, please leave this field empty.</span
-          >
+          <span class="form-text text-muted">{{
+            "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_INFO" | translate
+          }}</span>
         </div>
       </div>
       <!-- end date period of leave -->
       <div *ngIf="role === 'Student'" class="form-group row">
-        <label for="datesLeaveEndDate" class="col-3"
-          >Proposed end date of leave period</label
-        >
+        <label for="datesLeaveEndDate" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -129,13 +135,9 @@
               )
             }}
           </div>
-          <span class="form-text text-muted"
-            >You have the option to schedule a period of leave during your
-            internship. This is determined in consultation with your school and
-            the organization. It is strongly recommended and requested to plan
-            this period of leave at the end of the internship. If you choose not
-            to schedule a period of leave, please leave this field empty.</span
-          >
+          <span class="form-text text-muted">{{
+            "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_INFO" | translate
+          }}</span>
         </div>
       </div>
     </form>
@@ -143,13 +145,15 @@
   <div class="separator separator-dashed my-10"></div>
   <!-- spanish -->
   <div class="my-2">
-    <h4 class="text-dark font-weight-bold mb-4">Spanish</h4>
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.TITLE" | translate }}
+    </h4>
     <form [formGroup]="organizationalForm.controls.spanish">
       <!-- level -->
       <div class="form-group row">
-        <label for="spanishLevel" class="col-3"
-          >Describe your level of Spanish</label
-        >
+        <label for="spanishLevel" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.SPANISH.LEVEL" | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -175,9 +179,9 @@
       </div>
       <!-- weeks -->
       <div class="form-group row">
-        <label for="spanishWeeks" class="col-3"
-          >Number of weeks for Spanish lessons</label
-        >
+        <label for="spanishWeeks" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -198,12 +202,9 @@
               )
             }}
           </div>
-          <span class="form-text text-muted"
-            >If you do not yet speak a basic level of Spanish, it is mandatory
-            to take a minimum of 4 weeks of Spanish lessons. If you already have
-            a basis, the lessons are without obligation, but always recommended
-            to improve your level.</span
-          >
+          <span class="form-text text-muted">{{
+            "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_INFO" | translate
+          }}</span>
         </div>
       </div>
     </form>
@@ -211,14 +212,18 @@
   <div class="separator separator-dashed my-10"></div>
   <!-- info -->
   <div class="my-2">
-    <h4 class="text-dark font-weight-bold mb-4">Info</h4>
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.ORGANIZATIONAL.INFO.TITLE" | translate }}
+    </h4>
     <form [formGroup]="organizationalForm.controls.info">
       <!-- occupation -->
       <div class="form-group row">
-        <label for="infoOccupation" class="col-3"
-          >Describe your
-          {{ role === "Student" ? " study programme" : " profession" }}
-        </label>
+        <label for="infoOccupation" class="col-3">{{
+          (role === "Student"
+            ? "REGISTRATION.ORGANIZATIONAL.INFO.OCCUPATION_STUDENT"
+            : "REGISTRATION.ORGANIZATIONAL.INFO.OCCUPATION_VOLUNTEER"
+          ) | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -244,7 +249,9 @@
       </div>
       <!-- degree -->
       <div *ngIf="role === 'Student'" class="form-group row">
-        <label for="infoDegree" class="col-3">Current degree</label>
+        <label for="infoDegree" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.INFO.DEGREE" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -269,9 +276,10 @@
       </div>
       <!-- internship context -->
       <div *ngIf="role === 'Student'" class="form-group row">
-        <label for="infoInternshipContext" class="col-3"
-          >Internship context</label
-        >
+        <label for="infoInternshipContext" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.TITLE"
+            | translate
+        }}</label>
         <div class="col-9">
           <select
             class="form-control form-control-solid"
@@ -280,9 +288,24 @@
             required
           >
             <option value="0" selected>--</option>
-            <option value="1">Internship project</option>
-            <option value="2">(Bachelor's) thesis</option>
-            <option value="3">Other</option>
+            <option value="1">
+              {{
+                "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.PROJECT"
+                  | translate
+              }}
+            </option>
+            <option value="2">
+              {{
+                "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.THESIS"
+                  | translate
+              }}
+            </option>
+            <option value="3">
+              {{
+                "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.OTHER"
+                  | translate
+              }}
+            </option>
           </select>
           <div
             *ngIf="
@@ -305,9 +328,9 @@
       </div>
       <!-- tasks -->
       <div class="form-group row">
-        <label for="infoTasks" class="col-3"
-          >What tasks would you like to work on?</label
-        >
+        <label for="infoTasks" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.INFO.TASKS" | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -330,17 +353,18 @@
             }}
           </div>
           <span class="form-text text-muted">{{
-            role === "Student"
-              ? "Describe the tasks your school expects you to accomplish and/or tell us yourself what tasks you would like to work on within the organization."
-              : "Describe the tasks you would you like to work on within the organization."
+            (role === "Student"
+              ? "REGISTRATION.ORGANIZATIONAL.INFO.TASKS_INFO_STUDENT"
+              : "REGISTRATION.ORGANIZATIONAL.INFO.TASKS_INFO_VOLUNTEER"
+            ) | translate
           }}</span>
         </div>
       </div>
       <!-- expectations -->
       <div class="form-group row">
-        <label for="infoExpecations" class="col-3"
-          >What are your expectations?</label
-        >
+        <label for="infoExpecations" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.INFO.EXPECTATIONS" | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -361,18 +385,19 @@
               )
             }}
           </div>
-          <span class="form-text text-muted"
-            >Describe your expectations of your possible
-            {{ role === "Student" ? " internship " : " volunteering work " }}
-            at Añañau.</span
-          >
+          <span class="form-text text-muted">{{
+            (role === "Student"
+              ? "REGISTRATION.ORGANIZATIONAL.INFO.EXPECTATIONS_INFO_STUDENT"
+              : "REGISTRATION.ORGANIZATIONAL.INFO.EXPECTATIONS_INFO_VOLUNTEER"
+            ) | translate
+          }}</span>
         </div>
       </div>
       <!-- proposals -->
       <div class="form-group row">
-        <label for="infoProposals" class="col-3"
-          >Do you have any proposals?</label
-        >
+        <label for="infoProposals" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.INFO.PROPOSALS" | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -393,10 +418,9 @@
               )
             }}
           </div>
-          <span class="form-text text-muted"
-            >If you have any proposals concerning your work within the
-            organization, please provide them here.</span
-          >
+          <span class="form-text text-muted">{{
+            "REGISTRATION.ORGANIZATIONAL.INFO.PROPOSALS_INFO" | translate
+          }}</span>
         </div>
       </div>
     </form>
