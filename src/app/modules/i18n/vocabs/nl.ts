@@ -14,7 +14,9 @@ export const locale = {
 
     // BUTTONS
     BUTTONS: {
-      SAVE_CHANGES: "Wijzigingen Opslaan",
+      SAVE: "Opslaan",
+      SAVE_CHANGES: "Wijzigingen opslaan",
+      SUBMIT: "Verzenden",
       CANCEL: "Annuleer",
     },
 
@@ -148,8 +150,6 @@ export const locale = {
         ORGANIZATIONAL: "Organisatorisch",
         SCANS: "Scans",
         QUESTIONS: "Vragen",
-        SAVE: "Opslaan",
-        SEND: "Verzenden",
         ERRORS: {
           REQUIRED: "Dit veld is verplicht.",
           EMAIL: "Dit veld verwacht een e-mailadres.",
@@ -282,6 +282,16 @@ export const locale = {
           INFO:
             "Nadat je je registratieformulier hebt ingediend, proberen we zo snel mogelijk contact met je op te nemen. Meestal zullen we zelfs een videogesprek inplannen om een aantal dingen te bespreken en elkaars vragen te beantwoorden. Mocht je toch al vragen hebben over het aanmeldingsproces of de stage in het algemeen, dan kun je altijd contact met ons opnemen via e-mail of WhatsApp.",
         },
+      },
+      TERMS: {
+        TITLE: "Voorwaarden",
+        PART_1:
+          "Als onderdeel van het online vrijwilligersprogramma/stage/face-to-face vrijwilligersprogramma bij NGO Añañau, heb je taken waarbij je toegang hebt tot gevoelige en privé-informatie, om die reden is de organisatie gedwongen om hun belangen te beschermen en is het dus ten strengste verboden om enige vorm van informatie te gebruiken (intellectueel, mondeling, visueel, schriftelijk, wetenschappelijk, technologisch en andere), verkregen in de organisatie, die toebehoort aan Añañau; op dezelfde manier is het verboden om elk type informatie dat hierboven in deze paragraaf werd vermeld, rechtstreeks of onrechtstreeks door te geven aan derden of instellingen van welke aard dan ook.",
+        PART_2:
+          "Via deze brief kunt u geen enkele vorm van commentaar geven, schriftelijk of mondeling, aan derden of entiteiten van welke aard dan ook, of op een virtuele manier (bijv. via sociale netwerken zoals Facebook, Instagram, WhatsApp, Twitter , etc.) die het imago en de reputatie van Añañau kunnen schaden.",
+        PART_3:
+          "In geval van niet-naleving van al het bovenstaande, bent u onderworpen aan burgerlijke en strafrechtelijke aansprakelijkheid voor mogelijke schade die aan de vereniging is toegebracht, volgens de Peruaanse wet. Deze vertrouwelijkheidsovereenkomst zal voor onbepaalde tijd worden gehandhaafd, nu en in de toekomst, totdat de vereniging deze als beëindigd beschouwt, of door ontbinding ervan.",
+        AGREE: "Ik ga akkoord met de bovenstaande voorwaarden.",
       },
     },
   },

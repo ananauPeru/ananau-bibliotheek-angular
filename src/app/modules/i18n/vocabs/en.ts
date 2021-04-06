@@ -14,7 +14,9 @@ export const locale = {
 
     // BUTTONS
     BUTTONS: {
-      SAVE_CHANGES: "Save Changes",
+      SAVE: "Save",
+      SAVE_CHANGES: "Save changes",
+      SUBMIT: "Submit",
       CANCEL: "Cancel",
     },
 
@@ -150,8 +152,6 @@ export const locale = {
         ORGANIZATIONAL: "Organizational",
         SCANS: "Scans",
         QUESTIONS: "Questions",
-        SAVE: "Save",
-        SEND: "Send",
         ERRORS: {
           REQUIRED: "This field is required.",
           EMAIL: "This field expects an email address.",
@@ -283,6 +283,16 @@ export const locale = {
           INFO:
             "After you have submitted your registration, we will try to contact you as soon as possible. Usually, we will even set up a video call to discuss some things and answer each other's questions. Still, if you already have questions about the registration process or the internship in general, you can always contact us via email or WhatsApp.",
         },
+      },
+      TERMS: {
+        TITLE: "Terms of agreement",
+        PART_1:
+          "As part of the online volunteer/internship/face-to-face volunteering program in NGO Añañau, you will have tasks in which you will have access to sensitive and private information, for that reason the association is forced to safeguard their interests and so you are strictly prohibited from using any type of information (intellectual, oral, visual, writing, scientific, technological and others), obtained in the association, that belongs to Añañau; in the same way, it is forbidden to transmit any type of information that was mentioned above in this paragraph to third parties or institutions of any kind, directly or indirectly.",
+        PART_2:
+          "Through this letter, you will not be able to make any type of comment, written or through verbal publication, to third parties or entities of any kind, or in a virtual way (e.g. through social networks such as Facebook, Instagram, WhatsApp, Twitter, etc.) that can damage the image and reputation of Añañau.",
+        PART_3:
+          "In the case of non-respect to all of the above, you will be subject to civil and criminal liability, for possible damages caused to the association, according to Peruvian law. This confidentiality agreement will be maintained indefinitely, now and in the future, until the association considers it finished, or by dissolution of the same.",
+        AGREE: "I agree with the terms mentioned above.",
       },
     },
   },

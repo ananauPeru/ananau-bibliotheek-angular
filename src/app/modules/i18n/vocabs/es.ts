@@ -12,6 +12,14 @@ export const locale = {
       TRY_AGAIN: "Algo salió mal. Por favor, inténtelo de nuevo más tarde.",
     },
 
+    // BUTTONS
+    BUTTONS: {
+      SAVE: "Guardar",
+      SAVE_CHANGES: "Guardar cambios",
+      SUBMIT: "Enviar",
+      CANCEL: "Cancelar",
+    },
+
     // MENU
     MENU: {
       NEW: "nuevo",
@@ -87,8 +95,6 @@ export const locale = {
         ORGANIZATIONAL: "Organizativo",
         SCANS: "Escaneos",
         QUESTIONS: "Preguntas",
-        SAVE: "Ahorrar",
-        SEND: "Enviar",
         ERRORS: {
           REQUIRED: "Este campo es obligatorio.",
           EMAIL: "Este campo espera una dirección de correo electrónico.",
@@ -221,6 +227,16 @@ export const locale = {
           INFO:
             "Una vez que haya enviado su registro, intentaremos comunicarnos con usted lo antes posible. Por lo general, incluso configuraremos una videollamada para discutir algunas cosas y responder las preguntas de los demás. Aún así, si ya tiene preguntas sobre el proceso de registro o la pasantía en general, siempre puede contactarnos por correo electrónico o WhatsApp.",
         },
+      },
+      TERMS: {
+        TITLE: "Términos del acuerdo",
+        PART_1:
+          "Como parte del programa de voluntariado online / prácticas / voluntariado presencial en ONG Añañau, tendrás tareas en las que tendrás acceso a información sensible y privada, por ello la asociación se ve obligada a salvaguardar sus intereses y así tú queda estrictamente prohibido el uso de cualquier tipo de información (intelectual, oral, visual, escrita, científica, tecnológica y otros), obtenida en la asociación, que pertenece a Añañau; de igual forma, se prohíbe transmitir cualquier tipo de información que fue mencionada anteriormente en este párrafo a terceros o instituciones de cualquier tipo, directa o indirectamente.",
+        PART_2:
+          "A través de esta carta, no podrá realizar ningún tipo de comentario, escrito o mediante publicación verbal, a terceros o entidades de ningún tipo, ni de forma virtual (ej. a través de redes sociales como Facebook, Instagram, WhatsApp, Twitter , etc.) que puedan dañar la imagen y reputación de Añañau.",
+        PART_3:
+          "En el caso de incumplimiento de todo lo anterior, usted estará sujeto a responsabilidad civil y penal, por los posibles daños ocasionados a la asociación, de acuerdo con la ley peruana. Este acuerdo de confidencialidad se mantendrá indefinidamente, ahora y en el futuro, hasta que la asociación lo considere terminado, o por disolución del mismo.",
+        AGREE: "Estoy de acuerdo con los términos mencionados anteriormente.",
       },
     },
   },

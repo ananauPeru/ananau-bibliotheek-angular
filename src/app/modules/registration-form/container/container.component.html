@@ -116,7 +116,7 @@
         class="btn btn-light-primary font-weight-bolder mr-2"
         [ngClass]="{ 'spinner spinner-left': saving }"
       >
-        {{ "REGISTRATION.GENERAL.SAVE" | translate }}
+        {{ "BUTTONS.SAVE" | translate }}
       </button>
       <button
         [disabled]="
@@ -132,7 +132,7 @@
         data-toggle="modal"
         data-target="#agreement-box"
       >
-        {{ "REGISTRATION.GENERAL.SEND" | translate }}
+        {{ "BUTTONS.SUBMIT" | translate }}
       </button>
     </div>
   </div>
@@ -239,7 +239,9 @@
   >
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Terms of agreement</h5>
+        <h5 class="modal-title">
+          {{ "REGISTRATION.TERMS.TITLE" | translate }}
+        </h5>
         <button
           type="button"
           class="close"
@@ -251,30 +253,15 @@
       </div>
       <div class="modal-body">
         <div class="my-2">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
-          cupiditate facere molestiae, repudiandae quaerat omnis quisquam
-          similique, dolorem vel, inventore recusandae! Iure, hic perspiciatis
-          quos tempora neque expedita iusto facilis! Eum minima facilis iusto,
-          illum atque quas ab ipsum voluptas dignissimos nemo at laboriosam
-          laborum impedit rem recusandae ullam quia doloremque provident non
-          repudiandae, rerum iste. Eius et a excepturi. Sunt tempore ad soluta
-          labore nisi magni molestias fuga natus libero rerum, vero cumque
-          temporibus, quas perspiciatis odit obcaecati vel fugiat eaque error
-          sequi dolorem sapiente earum. Ullam, iusto dignissimos! Architecto
-          eaque, enim asperiores veniam nobis porro non eos obcaecati assumenda
-          illo doloribus voluptate, exercitationem laudantium, cupiditate id
-          tempora accusantium! Eveniet voluptate nulla non, laudantium
-          voluptatum impedit aspernatur quasi accusantium! Placeat, distinctio
-          iure inventore delectus magnam, cupiditate, et doloremque itaque
-          repellat soluta obcaecati ut architecto aliquam quas nesciunt
-          temporibus modi voluptates maxime quae illo consectetur harum dolorum.
-          Ullam, consectetur nihil.
+          <p>{{ "REGISTRATION.TERMS.PART_1" | translate }}</p>
+          <p>{{ "REGISTRATION.TERMS.PART_2" | translate }}</p>
+          <p>{{ "REGISTRATION.TERMS.PART_3" | translate }}</p>
         </div>
         <div class="my-2">
           <label class="checkbox">
             <input [formControl]="agreementControl" type="checkbox" />
             <span></span>
-            &nbsp;&nbsp;I agree with the terms mentioned above
+            &nbsp;&nbsp;{{ "REGISTRATION.TERMS.AGREE" | translate }}
           </label>
         </div>
       </div>
@@ -283,7 +270,7 @@
           class="btn btn-light-primary font-weight-bolder"
           data-dismiss="modal"
         >
-          Cancel
+          {{ "BUTTONS.CANCEL" | translate }}
         </button>
         <button
           (click)="saveForm(true)"
@@ -292,7 +279,7 @@
           data-dismiss="modal"
           [disabled]="!agreementControl.valid"
         >
-          Send
+          {{ "BUTTONS.SUBMIT" | translate }}
         </button>
       </div>
     </div>
