@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { AuthUtil } from 'src/app/_utils/auth_util';
 import { LayoutService } from '../../../../_metronic/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { LayoutService } from '../../../../_metronic/core';
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.scss'],
 })
-export class AsideComponent implements OnInit {
+export class AsideComponent extends AuthUtil implements OnInit {
   disableAsideSelfDisplay: boolean;
   headerLogo: string;
   brandSkin: string;
@@ -20,7 +21,9 @@ export class AsideComponent implements OnInit {
   asideMenuScroll = 1;
   asideSelfMinimizeToggle = false;
 
-  constructor(private layout: LayoutService, private loc: Location) { }
+  constructor(private layout: LayoutService, private loc: Location) { 
+    super()
+  }
 
   ngOnInit(): void {
     // load view settings
