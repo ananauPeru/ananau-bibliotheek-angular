@@ -37,10 +37,15 @@ export class ItemHTTPService {
   // server should return the object with ID
   create(item: ItemDTO): Observable<ItemModel> {
     return this.http.post<ItemModel>(`${API_ITEMS_URL}`, item).pipe(
-      catchError((err) => {
-        console.error('CREATE ITEM', err)
-        // return of({ id: undefined })
-        return of(null)
+      catchError((error) => {
+        if (error.status == 401) {
+          console.log('Login please...')
+        }
+        return throwError(error)
+      }),
+      map((item: any): ItemModel => {
+        console.log(item)
+        return item
       }),
     )
   }

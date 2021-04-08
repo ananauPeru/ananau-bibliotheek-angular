@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { of } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
+import { ToastrUtil } from 'src/app/_utils/toastr_util'
 import { ItemDTO } from '../_dto/item-dto'
 import { ItemModel } from '../_models/item.model'
 import { ItemHTTPService } from '../_services/item-http'
@@ -20,6 +21,7 @@ export class CreateComponent implements OnInit {
     private itemService: ItemHTTPService,
     private router: Router,
     private route: ActivatedRoute,
+    public toastrUtil: ToastrUtil,
   ) {}
 
   ngOnInit(): void {
@@ -92,14 +94,28 @@ export class CreateComponent implements OnInit {
     const icreate = this.itemService
       .create(item)
       .pipe(
-        tap(() => this.router.navigate(['/library'])),
-        catchError((errorMessage) => {
-          console.error('UPDATE ERROR', errorMessage)
-          // return of(this.item)
-          return errorMessage
-        }),
+        tap(
+          // Log the result or error
+          (data) => {
+            console.log('success!!!')
+            console.log(data)
+            this.toastrUtil.showSuccess('Item successfully created!', 'Item Created')
+            // this.router.navigate(['/library'])
+          },
+          (error) => {
+            console.log('error!!!')
+            console.log(error)
+            this.toastrUtil.showError('Item could not be added... Try again later.', 'Error')
+          },
+        ),
+
+        // catchError((errorMessage) => {
+        //   console.error('UPDATE ERROR', errorMessage)
+        //   // return of(this.item)
+        //   return errorMessage
+        // }),
       )
-      .subscribe((res) => ( res as ItemModel))
+      .subscribe((res) => res as ItemModel)
     // this.subscriptions.push(sbCreate)
   }
 

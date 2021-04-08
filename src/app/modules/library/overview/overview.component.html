@@ -36,7 +36,7 @@
     <div class="card-body pt-2">
 
         <!--begin::Form Group-->
-        <div class="form-group row mb-10"  *ngIf="permitted(['SuperAdmin'])">
+        <div class="form-group row mb-10"  *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
             <div class="col-12 col-md-8">
                 <div class="input-group input-group-lg input-group-solid">
                     <div class="input-group-prepend">

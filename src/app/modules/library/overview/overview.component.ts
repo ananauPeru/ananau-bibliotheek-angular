@@ -77,7 +77,7 @@ function createNewUser(id: number): UserData {
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-export class OverviewComponent extends AuthUtil implements OnInit {
+export class OverviewComponent implements OnInit {
   private itemsPerPage: number = 5
   private page: number = 1
 
@@ -96,8 +96,12 @@ export class OverviewComponent extends AuthUtil implements OnInit {
 
   ngAfterViewInit() {}
 
-  constructor(private http: HttpClient, public itemService: ItemService) {
-    super()
+  constructor(
+    private http: HttpClient,
+    public itemService: ItemService,
+    public AuthUtil: AuthUtil,
+  ) {
+    // super()
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1))
 
     // Assign the data to the data source for the table to render
@@ -174,13 +178,12 @@ export class OverviewComponent extends AuthUtil implements OnInit {
   // }
 
   pageEvents(event: any) {
-    console.log(event.pageIndex);
-    console.log(event.pageSize);
+    console.log(event.pageIndex)
+    console.log(event.pageSize)
     this.itemsPerPage = event.pageSize
     this.paginate()
     // The code that you want to execute on clicking on next and previous buttons will be written here.
- }
- 
+  }
 
   setPage(p: number) {
     this.page = p
