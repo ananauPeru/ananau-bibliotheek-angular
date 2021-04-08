@@ -24,6 +24,8 @@ export const locale = {
       LIBRARY: {
         TITLE: 'Library',
         OVERVIEW: 'Overview',
+        BOOKS: 'Books',
+        ADD_BOOK:'Add Book'
       },
     },
 
@@ -169,6 +171,17 @@ export const locale = {
         EMAIL: 'Email Address',
         EMAIL_ALT: 'Changing email address is not possible.',
         DATEOFBIRTH: 'Geboortedatum',
+      },
+    },
+
+    LIBRARY: {
+      OVERVIEW: {
+        BOOK: 'Book',
+        EDUCATIONAL_ITEM: 'Educational Item',
+        NOVEL: 'Novel',
+        ANCIENT_EPIC: 'Ancient Epic',
+        NARRATIVE: 'Narrative',
+        TALE: 'Tale',
       },
     },
   },

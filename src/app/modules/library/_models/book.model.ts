@@ -1,18 +1,18 @@
 import { Timestamp } from 'rxjs/internal/operators/timestamp'
+import { UserModel } from '../../auth'
 import { ItemPieceModel } from './item-piece.model'
 
-
-export class ItemModel {
+export class BookModel {
   id: number
+  user: UserModel
   category: string
   genre: string
   name: string
-  brand: string
+  author: string
   description: string
-  material: string
+  state: string
   archived: boolean
   deleted: boolean
-  user: string
   pieces: ItemPieceModel[]
   photoUrl: string
   createdAt: Date

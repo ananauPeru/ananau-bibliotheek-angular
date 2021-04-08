@@ -6,7 +6,7 @@ import { catchError, tap } from 'rxjs/operators'
 import { ToastrUtil } from 'src/app/_utils/toastr_util'
 import { ItemDTO } from '../_dto/item-dto'
 import { ItemModel } from '../_models/item.model'
-import { ItemHTTPService } from '../_services/item-http'
+import { ItemHTTPService } from '../_services/item/item-http/item-http.service'
 
 @Component({
   selector: 'app-create',

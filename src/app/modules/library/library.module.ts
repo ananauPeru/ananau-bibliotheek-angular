@@ -45,11 +45,12 @@ import { MatTreeModule } from '@angular/material/tree'
 import { routes } from 'src/app/app-routing.module'
 import { CoreModule } from 'src/app/_metronic/core'
 import { GeneralModule } from 'src/app/_metronic/partials/content/general/general.module'
-import { OverviewComponent } from './overview/overview.component'
+import { OverviewItemComponent } from './overview/item/overview-item.component'
 import { CreateComponent } from './create/create.component'
+import { OverviewBookComponent } from './overview/book/overview-book.component'
 
 @NgModule({
-  declarations: [LibraryComponent, OverviewComponent, CreateComponent],
+  declarations: [LibraryComponent, OverviewItemComponent, OverviewBookComponent, CreateComponent],
   imports: [
     CommonModule,
 

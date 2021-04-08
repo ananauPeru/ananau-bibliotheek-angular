@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core'
 import { Observable, of, throwError } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from '../../../../../environments/environment'
+import { environment } from '../../../../../../environments/environment'
 import { catchError, finalize, map } from 'rxjs/operators'
-import { ItemModel } from '../../_models/item.model'
-import { ItemDTO } from '../../_dto/item-dto'
+import { ItemModel } from '../../../_models/item.model'
+import { ItemDTO } from '../../../_dto/item-dto'
+import { BookModel } from '../../../_models/book.model'
+import { BookDTO } from '../../../_dto/book-dto'
 
-const API_ITEMS_URL = `${environment.apiUrl}/item`
+const API_ITEMS_URL = `${environment.apiUrl}/book`
 
 @Injectable({
   providedIn: 'root',
 })
-export class ItemHTTPService {
+export class BookHTTPService {
   constructor(private http: HttpClient) {}
 
-  getAllItems$(): Observable<ItemModel[]> {
+  getAllBooks$(): Observable<BookModel[]> {
     return this.http
       .get(`${API_ITEMS_URL}/getall`, {
         responseType: 'json',
@@ -26,7 +28,7 @@ export class ItemHTTPService {
           }
           return throwError(error)
         }),
-        map((items: any): ItemModel[] => {
+        map((items: any): BookModel[] => {
           console.log(items)
           return items
         }),
@@ -35,17 +37,17 @@ export class ItemHTTPService {
 
   // CREATE
   // server should return the object with ID
-  create(item: ItemDTO): Observable<ItemModel> {
-    return this.http.post<ItemModel>(`${API_ITEMS_URL}`, item).pipe(
+  create(book: BookDTO): Observable<BookModel> {
+    return this.http.post<BookModel>(`${API_ITEMS_URL}`, book).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.log('Login please...')
         }
         return throwError(error)
       }),
-      map((item: any): ItemModel => {
-        console.log(item)
-        return item
+      map((book: any): BookModel => {
+        console.log(book)
+        return book
       }),
     )
   }

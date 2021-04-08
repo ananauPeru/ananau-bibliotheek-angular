@@ -10,7 +10,8 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <button type="submit" id="kt_login_signin_submit"
-                            class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false" routerLink="/library/add-item">
+                            class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
+                            routerLink="/library/add-item">
                             Add New Item
                             <!-- {{"AUTH.LOGIN.BUTTON" | translate }} -->
                         </button>
@@ -36,8 +37,8 @@
     <div class="card-body pt-2">
 
         <!--begin::Form Group-->
-        <div class="form-group row mb-10"  *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
-            <div class="col-12 col-md-8">
+        <div class="form-group row mb-10" *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
+            <div class="col-12 col-md-6">
                 <div class="input-group input-group-lg input-group-solid">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -49,14 +50,39 @@
                         style="padding-left: 10px;" />
                 </div>
             </div>
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-3">
                 <select class="form-control form-control-lg form-control-solid" placeholder="Category"
                     (change)="applyCategory($event.target.value)">
                     <option value="">Category</option>
-                    <option value="book">Book</option>
-                    <option value="music">Music</option>
-                    <option value="game">Game</option>
+                    <option *ngFor="let enum of Categories | keyvalue" value="{{enum.key}}">
+                        {{enum.value | translate }}
+                    </option>
                 </select>
+            </div>
+            <div class="col-12 col-md-3" (click)="category ? '':showError()">
+                <select *ngIf="!category" class="form-control form-control-lg form-control-solid" placeholder="Genre"
+                    (change)="applyCategory($event.target.value)" [disabled]='category ? false : true'>
+                    <option value="">Genre/Purpose</option>
+                </select>
+                <ng-container *ngIf="category && category.toLowerCase()=='book'; else elseTemplate">
+                    <select [hidden]="!category" class="form-control form-control-lg form-control-solid" placeholder="Genre"
+                        (change)="applyGenre($event.target.value)" [disabled]='category ? false : true'>
+                        <option value="">Genre</option>
+                        <option *ngFor="let enum of BookCategories | keyvalue" value="{{enum.key}}">
+                            {{enum.value | translate }}
+                        </option>
+                    </select>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <select [hidden]="!category" class="form-control form-control-lg form-control-solid" placeholder="Genre"
+                        (change)="applyGenre($event.target.value)" [disabled]='category ? false : true'>
+                        <option value="">Purpose</option>
+                        <option *ngFor="let enum of EducationalCategories | keyvalue" value="{{enum.key}}">
+                            {{enum.value | translate }}
+                        </option>
+                    </select>
+                </ng-template>
+                <span [hidden]="!showErrorGenre" class="text-danger">Choose category first.</span>
             </div>
         </div>
         <!--begin::Form Group-->

@@ -4,8 +4,12 @@ import { FormGroup } from '@angular/forms'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
-import { ItemService } from '../_services/item.service'
-import { AuthUtil } from '../../../_utils/auth_util'
+import { ItemService } from '../../_services/item/item.service'
+import { AuthUtil } from '../../../../_utils/auth_util'
+import { BookCategories } from '../../_models/book-categories.enum'
+import { Categories } from '../../_models/categories.enum'
+import { timer } from 'rxjs'
+import { EducationalCategories } from '../../_models/educational-categories.enum'
 
 export interface UserData {
   id: string
@@ -74,12 +78,16 @@ function createNewUser(id: number): UserData {
 
 @Component({
   selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
+  templateUrl: './overview-item.component.html',
+  styleUrls: ['./overview-item.component.scss'],
 })
-export class OverviewComponent implements OnInit {
+export class OverviewItemComponent implements OnInit {
   private itemsPerPage: number = 5
   private page: number = 1
+  public Categories = Categories
+  public BookCategories = BookCategories
+  public EducationalCategories = EducationalCategories
+  public showErrorGenre: boolean = false
 
   // MatPaginator Output
   pageEvent: PageEvent
@@ -88,6 +96,7 @@ export class OverviewComponent implements OnInit {
   displayedColumns7: string[] = ['id', 'name', 'description', 'color']
 
   category: string = undefined
+  genre: string = undefined
 
   @ViewChild('matPaginator7', { static: true }) paginator7: MatPaginator
   @ViewChild('sort7', { static: true }) sort7: MatSort
@@ -134,10 +143,13 @@ export class OverviewComponent implements OnInit {
       this.category,
       this.itemsPerPage,
       this.page,
+      this.genre,
     )
   }
 
   applyCategory(category: string) {
+    this.showErrorGenre = false
+
     if (category.length > 0) {
       this.category = category
     } else {
@@ -151,6 +163,27 @@ export class OverviewComponent implements OnInit {
       this.category,
       this.itemsPerPage,
       this.page,
+      this.genre,
+    )
+  }
+
+  applyGenre(genre: string) {
+    this.showErrorGenre = false
+
+    if (genre.length > 0) {
+      this.genre = genre
+    } else {
+      this.genre = undefined
+    }
+
+    console.log(this.genre)
+
+    this.itemService.filter(
+      this.dataSource7.filter,
+      this.category,
+      this.itemsPerPage,
+      this.page,
+      this.genre,
     )
   }
 
@@ -196,6 +229,21 @@ export class OverviewComponent implements OnInit {
       this.category,
       this.itemsPerPage,
       this.page,
+      this.genre,
     )
+  }
+
+  showError() {
+    // set showloader to true to show loading div on view
+    this.showErrorGenre = true
+    console.log('SHOW ERROR')
+
+    let _timer = timer(3000) // 5000 millisecond means 5 seconds
+    let subscription = _timer.subscribe(() => {
+      // set showloader to false to hide loading div from view after 5 seconds
+      console.log('5 seconds passed')
+      this.showErrorGenre = false
+      console.log(this.showErrorGenre)
+    })
   }
 }

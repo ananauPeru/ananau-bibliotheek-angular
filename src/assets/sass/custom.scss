@@ -103,8 +103,15 @@ a:active,
 .aside-menu .menu-nav>.menu-item>.menu-heading .menu-arrow,
 .aside-menu .menu-nav>.menu-item>.menu-link .menu-arrow,
 .aside-menu .menu-nav>.menu-item .menu-submenu .menu-item>.menu-heading .menu-text,
-.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item>.menu-link .menu-text {
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item>.menu-link .menu-text,
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item>.menu-heading .menu-icon,
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item>.menu-link .menu-icon {
   color: #d9d9d9 !important;
+}
+
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item>.menu-heading .menu-icon.svg-icon svg g [fill],
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item>.menu-link .menu-icon.svg-icon svg g [fill] {
+  fill: #d9d9d9 !important;
 }
 
 .aside-menu .menu-nav>.menu-item.menu-item-active>.menu-heading .menu-text,
@@ -115,11 +122,15 @@ a:active,
 
 .aside-menu .menu-nav>.menu-item>.menu-heading .menu-icon.svg-icon svg g [fill],
 .aside-menu .menu-nav>.menu-item>.menu-link .menu-icon.svg-icon svg g [fill],
-.brand-dark .brand .btn .svg-icon svg g [fill] {
+.brand-dark .brand .btn .svg-icon svg g [fill],
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item.menu-item-open>.menu-heading .menu-icon.svg-icon svg g [fill],
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item.menu-item-open>.menu-link .menu-icon.svg-icon svg g [fill],
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item:not(.menu-item-parent):not(.menu-item-open):not(.menu-item-here):not(.menu-item-active):hover>.menu-heading .menu-icon.svg-icon svg g [fill],
+.aside-menu .menu-nav>.menu-item .menu-submenu .menu-item:not(.menu-item-parent):not(.menu-item-open):not(.menu-item-here):not(.menu-item-active):hover>.menu-link .menu-icon.svg-icon svg g [fill] {
   fill: white !important;
 }
 
 
-.input-group.input-group-solid .input-group-prepend ~ .form-control.force-pl-5 {
+.input-group.input-group-solid .input-group-prepend~.form-control.force-pl-5 {
   padding-left: 10px !important;
 }
