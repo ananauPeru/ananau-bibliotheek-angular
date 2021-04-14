@@ -211,7 +211,6 @@ export class OverviewBookComponent implements OnInit {
   //   this.paginate()
   // }
 
-
   pageEvents(event: any) {
     console.log(event.pageIndex)
     console.log(event.pageSize)

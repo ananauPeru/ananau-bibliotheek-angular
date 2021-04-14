@@ -69,64 +69,38 @@
             <div class="form-group row">
                 <!--begin::Form group-->
                 <div class="col-12 col-md-6">
-                    <label >
+                    <label>
                         Purchased at
                     </label>
-                    <input class="form-control form-control-solid form-control-lg"
-                        (click)="d.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker"
-                        name="dateofbirth" formControlName="dateofbirth" placeholder="2000-01-01" autocomplete="off"
-                        [ngClass]="{'is-invalid': registrationForm.controls['dateofbirth'].invalid && registrationForm.controls['dateofbirth'].dirty}" />
-                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-          validation: 'required',
-          message: ('AUTH.VALIDATION.DATEOFBIRTH_REQUIRED' | translate),
-          control: registrationForm.controls['dateofbirth']
-        }"></ng-container>
-                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-          validation: 'minlength',
-          message: ('AUTH.VALIDATION.DATEOFBIRTH_MINLENGTH' | translate),
-          control: registrationForm.controls['dateofbirth']
-        }"></ng-container>
-                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-          validation: 'maxLength',
-          message: ('AUTH.VALIDATION.DATEOFBIRTH_MAXLENGTH' | translate),
-          control: registrationForm.controls['dateofbirth']
-        }"></ng-container>
-                </div>
-                <div class="col-6 col-md-6">
-                    <label></label>
-                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder="Material" name='material' [class.is-invalid]="isControlInvalid('material')"
-                        [class.is-valid]="isControlValid('material')" formControlName='material' required />
-                    <div class="feedback" *ngIf="!isControlTouched('material')">
-                        Please enter <b>a Material for this item.</b>
+                    <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()"
+                        placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" name="purchasedAt"
+                        formControlName="purchasedAt" placeholder="2000-01-01" autocomplete="off"
+                        [class.is-invalid]="isControlInvalid('purchasedAt')"
+                        [class.is-valid]="isControlValid('purchasedAt')" required />
+                    <div class="feedback" *ngIf="!isControlTouched('purchasedAt')">
+                        Please enter <b>the Purchase Date of the book.</b>
                     </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('material')">
-                        <!-- Material was entered correct -->
+                    <div class="valid-feedback" *ngIf="isControlValid('purchasedAt')">
+                        <!-- Brand was entered correct -->
                     </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'material')">
-                        Material is required
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'material')">
-                        Material should have at least 3 symbols
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'material')">
-                        Material should have maximum 100 symbols
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'purchasedAt')">
+                        Purchase date is required
                     </div>
                 </div>
                 <div class="col-6 col-md-6">
-                    <label>Category</label>
-                    <select class="form-control form-control-lg form-control-solid" name="category"
-                        formControlName="category" aria-placeholder="Category"
-                        [class.is-invalid]="isControlInvalid('category')" [class.is-valid]="isControlValid('category')"
+                    <label>Genre</label>
+                    <select class="form-control form-control-lg form-control-solid" name="genre"
+                        formControlName="genre" aria-placeholder="Genre"
+                        [class.is-invalid]="isControlInvalid('genre')" [class.is-valid]="isControlValid('genre')"
                         required>
-                        <option value="">Category</option>
-                        <option value="Book">Book</option>
-                        <option value="Music">Music</option>
-                        <option value="nocategory">No Category</option>
+                        <option value="">Choose Genre</option>
+                        <option *ngFor="let enum of BookCategories | keyvalue" value="{{enum.key}}">
+                            {{enum.value | translate }}
+                        </option>
                     </select>
-                    <div class="feedback" *ngIf="!isControlTouched('category')">Please select a <b>Category.</b></div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'category')">
-                        Category is required
+                    <div class="feedback" *ngIf="!isControlTouched('genre')">Please select a <b>Genre.</b></div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'genre')">
+                        Genre is required
                     </div>
                 </div>
             </div>

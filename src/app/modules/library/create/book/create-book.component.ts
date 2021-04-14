@@ -7,6 +7,7 @@ import { ToastrUtil } from 'src/app/_utils/toastr_util'
 import { ItemDTO } from '../../_dto/item-dto'
 import { ItemModel } from '../../_models/item.model'
 import { ItemHTTPService } from '../../_services/item/item-http/item-http.service'
+import { BookCategories } from '../../_models/book-categories.enum'
 
 @Component({
   selector: 'app-create',
@@ -15,6 +16,7 @@ import { ItemHTTPService } from '../../_services/item/item-http/item-http.servic
 })
 export class CreateBookComponent implements OnInit {
   formGroup: FormGroup
+  public BookCategories = BookCategories
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +36,7 @@ export class CreateBookComponent implements OnInit {
           Validators.maxLength(100),
         ]),
       ],
-      category: ['', Validators.compose([Validators.required])],
+      genre: ['', Validators.compose([Validators.required])],
       author: [
         '',
         Validators.compose([
@@ -43,12 +45,10 @@ export class CreateBookComponent implements OnInit {
           Validators.maxLength(100),
         ]),
       ],
-      material: [
+      purchasedAt: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
         ]),
       ],
       description: [
