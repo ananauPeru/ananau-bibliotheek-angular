@@ -255,6 +255,8 @@ export const locale = {
           "You can request this from your city or municipal service.",
         DIPLOMA: "Scan diploma or certificate education",
         PHOTO: "Passport photo",
+        WARNING:
+          "Some images may keep loading continuously. If you still want to see them, click one. You can simply close the screen that opens afterwards in case you don't want to select new images.",
       },
       QUESTIONS: {
         TITLE: "Questions",

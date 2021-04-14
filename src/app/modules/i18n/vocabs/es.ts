@@ -199,6 +199,8 @@ export const locale = {
           "Puede solicitarlo en su ciudad o servicio municipal.",
         DIPLOMA: "Escaneo de diploma o certificado educativo",
         PHOTO: "Foto del pasaporte",
+        WARNING:
+          "Algunas imágenes pueden seguir cargarse continuamente. Si aún desea verlos, haga clic en uno. Simplemente puede cerrar la pantalla que se abre después en caso de que no desee seleccionar nuevas imágenes.",
       },
       QUESTIONS: {
         TITLE: "Preguntas",

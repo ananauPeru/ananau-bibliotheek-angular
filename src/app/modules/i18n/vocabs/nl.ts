@@ -254,6 +254,8 @@ export const locale = {
           "Deze kan je opvragen bij je gemeente of gemeentelijke dienst.",
         DIPLOMA: "Scan diploma of certificaat onderwijs",
         PHOTO: "Pasfoto",
+        WARNING:
+          "Het is mogelijk dat bepaalde afbeeldingen onophoudelijk blijven laden. Als je ze toch wil zien, klik er dan een aan. Het scherm dat daardoor geopend wordt, kan je gewoon sluiten in het geval je geen nieuwe afbeeldingen wil selecteren.",
       },
       QUESTIONS: {
         TITLE: "Vragen",
