@@ -104,6 +104,43 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-12">Upload a photo for this Book</label>
+                <div class="col-12">
+                  <div
+                    class="custom-dropzone form-control form-control-solid border"
+                    ngx-dropzone
+                    [accept]="'image/*'"
+                    (change)="onSelectBookImage($event)"
+                    required
+                  >
+                    <ngx-dropzone-label>
+                      <p class="form-text text-muted">
+                        Drop your file(s) here or click to select your file(s).
+                      </p>
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-image-preview
+                      ngProjectAs="ngx-dropzone-preview"
+                      *ngFor="let f of bookImages"
+                      [file]="f"
+                      [removable]="true"
+                      (removed)="onRemoveBookImage(f)"
+                    >
+                    </ngx-dropzone-image-preview>
+                  </div>
+                  <div
+                    *ngIf="
+                      formGroup.get('bookImage')['errors'] &&
+                      formGroup.get('bookImage').touched
+                    "
+                    class="text-danger form-text"
+                  >
+                    <!-- {{
+                      getErrorMessage(scansForm.get("internationalPassport")["errors"])
+                    }} -->
+                  </div>
+                </div>
+              </div>
             <!-- <div class="form-group row">
                 <div class="col-lg-4">
                     <label>Enter Mileage</label>

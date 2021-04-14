@@ -49,9 +49,16 @@ import { OverviewItemComponent } from './overview/item/overview-item.component'
 import { OverviewBookComponent } from './overview/book/overview-book.component'
 import { CreateItemComponent } from './create/item/create-item.component'
 import { CreateBookComponent } from './create/book/create-book.component'
+import { NgxDropzoneModule } from 'ngx-dropzone'
 
 @NgModule({
-  declarations: [LibraryComponent, OverviewItemComponent, OverviewBookComponent, CreateItemComponent, CreateBookComponent],
+  declarations: [
+    LibraryComponent,
+    OverviewItemComponent,
+    OverviewBookComponent,
+    CreateItemComponent,
+    CreateBookComponent,
+  ],
   imports: [
     CommonModule,
 
@@ -104,6 +111,7 @@ import { CreateBookComponent } from './create/book/create-book.component'
     HttpClientModule,
     LayoutModule,
     NgbModule,
+    NgxDropzoneModule
   ],
 })
 export class LibraryModule {}

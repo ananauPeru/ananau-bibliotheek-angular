@@ -8,6 +8,7 @@ import { ItemDTO } from '../../_dto/item-dto'
 import { ItemModel } from '../../_models/item.model'
 import { ItemHTTPService } from '../../_services/item/item-http/item-http.service'
 import { BookCategories } from '../../_models/book-categories.enum'
+import { NgxDropzoneChangeEvent } from 'ngx-dropzone'
 
 @Component({
   selector: 'app-create',
@@ -15,8 +16,10 @@ import { BookCategories } from '../../_models/book-categories.enum'
   styleUrls: ['./create-book.component.scss'],
 })
 export class CreateBookComponent implements OnInit {
-  formGroup: FormGroup
   public BookCategories = BookCategories
+  public bookImages = new Array<File>()
+
+  formGroup: FormGroup
 
   constructor(
     private fb: FormBuilder,
@@ -45,12 +48,7 @@ export class CreateBookComponent implements OnInit {
           Validators.maxLength(100),
         ]),
       ],
-      purchasedAt: [
-        '',
-        Validators.compose([
-          Validators.required,
-        ]),
-      ],
+      purchasedAt: ['', Validators.compose([Validators.required])],
       description: [
         '',
         // Validators.compose([
@@ -60,6 +58,7 @@ export class CreateBookComponent implements OnInit {
         // ]),
       ],
       photourl: [''],
+      bookImage: [false, Validators.requiredTrue],
     })
   }
 
@@ -95,13 +94,19 @@ export class CreateBookComponent implements OnInit {
           (data) => {
             console.log('success!!!')
             console.log(data)
-            this.toastrUtil.showSuccess('Item successfully created!', 'Item Created')
+            this.toastrUtil.showSuccess(
+              'Item successfully created!',
+              'Item Created',
+            )
             // this.router.navigate(['/library'])
           },
           (error) => {
             console.log('error!!!')
             console.log(error)
-            this.toastrUtil.showError('Item could not be added... Try again later.', 'Error')
+            this.toastrUtil.showError(
+              'Item could not be added... Try again later.',
+              'Error',
+            )
           },
         ),
 
@@ -135,4 +140,24 @@ export class CreateBookComponent implements OnInit {
     const control = this.formGroup.controls[controlName]
     return control.dirty || control.touched
   }
+
+  public onSelectBookImage(event: NgxDropzoneChangeEvent) {
+    this.bookImages.push(...event.addedFiles)
+    // this.updateInternationalPassport()
+  }
+
+  public onRemoveBookImage(event: File) {
+    this.bookImages.splice(this.bookImages.indexOf(event), 1)
+    // this.updateInternationalPassport();
+  }
+
+  // private updateInternationalPassport() {
+  //   const internationalPassport = this.scansForm.get("internationalPassport");
+  //   if (this.internationalPassportFiles.length > 0) {
+  //     internationalPassport.setValue(true);
+  //   } else {
+  //     internationalPassport.setValue(false);
+  //   }
+  //   internationalPassport.markAsTouched();
+  // }
 }
