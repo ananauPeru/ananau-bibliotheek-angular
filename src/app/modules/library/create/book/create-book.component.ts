@@ -4,16 +4,16 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { of } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
 import { ToastrUtil } from 'src/app/_utils/toastr_util'
-import { ItemDTO } from '../_dto/item-dto'
-import { ItemModel } from '../_models/item.model'
-import { ItemHTTPService } from '../_services/item/item-http/item-http.service'
+import { ItemDTO } from '../../_dto/item-dto'
+import { ItemModel } from '../../_models/item.model'
+import { ItemHTTPService } from '../../_services/item/item-http/item-http.service'
 
 @Component({
   selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss'],
+  templateUrl: './create-book.component.html',
+  styleUrls: ['./create-book.component.scss'],
 })
-export class CreateComponent implements OnInit {
+export class CreateBookComponent implements OnInit {
   formGroup: FormGroup
 
   constructor(
@@ -35,7 +35,7 @@ export class CreateComponent implements OnInit {
         ]),
       ],
       category: ['', Validators.compose([Validators.required])],
-      brand: [
+      author: [
         '',
         Validators.compose([
           Validators.required,
@@ -61,10 +61,6 @@ export class CreateComponent implements OnInit {
       ],
       photourl: [''],
     })
-  }
-
-  reset() {
-    this.formGroup.reset()
   }
 
   save() {

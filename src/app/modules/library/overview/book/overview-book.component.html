@@ -34,8 +34,7 @@
         </div>
     </div>
     <!-- Body -->
-    <div class="card-body pt-2">
-
+    <div class="card-body pt-2" *ngIf="AuthUtil.permitted(['admin'])">
         <!--begin::Form Group-->
         <div class="form-group row mb-10" *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
             <div class="col-12 col-md-8">
@@ -63,7 +62,7 @@
         <!--begin::Form Group-->
 
         <!--begin: Item-->
-        <div class="d-flex flex-wrap align-items-center mb-10" *ngFor="let book of bookService.books | async">
+        <div class="d-flex flex-wrap align-items-center mb-10" *ngFor="let book of bookService.books | async" >
             <!--begin::Symbol-->
             <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
                 <!-- <div class="symbol-label" style="

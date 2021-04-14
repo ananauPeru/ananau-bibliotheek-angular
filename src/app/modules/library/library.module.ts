@@ -46,11 +46,12 @@ import { routes } from 'src/app/app-routing.module'
 import { CoreModule } from 'src/app/_metronic/core'
 import { GeneralModule } from 'src/app/_metronic/partials/content/general/general.module'
 import { OverviewItemComponent } from './overview/item/overview-item.component'
-import { CreateComponent } from './create/create.component'
 import { OverviewBookComponent } from './overview/book/overview-book.component'
+import { CreateItemComponent } from './create/item/create-item.component'
+import { CreateBookComponent } from './create/book/create-book.component'
 
 @NgModule({
-  declarations: [LibraryComponent, OverviewItemComponent, OverviewBookComponent, CreateComponent],
+  declarations: [LibraryComponent, OverviewItemComponent, OverviewBookComponent, CreateItemComponent, CreateBookComponent],
   imports: [
     CommonModule,
 

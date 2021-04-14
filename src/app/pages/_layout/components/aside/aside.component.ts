@@ -8,7 +8,7 @@ import { LayoutService } from '../../../../_metronic/core';
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.scss'],
 })
-export class AsideComponent extends AuthUtil implements OnInit {
+export class AsideComponent implements OnInit {
   disableAsideSelfDisplay: boolean;
   headerLogo: string;
   brandSkin: string;
@@ -21,8 +21,8 @@ export class AsideComponent extends AuthUtil implements OnInit {
   asideMenuScroll = 1;
   asideSelfMinimizeToggle = false;
 
-  constructor(private layout: LayoutService, private loc: Location) { 
-    super()
+  constructor(private layout: LayoutService, private loc: Location, public AuthUtil:AuthUtil) { 
+
   }
 
   ngOnInit(): void {
