@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   defaultAuth = {
     email: '',
     password: '',
-  };
+  }
   // defaultAuth: any = {
   //   email: 'admin@demo.com',
   //   password: 'demo',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   hasError: boolean
   returnUrl: string
   isLoading$: Observable<boolean>
-  extrasLanguagesDisplay: boolean = true;
+  extrasLanguagesDisplay: boolean = true
 
   // private fields
   private unsubscribe: Subscription[] = [] // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     //   'extras.languages.display',
     // )
 
-    console.log(this.extrasLanguagesDisplay);
+    console.log(this.extrasLanguagesDisplay)
   }
 
   // convenience getter for easy access to form fields
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           Validators.required,
           Validators.email,
           Validators.minLength(3),
-          Validators.maxLength(320), 
+          Validators.maxLength(320),
         ]),
       ],
       password: [

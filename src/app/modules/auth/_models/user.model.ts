@@ -25,7 +25,7 @@ export class UserModel extends AuthModel {
   password: string
   fullname: string
   pic: string
-  roles: number[]
+  roles: string[]
   occupation: string
   companyName: string
   phone: string
