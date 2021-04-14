@@ -114,7 +114,9 @@
       <button
         (click)="saveForm(false)"
         class="btn btn-light-primary font-weight-bolder mr-2"
-        [ngClass]="{ 'spinner spinner-left': saving }"
+        [ngClass]="{
+          'spinner spinner-left': saving || savingScans
+        }"
       >
         {{ "BUTTONS.SAVE" | translate }}
       </button>
@@ -128,7 +130,9 @@
           )
         "
         class="btn btn-primary font-weight-bolder"
-        [ngClass]="{ 'spinner spinner-left': sending }"
+        [ngClass]="{
+          'spinner spinner-left': sending || sendingScans
+        }"
         data-toggle="modal"
         data-target="#agreement-box"
       >
@@ -195,6 +199,8 @@
                 [(scansForm)]="formContainer.controls.scansForm"
                 (scansFormCounted)="scansFormProgress = $event"
                 [upload]="saveScanFiles.asObservable()"
+                (saving)="savingScans = $event"
+                (sending)="sendingScans = $event"
               ></app-scan-uploads>
             </div>
             <div class="col-xl-2"></div>

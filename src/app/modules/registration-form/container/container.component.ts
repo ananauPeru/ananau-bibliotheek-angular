@@ -30,7 +30,9 @@ export class ContainerComponent implements OnInit {
   public errorMessage: string;
   public saving: boolean;
   public sending: boolean;
-  public saveScanFiles = new Subject<void>();
+  public savingScans: boolean;
+  public sendingScans: boolean;
+  public saveScanFiles = new Subject<boolean>();
   public personalFormProgress: {
     all: number;
     required: number;
@@ -119,10 +121,10 @@ export class ContainerComponent implements OnInit {
   }
 
   saveForm(submit: boolean) {
-    if (submit) this.sending = !this.sending;
-    else this.saving = !this.saving;
+    if (submit) this.sending = true;
+    else this.saving = true;
 
-    this.saveScanFiles.next();
+    this.saveScanFiles.next(submit);
 
     let dto = new RegistrationDTO();
 
@@ -194,34 +196,24 @@ export class ContainerComponent implements OnInit {
       this.registrationService
         .postStudentRegistration$(studentDto, submit)
         .subscribe(
-          (registration) => {
+          () => {},
+          (error) => console.error(error),
+          () => {
             this.saving = false;
             this.sending = false;
             this.cdRef.detectChanges();
-            console.log(registration);
-          },
-          (error) => {
-            this.saving = false;
-            this.sending = false;
-            this.cdRef.detectChanges();
-            console.error(error);
           }
         );
     } else {
       this.registrationService
         .postVolunteerRegistration$(dto, submit)
         .subscribe(
-          (registration) => {
+          () => {},
+          (error) => console.error(error),
+          () => {
             this.saving = false;
             this.sending = false;
             this.cdRef.detectChanges();
-            console.log(registration);
-          },
-          (error) => {
-            this.saving = false;
-            this.sending = false;
-            this.cdRef.detectChanges();
-            console.error(error);
           }
         );
     }

@@ -27,7 +27,9 @@ export class ScanUploadsComponent implements OnInit {
     required: number;
     requiredAndValid: number;
   }>();
-  @Input() public upload: Observable<void>;
+  @Input() public upload: Observable<boolean>;
+  @Output() public saving = new EventEmitter<boolean>();
+  @Output() public sending = new EventEmitter<boolean>();
   public internationalPassportFiles = new Array<ScansFile>();
   public goodConductCertificateFiles = new Array<ScansFile>();
   public diplomaFiles = new Array<ScansFile>();
@@ -78,7 +80,10 @@ export class ScanUploadsComponent implements OnInit {
     this.userStorageService.fetchImages$();
 
     // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards
-    this.upload.subscribe(() => {
+    this.upload.subscribe((submit) => {
+      if (submit) this.sending.emit(true);
+      else this.saving.emit(true);
+
       Promise.all([
         this.userStorageService.storeImages$(
           this.internationalPassportFiles.filter((file) => file.isNew)
@@ -105,7 +110,11 @@ export class ScanUploadsComponent implements OnInit {
           this.passportPhotoFiles.forEach((file) => (file.isNew = false));
           this.filesToDelete.length = 0;
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.error(error))
+        .finally(() => {
+          this.sending.emit(false);
+          this.saving.emit(false);
+        });
     });
   }
 
