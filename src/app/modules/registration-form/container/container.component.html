@@ -194,6 +194,7 @@
               <app-scan-uploads
                 [(scansForm)]="formContainer.controls.scansForm"
                 (scansFormCounted)="scansFormProgress = $event"
+                [upload]="saveScanFiles.asObservable()"
               ></app-scan-uploads>
             </div>
             <div class="col-xl-2"></div>

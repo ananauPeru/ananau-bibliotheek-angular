@@ -10,7 +10,7 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { EMPTY, Observable } from "rxjs";
+import { EMPTY, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { RegistrationService } from "../data-services/registration.service";
 import { FormRole } from "../models/form-role";
@@ -30,6 +30,7 @@ export class ContainerComponent implements OnInit {
   public errorMessage: string;
   public saving: boolean;
   public sending: boolean;
+  public saveScanFiles = new Subject<void>();
   public personalFormProgress: {
     all: number;
     required: number;
@@ -120,6 +121,8 @@ export class ContainerComponent implements OnInit {
   saveForm(submit: boolean) {
     if (submit) this.sending = !this.sending;
     else this.saving = !this.saving;
+
+    this.saveScanFiles.next();
 
     let dto = new RegistrationDTO();
 
