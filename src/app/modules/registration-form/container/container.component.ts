@@ -10,6 +10,7 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
+import { ToastrService } from "ngx-toastr";
 import { EMPTY, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { RegistrationService } from "../data-services/registration.service";
@@ -58,7 +59,8 @@ export class ContainerComponent implements OnInit {
     private registrationService: RegistrationService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {
     this.route.data.subscribe((data) => {
       this.role = data["role"] ? data["role"] : FormRole.VOLUNTEER;
@@ -196,8 +198,22 @@ export class ContainerComponent implements OnInit {
       this.registrationService
         .postStudentRegistration$(studentDto, submit)
         .subscribe(
-          () => {},
-          (error) => console.error(error),
+          () =>
+            this.toastr.success(
+              submit
+                ? "Your textual data has been successfully submitted."
+                : "Your textual data has been successfully saved.",
+              "Success"
+            ),
+          (error) => {
+            this.toastr.error(
+              submit
+                ? "Something went wrong while submitting your textual data. Please try again later."
+                : "Something went wrong while saving your textual data. Please try again later.",
+              "Error"
+            );
+            console.error(error);
+          },
           () => {
             this.saving = false;
             this.sending = false;
@@ -208,8 +224,22 @@ export class ContainerComponent implements OnInit {
       this.registrationService
         .postVolunteerRegistration$(dto, submit)
         .subscribe(
-          () => {},
-          (error) => console.error(error),
+          () =>
+            this.toastr.success(
+              submit
+                ? "Your textual data has been successfully submitted."
+                : "Your textual data has been successfully saved.",
+              "Success"
+            ),
+          (error) => {
+            this.toastr.error(
+              submit
+                ? "Something went wrong while submitting your textual data. Please try again later."
+                : "Something went wrong while saving your textual data. Please try again later.",
+              "Error"
+            );
+            console.error(error);
+          },
           () => {
             this.saving = false;
             this.sending = false;
