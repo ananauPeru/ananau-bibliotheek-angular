@@ -114,18 +114,26 @@ export class ScanUploadsComponent implements OnInit {
 
           this.toastr.success(
             submit
-              ? "Your image files have been successfully submitted."
-              : "Your image files have been successfully saved.",
-            "Success"
+              ? this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_SUCCESS"
+                )
+              : this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SAVE_SUCCESS"
+                ),
+            this.translate.instant("REGISTRATION.GENERAL.TOASTS.SUCCESS")
           );
         })
         .catch((error) => {
           console.error(error);
           this.toastr.error(
             submit
-              ? "Something went wrong while submitting your image files. Please try again later."
-              : "Something went wrong while saving your image files. Please try again later.",
-            "Error"
+              ? this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_ERROR"
+                )
+              : this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SAVE_ERROR"
+                ),
+            this.translate.instant("REGISTRATION.GENERAL.TOASTS.ERROR")
           );
         })
         .finally(() => {

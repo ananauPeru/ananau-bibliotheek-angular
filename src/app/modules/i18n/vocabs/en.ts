@@ -158,6 +158,24 @@ export const locale = {
           CHARACTERS: "This field expects at least {{value}} characters.",
           INCORRECT: "This field is not filled in correctly.",
         },
+        TOASTS: {
+          SUCCESS: "Success",
+          ERROR: "Error",
+          TEXT_SUBMIT_SUCCESS:
+            "Your textual data has been successfully submitted.",
+          TEXT_SAVE_SUCCESS: "Your textual data has been successfully saved.",
+          IMAGE_SUBMIT_SUCCESS:
+            "Your image files have been successfully submitted.",
+          IMAGE_SEND_SUCCESS: "Your image files have been successfully saved.",
+          TEXT_SUBMIT_ERROR:
+            "Something went wrong while submitting your textual data. Please try again later.",
+          TEXT_SAVE_ERROR:
+            "Something went wrong while saving your textual data. Please try again later.",
+          IMAGE_SUBMIT_ERROR:
+            "Something went wrong while submitting your image files. Please try again later.",
+          IMAGE_SAVE_ERROR:
+            "Something went wrong while saving your image files. Please try again later.",
+        },
       },
       PERSONAL: {
         TITLE: "Personal information",

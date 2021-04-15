@@ -101,6 +101,26 @@ export const locale = {
           CHARACTERS: "Este campo espera al menos {{value}} caracteres.",
           INCORRECT: "Este campo no está completado correctamente.",
         },
+        TOASTS: {
+          SUCCESS: "Éxito",
+          ERROR: "Error",
+          TEXT_SUBMIT_SUCCESS:
+            "Sus datos textuales se han enviado correctamente.",
+          TEXT_SAVE_SUCCESS:
+            "Sus datos textuales se han guardado correctamente.",
+          IMAGE_SUBMIT_SUCCESS:
+            "Sus archivos de imagen se han enviado correctamente.",
+          IMAGE_SEND_SUCCESS:
+            "Sus archivos de imagen se han guardado correctamente.",
+          TEXT_SUBMIT_ERROR:
+            "Se produjo un error al enviar sus datos textuales. Por favor, inténtelo de nuevo más tarde.",
+          TEXT_SAVE_ERROR:
+            "Se produjo un error al guardar sus datos textuales. Por favor, inténtelo de nuevo más tarde.",
+          IMAGE_SUBMIT_ERROR:
+            "Se produjo un error al enviar sus archivos de imagen. Por favor, inténtelo de nuevo más tarde.",
+          IMAGE_SAVE_ERROR:
+            "Se produjo un error al guardar sus archivos de imagen. Por favor, inténtelo de nuevo más tarde.",
+        },
       },
       PERSONAL: {
         TITLE: "Informacion personal",

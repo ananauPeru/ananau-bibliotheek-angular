@@ -60,6 +60,7 @@ export class ContainerComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private cdRef: ChangeDetectorRef,
+    private translate: TranslateService,
     private toastr: ToastrService
   ) {
     this.route.data.subscribe((data) => {
@@ -201,16 +202,24 @@ export class ContainerComponent implements OnInit {
           () =>
             this.toastr.success(
               submit
-                ? "Your textual data has been successfully submitted."
-                : "Your textual data has been successfully saved.",
-              "Success"
+                ? this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.TEXT_SUBMIT_SUCCESS"
+                  )
+                : this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.TEXT_SAVE_SUCCESS"
+                  ),
+              this.translate.instant("REGISTRATION.GENERAL.TOASTS.SUCCESS")
             ),
           (error) => {
             this.toastr.error(
               submit
-                ? "Something went wrong while submitting your textual data. Please try again later."
-                : "Something went wrong while saving your textual data. Please try again later.",
-              "Error"
+                ? this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.TEXT_SUBMIT_ERROR"
+                  )
+                : this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.TEXT_SAVE_ERROR"
+                  ),
+              this.translate.instant("REGISTRATION.GENERAL.TOASTS.ERROR")
             );
             console.error(error);
           },
@@ -227,16 +236,24 @@ export class ContainerComponent implements OnInit {
           () =>
             this.toastr.success(
               submit
-                ? "Your textual data has been successfully submitted."
-                : "Your textual data has been successfully saved.",
-              "Success"
+                ? this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.TEXT_SUBMIT_SUCCESS"
+                  )
+                : this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.TEXT_SAVE_SUCCESS"
+                  ),
+              this.translate.instant("REGISTRATION.GENERAL.TOASTS.SUCCESS")
             ),
           (error) => {
             this.toastr.error(
               submit
-                ? "Something went wrong while submitting your textual data. Please try again later."
-                : "Something went wrong while saving your textual data. Please try again later.",
-              "Error"
+                ? this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.TEXT_SUBMIT_ERROR"
+                  )
+                : this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.TEXT_SAVE_ERROR"
+                  ),
+              this.translate.instant("REGISTRATION.GENERAL.TOASTS.ERROR")
             );
             console.error(error);
           },
