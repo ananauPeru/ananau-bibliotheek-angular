@@ -110,7 +110,7 @@ export const locale = {
             "Sus datos textuales se han guardado correctamente.",
           IMAGE_SUBMIT_SUCCESS:
             "Sus archivos de imagen se han enviado correctamente.",
-          IMAGE_SEND_SUCCESS:
+          IMAGE_SAVE_SUCCESS:
             "Sus archivos de imagen se han guardado correctamente.",
           TEXT_SUBMIT_ERROR:
             "Se produjo un error al enviar sus datos textuales. Por favor, inténtelo de nuevo más tarde.",

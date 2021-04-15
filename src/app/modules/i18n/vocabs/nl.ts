@@ -164,7 +164,7 @@ export const locale = {
           TEXT_SAVE_SUCCESS: "Je tekstuele gegevens zijn succesvol opgeslagen.",
           IMAGE_SUBMIT_SUCCESS:
             "Je afbeeldingsbestanden zijn succesvol verzonden.",
-          IMAGE_SEND_SUCCESS:
+          IMAGE_SAVE_SUCCESS:
             "Je afbeeldingsbestanden zijn succesvol opgeslagen.",
           TEXT_SUBMIT_ERROR:
             "Er ging iets mis bij het verzenden van je tekstuele gegevens. Probeer het later nog eens.",
