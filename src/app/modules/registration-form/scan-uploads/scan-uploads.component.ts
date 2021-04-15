@@ -13,6 +13,7 @@ import { UserStorageService } from "../data-services/user-storage.service";
 import { BlobNamePrefix } from "../models/blob-name-prefix";
 import { ScansFile } from "../models/scans-file";
 import { v4 as uuidv4 } from "uuid";
+import { ToastrUtil } from "src/app/_utils/toastr_util";
 
 @Component({
   selector: "app-scan-uploads",
@@ -27,7 +28,9 @@ export class ScanUploadsComponent implements OnInit {
     required: number;
     requiredAndValid: number;
   }>();
-  @Input() public upload: Observable<void>;
+  @Input() public upload: Observable<boolean>;
+  @Output() public saving = new EventEmitter<boolean>();
+  @Output() public sending = new EventEmitter<boolean>();
   public internationalPassportFiles = new Array<ScansFile>();
   public goodConductCertificateFiles = new Array<ScansFile>();
   public diplomaFiles = new Array<ScansFile>();
@@ -37,7 +40,8 @@ export class ScanUploadsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private translate: TranslateService,
-    private userStorageService: UserStorageService
+    private userStorageService: UserStorageService,
+    private toastr: ToastrUtil
   ) {}
 
   ngOnInit() {
@@ -78,7 +82,10 @@ export class ScanUploadsComponent implements OnInit {
     this.userStorageService.fetchImages$();
 
     // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards
-    this.upload.subscribe(() => {
+    this.upload.subscribe((submit) => {
+      if (submit) this.sending.emit(true);
+      else this.saving.emit(true);
+
       Promise.all([
         this.userStorageService.storeImages$(
           this.internationalPassportFiles.filter((file) => file.isNew)
@@ -104,8 +111,35 @@ export class ScanUploadsComponent implements OnInit {
           this.diplomaFiles.forEach((file) => (file.isNew = false));
           this.passportPhotoFiles.forEach((file) => (file.isNew = false));
           this.filesToDelete.length = 0;
+
+          this.toastr.showSuccess(
+            submit
+              ? this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_SUCCESS"
+                )
+              : this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SAVE_SUCCESS"
+                ),
+            this.translate.instant("REGISTRATION.GENERAL.TOASTS.SUCCESS")
+          );
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+          console.error(error);
+          this.toastr.showError(
+            submit
+              ? this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_ERROR"
+                )
+              : this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SAVE_ERROR"
+                ),
+            this.translate.instant("REGISTRATION.GENERAL.TOASTS.ERROR")
+          );
+        })
+        .finally(() => {
+          this.sending.emit(false);
+          this.saving.emit(false);
+        });
     });
   }
 

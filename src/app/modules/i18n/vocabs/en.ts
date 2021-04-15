@@ -30,10 +30,10 @@ export const locale = {
       APPS: "Apps",
       DASHBOARD: "Dashboard",
       LIBRARY: {
-        TITLE: 'Library',
-        OVERVIEW: 'Overview',
-        BOOKS: 'Books',
-        ADD_BOOK: 'Add Book',
+        TITLE: "Library",
+        OVERVIEW: "Overview",
+        BOOKS: "Books",
+        ADD_BOOK: "Add Book",
       },
       MANAGEMENT: {
         TITLE: "User management",
@@ -159,6 +159,24 @@ export const locale = {
           EMAIL: "This field expects an email address.",
           CHARACTERS: "This field expects at least {{value}} characters.",
           INCORRECT: "This field is not filled in correctly.",
+        },
+        TOASTS: {
+          SUCCESS: "Success",
+          ERROR: "Error",
+          TEXT_SUBMIT_SUCCESS:
+            "Your textual data has been successfully submitted.",
+          TEXT_SAVE_SUCCESS: "Your textual data has been successfully saved.",
+          IMAGE_SUBMIT_SUCCESS:
+            "Your image files have been successfully submitted.",
+          IMAGE_SAVE_SUCCESS: "Your image files have been successfully saved.",
+          TEXT_SUBMIT_ERROR:
+            "Something went wrong while submitting your textual data. Please try again later.",
+          TEXT_SAVE_ERROR:
+            "Something went wrong while saving your textual data. Please try again later.",
+          IMAGE_SUBMIT_ERROR:
+            "Something went wrong while submitting your image files. Please try again later.",
+          IMAGE_SAVE_ERROR:
+            "Something went wrong while saving your image files. Please try again later.",
         },
       },
       PERSONAL: {
@@ -302,35 +320,35 @@ export const locale = {
 
     LIBRARY: {
       OVERVIEW: {
-        ANCIENT_EPIC: 'Ancient Epic',
-        CHILDREN_GAMES: 'Children Games',
-        DRAMATIC: 'Dramatic',
-        DRAMATIC_THRILLER: 'Dramatic - Thriller',
-        EPIC: 'Epic',
-        ESSAY: 'Essay',
-        FABLE: 'Fable',
-        FABLES_COLLECTION: 'Fables - Collection',
-        MULTIPLICATIONS: 'Multiplications',
-        NARRATIVE: 'Narrative',
-        NOVEL: 'Novel',
-        NOVEL_CHILDREN: 'Novel - Children',
-        NOVEL_FICTION: 'Novel - Fiction',
-        NOVEL_NARRATIVE: 'Novel - Narrative',
-        NOVEL_NON_FICTION: 'Novel - Non-Fiction',
-        NOVEL_PHILOSOPHICAL: 'Novel - Philosophical',
-        NOVEL_ROMANTIC: 'Novel - Romantic',
-        NOVEL_THRILLER: 'Novel - Thriller',
-        SHORT_STORIES: 'Short Stories',
-        SUSPENSE: 'Suspense',
-        TALE: 'Tale',
-        TALES_COLLECTION: 'Tales - Collection',
-        TRAGEDY: 'Tragedy',
+        ANCIENT_EPIC: "Ancient Epic",
+        CHILDREN_GAMES: "Children Games",
+        DRAMATIC: "Dramatic",
+        DRAMATIC_THRILLER: "Dramatic - Thriller",
+        EPIC: "Epic",
+        ESSAY: "Essay",
+        FABLE: "Fable",
+        FABLES_COLLECTION: "Fables - Collection",
+        MULTIPLICATIONS: "Multiplications",
+        NARRATIVE: "Narrative",
+        NOVEL: "Novel",
+        NOVEL_CHILDREN: "Novel - Children",
+        NOVEL_FICTION: "Novel - Fiction",
+        NOVEL_NARRATIVE: "Novel - Narrative",
+        NOVEL_NON_FICTION: "Novel - Non-Fiction",
+        NOVEL_PHILOSOPHICAL: "Novel - Philosophical",
+        NOVEL_ROMANTIC: "Novel - Romantic",
+        NOVEL_THRILLER: "Novel - Thriller",
+        SHORT_STORIES: "Short Stories",
+        SUSPENSE: "Suspense",
+        TALE: "Tale",
+        TALES_COLLECTION: "Tales - Collection",
+        TRAGEDY: "Tragedy",
       },
-      STATE:{
-        BAD:'Bad',
-        REGULAR:'Regular',
-        GOOD:'Good',
-      }
+      STATE: {
+        BAD: "Bad",
+        REGULAR: "Regular",
+        GOOD: "Good",
+      },
     },
   },
 };

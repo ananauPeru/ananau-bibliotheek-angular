@@ -156,6 +156,25 @@ export const locale = {
           CHARACTERS: "Dit veld verwacht minimaal {{value}} karakters.",
           INCORRECT: "Dit veld is niet correct ingevuld.",
         },
+        TOASTS: {
+          SUCCESS: "Geslaagd",
+          ERROR: "Fout",
+          TEXT_SUBMIT_SUCCESS:
+            "Je tekstuele gegevens zijn succesvol verzonden.",
+          TEXT_SAVE_SUCCESS: "Je tekstuele gegevens zijn succesvol opgeslagen.",
+          IMAGE_SUBMIT_SUCCESS:
+            "Je afbeeldingsbestanden zijn succesvol verzonden.",
+          IMAGE_SAVE_SUCCESS:
+            "Je afbeeldingsbestanden zijn succesvol opgeslagen.",
+          TEXT_SUBMIT_ERROR:
+            "Er ging iets mis bij het verzenden van je tekstuele gegevens. Probeer het later nog eens.",
+          TEXT_SAVE_ERROR:
+            "Er ging iets mis bij het opslaan van je tekstuele gegevens. Probeer het later nog eens.",
+          IMAGE_SUBMIT_ERROR:
+            "Er ging iets mis bij het verzenden van je afbeeldingsbestanden. Probeer het later nog eens.",
+          IMAGE_SAVE_ERROR:
+            "Er ging iets mis bij het opslaan van je afbeeldingsbestanden. Probeer het later nog eens.",
+        },
       },
       PERSONAL: {
         TITLE: "Persoonlijke informatie",
