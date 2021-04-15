@@ -10,9 +10,9 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { ToastrService } from "ngx-toastr";
 import { EMPTY, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationService } from "../data-services/registration.service";
 import { FormRole } from "../models/form-role";
 import { RegistrationDTO } from "../_dto/registration-dto";
@@ -61,7 +61,7 @@ export class ContainerComponent implements OnInit {
     private route: ActivatedRoute,
     private cdRef: ChangeDetectorRef,
     private translate: TranslateService,
-    private toastr: ToastrService
+    private toastr: ToastrUtil
   ) {
     this.route.data.subscribe((data) => {
       this.role = data["role"] ? data["role"] : FormRole.VOLUNTEER;
@@ -200,7 +200,7 @@ export class ContainerComponent implements OnInit {
         .postStudentRegistration$(studentDto, submit)
         .subscribe(
           () =>
-            this.toastr.success(
+            this.toastr.showSuccess(
               submit
                 ? this.translate.instant(
                     "REGISTRATION.GENERAL.TOASTS.TEXT_SUBMIT_SUCCESS"
@@ -211,7 +211,7 @@ export class ContainerComponent implements OnInit {
               this.translate.instant("REGISTRATION.GENERAL.TOASTS.SUCCESS")
             ),
           (error) => {
-            this.toastr.error(
+            this.toastr.showError(
               submit
                 ? this.translate.instant(
                     "REGISTRATION.GENERAL.TOASTS.TEXT_SUBMIT_ERROR"
@@ -234,7 +234,7 @@ export class ContainerComponent implements OnInit {
         .postVolunteerRegistration$(dto, submit)
         .subscribe(
           () =>
-            this.toastr.success(
+            this.toastr.showSuccess(
               submit
                 ? this.translate.instant(
                     "REGISTRATION.GENERAL.TOASTS.TEXT_SUBMIT_SUCCESS"
@@ -245,7 +245,7 @@ export class ContainerComponent implements OnInit {
               this.translate.instant("REGISTRATION.GENERAL.TOASTS.SUCCESS")
             ),
           (error) => {
-            this.toastr.error(
+            this.toastr.showError(
               submit
                 ? this.translate.instant(
                     "REGISTRATION.GENERAL.TOASTS.TEXT_SUBMIT_ERROR"

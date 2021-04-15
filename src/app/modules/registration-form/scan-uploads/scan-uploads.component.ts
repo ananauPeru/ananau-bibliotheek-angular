@@ -13,7 +13,7 @@ import { UserStorageService } from "../data-services/user-storage.service";
 import { BlobNamePrefix } from "../models/blob-name-prefix";
 import { ScansFile } from "../models/scans-file";
 import { v4 as uuidv4 } from "uuid";
-import { ToastrService } from "ngx-toastr";
+import { ToastrUtil } from "src/app/_utils/toastr_util";
 
 @Component({
   selector: "app-scan-uploads",
@@ -41,7 +41,7 @@ export class ScanUploadsComponent implements OnInit {
     private fb: FormBuilder,
     private translate: TranslateService,
     private userStorageService: UserStorageService,
-    private toastr: ToastrService
+    private toastr: ToastrUtil
   ) {}
 
   ngOnInit() {
@@ -112,7 +112,7 @@ export class ScanUploadsComponent implements OnInit {
           this.passportPhotoFiles.forEach((file) => (file.isNew = false));
           this.filesToDelete.length = 0;
 
-          this.toastr.success(
+          this.toastr.showSuccess(
             submit
               ? this.translate.instant(
                   "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_SUCCESS"
@@ -125,7 +125,7 @@ export class ScanUploadsComponent implements OnInit {
         })
         .catch((error) => {
           console.error(error);
-          this.toastr.error(
+          this.toastr.showError(
             submit
               ? this.translate.instant(
                   "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_ERROR"
