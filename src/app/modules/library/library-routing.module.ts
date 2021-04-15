@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from '../auth/_services/auth.guard'
-import { CreateComponent } from './create/create.component'
+import { CreateBookComponent } from './create/book/create-book.component'
 import { LibraryComponent } from './library.component'
-import { OverviewComponent } from './overview/overview.component'
+import { OverviewBookComponent } from './overview/book/overview-book.component'
+import { OverviewItemComponent } from './overview/item/overview-item.component'
+import { BookResolver } from './_resolvers/book.resolver'
 
 const routes: Routes = [
   {
@@ -11,16 +13,21 @@ const routes: Routes = [
     component: LibraryComponent,
     canActivate: [AuthGuard],
     data: {
-      permittedRoles: ['Admin','SuperAdmin'],
+      permittedRoles: ['Admin', 'SuperAdmin'],
     },
     children: [
       {
-        path: '',
-        component: OverviewComponent,
+        path: 'books/overview',
+        component: OverviewBookComponent,
       },
       {
-        path: 'add-item',
-        component: CreateComponent,
+        path: 'books/add-book',
+        component: CreateBookComponent,
+      },
+      {
+        path: 'books/edit-book/:id',
+        resolve: {book: BookResolver },
+        component: CreateBookComponent,
       },
       // {
       //   path: 'registration',

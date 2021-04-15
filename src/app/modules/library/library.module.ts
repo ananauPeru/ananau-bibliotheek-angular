@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
+import { CommonModule, DatePipe } from '@angular/common'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 import { TranslationModule } from '../i18n/translation.module'
@@ -45,11 +45,20 @@ import { MatTreeModule } from '@angular/material/tree'
 import { routes } from 'src/app/app-routing.module'
 import { CoreModule } from 'src/app/_metronic/core'
 import { GeneralModule } from 'src/app/_metronic/partials/content/general/general.module'
-import { OverviewComponent } from './overview/overview.component'
-import { CreateComponent } from './create/create.component'
+import { OverviewItemComponent } from './overview/item/overview-item.component'
+import { OverviewBookComponent } from './overview/book/overview-book.component'
+import { CreateItemComponent } from './create/item/create-item.component'
+import { CreateBookComponent } from './create/book/create-book.component'
+import { NgxDropzoneModule } from 'ngx-dropzone'
 
 @NgModule({
-  declarations: [LibraryComponent, OverviewComponent, CreateComponent],
+  declarations: [
+    LibraryComponent,
+    OverviewItemComponent,
+    OverviewBookComponent,
+    CreateItemComponent,
+    CreateBookComponent,
+  ],
   imports: [
     CommonModule,
 
@@ -102,6 +111,8 @@ import { CreateComponent } from './create/create.component'
     HttpClientModule,
     LayoutModule,
     NgbModule,
+    NgxDropzoneModule
   ],
+  providers: [DatePipe],
 })
 export class LibraryModule {}

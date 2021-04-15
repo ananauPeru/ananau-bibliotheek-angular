@@ -30,8 +30,10 @@ export const locale = {
       APPS: "Apps",
       DASHBOARD: "Dashboard",
       LIBRARY: {
-        TITLE: "Library",
-        OVERVIEW: "Overview",
+        TITLE: 'Library',
+        OVERVIEW: 'Overview',
+        BOOKS: 'Books',
+        ADD_BOOK: 'Add Book',
       },
       MANAGEMENT: {
         TITLE: "User management",
@@ -314,6 +316,39 @@ export const locale = {
           "In the case of non-respect to all of the above, you will be subject to civil and criminal liability, for possible damages caused to the association, according to Peruvian law. This confidentiality agreement will be maintained indefinitely, now and in the future, until the association considers it finished, or by dissolution of the same.",
         AGREE: "I agree with the terms mentioned above.",
       },
+    },
+
+    LIBRARY: {
+      OVERVIEW: {
+        ANCIENT_EPIC: 'Ancient Epic',
+        CHILDREN_GAMES: 'Children Games',
+        DRAMATIC: 'Dramatic',
+        DRAMATIC_THRILLER: 'Dramatic - Thriller',
+        EPIC: 'Epic',
+        ESSAY: 'Essay',
+        FABLE: 'Fable',
+        FABLES_COLLECTION: 'Fables - Collection',
+        MULTIPLICATIONS: 'Multiplications',
+        NARRATIVE: 'Narrative',
+        NOVEL: 'Novel',
+        NOVEL_CHILDREN: 'Novel - Children',
+        NOVEL_FICTION: 'Novel - Fiction',
+        NOVEL_NARRATIVE: 'Novel - Narrative',
+        NOVEL_NON_FICTION: 'Novel - Non-Fiction',
+        NOVEL_PHILOSOPHICAL: 'Novel - Philosophical',
+        NOVEL_ROMANTIC: 'Novel - Romantic',
+        NOVEL_THRILLER: 'Novel - Thriller',
+        SHORT_STORIES: 'Short Stories',
+        SUSPENSE: 'Suspense',
+        TALE: 'Tale',
+        TALES_COLLECTION: 'Tales - Collection',
+        TRAGEDY: 'Tragedy',
+      },
+      STATE:{
+        BAD:'Bad',
+        REGULAR:'Regular',
+        GOOD:'Good',
+      }
     },
   },
 };
