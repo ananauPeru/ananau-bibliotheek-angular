@@ -200,6 +200,11 @@ export const locale = {
         TALES_COLLECTION: 'Tales - Collection',
         TRAGEDY: 'Tragedy',
       },
+      STATE:{
+        BAD:'Bad',
+        REGULAR:'Regular',
+        GOOD:'Good',
+      }
     },
   },
 }

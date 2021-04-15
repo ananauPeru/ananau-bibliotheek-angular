@@ -42,7 +42,13 @@ export class BookService {
     )
   }
 
-  filter(filter: any, _category: any, pp: number, p: number, _genre: any) {
+  filter(
+    filter: any,
+    _category: any,
+    // pp: number,
+    // p: number,
+    _genre: any,
+  ) {
     let f = filter.toLowerCase()
     console.log(f)
     let category = undefined
@@ -56,9 +62,11 @@ export class BookService {
       genre = _genre.toLowerCase()
     }
     if (category == undefined) {
+      console.log("FILTERING WITHOUT CATEGORY SET!!!")
       this.books = this._books.pipe(
         map((books) =>
           books.filter((book) => {
+            console.log(book.name.toLowerCase())
             let b =
               book.name.toLowerCase().includes(f) ||
               (book.description
@@ -93,30 +101,26 @@ export class BookService {
       )
     }
 
-    if (genre) {
-      console.log('Filtering for genre')
-      this.books = this._books.pipe(
-        map((books) =>
-          books.filter((book) => {
-            let b = book.genre.toLowerCase().includes(genre)
-            return b
-          }),
-        ),
-      )
-    }
+    // if (genre) {
+    //   console.log('Filtering for genre')
+    //   this.books = this._books.pipe(
+    //     map((books) =>
+    //       books.filter((book) => {
+    //         let b = book.genre.toLowerCase().includes(genre)
+    //         return b
+    //       }),
+    //     ),
+    //   )
+    // }
 
-    this.books = this.books.pipe(
-      map((books) =>
-        books.filter((book, index) => {
-          console.log(index)
-          let i = index < pp * p && index >= pp * (p - 1)
-          return i
-        }),
-      ),
-    )
-  }
-
-  paginate(pp: any, p: any) {
-    console.log(this.books[0])
+    // this.books = this.books.pipe(
+    //   map((books) =>
+    //     books.filter((book, index) => {
+    //       console.log(index)
+    //       let i = index < pp * p && index >= pp * (p - 1)
+    //       return i
+    //     }),
+    //   ),
+    // )
   }
 }

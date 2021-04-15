@@ -3,7 +3,7 @@ import { UserModel } from '../../auth'
 import { ItemPieceModel } from './item-piece.model'
 
 export class BookModel {
-  id: number
+  bookId: number
   user: UserModel
   category: string
   genre: string
@@ -15,6 +15,7 @@ export class BookModel {
   deleted: boolean
   pieces: ItemPieceModel[]
   photoUrl: string
+  purchasedAt: Date
   createdAt: Date
   updatedAt: Date
 

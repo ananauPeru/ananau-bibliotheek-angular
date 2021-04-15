@@ -9,7 +9,12 @@
     <div class="card-header">
         <div class="card-title">
             <h3 class="card-label">
-                Create New Book
+                <ng-container *ngIf="book; else elseTemplate">
+                    Edit Book
+                </ng-container>
+                <ng-template #elseTemplate>
+                    Create New Book
+                </ng-template>
             </h3>
         </div>
         <div class="card-toolbar">
@@ -68,7 +73,7 @@
             </div>
             <div class="form-group row">
                 <!--begin::Form group-->
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-4">
                     <label>
                         Purchased at
                     </label>
@@ -87,14 +92,13 @@
                         Purchase date is required
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
+                <div class="col-6 col-md-4">
                     <label>Genre</label>
-                    <select class="form-control form-control-lg form-control-solid" name="genre"
-                        formControlName="genre" aria-placeholder="Genre"
-                        [class.is-invalid]="isControlInvalid('genre')" [class.is-valid]="isControlValid('genre')"
-                        required>
+                    <select class="form-control form-control-lg form-control-solid" name="genre" formControlName="genre"
+                        aria-placeholder="Genre" [class.is-invalid]="isControlInvalid('genre')"
+                        [class.is-valid]="isControlValid('genre')" required>
                         <option value="">Choose Genre</option>
-                        <option *ngFor="let enum of BookCategories | keyvalue" value="{{enum.key}}">
+                        <option *ngFor="let enum of BookCategories | keyvalue" value="{{enum.key.toUpperCase()}}">
                             {{enum.value | translate }}
                         </option>
                     </select>
@@ -103,44 +107,53 @@
                         Genre is required
                     </div>
                 </div>
+                <div class="col-6 col-md-4">
+                    <label>State</label>
+                    <select class="form-control form-control-lg form-control-solid" name="state" formControlName="state"
+                        aria-placeholder="State" [class.is-invalid]="isControlInvalid('state')"
+                        [class.is-valid]="isControlValid('state')" required>
+                        <option value="">Select State</option>
+                        <option value="BAD">
+                            {{"LIBRARY.STATE.BAD" | translate }}
+                        </option>
+                        <option value="REGULAR">
+                            {{"LIBRARY.STATE.REGULAR" | translate }}
+                        </option>
+                        <option value="GOOD">
+                            {{"LIBRARY.STATE.GOOD" | translate }}
+                        </option>
+                    </select>
+                    <div class="feedback" *ngIf="!isControlTouched('state')">Please select the <b>State of the book.</b>
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'state')">
+                        State is required
+                    </div>
+                </div>
             </div>
             <div class="form-group row">
                 <label class="col-12">Upload a photo for this Book</label>
                 <div class="col-12">
-                  <div
-                    class="custom-dropzone form-control form-control-solid border"
-                    ngx-dropzone
-                    [accept]="'image/*'"
-                    (change)="onSelectBookImage($event)"
-                    required
-                  >
-                    <ngx-dropzone-label>
-                      <p class="form-text text-muted">
-                        Drop your file(s) here or click to select your file(s).
-                      </p>
-                    </ngx-dropzone-label>
-                    <ngx-dropzone-image-preview
-                      ngProjectAs="ngx-dropzone-preview"
-                      *ngFor="let f of bookImages"
-                      [file]="f"
-                      [removable]="true"
-                      (removed)="onRemoveBookImage(f)"
-                    >
-                    </ngx-dropzone-image-preview>
-                  </div>
-                  <div
-                    *ngIf="
+                    <div class="custom-dropzone form-control form-control-solid border" ngx-dropzone
+                        [accept]="'image/*'" (change)="onSelectBookImage($event)" required>
+                        <ngx-dropzone-label>
+                            <p class="form-text text-muted">
+                                Drop your file(s) here or click to select your file(s).
+                            </p>
+                        </ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of bookImages"
+                            [file]="f" [removable]="true" (removed)="onRemoveBookImage(f)">
+                        </ngx-dropzone-image-preview>
+                    </div>
+                    <div *ngIf="
                       formGroup.get('bookImage')['errors'] &&
                       formGroup.get('bookImage').touched
-                    "
-                    class="text-danger form-text"
-                  >
-                    <!-- {{
+                    " class="text-danger form-text">
+                        <!-- {{
                       getErrorMessage(scansForm.get("internationalPassport")["errors"])
                     }} -->
-                  </div>
+                    </div>
                 </div>
-              </div>
+            </div>
             <!-- <div class="form-group row">
                 <div class="col-lg-4">
                     <label>Enter Mileage</label>
@@ -255,9 +268,14 @@
                     placeholder="Describe the item..."></textarea>
             </div>
             <div class="float-right">
-                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library">Cancel</a>
+                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library/overview">Cancel</a>
                 <button type="submit" class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
-                    Save
+                    <ng-container *ngIf="book; else elseTemplate">
+                        Save Changes
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        Create
+                    </ng-template>
                 </button>
             </div>
         </form>

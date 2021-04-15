@@ -112,7 +112,7 @@ export class ItemService {
     this.items = this.items.pipe(
       map((items) =>
         items.filter((item, index) => {
-          console.log(index)
+          // console.log(index)
           let i = index < pp * p && index >= pp * (p - 1)
           return i
         }),

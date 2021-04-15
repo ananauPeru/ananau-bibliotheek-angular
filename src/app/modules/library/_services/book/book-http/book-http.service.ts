@@ -45,10 +45,52 @@ export class BookHTTPService {
         }
         return throwError(error)
       }),
-      map((book: any): BookModel => {
-        console.log(book)
-        return book
-      }),
+      map(
+        (book: any): BookModel => {
+          console.log(book)
+          return book
+        },
+      ),
     )
+  }
+
+  edit(id: number, book: BookDTO): Observable<BookModel> {
+    console.log(id)
+    console.log(book)
+    return this.http.put<BookModel>(`${API_ITEMS_URL}/${id}`, book).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.log('Login please...')
+        }
+        return throwError(error)
+      }),
+      map(
+        (book: any): BookModel => {
+          console.log(book)
+          return book
+        },
+      ),
+    )
+  }
+
+  getItemById(id: number): Observable<BookModel> {
+    return this.http
+      .get(`${API_ITEMS_URL}/getById/${id}`, {
+        responseType: 'json',
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.log('Login please...')
+          }
+          return throwError(error)
+        }),
+        map(
+          (book: any): BookModel => {
+            console.log(book)
+            return book
+          },
+        ),
+      )
   }
 }

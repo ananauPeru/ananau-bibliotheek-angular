@@ -5,6 +5,7 @@ import { CreateBookComponent } from './create/book/create-book.component'
 import { LibraryComponent } from './library.component'
 import { OverviewBookComponent } from './overview/book/overview-book.component'
 import { OverviewItemComponent } from './overview/item/overview-item.component'
+import { BookResolver } from './_resolvers/book.resolver'
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
       },
       {
         path: 'books/add-book',
+        component: CreateBookComponent,
+      },
+      {
+        path: 'books/edit-book/:id',
+        resolve: {book: BookResolver },
         component: CreateBookComponent,
       },
       // {

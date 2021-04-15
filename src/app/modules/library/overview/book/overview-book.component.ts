@@ -8,9 +8,11 @@ import { ItemService } from '../../_services/item/item.service'
 import { AuthUtil } from '../../../../_utils/auth_util'
 import { BookCategories } from '../../_models/book-categories.enum'
 import { Categories } from '../../_models/categories.enum'
-import { timer } from 'rxjs'
+import { Observable, timer } from 'rxjs'
 import { EducationalCategories } from '../../_models/educational-categories.enum'
 import { BookService } from '../../_services/book/book.service'
+import { BookModel } from '../../_models/book.model'
+import { map } from 'rxjs/operators'
 
 export interface UserData {
   id: string
@@ -84,7 +86,7 @@ function createNewUser(id: number): UserData {
 })
 export class OverviewBookComponent implements OnInit {
   private itemsPerPage: number = 5
-  private page: number = 1
+  public page: number = 0
   public Categories = Categories
   public BookCategories = BookCategories
   public EducationalCategories = EducationalCategories
@@ -142,8 +144,8 @@ export class OverviewBookComponent implements OnInit {
     this.bookService.filter(
       filterValue,
       this.category,
-      this.itemsPerPage,
-      this.page,
+      // this.itemsPerPage,
+      // this.page,
       this.genre,
     )
   }
@@ -162,8 +164,8 @@ export class OverviewBookComponent implements OnInit {
     this.bookService.filter(
       this.dataSource7.filter,
       this.category,
-      this.itemsPerPage,
-      this.page,
+      // this.itemsPerPage,
+      // this.page,
       this.genre,
     )
   }
@@ -182,8 +184,8 @@ export class OverviewBookComponent implements OnInit {
     this.bookService.filter(
       this.dataSource7.filter,
       this.category,
-      this.itemsPerPage,
-      this.page,
+      // this.itemsPerPage,
+      // this.page,
       this.genre,
     )
   }
@@ -215,6 +217,7 @@ export class OverviewBookComponent implements OnInit {
     console.log(event.pageIndex)
     console.log(event.pageSize)
     this.itemsPerPage = event.pageSize
+    this.page = event.pageIndex
     this.paginate()
     // The code that you want to execute on clicking on next and previous buttons will be written here.
   }
@@ -224,14 +227,30 @@ export class OverviewBookComponent implements OnInit {
     this.paginate()
   }
 
-  paginate() {
-    this.bookService.filter(
-      this.dataSource7.filter,
-      this.category,
-      this.itemsPerPage,
-      this.page,
-      this.genre,
+  paginate(): Observable<BookModel[]> {
+    // let booklist = this.bookService.filter(
+    //   this.dataSource7.filter,
+    //   this.category,
+    //   // this.itemsPerPage,
+    //   // this.page,
+    //   this.genre,
+    // )
+
+    let bookList = this.bookService.books.pipe(
+      map((books) =>
+        books.filter((book, index) => {
+          // console.log(index)
+          let i =
+            index > this.itemsPerPage * this.page &&
+            index <= this.itemsPerPage * (this.page + 1)
+          return i
+        }),
+      ),
     )
+
+    console.log(bookList)
+
+    return bookList
   }
 
   showError() {
