@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, ValidationErrors } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
 import { RegistrationDTO } from "../_dto/registration-dto";
@@ -19,9 +20,8 @@ export class QuestionsComponent implements OnInit {
   }>();
   @Input() public role: FormRole;
   @Input() public initialData: RegistrationDTO;
-  getErrorMessage = ContainerComponent.getErrorMessage;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private translate: TranslateService) {}
 
   ngOnInit() {
     this.questionsForm = this.fb.group({
@@ -35,6 +35,10 @@ export class QuestionsComponent implements OnInit {
 
     // When the form is changed, the parent form is also updated
     this.questionsForm.valueChanges.subscribe(() => this.emitForm());
+  }
+
+  getErrorMessage(errors: ValidationErrors): string {
+    return ContainerComponent.getErrorMessage(errors, this.translate);
   }
 
   private emitForm() {

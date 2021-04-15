@@ -1,12 +1,18 @@
 <div class="my-2">
-  <h3 class="text-dark font-weight-bold mb-10">Personal information</h3>
+  <h3 class="text-dark font-weight-bold mb-10">
+    {{ "REGISTRATION.PERSONAL.TITLE" | translate }}
+  </h3>
   <!-- general -->
   <div class="my-2">
-    <h4 class="text-dark font-weight-bold mb-4">General</h4>
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.PERSONAL.GENERAL.TITLE" | translate }}
+    </h4>
     <form [formGroup]="personalForm.controls.general">
       <!-- first name -->
       <div class="form-group row">
-        <label for="generalFirstName" class="col-3">First Name</label>
+        <label for="generalFirstName" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.FIRST_NAME" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -31,7 +37,9 @@
       </div>
       <!-- middle name -->
       <div class="form-group row">
-        <label for="generalMiddleName" class="col-3">Middle name</label>
+        <label for="generalMiddleName" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.MIDDLE_NAME" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -55,7 +63,9 @@
       </div>
       <!-- last name -->
       <div class="form-group row">
-        <label for="generalLastName" class="col-3">Last name</label>
+        <label for="generalLastName" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.LAST_NAME" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -80,7 +90,9 @@
       </div>
       <!-- email -->
       <div class="form-group row">
-        <label for="generalEmail" class="col-3">Email</label>
+        <label for="generalEmail" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.EMAIL" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -92,7 +104,9 @@
       </div>
       <!-- school email -->
       <div *ngIf="role === 'Student'" class="form-group row">
-        <label for="generalSchoolEmail" class="col-3">School email</label>
+        <label for="generalSchoolEmail" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.SCHOOL_EMAIL" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -118,7 +132,9 @@
       </div>
       <!-- phone -->
       <div class="form-group row">
-        <label for="generalPhone" class="col-3">Phone number</label>
+        <label for="generalPhone" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.PHONE" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -143,7 +159,9 @@
       </div>
       <!-- date of birth -->
       <div class="form-group row">
-        <label for="generalBirthdate" class="col-3">Date of birth</label>
+        <label for="generalBirthdate" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.BIRTH_DATE" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -170,7 +188,9 @@
       </div>
       <!-- birthplace -->
       <div class="form-group row">
-        <label for="generalBirthplace" class="col-3">Birthplace</label>
+        <label for="generalBirthplace" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.BIRTHPLACE" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -195,7 +215,9 @@
       </div>
       <!-- nationality -->
       <div class="form-group row">
-        <label for="generalNationality" class="col-3">Nationality</label>
+        <label for="generalNationality" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.NATIONALITY" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -220,7 +242,9 @@
       </div>
       <!-- passport number -->
       <div class="form-group row">
-        <label for="generalPassportNumber" class="col-3">Passport number</label>
+        <label for="generalPassportNumber" class="col-3">{{
+          "REGISTRATION.PERSONAL.GENERAL.PASSPORT" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -248,11 +272,15 @@
   <div class="separator separator-dashed my-10"></div>
   <!-- address -->
   <div class="my-2">
-    <h4 class="text-dark font-weight-bold mb-4">Address</h4>
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.PERSONAL.ADDRESS.TITLE" | translate }}
+    </h4>
     <form [formGroup]="personalForm.controls.address">
       <!-- street -->
       <div class="form-group row">
-        <label for="addressStreet" class="col-3">Street</label>
+        <label for="addressStreet" class="col-3">{{
+          "REGISTRATION.PERSONAL.ADDRESS.STREET" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -277,7 +305,9 @@
       </div>
       <!-- house number -->
       <div class="form-group row">
-        <label for="addressHouseNumber" class="col-3">House number</label>
+        <label for="addressHouseNumber" class="col-3">{{
+          "REGISTRATION.PERSONAL.ADDRESS.NUMBER" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -302,7 +332,9 @@
       </div>
       <!-- mailbox -->
       <div class="form-group row">
-        <label for="addressMailbox" class="col-3">Mailbox</label>
+        <label for="addressMailbox" class="col-3">{{
+          "REGISTRATION.PERSONAL.ADDRESS.MAILBOX" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -326,7 +358,9 @@
       </div>
       <!-- postal code -->
       <div class="form-group row">
-        <label for="addressPostalCode" class="col-3">Postal code</label>
+        <label for="addressPostalCode" class="col-3">{{
+          "REGISTRATION.PERSONAL.ADDRESS.POSTAL_CODE" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -351,7 +385,9 @@
       </div>
       <!-- township -->
       <div class="form-group row">
-        <label for="addressTownship" class="col-3">Township</label>
+        <label for="addressTownship" class="col-3">{{
+          "REGISTRATION.PERSONAL.ADDRESS.TOWNSHIP" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -376,7 +412,9 @@
       </div>
       <!-- country -->
       <div class="form-group row">
-        <label for="addressCountry" class="col-3">Country</label>
+        <label for="addressCountry" class="col-3">{{
+          "REGISTRATION.PERSONAL.ADDRESS.COUNTRY" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -404,15 +442,18 @@
   <div class="separator separator-dashed my-10"></div>
   <!-- contact person -->
   <div class="my-2">
-    <h4 class="text-dark font-weight-bold mb-4">Contact person</h4>
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.PERSONAL.CONTACT_PERSON.TITLE" | translate }}
+    </h4>
     <p class="text-muted mb-4">
-      Your contact person is the person we should be able to contact in case of
-      an emergency.
+      {{ "REGISTRATION.PERSONAL.CONTACT_PERSON.INFO" | translate }}
     </p>
     <form [formGroup]="personalForm.controls.contactPerson">
       <!-- first name contact -->
       <div class="form-group row">
-        <label for="contactPersonFirstName" class="col-3">First name</label>
+        <label for="contactPersonFirstName" class="col-3">{{
+          "REGISTRATION.PERSONAL.CONTACT_PERSON.FIRST_NAME" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -437,7 +478,9 @@
       </div>
       <!-- middle name contact -->
       <div class="form-group row">
-        <label for="contactPersonMiddleName" class="col-3">Middle name</label>
+        <label for="contactPersonMiddleName" class="col-3">{{
+          "REGISTRATION.PERSONAL.CONTACT_PERSON.MIDDLE_NAME" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -461,7 +504,9 @@
       </div>
       <!-- last name contact -->
       <div class="form-group row">
-        <label for="contactPersonLastName" class="col-3">Last name</label>
+        <label for="contactPersonLastName" class="col-3">{{
+          "REGISTRATION.PERSONAL.CONTACT_PERSON.LAST_NAME" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -486,7 +531,9 @@
       </div>
       <!-- relation -->
       <div class="form-group row">
-        <label for="contactPersonRelation" class="col-3">Relation</label>
+        <label for="contactPersonRelation" class="col-3">{{
+          "REGISTRATION.PERSONAL.CONTACT_PERSON.RELATION" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -511,7 +558,9 @@
       </div>
       <!-- email contact -->
       <div class="form-group row">
-        <label for="contactPersonEmail" class="col-3">Email</label>
+        <label for="contactPersonEmail" class="col-3">{{
+          "REGISTRATION.PERSONAL.CONTACT_PERSON.EMAIL" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -537,7 +586,9 @@
       </div>
       <!-- phone contact -->
       <div class="form-group row">
-        <label for="contactPersonPhone" class="col-3">Phone number</label>
+        <label for="contactPersonPhone" class="col-3">{{
+          "REGISTRATION.PERSONAL.CONTACT_PERSON.PHONE" | translate
+        }}</label>
         <div class="col-9">
           <input
             class="form-control form-control-solid"
@@ -565,11 +616,15 @@
   <div class="separator separator-dashed my-10"></div>
   <!-- medical details -->
   <div class="my-2">
-    <h4 class="text-dark font-weight-bold mb-4">Medical details</h4>
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.PERSONAL.MEDICAL.TITLE" | translate }}
+    </h4>
     <form [formGroup]="personalForm.controls.medical">
       <!-- allergies -->
       <div class="form-group row">
-        <label for="medicalAllergies" class="col-3">Allergies</label>
+        <label for="medicalAllergies" class="col-3">{{
+          "REGISTRATION.PERSONAL.MEDICAL.ALLERGIES" | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -594,7 +649,9 @@
       </div>
       <!-- medical conditions -->
       <div class="form-group row">
-        <label for="medicalConditions" class="col-3">Medical conditions</label>
+        <label for="medicalConditions" class="col-3">{{
+          "REGISTRATION.PERSONAL.MEDICAL.CONDITIONS" | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"

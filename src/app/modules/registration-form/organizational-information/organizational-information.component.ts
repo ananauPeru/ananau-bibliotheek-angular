@@ -1,6 +1,12 @@
 import { DatePipe } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
 import { RegistrationDTO } from "../_dto/registration-dto";
@@ -21,9 +27,12 @@ export class OrganizationalInformationComponent implements OnInit {
   }>();
   @Input() public role: FormRole;
   @Input() public initialData: RegistrationDTO;
-  getErrorMessage = ContainerComponent.getErrorMessage;
 
-  constructor(private fb: FormBuilder, private datePipe: DatePipe) {}
+  constructor(
+    private fb: FormBuilder,
+    private datePipe: DatePipe,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     this.organizationalForm = this.fb.group({
@@ -110,6 +119,10 @@ export class OrganizationalInformationComponent implements OnInit {
 
     // When the form is changed, the parent form is also updated
     this.organizationalForm.valueChanges.subscribe(() => this.emitForm());
+  }
+
+  getErrorMessage(errors: ValidationErrors): string {
+    return ContainerComponent.getErrorMessage(errors, this.translate);
   }
 
   private emitForm() {
