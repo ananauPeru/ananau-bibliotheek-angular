@@ -4,8 +4,15 @@ import { FormGroup } from '@angular/forms'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
-import { ItemService } from '../_services/item.service'
-import { AuthUtil } from '../../../_utils/auth_util'
+import { ItemService } from '../../_services/item/item.service'
+import { AuthUtil } from '../../../../_utils/auth_util'
+import { BookCategories } from '../../_models/book-categories.enum'
+import { Categories } from '../../_models/categories.enum'
+import { Observable, timer } from 'rxjs'
+import { EducationalCategories } from '../../_models/educational-categories.enum'
+import { BookService } from '../../_services/book/book.service'
+import { BookModel } from '../../_models/book.model'
+import { map } from 'rxjs/operators'
 
 export interface UserData {
   id: string
@@ -74,12 +81,16 @@ function createNewUser(id: number): UserData {
 
 @Component({
   selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
+  templateUrl: './overview-book.component.html',
+  styleUrls: ['./overview-book.component.scss'],
 })
-export class OverviewComponent extends AuthUtil implements OnInit {
+export class OverviewBookComponent implements OnInit {
   private itemsPerPage: number = 5
-  private page: number = 1
+  public page: number = 0
+  public Categories = Categories
+  public BookCategories = BookCategories
+  public EducationalCategories = EducationalCategories
+  public showErrorGenre: boolean = false
 
   // MatPaginator Output
   pageEvent: PageEvent
@@ -88,6 +99,7 @@ export class OverviewComponent extends AuthUtil implements OnInit {
   displayedColumns7: string[] = ['id', 'name', 'description', 'color']
 
   category: string = undefined
+  genre: string = undefined
 
   @ViewChild('matPaginator7', { static: true }) paginator7: MatPaginator
   @ViewChild('sort7', { static: true }) sort7: MatSort
@@ -96,8 +108,12 @@ export class OverviewComponent extends AuthUtil implements OnInit {
 
   ngAfterViewInit() {}
 
-  constructor(private http: HttpClient, public itemService: ItemService) {
-    super()
+  constructor(
+    private http: HttpClient,
+    public bookService: BookService,
+    public AuthUtil: AuthUtil,
+  ) {
+    // super()
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1))
 
     // Assign the data to the data source for the table to render
@@ -105,7 +121,7 @@ export class OverviewComponent extends AuthUtil implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.itemService.items)
+    console.log(this.bookService.books)
 
     console.log('Library Module main component')
 
@@ -125,15 +141,18 @@ export class OverviewComponent extends AuthUtil implements OnInit {
     //   this.dataSource7.paginator.firstPage()
     // }
 
-    this.itemService.filter(
+    this.bookService.filter(
       filterValue,
       this.category,
-      this.itemsPerPage,
-      this.page,
+      // this.itemsPerPage,
+      // this.page,
+      this.genre,
     )
   }
 
   applyCategory(category: string) {
+    this.showErrorGenre = false
+
     if (category.length > 0) {
       this.category = category
     } else {
@@ -142,11 +161,32 @@ export class OverviewComponent extends AuthUtil implements OnInit {
 
     console.log(this.category)
 
-    this.itemService.filter(
+    this.bookService.filter(
       this.dataSource7.filter,
       this.category,
-      this.itemsPerPage,
-      this.page,
+      // this.itemsPerPage,
+      // this.page,
+      this.genre,
+    )
+  }
+
+  applyGenre(genre: string) {
+    this.showErrorGenre = false
+
+    if (genre.length > 0) {
+      this.genre = genre
+    } else {
+      this.genre = undefined
+    }
+
+    console.log(this.genre)
+
+    this.bookService.filter(
+      this.dataSource7.filter,
+      this.category,
+      // this.itemsPerPage,
+      // this.page,
+      this.genre,
     )
   }
 
@@ -174,25 +214,56 @@ export class OverviewComponent extends AuthUtil implements OnInit {
   // }
 
   pageEvents(event: any) {
-    console.log(event.pageIndex);
-    console.log(event.pageSize);
+    console.log(event.pageIndex)
+    console.log(event.pageSize)
     this.itemsPerPage = event.pageSize
+    this.page = event.pageIndex
     this.paginate()
     // The code that you want to execute on clicking on next and previous buttons will be written here.
- }
- 
+  }
 
   setPage(p: number) {
     this.page = p
     this.paginate()
   }
 
-  paginate() {
-    this.itemService.filter(
-      this.dataSource7.filter,
-      this.category,
-      this.itemsPerPage,
-      this.page,
+  paginate(): Observable<BookModel[]> {
+    // let booklist = this.bookService.filter(
+    //   this.dataSource7.filter,
+    //   this.category,
+    //   // this.itemsPerPage,
+    //   // this.page,
+    //   this.genre,
+    // )
+
+    let bookList = this.bookService.books.pipe(
+      map((books) =>
+        books.filter((book, index) => {
+          // console.log(index)
+          let i =
+            index > this.itemsPerPage * this.page &&
+            index <= this.itemsPerPage * (this.page + 1)
+          return i
+        }),
+      ),
     )
+
+    console.log(bookList)
+
+    return bookList
+  }
+
+  showError() {
+    // set showloader to true to show loading div on view
+    this.showErrorGenre = true
+    console.log('SHOW ERROR')
+
+    let _timer = timer(3000) // 5000 millisecond means 5 seconds
+    let subscription = _timer.subscribe(() => {
+      // set showloader to false to hide loading div from view after 5 seconds
+      console.log('5 seconds passed')
+      this.showErrorGenre = false
+      console.log(this.showErrorGenre)
+    })
   }
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Observable, of, throwError } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from '../../../../../environments/environment'
+import { environment } from '../../../../../../environments/environment'
 import { catchError, finalize, map } from 'rxjs/operators'
-import { ItemModel } from '../../_models/item.model'
-import { ItemDTO } from '../../_dto/item-dto'
+import { ItemModel } from '../../../_models/item.model'
+import { ItemDTO } from '../../../_dto/item-dto'
 
 const API_ITEMS_URL = `${environment.apiUrl}/item`
 
@@ -37,10 +37,15 @@ export class ItemHTTPService {
   // server should return the object with ID
   create(item: ItemDTO): Observable<ItemModel> {
     return this.http.post<ItemModel>(`${API_ITEMS_URL}`, item).pipe(
-      catchError((err) => {
-        console.error('CREATE ITEM', err)
-        // return of({ id: undefined })
-        return of(null)
+      catchError((error) => {
+        if (error.status == 401) {
+          console.log('Login please...')
+        }
+        return throwError(error)
+      }),
+      map((item: any): ItemModel => {
+        console.log(item)
+        return item
       }),
     )
   }

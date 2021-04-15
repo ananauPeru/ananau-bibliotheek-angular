@@ -48,3 +48,6 @@ Thumbs.db
 
 # Metronic files
 /Metronic
+
+# Old files
+/src/app_old

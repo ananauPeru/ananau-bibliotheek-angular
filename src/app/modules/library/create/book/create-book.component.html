@@ -1,0 +1,296 @@
+<div class="card card-custom gutter-b">
+    <!-- <ng-container *ngIf="isLoading$ | async">
+        <div class="progress progress-modal">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+                style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </ng-container> -->
+
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">
+                <ng-container *ngIf="book; else elseTemplate">
+                    Edit Book
+                </ng-container>
+                <ng-template #elseTemplate>
+                    Create New Book
+                </ng-template>
+            </h3>
+        </div>
+        <div class="card-toolbar">
+            <a type="button" class="btn btn-light" routerLink="/library">
+                <i class="fa fa-arrow-left"></i>Back
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+
+
+        <form action="#" class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="save()">
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
+                    <label>Title</label>
+                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                        placeholder="Title" name='name' [class.is-invalid]="isControlInvalid('name')"
+                        [class.is-valid]="isControlValid('name')" formControlName='name' required />
+                    <div class="feedback" *ngIf="!isControlTouched('name')">
+                        Please enter <b>the Title of the book.</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('name')">
+                        <!-- Name was entered correct -->
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">
+                        Title is required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">
+                        Title should have at least 3 symbols
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">
+                        Title should have maximum 100 symbols
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label>Author</label>
+                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                        placeholder="Author" name='author' [class.is-invalid]="isControlInvalid('author')"
+                        [class.is-valid]="isControlValid('author')" formControlName='author' required />
+                    <div class="feedback" *ngIf="!isControlTouched('author')">
+                        Please enter <b>the Author of the book.</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('author')">
+                        <!-- Brand was entered correct -->
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'author')">
+                        Author is required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'author')">
+                        Author should have at least 3 symbols
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'author')">
+                        Author should have maximum 100 symbols
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <!--begin::Form group-->
+                <div class="col-12 col-md-4">
+                    <label>
+                        Purchased at
+                    </label>
+                    <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()"
+                        placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" name="purchasedAt"
+                        formControlName="purchasedAt" placeholder="2000-01-01" autocomplete="off"
+                        [class.is-invalid]="isControlInvalid('purchasedAt')"
+                        [class.is-valid]="isControlValid('purchasedAt')" required />
+                    <div class="feedback" *ngIf="!isControlTouched('purchasedAt')">
+                        Please enter <b>the Purchase Date of the book.</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('purchasedAt')">
+                        <!-- Brand was entered correct -->
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'purchasedAt')">
+                        Purchase date is required
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <label>Genre</label>
+                    <select class="form-control form-control-lg form-control-solid" name="genre" formControlName="genre"
+                        aria-placeholder="Genre" [class.is-invalid]="isControlInvalid('genre')"
+                        [class.is-valid]="isControlValid('genre')" required>
+                        <option value="">Choose Genre</option>
+                        <option *ngFor="let enum of BookCategories | keyvalue" value="{{enum.key.toUpperCase()}}">
+                            {{enum.value | translate }}
+                        </option>
+                    </select>
+                    <div class="feedback" *ngIf="!isControlTouched('genre')">Please select a <b>Genre.</b></div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'genre')">
+                        Genre is required
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <label>State</label>
+                    <select class="form-control form-control-lg form-control-solid" name="state" formControlName="state"
+                        aria-placeholder="State" [class.is-invalid]="isControlInvalid('state')"
+                        [class.is-valid]="isControlValid('state')" required>
+                        <option value="">Select State</option>
+                        <option value="BAD">
+                            {{"LIBRARY.STATE.BAD" | translate }}
+                        </option>
+                        <option value="REGULAR">
+                            {{"LIBRARY.STATE.REGULAR" | translate }}
+                        </option>
+                        <option value="GOOD">
+                            {{"LIBRARY.STATE.GOOD" | translate }}
+                        </option>
+                    </select>
+                    <div class="feedback" *ngIf="!isControlTouched('state')">Please select the <b>State of the book.</b>
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'state')">
+                        State is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-12">Upload a photo for this Book</label>
+                <div class="col-12">
+                    <div class="custom-dropzone form-control form-control-solid border" ngx-dropzone
+                        [accept]="'image/*'" (change)="onSelectBookImage($event)" required>
+                        <ngx-dropzone-label>
+                            <p class="form-text text-muted">
+                                Drop your file(s) here or click to select your file(s).
+                            </p>
+                        </ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of bookImages"
+                            [file]="f" [removable]="true" (removed)="onRemoveBookImage(f)">
+                        </ngx-dropzone-image-preview>
+                    </div>
+                    <div *ngIf="
+                      formGroup.get('bookImage')['errors'] &&
+                      formGroup.get('bookImage').touched
+                    " class="text-danger form-text">
+                        <!-- {{
+                      getErrorMessage(scansForm.get("internationalPassport")["errors"])
+                    }} -->
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="form-group row">
+                <div class="col-lg-4">
+                    <label>Enter Mileage</label>
+                    <input type="number" class="form-control form-control-lg form-control-solid" placeholder="Mileage"
+                        name="mileage" [class.is-invalid]="isControlInvalid('mileage')"
+                        [class.is-valid]="isControlValid('mileage')" formControlName="mileage" />
+                    <div class="feedback" *ngIf="!isControlTouched('mileage')">
+                        Please enter <b>Mileage</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('mileage')">
+                        Mileage was entered correct
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'mileage')">
+                        Mileage is required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'mileage')">
+                        Mileage should have at least 1 symbol
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'mileage')">
+                        Mileage year should have maximum 100 symbols
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label>Select Color</label>
+                    <select class="form-control form-control-lg form-control-solid" name="color"
+                        formControlName="color">
+                        <option value="Red">Red</option>
+                        <option value="CadetBlue">CadetBlue</option>
+                        <option value="Eagle">Eagle</option>
+                        <option value="Gold">Gold</option>
+                        <option value="LightSlateGrey">LightSlateGrey</option>
+                        <option value="RoyalBlue">RoyalBlue</option>
+                        <option value="Crimson">Crimson</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Sienna">Sienna</option>
+                        <option value="Indigo">Indigo</option>
+                        <option value="Green">Green</option>
+                        <option value="Violet">Violet</option>
+                        <option value="GoldenRod">GoldenRod</option>
+                        <option value="OrangeRed">OrangeRed</option>
+                        <option value="Khaki">Khaki</option>
+                        <option value="Teal">Teal</option>
+                        <option value="Purple">Purple</option>
+                        <option value="Orange">Orange</option>
+                        <option value="Pink">Pink</option>
+                        <option value="Black">Black</option>
+                        <option value="DarkTurquoise">DarkTurquoise</option>
+                    </select>
+                    <div class="feedback">Please select <b>Color</b></div>
+                </div>
+                <div class="col-lg-4">
+                    <label>Enter Price ($)</label>
+                    <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                        placeholder="Price" name="price" [class.is-invalid]="isControlInvalid('price')"
+                        [class.is-valid]="isControlValid('price')" formControlName="price" />
+                    <div class="feedback" *ngIf="!isControlTouched('price')">
+                        Please enter <b>Price</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('price')">
+                        Price was entered correct
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'price')">
+                        Price is required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'price')">
+                        Price should have at least 3 symbols
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'price')">
+                        Price should have maximum 100 symbols
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-4">
+                    <label>Enter VIN code</label>
+                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                        placeholder="VIN Code" name="VINCode" [class.is-invalid]="isControlInvalid('VINCode')"
+                        [class.is-valid]="isControlValid('VINCode')" formControlName="VINCode" />
+                    <div class="feedback" *ngIf="!isControlTouched('VINCode')">
+                        Please enter <b>VIN code</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('VINCode')">
+                        VIN code was entered correct
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'VINCode')">
+                        VIN code is required
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label>Select Status</label>
+                    <select class="form-control form-control-lg form-control-solid" name="status"
+                        formControlName="status">
+                        <option value="1">Selling</option>
+                        <option value="2">Sold</option>
+                    </select>
+                    <div class="feedback">Please select <b>Status</b></div>
+                </div>
+                <div class="col-lg-4">
+                    <label>Select Condition</label>
+                    <select class="form-control form-control-lg form-control-solid" name="condition"
+                        formControlName="condition">
+                        <option value="1">New</option>
+                        <option value="2">Used</option>
+                    </select>
+                    <div class="feedback">Please select <b>Condition</b></div>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" class="form-control form-control-lg form-control-solid"
+                    formControlName="description" style="min-height: 250px; padding:13px"
+                    placeholder="Describe the item..."></textarea>
+            </div>
+            <div class="float-right">
+                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library/overview">Cancel</a>
+                <button type="submit" class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
+                    <ng-container *ngIf="book; else elseTemplate">
+                        Save Changes
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        Create
+                    </ng-template>
+                </button>
+            </div>
+        </form>
+
+
+        <!-- <ng-container
+        *ngIf="activeTabId === tabs.REMARKS_TAB && product && product.id"
+      >
+        <app-remarks [productId]="product.id"></app-remarks>
+      </ng-container>
+  
+      <ng-container
+        *ngIf="activeTabId === tabs.SPECIFICATIONS_TAB && product && product.id"
+      >
+        <app-specifications [productId]="product.id"></app-specifications>
+      </ng-container> -->
+    </div>
+</div>
