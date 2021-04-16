@@ -23,7 +23,7 @@
         <div
           class="custom-dropzone form-control form-control-solid border"
           ngx-dropzone
-          [accept]="'image/*'"
+          [accept]="'image/*,.pdf'"
           (change)="onSelectInternationalPassportFile($event)"
           required
         >
@@ -35,7 +35,7 @@
           <ngx-dropzone-image-preview
             ngProjectAs="ngx-dropzone-preview"
             *ngFor="let f of internationalPassportFiles"
-            [file]="f"
+            [file]="getPreviewImage(f)"
             [removable]="true"
             (removed)="onRemoveInternationalPassportFile(f)"
           >
@@ -63,7 +63,7 @@
         <div
           class="custom-dropzone form-control form-control-solid border"
           ngx-dropzone
-          [accept]="'image/*'"
+          [accept]="'image/*,.pdf'"
           (change)="onSelectGoodConductCertificateFile($event)"
           required
         >
@@ -75,7 +75,7 @@
           <ngx-dropzone-image-preview
             ngProjectAs="ngx-dropzone-preview"
             *ngFor="let f of goodConductCertificateFiles"
-            [file]="f"
+            [file]="getPreviewImage(f)"
             [removable]="true"
             (removed)="onRemoveGoodConductCertificateFile(f)"
           >
@@ -106,7 +106,7 @@
         <div
           class="custom-dropzone form-control form-control-solid border"
           ngx-dropzone
-          [accept]="'image/*'"
+          [accept]="'image/*,.pdf'"
           (change)="onSelectDiplomaFile($event)"
           required
         >
@@ -118,7 +118,7 @@
           <ngx-dropzone-image-preview
             ngProjectAs="ngx-dropzone-preview"
             *ngFor="let f of diplomaFiles"
-            [file]="f"
+            [file]="getPreviewImage(f)"
             [removable]="true"
             (removed)="onRemoveDiplomaFile(f)"
           >
@@ -142,7 +142,7 @@
         <div
           class="custom-dropzone form-control form-control-solid border"
           ngx-dropzone
-          [accept]="'image/*'"
+          [accept]="'image/*,.pdf'"
           (change)="onSelectPassportPhotoFile($event)"
           required
         >
@@ -154,7 +154,7 @@
           <ngx-dropzone-image-preview
             ngProjectAs="ngx-dropzone-preview"
             *ngFor="let f of passportPhotoFiles"
-            [file]="f"
+            [file]="getPreviewImage(f)"
             [removable]="true"
             (removed)="onRemovePassportPhotoFile(f)"
           >

@@ -14,6 +14,7 @@ import { BlobNamePrefix } from "../models/blob-name-prefix";
 import { ScansFile } from "../models/scans-file";
 import { v4 as uuidv4 } from "uuid";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-scan-uploads",
@@ -36,12 +37,14 @@ export class ScanUploadsComponent implements OnInit {
   public diplomaFiles = new Array<ScansFile>();
   public passportPhotoFiles = new Array<ScansFile>();
   private filesToDelete = new Array<ScansFile>();
+  private previewImageForNonImageFiles: File;
 
   constructor(
     private fb: FormBuilder,
     private translate: TranslateService,
     private userStorageService: UserStorageService,
-    private toastr: ToastrUtil
+    private toastr: ToastrUtil,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -78,8 +81,18 @@ export class ScanUploadsComponent implements OnInit {
       }
     });
 
-    // Ask the storage service to begin fetching blob images from Azure
-    this.userStorageService.fetchImages$();
+    // Fetch the preview image from assets (will be shown when file is no image)
+    this.http.get("/assets/images/pdf.png", { responseType: "blob" }).subscribe(
+      (image) => {
+        this.previewImageForNonImageFiles = new File([image], "pdf.png", {
+          type: "image/png",
+        });
+      },
+      (error) => console.error(error),
+      () =>
+        // Ask the storage service to begin fetching blob images from Azure
+        this.userStorageService.fetchImages$()
+    );
 
     // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards
     this.upload.subscribe((submit) => {
@@ -143,8 +156,18 @@ export class ScanUploadsComponent implements OnInit {
     });
   }
 
-  getErrorMessage(errors: ValidationErrors): string {
+  public getErrorMessage(errors: ValidationErrors): string {
     return ContainerComponent.getErrorMessage(errors, this.translate);
+  }
+
+  public isImageFile(file: ScansFile): boolean {
+    if (file.type.startsWith("image")) return true;
+    else return false;
+  }
+
+  public getPreviewImage(file: ScansFile): File {
+    if (this.isImageFile(file)) return file;
+    else return this.previewImageForNonImageFiles;
   }
 
   public onSelectInternationalPassportFile(event: NgxDropzoneChangeEvent) {
