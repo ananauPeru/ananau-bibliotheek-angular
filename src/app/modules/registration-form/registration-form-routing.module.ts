@@ -11,22 +11,12 @@ const routes: Routes = [
     component: RegistrationFormComponent,
     children: [
       {
-        path: "",
-        component: ContainerComponent,
-        canActivate: [AuthGuard],
-        data: {
-          permittedRoles: ["Student", "Volunteer", "SuperAdmin"],
-          fallbackRole: FormRole.VOLUNTEER,
-        },
-        pathMatch: "full",
-      },
-      {
         path: "student",
         component: ContainerComponent,
         canActivate: [AuthGuard],
         data: {
-          permittedRoles: ["SuperAdmin"], // only SuperAdmins are allowed to explicitly access the student form
-          fallbackRole: FormRole.STUDENT,
+          permittedRoles: ["Student", "SuperAdmin"],
+          fallbackRole: FormRole.STUDENT, // Since SuperAdmins can access both student and volunteer forms, the exact rol still needs to be given.
         },
       },
       {
@@ -34,8 +24,8 @@ const routes: Routes = [
         component: ContainerComponent,
         canActivate: [AuthGuard],
         data: {
-          permittedRoles: ["SuperAdmin"], // only SuperAdmins are allowed to explicitly access the volunteer form
-          fallbackRole: FormRole.VOLUNTEER,
+          permittedRoles: ["Volunteer", "SuperAdmin"],
+          fallbackRole: FormRole.VOLUNTEER, // Since SuperAdmins can access both student and volunteer forms, the exact rol still needs to be given.
         },
       },
       { path: "**", redirectTo: "", pathMatch: "full" },

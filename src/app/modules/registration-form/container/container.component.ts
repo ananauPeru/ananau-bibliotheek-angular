@@ -12,8 +12,8 @@ import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { EMPTY, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { AuthUtil } from "src/app/_utils/auth_util";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
-import { AuthService } from "../../auth";
 import { RegistrationService } from "../data-services/registration.service";
 import { FormRole } from "../models/form-role";
 import { RegistrationDTO } from "../_dto/registration-dto";
@@ -57,7 +57,7 @@ export class ContainerComponent implements OnInit {
   };
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthUtil,
     private registrationService: RegistrationService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -66,19 +66,17 @@ export class ContainerComponent implements OnInit {
     private toastr: ToastrUtil
   ) {
     if (
-      this.authService.currentUserValue.roles.some(
-        (role) => role.toLowerCase() === "student"
-      )
+      this.auth
+        .getAuthFromLocalStorage()
+        .roles.some((role) => role.toLowerCase() === "student")
     ) {
       this.role = FormRole.STUDENT;
-      console.log("Ingelogd als student -> rol is: " + this.role);
     } else if (
-      this.authService.currentUserValue.roles.some(
-        (role) => role.toLowerCase() === "volunteer"
-      )
+      this.auth
+        .getAuthFromLocalStorage()
+        .roles.some((role) => role.toLowerCase() === "volunteer")
     ) {
       this.role = FormRole.VOLUNTEER;
-      console.log("Ingelogd als volunteer -> rol is: " + this.role);
     } else {
       this.route.data.subscribe(
         (data) =>
@@ -86,7 +84,6 @@ export class ContainerComponent implements OnInit {
             ? data["fallbackRole"]
             : FormRole.VOLUNTEER)
       );
-      console.log("Ingelogd als anders -> rol is: " + this.role);
     }
 
     if (this.role === FormRole.STUDENT) {

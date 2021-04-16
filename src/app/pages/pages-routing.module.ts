@@ -10,12 +10,8 @@ const routes: Routes = [
     children: [
       {
         path: "dashboard",
-        loadChildren: () => {
-          console.log("dashboard");
-          return import("./dashboard/dashboard.module").then(
-            (m) => m.DashboardModule
-          );
-        },
+        loadChildren: () =>
+          import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
       },
       {
         path: "library",
