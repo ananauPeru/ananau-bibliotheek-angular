@@ -1,37 +1,30 @@
-import { NgModule } from '@angular/core'
-import { Routes, RouterModule } from '@angular/router'
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "../modules/auth/_services/auth.guard";
-import { LayoutComponent } from './_layout/layout.component'
+import { LayoutComponent } from "./_layout/layout.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: LayoutComponent,
     children: [
       {
-        path: 'dashboard',
-        loadChildren: () => {
-          console.log('dashboard')
-          return import('./dashboard/dashboard.module').then(
-            (m) => m.DashboardModule,
-          )
-        },
+        path: "dashboard",
+        loadChildren: () =>
+          import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
       },
       {
         path: "library",
         loadChildren: () =>
-          import('../modules/library/library.module').then(
-            (m) => m.LibraryModule,
+          import("../modules/library/library.module").then(
+            (m) => m.LibraryModule
           ),
       },
       {
-        path: 'registration-form',
+        path: "registration-form",
         loadChildren: () =>
-          import('../modules/registration-form/registration-form.module').then(
-            (m) => {
-              console.log("---------- WE'RE HERE!! --------")
-              return m.RegistrationFormModule
-            },
+          import("../modules/registration-form/registration-form.module").then(
+            (m) => m.RegistrationFormModule
           ),
       },
       {
@@ -40,12 +33,12 @@ const routes: Routes = [
         pathMatch: "full",
       },
       {
-        path: '**',
-        redirectTo: 'error/404',
+        path: "**",
+        redirectTo: "error/404",
       },
     ],
   },
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

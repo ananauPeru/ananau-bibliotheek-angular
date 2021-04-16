@@ -12,6 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { EMPTY, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { AuthUtil } from "src/app/_utils/auth_util";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationService } from "../data-services/registration.service";
 import { FormRole } from "../models/form-role";
@@ -56,6 +57,7 @@ export class ContainerComponent implements OnInit {
   };
 
   constructor(
+    private auth: AuthUtil,
     private registrationService: RegistrationService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -63,9 +65,26 @@ export class ContainerComponent implements OnInit {
     private translate: TranslateService,
     private toastr: ToastrUtil
   ) {
-    this.route.data.subscribe((data) => {
-      this.role = data["role"] ? data["role"] : FormRole.VOLUNTEER;
-    });
+    if (
+      this.auth
+        .getAuthFromLocalStorage()
+        .roles.some((role) => role.toLowerCase() === "student")
+    ) {
+      this.role = FormRole.STUDENT;
+    } else if (
+      this.auth
+        .getAuthFromLocalStorage()
+        .roles.some((role) => role.toLowerCase() === "volunteer")
+    ) {
+      this.role = FormRole.VOLUNTEER;
+    } else {
+      this.route.data.subscribe(
+        (data) =>
+          (this.role = data["fallbackRole"]
+            ? data["fallbackRole"]
+            : FormRole.VOLUNTEER)
+      );
+    }
 
     if (this.role === FormRole.STUDENT) {
       this.initialData$ = this.registrationService
