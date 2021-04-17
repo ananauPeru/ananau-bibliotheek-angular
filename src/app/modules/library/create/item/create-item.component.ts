@@ -46,11 +46,6 @@ export class CreateItemComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.routeId = params['id']
     })
-    console.log(this.item)
-    let data = new Date(this.item.purchasedAt)
-    console.log(data)
-    console.log(data.getFullYear())
-    // this.item.purchasedAt.toDateString()
   }
 
   ngOnInit(): void {
