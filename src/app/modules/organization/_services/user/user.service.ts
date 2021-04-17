@@ -3,7 +3,6 @@ import { Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { UserModel } from 'src/app/modules/auth/_models/user.model'
-import { ItemModel } from '../../_models/item.model'
 import { UserHTTPService } from './user-http/user-http.service'
 
 @Injectable({
