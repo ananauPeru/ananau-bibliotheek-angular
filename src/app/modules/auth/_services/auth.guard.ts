@@ -6,13 +6,18 @@ import {
   RouterStateSnapshot,
 } from '@angular/router'
 import { AuthUtil } from 'src/app/_utils/auth_util'
+import { ToastrUtil } from 'src/app/_utils/toastr_util'
 import { AuthService } from './auth.service'
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard extends AuthUtil implements CanActivate {
-  constructor(private router: Router, private authService: AuthService) {
+
+  public toastrUtil;
+
+  constructor(private router: Router, private authService: AuthService, toastrUtil:ToastrUtil) {
     super()
+    this.toastrUtil = toastrUtil;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -26,7 +31,7 @@ export class AuthGuard extends AuthUtil implements CanActivate {
           return true
         } else {
           console.log("Returning from auth guard false")
-          this.router.navigate(['**'])
+          this.toastrUtil.showWarning("You are not authorized to do that... Contact the organization.","Unauthorized")
           return false
         }
       }

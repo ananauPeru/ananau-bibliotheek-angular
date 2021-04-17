@@ -6,16 +6,15 @@
             <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
                 <div class="row">
                     <div class="col-12 col-md-8 w-100">
-                        <h3 class="card-title font-weight-bolder text-dark">All Books in Library</h3>
+                        <h3 class="card-title font-weight-bolder text-dark">Change and Assign Roles</h3>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <!-- <div class="col-12 col-md-4">
                         <button type="submit" id="kt_login_signin_submit"
                             class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
                             routerLink="/library/add-item">
                             Add New Book
-                            <!-- {{"AUTH.LOGIN.BUTTON" | translate }} -->
                         </button>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -35,28 +34,66 @@
     </div>
     <!-- Body -->
     <div class="card-body pt-2">
+        <div [ngClass]=" working ? 'd-flex' : ''" id="overlay" onclick="off()">
+            <div class="w-100 d-flex justify-content-center align-items-center">
+                <h1 class="text-center text-white">Please wait...</h1>
+            </div>
+        </div>
+
         <!--begin::Form Group-->
         <div class="form-group row mb-10">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-12">
                 <div class="input-group input-group-lg input-group-solid">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="fa fa-search"></i>
                         </span>
                     </div>
+
                     <input (keyup)="applyFilter($event.target.value)" type="email"
                         class="form-control form-control-lg form-control-solid force-pl-5" placeholder="Filter..."
                         style="padding-left: 10px;" />
                 </div>
-            </div>            
+                <div class="feedback">
+                    Try searching and filtering on <b>First name, Last name, Email or Role.</b>
+                </div>
+            </div>
         </div>
         <!--begin::Form Group-->
 
         <!--begin: Item-->
-        <div class="d-flex flex-wrap align-items-center mb-10" >
-           <table>
-               
-           </table>
+        <div class="d-flex flex-wrap align-items-center mb-10">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>SuperAdmin</th>
+                        <th>Admin</th>
+                        <th>Librarian</th>
+                        <th>Volunteer</th>
+                        <th>Student</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userService.users | async">
+                        <td>{{user.user.userDetail.firstName}}</td>
+                        <td>{{user.user.userDetail.lastName}}</td>
+                        <td>{{user.user.userName}}</td>
+                        <td class="text-center" *ngFor="let role of roleService.roles | async">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                [checked]="user.roles.includes(role.name)"
+                                (change)="changeRoles($event, user, role.name)">
+                        </td>
+                        <!-- <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('SuperAdmin')" (change)="changeRoles($event, user, 'SuperAdmin')"></td>
+                        <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Admin')"></td>
+                        <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Librarian')"></td>
+                        <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Volunteer')"></td>
+                        <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Student')"></td> -->
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <!--end: Item-->
 

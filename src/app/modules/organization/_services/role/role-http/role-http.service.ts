@@ -3,20 +3,20 @@ import { Observable, of, throwError } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../../../../environments/environment'
 import { catchError, finalize, map } from 'rxjs/operators'
-import { ItemModel } from '../../../_models/item.model'
 import { ItemDTO } from '../../../_dto/item-dto'
+import { RoleModel } from '../../../_models/role.model'
 
-const API_ITEMS_URL = `${environment.apiUrl}/item`
+const API_ITEMS_URL = `${environment.apiUrl}/user`
 
 @Injectable({
   providedIn: 'root',
 })
-export class ItemHTTPService {
+export class RoleHTTPService {
   constructor(private http: HttpClient) {}
 
-  getAllItems$(): Observable<ItemModel[]> {
+  getAllRoles$(): Observable<RoleModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}/getall`, {
+      .get(`${API_ITEMS_URL}/getAllRoles`, {
         responseType: 'json',
       })
       .pipe(
@@ -26,7 +26,7 @@ export class ItemHTTPService {
           }
           return throwError(error)
         }),
-        map((items: any): ItemModel[] => {
+        map((items: any): RoleModel[] => {
           console.log(items)
           return items
         }),
@@ -35,8 +35,8 @@ export class ItemHTTPService {
 
   // CREATE
   // server should return the object with ID
-  create(item: ItemDTO): Observable<ItemModel> {
-    return this.http.post<ItemModel>(`${API_ITEMS_URL}`, item).pipe(
+  create(item: ItemDTO): Observable<RoleModel> {
+    return this.http.post<RoleModel>(`${API_ITEMS_URL}`, item).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.log('Login please...')
@@ -44,7 +44,7 @@ export class ItemHTTPService {
         return throwError(error)
       }),
       map(
-        (item: any): ItemModel => {
+        (item: any): RoleModel => {
           console.log(item)
           return item
         },
@@ -52,8 +52,8 @@ export class ItemHTTPService {
     )
   }
 
-  edit(id: number, item: ItemDTO): Observable<ItemModel> {
-    return this.http.put<ItemModel>(`${API_ITEMS_URL}/${id}`, item).pipe(
+  edit(id: number, item: ItemDTO): Observable<RoleModel> {
+    return this.http.put<RoleModel>(`${API_ITEMS_URL}/${id}`, item).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.log('Login please...')
@@ -61,7 +61,7 @@ export class ItemHTTPService {
         return throwError(error)
       }),
       map(
-        (item: any): ItemModel => {
+        (item: any): RoleModel => {
           console.log(item)
           return item
         },
@@ -69,7 +69,7 @@ export class ItemHTTPService {
     )
   }
 
-  getItemById(id: number): Observable<ItemModel> {
+  getItemById(id: number): Observable<RoleModel> {
     return this.http
       .get(`${API_ITEMS_URL}/getById/${id}`, {
         responseType: 'json',
@@ -82,7 +82,7 @@ export class ItemHTTPService {
           return throwError(error)
         }),
         map(
-          (item: any): ItemModel => {
+          (item: any): RoleModel => {
             console.log(item)
             return item
           },

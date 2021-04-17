@@ -8,7 +8,7 @@ import { UserService } from './_services/user/user.service'
   styleUrls: ['./organization.component.scss'],
 })
 export class OrganizationComponent implements OnInit {
-  constructor(private http: HttpClient, public userService: UserService,) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
 }

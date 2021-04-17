@@ -15,7 +15,7 @@ const routes: Routes = [
     component: LibraryComponent,
     canActivate: [AuthGuard],
     data: {
-      permittedRoles: ['Admin', 'SuperAdmin'],
+      permittedRoles: ['Librarian'],
     },
     children: [
       {
@@ -56,8 +56,8 @@ const routes: Routes = [
       //   path: 'logout',
       //   component: LogoutComponent
       // },
-      { path: '', redirectTo: '', pathMatch: 'full' },
-      { path: '**', redirectTo: '', pathMatch: 'full' },
+      { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
+      { path: '**', redirectTo: 'Dashboard', pathMatch: 'full' },
     ],
   },
 ]

@@ -157,7 +157,7 @@ export class AuthService implements OnDestroy {
     return false
   }
 
-  private getAuthFromLocalStorage(): AuthModel {
+  public getAuthFromLocalStorage(): AuthModel {
     try {
       // console.log(localStorage)
       // console.log(this.authLocalStorageToken)
@@ -174,5 +174,11 @@ export class AuthService implements OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe())
+  }
+
+  public setRolesToLocalStorage(roles: string[]) {
+    let authData = this.getAuthFromLocalStorage()
+    authData.roles = roles
+    this.setAuthFromLocalStorage(authData)
   }
 }

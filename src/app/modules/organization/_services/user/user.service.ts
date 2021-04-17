@@ -31,7 +31,7 @@ export class UserService {
   }
 
   loadInitialData() {
-    this.userHttpService.getAllUsers$().subscribe(
+    this.userHttpService.getAllUsersWithDetails$().subscribe(
       (res) => {
         // let items = (<Object[]>res.json()).map((todo: any) =>
         //     new Item({id:todo.id, description:todo.description,completed: todo.completed}));
@@ -121,84 +121,30 @@ export class UserService {
   //   )
   // }
 
-  filter(
-    filter: any,
-    _category: any,
-    // pp: number,
-    // p: number,
-    _course: any,
-  ) {
+  filter(filter: any) {
     let f = filter.toLowerCase()
     let category = undefined
-    if (_category) {
-      category = _category.toLowerCase()
-    }
-    let course = undefined
-    if (_course) {
-      course = _course.toLowerCase()
-    }
-    if (category == undefined) {
-      console.log('FILTERING WITHOUT CATEGORY SET!!!')
-      this.users = this._users.pipe(
-        map((users) =>
-          users.filter((user) => {
-            return (
-              user.userDetail.firstName.toLowerCase().includes(f) ||
-              user.userDetail.lastName.toLowerCase().includes(f) ||
-              user.userName.toLowerCase().includes(f)
-              // (item.description
-              //   ? item.description.toLowerCase().includes(f)
-              //   : false) ||
-              // (item.purpose ? item.purpose.toLowerCase().includes(f) : false) ||
-              // (item.brand ? item.brand.toLowerCase().includes(f) : false) ||
-              // (item.course ? item.course.toLowerCase().includes(f) : false)
-            )
-            // return b
-          }),
-        ),
-      )
-    }
-    // else {
-    //   console.log('Filtering for category')
-    //   this.books = this._books.pipe(
-    //     map((books) =>
-    //       books.filter((book) => {
-    //         let b =
-    //           (book.name.toLowerCase().includes(f) ||
-    //             (book.description
-    //               ? book.description.toLowerCase().includes(f)
-    //               : false) ||
-    //             (book.author ? book.author.toLowerCase().includes(f) : false) ||
-    //             (book.state ? book.state.toLowerCase().includes(f) : false)) &&
-    //           book.genre.toLowerCase().includes(category)
-    //         console.log(b)
 
-    //         return b
-    //       }),
-    //     ),
-    //   )
-    // }
-
-    // if (course) {
-    //   this.users = this.users.pipe(
-    //     map((items) =>
-    //       items.filter((item) => {
-    //         let b = user.toLowerCase().includes(course)
-    //         return b
-    //       }),
-    //     ),
-    //   )
-    // }
-
-    // this.books = this.books.pipe(
-    //   map((books) =>
-    //     books.filter((book, index) => {
-    //       console.log(index)
-    //       let i = index < pp * p && index >= pp * (p - 1)
-    //       return i
-    //     }),
-    //   ),
-    // )
+    this.users = this._users.pipe(
+      map((users) =>
+        users.filter((user) => {
+          let r = false
+          user.roles.forEach((role) =>
+            role.toLowerCase().includes(f) ? (r = true) : '',
+          )
+          console.log(r)
+          return (
+            user.user.userName.toLowerCase().includes(f) ||
+            user.user.userDetail.firstName.toLowerCase().includes(f) ||
+            user.user.userDetail.lastName.toLowerCase().includes(f) ||
+            r
+          )
+        }),
+      ),
+    )
   }
 
+  changeRoles(userId: number, roles: string[]): Observable<string[]> {
+    return this.userHttpService.changeRoles(userId, roles)
+  }
 }

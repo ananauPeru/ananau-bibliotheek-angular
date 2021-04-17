@@ -47,6 +47,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone'
 import { OrganizationRoutingModule } from './organization-routing.module'
 import { RolesComponent } from './roles/roles.component'
 import { OrganizationComponent } from './organization.component'
+import { ToastrUtil } from 'src/app/_utils/toastr_util'
 
 @NgModule({
   declarations: [RolesComponent, OrganizationComponent],
