@@ -50,6 +50,7 @@ import { OverviewBookComponent } from './overview/book/overview-book.component'
 import { CreateItemComponent } from './create/item/create-item.component'
 import { CreateBookComponent } from './create/book/create-book.component'
 import { NgxDropzoneModule } from 'ngx-dropzone'
+import { MarkAsteriskDirective } from './directives/mark-asterisk.directive'
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone'
     OverviewBookComponent,
     CreateItemComponent,
     CreateBookComponent,
+    MarkAsteriskDirective,
   ],
   imports: [
     CommonModule,

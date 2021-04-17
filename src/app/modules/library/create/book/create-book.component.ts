@@ -45,7 +45,7 @@ export class CreateBookComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.fb.group({
       name: [
-        this.book.name ? this.book.name : '',
+        this.book && this.book.name ? this.book.name : '',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -53,11 +53,11 @@ export class CreateBookComponent implements OnInit {
         ]),
       ],
       genre: [
-        this.book.genre ? this.book.genre : '',
+        this.book && this.book.genre ? this.book.genre : '',
         Validators.compose([Validators.required]),
       ],
       author: [
-        this.book.author ? this.book.author : '',
+        this.book && this.book.author ? this.book.author : '',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -65,7 +65,7 @@ export class CreateBookComponent implements OnInit {
         ]),
       ],
       purchasedAt: [
-        this.book.purchasedAt
+        this.book && this.book.purchasedAt
           ? this.datePipe.transform(
               new Date(this.book.purchasedAt),
               'yyyy-MM-dd',
@@ -74,7 +74,7 @@ export class CreateBookComponent implements OnInit {
         Validators.compose([Validators.required]),
       ],
       description: [
-        this.book.description ? this.book.description : '',
+        this.book && this.book.description ? this.book.description : '',
         // Validators.compose([
         //   Validators.required,
         //   Validators.minLength(3),
@@ -82,7 +82,7 @@ export class CreateBookComponent implements OnInit {
         // ]),
       ],
       state: [
-        this.book.state ? this.book.state : '',
+        this.book && this.book.state ? this.book.state : '',
         Validators.compose([Validators.required]),
       ],
       photourl: [''],
@@ -109,6 +109,11 @@ export class CreateBookComponent implements OnInit {
       item.genre = formValues.genre.toUpperCase()
       item.description = formValues.description
       item.state = formValues.state
+      item.purchasedAt = new Date(
+        formValues.purchasedAt.year,
+        formValues.purchasedAt.month,
+        formValues.purchasedAt.day,
+      )
       this.create(item)
     } else {
       this.book.name = formValues.name

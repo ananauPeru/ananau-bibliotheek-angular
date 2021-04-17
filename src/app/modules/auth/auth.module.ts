@@ -13,6 +13,7 @@ import { LayoutModule } from 'src/app/pages/layout.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { httpInterceptorProviders } from 'src/app/http-interceptor'
 
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -29,8 +30,8 @@ import { httpInterceptorProviders } from 'src/app/http-interceptor'
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    LayoutModule,
-    NgbModule,
+    LayoutModule,    
+    NgbModule,    
   ],
 })
 export class AuthModule {}

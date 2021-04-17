@@ -9,16 +9,18 @@
     <div class="card-header">
         <div class="card-title">
             <h3 class="card-label">
-                Create New Item
+                <ng-container *ngIf="item; else elseTemplate">
+                    Edit Book
+                </ng-container>
+                <ng-template #elseTemplate>
+                    Create New Book
+                </ng-template>
             </h3>
         </div>
         <div class="card-toolbar">
-            <a type="button" class="btn btn-light" routerLink="/library">
+            <a type="button" class="btn btn-light" routerLink="/library/items/overview">
                 <i class="fa fa-arrow-left"></i>Back
             </a>
-            <button class="btn btn-secondary ml-2" (click)="reset()">
-                <i class="fa fa-redo"></i>Reset
-            </button>
         </div>
     </div>
     <div class="card-body">
@@ -26,34 +28,34 @@
 
         <form action="#" class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="save()">
             <div class="form-group row">
-                <div class="col-6 col-md-6">
-                    <label>Name</label>
+                <div class="col-12 col-md-6">
+                    <label>Title </label>
                     <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder="Name" name='name' [class.is-invalid]="isControlInvalid('name')"
+                        placeholder="Title" name='name' [class.is-invalid]="isControlInvalid('name')"
                         [class.is-valid]="isControlValid('name')" formControlName='name' required />
                     <div class="feedback" *ngIf="!isControlTouched('name')">
-                        Please enter <b>a Title for this item.</b>
+                        Please enter <b>the Title of the item.</b>
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('name')">
                         <!-- Name was entered correct -->
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">
-                        Name is required
+                        Title is required
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">
-                        Name should have at least 3 symbols
+                        Title should have at least 3 symbols
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">
-                        Name should have maximum 100 symbols
+                        Title should have maximum 100 symbols
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
+                <div class="col-12 col-md-6">
                     <label>Brand</label>
                     <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                         placeholder="Brand" name='brand' [class.is-invalid]="isControlInvalid('brand')"
                         [class.is-valid]="isControlValid('brand')" formControlName='brand' required />
                     <div class="feedback" *ngIf="!isControlTouched('brand')">
-                        Please enter <b>a Brand for this item.</b>
+                        Please enter <b>the Brand of the item.</b>
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('brand')">
                         <!-- Brand was entered correct -->
@@ -70,41 +72,192 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-6 col-md-6">
-                    <label>Material</label>
-                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder="Material" name='material' [class.is-invalid]="isControlInvalid('material')"
-                        [class.is-valid]="isControlValid('material')" formControlName='material' required />
-                    <div class="feedback" *ngIf="!isControlTouched('material')">
-                        Please enter <b>a Material for this item.</b>
+                <!--begin::Form group-->
+                <div class="col-12 col-md-6">
+                    <label>
+                        Purchased at
+                    </label>
+                    <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()"
+                        placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" name="purchasedAt"
+                        formControlName="purchasedAt" placeholder="2000-01-01" autocomplete="off"
+                        [class.is-invalid]="isControlInvalid('purchasedAt')"
+                        [class.is-valid]="isControlValid('purchasedAt')" [(ngModel)]="modelDate" required />
+                    <div class="feedback" *ngIf="!isControlTouched('purchasedAt')">
+                        Please enter <b>the Purchase Date of the item.</b>
                     </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('material')">
-                        <!-- Material was entered correct -->
+                    <div class="valid-feedback" *ngIf="isControlValid('purchasedAt')">
+                        <!-- Brand was entered correct -->
                     </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'material')">
-                        Material is required
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'material')">
-                        Material should have at least 3 symbols
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'material')">
-                        Material should have maximum 100 symbols
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'purchasedAt')">
+                        Purchase date is required
                     </div>
                 </div>
-                <div class="col-6 col-md-6">
-                    <label>Category</label>
-                    <select class="form-control form-control-lg form-control-solid" name="category"
-                        formControlName="category" aria-placeholder="Category"
-                        [class.is-invalid]="isControlInvalid('category')" [class.is-valid]="isControlValid('category')"
+                <div class="col-12 col-md-6">
+                    <label>Purpose</label>
+                    <select class="form-control form-control-lg form-control-solid" name="purpose"
+                        formControlName="purpose" aria-placeholder="Purpose"
+                        [class.is-invalid]="isControlInvalid('purpose')" [class.is-valid]="isControlValid('purpose')"
                         required>
-                        <option value="">Category</option>
-                        <option value="Book">Book</option>
-                        <option value="Music">Music</option>
-                        <option value="nocategory">No Category</option>
+                        <option value="">Select Purpose</option>
+                        <option *ngFor="let enum of ItemPurposes | keyvalue" value="{{enum.key.toUpperCase()}}">
+                            {{enum.value | translate }}
+                        </option>
                     </select>
-                    <div class="feedback" *ngIf="!isControlTouched('category')">Please select a <b>Category.</b></div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'category')">
-                        Category is required
+                    <div class="feedback" *ngIf="!isControlTouched('purpose')">Please select the <b>Purpose of the
+                            item.</b>
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'purpose')">
+                        Purpose is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
+                    <label>Course</label>
+                    <select class="form-control form-control-lg form-control-solid" name="course"
+                        formControlName="course" aria-placeholder="Course"
+                        [class.is-invalid]="isControlInvalid('course')" [class.is-valid]="isControlValid('course')"
+                        required>
+                        <option value="">Choose Course</option>
+                        <option *ngFor="let enum of EducationalCourses | keyvalue" value="{{enum.key.toUpperCase()}}">
+                            {{enum.value | translate }}
+                        </option>
+                    </select>
+                    <div class="feedback" *ngIf="!isControlTouched('course')">Please select a <b>Course.</b></div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'course')">
+                        Course is required
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label style="height:23px;">Code <span
+                            style="color:red;font-weight: bold;margin-left: 3px; font-size: 1.2em;">*</span></label>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="border-width:0px;">
+                                <span [ngSwitch]="formGroup.value.course.toLowerCase()">
+                                    <span *ngSwitchCase="'communication'">
+                                        COM 1.
+                                    </span>
+                                    <span *ngSwitchCase="'mathematics'">
+                                        MAT 2.
+                                    </span>
+                                    <span *ngSwitchCase="'stimulation'">
+                                        EST 3.
+                                    </span>
+                                    <span *ngSwitchCase="'games'">
+                                        JUE 4.
+                                    </span>
+                                    <span *ngSwitchCase="'geography'">
+                                        GEO 5.
+                                    </span>
+                                    <span *ngSwitchCase="'music'">
+                                        MUS 6.
+                                    </span>
+                                    <span *ngSwitchCase="'socio educational activities'">
+                                        ASE 7.
+                                    </span>
+                                    <span *ngSwitchCase="'robotics'">
+                                        ROB 8.
+                                    </span>
+                                    <span *ngSwitchCase="'english'">
+                                        ING 9.
+                                    </span>
+                                    <span *ngSwitchDefault>
+                                        COM 1.
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control form-control-lg form-control-solid" name="code"
+                            formControlName="code" aria-placeholder="Code"
+                            [class.is-invalid]="isControlInvalid('code')" [class.is-valid]="isControlValid('code')"
+                            required />
+                    </div>
+
+                    <!-- <select class="form-control form-control-lg form-control-solid" name="course"
+                            formControlName="course" aria-placeholder="Course"
+                            [class.is-invalid]="isControlInvalid('course')" [class.is-valid]="isControlValid('course')"
+                            required>
+                            <option value="">Choose Course</option>
+                            <option *ngFor="let enum of EducationalCourses | keyvalue"
+                                value="{{enum.key.toUpperCase()}}">
+                                {{enum.value | translate }}
+                            </option>
+                        </select> -->
+                    <div class="feedback" *ngIf="!isControlTouched('code')">Please select a <b>Code.</b></div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">
+                        Code is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-md-4">
+                    <label>Quantity</label>
+                    <input type="number" min="1" max="1000" step="1"
+                        class="form-control form-control-lg form-control-solid" autocomplete="off" placeholder="1"
+                        name='quantity' [class.is-invalid]="isControlInvalid('quantity')"
+                        [class.is-valid]="isControlValid('quantity')" formControlName='quantity' required />
+                    <div class="feedback" *ngIf="!isControlTouched('quantity')">
+                        Please enter <b>the Quantity of the item.</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('quantity')">
+                        <!-- Name was entered correct -->
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'quantity')">
+                        Quantity is required.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('min', 'quantity')">
+                        The minimum Quantity should be 1.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('max', 'quantity')">
+                        The maximum Quantity should be 1000.
+                    </div>
+                </div>
+                <div class="col-12 col-md-8 ">
+                    <label>Pieces</label>
+                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                        placeholder="Pieces" name='pieces' [class.is-invalid]="isControlInvalid('pieces')"
+                        [class.is-valid]="isControlValid('pieces')" formControlName='pieces' required />
+                    <div class="feedback" *ngIf="!isControlTouched('pieces')">
+                        Please explain <b>the Pieces of a Quantity for an item.</b>
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('pieces')">
+                        <!-- Brand was entered correct -->
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'pieces')">
+                        Pieces is required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pieces')">
+                        Pieces should have at least 3 symbols
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'pieces')">
+                        Pieces should have maximum 100 symbols
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <label>Upload a photo for this Book</label>
+
+                    <div class="custom-dropzone form-control form-control-solid border" ngx-dropzone
+                        [accept]="'image/*'" (change)="onSelectBookImage($event)" required>
+                        <ngx-dropzone-label>
+                            <p class="form-text text-muted">
+                                Drop your file(s) here or click to select your file(s).
+                            </p>
+                        </ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of itemImages"
+                            [file]="f" [removable]="true" (removed)="onRemoveBookImage(f)">
+                        </ngx-dropzone-image-preview>
+                    </div>
+                    <div *ngIf="
+                      formGroup.get('bookImage')['errors'] &&
+                      formGroup.get('bookImage').touched
+                    " class="text-danger form-text">
+                        <!-- {{
+                      getErrorMessage(scansForm.get("internationalPassport")["errors"])
+                    }} -->
                     </div>
                 </div>
             </div>
@@ -222,9 +375,14 @@
                     placeholder="Describe the item..."></textarea>
             </div>
             <div class="float-right">
-                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library">Cancel</a>
+                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library/items/overview">Cancel</a>
                 <button type="submit" class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
-                    Save
+                    <ng-container *ngIf="item; else elseTemplate">
+                        Save Changes
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        Create
+                    </ng-template>
                 </button>
             </div>
         </form>

@@ -1,7 +1,13 @@
 export class ItemDTO {
   category: string
-  name: string
   brand: string
+  name: string
+  course: string
+  code: string
   description: string
-  material: string
+  purchasedAt: Date
+  quantity: number
+  pieces: string
+  purpose: string
+  photoUrl:string
 }

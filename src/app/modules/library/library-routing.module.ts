@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from '../auth/_services/auth.guard'
 import { CreateBookComponent } from './create/book/create-book.component'
+import { CreateItemComponent } from './create/item/create-item.component'
 import { LibraryComponent } from './library.component'
 import { OverviewBookComponent } from './overview/book/overview-book.component'
 import { OverviewItemComponent } from './overview/item/overview-item.component'
 import { BookResolver } from './_resolvers/book.resolver'
+import { ItemResolver } from './_resolvers/item.resolver'
 
 const routes: Routes = [
   {
@@ -13,7 +15,7 @@ const routes: Routes = [
     component: LibraryComponent,
     canActivate: [AuthGuard],
     data: {
-      permittedRoles: ['Admin', 'SuperAdmin'],
+      permittedRoles: ['Librarian'],
     },
     children: [
       {
@@ -29,6 +31,19 @@ const routes: Routes = [
         resolve: {book: BookResolver },
         component: CreateBookComponent,
       },
+      {
+        path: 'items/overview',
+        component: OverviewItemComponent,
+      },
+      {
+        path: 'items/add-item',
+        component: CreateItemComponent,
+      },
+      {
+        path: 'items/edit-item/:id',
+        resolve: {item: ItemResolver },
+        component: CreateItemComponent,
+      },
       // {
       //   path: 'registration',
       //   component: RegistrationComponent
@@ -41,8 +56,8 @@ const routes: Routes = [
       //   path: 'logout',
       //   component: LogoutComponent
       // },
-      { path: '', redirectTo: '', pathMatch: 'full' },
-      { path: '**', redirectTo: '', pathMatch: 'full' },
+      { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
+      { path: '**', redirectTo: 'Dashboard', pathMatch: 'full' },
     ],
   },
 ]

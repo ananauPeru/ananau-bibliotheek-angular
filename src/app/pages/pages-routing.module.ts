@@ -21,7 +21,14 @@ const routes: Routes = [
           ),
       },
       {
-        path: "registration-form",
+        path: "organization",
+        loadChildren: () =>
+          import('../modules/organization/organization.module').then(
+            (m) => m.OrganizationModule,
+          ),
+      },
+      {
+        path: 'registration-form',
         loadChildren: () =>
           import("../modules/registration-form/registration-form.module").then(
             (m) => m.RegistrationFormModule
