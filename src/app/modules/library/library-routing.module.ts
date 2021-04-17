@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from '../auth/_services/auth.guard'
 import { CreateBookComponent } from './create/book/create-book.component'
+import { CreateItemComponent } from './create/item/create-item.component'
 import { LibraryComponent } from './library.component'
 import { OverviewBookComponent } from './overview/book/overview-book.component'
 import { OverviewItemComponent } from './overview/item/overview-item.component'
 import { BookResolver } from './_resolvers/book.resolver'
+import { ItemResolver } from './_resolvers/item.resolver'
 
 const routes: Routes = [
   {
@@ -28,6 +30,19 @@ const routes: Routes = [
         path: 'books/edit-book/:id',
         resolve: {book: BookResolver },
         component: CreateBookComponent,
+      },
+      {
+        path: 'items/overview',
+        component: OverviewItemComponent,
+      },
+      {
+        path: 'items/add-item',
+        component: CreateItemComponent,
+      },
+      {
+        path: 'items/edit-item/:id',
+        resolve: {item: ItemResolver },
+        component: CreateItemComponent,
       },
       // {
       //   path: 'registration',

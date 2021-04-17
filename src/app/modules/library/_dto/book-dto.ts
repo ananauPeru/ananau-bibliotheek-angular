@@ -5,4 +5,5 @@ export class BookDTO {
   author: string
   description: string
   state: string
+  purchasedAt: Date
 }
