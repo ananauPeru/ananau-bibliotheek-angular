@@ -216,6 +216,9 @@ export const locale = {
         TITLE: "Información organizacional",
         DATES: {
           TITLE: "Fechas",
+          ONLINE: "Voluntariado online",
+          ONLINE_INFO:
+            "Además de realizar trabajo voluntario en la organización en el propio Perú, también es posible realizar trabajo de forma remota.",
           START_VOLUNTEER: "Fecha de inicio propuesta para voluntariado",
           END_VOLUNTEER: "Fecha final propuesta para voluntariado",
           START_STUDENT: "Fecha de inicio propuesta para pasantía",
@@ -227,10 +230,15 @@ export const locale = {
         },
         SPANISH: {
           TITLE: "Español",
+          INFO:
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de {{number}} semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
           LEVEL: "Describe tu nivel de español",
-          WEEKS: "Número de semanas para lecciones de español",
+          WEEKS_ONLINE: "Número de semanas para lecciones de español online",
+          WEEKS_ONLINE_INFO:
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite {{number}} semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
+          WEEKS: "Número de semanas para lecciones de español en el sitio",
           WEEKS_INFO:
-            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 4 semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite {{number}} semanas de lecciones de español en el sitio.",
         },
         INFO: {
           TITLE: "Info",

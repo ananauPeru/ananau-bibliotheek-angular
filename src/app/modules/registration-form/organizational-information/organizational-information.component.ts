@@ -37,6 +37,7 @@ export class OrganizationalInformationComponent implements OnInit {
   ngOnInit() {
     this.organizationalForm = this.fb.group({
       dates: this.fb.group({
+        internshipOnline: [this.initialData.internshipOnline],
         startDate: [
           this.initialData.startDate
             ? this.datePipe.transform(
@@ -58,6 +59,7 @@ export class OrganizationalInformationComponent implements OnInit {
       }),
       spanish: this.fb.group({
         level: [this.initialData.level, Validators.required],
+        weeksOnline: [this.initialData.weeksOnline],
         weeks: [this.initialData.weeks],
       }),
       info: this.fb.group({

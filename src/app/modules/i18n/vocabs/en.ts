@@ -240,6 +240,9 @@ export const locale = {
         TITLE: "Organizational information",
         DATES: {
           TITLE: "Dates",
+          ONLINE: "Online volunteering",
+          ONLINE_INFO:
+            "In addition to doing voluntary work at the organization in Peru itself, it is also possible to do work remotely.",
           START_VOLUNTEER: "Proposed start date volunteering",
           END_VOLUNTEER: "Proposed end date volunteering",
           START_STUDENT: "Proposed start date internship",
@@ -251,10 +254,15 @@ export const locale = {
         },
         SPANISH: {
           TITLE: "Spanish",
+          INFO:
+            "If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of {{number}} weeks of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.",
           LEVEL: "Describe your level of Spanish",
-          WEEKS: "Number of weeks Spanish lessons",
+          WEEKS_ONLINE: "Number of weeks online Spanish lessons",
+          WEEKS_ONLINE_INFO:
+            "If you do not yet speak a basic level of Spanish, we recommend you apply for {{number}} weeks of online Spanish lessons. These lessons will be provided through video call, prior to your arrival at Añañau.",
+          WEEKS: "Number of weeks Spanish lessons on-site",
           WEEKS_INFO:
-            "If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of 4 weeks of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.",
+            "If you do not yet speak a basic level of Spanish, we recommend you apply for {{number}} weeks of Spanish lessons on-site.",
         },
         INFO: {
           TITLE: "Info",

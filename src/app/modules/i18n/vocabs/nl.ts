@@ -232,6 +232,9 @@ export const locale = {
         TITLE: "Organisatorische informatie",
         DATES: {
           TITLE: "Datums",
+          ONLINE: "Online vrijwilligerwerk",
+          ONLINE_INFO:
+            "Naast het verrichten van vrijwilligerswerk bij de organisatie in Peru zelf, is het ook mogelijk om vanop afstand te werken.",
           START_VOLUNTEER: "Voorgestelde startdatum vrijwilligerswerk",
           END_VOLUNTEER: "Voorgestelde einddatum vrijwilligerswerk",
           START_STUDENT: "Voorgestelde startdatum stage",
@@ -243,10 +246,15 @@ export const locale = {
         },
         SPANISH: {
           TITLE: "Spaans",
+          INFO:
+            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal {{number}} weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
           LEVEL: "Beschrijf je niveau Spaans",
-          WEEKS: "Aantal weken Spaanse lessen",
+          WEEKS_ONLINE: "Aantal weken online Spaanse les",
+          WEEKS_ONLINE_INFO:
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor {{number}} weken online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
+          WEEKS: "Aantal weken Spaanse les ter plaatse",
           WEEKS_INFO:
-            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 4 weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor {{number}} weken Spaanse les ter plaatse.",
         },
         INFO: {
           TITLE: "Info",

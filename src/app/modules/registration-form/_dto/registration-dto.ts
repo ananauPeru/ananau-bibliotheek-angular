@@ -33,11 +33,13 @@ export class RegistrationDTO {
 
   // ORGANIZATIONAL INFORMATION
   // Dates
+  internshipOnline: boolean;
   startDate: Date;
   endDate: Date;
 
   // Spanish
   level: string;
+  weeksOnline: number;
   weeks: number;
 
   // Info

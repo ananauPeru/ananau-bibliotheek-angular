@@ -187,11 +187,13 @@ export class ContainerComponent implements OnInit {
     ) as FormGroup;
 
     const dates = organizationalForm.get("dates") as FormGroup;
+    dto.internshipOnline = Boolean(dates.get("internshipOnline").value);
     dto.startDate = new Date(dates.get("startDate").value);
     dto.endDate = new Date(dates.get("endDate").value);
 
     const spanish = organizationalForm.get("spanish") as FormGroup;
     dto.level = spanish.get("level").value;
+    dto.weeksOnline = Number(spanish.get("weeksOnline").value);
     dto.weeks = Number(spanish.get("weeks").value);
 
     const info = organizationalForm.get("info") as FormGroup;
