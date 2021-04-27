@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common'
 import { ItemDTO } from '../../_dto/item-dto'
 import { EducationalCourses } from '../../_models/educational-courses.enum'
 import { ItemPurposes } from '../../_models/item-purposes.enum'
+import { ItemService } from '../../_services/item/item.service'
 
 @Component({
   selector: 'app-create',
@@ -34,7 +35,8 @@ export class CreateItemComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private itemService: ItemHTTPService,
+    private itemHTTPService: ItemHTTPService,
+    private itemService: ItemService,
     private router: Router,
     private route: ActivatedRoute,
     public toastrUtil: ToastrUtil,
@@ -172,7 +174,7 @@ export class CreateItemComponent implements OnInit {
   create(item: any) {
     console.log(item)
     if (!this.item) {
-      const icreate = this.itemService
+      const icreate = this.itemHTTPService
         .create(item)
         .pipe(
           tap(
@@ -205,7 +207,7 @@ export class CreateItemComponent implements OnInit {
         .subscribe((res) => res as ItemModel)
       // this.subscriptions.push(sbCreate)
     } else {
-      const icreate = this.itemService
+      const icreate = this.itemHTTPService
         .edit(this.routeId, item)
         .pipe(
           tap(
@@ -238,6 +240,7 @@ export class CreateItemComponent implements OnInit {
         .subscribe((res) => res as ItemModel)
       // this.subscriptions.push(sbCreate)
     }
+    this.itemService.loadInitialData()
   }
 
   // helpers for View
@@ -280,4 +283,40 @@ export class CreateItemComponent implements OnInit {
   //   }
   //   internationalPassport.markAsTouched();
   // }
+
+  onDelete() {
+    if (!this.item) {
+      this.toastrUtil.showError(
+        "Something went wrong, couldn't delete... Try again later.",
+        'Error',
+      )
+    } else {
+      console.log("deleting item")
+      const idelete = this.itemHTTPService
+        .delete(this.item.itemId)
+        .pipe(
+          tap(
+            (res) => {
+              console.log('success!!!')
+              console.log(res)
+              this.toastrUtil.showSuccess(
+                'Item successfully deleted.',
+                'Item Deleted',
+              )
+              this.router.navigate(['/library/items/overview'])
+            },
+            (error) => {
+              console.log('error!!!')
+              console.log(error)
+              this.toastrUtil.showError(
+                'Item could not be deleted... Try again later.',
+                'Error',
+              )
+            },
+          ),
+        )
+        .subscribe()
+    }
+    this.itemService.loadInitialData()
+  }
 }

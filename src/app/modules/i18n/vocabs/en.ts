@@ -36,6 +36,8 @@ export const locale = {
         ADD_BOOK: 'Add Book',
         ITEMS: 'Items',
         ADD_ITEM: 'Add Item',
+        LOANING:'Loaning',
+        NEW_LOAN:'New Loan',
       },
       MANAGEMENT: {
         TITLE: 'User management',
