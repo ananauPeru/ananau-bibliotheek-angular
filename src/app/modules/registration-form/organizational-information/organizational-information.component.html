@@ -188,7 +188,10 @@
     </h4>
     <p class="text-muted mb-4">
       {{
-        "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO" | translate: { number: 4 }
+        (role === "Student"
+          ? "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO_STUDENT"
+          : "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO_VOLUNTEER"
+        ) | translate
       }}
     </p>
     <form [formGroup]="organizationalForm.controls.spanish">
@@ -248,8 +251,10 @@
             }}
           </div>
           <span class="form-text text-muted">{{
-            "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_ONLINE_INFO"
-              | translate: { number: 2 }
+            (role === "Student"
+              ? "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_ONLINE_INFO_STUDENT"
+              : "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_ONLINE_INFO_VOLUNTEER"
+            ) | translate
           }}</span>
         </div>
       </div>
@@ -279,8 +284,7 @@
             }}
           </div>
           <span class="form-text text-muted">{{
-            "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_INFO"
-              | translate: { number: 2 }
+            "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_INFO" | translate
           }}</span>
         </div>
       </div>

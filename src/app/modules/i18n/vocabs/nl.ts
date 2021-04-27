@@ -246,15 +246,19 @@ export const locale = {
         },
         SPANISH: {
           TITLE: "Spaans",
-          INFO:
-            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal {{number}} weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
+          INFO_VOLUNTEER:
+            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 2 weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
+          INFO_STUDENT:
+            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 3 weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
           LEVEL: "Beschrijf je niveau Spaans",
           WEEKS_ONLINE: "Aantal weken online Spaanse les",
-          WEEKS_ONLINE_INFO:
-            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor {{number}} weken online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
+          WEEKS_ONLINE_INFO_VOLUNTEER:
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 1 week online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
+          WEEKS_ONLINE_INFO_STUDENT:
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 2 weken online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
           WEEKS: "Aantal weken Spaanse les ter plaatse",
           WEEKS_INFO:
-            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor {{number}} weken Spaanse les ter plaatse.",
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 1 week Spaanse les ter plaatse.",
         },
         INFO: {
           TITLE: "Info",

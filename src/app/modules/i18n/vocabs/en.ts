@@ -254,15 +254,19 @@ export const locale = {
         },
         SPANISH: {
           TITLE: "Spanish",
-          INFO:
-            "If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of {{number}} weeks of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.",
+          INFO_VOLUNTEER:
+            "If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of 2 weeks of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.",
+          INFO_STUDENT:
+            "If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of 3 weeks of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.",
           LEVEL: "Describe your level of Spanish",
           WEEKS_ONLINE: "Number of weeks online Spanish lessons",
-          WEEKS_ONLINE_INFO:
-            "If you do not yet speak a basic level of Spanish, we recommend you apply for {{number}} weeks of online Spanish lessons. These lessons will be provided through video call, prior to your arrival at Añañau.",
+          WEEKS_ONLINE_INFO_VOLUNTEER:
+            "If you do not yet speak a basic level of Spanish, we recommend you apply for 1 week of online Spanish lessons. These lessons will be provided through video call, prior to your arrival at Añañau.",
+          WEEKS_ONLINE_INFO_STUDENT:
+            "If you do not yet speak a basic level of Spanish, we recommend you apply for 2 weeks of online Spanish lessons. These lessons will be provided through video call, prior to your arrival at Añañau.",
           WEEKS: "Number of weeks Spanish lessons on-site",
           WEEKS_INFO:
-            "If you do not yet speak a basic level of Spanish, we recommend you apply for {{number}} weeks of Spanish lessons on-site.",
+            "If you do not yet speak a basic level of Spanish, we recommend you apply for 1 week of Spanish lessons on-site.",
         },
         INFO: {
           TITLE: "Info",
