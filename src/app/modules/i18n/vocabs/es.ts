@@ -38,18 +38,21 @@ export const locale = {
     // AUTH PAGES
     AUTH: {
       GENERAL: {
-        NEW: "Nuevo aquí?",
+        NEW:
+          "¿Buscas voluntariado, buscas prácticas o eres nuevo empleado en Añañau?",
         TITLE: "Bienvenido a Añañau",
+        WELCOMETITLE1: "¡Bienvenido a Asociación ONG Añañau!",
         OR: "O",
         SUBMIT_BUTTON: "Enviar",
         CANCEL_BUTTON: "Cancelar",
         NO_ACCOUNT: "No tienes una cuenta?",
-        SIGNUP_BUTTON: "Regístrate",
+        SIGNUP_BUTTON: "Entonces regístrate aquí",
         FORGOT_BUTTON: "Se te olvidó tu contraseña",
         BACK_BUTTON: "Espalda",
         PRIVACY: "Intimidad",
         LEGAL: "Legal",
-        CONTACT: "Contacto",
+        CONTACT: "Contacta con nosotros",
+        WEBSITE: "Sitio web",
       },
       LOGIN: {
         TITLE: "Crear una cuenta",
@@ -61,7 +64,7 @@ export const locale = {
         SUCCESS: "Your account has been successfully reset.",
       },
       REGISTER: {
-        TITLE: "Sign Up",
+        TITLE: "Registrarse",
         DESC: "Enter your details to create your account",
         SUCCESS: "Your account has been successfuly registered.",
         INCORRECT: "The registration details are incorrect",

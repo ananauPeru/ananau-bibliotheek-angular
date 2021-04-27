@@ -38,21 +38,23 @@ export const locale = {
     // AUTH PAGES
     AUTH: {
       GENERAL: {
-        NEW: "Nieuw hier?",
-        TITLE: "Welkom op Añañau",
-        WELCOMETITLE1: "Welkom op Asociación ONG Añañau!",
+        NEW:
+          "Ben je op zoek naar vrijwilligerswerk, zoek je een stageplek of ben je een nieuwe medewerker bij Añañau?",
+        TITLE: "Welkom bij Añañau",
+        WELCOMETITLE1: "Welkom bij Asociación ONG Añañau!",
         WELCOMETITLE2:
           "Asociación ONG Añañau is een non-profit en niet-gouvernamentele organisatie gericht aan kinderen en jongeren die in extreme armoede en onstabiele familiesituaties leven.",
         OR: "Of",
         SUBMIT_BUTTON: "Verzenden",
         CANCEL_BUTTON: "Annuleer",
         NO_ACCOUNT: "Nog geen account?",
-        SIGNUP_BUTTON: "Registreer",
+        SIGNUP_BUTTON: "Registreer je dan hier",
         FORGOT_BUTTON: "Wachtwoord Vergeten",
         BACK_BUTTON: "Terug",
         PRIVACY: "Privacy",
         LEGAL: "Legal",
-        CONTACT: "Contact",
+        CONTACT: "Contacteer ons",
+        WEBSITE: "Website",
       },
       LOGIN: {
         TITLE: "Login Account",
@@ -65,7 +67,7 @@ export const locale = {
         SUCCESS: "Jouw account is succesvol gereset.",
       },
       REGISTER: {
-        TITLE: "Registreer",
+        TITLE: "Registreren",
         DESC: "Vul je gegevens in om een account aan te maken.",
         SUCCESS: "Jouw account is succesvol aangemaakt.",
         INCORRECT: "Gegevens incorrect.",

@@ -50,7 +50,8 @@ export const locale = {
     // AUTH PAGES
     AUTH: {
       GENERAL: {
-        NEW: "New here?",
+        NEW:
+          "Are you looking to volunteer, are you looking for an internship or are you a new employee at Añañau?",
         TITLE: "Welcome to Añañau",
         WELCOMETITLE1: "Welcome to Asociación ONG Añañau!",
         WELCOMETITLE2:
@@ -59,12 +60,13 @@ export const locale = {
         SUBMIT_BUTTON: "Submit",
         CANCEL_BUTTON: "Cancel",
         NO_ACCOUNT: "Don't have an account?",
-        SIGNUP_BUTTON: "Sign Up",
+        SIGNUP_BUTTON: "Then sign up here",
         FORGOT_BUTTON: "Forgot Password",
         BACK_BUTTON: "Back",
         PRIVACY: "Privacy",
         LEGAL: "Legal",
-        CONTACT: "Contact",
+        CONTACT: "Contact us",
+        WEBSITE: "Website",
       },
       LOGIN: {
         TITLE: "Login Account",
@@ -77,7 +79,7 @@ export const locale = {
         SUCCESS: "Your account has been successfully reset.",
       },
       REGISTER: {
-        TITLE: "Sign Up",
+        TITLE: "Sign up",
         DESC: "Enter your details to create your account",
         SUCCESS: "Your account has been successfuly registered.",
         INCORRECT: "The registration details are incorrect",
