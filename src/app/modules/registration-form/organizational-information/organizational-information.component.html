@@ -9,7 +9,7 @@
     </h4>
     <form [formGroup]="organizationalForm.controls.dates">
       <!-- internship online -->
-      <div class="form-group row">
+      <div *ngIf="role === 'Volunteer'" class="form-group row">
         <label for="internshipOnline" class="col-3">{{
           "REGISTRATION.ORGANIZATIONAL.DATES.ONLINE" | translate
         }}</label>
