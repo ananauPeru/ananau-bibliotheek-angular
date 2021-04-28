@@ -30,7 +30,7 @@
           </div>
 
           <input
-            (keyup)="applyFilter($event.target.value)"
+            (keyup)="registrationService.filter($event.target.value)"
             type="email"
             class="form-control form-control-lg form-control-solid force-pl-5"
             placeholder="Filter..."
@@ -39,7 +39,7 @@
         </div>
         <div class="feedback">
           Try searching and filtering on
-          <b>First name, Last name, Email or Role.</b>
+          <b>First name, Last name, Email, Start date, End date or Role.</b>
         </div>
       </div>
     </div>

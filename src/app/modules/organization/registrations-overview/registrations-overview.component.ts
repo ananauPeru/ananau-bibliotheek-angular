@@ -12,8 +12,4 @@ export class RegistrationsOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  applyFilter(filterValue: string) {
-    console.log(filterValue);
-  }
 }
