@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { RegistrationService } from "../_services/registration/registration.service";
 
 @Component({
   selector: "app-registrations-overview",
@@ -6,7 +7,9 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./registrations-overview.component.scss"],
 })
 export class RegistrationsOverviewComponent implements OnInit {
-  constructor() {}
+  constructor(public registrationService: RegistrationService) {
+    this.registrationService.loadInitialData();
+  }
 
   ngOnInit(): void {}
 

@@ -53,18 +53,26 @@
             <th>First name</th>
             <th>Last name</th>
             <th>Email</th>
-            <th>Proposed start date</th>
-            <th>Proposed end date</th>
+            <th>Start date</th>
+            <th>End date</th>
             <th>Role</th>
             <th>Confirmed</th>
           </tr>
         </thead>
         <tbody>
-          <!-- <tr *ngFor="let user of userService.users | async">
-                        <td>{{user.user.userDetail.firstName}}</td>
-                        <td>{{user.user.userDetail.lastName}}</td>
-                        <td>{{user.user.userName}}</td>
-                    </tr> -->
+          <tr
+            *ngFor="
+              let registration of registrationService.registrations | async
+            "
+          >
+            <td>{{ registration.firstName }}</td>
+            <td>{{ registration.lastName }}</td>
+            <td>{{ registration.email }}</td>
+            <td>{{ registration.startDate }}</td>
+            <td>{{ registration.endDate }}</td>
+            <td>{{ registration.role }}</td>
+            <td>{{ registration.confirmed }}</td>
+          </tr>
         </tbody>
       </table>
     </div>

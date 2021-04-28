@@ -4,22 +4,18 @@ import { Injectable } from "@angular/core";
 import { ToastrUtil } from "./toastr_util";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthUtil {
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
   getAuthFromLocalStorage(): AuthModel {
     try {
-      // console.log(localStorage)
-      // console.log(this.authLocalStorageToken)
       const authData = JSON.parse(
         localStorage.getItem(this.authLocalStorageToken)
       );
-      // console.log(authData)
       return authData;
     } catch (error) {
-      // console.error(error)
       return undefined;
     }
   }
@@ -28,21 +24,17 @@ export class AuthUtil {
     var payLoad = this.getAuthFromLocalStorage().roles;
     var b = false;
     payLoad = payLoad.map((r) => r.toLowerCase());
-    console.log(payLoad);
     allowedRoles.forEach((element) => {
-      console.log(element.toLowerCase());
       if (payLoad.indexOf(element.toLowerCase()) > -1) {
-        console.log("returning true");
         b = true;
       }
-    })
+    });
     // if (!b) {
-    //   console.log("not permitted...")
     //   this.toastrUtil.showWarning(
     //     'You are not permitted to do this...',
     //     'Unauthorized',
     //   )
     // }
-    return b
+    return b;
   }
 }
