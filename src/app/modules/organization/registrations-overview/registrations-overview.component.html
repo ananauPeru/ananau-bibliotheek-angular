@@ -67,11 +67,27 @@
           >
             <td>{{ registration.firstName }}</td>
             <td>{{ registration.lastName }}</td>
-            <td>{{ registration.email }}</td>
-            <td>{{ registration.startDate }}</td>
-            <td>{{ registration.endDate }}</td>
-            <td>{{ registration.role }}</td>
-            <td>{{ registration.confirmed }}</td>
+            <td>
+              <a href="mailto:{{ registration.email }}">{{
+                registration.email
+              }}</a>
+            </td>
+            <td>{{ registration.startDate | date: "dd-MM-yyyy" }}</td>
+            <td>{{ registration.endDate | date: "dd-MM-yyyy" }}</td>
+            <td>{{ registration.role === 1 ? "Student" : "Volunteer" }}</td>
+            <td>
+              <img
+                *ngIf="registration.confirmed"
+                src="../../../../assets/media/svg/icons/Navigation/Check.svg"
+              />
+              <button
+                *ngIf="!registration.confirmed"
+                type="button"
+                class="btn btn-success"
+              >
+                Confirm
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
