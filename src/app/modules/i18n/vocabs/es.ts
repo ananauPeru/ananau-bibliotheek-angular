@@ -33,6 +33,11 @@ export const locale = {
         TITLE: "Gestión de usuarios",
         REGISTRATION: "Formulario de inscripción",
       },
+      ORGANIZATION: {
+        TITLE: "Organización",
+        ROLES: "Gestión de roles",
+        REGISTRATIONS: "Inscripciones",
+      },
     },
 
     // AUTH PAGES
@@ -57,6 +62,7 @@ export const locale = {
       LOGIN: {
         TITLE: "Crear una cuenta",
         BUTTON: "Registrarse",
+        ALREADY_ACCOUNT: "¿Ya tienes una cuenta?",
       },
       FORGOT: {
         TITLE: "Contraseña olvidada?",

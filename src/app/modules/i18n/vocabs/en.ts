@@ -44,6 +44,7 @@ export const locale = {
       ORGANIZATION: {
         TITLE: "Organization",
         ROLES: "Role Management",
+        REGISTRATIONS: "Registrations",
       },
     },
 
@@ -72,6 +73,7 @@ export const locale = {
         TITLE: "Login Account",
         BUTTON: "Sign In",
         ERROR: "The login details are incorrect",
+        ALREADY_ACCOUNT: "Already have an account?",
       },
       FORGOT: {
         TITLE: "Forgotten Password?",

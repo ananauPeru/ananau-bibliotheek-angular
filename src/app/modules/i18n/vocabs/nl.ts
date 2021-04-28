@@ -33,6 +33,11 @@ export const locale = {
         TITLE: "Gebruikersbeheer",
         REGISTRATION: "Registratieformulier",
       },
+      ORGANIZATION: {
+        TITLE: "Organisatie",
+        ROLES: "Rolbeheer",
+        REGISTRATIONS: "Registraties",
+      },
     },
 
     // AUTH PAGES
@@ -60,6 +65,7 @@ export const locale = {
         TITLE: "Login Account",
         BUTTON: "Inloggen",
         ERROR: "Logingegevens zijn incorrect.",
+        ALREADY_ACCOUNT: "Heb je al een account?",
       },
       FORGOT: {
         TITLE: "Wachtwoord Vergeten?",
