@@ -35,8 +35,8 @@ export class LoanHTTPService {
 
   // CREATE
   // server should return the object with ID
-  create(item: LoanedPieceDTO): Observable<LoanedPieceModel> {
-    return this.http.post<LoanedPieceModel>(`${API_LOANS_URL}`, item).pipe(
+  create(lp: LoanedPieceDTO): Observable<LoanedPieceModel> {
+    return this.http.post<LoanedPieceModel>(`${API_LOANS_URL}`, lp).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.log('Login please...')
@@ -44,16 +44,16 @@ export class LoanHTTPService {
         return throwError(error)
       }),
       map(
-        (item: any): LoanedPieceModel => {
-          console.log(item)
-          return item
+        (lp: any): LoanedPieceModel => {
+          console.log(lp)
+          return lp
         },
       ),
     )
   }
 
-  edit(id: number, item: LoanedPieceDTO): Observable<LoanedPieceModel> {
-    return this.http.put<LoanedPieceModel>(`${API_LOANS_URL}/${id}`, item).pipe(
+  edit(id: number, lp: LoanedPieceDTO): Observable<LoanedPieceModel> {
+    return this.http.put<LoanedPieceModel>(`${API_LOANS_URL}/${id}`, lp).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.log('Login please...')
@@ -61,9 +61,9 @@ export class LoanHTTPService {
         return throwError(error)
       }),
       map(
-        (item: any): LoanedPieceModel => {
-          console.log(item)
-          return item
+        (lp: any): LoanedPieceModel => {
+          console.log(lp)
+          return lp
         },
       ),
     )
@@ -82,9 +82,9 @@ export class LoanHTTPService {
           return throwError(error)
         }),
         map(
-          (item: any): LoanedPieceModel => {
-            console.log(item)
-            return item
+          (lp: any): LoanedPieceModel => {
+            console.log(lp)
+            return lp
           },
         ),
       )

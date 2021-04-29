@@ -5,7 +5,8 @@
             <div class="input-group">
                 <div class="input-group-prepend col-2 pr-0 pl-0">
                     <button type="button" class="btn btn-secondary btn-block dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" id="bookitem">
+                        aria-haspopup="true" aria-expanded="false" [disabled]="loanedPiece.loanedPieceId?true:false"
+                        id="bookitem">
                         {{type}}&nbsp;
                         <i class="fas fa-caret-down"></i>
                     </button>
@@ -17,10 +18,10 @@
                 <div class="input-group-append col-10 pl-0 pr-0">
                     <input type="text" class="form-control form-control-lg form-control-solid dropdown-toggle"
                         id="dropdownMenuButton" data-toggle="dropdown" aria-label="Text input with dropdown button"
-                        placeholder="Type in the title of the Item/Book" value='{{item ? item.name : ""}}'
-                        (input)="filter = $event.target.value" />
+                        placeholder="Type in the title of the Item/Book" value='{{item ? item.name : filter}}'
+                        (input)="setFilter($event.target.value)" [disabled]="loanedPiece.loanedPieceId?true:false" />
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="itemsDropdown">
-                        <a class="dropdown-item text-dark" (click)="item=i"
+                        <a class="dropdown-item text-dark" (click)="setItem(i)"
                             *ngFor="let i of filteredList() | async">{{i.name}}</a>
                     </div>
                 </div>
@@ -37,7 +38,8 @@
             <div class="input-group">
                 <div class="input-group-prepend col-2 pr-0 pl-0">
                     <button type="button" class="btn btn-secondary btn-block dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" id="bookitem">
+                        aria-haspopup="true" aria-expanded="false" id="bookitem"
+                        [disabled]="loanedPiece.loanedPieceId?true:false">
                         User
                     </button>
                 </div>
@@ -45,10 +47,10 @@
                     <input type="text" class="form-control form-control-lg form-control-solid dropdown-toggle"
                         id="dropdownMenuButtonUser" data-toggle="dropdown" aria-label="Text input with dropdown button"
                         placeholder="Type in a name or email"
-                        value='{{loaningUser && loaningUser.userDetail ? loaningUser.userDetail.firstName : ""}}'
-                        (input)="userFilter = $event.target.value" />
+                        value='{{loaningUser && loaningUser.userDetail ? loaningUser.userDetail.firstName+ " " +loaningUser.userDetail.lastName +" • "+loaningUser.email : ""}}'
+                        (input)="userFilter = $event.target.value" [disabled]="loanedPiece.loanedPieceId?true:false" />
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonUser" id="usersDropdown">
-                        <a class="dropdown-item text-dark" (click)="loaningUser=i.user"
+                        <a class="dropdown-item text-dark" (click)="setUser(i.user)"
                             *ngFor="let i of filteredUserList() | async">{{i.user.userDetail.firstName + '
                             '+i.user.userDetail.lastName +' • '+i.user.email }}</a>
                     </div>
@@ -59,33 +61,27 @@
         </div>
     </div>
 </div>
-<form action="#" class="form form-label-right" [formGroup]="formGroup">
+<form action="#" class="form form-label-right" [formGroup]="loanForm">
     <div class="row form-group">
-        <div class="col-12 col-md-6 mb-3">
-            <label>User</label>
-            <select class="form-control form-control-lg form-control-solid" name="loaningUser"
-                formControlName="loaningUser" aria-placeholder="Loaning user"
-                [class.is-invalid]="isControlInvalid('loaningUser')" [class.is-valid]="isControlValid('loaningUser')"
-                placeholder="User" required>
-                <option value=''>Choose User</option>
-                <option *ngFor="let user of userService.users | async" value="{{user.user.id}}">
-                    {{user.user.userDetail.firstName + ' '+user.user.userDetail.lastName }}
-                </option>
-            </select>
-            <div class="feedback" *ngIf="!isControlTouched('loaningUser')">Please select the <b>User</b> who is loaning.
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'loaningUser')">
-                User is required
-            </div>
-        </div>
         <div class="col-12 col-md-6 mb-3">
             <label>
                 Loaned At
             </label>
-            <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()" ngbDatepicker
+            <ng-container *ngIf="loanedPiece.loanedPieceId; else elseTemplate">
+                <input class="form-control form-control-solid form-control-lg" ngbDatepicker
+               name="loanDate" formControlName="loanDate" placeholder="2000-01-01"
+                autocomplete="off" [class.is-invalid]="isControlInvalid('loanDate')"
+                [class.is-valid]="isControlValid('loanDate')" [disabled]="true"
+                required />
+            </ng-container>
+            <ng-template #elseTemplate>
+                <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()" ngbDatepicker
                 #d="ngbDatepicker" name="loanDate" formControlName="loanDate" placeholder="2000-01-01"
                 autocomplete="off" [class.is-invalid]="isControlInvalid('loanDate')"
-                [class.is-valid]="isControlValid('loanDate')" required />
+                [class.is-valid]="isControlValid('loanDate')" [disabled]="loanedPiece.loanedPieceId?true:false"
+                required />
+            </ng-template>        
+           
             <div class="feedback" *ngIf="!isControlTouched('loanDate')">
                 Please enter <b>the Loaned Date of the item.</b>
             </div>
@@ -115,24 +111,44 @@
             </div>
         </div>
         <div class="col-12 col-md-6 mb-3">
-            <label>State</label>
-            <select class="form-control form-control-lg form-control-solid" name="state" formControlName="state"
-                [class.is-invalid]="isControlInvalid('state')" [class.is-valid]="isControlValid('state')" required>
-                <option value='Good'>Good</option>
-                <option value="Normal usage signs">Normal usage signs</option>
-                <option value="Bad">Bad</option>
-            </select>
-            <div class="feedback" *ngIf="!isControlTouched('state')">Please select a <b>State</b> for the item.
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'state')">
-                State is required
-            </div>
+            <label>State when Loaning</label>
+
+            <ng-container *ngIf="loanedPiece.loanedPieceId; else elseTemplateState">
+                <select class="form-control form-control-lg form-control-solid" name="loanState"
+                    formControlName="loanState" [class.is-invalid]="isControlInvalid('loanState')"
+                    [class.is-valid]="isControlValid('loanState')"
+                    [attr.disabled]='loanedPiece.loanedPieceId?true:false' required>
+                    <option value='GOOD'>Good</option>
+                    <option value="NORMAL USAGE SIGNS">Normal usage signs</option>
+                    <option value="BAD">Bad</option>
+                </select>
+                <div class="feedback" *ngIf="!isControlTouched('loanState')">Please select a <b>State</b> for the item.
+                </div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'loanState')">
+                    State is required
+                </div>
+            </ng-container>
+            <ng-template #elseTemplateState>
+                <select class="form-control form-control-lg form-control-solid" name="loanState"
+                    formControlName="loanState" [class.is-invalid]="isControlInvalid('loanState')"
+                    [class.is-valid]="isControlValid('loanState')" required>
+                    <option value='GOOD'>Good</option>
+                    <option value="NORMAL USAGE SIGNS">Normal usage signs</option>
+                    <option value="BAD">Bad</option>
+                </select>
+                <div class="feedback" *ngIf="!isControlTouched('loanState')">Please select a <b>State</b> for the item.
+                </div>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'loanState')">
+                    State is required
+                </div>
+            </ng-template>
         </div>
         <div class="col-12 col-md-6 mb-3">
             <label>Quantity</label>
             <input type="number" min="1" max="1000" step="1" class="form-control form-control-lg form-control-solid"
                 autocomplete="off" placeholder="1" name='quantity' [class.is-invalid]="isControlInvalid('quantity')"
-                [class.is-valid]="isControlValid('quantity')" formControlName='quantity' required />
+                [class.is-valid]="isControlValid('quantity')" formControlName='quantity'
+                [readonly]="loanedPiece.loanedPieceId?true:false" required />
             <div class="feedback" *ngIf="!isControlTouched('quantity')">
                 Please enter <b>the Quantity of the loaned items.</b>
             </div>
@@ -151,8 +167,10 @@
         </div>
         <div class="col-12 mb-3">
             <label>State Description</label>
-            <textarea style="min-height: 250px;" class="form-control form-control-lg form-control-solid"
-                placeholder="Please describe the state in more detail if necessary."></textarea>
+            <textarea [readonly]="loanedPiece.loanedPieceId?true:false" style="min-height: 250px;"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Please describe the state in more detail if necessary."
+                formControlName='loanStateDescription'></textarea>
         </div>
     </div>
 </form>

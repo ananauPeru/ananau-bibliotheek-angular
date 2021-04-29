@@ -16,5 +16,6 @@ export class LoanedPieceModel {
   loanDate: Date
   returnDate: Date
   returnedAt: Date
-  status:string
+  remarks: string
+  status: string
 }

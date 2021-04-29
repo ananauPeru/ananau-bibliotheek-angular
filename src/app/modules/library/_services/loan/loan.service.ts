@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { LoanedPieceDTO } from '../../_dto/loaned-piece-dto'
 import { LoanedPieceModel } from '../../_models/loaned-piece.model'
 import { LoanHTTPService } from './loan-http/loan-http.service'
 
@@ -34,163 +35,57 @@ export class LoanService {
     )
   }
 
-  // filter(filter: any, _category: any, pp: number, p: number, _course: any) {
-  //   let f = filter.toLowerCase()
-  //   console.log(f)
-  //   let category = undefined
-  //   if (_category) {
-  //     category = _category.toLowerCase()
-  //   }
-  //   console.log(category)
-  //   console.log(this.loans[0])
-  //   let course = undefined
-  //   if (_course) {
-  //     course = _course.toLowerCase()
-  //   }
-  //   if (category == undefined) {
-  //     this.loans = this._loans.pipe(
-  //       map((loans) =>
-  //         loans.filter((item) => {
-  //           let b =
-  //             item.name.toLowerCase().includes(f) ||
-  //             (item.description
-  //               ? item.description.toLowerCase().includes(f)
-  //               : false) ||
-  //             (item.brand ? item.brand.toLowerCase().includes(f) : false) ||
-  //             (item.material
-  //               ? item.material.toLowerCase().includes(f)
-  //               : false) ||
-  //             (item.category ? item.category.toLowerCase().includes(f) : false)
+  filter(s: string, f?: string) {
+    let status = s.toLowerCase()
+    let filter = f ? f.toLowerCase() : ''
 
-  //           return b
-  //         }),
-  //       ),
-  //     )
-  //   } else {
-  //     console.log('Filtering for category')
-  //     this.loans = this._loans.pipe(
-  //       map((loans) =>
-  //         loans.filter((item) => {
-  //           let b =
-  //             (item.name.toLowerCase().includes(f) ||
-  //               (item.description
-  //                 ? item.description.toLowerCase().includes(f)
-  //                 : false) ||
-  //               (item.brand ? item.brand.toLowerCase().includes(f) : false) ||
-  //               (item.material
-  //                 ? item.material.toLowerCase().includes(f)
-  //                 : false)) &&
-  //             item.category.toLowerCase().includes(category)
-  //           console.log(b)
-
-  //           return b
-  //         }),
-  //       ),
-  //     )
-  //   }
-
-  //   if (course) {
-  //     console.log('Filtering for genre')
-  //     this.loans = this._loans.pipe(
-  //       map((loans) =>
-  //         loans.filter((item) => {
-  //           let b = item.course.toLowerCase().includes(course)
-  //           return b
-  //         }),
-  //       ),
-  //     )
-  //   }
-
-  //   this.loans = this.loans.pipe(
-  //     map((loans) =>
-  //       loans.filter((item, index) => {
-  //         // console.log(index)
-  //         let i = index < pp * p && index >= pp * (p - 1)
-  //         return i
-  //       }),
-  //     ),
-  //   )
-  // }
-
-  filter(
-    filter: any,
-    _category: any,
-    // pp: number,
-    // p: number,
-    _course: any,
-  ) {
-    let f = filter.toLowerCase()
-    let category = undefined
-    if (_category) {
-      category = _category.toLowerCase()
-    }
-    let course = undefined
-    if (_course) {
-      course = _course.toLowerCase()
-    }
-    if (category == undefined) {
-      console.log('FILTERING WITHOUT CATEGORY SET!!!')
-      this.loans = this._loans.pipe(
-        map((loans) =>
-          loans.filter((item) => {
-            return true
-            // item.name.toLowerCase().includes(f)
-            // (item.description
-            //   ? item.description.toLowerCase().includes(f)
-            //   : false) ||
-            // (item.purpose ? item.purpose.toLowerCase().includes(f) : false) ||
-            // (item.brand ? item.brand.toLowerCase().includes(f) : false) ||
-            // (item.course ? item.course.toLowerCase().includes(f) : false)
-            // return b
-          }),
-        ),
-      )
-    }
-    // else {
-    //   console.log('Filtering for category')
-    //   this.books = this._books.pipe(
-    //     map((books) =>
-    //       books.filter((book) => {
-    //         let b =
-    //           (book.name.toLowerCase().includes(f) ||
-    //             (book.description
-    //               ? book.description.toLowerCase().includes(f)
-    //               : false) ||
-    //             (book.author ? book.author.toLowerCase().includes(f) : false) ||
-    //             (book.state ? book.state.toLowerCase().includes(f) : false)) &&
-    //           book.genre.toLowerCase().includes(category)
-    //         console.log(b)
-
-    //         return b
-    //       }),
-    //     ),
-    //   )
+    // let f = filter.toLowerCase()
+    // let category = undefined
+    // if (_category) {
+    //   category = _category.toLowerCase()
+    // }
+    // let course = undefined
+    // if (_course) {
+    //   course = _course.toLowerCase()
     // }
 
-    if (course) {
-      this.loans = this.loans.pipe(
-        map((loans) =>
-          loans.filter((item) => {
-            let b = true
-            // let b = item.course.toLowerCase().includes(course)
-            return b
-          }),
-        ),
-      )
-    }
-
-    // this.books = this.books.pipe(
-    //   map((books) =>
-    //     books.filter((book, index) => {
-    //       console.log(index)
-    //       let i = index < pp * p && index >= pp * (p - 1)
-    //       return i
-    //     }),
-    //   ),
-    // )
+    console.log('FILTERING WITHOUT CATEGORY SET!!!')
+    this.loans = this._loans.pipe(
+      map((loans) =>
+        loans.filter((l) => {
+          let b =
+            l.status.toLowerCase().includes(status) &&
+            ((
+              l.loaningUser.userDetail.firstName +
+              ' ' +
+              l.loaningUser.userDetail.lastName
+            ).toLowerCase().includes(filter) ||
+              l.loaningUser.email.toLowerCase().includes(filter))
+          // item.name.toLowerCase().includes(f)
+          // (item.description
+          //   ? item.description.toLowerCase().includes(f)
+          //   : false) ||
+          // (item.purpose ? item.purpose.toLowerCase().includes(f) : false) ||
+          // (item.brand ? item.brand.toLowerCase().includes(f) : false) ||
+          // (item.course ? item.course.toLowerCase().includes(f) : false)
+          return b
+        }),
+      ),
+    )
   }
 
-  paginate(pp: any, p: any) {
-    console.log(this.loans[0])
+  // paginate(pp: any, p: any) {
+  //   console.log(this.loans[0])
+  // }
+
+  create(loanedPieceDTO: LoanedPieceDTO): Observable<LoanedPieceModel> {
+    return this.loanHttpService.create(loanedPieceDTO)
+  }
+
+  edit(
+    routeId: number,
+    loanedPieceDTO: LoanedPieceDTO,
+  ): Observable<LoanedPieceModel> {
+    return this.loanHttpService.edit(routeId, loanedPieceDTO)
   }
 }

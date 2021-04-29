@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common'
 import { Token } from '@angular/compiler/src/ml_parser/lexer'
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap'
 import { Observable } from 'rxjs'
@@ -19,71 +19,54 @@ import { UserService } from '../../../_services/user/user.service'
   styleUrls: ['./loan-details.component.scss'],
 })
 export class LoanDetailsComponent implements OnInit {
+  @Input() loanedPiece: LoanedPieceModel = new LoanedPieceModel()
+  @Input() loaningUser: UserModel = null
+  @Input() loanForm: FormGroup
+
   public filteredItems = null
   public type = 'Books'
   public item = null
-  public loanedPiece: LoanedPieceModel = null
-  public loaningUser: UserModel = null
   public filter = this.item ? this.item.name : ''
   public userFilter = this.loaningUser ? this.loaningUser.email : ''
 
-  formGroup: FormGroup
-
   constructor(
-    private fb: FormBuilder,
     public loanService: LoanService,
     public bookService: BookService,
     public itemService: ItemService,
     public userService: UserService,
-    private datePipe: DatePipe,
   ) {}
 
   ngOnInit(): void {
-    console.log(this.datePipe.transform(Date.now(), 'yyyy-MM-dd'))
-    this.formGroup = this.fb.group({
-      loaningUser: [
-        this.loanedPiece && this.loanedPiece.loaningUser
-          ? this.loanedPiece.loaningUser.id
-          : '',
-        Validators.compose([Validators.required]),
-      ],
-      loanDate: [
-        this.loanedPiece && this.loanedPiece.loanDate
-          ? this.datePipe.transform(Date.now(), 'yyyy-MM-dd')
-          : new NgbDate(
-              new Date().getFullYear(),
-              new Date().getMonth() + 1,
-              new Date().getDate(),
-            ),
-        Validators.compose([Validators.required]),
-      ],
-      returnDate: [
-        this.loanedPiece && this.loanedPiece.returnDate
-          ? this.datePipe.transform(Date.now(), 'yyyy-MM-dd')
-          : new NgbDate(
-              new Date(Date.now() + 12096e5).getFullYear(),
-              new Date(Date.now() + 12096e5).getMonth() + 1,
-              new Date(Date.now() + 12096e5).getDate(),
-            ),
-        Validators.compose([Validators.required]),
-      ],
-      state: [
-        this.loanedPiece && this.loanedPiece.loanState
-          ? this.loanedPiece.loanState
-          : 'Good',
-        Validators.compose([Validators.required]),
-      ],
-      quantity: [
-        this.loanedPiece && this.loanedPiece.quantity
-          ? this.loanedPiece.quantity
-          : 1,
-        Validators.compose([
-          Validators.required,
-          Validators.min(1),
-          Validators.max(1000),
-        ]),
-      ],
-    })
+    if (this.loanedPiece.book) {
+      this.type = 'Books'
+      this.item = this.loanedPiece.book
+    } else if (this.loanedPiece.item) {
+      this.type = 'Items'
+      this.item = this.loanedPiece.item
+    }
+  }
+
+  setItem(i: any) {
+    this.item = i
+    if (this.type.toLowerCase() == 'books') {
+      this.loanedPiece.book = this.item
+      this.loanedPiece.item = null
+    } else {
+      this.loanedPiece.book = null
+      this.loanedPiece.item = this.item
+    }
+  }
+
+  setUser(u: any) {
+    this.loaningUser = u
+    this.loanedPiece.loaningUser = u
+  }
+
+  setFilter(e: string) {
+    this.item = null
+    this.loanedPiece.book = null
+    this.loanedPiece.item = null
+    this.filter = e
   }
 
   filteredList(): Observable<any[]> {
@@ -103,22 +86,22 @@ export class LoanDetailsComponent implements OnInit {
 
   // helpers for View
   isControlValid(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName]
+    const control = this.loanForm.controls[controlName]
     return control.valid && (control.dirty || control.touched)
   }
 
   isControlInvalid(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName]
+    const control = this.loanForm.controls[controlName]
     return control.invalid && (control.dirty || control.touched)
   }
 
   controlHasError(validation: string, controlName: string) {
-    const control = this.formGroup.controls[controlName]
+    const control = this.loanForm.controls[controlName]
     return control.hasError(validation) && (control.dirty || control.touched)
   }
 
   isControlTouched(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName]
+    const control = this.loanForm.controls[controlName]
     return control.dirty || control.touched
   }
 }

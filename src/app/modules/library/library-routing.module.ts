@@ -31,7 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'books/edit-book/:id',
-        resolve: {book: BookResolver },
+        resolve: { book: BookResolver },
         component: CreateBookComponent,
       },
       {
@@ -44,7 +44,7 @@ const routes: Routes = [
       },
       {
         path: 'items/edit-item/:id',
-        resolve: {item: ItemResolver },
+        resolve: { item: ItemResolver },
         component: CreateItemComponent,
       },
       {
@@ -56,9 +56,9 @@ const routes: Routes = [
         component: AddLoanComponent,
       },
       {
-        path: 'loans/edit-loan',
-        resolve: {loan: LoanedPieceResolver },
-        component: CreateBookComponent,
+        path: 'loans/edit-loan/:id',
+        resolve: { loan: LoanedPieceResolver },
+        component: AddLoanComponent,
       },
       // {
       //   path: 'registration',
