@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-4">
+            Step 0 - Before Starting
+        </h1>
+        <hr />
+        <p class="lead h6"> Created: 29/04/2021 | Last Update: 29/04/2021</p>
+    </div>
+    <div class="col-12 mt-3">
+        <p class="lead">
+            In order to begin working for Ananau and all of her projects we need access, lets sort that out first!
+        </p>
+        <p>
+            We need access to multiple resources in order to start developing. Managing logins and passwords in a
+            correct and secure manner is very important. So it would be a bad idea to simply list them all here. We are
+            using a key vault on Azure
+            to store all of our credentials. Below is a step by step instruction to access the vault and
+            username/password combinations.
+        </p>
+        <h4 class="display">Step 1 - Log in to Azure</h4>
+        <p>Log in to Azure and open the Ananau Resource Group named <kbd>ananauAPI</kbd>. If you don't have access
+            to the Azure portal yet please contact <kbd>Ellen Bosh</kbd> or <kbd>Gilmourd Cardeña Pérez</kbd>. They can
+            give
+            you access to the portal, step-by-step instructions can be found <a (click)="scrollToElement(azureaccess)">below.</a></p>
+
+
+        <h2 #azureaccess class="display">Giving Access to New Users</h2>
+        <p>In the past everyone logged in from the same master account with all the permissions for the Azure portal.
+            This is not the best solution for obvious reasons. We've switched to using <kbd>Azure role-based access
+                control (Azure RBAC)</kbd>, the official documentation can be found <a
+                href="https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal"
+                target="_blank">here</a>.</p>
+
+        <h4 class="display">Step 1 - Log in to Azure </h4>
+        <p>Log in to Azure with the owner account <kbd>ellen@quebonito.onmicrosoft.com</kbd>. You will be presented with
+            an overview like below, please select the resource group named <kbd>ananauAPI</kbd>.</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-1.png" class="center-image" alt="">
+
+        <h4 class="display">Step 2 - Navigate to Access Control (IAM)</h4>
+        <p>Click on <kbd>Access Control (IAM)</kbd> which is located on the left navigation panel.</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-2.png" class="center-image" alt="">
+        
+        <h4 class="display">Step 3 - Navigate to Role Assignments Tab</h4>
+        <p>Click on <kbd>Role Assignments (3)</kbd> which is located on the top navigation bar within the IAM control panel. Next click on <kbd>+ Add (4)</kbd> and select <kbd>Add role assignment</kbd> from the dropdown to assign a new role to a user.</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-3.png" class="center-image" alt="">
+
+        <h4 class="display">Step 4 - Add Role & User</h4>
+        <p>A side-panel will show up where you need to fill in the following information and click on <kbd>Save</kbd>.</p>
+        <ul>
+            <li>Role: <u>contributer</u></li>
+            <li>Assign access to: <u>User, group, or service principal</u></li>
+            <li>Select: <u>example@email.com</u></li>
+        </ul>
+        <p>The user has been granted access to the resource group.</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-4.png" class="center-image" alt="">
+    </div>
+</div>
