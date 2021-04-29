@@ -1,0 +1,27 @@
+table tr {
+  height: 56px;
+  min-height: 56px;
+  border-bottom-color: #ebedf3;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  font-weight: 500;
+  width: auto;
+
+  th,
+  td {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 20px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  .badge.badge-pill {
+   padding: 6px;
+  }
+}

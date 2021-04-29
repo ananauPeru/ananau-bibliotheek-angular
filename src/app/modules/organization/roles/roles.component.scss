@@ -67,3 +67,23 @@
   cursor: pointer;
   border-radius: 5px;
 }
+
+table tr {
+  height: 56px;
+  min-height: 56px;
+  border-bottom-color: #ebedf3;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  font-weight: 500;
+  width: auto;
+
+  th,td {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 56px;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+}

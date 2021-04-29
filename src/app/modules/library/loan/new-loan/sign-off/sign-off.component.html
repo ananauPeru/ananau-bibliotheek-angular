@@ -1,0 +1,51 @@
+<form action="#" class="form form-label-right" [formGroup]="loanForm">
+    <div class="row form-group">
+
+        <div class="col-12 mb-3">
+            <h3>Signing Off (Closing) Loan</h3><br>
+            <p>You are about to sign off and close this loan. Please check all of the details below and make changes if
+                necessary...
+                If there is a remark you would like to add, you can write it down in the text box below before closing.
+            </p>
+        </div>
+
+        <div class="col-12 mb-3">
+            <hr />
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <strong>Type: </strong>{{loanedPiece.book ? 'BOOK' : 'ITEM'}} <br>
+                    <strong>Title: </strong>{{loanedPiece.book?loanedPiece.book.name:loanedPiece.item.name}} <br>
+                    <strong>Quantity: </strong>{{loanedPiece.quantity}} <br>
+                    <strong>User: </strong>{{loanedPiece.loaningUser.userDetail.firstName + ' ' +
+                    loanedPiece.loaningUser.userDetail.lastName + ' • ' + loanedPiece.loaningUser.email}} <br>
+                    <strong>Loan Date: </strong> {{loanedPiece.loanDate | date:'dd/MM/yyyy'}} <br>
+                    <strong>Loan State: </strong> {{loanedPiece.loanState.toLowerCase()}} <br>
+                    <strong>Loan State Description: </strong> <br>
+                    <span class="pl-3">
+                        {{loanedPiece.loanStateDescription ?
+                        loanedPiece.loanStateDescription: 'No description provided.' }}
+                    </span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <strong>Expected Return Date: </strong>{{loanedPiece.returnDate|date:'dd/MM/yyyy'}} <br>
+                    <strong>Returned At: </strong>{{loanedPiece.returnedAt? (loanedPiece.returnedAt | date:'dd/MM/yyyy')
+                    : ''}} <br>
+                    <strong>Return State: </strong>{{loanedPiece.returnState? loanedPiece.returnState.toLowerCase() :
+                    ''}} <br>
+                    <strong>Return State Description: </strong> <br>
+                    <span class="pl-3">
+                        {{loanedPiece.returnStateDescription ?
+                        loanedPiece.returnStateDescription: 'No description provided.' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mb-3">
+            <hr />
+            <label>Remarks</label>
+            <textarea style="min-height: 250px;" class="form-control form-control-lg form-control-solid"
+                placeholder="Remarks before closing the loan." formControlName='remarks'></textarea>
+        </div>
+    </div>
+</form>

@@ -134,3 +134,9 @@ a:active,
 .input-group.input-group-solid .input-group-prepend~.form-control.force-pl-5 {
   padding-left: 10px !important;
 }
+
+td a {
+  :hover{
+    color: $primary
+  }
+}

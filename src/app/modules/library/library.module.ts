@@ -51,6 +51,12 @@ import { CreateItemComponent } from './create/item/create-item.component'
 import { CreateBookComponent } from './create/book/create-book.component'
 import { NgxDropzoneModule } from 'ngx-dropzone'
 import { MarkAsteriskDirective } from './directives/mark-asterisk.directive'
+import { OverviewComponent } from './loan/overview/overview.component'
+import { PositivePipe } from './pipes/positive.pipe'
+import { AddLoanComponent } from './loan/new-loan/add-loan.component';
+import { LoanDetailsComponent } from './loan/new-loan/loan-details/loan-details.component';
+import { ReturnDetailsComponent } from './loan/new-loan/return-details/return-details.component';
+import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component'
 
 @NgModule({
   declarations: [
@@ -60,6 +66,12 @@ import { MarkAsteriskDirective } from './directives/mark-asterisk.directive'
     CreateItemComponent,
     CreateBookComponent,
     MarkAsteriskDirective,
+    OverviewComponent,
+    AddLoanComponent,
+    PositivePipe,
+    LoanDetailsComponent,
+    ReturnDetailsComponent,
+    SignOffComponent,
   ],
   imports: [
     CommonModule,
@@ -113,7 +125,7 @@ import { MarkAsteriskDirective } from './directives/mark-asterisk.directive'
     HttpClientModule,
     LayoutModule,
     NgbModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
   ],
   providers: [DatePipe],
 })
