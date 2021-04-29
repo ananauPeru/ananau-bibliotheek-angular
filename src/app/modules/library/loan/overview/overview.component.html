@@ -6,7 +6,7 @@
             <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
                 <div class="row">
                     <div class="col-12 col-md-8 w-100">
-                        <h3 class="card-title font-weight-bolder text-dark">Change and Assign Roles</h3>
+                        <h3 class="card-title font-weight-bolder text-dark">All Loaned Out Items and Books</h3>
                     </div>
                     <!-- <div class="col-12 col-md-4">
                         <button type="submit" id="kt_login_signin_submit"
@@ -34,12 +34,6 @@
     </div>
     <!-- Body -->
     <div class="card-body pt-2">
-        <div [ngClass]=" working ? 'd-flex' : ''" id="overlay" onclick="off()">
-            <div class="w-100 d-flex justify-content-center align-items-center">
-                <h1 class="text-center text-white">Please wait...</h1>
-            </div>
-        </div>
-
         <!--begin::Form Group-->
         <div class="form-group row mb-10">
             <div class="col-12 col-md-12">
@@ -50,12 +44,12 @@
                         </span>
                     </div>
 
-                    <input (keyup)="applyFilter($event.target.value)" type="email"
+                    <input (keyup)="filter = ($event.target.value)" type="email"
                         class="form-control form-control-lg form-control-solid force-pl-5" placeholder="Filter..."
                         style="padding-left: 10px;" />
                 </div>
                 <div class="feedback">
-                    Try searching and filtering on <b>First name, Last name, Email or Role.</b>
+                    Try searching and filtering on <b>Title of the Item/Book, Name of User or Email of User.</b>
                 </div>
             </div>
         </div>
@@ -64,39 +58,65 @@
         <!--begin: Item-->
         <div class="row">
             <div class="col-12">
+                <!--begin: Item-->
                 <div class="d-flex flex-wrap align-items-center mb-10 table-responsive">
                     <table class="table table-fit">
                         <thead>
                             <tr>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Email</th>
-                                <th>SuperAdmin</th>
-                                <th>Admin</th>
-                                <th>Librarian</th>
-                                <th>Volunteer</th>
-                                <th>Student</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Loaned By</th>
+                                <th>Loaned At</th>
+                                <th>Return Date</th>
+                                <th>Days Remaining</th>
+                                <th>•••</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of userService.users | async">
-                                <td>{{user.user.userDetail.firstName}}</td>
-                                <td>{{user.user.userDetail.lastName}}</td>
-                                <td>{{user.user.userName}}</td>
-                                <td class="text-center" *ngFor="let role of roleService.roles | async">
-                                    <input class="form-check-input position-relative" type="checkbox" value=""
-                                        id="flexCheckChecked" [checked]="user.roles.includes(role.name)"
-                                        (change)="changeRoles($event, user, role.name)">
+                            <tr *ngFor="let l of filteredActiveLoans() | async">
+                                <td>{{l.loanedPieceId}}</td>
+                                <td>{{l.item ? l.item.name : l.book.name}}</td>
+                                <td>{{l.loaningUser.userDetail.firstName +' ' + l.loaningUser.userDetail.lastName}}</td>
+                                <td>{{l.loanDate | date:'dd/MM/yy'}}</td>
+                                <td>{{l.returnDate | date:'dd/MM/yy'}}</td>
+                                <ng-container *ngIf="diffDays(l.returnDate) > 3; else elseTemplate">
+                                    <td>
+                                        <div class="badge badge-pill badge-success text-light">
+                                            {{diffDays(l.returnDate) + ' Days Remaining' }}
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                    <ng-container
+                                        *ngIf="diffDays(l.returnDate) > 0 && diffDays(l.returnDate) <= 3; else elseTemplate">
+                                        <td>
+                                            <div class="badge badge-pill badge-warning text-light">
+                                                {{diffDays(l.returnDate) + ' Days Remaining' }}
+                                            </div>
+
+                                        </td>
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        <td>
+                                            <div class="badge badge-pill badge-danger text-light">
+                                                {{(diffDays(l.returnDate)|positive) + ' Days Late' }}
+                                            </div>
+                                        </td>
+                                    </ng-template>
+                                </ng-template>
+                                <td>
+                                    <a routerLink='/library/loans/edit-loan/{{l.loanedPieceId}}'>
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                                 </td>
-                                <!-- <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('SuperAdmin')" (change)="changeRoles($event, user, 'SuperAdmin')"></td>
-                                <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Admin')"></td>
-                                <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Librarian')"></td>
-                                <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Volunteer')"></td>
-                                <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Student')"></td> -->
+                            </tr>
+                            <tr *ngIf="filteredActiveLoansEmpty|async">
+                                <td colspan="7" class="text-center"><i>No results...</i></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <!--end: Item-->
             </div>
         </div>
         <!--end: Item-->

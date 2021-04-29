@@ -1,0 +1,45 @@
+<form action="#" class="form form-label-right" [formGroup]="loanForm">
+    <div class="row form-group">
+        <div class="col-12 col-md-6 mb-3">
+            <label>
+                Returned At
+            </label>
+            <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()" ngbDatepicker
+                #d="ngbDatepicker" name="returnedAt" formControlName="returnedAt" placeholder="2000-01-01"
+                autocomplete="off" [class.is-invalid]="isControlInvalid('returnedAt')"
+                [class.is-valid]="isControlValid('returnedAt')" required />
+            <div class="feedback" *ngIf="!isControlTouched('returnedAt')">
+                Please enter <b>the Return Date of the item.</b>
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('returnedAt')">
+                <!-- Brand was entered correct -->
+            </div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'returnedAt')">
+                Return Date is required
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+            <label>State when Returned</label>
+            <select class="form-control form-control-lg form-control-solid" name="returnState"
+                formControlName="returnState" [class.is-invalid]="isControlInvalid('returnState')"
+                [class.is-valid]="isControlValid('returnState')" required>
+                <option value='GOOD'>Good</option>
+                <option value="NORMAL USAGE SIGNS">Normal usage signs</option>
+                <option value="BAD">Bad</option>
+            </select>
+            <div class="feedback" *ngIf="!isControlTouched('returnState')">Please select a <b>State</b> for the
+                item.
+            </div>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'returnState')">
+                State is required
+            </div>
+        </div>
+        <div class="col-12 mb-3">
+            <label>Return State Description</label>
+            <textarea style="min-height: 250px;"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Please describe the state in more detail if necessary."
+                formControlName='returnStateDescription'></textarea>
+        </div>
+    </div>
+</form>

@@ -3,20 +3,20 @@ import { Observable, of, throwError } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../../../../environments/environment'
 import { catchError, finalize, map } from 'rxjs/operators'
-import { ItemModel } from '../../../_models/item.model'
-import { ItemDTO } from '../../../_dto/item-dto'
+import { LoanedPieceModel } from '../../../_models/loaned-piece.model'
+import { LoanedPieceDTO } from '../../../_dto/loaned-piece-dto'
 
-const API_ITEMS_URL = `${environment.apiUrl}/item`
+const API_LOANS_URL = `${environment.apiUrl}/loanedpiece`
 
 @Injectable({
   providedIn: 'root',
 })
-export class ItemHTTPService {
+export class LoanHTTPService {
   constructor(private http: HttpClient) {}
 
-  getAllItems$(): Observable<ItemModel[]> {
+  getAllloans$(): Observable<LoanedPieceModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}/getall`, {
+      .get(`${API_LOANS_URL}/getall`, {
         responseType: 'json',
       })
       .pipe(
@@ -26,17 +26,17 @@ export class ItemHTTPService {
           }
           return throwError(error)
         }),
-        map((items: any): ItemModel[] => {
-          console.log(items)
-          return items
+        map((loans: any): LoanedPieceModel[] => {
+          console.log(loans)
+          return loans
         }),
       )
   }
 
   // CREATE
   // server should return the object with ID
-  create(item: ItemDTO): Observable<ItemModel> {
-    return this.http.post<ItemModel>(`${API_ITEMS_URL}`, item).pipe(
+  create(lp: LoanedPieceDTO): Observable<LoanedPieceModel> {
+    return this.http.post<LoanedPieceModel>(`${API_LOANS_URL}`, lp).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.log('Login please...')
@@ -44,16 +44,16 @@ export class ItemHTTPService {
         return throwError(error)
       }),
       map(
-        (item: any): ItemModel => {
-          console.log(item)
-          return item
+        (lp: any): LoanedPieceModel => {
+          console.log(lp)
+          return lp
         },
       ),
     )
   }
 
-  edit(id: number, item: ItemDTO): Observable<ItemModel> {
-    return this.http.put<ItemModel>(`${API_ITEMS_URL}/${id}`, item).pipe(
+  edit(id: number, lp: LoanedPieceDTO): Observable<LoanedPieceModel> {
+    return this.http.put<LoanedPieceModel>(`${API_LOANS_URL}/${id}`, lp).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.log('Login please...')
@@ -61,17 +61,17 @@ export class ItemHTTPService {
         return throwError(error)
       }),
       map(
-        (item: any): ItemModel => {
-          console.log(item)
-          return item
+        (lp: any): LoanedPieceModel => {
+          console.log(lp)
+          return lp
         },
       ),
     )
   }
 
-  getItemById(id: number): Observable<ItemModel> {
+  getItemById(id: number): Observable<LoanedPieceModel> {
     return this.http
-      .get(`${API_ITEMS_URL}/getById/${id}`, {
+      .get(`${API_LOANS_URL}/getById/${id}`, {
         responseType: 'json',
       })
       .pipe(
@@ -82,17 +82,17 @@ export class ItemHTTPService {
           return throwError(error)
         }),
         map(
-          (item: any): ItemModel => {
-            console.log(item)
-            return item
+          (lp: any): LoanedPieceModel => {
+            console.log(lp)
+            return lp
           },
         ),
       )
   }
 
-  delete(id: number): Observable<ItemModel> {
+  delete(id: number): Observable<LoanedPieceModel> {
     return this.http
-      .delete(`${API_ITEMS_URL}/${id}`, {
+      .delete(`${API_LOANS_URL}/${id}`, {
         responseType: 'json',
       })
       .pipe(
@@ -103,7 +103,7 @@ export class ItemHTTPService {
           return throwError(error)
         }),
         map(
-          (res: any): ItemModel => {
+          (res: any): LoanedPieceModel => {
             console.log(res)
             return res
           },

@@ -50,6 +50,7 @@ export class BookService {
     _genre: any,
   ) {
     let f = filter.toLowerCase()
+    console.log(f)
     let category = undefined
     if (_category) {
       category = _category.toLowerCase()
@@ -118,6 +119,4 @@ export class BookService {
     //   ),
     // )
   }
-
-  
 }

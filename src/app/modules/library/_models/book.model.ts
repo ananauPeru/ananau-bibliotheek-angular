@@ -1,6 +1,6 @@
 import { Timestamp } from 'rxjs/internal/operators/timestamp'
 import { UserModel } from '../../auth'
-import { ItemPieceModel } from './item-piece.model'
+import { LoanedPieceModel } from './loaned-piece.model'
 
 export class BookModel {
   bookId: number
@@ -13,7 +13,7 @@ export class BookModel {
   state: string
   archived: boolean
   deleted: boolean
-  pieces: ItemPieceModel[]
+  pieces: LoanedPieceModel[]
   photoUrl: string
   purchasedAt: Date
   createdAt: Date

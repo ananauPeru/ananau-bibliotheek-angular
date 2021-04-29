@@ -4,10 +4,13 @@ import { AuthGuard } from '../auth/_services/auth.guard'
 import { CreateBookComponent } from './create/book/create-book.component'
 import { CreateItemComponent } from './create/item/create-item.component'
 import { LibraryComponent } from './library.component'
+import { AddLoanComponent } from './loan/new-loan/add-loan.component'
+import { OverviewComponent } from './loan/overview/overview.component'
 import { OverviewBookComponent } from './overview/book/overview-book.component'
 import { OverviewItemComponent } from './overview/item/overview-item.component'
 import { BookResolver } from './_resolvers/book.resolver'
 import { ItemResolver } from './_resolvers/item.resolver'
+import { LoanedPieceResolver } from './_resolvers/loaned-piece.resolver'
 
 const routes: Routes = [
   {
@@ -28,7 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'books/edit-book/:id',
-        resolve: {book: BookResolver },
+        resolve: { book: BookResolver },
         component: CreateBookComponent,
       },
       {
@@ -41,8 +44,21 @@ const routes: Routes = [
       },
       {
         path: 'items/edit-item/:id',
-        resolve: {item: ItemResolver },
+        resolve: { item: ItemResolver },
         component: CreateItemComponent,
+      },
+      {
+        path: 'loans/overview',
+        component: OverviewComponent,
+      },
+      {
+        path: 'loans/new-loan',
+        component: AddLoanComponent,
+      },
+      {
+        path: 'loans/edit-loan/:id',
+        resolve: { loan: LoanedPieceResolver },
+        component: AddLoanComponent,
       },
       // {
       //   path: 'registration',

@@ -26,7 +26,7 @@
     <div class="card-body">
 
 
-        <form action="#" class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="save()">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
             <div class="form-group row">
                 <div class="col-12 col-md-6">
                     <label>Title </label>
@@ -376,7 +376,12 @@
             </div>
             <div class="float-right">
                 <a class="btn btn-default font-weight-bold mr-2" routerLink="/library/items/overview">Cancel</a>
-                <button type="submit" class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
+                <ng-container *ngIf="item">
+                    <button (click)='onDelete()' class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
+                      Delete
+                    </button>
+                </ng-container>                
+                <button (click)='save()' class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
                     <ng-container *ngIf="item; else elseTemplate">
                         Save Changes
                     </ng-container>
