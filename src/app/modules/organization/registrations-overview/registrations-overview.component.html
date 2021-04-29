@@ -47,7 +47,7 @@
 
     <!--begin: Item-->
     <div class="d-flex flex-wrap align-items-center mb-10">
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>First name</th>
@@ -78,16 +78,10 @@
             <td>{{ registration.role === 1 ? "Student" : "Volunteer" }}</td>
             <td>
               <img
-                *ngIf="registration.confirmed"
-                src="../../../../assets/media/svg/icons/Navigation/Check.svg"
+                src="../../../../assets/media/svg/icons/Navigation/{{
+                  registration.confirmed ? 'Check' : 'Close'
+                }}.svg"
               />
-              <button
-                *ngIf="!registration.confirmed"
-                type="button"
-                class="btn btn-primary"
-              >
-                Confirm
-              </button>
             </td>
             <td>
               <a

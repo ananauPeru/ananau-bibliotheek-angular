@@ -1,35 +1,316 @@
-<div class="card card-custom">
+<div class="card card-custom gutter-b">
   <!-- Header -->
-  <div class="row">
-    <div class="col-12">
-      <div
-        class="card-header border-0 text-white"
-        style="background-color: white; padding: 2rem 2.25rem"
-      >
-        <div class="row">
-          <div class="col-12 col-md-8 w-100">
-            <h3 class="card-title font-weight-bolder text-dark">
-              <a routerLink="/organization/registrations">
-                <img
-                  src="../../../../assets/media/svg/icons/Navigation/Arrow-left.svg"
-                  alt="Back"
-                />
-              </a>
-              Registration of {{ id }}
-            </h3>
-          </div>
-        </div>
-      </div>
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <span class="card-icon">
+          <a routerLink="/organization/registrations">
+            <img
+              src="../../../../assets/media/svg/icons/Navigation/Arrow-left.svg"
+              alt="Back"
+            />
+          </a>
+        </span>
+        <span *ngIf="registration$ | async as registration; else standardTitle"
+          >Registration of {{ registration.firstName }}</span
+        >
+        <small class="pl-2">{{
+          role === "Student" ? "Student" : "Volunteer"
+        }}</small>
+      </h3>
     </div>
   </div>
 
   <!-- Body -->
-  <div class="card-body pt-2">
+  <div class="card-body">
     <div *ngIf="registration$ | async as registration; else loadingOrError">
-      <span>{{ registration.email }}</span>
+      <div>
+        <h4 class="text-dark font-weight-bold mb-4">Personal information</h4>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">General</h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>First name</td>
+                <td>{{ registration.firstName }}</td>
+              </tr>
+              <tr>
+                <td>Middle name</td>
+                <td>{{ registration.middleName }}</td>
+              </tr>
+              <tr>
+                <td>Last name</td>
+                <td>{{ registration.lastName }}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>
+                  <a href="mailto:{{ registration.email }}">{{
+                    registration.email
+                  }}</a>
+                </td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>School email</td>
+                <td>
+                  <a href="mailto:{{ registration.schoolEmail }}">{{
+                    registration.schoolEmail
+                  }}</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td>{{ registration.phone }}</td>
+              </tr>
+              <tr>
+                <td>Date of birth</td>
+                <td>{{ registration.dateOfBirth | date: "dd-MM-yyyy" }}</td>
+              </tr>
+              <tr>
+                <td>Birthplace</td>
+                <td>{{ registration.birthplace }}</td>
+              </tr>
+              <tr>
+                <td>Nationality</td>
+                <td>{{ registration.nationality }}</td>
+              </tr>
+              <tr>
+                <td>Passport number</td>
+                <td>{{ registration.passportNumber }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">Address</h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>Street</td>
+                <td>{{ registration.street }}</td>
+              </tr>
+              <tr>
+                <td>House number</td>
+                <td>{{ registration.houseNumber }}</td>
+              </tr>
+              <tr>
+                <td>Mailbox</td>
+                <td>{{ registration.mailbox }}</td>
+              </tr>
+              <tr>
+                <td>Postal code</td>
+                <td>{{ registration.postalCode }}</td>
+              </tr>
+              <tr>
+                <td>Township</td>
+                <td>{{ registration.township }}</td>
+              </tr>
+              <tr>
+                <td>Country</td>
+                <td>{{ registration.country }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">Contact person</h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>First name</td>
+                <td>{{ registration.firstNameContact }}</td>
+              </tr>
+              <tr>
+                <td>Middle name</td>
+                <td>{{ registration.middleNameContact }}</td>
+              </tr>
+              <tr>
+                <td>Last name</td>
+                <td>{{ registration.lastNameContact }}</td>
+              </tr>
+              <tr>
+                <td>Relation</td>
+                <td>{{ registration.relation }}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>
+                  <a href="mailto:{{ registration.emailContact }}">{{
+                    registration.emailContact
+                  }}</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td>{{ registration.phoneContact }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">Medical</h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>Allergies</td>
+                <td>{{ registration.allergies }}</td>
+              </tr>
+              <tr>
+                <td>Medical conditions</td>
+                <td>{{ registration.medicalConditions }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="separator separator-dashed my-10"></div>
+      <div>
+        <h4 class="text-dark font-weight-bold mb-4">
+          Organizational information
+        </h4>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">Dates</h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr *ngIf="role === 'Volunteer'">
+                <td>Online volunteering</td>
+                <td>
+                  <img
+                    src="../../../../assets/media/svg/icons/Navigation/{{
+                      registration.internshipOnline ? 'Check' : 'Close'
+                    }}.svg"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Start date</td>
+                <td>{{ registration.startDate | date: "dd-MM-yyyy" }}</td>
+              </tr>
+              <tr>
+                <td>End date</td>
+                <td>{{ registration.endDate | date: "dd-MM-yyyy" }}</td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>Start date period of leave</td>
+                <td>{{ registration.leaveStartDate | date: "dd-MM-yyyy" }}</td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>End date period of leave</td>
+                <td>{{ registration.leaveEndDate | date: "dd-MM-yyyy" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">Spanish</h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>Level</td>
+                <td>{{ registration.level }}</td>
+              </tr>
+              <tr>
+                <td>Number of weeks online lessons</td>
+                <td>{{ registration.weeksOnline }}</td>
+              </tr>
+              <tr>
+                <td>Number of weeks lessons on-site</td>
+                <td>{{ registration.weeks }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">Info</h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>Occupation</td>
+                <td>{{ registration.occupation }}</td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>Degree</td>
+                <td>{{ registration.degree }}</td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>Internship context</td>
+                <td>{{ registration.internshipContext }}</td>
+              </tr>
+              <tr>
+                <td>Tasks</td>
+                <td>{{ registration.tasks }}</td>
+              </tr>
+              <tr>
+                <td>Expectations</td>
+                <td>{{ registration.expectations }}</td>
+              </tr>
+              <tr>
+                <td>Proposals</td>
+                <td>{{ registration.proposals }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="separator separator-dashed my-10"></div>
+      <div>
+        <h4 class="text-dark font-weight-bold mb-4">Scans</h4>
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td>International passport</td>
+              <td>
+                <button class="btn btn-primary">Download</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Certificate of good conduct</td>
+              <td>
+                <button class="btn btn-primary">Download</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Diploma</td>
+              <td>
+                <button class="btn btn-primary">Download</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Passport photo</td>
+              <td>
+                <button class="btn btn-primary">Download</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="separator separator-dashed my-10"></div>
+      <div>
+        <h4 class="text-dark font-weight-bold mb-4">Questions</h4>
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td>Experience</td>
+              <td>{{ registration.experience }}</td>
+            </tr>
+            <tr>
+              <td>Why Añañau?</td>
+              <td>{{ registration.whyAnanau }}</td>
+            </tr>
+            <tr>
+              <td>First heard?</td>
+              <td>{{ registration.firstHeard }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
+
+<ng-template #standardTitle>
+  <span>Registration</span>
+</ng-template>
 
 <ng-template #loadingOrError>
   <span *ngIf="errorMessage; else loading" class="text-danger">
