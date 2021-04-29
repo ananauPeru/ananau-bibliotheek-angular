@@ -1,5 +1,6 @@
 import { formatDate } from "@angular/common";
 import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { RegistrationStudentModel } from "../../_models/registration-student.model";
@@ -21,7 +22,10 @@ export class RegistrationService {
     SmallRegistrationModel[]
   > = this._registrations.asObservable();
 
-  constructor(private registartionHttpService: RegistrationHttpService) {}
+  constructor(
+    private registartionHttpService: RegistrationHttpService,
+    private translate: TranslateService
+  ) {}
 
   loadInitialData() {
     this.registartionHttpService.getAllRegistrations$().subscribe(
@@ -37,8 +41,8 @@ export class RegistrationService {
         registrations.filter((registration) => {
           const role =
             registration.role === SmallRegistrationModelRole.STUDENT
-              ? "student"
-              : "volunteer";
+              ? this.translate.instant("REGISTRATIONS.STUDENT")
+              : this.translate.instant("REGISTRATIONS.VOLUNTEER");
           return (
             registration.firstName.toLowerCase().includes(f) ||
             registration.lastName.toLowerCase().includes(f) ||
@@ -49,7 +53,7 @@ export class RegistrationService {
             formatDate(registration.endDate, "dd-MM-yyyy", "en-US").includes(
               f
             ) ||
-            role.includes(f)
+            role.toLowerCase().includes(f)
           );
         })
       )

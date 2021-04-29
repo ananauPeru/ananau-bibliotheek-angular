@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-12 col-md-8 w-100">
             <h3 class="card-title font-weight-bolder text-dark">
-              Registrations of volunteers and students
+              {{ "REGISTRATIONS.OVERVIEW.TITLE" | translate }}
             </h3>
           </div>
         </div>
@@ -33,13 +33,12 @@
             (keyup)="registrationService.filter($event.target.value)"
             type="email"
             class="form-control form-control-lg form-control-solid force-pl-5"
-            placeholder="Filter..."
+            placeholder="{{ 'REGISTRATIONS.OVERVIEW.FILTER' | translate }}"
             style="padding-left: 10px"
           />
         </div>
         <div class="feedback">
-          Try searching and filtering on
-          <b>First name, Last name, Email, Start date, End date or Role.</b>
+          {{ "REGISTRATIONS.OVERVIEW.FILTER_INFO" | translate }}
         </div>
       </div>
     </div>
@@ -50,14 +49,14 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th>Start date</th>
-            <th>End date</th>
-            <th>Role</th>
-            <th>Confirmed</th>
-            <th>Details</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.FIRST_NAME" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.LAST_NAME" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.EMAIL" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.START_DATE" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.END_DATE" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.ROLE" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.CONFIRMED" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.DETAILS" | translate }}</th>
           </tr>
         </thead>
         <tbody>
@@ -75,7 +74,14 @@
             </td>
             <td>{{ registration.startDate | date: "dd-MM-yyyy" }}</td>
             <td>{{ registration.endDate | date: "dd-MM-yyyy" }}</td>
-            <td>{{ registration.role === 1 ? "Student" : "Volunteer" }}</td>
+            <td>
+              {{
+                (registration.role === 1
+                  ? "REGISTRATIONS.STUDENT"
+                  : "REGISTRATIONS.VOLUNTEER"
+                ) | translate
+              }}
+            </td>
             <td>
               <img
                 src="../../../../assets/media/svg/icons/Navigation/{{

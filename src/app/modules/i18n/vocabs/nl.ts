@@ -18,6 +18,7 @@ export const locale = {
       SAVE_CHANGES: "Wijzigingen opslaan",
       SUBMIT: "Verzenden",
       CANCEL: "Annuleer",
+      DOWNLOAD: "Download",
     },
 
     // MENU
@@ -344,6 +345,30 @@ export const locale = {
         PART_3:
           "In geval van niet-naleving van al het bovenstaande, bent u onderworpen aan burgerlijke en strafrechtelijke aansprakelijkheid voor mogelijke schade die aan de vereniging is toegebracht, volgens de Peruaanse wet. Deze vertrouwelijkheidsovereenkomst zal voor onbepaalde tijd worden gehandhaafd, nu en in de toekomst, totdat de vereniging deze als beëindigd beschouwt, of door ontbinding ervan.",
         AGREE: "Ik ga akkoord met de bovenstaande voorwaarden.",
+      },
+    },
+
+    // REGISTRATIONS OVERVIEW & DETAILS
+    REGISTRATIONS: {
+      STUDENT: "Student",
+      VOLUNTEER: "Vrijwilliger",
+      OVERVIEW: {
+        TITLE: "Registraties van vrijwilligers en studenten",
+        FILTER: "Filteren...",
+        FILTER_INFO:
+          "Probeer te zoeken en te filteren op voornaam, familienaam, e-mail, startdatum, einddatum of rol.",
+        FIRST_NAME: "Voornaam",
+        LAST_NAME: "Familienaam",
+        EMAIL: "E-mail",
+        START_DATE: "Startdatum",
+        END_DATE: "Einddatum",
+        ROLE: "Rol",
+        CONFIRMED: "Bevestigd",
+        DETAILS: "Details",
+      },
+      DETAILS: {
+        STANDARD_TITLE: "Registratie",
+        TITLE: "Registratie van {{name}}",
       },
     },
   },

@@ -18,6 +18,7 @@ export const locale = {
       SAVE_CHANGES: "Save changes",
       SUBMIT: "Submit",
       CANCEL: "Cancel",
+      DOWNLOAD: "Download",
     },
 
     // MENU
@@ -392,6 +393,30 @@ export const locale = {
         BAD: "Bad",
         REGULAR: "Regular",
         GOOD: "Good",
+      },
+    },
+
+    // REGISTRATIONS OVERVIEW & DETAILS
+    REGISTRATIONS: {
+      STUDENT: "Student",
+      VOLUNTEER: "Volunteer",
+      OVERVIEW: {
+        TITLE: "Registrations of volunteers and students",
+        FILTER: "Filter...",
+        FILTER_INFO:
+          "Try searching and filtering on first name, last name, email, start date, end date or role.",
+        FIRST_NAME: "First name",
+        LAST_NAME: "Last name",
+        EMAIL: "Email",
+        START_DATE: "Start date",
+        END_DATE: "End date",
+        ROLE: "Role",
+        CONFIRMED: "Confirmed",
+        DETAILS: "Details",
+      },
+      DETAILS: {
+        STANDARD_TITLE: "Registration",
+        TITLE: "Registration of {{name}}",
       },
     },
   },
