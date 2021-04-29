@@ -38,18 +38,21 @@ export const locale = {
     // AUTH PAGES
     AUTH: {
       GENERAL: {
-        NEW: "Nuevo aquí?",
+        NEW:
+          "¿Buscas voluntariado, buscas prácticas o eres nuevo empleado en Añañau?",
         TITLE: "Bienvenido a Añañau",
+        WELCOMETITLE1: "¡Bienvenido a Asociación ONG Añañau!",
         OR: "O",
         SUBMIT_BUTTON: "Enviar",
         CANCEL_BUTTON: "Cancelar",
         NO_ACCOUNT: "No tienes una cuenta?",
-        SIGNUP_BUTTON: "Regístrate",
+        SIGNUP_BUTTON: "Entonces regístrate aquí",
         FORGOT_BUTTON: "Se te olvidó tu contraseña",
         BACK_BUTTON: "Espalda",
         PRIVACY: "Intimidad",
         LEGAL: "Legal",
-        CONTACT: "Contacto",
+        CONTACT: "Contacta con nosotros",
+        WEBSITE: "Sitio web",
       },
       LOGIN: {
         TITLE: "Crear una cuenta",
@@ -61,28 +64,77 @@ export const locale = {
         SUCCESS: "Your account has been successfully reset.",
       },
       REGISTER: {
-        TITLE: "Sign Up",
+        TITLE: "Registrarse",
         DESC: "Enter your details to create your account",
         SUCCESS: "Your account has been successfuly registered.",
+        INCORRECT: "The registration details are incorrect",
+        VOLUNTEER: "Voluntario",
+        STUDENT: "Estudiante",
+        EMPLOYEE: "Empleado",
+        VOLUNTEER_INFO:
+          "Quiero ser voluntario en línea o presencial para Añañau y, por lo tanto, quiero acceder al formulario de registro de voluntario.",
+        STUDENT_INFO:
+          "Soy un estudiante que quiere hacer unas prácticas en Añañau y por tanto quiero acceder al formulario de registro de estudiante.",
+        EMPLOYEE_INFO:
+          "Soy un nuevo empleado de Añañau y se me ha indicado que cree una cuenta personal en esta plataforma.",
       },
       INPUT: {
-        EMAIL: "Email",
-        FIRSTNAME: "Fullname",
-        PASSWORD: "Password",
-        CONFIRM_PASSWORD: "Confirm Password",
-        USERNAME: "Usuario",
+        EMAIL: "Correo electrónico",
+        FIRSTNAME: "Nombre propio",
+        LASTNAME: "Apellido",
+        PHONE: "Teléfono",
+        DATEOFBIRTH: "Fecha de cumpleaños",
+        PASSWORD: "Contraseña",
+        CONFIRM_PASSWORD: "Confirmar contraseña",
+        USERNAME: "Nombre de usuario",
+        TERMS:
+          "Acepto que Añañau pueda conservar mis datos de forma indefinida.",
       },
       VALIDATION: {
-        INVALID: "{{name}} is not valid",
-        REQUIRED: "{{name}} is required",
-        MIN_LENGTH: "{{name}} minimum length is {{min}}",
-        AGREEMENT_REQUIRED: "Accepting terms & conditions are required",
-        NOT_FOUND: "The requested {{name}} is not found",
-        INVALID_LOGIN: "The login detail is incorrect",
-        REQUIRED_FIELD: "Required field",
-        MIN_LENGTH_FIELD: "Minimum field length:",
-        MAX_LENGTH_FIELD: "Maximum field length:",
-        INVALID_FIELD: "Field is not valid",
+        INVALID: "{{name}} no es válido",
+        REQUIRED: "{{name}} es obligatorio",
+        MIN_LENGTH: "{{name}} la longitud mínima es {{min}}",
+        AGREEMENT_REQUIRED: "Se requiere aceptar los términos y condiciones",
+        NOT_FOUND: "No se encuentra el {{name}} solicitado",
+        INVALID_LOGIN: "Estos datos de inicio de sesión son incorrectos",
+        REQUIRED_FIELD: "Campo requerido",
+        MIN_LENGTH_FIELD: "Longitud mínima del campo:",
+        MAX_LENGTH_FIELD: "Longitud máxima del campo:",
+        INVALID_FIELD: "El campo no es válido.",
+        INVALID_EMAIL: "El correo electrónico es incorrecto.",
+        FIRSTNAME_REQUIRED: "Se requiere el primer nombre.",
+        FIRSTNAME_MINLENGTH: "El nombre debe tener al menos 3 símbolos.",
+        FIRSTNAME_MAXLENGTH: "El nombre debe tener un máximo de 100 símbolos.",
+        LASTNAME_REQUIRED: "Se requiere apellido.",
+        LASTNAME_MINLENGTH: "El apellido debe tener al menos 3 símbolos.",
+        LASTNAME_MAXLENGTH: "El apellido debe tener un máximo de 100 símbolos.",
+        EMAIL_REQUIRED: "Correo electronico es requerido.",
+        EMAIL_INVALID: "El correo no es válido.",
+        EMAIL_MINLENGTH:
+          "El correo electrónico debe tener al menos 3 símbolos.",
+        EMAIL_MAXLENGTH:
+          "El correo electrónico debe tener un máximo de 360 símbolos.",
+        PASSWORD_REQUIRED: "Se requiere contraseña.",
+        PASSWORD_MINLENGTH: "La contraseña debe tener al menos 3 símbolos.",
+        PASSWORD_MAXLENGTH:
+          "La contraseña debe tener un máximo de 360 símbolos.",
+        CONFIRMPASSWORD_REQUIRED: "Se requiere confirmación de contraseña.",
+        CONFIRMPASSWORD_MINLENGTH:
+          "La confirmación de la contraseña debe tener al menos 3 símbolos.",
+        CONFIRMPASSWORD_MAXLENGTH:
+          "La confirmación de la contraseña debe tener un máximo de 360 símbolos.",
+        PASSWORD_NO_MATCH:
+          "'Contraseña' y 'Confirmar contraseña' no coinciden.",
+        PHONE_REQUIRED: "Se requiere teléfono.",
+        PHONE_PATTERN:
+          "El teléfono solo puede contener números, debe comenzar con el símbolo '+' y el código de su país.",
+        PHONE_MINLENGTH: "El teléfono debe tener al menos 3 símbolos.",
+        PHONE_MAXLENGTH: "El teléfono debe tener un máximo de 100 símbolos.",
+        DATEOFBIRTH_REQUIRED: "Se requiere fecha de nacimiento.",
+        DATEOFBIRTH_MINLENGTH:
+          "La fecha de nacimiento debe tener al menos 3 símbolos.",
+        DATEOFBIRTH_MAXLENGTH:
+          "La fecha de nacimiento debe tener un máximo de 100 símbolos.",
       },
     },
 
@@ -126,7 +178,7 @@ export const locale = {
         TITLE: "Informacion personal",
         GENERAL: {
           TITLE: "General",
-          FIRST_NAME: "Primer nombre",
+          FIRST_NAME: "Nombre propio",
           MIDDLE_NAME: "Segundo nombre",
           LAST_NAME: "Apellido",
           EMAIL: "Correo electrónico",
@@ -167,6 +219,9 @@ export const locale = {
         TITLE: "Información organizacional",
         DATES: {
           TITLE: "Fechas",
+          ONLINE: "Voluntariado online",
+          ONLINE_INFO:
+            "Además de realizar trabajo voluntario en la organización en el propio Perú, también es posible realizar trabajo de forma remota.",
           START_VOLUNTEER: "Fecha de inicio propuesta para voluntariado",
           END_VOLUNTEER: "Fecha final propuesta para voluntariado",
           START_STUDENT: "Fecha de inicio propuesta para pasantía",
@@ -178,10 +233,19 @@ export const locale = {
         },
         SPANISH: {
           TITLE: "Español",
+          INFO_VOLUNTEER:
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 2 semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
+          INFO_STUDENT:
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 3 semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
           LEVEL: "Describe tu nivel de español",
-          WEEKS: "Número de semanas para lecciones de español",
+          WEEKS_ONLINE: "Número de semanas para lecciones de español online",
+          WEEKS_ONLINE_INFO_VOLUNTEER:
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 1 semana de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
+          WEEKS_ONLINE_INFO_STUDENT:
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 2 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
+          WEEKS: "Número de semanas para lecciones de español en el sitio",
           WEEKS_INFO:
-            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 4 semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 1 semana de lecciones de español en el sitio.",
         },
         INFO: {
           TITLE: "Info",

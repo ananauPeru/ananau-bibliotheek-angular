@@ -38,21 +38,23 @@ export const locale = {
     // AUTH PAGES
     AUTH: {
       GENERAL: {
-        NEW: "Nieuw hier?",
-        TITLE: "Welkom op Añañau",
-        WELCOMETITLE1: "Welkom op Asociación ONG Añañau!",
+        NEW:
+          "Ben je op zoek naar vrijwilligerswerk, zoek je een stageplek of ben je een nieuwe medewerker bij Añañau?",
+        TITLE: "Welkom bij Añañau",
+        WELCOMETITLE1: "Welkom bij Asociación ONG Añañau!",
         WELCOMETITLE2:
           "Asociación ONG Añañau is een non-profit en niet-gouvernamentele organisatie gericht aan kinderen en jongeren die in extreme armoede en onstabiele familiesituaties leven.",
         OR: "Of",
         SUBMIT_BUTTON: "Verzenden",
         CANCEL_BUTTON: "Annuleer",
         NO_ACCOUNT: "Nog geen account?",
-        SIGNUP_BUTTON: "Registreer",
+        SIGNUP_BUTTON: "Registreer je dan hier",
         FORGOT_BUTTON: "Wachtwoord Vergeten",
         BACK_BUTTON: "Terug",
         PRIVACY: "Privacy",
         LEGAL: "Legal",
-        CONTACT: "Contact",
+        CONTACT: "Contacteer ons",
+        WEBSITE: "Website",
       },
       LOGIN: {
         TITLE: "Login Account",
@@ -65,10 +67,19 @@ export const locale = {
         SUCCESS: "Jouw account is succesvol gereset.",
       },
       REGISTER: {
-        TITLE: "Registreer",
+        TITLE: "Registreren",
         DESC: "Vul je gegevens in om een account aan te maken.",
         SUCCESS: "Jouw account is succesvol aangemaakt.",
         INCORRECT: "Gegevens incorrect.",
+        VOLUNTEER: "Vrijwilliger",
+        STUDENT: "Student",
+        EMPLOYEE: "Medewerker",
+        VOLUNTEER_INFO:
+          "Ik wil online of ter plaatse vrijwilligerswerk doen voor Añañau en wil daarom toegang tot het registratieformulier voor vrijwilligers.",
+        STUDENT_INFO:
+          "Ik ben een student die stage wil lopen bij Añañau en wil daarom toegang tot het registratieformulier voor studenten.",
+        EMPLOYEE_INFO:
+          "Ik ben een nieuwe medewerker bij Añañau en heb de opdracht gekregen een persoonlijk account op dit platform aan te maken.",
       },
       INPUT: {
         EMAIL: "Email",
@@ -77,19 +88,21 @@ export const locale = {
         PHONE: "Telefoon",
         DATEOFBIRTH: "Geboortedatum",
         PASSWORD: "Wachtwoord",
-        CONFIRM_PASSWORD: "Wachtwoord Bevestigen",
-        USERNAME: "Username",
+        CONFIRM_PASSWORD: "Wachtwoord bevestigen",
+        USERNAME: "Gebruikersnaam",
+        TERMS:
+          "Ik ga ermee akkoord dat Añañau mijn gegevens voor onbepaalde duur kan bewaren.",
       },
       VALIDATION: {
-        INVALID: "{{name}} is not valid",
-        REQUIRED: "{{name}} is required",
-        MIN_LENGTH: "{{name}} minimum length is {{min}}",
-        AGREEMENT_REQUIRED: "Accepting terms & conditions are required",
-        NOT_FOUND: "The requested {{name}} is not found",
-        INVALID_LOGIN: "The login detail is incorrect",
+        INVALID: "{{name}} is niet geldig",
+        REQUIRED: "{{name}} is verplicht",
+        MIN_LENGTH: "{{name}} minimumlengte is {{min}}",
+        AGREEMENT_REQUIRED: "De voorwaarden aanvaarden is verplicht",
+        NOT_FOUND: "De opgevraagde {{name}} werd niet gevonden",
+        INVALID_LOGIN: "Deze logindetails zijn incorrect",
         REQUIRED_FIELD: "Verplicht in te vullen.",
-        MIN_LENGTH_FIELD: "Minimum field length:",
-        MAX_LENGTH_FIELD: "Maximum field length:",
+        MIN_LENGTH_FIELD: "Minimumlengte van veld:",
+        MAX_LENGTH_FIELD: "Maximumlengte van veld:",
         INVALID_FIELD: "Ongeldige input.",
         INVALID_EMAIL: "Email is incorrect.",
         FIRSTNAME_REQUIRED: "Voornaam is verplicht",
@@ -221,6 +234,9 @@ export const locale = {
         TITLE: "Organisatorische informatie",
         DATES: {
           TITLE: "Datums",
+          ONLINE: "Online vrijwilligerwerk",
+          ONLINE_INFO:
+            "Naast het verrichten van vrijwilligerswerk bij de organisatie in Peru zelf, is het ook mogelijk om vanop afstand te werken.",
           START_VOLUNTEER: "Voorgestelde startdatum vrijwilligerswerk",
           END_VOLUNTEER: "Voorgestelde einddatum vrijwilligerswerk",
           START_STUDENT: "Voorgestelde startdatum stage",
@@ -232,10 +248,19 @@ export const locale = {
         },
         SPANISH: {
           TITLE: "Spaans",
+          INFO_VOLUNTEER:
+            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 2 weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
+          INFO_STUDENT:
+            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 3 weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
           LEVEL: "Beschrijf je niveau Spaans",
-          WEEKS: "Aantal weken Spaanse lessen",
+          WEEKS_ONLINE: "Aantal weken online Spaanse les",
+          WEEKS_ONLINE_INFO_VOLUNTEER:
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 1 week online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
+          WEEKS_ONLINE_INFO_STUDENT:
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 2 weken online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
+          WEEKS: "Aantal weken Spaanse les ter plaatse",
           WEEKS_INFO:
-            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 4 weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 1 week Spaanse les ter plaatse.",
         },
         INFO: {
           TITLE: "Info",

@@ -11,7 +11,7 @@
     <!--begin::Title-->
     <div class="pt-lg-0 pt-5">
       <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
-        {{ "AUTH.GENERAL.SIGNUP_BUTTON" | translate }}
+        {{ "AUTH.REGISTER.TITLE" | translate }}
       </h3>
       <p class="text-muted font-weight-bold font-size-h4">
         {{ "AUTH.REGISTER.DESC" | translate }}
@@ -48,12 +48,13 @@
           </span>
           <span class="option-label">
             <span class="option-head">
-              <span class="option-title">Volunteer</span>
+              <span class="option-title">{{
+                "AUTH.REGISTER.VOLUNTEER" | translate
+              }}</span>
             </span>
-            <span class="option-body"
-              >I want to volunteer online or on site for Añañau and therefore
-              want access to the volunteer registration form.</span
-            >
+            <span class="option-body">{{
+              "AUTH.REGISTER.VOLUNTEER_INFO" | translate
+            }}</span>
           </span>
         </label>
       </div>
@@ -72,12 +73,13 @@
           </span>
           <span class="option-label">
             <span class="option-head">
-              <span class="option-title">Student</span>
+              <span class="option-title">{{
+                "AUTH.REGISTER.STUDENT" | translate
+              }}</span>
             </span>
-            <span class="option-body"
-              >I am a student who wants to do an internship at Añañau and
-              therefore want access to the student registration form.</span
-            >
+            <span class="option-body">{{
+              "AUTH.REGISTER.STUDENT_INFO" | translate
+            }}</span>
           </span>
         </label>
       </div>
@@ -96,12 +98,13 @@
           </span>
           <span class="option-label">
             <span class="option-head">
-              <span class="option-title">Employee</span>
+              <span class="option-title">{{
+                "AUTH.REGISTER.EMPLOYEE" | translate
+              }}</span>
             </span>
-            <span class="option-body"
-              >I am a new employee at Añañau and have been instructed to create
-              a personal account on this platform.</span
-            >
+            <span class="option-body">{{
+              "AUTH.REGISTER.EMPLOYEE_INFO" | translate
+            }}</span>
           </span>
         </label>
       </div>
@@ -459,12 +462,9 @@
     <!--begin::Form group-->
     <div class="form-group">
       <label class="checkbox mb-0">
-        <input type="checkbox" formControlName="agree" name="agree" />&nbsp;I
-        Agree the&nbsp;<a
-          href="https://keenthemes.com/metronic/?page=faq"
-          target="_blank"
-          >terms and conditions</a
-        >.&nbsp;
+        <input type="checkbox" formControlName="agree" name="agree" />{{
+          "AUTH.INPUT.TERMS" | translate
+        }}&nbsp;
         <span></span>
       </label>
     </div>
