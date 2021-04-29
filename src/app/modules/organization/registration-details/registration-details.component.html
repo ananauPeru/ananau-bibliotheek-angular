@@ -1,0 +1,41 @@
+<div class="card card-custom">
+  <!-- Header -->
+  <div class="row">
+    <div class="col-12">
+      <div
+        class="card-header border-0 text-white"
+        style="background-color: white; padding: 2rem 2.25rem"
+      >
+        <div class="row">
+          <div class="col-12 col-md-8 w-100">
+            <h3 class="card-title font-weight-bolder text-dark">
+              <a routerLink="/organization/registrations">
+                <img
+                  src="../../../../assets/media/svg/icons/Navigation/Arrow-left.svg"
+                  alt="Back"
+                />
+              </a>
+              Registration of {{ id }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="card-body pt-2">
+    <div *ngIf="registration$ | async as registration; else loadingOrError">
+      <span>{{ registration.email }}</span>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingOrError>
+  <span *ngIf="errorMessage; else loading" class="text-danger">
+    {{ "ERRORS.TRY_AGAIN" | translate }}
+  </span>
+  <ng-template #loading>
+    <div class="spinner spinner-primary spinner-lg"></div>
+  </ng-template>
+</ng-template>

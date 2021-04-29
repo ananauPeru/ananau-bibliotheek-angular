@@ -2,10 +2,12 @@ import { formatDate } from "@angular/common";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { RegistrationStudentModel } from "../../_models/registration-student.model";
+import { RegistrationModel } from "../../_models/registration.model";
 import {
-  RegistrationModel,
-  RegistrationModelRole,
-} from "../../_models/registration.model";
+  SmallRegistrationModel,
+  SmallRegistrationModelRole,
+} from "../../_models/small-registration.model";
 import { RegistrationHttpService } from "./registration-http/registration-http.service";
 
 @Injectable({
@@ -13,10 +15,10 @@ import { RegistrationHttpService } from "./registration-http/registration-http.s
 })
 export class RegistrationService {
   private _registrations: BehaviorSubject<
-    RegistrationModel[]
+    SmallRegistrationModel[]
   > = new BehaviorSubject([]);
   public registrations: Observable<
-    RegistrationModel[]
+    SmallRegistrationModel[]
   > = this._registrations.asObservable();
 
   constructor(private registartionHttpService: RegistrationHttpService) {}
@@ -34,7 +36,7 @@ export class RegistrationService {
       map((registrations) =>
         registrations.filter((registration) => {
           const role =
-            registration.role === RegistrationModelRole.STUDENT
+            registration.role === SmallRegistrationModelRole.STUDENT
               ? "student"
               : "volunteer";
           return (
@@ -52,5 +54,15 @@ export class RegistrationService {
         })
       )
     );
+  }
+
+  getStudentRegistrationById$(
+    userId: number
+  ): Observable<RegistrationStudentModel> {
+    return this.registartionHttpService.getStudentRegistrationById$(userId);
+  }
+
+  getVolunteerRegistrationById$(userId: number): Observable<RegistrationModel> {
+    return this.registartionHttpService.getVolunteerRegistrationById$(userId);
   }
 }

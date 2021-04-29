@@ -57,6 +57,7 @@
             <th>End date</th>
             <th>Role</th>
             <th>Confirmed</th>
+            <th>Details</th>
           </tr>
         </thead>
         <tbody>
@@ -83,10 +84,21 @@
               <button
                 *ngIf="!registration.confirmed"
                 type="button"
-                class="btn btn-success"
+                class="btn btn-primary"
               >
                 Confirm
               </button>
+            </td>
+            <td>
+              <a
+                routerLink="/organization/registrations/{{
+                  registration.role === 1 ? 'students' : 'volunteers'
+                }}/{{ registration.userId }}"
+              >
+                <img
+                  src="../../../..//assets/media/svg/icons/Navigation/Sign-in.svg"
+                />
+              </a>
             </td>
           </tr>
         </tbody>

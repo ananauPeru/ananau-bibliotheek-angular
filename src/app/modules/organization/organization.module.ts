@@ -49,12 +49,14 @@ import { RolesComponent } from "./roles/roles.component";
 import { OrganizationComponent } from "./organization.component";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationsOverviewComponent } from "./registrations-overview/registrations-overview.component";
+import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
 
 @NgModule({
   declarations: [
     RolesComponent,
     OrganizationComponent,
     RegistrationsOverviewComponent,
+    RegistrationDetailsComponent,
   ],
   imports: [
     CommonModule,
