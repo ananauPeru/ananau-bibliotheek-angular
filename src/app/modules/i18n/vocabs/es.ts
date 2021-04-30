@@ -243,18 +243,18 @@ export const locale = {
         SPANISH: {
           TITLE: "Español",
           INFO_VOLUNTEER:
-            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 2 semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 2 meses de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
           INFO_STUDENT:
-            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 3 semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 3 meses de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
           LEVEL: "Describe tu nivel de español",
           WEEKS_ONLINE: "Número de semanas para lecciones de español online",
           WEEKS_ONLINE_INFO_VOLUNTEER:
-            "Si aún no habla un nivel básico de español, le recomendamos que solicite 1 semana de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
           WEEKS_ONLINE_INFO_STUDENT:
-            "Si aún no habla un nivel básico de español, le recomendamos que solicite 2 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 8 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
           WEEKS: "Número de semanas para lecciones de español en el sitio",
           WEEKS_INFO:
-            "Si aún no habla un nivel básico de español, le recomendamos que solicite 1 semana de lecciones de español en el sitio.",
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
         INFO: {
           TITLE: "Info",
