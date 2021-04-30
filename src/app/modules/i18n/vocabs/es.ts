@@ -19,6 +19,8 @@ export const locale = {
       SUBMIT: "Enviar",
       CANCEL: "Cancelar",
       DOWNLOAD: "Descargar",
+      CONFIRM: "Confirmar",
+      DISCONFIRM: "Desconfirmar",
     },
 
     // MENU
@@ -354,6 +356,16 @@ export const locale = {
       DETAILS: {
         STANDARD_TITLE: "Registro",
         TITLE: "Registro de {{name}}",
+      },
+      TOASTS: {
+        SUCCESS: "Éxito",
+        ERROR: "Error",
+        CONFIRM_SUCCESS: "El registro se ha confirmado con éxito.",
+        DISCONFIRM_SUCCESS: "El registro se ha cancelado correctamente.",
+        CONFIRM_ERROR:
+          "Algo salió mal al confirmar el registro. Por favor, inténtelo de nuevo más tarde.",
+        DISCONFIRM_ERROR:
+          "Se produjo un error al anular la confirmación del registro. Por favor, inténtelo de nuevo más tarde.",
       },
     },
   },

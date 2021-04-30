@@ -69,4 +69,8 @@ export class RegistrationService {
   getVolunteerRegistrationById$(userId: number): Observable<RegistrationModel> {
     return this.registartionHttpService.getVolunteerRegistrationById$(userId);
   }
+
+  confirmRegistration$(userId: number, confirm: boolean) {
+    return this.registartionHttpService.confirmRegistration$(userId, confirm);
+  }
 }

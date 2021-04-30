@@ -1,7 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { EMPTY, Observable } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
+import { BehaviorSubject, EMPTY, Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationRole } from "../_models/registration-role";
 import { RegistrationModel } from "../_models/registration.model";
 import { RegistrationService } from "../_services/registration/registration.service";
@@ -12,40 +14,85 @@ import { RegistrationService } from "../_services/registration/registration.serv
   styleUrls: ["./registration-details.component.scss"],
 })
 export class RegistrationDetailsComponent implements OnInit {
-  public id: number;
+  private _registration: BehaviorSubject<RegistrationModel> = new BehaviorSubject(
+    null
+  );
+  private _userId: number;
   public role: RegistrationRole;
-  public registration$: Observable<RegistrationModel>;
+  public registration$: Observable<RegistrationModel> = this._registration.asObservable();
   public errorMessage: string;
+  public confirming: boolean;
 
   constructor(
     private route: ActivatedRoute,
-    private registrationService: RegistrationService
+    private registrationService: RegistrationService,
+    private toastr: ToastrUtil,
+    private cdRef: ChangeDetectorRef,
+    private translate: TranslateService
   ) {
     this.route.data.subscribe(
       (data) =>
         (this.role = data["role"] ? data["role"] : RegistrationRole.VOLUNTEER)
     );
-    this.route.params.subscribe((params) => (this.id = params["id"]));
+    this.route.params.subscribe((params) => (this._userId = params["id"]));
 
     if (this.role === RegistrationRole.STUDENT) {
-      this.registration$ = this.registrationService
-        .getStudentRegistrationById$(this.id)
-        .pipe(
-          catchError((error) => {
-            this.errorMessage = error;
-            return EMPTY;
-          })
+      this.registrationService
+        .getStudentRegistrationById$(this._userId)
+        .subscribe(
+          (registration) => this._registration.next(registration),
+          (err) => {
+            console.error(err);
+            this.errorMessage = err;
+          }
         );
     } else {
-      this.registration$ = this.registrationService
-        .getVolunteerRegistrationById$(this.id)
-        .pipe(
-          catchError((error) => {
-            this.errorMessage = error;
-            return EMPTY;
-          })
+      this.registrationService
+        .getVolunteerRegistrationById$(this._userId)
+        .subscribe(
+          (registration) => this._registration.next(registration),
+          (err) => {
+            console.error(err);
+            this.errorMessage = err;
+          }
         );
     }
+  }
+
+  confirm(confirm: boolean) {
+    this.confirming = true;
+    this.registrationService
+      .confirmRegistration$(this._userId, confirm)
+      .subscribe(
+        () => {
+          let updatedRegistration = this._registration.value;
+          updatedRegistration.confirmed = confirm;
+          this._registration.next(updatedRegistration);
+          this.toastr.showSuccess(
+            this.translate.instant(
+              confirm
+                ? "REGISTRATIONS.TOASTS.CONFIRM_SUCCESS"
+                : "REGISTRATIONS.TOASTS.DISCONFIRM_SUCCESS"
+            ),
+            this.translate.instant("REGISTRATIONS.TOASTS.SUCCESS")
+          );
+        },
+        (err) => {
+          console.error(err);
+          this.toastr.showError(
+            this.translate.instant(
+              confirm
+                ? "REGISTRATIONS.TOASTS.CONFIRM_ERROR"
+                : "REGISTRATIONS.TOASTS.DISCONFIRM_ERROR"
+            ),
+            this.translate.instant("REGISTRATIONS.TOASTS.ERROR")
+          );
+        },
+        () => {
+          this.confirming = false;
+          this.cdRef.detectChanges();
+        }
+      );
   }
 
   ngOnInit(): void {}

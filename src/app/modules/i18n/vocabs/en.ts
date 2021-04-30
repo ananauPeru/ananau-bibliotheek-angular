@@ -19,6 +19,8 @@ export const locale = {
       SUBMIT: "Submit",
       CANCEL: "Cancel",
       DOWNLOAD: "Download",
+      CONFIRM: "Confirm",
+      DISCONFIRM: "Disconfirm",
     },
 
     // MENU
@@ -417,6 +419,16 @@ export const locale = {
       DETAILS: {
         STANDARD_TITLE: "Registration",
         TITLE: "Registration of {{name}}",
+      },
+      TOASTS: {
+        SUCCESS: "Success",
+        ERROR: "Error",
+        CONFIRM_SUCCESS: "Registration has been successfully confirmed.",
+        DISCONFIRM_SUCCESS: "Registration has been successfully disconfirmed.",
+        CONFIRM_ERROR:
+          "Something went wrong while confirming the registration. Please try again later.",
+        DISCONFIRM_ERROR:
+          "Something went wrong while disconfirming the registration. Please try again later.",
       },
     },
   },

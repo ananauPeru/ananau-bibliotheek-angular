@@ -19,6 +19,8 @@ export const locale = {
       SUBMIT: "Verzenden",
       CANCEL: "Annuleer",
       DOWNLOAD: "Download",
+      CONFIRM: "Bevestigen",
+      DISCONFIRM: "Bevestiging intrekken",
     },
 
     // MENU
@@ -369,6 +371,17 @@ export const locale = {
       DETAILS: {
         STANDARD_TITLE: "Registratie",
         TITLE: "Registratie van {{name}}",
+      },
+      TOASTS: {
+        SUCCESS: "Geslaagd",
+        ERROR: "Fout",
+        CONFIRM_SUCCESS: "Registratie is succesvol bevestigd.",
+        DISCONFIRM_SUCCESS:
+          "Bevestiging van registratie is succesvol ingetrokken.",
+        CONFIRM_ERROR:
+          "Er ging iets mis bij het bevestigen van de registratie. Probeer het later nog eens.",
+        DISCONFIRM_ERROR:
+          "Er ging iets mis bij het intrekken van de bevestiging van de registratie. Probeer het later nog eens.",
       },
     },
   },

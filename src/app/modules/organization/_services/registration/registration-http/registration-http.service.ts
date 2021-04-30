@@ -62,4 +62,22 @@ export class RegistrationHttpService {
         map((registration: any): RegistrationModel => registration)
       );
   }
+
+  confirmRegistration$(userId: number, confirm: boolean) {
+    return this.http
+      .patch(
+        `${API_REGISTRATIONS_URL}/${userId}/${
+          confirm ? "confirm" : "disconfirm"
+        }`,
+        null
+      )
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.log("Login please...");
+          }
+          return throwError(error);
+        })
+      );
+  }
 }
