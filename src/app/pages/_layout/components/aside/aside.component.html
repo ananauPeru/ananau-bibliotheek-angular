@@ -287,6 +287,58 @@
       </li>
       <!-- end::1 Level -->
 
+         <!-- USER MANAGEMENT -->
+      <!-- begin::section -->
+      <li class="menu-section">
+        <h4 class="menu-text">{{ "MENU.DOCUMENTATION.TITLE" | translate }}</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <!-- end:: section -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted(['superadmin'])">
+        <a class="menu-link menu-toggle" routerLinkActive="active" href="/documentation">
+          <span [inlineSVG]="'./assets/media/svg/icons/Home/Book.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text"> {{"MENU.DOCUMENTATION.GETTING_STARTED" | translate }}</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">{{"MENU.DOCUMENTATION.GETTING_STARTED" | translate }}</span>
+              </span>
+            </li>
+
+            <!-- Form Controls -->
+            <!-- begin::2 Level -->
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+              routerLinkActive="menu-item-open">
+              <a class="menu-link menu-toggle" routerLink="/documentation/getting-started/0-preparations" routerLinkActive="active">
+                <span [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'" cacheSVG="true"
+                  class="svg-icon menu-icon"></span>
+                <span class="menu-text">{{"MENU.DOCUMENTATION.S0_PREPARATIONS" | translate }}</span>
+              </a>
+            </li>
+
+            <!-- Form Controls -->
+            <!-- begin::2 Level -->
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+              routerLinkActive="menu-item-open">
+              <a class="menu-link menu-toggle" routerLink="/documentation/getting-started/1-setting-up" routerLinkActive="active">
+                <span [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'" cacheSVG="true"
+                  class="svg-icon menu-icon"></span>
+                <span class="menu-text">{{"MENU.DOCUMENTATION.S1_SETTING_UP" | translate }}</span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </li>
+      <!-- end::1 Level -->
+
       <!-- /////////////////////////////////////////////////////////////////// THEME FROM HERE BELOW -->
     </ul>
     <!-- end::Menu Nav -->

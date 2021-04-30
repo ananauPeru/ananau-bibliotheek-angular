@@ -8,6 +8,44 @@
       {{ "REGISTRATION.ORGANIZATIONAL.DATES.TITLE" | translate }}
     </h4>
     <form [formGroup]="organizationalForm.controls.dates">
+      <!-- internship online -->
+      <div *ngIf="role === 'Volunteer'" class="form-group row">
+        <label for="internshipOnline" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.DATES.ONLINE" | translate
+        }}</label>
+        <div class="col-9">
+          <span class="switch switch-sm">
+            <label>
+              <input
+                type="checkbox"
+                id="internshipOnline"
+                formControlName="internshipOnline"
+              />
+              <span></span>
+            </label>
+          </span>
+          <div
+            *ngIf="
+              organizationalForm.controls.dates.get('internshipOnline')[
+                'errors'
+              ] &&
+              organizationalForm.controls.dates.get('internshipOnline').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.dates.get("internshipOnline")[
+                  "errors"
+                ]
+              )
+            }}
+          </div>
+          <span class="form-text text-muted">{{
+            "REGISTRATION.ORGANIZATIONAL.DATES.ONLINE_INFO" | translate
+          }}</span>
+        </div>
+      </div>
       <!-- start date -->
       <div class="form-group row">
         <label for="datesStartDate" class="col-3">{{
@@ -148,6 +186,14 @@
     <h4 class="text-dark font-weight-bold mb-4">
       {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.TITLE" | translate }}
     </h4>
+    <p class="text-muted mb-4">
+      {{
+        (role === "Student"
+          ? "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO_STUDENT"
+          : "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO_VOLUNTEER"
+        ) | translate
+      }}
+    </p>
     <form [formGroup]="organizationalForm.controls.spanish">
       <!-- level -->
       <div class="form-group row">
@@ -175,6 +221,41 @@
               )
             }}
           </div>
+        </div>
+      </div>
+      <!-- weeks online -->
+      <div class="form-group row">
+        <label for="spanishWeeksOnline" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_ONLINE" | translate
+        }}</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="spanishWeeksOnline"
+            type="number"
+            formControlName="weeksOnline"
+          />
+          <div
+            *ngIf="
+              organizationalForm.controls.spanish.get('weeksOnline')[
+                'errors'
+              ] &&
+              organizationalForm.controls.spanish.get('weeksOnline').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.spanish.get("weeksOnline")["errors"]
+              )
+            }}
+          </div>
+          <span class="form-text text-muted">{{
+            (role === "Student"
+              ? "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_ONLINE_INFO_STUDENT"
+              : "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_ONLINE_INFO_VOLUNTEER"
+            ) | translate
+          }}</span>
         </div>
       </div>
       <!-- weeks -->

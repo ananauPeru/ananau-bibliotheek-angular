@@ -36,23 +36,30 @@ export const locale = {
         ADD_BOOK: 'Add Book',
         ITEMS: 'Items',
         ADD_ITEM: 'Add Item',
-        LOANING:'Loaning',
-        NEW_LOAN:'New Loan',
+        LOANING: 'Loaning',
+        NEW_LOAN: 'New Loan',
       },
       MANAGEMENT: {
         TITLE: 'User management',
         REGISTRATION: 'Registration form',
       },
-      ORGANIZATION:{
-        TITLE:"Organization",
-        ROLES:"Role Management",
-      }
+      ORGANIZATION: {
+        TITLE: 'Organization',
+        ROLES: 'Role Management',
+      },
+      DOCUMENTATION: {
+        TITLE: 'IT - Documentation',
+        GETTING_STARTED: 'Getting Started',
+        S0_PREPARATIONS: '0 - Before Starting',
+        S1_SETTING_UP: '1 - Setting Up',
+      },
     },
 
     // AUTH PAGES
     AUTH: {
       GENERAL: {
-        NEW: 'New here?',
+        NEW:
+          'Are you looking to volunteer, are you looking for an internship or are you a new employee at Añañau?',
         TITLE: 'Welcome to Añañau',
         WELCOMETITLE1: 'Welcome to Asociación ONG Añañau!',
         WELCOMETITLE2:
@@ -61,12 +68,13 @@ export const locale = {
         SUBMIT_BUTTON: 'Submit',
         CANCEL_BUTTON: 'Cancel',
         NO_ACCOUNT: "Don't have an account?",
-        SIGNUP_BUTTON: 'Sign Up',
+        SIGNUP_BUTTON: 'Then sign up here',
         FORGOT_BUTTON: 'Forgot Password',
         BACK_BUTTON: 'Back',
         PRIVACY: 'Privacy',
         LEGAL: 'Legal',
-        CONTACT: 'Contact',
+        CONTACT: 'Contact us',
+        WEBSITE: 'Website',
       },
       LOGIN: {
         TITLE: 'Login Account',
@@ -79,20 +87,30 @@ export const locale = {
         SUCCESS: 'Your account has been successfully reset.',
       },
       REGISTER: {
-        TITLE: 'Sign Up',
+        TITLE: 'Sign up',
         DESC: 'Enter your details to create your account',
         SUCCESS: 'Your account has been successfuly registered.',
         INCORRECT: 'The registration details are incorrect',
+        VOLUNTEER: 'Volunteer',
+        STUDENT: 'Student',
+        EMPLOYEE: 'Employee',
+        VOLUNTEER_INFO:
+          'I want to volunteer online or on site for Añañau and therefore want access to the volunteer registration form.',
+        STUDENT_INFO:
+          'I am a student who wants to do an internship at Añañau and therefore want access to the student registration form.',
+        EMPLOYEE_INFO:
+          'I am a new employee at Añañau and have been instructed to create a personal account on this platform.',
       },
       INPUT: {
         EMAIL: 'Email',
-        FIRSTNAME: 'Firstname',
-        LASTNAME: 'Lastname',
+        FIRSTNAME: 'First name',
+        LASTNAME: 'Last name',
         PHONE: 'Phone',
         DATEOFBIRTH: 'Date of Birth',
         PASSWORD: 'Password',
         CONFIRM_PASSWORD: 'Confirm Password',
         USERNAME: 'Username',
+        TERMS: 'I agree that Añañau can keep my data indefinitely.',
       },
       VALIDATION: {
         INVALID: '{{name}} is not valid',
@@ -106,12 +124,12 @@ export const locale = {
         MAX_LENGTH_FIELD: 'Maximum field length:',
         INVALID_FIELD: 'Field is not valid',
         INVALID_EMAIL: 'The email is incorrect',
-        FIRSTNAME_REQUIRED: 'Firstname is required.',
-        FIRSTNAME_MINLENGTH: 'Firstname should have at least 3 symbols.',
-        FIRSTNAME_MAXLENGTH: 'Firstname should have maximum 100 symbols.',
-        LASTNAME_REQUIRED: 'Lastname is required.',
-        LASTNAME_MINLENGTH: 'Lastname should have at least 3 symbols.',
-        LASTNAME_MAXLENGTH: 'Lastname should have maximum 100 symbols.',
+        FIRSTNAME_REQUIRED: 'First name is required.',
+        FIRSTNAME_MINLENGTH: 'First name should have at least 3 symbols.',
+        FIRSTNAME_MAXLENGTH: 'First name should have maximum 100 symbols.',
+        LASTNAME_REQUIRED: 'Last name is required.',
+        LASTNAME_MINLENGTH: 'Last name should have at least 3 symbols.',
+        LASTNAME_MAXLENGTH: 'Last name should have maximum 100 symbols.',
         EMAIL_REQUIRED: 'Email is required.',
         EMAIL_INVALID: 'Email is not valid.',
         EMAIL_MINLENGTH: 'Email should have at least 3 symbols.',
@@ -232,6 +250,9 @@ export const locale = {
         TITLE: 'Organizational information',
         DATES: {
           TITLE: 'Dates',
+          ONLINE: 'Online volunteering',
+          ONLINE_INFO:
+            'In addition to doing voluntary work at the organization in Peru itself, it is also possible to do work remotely.',
           START_VOLUNTEER: 'Proposed start date volunteering',
           END_VOLUNTEER: 'Proposed end date volunteering',
           START_STUDENT: 'Proposed start date internship',
@@ -243,10 +264,19 @@ export const locale = {
         },
         SPANISH: {
           TITLE: 'Spanish',
+          INFO_VOLUNTEER:
+            'If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of 2 weeks of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.',
+          INFO_STUDENT:
+            'If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of 3 weeks of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.',
           LEVEL: 'Describe your level of Spanish',
-          WEEKS: 'Number of weeks Spanish lessons',
+          WEEKS_ONLINE: 'Number of weeks online Spanish lessons',
+          WEEKS_ONLINE_INFO_VOLUNTEER:
+            'If you do not yet speak a basic level of Spanish, we recommend you apply for 1 week of online Spanish lessons. These lessons will be provided through video call, prior to your arrival at Añañau.',
+          WEEKS_ONLINE_INFO_STUDENT:
+            'If you do not yet speak a basic level of Spanish, we recommend you apply for 2 weeks of online Spanish lessons. These lessons will be provided through video call, prior to your arrival at Añañau.',
+          WEEKS: 'Number of weeks Spanish lessons on-site',
           WEEKS_INFO:
-            'If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of 4 weeks of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.',
+            'If you do not yet speak a basic level of Spanish, we recommend you apply for 1 week of Spanish lessons on-site.',
         },
         INFO: {
           TITLE: 'Info',
@@ -352,17 +382,17 @@ export const locale = {
         TALES_COLLECTION: 'Tales - Collection',
         TRAGEDY: 'Tragedy',
       },
-      ITEM_OVERVIEW:{
-        COMMUNICATION : 'Communication',
-        EDUCATIONAL:'Educational',
-        ENGLISH : 'English',
-        GAMES : 'Games',
-        GEOGRAPHY : 'Geography',
-        MATHEMATICS : 'Mathematics',
-        MUSIC : 'Music',
-        ROBOTICS : 'Robotics',
-        SOCIO_EDUCATIONAL_ACTIVITIES : 'Socio Educational Activities',
-        STIMULATION : 'Stimulation',
+      ITEM_OVERVIEW: {
+        COMMUNICATION: 'Communication',
+        EDUCATIONAL: 'Educational',
+        ENGLISH: 'English',
+        GAMES: 'Games',
+        GEOGRAPHY: 'Geography',
+        MATHEMATICS: 'Mathematics',
+        MUSIC: 'Music',
+        ROBOTICS: 'Robotics',
+        SOCIO_EDUCATIONAL_ACTIVITIES: 'Socio Educational Activities',
+        STIMULATION: 'Stimulation',
       },
       STATE: {
         BAD: 'Bad',
