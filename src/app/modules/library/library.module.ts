@@ -72,6 +72,7 @@ import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component'
     LoanDetailsComponent,
     ReturnDetailsComponent,
     SignOffComponent,
+        
   ],
   imports: [
     CommonModule,
