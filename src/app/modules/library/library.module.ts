@@ -60,7 +60,18 @@ import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component'
 
 @NgModule({
   declarations: [
-   
+    LibraryComponent,
+    OverviewItemComponent,
+    OverviewBookComponent,
+    CreateItemComponent,
+    CreateBookComponent,
+    MarkAsteriskDirective,
+    OverviewComponent,
+    AddLoanComponent,
+    PositivePipe,
+    LoanDetailsComponent,
+    ReturnDetailsComponent,
+    SignOffComponent,        
   ],
   imports: [
     CommonModule,
