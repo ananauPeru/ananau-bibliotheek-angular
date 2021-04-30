@@ -1,0 +1,119 @@
+<div class="card card-custom">
+  <!-- Header -->
+  <div class="row">
+    <div class="col-12">
+      <div
+        class="card-header border-0 text-white"
+        style="background-color: white; padding: 2rem 2.25rem"
+      >
+        <div class="row">
+          <div class="col-12 col-md-8 w-100">
+            <h3 class="card-title font-weight-bolder text-dark">
+              {{ "REGISTRATIONS.OVERVIEW.TITLE" | translate }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="card-body pt-2">
+    <!--begin::Form Group-->
+    <div class="form-group row mb-10">
+      <div class="col-12 col-md-12">
+        <div class="input-group input-group-lg input-group-solid">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+
+          <input
+            (keyup)="registrationService.filter($event.target.value)"
+            type="email"
+            class="form-control form-control-lg form-control-solid force-pl-5"
+            placeholder="{{ 'REGISTRATIONS.OVERVIEW.FILTER' | translate }}"
+            style="padding-left: 10px"
+          />
+        </div>
+        <div class="feedback">
+          {{ "REGISTRATIONS.OVERVIEW.FILTER_INFO" | translate }}
+        </div>
+      </div>
+    </div>
+    <!--begin::Form Group-->
+
+    <!--begin: Item-->
+    <div class="d-flex flex-wrap align-items-center mb-10">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>{{ "REGISTRATIONS.OVERVIEW.FIRST_NAME" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.LAST_NAME" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.EMAIL" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.START_DATE" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.END_DATE" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.ROLE" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.CONFIRMED" | translate }}</th>
+            <th>{{ "REGISTRATIONS.OVERVIEW.DETAILS" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let registration of registrationService.registrations | async
+            "
+          >
+            <td>{{ registration.firstName }}</td>
+            <td>{{ registration.lastName }}</td>
+            <td>
+              <a href="mailto:{{ registration.email }}">{{
+                registration.email
+              }}</a>
+            </td>
+            <td>{{ registration.startDate | date: "dd-MM-yyyy" }}</td>
+            <td>{{ registration.endDate | date: "dd-MM-yyyy" }}</td>
+            <td>
+              {{
+                (registration.role === 1
+                  ? "REGISTRATIONS.STUDENT"
+                  : "REGISTRATIONS.VOLUNTEER"
+                ) | translate
+              }}
+            </td>
+            <td>
+              <img
+                src="../../../../assets/media/svg/icons/Navigation/{{
+                  registration.confirmed ? 'Check' : 'Close'
+                }}.svg"
+              />
+            </td>
+            <td>
+              <a
+                routerLink="/organization/registrations/{{
+                  registration.role === 1 ? 'students' : 'volunteers'
+                }}/{{ registration.userId }}"
+              >
+                <img
+                  src="../../../..//assets/media/svg/icons/Navigation/Sign-in.svg"
+                />
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--end: Item-->
+
+    <!-- <div class="d-flex flex-wrap align-items-center mb-10">
+            <div class="example-preview flex-grow-1  ">
+                <div class="example-container ">
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" (page)="pageEvents($event)" [pageIndex]="page"
+                        [showFirstLastButtons]="true" [length]="(bookService.books | async)?.length">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div> -->
+  </div>
+</div>

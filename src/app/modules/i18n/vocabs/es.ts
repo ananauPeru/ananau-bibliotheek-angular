@@ -18,6 +18,9 @@ export const locale = {
       SAVE_CHANGES: "Guardar cambios",
       SUBMIT: "Enviar",
       CANCEL: "Cancelar",
+      DOWNLOAD: "Descargar",
+      CONFIRM: "Confirmar",
+      DISCONFIRM: "Desconfirmar",
     },
 
     // MENU
@@ -32,6 +35,11 @@ export const locale = {
       MANAGEMENT: {
         TITLE: "Gestión de usuarios",
         REGISTRATION: "Formulario de inscripción",
+      },
+      ORGANIZATION: {
+        TITLE: "Organización",
+        ROLES: "Gestión de roles",
+        REGISTRATIONS: "Inscripciones",
       },
     },
 
@@ -57,6 +65,7 @@ export const locale = {
       LOGIN: {
         TITLE: "Crear una cuenta",
         BUTTON: "Registrarse",
+        ALREADY_ACCOUNT: "¿Ya tienes una cuenta?",
       },
       FORGOT: {
         TITLE: "Contraseña olvidada?",
@@ -323,6 +332,45 @@ export const locale = {
         PART_3:
           "En el caso de incumplimiento de todo lo anterior, usted estará sujeto a responsabilidad civil y penal, por los posibles daños ocasionados a la asociación, de acuerdo con la ley peruana. Este acuerdo de confidencialidad se mantendrá indefinidamente, ahora y en el futuro, hasta que la asociación lo considere terminado, o por disolución del mismo.",
         AGREE: "Estoy de acuerdo con los términos mencionados anteriormente.",
+      },
+    },
+
+    // REGISTRATIONS OVERVIEW & DETAILS
+    REGISTRATIONS: {
+      STUDENT: "Estudiante",
+      VOLUNTEER: "Voluntario",
+      OVERVIEW: {
+        TITLE: "Inscripciones de voluntarios y estudiantes",
+        FILTER: "Filtrar...",
+        FILTER_INFO:
+          "Intente buscar y filtrar por nombre, apellido, correo electrónico, fecha de inicio, fecha de finalización o rol.",
+        FIRST_NAME: "Nombre propio",
+        LAST_NAME: "Apellido",
+        EMAIL: "Correo electrónico",
+        START_DATE: "Fecha de inicio",
+        END_DATE: "Fecha final",
+        ROLE: "Rol",
+        CONFIRMED: "Confirmado",
+        DETAILS: "Detalles",
+      },
+      DETAILS: {
+        STANDARD_TITLE: "Registro",
+        TITLE: "Registro de {{name}}",
+        DELETE: "Quitar de la lista",
+      },
+      TOASTS: {
+        SUCCESS: "Éxito",
+        ERROR: "Error",
+        CONFIRM_SUCCESS: "El registro se ha confirmado con éxito.",
+        DISCONFIRM_SUCCESS: "El registro se ha cancelado correctamente.",
+        CONFIRM_ERROR:
+          "Algo salió mal al confirmar el registro. Por favor, inténtelo de nuevo más tarde.",
+        DISCONFIRM_ERROR:
+          "Se produjo un error al anular la confirmación del registro. Por favor, inténtelo de nuevo más tarde.",
+        DELETE_SUCCESS:
+          "El registro se ha eliminado correctamente de la lista.",
+        DELETE_ERROR:
+          "Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.",
       },
     },
   },

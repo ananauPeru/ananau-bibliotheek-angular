@@ -1,0 +1,551 @@
+<div class="card card-custom card-sticky gutter-b" id="kt_page_sticky_card">
+  <!-- Header -->
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <span class="card-icon">
+          <a routerLink="/organization/registrations">
+            <img
+              src="../../../../assets/media/svg/icons/Navigation/Arrow-left.svg"
+              alt="Back"
+            />
+          </a>
+        </span>
+        <span
+          *ngIf="registration$ | async as registration; else standardTitle"
+          >{{
+            "REGISTRATIONS.DETAILS.TITLE"
+              | translate: { name: registration.firstName }
+          }}</span
+        >
+        <small class="pl-2">{{
+          (role === "Student"
+            ? "REGISTRATIONS.STUDENT"
+            : "REGISTRATIONS.VOLUNTEER"
+          ) | translate
+        }}</small>
+      </h3>
+    </div>
+    <div *ngIf="registration$ | async as registration" class="card-toolbar">
+      <button
+        class="btn btn-danger font-weight-bolder mr-2"
+        [ngClass]="{
+          'spinner spinner-left': deleting
+        }"
+        (click)="delete()"
+      >
+        {{ "REGISTRATIONS.DETAILS.DELETE" | translate }}
+      </button>
+      <button
+        *ngIf="!registration.confirmed"
+        class="btn btn-primary font-weight-bolder"
+        [ngClass]="{
+          'spinner spinner-left': confirming
+        }"
+        (click)="confirm(true)"
+      >
+        {{ "BUTTONS.CONFIRM" | translate }}
+      </button>
+      <button
+        *ngIf="registration.confirmed"
+        class="btn btn-warning font-weight-bolder"
+        [ngClass]="{
+          'spinner spinner-left': confirming
+        }"
+        (click)="confirm(false)"
+      >
+        {{ "BUTTONS.DISCONFIRM" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="card-body">
+    <div *ngIf="registration$ | async as registration; else loadingOrError">
+      <div>
+        <h4 class="text-dark font-weight-bold mb-4">
+          {{ "REGISTRATION.PERSONAL.TITLE" | translate }}
+        </h4>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">
+            {{ "REGISTRATION.PERSONAL.GENERAL.TITLE" | translate }}
+          </h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.GENERAL.FIRST_NAME" | translate }}
+                </td>
+                <td>{{ registration.firstName }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.GENERAL.MIDDLE_NAME" | translate }}
+                </td>
+                <td>{{ registration.middleName }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.GENERAL.LAST_NAME" | translate }}
+                </td>
+                <td>{{ registration.lastName }}</td>
+              </tr>
+              <tr>
+                <td>{{ "REGISTRATION.PERSONAL.GENERAL.EMAIL" | translate }}</td>
+                <td>
+                  <a href="mailto:{{ registration.email }}">{{
+                    registration.email
+                  }}</a>
+                </td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>
+                  {{ "REGISTRATION.PERSONAL.GENERAL.SCHOOL_EMAIL" | translate }}
+                </td>
+                <td>
+                  <a href="mailto:{{ registration.schoolEmail }}">{{
+                    registration.schoolEmail
+                  }}</a>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ "REGISTRATION.PERSONAL.GENERAL.PHONE" | translate }}</td>
+                <td>{{ registration.phone }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.GENERAL.BIRTH_DATE" | translate }}
+                </td>
+                <td>{{ registration.dateOfBirth | date: "dd-MM-yyyy" }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.GENERAL.BIRTHPLACE" | translate }}
+                </td>
+                <td>{{ registration.birthplace }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.GENERAL.NATIONALITY" | translate }}
+                </td>
+                <td>{{ registration.nationality }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.GENERAL.PASSPORT" | translate }}
+                </td>
+                <td>{{ registration.passportNumber }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">
+            {{ "REGISTRATION.PERSONAL.ADDRESS.TITLE" | translate }}
+          </h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.ADDRESS.STREET" | translate }}
+                </td>
+                <td>{{ registration.street }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.ADDRESS.NUMBER" | translate }}
+                </td>
+                <td>{{ registration.houseNumber }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.ADDRESS.MAILBOX" | translate }}
+                </td>
+                <td>{{ registration.mailbox }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.ADDRESS.POSTAL_CODE" | translate }}
+                </td>
+                <td>{{ registration.postalCode }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.ADDRESS.TOWNSHIP" | translate }}
+                </td>
+                <td>{{ registration.township }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.ADDRESS.COUNTRY" | translate }}
+                </td>
+                <td>{{ registration.country }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">
+            {{ "REGISTRATION.PERSONAL.CONTACT_PERSON.TITLE" | translate }}
+          </h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.PERSONAL.CONTACT_PERSON.FIRST_NAME"
+                      | translate
+                  }}
+                </td>
+                <td>{{ registration.firstNameContact }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.PERSONAL.CONTACT_PERSON.MIDDLE_NAME"
+                      | translate
+                  }}
+                </td>
+                <td>{{ registration.middleNameContact }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.PERSONAL.CONTACT_PERSON.LAST_NAME" | translate
+                  }}
+                </td>
+                <td>{{ registration.lastNameContact }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.PERSONAL.CONTACT_PERSON.RELATION" | translate
+                  }}
+                </td>
+                <td>{{ registration.relation }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.CONTACT_PERSON.EMAIL" | translate }}
+                </td>
+                <td>
+                  <a href="mailto:{{ registration.emailContact }}">{{
+                    registration.emailContact
+                  }}</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.CONTACT_PERSON.PHONE" | translate }}
+                </td>
+                <td>{{ registration.phoneContact }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">
+            {{ "REGISTRATION.PERSONAL.MEDICAL.TITLE" | translate }}
+          </h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.MEDICAL.ALLERGIES" | translate }}
+                </td>
+                <td>{{ registration.allergies }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.PERSONAL.MEDICAL.CONDITIONS" | translate }}
+                </td>
+                <td>{{ registration.medicalConditions }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="separator separator-dashed my-10"></div>
+      <div>
+        <h4 class="text-dark font-weight-bold mb-4">
+          {{ "REGISTRATION.ORGANIZATIONAL.TITLE" | translate }}
+        </h4>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">
+            {{ "REGISTRATION.ORGANIZATIONAL.DATES.TITLE" | translate }}
+          </h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr *ngIf="role === 'Volunteer'">
+                <td>
+                  {{ "REGISTRATION.ORGANIZATIONAL.DATES.ONLINE" | translate }}
+                </td>
+                <td>
+                  <img
+                    src="../../../../assets/media/svg/icons/Navigation/{{
+                      registration.internshipOnline ? 'Check' : 'Close'
+                    }}.svg"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    (role === "Student"
+                      ? "REGISTRATION.ORGANIZATIONAL.DATES.START_STUDENT"
+                      : "REGISTRATION.ORGANIZATIONAL.DATES.START_VOLUNTEER"
+                    ) | translate
+                  }}
+                </td>
+                <td>{{ registration.startDate | date: "dd-MM-yyyy" }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    (role === "Student"
+                      ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
+                      : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
+                    ) | translate
+                  }}
+                </td>
+                <td>{{ registration.endDate | date: "dd-MM-yyyy" }}</td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_START" | translate
+                  }}
+                </td>
+                <td>{{ registration.leaveStartDate | date: "dd-MM-yyyy" }}</td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
+                  }}
+                </td>
+                <td>{{ registration.leaveEndDate | date: "dd-MM-yyyy" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">
+            {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.TITLE" | translate }}
+          </h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.LEVEL" | translate }}
+                </td>
+                <td>{{ registration.level }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS_ONLINE"
+                      | translate
+                  }}
+                </td>
+                <td>{{ registration.weeksOnline }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS" | translate }}
+                </td>
+                <td>{{ registration.weeks }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">
+            {{ "REGISTRATION.ORGANIZATIONAL.INFO.TITLE" | translate }}
+          </h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  {{
+                    (role === "Student"
+                      ? "REGISTRATION.ORGANIZATIONAL.INFO.OCCUPATION_STUDENT"
+                      : "REGISTRATION.ORGANIZATIONAL.INFO.OCCUPATION_VOLUNTEER"
+                    ) | translate
+                  }}
+                </td>
+                <td>{{ registration.occupation }}</td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>
+                  {{ "REGISTRATION.ORGANIZATIONAL.INFO.DEGREE" | translate }}
+                </td>
+                <td>{{ registration.degree }}</td>
+              </tr>
+              <tr *ngIf="role === 'Student'">
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.TITLE"
+                      | translate
+                  }}
+                </td>
+                <td [ngSwitch]="registration.internshipContext">
+                  <span *ngSwitchCase="1">{{
+                    "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.PROJECT"
+                      | translate
+                  }}</span>
+                  <span *ngSwitchCase="2">{{
+                    "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.THESIS"
+                      | translate
+                  }}</span>
+                  <span *ngSwitchCase="3">{{
+                    "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.OTHER"
+                      | translate
+                  }}</span>
+                  <span *ngSwitchDefault></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.ORGANIZATIONAL.INFO.TASKS" | translate }}
+                </td>
+                <td>{{ registration.tasks }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.INFO.EXPECTATIONS" | translate
+                  }}
+                </td>
+                <td>{{ registration.expectations }}</td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.ORGANIZATIONAL.INFO.PROPOSALS" | translate }}
+                </td>
+                <td>{{ registration.proposals }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="separator separator-dashed my-10"></div>
+      <div>
+        <h4 class="text-dark font-weight-bold mb-4">
+          {{ "REGISTRATION.SCANS.TITLE" | translate }}
+        </h4>
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td>{{ "REGISTRATION.SCANS.PASSPORT" | translate }}</td>
+              <td>
+                <button class="btn btn-primary">
+                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ "REGISTRATION.SCANS.GOOD_CONDUCT" | translate }}</td>
+              <td>
+                <button class="btn btn-primary">
+                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ "REGISTRATION.SCANS.DIPLOMA" | translate }}</td>
+              <td>
+                <button class="btn btn-primary">
+                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ "REGISTRATION.SCANS.PHOTO" | translate }}</td>
+              <td>
+                <button class="btn btn-primary">
+                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="separator separator-dashed my-10"></div>
+      <div>
+        <h4 class="text-dark font-weight-bold mb-4">
+          {{ "REGISTRATION.QUESTIONS.TITLE" | translate }}
+        </h4>
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td>
+                {{ "REGISTRATION.QUESTIONS.EXTRA.EXPERIENCE" | translate }}
+              </td>
+              <td>{{ registration.experience }}</td>
+            </tr>
+            <tr>
+              <td>
+                {{
+                  (role === "Student"
+                    ? "REGISTRATION.QUESTIONS.EXTRA.WHY_ANANAU_STUDENT"
+                    : "REGISTRATION.QUESTIONS.EXTRA.WHY_ANANAU_VOLUNTEER"
+                  ) | translate
+                }}
+              </td>
+              <td>{{ registration.whyAnanau }}</td>
+            </tr>
+            <tr>
+              <td>
+                {{
+                  "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.TITLE" | translate
+                }}
+              </td>
+              <td [ngSwitch]="registration.firstHeard">
+                <span *ngSwitchCase="1">{{
+                  "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.WEBSITE" | translate
+                }}</span>
+                <span *ngSwitchCase="2">{{
+                  "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.FACEBOOK"
+                    | translate
+                }}</span>
+                <span *ngSwitchCase="3">{{
+                  "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.INSTAGRAM"
+                    | translate
+                }}</span>
+                <span *ngSwitchCase="4">{{
+                  "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.OTHER_PERSON"
+                    | translate
+                }}</span>
+                <span *ngSwitchCase="5">{{
+                  "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.NEWSLETTER"
+                    | translate
+                }}</span>
+                <span *ngSwitchCase="6">{{
+                  "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.SCHOOL" | translate
+                }}</span>
+                <span *ngSwitchCase="7">{{
+                  "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.OTHER" | translate
+                }}</span>
+                <span *ngSwitchDefault></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #standardTitle>
+  <span>{{ "REGISTRATIONS.DETAILS.STANDARD_TITLE" | translate }}</span>
+</ng-template>
+
+<ng-template #loadingOrError>
+  <span *ngIf="errorMessage; else loading" class="text-danger">
+    {{ "ERRORS.TRY_AGAIN" | translate }}
+  </span>
+  <ng-template #loading>
+    <div class="spinner spinner-primary spinner-lg"></div>
+  </ng-template>
+</ng-template>

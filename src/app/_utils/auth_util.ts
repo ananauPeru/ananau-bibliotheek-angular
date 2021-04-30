@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { ToastrUtil } from "./toastr_util";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthUtil {
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;

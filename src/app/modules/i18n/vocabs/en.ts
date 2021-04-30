@@ -14,10 +14,13 @@ export const locale = {
 
     // BUTTONS
     BUTTONS: {
-      SAVE: 'Save',
-      SAVE_CHANGES: 'Save changes',
-      SUBMIT: 'Submit',
-      CANCEL: 'Cancel',
+      SAVE: "Save",
+      SAVE_CHANGES: "Save changes",
+      SUBMIT: "Submit",
+      CANCEL: "Cancel",
+      DOWNLOAD: "Download",
+      CONFIRM: "Confirm",
+      DISCONFIRM: "Disconfirm",
     },
 
     // MENU
@@ -44,8 +47,9 @@ export const locale = {
         REGISTRATION: 'Registration form',
       },
       ORGANIZATION: {
-        TITLE: 'Organization',
-        ROLES: 'Role Management',
+        TITLE: "Organization",
+        ROLES: "Role Management",
+        REGISTRATIONS: "Registrations",
       },
       DOCUMENTATION: {
         TITLE: 'IT - Documentation',
@@ -77,9 +81,10 @@ export const locale = {
         WEBSITE: 'Website',
       },
       LOGIN: {
-        TITLE: 'Login Account',
-        BUTTON: 'Sign In',
-        ERROR: 'The login details are incorrect',
+        TITLE: "Login Account",
+        BUTTON: "Sign In",
+        ERROR: "The login details are incorrect",
+        ALREADY_ACCOUNT: "Already have an account?",
       },
       FORGOT: {
         TITLE: 'Forgotten Password?',
@@ -398,6 +403,44 @@ export const locale = {
         BAD: 'Bad',
         REGULAR: 'Regular',
         GOOD: 'Good',
+      },
+    },
+
+    // REGISTRATIONS OVERVIEW & DETAILS
+    REGISTRATIONS: {
+      STUDENT: "Student",
+      VOLUNTEER: "Volunteer",
+      OVERVIEW: {
+        TITLE: "Registrations of volunteers and students",
+        FILTER: "Filter...",
+        FILTER_INFO:
+          "Try searching and filtering on first name, last name, email, start date, end date or role.",
+        FIRST_NAME: "First name",
+        LAST_NAME: "Last name",
+        EMAIL: "Email",
+        START_DATE: "Start date",
+        END_DATE: "End date",
+        ROLE: "Role",
+        CONFIRMED: "Confirmed",
+        DETAILS: "Details",
+      },
+      DETAILS: {
+        STANDARD_TITLE: "Registration",
+        TITLE: "Registration of {{name}}",
+        DELETE: "Remove from list",
+      },
+      TOASTS: {
+        SUCCESS: "Success",
+        ERROR: "Error",
+        CONFIRM_SUCCESS: "Registration has been successfully confirmed.",
+        DISCONFIRM_SUCCESS: "Registration has been successfully disconfirmed.",
+        CONFIRM_ERROR:
+          "Something went wrong while confirming the registration. Please try again later.",
+        DISCONFIRM_ERROR:
+          "Something went wrong while disconfirming the registration. Please try again later.",
+        DELETE_SUCCESS: "Registration has been successfully removed from list.",
+        DELETE_ERROR:
+          "Something went wrong while removing the registration. Please try again later.",
       },
     },
   },
