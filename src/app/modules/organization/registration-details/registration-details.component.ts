@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject, EMPTY, Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
@@ -22,13 +22,15 @@ export class RegistrationDetailsComponent implements OnInit {
   public registration$: Observable<RegistrationModel> = this._registration.asObservable();
   public errorMessage: string;
   public confirming: boolean;
+  public deleting: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private registrationService: RegistrationService,
     private toastr: ToastrUtil,
     private cdRef: ChangeDetectorRef,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     this.route.data.subscribe(
       (data) =>
@@ -93,6 +95,30 @@ export class RegistrationDetailsComponent implements OnInit {
           this.cdRef.detectChanges();
         }
       );
+  }
+
+  delete() {
+    this.deleting = true;
+    this.registrationService.deleteRegistration$(this._userId).subscribe(
+      () => {
+        this.toastr.showSuccess(
+          this.translate.instant("REGISTRATIONS.TOASTS.DELETE_SUCCESS"),
+          this.translate.instant("REGISTRATIONS.TOASTS.SUCCESS")
+        );
+        this.router.navigate(["/organization/registrations"]);
+      },
+      (err) => {
+        console.error(err);
+        this.toastr.showError(
+          this.translate.instant("REGISTRATIONS.TOASTS.DELETE_ERROR"),
+          this.translate.instant("REGISTRATIONS.TOASTS.ERROR")
+        );
+      },
+      () => {
+        this.confirming = false;
+        this.cdRef.detectChanges();
+      }
+    );
   }
 
   ngOnInit(): void {}

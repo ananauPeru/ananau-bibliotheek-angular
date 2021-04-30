@@ -371,6 +371,7 @@ export const locale = {
       DETAILS: {
         STANDARD_TITLE: "Registratie",
         TITLE: "Registratie van {{name}}",
+        DELETE: "Verwijder uit lijst",
       },
       TOASTS: {
         SUCCESS: "Geslaagd",
@@ -382,6 +383,9 @@ export const locale = {
           "Er ging iets mis bij het bevestigen van de registratie. Probeer het later nog eens.",
         DISCONFIRM_ERROR:
           "Er ging iets mis bij het intrekken van de bevestiging van de registratie. Probeer het later nog eens.",
+        DELETE_SUCCESS: "Registratie is succesvol uit lijst verwijderd.",
+        DELETE_ERROR:
+          "Er ging iets mis bij het verwijderen van de registratie. Probeer het later nog eens.",
       },
     },
   },

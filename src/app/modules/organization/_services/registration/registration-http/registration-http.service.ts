@@ -80,4 +80,15 @@ export class RegistrationHttpService {
         })
       );
   }
+
+  deleteRegistration$(userId: number) {
+    return this.http.delete(`${API_REGISTRATIONS_URL}/${userId}`).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.log("Login please...");
+        }
+        return throwError(error);
+      })
+    );
+  }
 }

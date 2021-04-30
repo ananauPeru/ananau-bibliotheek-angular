@@ -356,6 +356,7 @@ export const locale = {
       DETAILS: {
         STANDARD_TITLE: "Registro",
         TITLE: "Registro de {{name}}",
+        DELETE: "Quitar de la lista",
       },
       TOASTS: {
         SUCCESS: "Éxito",
@@ -366,6 +367,10 @@ export const locale = {
           "Algo salió mal al confirmar el registro. Por favor, inténtelo de nuevo más tarde.",
         DISCONFIRM_ERROR:
           "Se produjo un error al anular la confirmación del registro. Por favor, inténtelo de nuevo más tarde.",
+        DELETE_SUCCESS:
+          "El registro se ha eliminado correctamente de la lista.",
+        DELETE_ERROR:
+          "Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.",
       },
     },
   },

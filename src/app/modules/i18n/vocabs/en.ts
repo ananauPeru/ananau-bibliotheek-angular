@@ -419,6 +419,7 @@ export const locale = {
       DETAILS: {
         STANDARD_TITLE: "Registration",
         TITLE: "Registration of {{name}}",
+        DELETE: "Remove from list",
       },
       TOASTS: {
         SUCCESS: "Success",
@@ -429,6 +430,9 @@ export const locale = {
           "Something went wrong while confirming the registration. Please try again later.",
         DISCONFIRM_ERROR:
           "Something went wrong while disconfirming the registration. Please try again later.",
+        DELETE_SUCCESS: "Registration has been successfully removed from list.",
+        DELETE_ERROR:
+          "Something went wrong while removing the registration. Please try again later.",
       },
     },
   },

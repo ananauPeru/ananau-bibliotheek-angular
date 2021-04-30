@@ -73,4 +73,8 @@ export class RegistrationService {
   confirmRegistration$(userId: number, confirm: boolean) {
     return this.registartionHttpService.confirmRegistration$(userId, confirm);
   }
+
+  deleteRegistration$(userId: number) {
+    return this.registartionHttpService.deleteRegistration$(userId);
+  }
 }
