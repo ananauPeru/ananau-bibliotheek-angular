@@ -68,6 +68,17 @@ export class ContainerComponent implements OnInit {
     if (
       this.auth
         .getAuthFromLocalStorage()
+        .roles.some((role) => role.toLowerCase() === "superadmin")
+    ) {
+      this.route.data.subscribe(
+        (data) =>
+          (this.role = data["fallbackRole"]
+            ? data["fallbackRole"]
+            : FormRole.VOLUNTEER)
+      );
+    } else if (
+      this.auth
+        .getAuthFromLocalStorage()
         .roles.some((role) => role.toLowerCase() === "student")
     ) {
       this.role = FormRole.STUDENT;
