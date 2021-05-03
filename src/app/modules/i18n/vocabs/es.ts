@@ -357,6 +357,12 @@ export const locale = {
         STANDARD_TITLE: "Registro",
         TITLE: "Registro de {{name}}",
         DELETE: "Quitar de la lista",
+        FILE_NAMES: {
+          INTERNATIONAL_PASSPORT: "Pasaporte internacional",
+          GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
+          DIPLOMA: "Certificado educativo",
+          PASSPORT_PHOTO: "Foto del pasaporte",
+        },
       },
       TOASTS: {
         SUCCESS: "Éxito",
@@ -371,6 +377,8 @@ export const locale = {
           "El registro se ha eliminado correctamente de la lista.",
         DELETE_ERROR:
           "Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.",
+        DOWNLOAD_ERROR:
+          "Se produjo un error al descargar el archivo. Por favor, inténtelo de nuevo más tarde.",
       },
     },
   },

@@ -440,9 +440,16 @@
               <td>{{ "REGISTRATION.SCANS.PASSPORT" | translate }}</td>
               <td>
                 <button
-                  *ngFor="let file of internationalPassportFiles"
+                  *ngFor="let file of internationalPassportFiles; let i = index"
                   class="btn btn-primary mr-2"
-                  (click)="downloadFile(file)"
+                  (click)="
+                    downloadFile(
+                      file,
+                      registration.firstName,
+                      registration.lastName,
+                      i
+                    )
+                  "
                 >
                   {{ "BUTTONS.DOWNLOAD" | translate }}
                 </button>
@@ -452,9 +459,19 @@
               <td>{{ "REGISTRATION.SCANS.GOOD_CONDUCT" | translate }}</td>
               <td>
                 <button
-                  *ngFor="let file of goodConductCertificateFiles"
+                  *ngFor="
+                    let file of goodConductCertificateFiles;
+                    let i = index
+                  "
                   class="btn btn-primary mr-2"
-                  (click)="downloadFile(file)"
+                  (click)="
+                    downloadFile(
+                      file,
+                      registration.firstName,
+                      registration.lastName,
+                      i
+                    )
+                  "
                 >
                   {{ "BUTTONS.DOWNLOAD" | translate }}
                 </button>
@@ -464,9 +481,16 @@
               <td>{{ "REGISTRATION.SCANS.DIPLOMA" | translate }}</td>
               <td>
                 <button
-                  *ngFor="let file of diplomaFiles"
+                  *ngFor="let file of diplomaFiles; let i = index"
                   class="btn btn-primary mr-2"
-                  (click)="downloadFile(file)"
+                  (click)="
+                    downloadFile(
+                      file,
+                      registration.firstName,
+                      registration.lastName,
+                      i
+                    )
+                  "
                 >
                   {{ "BUTTONS.DOWNLOAD" | translate }}
                 </button>
@@ -476,9 +500,16 @@
               <td>{{ "REGISTRATION.SCANS.PHOTO" | translate }}</td>
               <td>
                 <button
-                  *ngFor="let file of passportPhotoFiles"
+                  *ngFor="let file of passportPhotoFiles; let i = index"
                   class="btn btn-primary mr-2"
-                  (click)="downloadFile(file)"
+                  (click)="
+                    downloadFile(
+                      file,
+                      registration.firstName,
+                      registration.lastName,
+                      i
+                    )
+                  "
                 >
                   {{ "BUTTONS.DOWNLOAD" | translate }}
                 </button>

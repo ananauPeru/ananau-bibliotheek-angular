@@ -372,6 +372,12 @@ export const locale = {
         STANDARD_TITLE: "Registratie",
         TITLE: "Registratie van {{name}}",
         DELETE: "Verwijder uit lijst",
+        FILE_NAMES: {
+          INTERNATIONAL_PASSPORT: "Internationaal paspoort",
+          GOOD_CONDUCT_CERTIFICATE: "Bewijs van goed gedrag",
+          DIPLOMA: "Onderwijscertificaat",
+          PASSPORT_PHOTO: "Pasfoto",
+        },
       },
       TOASTS: {
         SUCCESS: "Geslaagd",
@@ -386,6 +392,8 @@ export const locale = {
         DELETE_SUCCESS: "Registratie is succesvol uit lijst verwijderd.",
         DELETE_ERROR:
           "Er ging iets mis bij het verwijderen van de registratie. Probeer het later nog eens.",
+        DOWNLOAD_ERROR:
+          "Er ging iets mis bij het downloaden van het bestand. Probeer het later nog eens.",
       },
     },
   },

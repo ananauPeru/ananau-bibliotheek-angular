@@ -428,6 +428,12 @@ export const locale = {
         STANDARD_TITLE: "Registration",
         TITLE: "Registration of {{name}}",
         DELETE: "Remove from list",
+        FILE_NAMES: {
+          INTERNATIONAL_PASSPORT: "International passport",
+          GOOD_CONDUCT_CERTIFICATE: "Certificate of good conduct",
+          DIPLOMA: "Certificate of education",
+          PASSPORT_PHOTO: "Passport photo",
+        },
       },
       TOASTS: {
         SUCCESS: "Success",
@@ -441,6 +447,8 @@ export const locale = {
         DELETE_SUCCESS: "Registration has been successfully removed from list.",
         DELETE_ERROR:
           "Something went wrong while removing the registration. Please try again later.",
+        DOWNLOAD_ERROR:
+          "Something went wrong while downloading the file. Please try again later.",
       },
     },
   },

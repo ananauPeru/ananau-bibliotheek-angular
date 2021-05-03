@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
+import * as FileSaver from "file-saver";
 import { BehaviorSubject, Observable } from "rxjs";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { BlobNamePrefix } from "../_models/blob-name-prefix";
@@ -147,9 +148,39 @@ export class RegistrationDetailsComponent implements OnInit {
     );
   }
 
-  downloadFile(file: File) {
-    console.log(file);
-    const url = window.URL.createObjectURL(file);
-    window.open(url);
+  downloadFile(file: File, firstName: string, lastName: string, index: number) {
+    let fileName = `${lastName} ${firstName}`;
+
+    if (index > 0) fileName = fileName + ` (${index + 1})`;
+
+    if (file.name.startsWith(BlobNamePrefix.InternationalPassport)) {
+      fileName =
+        this.translate.instant(
+          "REGISTRATIONS.DETAILS.FILE_NAMES.INTERNATIONAL_PASSPORT"
+        ) + ` - ${fileName}`;
+      FileSaver.saveAs(file, fileName);
+    } else if (file.name.startsWith(BlobNamePrefix.GoodConductCertificate)) {
+      fileName =
+        this.translate.instant(
+          "REGISTRATIONS.DETAILS.FILE_NAMES.GOOD_CONDUCT_CERTIFICATE"
+        ) + ` - ${fileName}`;
+      FileSaver.saveAs(file, fileName);
+    } else if (file.name.startsWith(BlobNamePrefix.Diploma)) {
+      fileName =
+        this.translate.instant("REGISTRATIONS.DETAILS.FILE_NAMES.DIPLOMA") +
+        ` - ${fileName}`;
+      FileSaver.saveAs(file, fileName);
+    } else if (file.name.startsWith(BlobNamePrefix.PassportPhoto)) {
+      fileName =
+        this.translate.instant(
+          "REGISTRATIONS.DETAILS.FILE_NAMES.PASSPORT_PHOTO"
+        ) + ` - ${fileName}`;
+      FileSaver.saveAs(file, fileName);
+    } else {
+      this.toastr.showError(
+        this.translate.instant("REGISTRATIONS.TOASTS.DELETE_ERROR"),
+        this.translate.instant("REGISTRATIONS.TOASTS.DOWNLOAD_ERROR")
+      );
+    }
   }
 }
