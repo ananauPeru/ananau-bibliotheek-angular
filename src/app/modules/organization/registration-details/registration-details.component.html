@@ -439,7 +439,11 @@
             <tr>
               <td>{{ "REGISTRATION.SCANS.PASSPORT" | translate }}</td>
               <td>
-                <button class="btn btn-primary">
+                <button
+                  *ngFor="let file of internationalPassportFiles"
+                  class="btn btn-primary mr-2"
+                  (click)="downloadFile(file)"
+                >
                   {{ "BUTTONS.DOWNLOAD" | translate }}
                 </button>
               </td>
@@ -447,7 +451,11 @@
             <tr>
               <td>{{ "REGISTRATION.SCANS.GOOD_CONDUCT" | translate }}</td>
               <td>
-                <button class="btn btn-primary">
+                <button
+                  *ngFor="let file of goodConductCertificateFiles"
+                  class="btn btn-primary mr-2"
+                  (click)="downloadFile(file)"
+                >
                   {{ "BUTTONS.DOWNLOAD" | translate }}
                 </button>
               </td>
@@ -455,7 +463,11 @@
             <tr>
               <td>{{ "REGISTRATION.SCANS.DIPLOMA" | translate }}</td>
               <td>
-                <button class="btn btn-primary">
+                <button
+                  *ngFor="let file of diplomaFiles"
+                  class="btn btn-primary mr-2"
+                  (click)="downloadFile(file)"
+                >
                   {{ "BUTTONS.DOWNLOAD" | translate }}
                 </button>
               </td>
@@ -463,7 +475,11 @@
             <tr>
               <td>{{ "REGISTRATION.SCANS.PHOTO" | translate }}</td>
               <td>
-                <button class="btn btn-primary">
+                <button
+                  *ngFor="let file of passportPhotoFiles"
+                  class="btn btn-primary mr-2"
+                  (click)="downloadFile(file)"
+                >
                   {{ "BUTTONS.DOWNLOAD" | translate }}
                 </button>
               </td>

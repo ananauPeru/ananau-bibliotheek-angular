@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { BehaviorSubject, EMPTY, Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { BehaviorSubject, Observable } from "rxjs";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
+import { BlobNamePrefix } from "../_models/blob-name-prefix";
 import { RegistrationRole } from "../_models/registration-role";
 import { RegistrationModel } from "../_models/registration.model";
 import { RegistrationService } from "../_services/registration/registration.service";
+import { UserStorageService } from "../_services/registration/user-storage.service";
 
 @Component({
   selector: "app-registration-details",
@@ -23,6 +24,10 @@ export class RegistrationDetailsComponent implements OnInit {
   public errorMessage: string;
   public confirming: boolean;
   public deleting: boolean;
+  public internationalPassportFiles = new Array<File>();
+  public goodConductCertificateFiles = new Array<File>();
+  public diplomaFiles = new Array<File>();
+  public passportPhotoFiles = new Array<File>();
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +35,8 @@ export class RegistrationDetailsComponent implements OnInit {
     private toastr: ToastrUtil,
     private cdRef: ChangeDetectorRef,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private userStorageService: UserStorageService
   ) {
     this.route.data.subscribe(
       (data) =>
@@ -59,6 +65,26 @@ export class RegistrationDetailsComponent implements OnInit {
           }
         );
     }
+  }
+
+  ngOnInit(): void {
+    this.userStorageService.getNewFile$.subscribe((file) => {
+      if (file.name.startsWith(BlobNamePrefix.InternationalPassport)) {
+        this.internationalPassportFiles.push(file);
+      }
+      if (file.name.startsWith(BlobNamePrefix.GoodConductCertificate)) {
+        this.goodConductCertificateFiles.push(file);
+      }
+      if (file.name.startsWith(BlobNamePrefix.Diploma)) {
+        this.diplomaFiles.push(file);
+      }
+      if (file.name.startsWith(BlobNamePrefix.PassportPhoto)) {
+        this.passportPhotoFiles.push(file);
+      }
+      this.cdRef.detectChanges();
+    });
+
+    this.userStorageService.fetchFiles$(this._userId);
   }
 
   confirm(confirm: boolean) {
@@ -121,5 +147,9 @@ export class RegistrationDetailsComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  downloadFile(file: File) {
+    console.log(file);
+    const url = window.URL.createObjectURL(file);
+    window.open(url);
+  }
 }
