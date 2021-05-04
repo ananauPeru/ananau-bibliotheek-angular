@@ -32,6 +32,7 @@ export const locale = {
       FEATURES: "Features",
       APPS: "Apps",
       DASHBOARD: "Dashboard",
+      TODAY: "Vandaag",
       MANAGEMENT: {
         TITLE: "Gebruikersbeheer",
         REGISTRATION: "Registratieformulier",

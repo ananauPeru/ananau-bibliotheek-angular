@@ -32,6 +32,7 @@ export const locale = {
       FEATURES: "Caracteristicas",
       APPS: "Aplicaciones",
       DASHBOARD: "Tablero",
+      TODAY: "Hoy",
       MANAGEMENT: {
         TITLE: "Gestión de usuarios",
         REGISTRATION: "Formulario de inscripción",
