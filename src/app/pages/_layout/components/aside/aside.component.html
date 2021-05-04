@@ -95,20 +95,31 @@
               <span class="menu-link">
                 <span class="menu-text">{{
                   "MENU.LIBRARY.BOOKS" | translate
-                  }}</span>
+                }}</span>
               </span>
             </li>
 
             <!-- Form Controls -->
             <!-- begin::2 Level -->
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/library/books/overview" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
+            <li
+              class="menu-item menu-item-submenu"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              routerLinkActive="menu-item-open"
+            >
+              <a
+                class="menu-link menu-toggle"
+                routerLink="/library/books/overview"
+                routerLinkActive="active"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'"
+                  cacheSVG="true"
+                  class="svg-icon menu-icon"
+                ></span>
                 <span class="menu-text">{{
                   "MENU.LIBRARY.OVERVIEW" | translate
-                  }}</span>
+                }}</span>
               </a>
             </li>
 
@@ -227,12 +238,26 @@
       <!-- end::1 Level -->
 
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted(['librarian'])">
-        <a class="menu-link menu-toggle" routerLinkActive="active" href="/library/loans">
-          <span [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text"> {{"MENU.LIBRARY.LOANING" | translate }}</span>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+        *ngIf="AuthUtil.permitted(['librarian'])"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLinkActive="active"
+          href="/library/loans"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">
+            {{ "MENU.LIBRARY.LOANING" | translate }}</span
+          >
           <i class="menu-arrow"></i>
         </a>
         <div class="menu-submenu">
@@ -240,37 +265,63 @@
           <ul class="menu-subnav">
             <li class="menu-item menu-item-parent" aria-haspopup="true">
               <span class="menu-link">
-                <span class="menu-text">{{"MENU.LIBRARY.ITEMS" | translate }}</span>
+                <span class="menu-text">{{
+                  "MENU.LIBRARY.ITEMS" | translate
+                }}</span>
               </span>
             </li>
 
             <!-- Form Controls -->
             <!-- begin::2 Level -->
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/library/loans/overview" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{"MENU.LIBRARY.OVERVIEW" | translate }}</span>
+            <li
+              class="menu-item menu-item-submenu"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              routerLinkActive="menu-item-open"
+            >
+              <a
+                class="menu-link menu-toggle"
+                routerLink="/library/loans/overview"
+                routerLinkActive="active"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'"
+                  cacheSVG="true"
+                  class="svg-icon menu-icon"
+                ></span>
+                <span class="menu-text">{{
+                  "MENU.LIBRARY.OVERVIEW" | translate
+                }}</span>
               </a>
             </li>
 
             <!-- Form Controls -->
             <!-- begin::2 Level -->
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/library/loans/new-loan" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{"MENU.LIBRARY.NEW_LOAN" | translate }}</span>
+            <li
+              class="menu-item menu-item-submenu"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              routerLinkActive="menu-item-open"
+            >
+              <a
+                class="menu-link menu-toggle"
+                routerLink="/library/loans/new-loan"
+                routerLinkActive="active"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                  cacheSVG="true"
+                  class="svg-icon menu-icon"
+                ></span>
+                <span class="menu-text">{{
+                  "MENU.LIBRARY.NEW_LOAN" | translate
+                }}</span>
               </a>
             </li>
-
           </ul>
         </div>
       </li>
       <!-- end::1 Level -->
-
 
       <!-- Material-UI -->
       <!-- begin::1 Level -->
@@ -291,74 +342,89 @@
         *ngIf="AuthUtil.permitted([''])"
       >
         <a class="menu-link" routerLink="/scan-item" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Barcode-read.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Shopping/Barcode-read.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
           <span class="menu-text">Scan Item</span>
         </a>
       </li>
       <!-- end::1 Level -->
 
-      <!-- USER MANAGEMENT -->
+      <!-- STUDENT -->
       <!-- begin::section -->
-
       <li
         class="menu-section"
-        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Volunteer', 'Student'])"
+        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Student'])"
       >
-        <h4 class="menu-text">{{ "MENU.MANAGEMENT.TITLE" | translate }}</h4>
+        <h4 class="menu-text">
+          {{ "REGISTRATION.GENERAL.STUDENT" | translate }}
+        </h4>
         <i class="menu-icon flaticon-more-v2"></i>
       </li>
       <!-- end:: section -->
-
-      <!-- begin::1 Level - Volunteer registration form for Volunteer -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['Volunteer'])">
-        <a class="menu-link" routerLink="/registration-form/volunteer" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
+      <!-- begin::1 Level - Student registration form -->
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Student'])"
+      >
+        <a
+          class="menu-link"
+          routerLink="/registration-form/student"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
           <span class="menu-text">{{
             "MENU.MANAGEMENT.REGISTRATION" | translate
-            }}</span>
+          }}</span>
         </a>
       </li>
       <!-- end::1 Level -->
-      <!-- begin::1 Level - Student registration form for Student-->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['Student'])">
-        <a class="menu-link" routerLink="/registration-form/student" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{
-            "MENU.MANAGEMENT.REGISTRATION" | translate
-            }}</span>
-        </a>
+
+      <!-- VOLUNTEER -->
+      <!-- begin::section -->
+      <li
+        class="menu-section"
+        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Volunteer'])"
+      >
+        <h4 class="menu-text">
+          {{ "REGISTRATION.GENERAL.VOLUNTEER" | translate }}
+        </h4>
+        <i class="menu-icon flaticon-more-v2"></i>
       </li>
       <!-- end:: section -->
-      <!-- begin::1 Level - Volunteer registration form for SuperAdmin -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['SuperAdmin'])">
-        <a class="menu-link" routerLink="/registration-form/volunteer" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ "MENU.MANAGEMENT.REGISTRATION" | translate }} ({{
-            "REGISTRATION.GENERAL.VOLUNTEER" | translate
-            }})</span>
+      <!-- begin::1 Level - Student registration form -->
+      <li
+        class="menu-item"
+        aria-haspopup="true"
+        routerLinkActive="menu-item-active"
+        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Volunteer'])"
+      >
+        <a
+          class="menu-link"
+          routerLink="/registration-form/volunteer"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">{{
+            "MENU.MANAGEMENT.REGISTRATION" | translate
+          }}</span>
         </a>
       </li>
       <!-- end::1 Level -->
-      <!-- begin::1 Level - Student registration form for SuperAdmin-->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['SuperAdmin'])">
-        <a class="menu-link" routerLink="/registration-form/student" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ "MENU.MANAGEMENT.REGISTRATION" | translate }} ({{
-            "REGISTRATION.GENERAL.STUDENT" | translate
-            }})</span>
-        </a>
-      </li>
 
-      <!-- USER MANAGEMENT -->
+      <!-- ORGANIZATION -->
       <!-- begin::section -->
       <li
         class="menu-section"
@@ -413,7 +479,7 @@
       </li>
       <!-- end::1 Level -->
 
-         <!-- USER MANAGEMENT -->
+      <!-- USER MANAGEMENT -->
       <!-- begin::section -->
       <li class="menu-section">
         <h4 class="menu-text">{{ "MENU.DOCUMENTATION.TITLE" | translate }}</h4>
@@ -421,12 +487,26 @@
       </li>
       <!-- end:: section -->
       <!-- begin::1 Level -->
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted(['superadmin'])">
-        <a class="menu-link menu-toggle" routerLinkActive="active" href="/documentation">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Book.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text"> {{"MENU.DOCUMENTATION.GETTING_STARTED" | translate }}</span>
+      <li
+        class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"
+        *ngIf="AuthUtil.permitted(['superadmin'])"
+      >
+        <a
+          class="menu-link menu-toggle"
+          routerLinkActive="active"
+          href="/documentation"
+        >
+          <span
+            [inlineSVG]="'./assets/media/svg/icons/Home/Book.svg'"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text">
+            {{ "MENU.DOCUMENTATION.GETTING_STARTED" | translate }}</span
+          >
           <i class="menu-arrow"></i>
         </a>
         <div class="menu-submenu">
@@ -434,32 +514,59 @@
           <ul class="menu-subnav">
             <li class="menu-item menu-item-parent" aria-haspopup="true">
               <span class="menu-link">
-                <span class="menu-text">{{"MENU.DOCUMENTATION.GETTING_STARTED" | translate }}</span>
+                <span class="menu-text">{{
+                  "MENU.DOCUMENTATION.GETTING_STARTED" | translate
+                }}</span>
               </span>
             </li>
 
             <!-- Form Controls -->
             <!-- begin::2 Level -->
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/documentation/getting-started/0-preparations" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{"MENU.DOCUMENTATION.S0_PREPARATIONS" | translate }}</span>
+            <li
+              class="menu-item menu-item-submenu"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              routerLinkActive="menu-item-open"
+            >
+              <a
+                class="menu-link menu-toggle"
+                routerLink="/documentation/getting-started/0-preparations"
+                routerLinkActive="active"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
+                  cacheSVG="true"
+                  class="svg-icon menu-icon"
+                ></span>
+                <span class="menu-text">{{
+                  "MENU.DOCUMENTATION.S0_PREPARATIONS" | translate
+                }}</span>
               </a>
             </li>
 
             <!-- Form Controls -->
             <!-- begin::2 Level -->
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/documentation/getting-started/1-setting-up" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{"MENU.DOCUMENTATION.S1_SETTING_UP" | translate }}</span>
+            <li
+              class="menu-item menu-item-submenu"
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              routerLinkActive="menu-item-open"
+            >
+              <a
+                class="menu-link menu-toggle"
+                routerLink="/documentation/getting-started/1-setting-up"
+                routerLinkActive="active"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
+                  cacheSVG="true"
+                  class="svg-icon menu-icon"
+                ></span>
+                <span class="menu-text">{{
+                  "MENU.DOCUMENTATION.S1_SETTING_UP" | translate
+                }}</span>
               </a>
             </li>
-
           </ul>
         </div>
       </li>

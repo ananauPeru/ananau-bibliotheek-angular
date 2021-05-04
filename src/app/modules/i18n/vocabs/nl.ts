@@ -167,8 +167,8 @@ export const locale = {
     // REGISTRATION FORM
     REGISTRATION: {
       GENERAL: {
-        STUDENT: "student",
-        VOLUNTEER: "vrijwilliger",
+        STUDENT: "Student",
+        VOLUNTEER: "Vrijwilliger",
         PERSONAL: "Persoonlijk",
         ORGANIZATIONAL: "Organisatorisch",
         SCANS: "Scans",

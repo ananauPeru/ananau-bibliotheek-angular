@@ -180,8 +180,8 @@ export const locale = {
     // REGISTRATION FORM
     REGISTRATION: {
       GENERAL: {
-        STUDENT: "student",
-        VOLUNTEER: "volunteer",
+        STUDENT: "Student",
+        VOLUNTEER: "Volunteer",
         PERSONAL: "Personal",
         ORGANIZATIONAL: "Organizational",
         SCANS: "Scans",
