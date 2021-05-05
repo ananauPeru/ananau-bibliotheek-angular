@@ -47,6 +47,7 @@ export const locale = {
         TITLE: 'Organization',
         ROLES: 'Role Management',
       },
+      // We dont translate documentation (IT) to different languages
       DOCUMENTATION: {
         TITLE: 'IT - Documentation',
         GETTING_STARTED: 'Getting Started',
@@ -89,7 +90,7 @@ export const locale = {
       REGISTER: {
         TITLE: 'Sign up',
         DESC: 'Enter your details to create your account',
-        SUCCESS: 'Your account has been successfuly registered.',
+        SUCCESS: 'Your account has been successfully registered.',
         INCORRECT: 'The registration details are incorrect',
         VOLUNTEER: 'Volunteer',
         STUDENT: 'Student',
@@ -112,6 +113,7 @@ export const locale = {
         USERNAME: 'Username',
         TERMS: 'I agree that Añañau can keep my data indefinitely.',
       },
+
       VALIDATION: {
         INVALID: '{{name}} is not valid',
         REQUIRED: '{{name}} is required',
@@ -167,7 +169,7 @@ export const locale = {
         PHONE: 'Telephone',
         EMAIL: 'Email Address',
         EMAIL_ALT: 'Changing email address is not possible.',
-        DATEOFBIRTH: 'Geboortedatum',
+        DATEOFBIRTH: 'Date of Birth',
       },
     },
 
@@ -357,7 +359,135 @@ export const locale = {
     },
 
     LIBRARY: {
+      GENERAL: {},
+      CREATE: {
+        BOOK: {
+          EDIT_BOOK: 'Edit Book',
+          CREATE_NEW_BOOK: 'Create New Book',
+          BACK: 'Back',
+          TITLE: {
+            TITLE: 'Title',
+            F1: 'Please enter the Title of the book.',
+            F2: 'Title is required',
+            F3: 'Title should have at least 3 symbols',
+            F4: 'Title should have maximum 100 symbols',
+          },
+          AUTHOR: {
+            TITLE: 'Author',
+            F1: 'Please enter the Author of the book.',
+            F2: 'Author is required',
+            F3: 'Author should have at least 3 symbols',
+            F4: 'Author should have maximum 100 symbols',
+          },
+          PURCHASED_AT: {
+            TITLE: 'Purchased At',
+            F1: 'Please enter the Purchase Date of the book.',
+            F2: 'Purchase date is required',
+          },
+          GENRE: {
+            TITLE: 'Genre',
+            D_DEFAULT: 'Choose Genre',
+            F1: 'Please select a Genre.',
+            F2: 'Genre is required.',
+          },
+          STATE: {
+            TITLE: 'State',
+            D_DEFAULT: 'Select State',
+            F1: 'Please select the State of the book.',
+            F2: 'State is required.',
+          },
+          PHOTO: {
+            TITLE: 'Upload a photo for this Book',
+            MESSAGE: 'Drop your image here or click to select your image.',
+          },
+          DESCRIPTION: {
+            TITLE: 'Description',
+            PH: 'Describe the item...',
+          },
+          SAVE: 'Save Changes',
+          CREATE: 'Create',
+          SAVE_CHANGES: 'Save Changes',
+          CREATE_ITEM: 'Create',
+          CANCEL: 'Cancel',
+          DELETE: 'Delete',
+        },
+        ITEM: {
+          EDIT_ITEM: 'Edit Item',
+          CREATE_NEW_ITEM: 'Create New Item',
+          BACK: 'Back',
+          TITLE: {
+            TITLE: 'Title',
+            F1: 'Please enter the Title of the Item.',
+            F2: 'Title is required',
+            F3: 'Title should have at least 3 symbols',
+            F4: 'Title should have maximum 100 symbols',
+          },
+          BRAND: {
+            TITLE: 'Brand',
+            F1: 'Please enter the Brand of the Item.',
+            F2: 'Brand is required',
+            F3: 'Brand should have at least 3 symbols',
+            F4: 'Brand should have maximum 100 symbols',
+          },
+          PURCHASED_AT: {
+            TITLE: 'Purchased At',
+            F1: 'Please enter the Purchase Date of the Item.',
+            F2: 'Purchase Date is required',
+          },
+          PURPOSE: {
+            TITLE: 'Purpose',
+            D_DEFAULT: 'Select Purpose',
+            F1: 'Please select a Purpose.',
+            F2: 'Purpose is required.',
+          },
+          COURSE: {
+            TITLE: 'Course',
+            D_DEFAULT: 'Select Course',
+            F1: 'Please select the Course of the Item.',
+            F2: 'Course is required.',
+          },
+          CODE: {
+            TITLE: 'Code',
+            F1: 'Please enter the Quantity of the item.',
+            F2: 'Quantity is required.',
+            F3: 'The minimum Quantity should be 1.',
+            F4: 'The maximum Quantity should be 1000.',
+          },
+          QUANTITY: {
+            TITLE: 'Quantity',
+            F1: 'Please insert a Code for the Item.',
+            F2: 'Code is required.',
+          },
+          PIECES: {
+            TITLE: 'Pieces',
+            F1: 'Please explain the Pieces of a Quantity for an item.',
+            F2: 'Pieces is required',
+            F3: 'Pieces should have at least 3 symbols',
+            F4: 'Pieces should have maximum 100 symbols',
+          },
+          PHOTO: {
+            TITLE: 'Upload a photo for this Item',
+            MESSAGE: 'Drop your image here or click to select your image.',
+          },
+          DESCRIPTION: {
+            TITLE: 'Description',
+            PH: 'Describe the item...',
+          },
+          SAVE_CHANGES: 'Save Changes',
+          CREATE_ITEM: 'Create',
+          CANCEL: 'Cancel',
+          DELETE: 'Delete',
+        },
+      },
       OVERVIEW: {
+        BOOK: {
+          TITLE: 'All Books in Library',
+          ADD: 'Add New Book',
+          GENRE: 'Genre',
+          FILTER_PH:'Filter...'
+        },
+      },
+      BOOK_OVERVIEW: {
         ANCIENT_EPIC: 'Ancient Epic',
         CHILDREN_GAMES: 'Children Games',
         DRAMATIC: 'Dramatic',
