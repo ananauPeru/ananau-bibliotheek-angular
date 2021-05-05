@@ -20,7 +20,6 @@ export class UserOffcanvasComponent implements OnInit {
       "extras.user.offcanvas.direction"
     )}`;
     this.user$ = this.auth.currentUserSubject.asObservable();
-    console.log("yooo");
   }
 
   logout() {
