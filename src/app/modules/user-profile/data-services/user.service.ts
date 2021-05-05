@@ -30,7 +30,7 @@ export class UserService {
   }
 
   changePassword$(dto: ChangePasswordDTO) {
-    return this.http.put(`${API_USERS_URL}/password`, dto).pipe(
+    return this.http.post(`${API_USERS_URL}/change-password`, dto).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.log("Login please...");
