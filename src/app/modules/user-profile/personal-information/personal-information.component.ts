@@ -125,11 +125,6 @@ export class PersonalInformationComponent implements OnInit, OnDestroy {
         this.toasts.error("Something went wrong.", "Error");
       }
     );
-
-    // setTimeout(() => {
-    //   this.authService.currentUserSubject.next(Object.assign({}, this.user));
-    //   this.authService.isLoadingSubject.next(false);
-    // }, 2000);
   }
 
   cancel() {

@@ -4,6 +4,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { UserModel } from "../../auth";
+import { ChangePasswordDTO } from "../_dto/change-password-dto";
 import { UserDTO } from "../_dto/user-dto";
 
 const API_USERS_URL = `${environment.apiUrl}/user`;
@@ -16,7 +17,7 @@ export class UserService {
 
   updateUser$(dto: UserDTO): Observable<UserModel> {
     return this.http
-      .put(`${API_USERS_URL}/${dto.userId}`, dto, { responseType: "json" })
+      .put(`${API_USERS_URL}`, dto, { responseType: "json" })
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -26,5 +27,16 @@ export class UserService {
         }),
         map((user: any): UserModel => user)
       );
+  }
+
+  changePassword$(dto: ChangePasswordDTO) {
+    return this.http.put(`${API_USERS_URL}/password`, dto).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.log("Login please...");
+        }
+        return throwError(error);
+      })
+    );
   }
 }

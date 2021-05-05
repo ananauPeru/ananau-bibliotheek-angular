@@ -1,13 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { AuthService, UserModel, ConfirmPasswordValidator } from '../../auth';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ToastrService } from "ngx-toastr";
+import { Observable, Subscription } from "rxjs";
+import { first } from "rxjs/operators";
+import { AuthService, UserModel, ConfirmPasswordValidator } from "../../auth";
+import { UserService } from "../data-services/user.service";
+import { ChangePasswordDTO } from "../_dto/change-password-dto";
 
 @Component({
-  selector: 'app-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss']
+  selector: "app-change-password",
+  templateUrl: "./change-password.component.html",
+  styleUrls: ["./change-password.component.scss"],
 })
 export class ChangePasswordComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
@@ -16,33 +19,42 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   isLoading$: Observable<boolean>;
 
-  constructor(private userService: AuthService, private fb: FormBuilder) {
-    this.isLoading$ = this.userService.isLoadingSubject.asObservable();
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private userService: UserService,
+    private toasts: ToastrService
+  ) {
+    this.isLoading$ = this.authService.isLoadingSubject.asObservable();
   }
 
   ngOnInit(): void {
-    const sb = this.userService.currentUserSubject.asObservable().pipe(
-      first(user => !!user)
-    ).subscribe(user => {
-      this.user = Object.assign({}, user);
-      this.firstUserState = Object.assign({}, user);
-      this.loadForm();
-    });
+    const sb = this.authService.currentUserSubject
+      .asObservable()
+      .pipe(first((user) => !!user))
+      .subscribe((user) => {
+        this.user = Object.assign({}, user);
+        this.firstUserState = Object.assign({}, user);
+        this.loadForm();
+      });
     this.subscriptions.push(sb);
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sb => sb.unsubscribe());
+    this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
 
   loadForm() {
-    this.formGroup = this.fb.group({
-      currentPassword: [this.user.password, Validators.required],
-      password: ['', Validators.required],
-      cPassword: ['', Validators.required]
-    }, {
-      validator: ConfirmPasswordValidator.MatchPassword
-    });
+    this.formGroup = this.fb.group(
+      {
+        currentPassword: [this.user.password, Validators.required],
+        password: ["", Validators.required],
+        cPassword: ["", Validators.required],
+      },
+      {
+        validator: ConfirmPasswordValidator.MatchPassword,
+      }
+    );
   }
 
   save() {
@@ -51,12 +63,19 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.user.password = this.formGroup.value.password;
-    this.userService.isLoadingSubject.next(true);
-    setTimeout(() => {
-      this.userService.currentUserSubject.next(Object.assign({}, this.user));
-      this.userService.isLoadingSubject.next(false);
-    }, 2000);
+    let dto = new ChangePasswordDTO();
+    dto.oldPassword = this.formGroup.value.currentPassword;
+    dto.newPassword = this.formGroup.value.password;
+    dto.newPasswordConfirmation = this.formGroup.value.cPassword;
+
+    this.userService.changePassword$(dto).subscribe(
+      () => {
+        this.toasts.success("Password successfully updated.", "Success");
+      },
+      () => {
+        this.toasts.error("Something went wrong.", "Error");
+      }
+    );
   }
 
   cancel() {
