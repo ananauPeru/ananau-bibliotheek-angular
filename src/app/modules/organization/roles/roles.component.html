@@ -1,42 +1,25 @@
 <div class="card card-custom">
-    <!-- Header -->
 
+    <!-- Header -->
     <div class="row">
         <div class="col-12">
             <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
                 <div class="row">
                     <div class="col-12 col-md-8 w-100">
-                        <h3 class="card-title font-weight-bolder text-dark">Change and Assign Roles</h3>
+                        <h3 class="card-title font-weight-bolder text-dark">
+                            {{"ORGANIZATION.ROLES.OVERVIEW.TITLE" | translate }}
+                        </h3>
                     </div>
-                    <!-- <div class="col-12 col-md-4">
-                        <button type="submit" id="kt_login_signin_submit"
-                            class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
-                            routerLink="/library/add-item">
-                            Add New Book
-                        </button>
-                    </div> -->
                 </div>
-
-
-                <!-- <div class="card-toolbar">
-                    <div ngbDropdown placement="bottom-right" class="dropdown dropdown-inline" title="Quick actions">
-                        <a ngbDropdownToggle class="btn btn-clean btn-hover-light-primary btn-sm btn-icon"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="ki ki-bold-more-ver"></i>
-                        </a>
-                        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                            <app-dropdown-menu1></app-dropdown-menu1>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
+
     <!-- Body -->
     <div class="card-body pt-2">
         <div [ngClass]=" working ? 'd-flex' : ''" id="overlay" onclick="off()">
             <div class="w-100 d-flex justify-content-center align-items-center">
-                <h1 class="text-center text-white">Please wait...</h1>
+                <h1 class="text-center text-white">{{"ORGANIZATION.ROLES.OVERVIEW.PLEASE_WAIT" | translate }}</h1>
             </div>
         </div>
 
@@ -51,11 +34,12 @@
                     </div>
 
                     <input (keyup)="applyFilter($event.target.value)" type="email"
-                        class="form-control form-control-lg form-control-solid force-pl-5" placeholder="Filter..."
+                        class="form-control form-control-lg form-control-solid force-pl-5" 
+                        placeholder='{{"ORGANIZATION.ROLES.OVERVIEW.FILTER" | translate }}'
                         style="padding-left: 10px;" />
                 </div>
                 <div class="feedback">
-                    Try searching and filtering on <b>First name, Last name, Email or Role.</b>
+                    {{"ORGANIZATION.ROLES.OVERVIEW.FILTER_SUB" | translate }}
                 </div>
             </div>
         </div>
@@ -68,8 +52,8 @@
                     <table class="table table-fit">
                         <thead>
                             <tr>
-                                <th>First name</th>
-                                <th>Last name</th>
+                                <th>{{"ORGANIZATION.ROLES.OVERVIEW.FIRST_NAME" | translate }}</th>
+                                <th>{{"ORGANIZATION.ROLES.OVERVIEW.LAST_NAME" | translate }}</th>
                                 <th>Email</th>
                                 <th>SuperAdmin</th>
                                 <th>Admin</th>

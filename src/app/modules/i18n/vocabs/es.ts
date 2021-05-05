@@ -527,6 +527,85 @@ export const locale = {
           DAYS_REMAINING: 'Días restantes',
           DAYS_LATE: 'Días tarde',
           NO_RESULTS: 'No hay resultados...',
+
+          ADD_LOAN: {
+            LOAN_DETAILS: 'Detalles del préstamo',
+            RETURN_MANAGEMENT: 'Gestión de devoluciones',
+            SIGN_OFF: 'Cerrar sesión',
+            CREATE_LOAN: 'Crear préstamo',
+            CLOSE_LOAN: 'Cerrar préstamo',
+            EDIT_LOAN: 'Editar préstamo',
+          },
+          LOAN_DETAILS: {
+            ITEM_INPUT:
+              'Elija un libro o un artículo educativo para ser prestado.',
+            BOOKS: 'Libros',
+            ITEMS: 'Artículos educativos',
+            ITEM_INPUT_PH: 'Escriba el título del artículo / libro',
+            ITEM_INPUT_SUB:
+              'Escriba el nombre del elemento deseado, puede elegir entre los resultados filtrados ...',
+            USER_INPUT:
+              'Elija el usuario que está prestando el libro / artículo.',
+            USER: 'Usuario',
+            USER_INPUT_PH: 'Escriba un nombre o correo electrónico',
+            USER_INPUT_SUB:
+              'Escriba el nombre o correo electrónico del usuario, puede elegir entre los resultados filtrados ...',
+            LOANED_AT: 'Prestado en',
+            LOANED_AT_F1: 'Ingrese la fecha de préstamo del artículo.',
+            LOANED_AT_F2: 'Se requiere fecha de préstamo',
+            EXPECTED_RETURN_DATE: 'Fecha de devolución esperada',
+            EXPECTED_RETURN_DATE_F1:
+              'Ingrese la fecha de devolución esperada del artículo.',
+            EXPECTED_RETURN_DATE_F2:
+              'Se requiere la fecha de devolución esperada',
+            STATE: 'Estado al prestar',
+            STATE_GOOD: 'Bueno',
+            STATE_NORMAL: 'Señales de uso normal',
+            STATE_BAD: 'Malo',
+            STATE_F1: 'Seleccione un estado para el artículo.',
+            STATE_F2: 'Se requiere estado',
+            QUANTITY: 'Cantidad',
+            QUANTITY_F1: 'Ingrese la cantidad de los artículos prestados.',
+            QUANTITY_F2: 'Se requiere cantidad.',
+            QUANTITY_F3: 'La cantidad mínima debe ser 1.',
+            QUANTITY_F4: 'La cantidad máxima debe ser 1000.',
+            STATE_DESC: 'Descripción del estado',
+            STATE_DESC_PH:
+              'Describa el estado con más detalle si es necesario.',
+          },
+          RETURN_DETAILS: {
+            RETURNED_AT: 'Devuelto en',
+            RETURNED_AT_F1: 'Ingrese la fecha de devolución del artículo.',
+            RETURNED_AT_F2: 'Se requiere la fecha de devolución',
+            STATE: 'Estado cuando regresó',
+            STATE_GOOD: 'Bueno',
+            STATE_NORMAL: 'Señales de uso normal',
+            STATE_BAD: 'Malo',
+            STATE_F1: 'Seleccione un Estado de devolución para el artículo.',
+            STATE_F2: 'Se requiere el estado de retorno',
+            STATE_DESC: 'Descripción del estado de retorno',
+            STATE_DESC_PH:
+              'Describa el estado con más detalle si es necesario.',
+          },
+          SIGN_OFF: {
+            MAIN_TITLE: 'Préstamo de firma (cierre)',
+            MAIN_TITLE_SUB:
+              'Está a punto de firmar y cerrar este préstamo. Verifique todos los detalles a continuación y realice cambios si es necesario ... Si hay un comentario que le gustaría agregar, puede escribirlo en el cuadro de texto a continuación antes de cerrar.',
+            TYPE: 'Tipo',
+            TITLE: 'Título',
+            QUANTITY: 'Cantidad',
+            USER: 'Usuario',
+            LOAN_DATE: 'Fecha de préstamo',
+            LOAN_STATE: 'Estado del préstamo',
+            LOAN_STATE_DESC: 'Descripción del estado del préstamo',
+            EXPECTED_RETURN_DATE: 'Fecha de devolución esperada',
+            RETURNED_AT: 'Devuelto en',
+            RETURN_STATE: 'Estado de retorno',
+            RETURN_STATE_DESC: 'Descripción del estado de retorno',
+            REMARKS: 'Observaciones',
+            REMARKS_PH: 'Comentarios antes de cerrar el préstamo.',
+            NO_DESC: 'No se ha proporcionado ninguna descripción.',
+          },
         },
       },
       BOOK_OVERVIEW: {
@@ -570,6 +649,20 @@ export const locale = {
         BAD: 'Malo',
         REGULAR: 'Regular',
         GOOD: 'Bueno',
+      },
+    },
+
+    ORGANIZATION: {
+      ROLES: {
+        OVERVIEW: {
+          TITLE: 'Cambiar y asignar roles',
+          PLEASE_WAIT: 'Espere por favor...',
+          FILTER: 'Filtrar...',
+          FILTER_SUB:
+            'Intente buscar y filtrar por nombre, apellido, correo electrónico o función.',
+          FIRST_NAME: 'Nombre propio',
+          LAST_NAME: 'Apellido',
+        },
       },
     },
   },

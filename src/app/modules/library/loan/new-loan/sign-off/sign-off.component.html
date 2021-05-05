@@ -2,10 +2,9 @@
     <div class="row form-group">
 
         <div class="col-12 mb-3">
-            <h3>Signing Off (Closing) Loan</h3><br>
-            <p>You are about to sign off and close this loan. Please check all of the details below and make changes if
-                necessary...
-                If there is a remark you would like to add, you can write it down in the text box below before closing.
+            <h3>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.MAIN_TITLE" | translate }}</h3><br>
+            <p>
+                {{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.MAIN_TITLE_SUB" | translate }}
             </p>
         </div>
 
@@ -13,22 +12,30 @@
             <hr />
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <strong>Type: </strong>{{loanedPiece.book ? 'BOOK' : 'ITEM'}} <br>
-                    <strong>Title: </strong>{{loanedPiece.book?loanedPiece.book.name:loanedPiece.item.name}} <br>
-                    <strong>Quantity: </strong>{{loanedPiece.quantity}} <br>
-                    <strong>User: </strong>{{loanedPiece.loaningUser.userDetail.firstName + ' ' +
-                    loanedPiece.loaningUser.userDetail.lastName + ' • ' + loanedPiece.loaningUser.email}} <br>
-                    <strong>Loan Date: </strong> {{loanedPiece.loanDate | date:'dd/MM/yyyy'}} <br>
-                    <strong>Loan State: </strong> {{loanedPiece.loanState.toLowerCase()}} <br>
-                    <strong>Loan State Description: </strong> <br>
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.TYPE" | translate }}: </strong>{{loanedPiece.book ? 'BOOK'
+                    : 'ITEM'}} <br>
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.TITLE" | translate }}:
+                    </strong>{{loanedPiece.book?loanedPiece.book.name:(loanedPiece.item ?
+                    loanedPiece.item.name : '')}} <br>
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.QUANTITY" | translate }}: </strong>{{loanedPiece.quantity?
+                    loanedPiece.quantity:''}} <br>
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.USER" | translate }}: </strong>
+                    {{loanedPiece.loaningUser ? loanedPiece.loaningUser.userDetail.firstName + '
+                    ' + loanedPiece.loaningUser.userDetail.lastName + ' • ' + loanedPiece.loaningUser.email : ''}} <br>
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.LOAN_DATE" | translate }}: </strong> {{loanedPiece.loanDate ? (loanedPiece.loanDate | date:'dd/MM/yyyy') :
+                    ''}} <br>
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.LOAN_STATE" | translate }}: </strong> {{loanedPiece.loanState ? loanedPiece.loanState.toLowerCase() : ''}}
+                    <br>
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.LOAN_STATE_DESC" | translate }}: </strong> <br>
                     <span class="pl-3">
                         {{loanedPiece.loanStateDescription ?
                         loanedPiece.loanStateDescription: 'No description provided.' }}
                     </span>
                 </div>
                 <div class="col-12 col-md-6">
-                    <strong>Expected Return Date: </strong>{{loanedPiece.returnDate|date:'dd/MM/yyyy'}} <br>
-                    <strong>Returned At: </strong>{{loanedPiece.returnedAt? (loanedPiece.returnedAt | date:'dd/MM/yyyy')
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.EXPECTED_RETURN_DATE" | translate }}: </strong>{{loanedPiece.returnDate ?
+                    (loanedPiece.returnDate|date:'dd/MM/yyyy'):''}} <br>
+                    <strong>{{"LIBRARY.OVERVIEW.LOAN.SIGN_OFF.RETURNED_AT" | translate }}: </strong>{{loanedPiece.returnedAt? (loanedPiece.returnedAt | date:'dd/MM/yyyy')
                     : ''}} <br>
                     <strong>Return State: </strong>{{loanedPiece.returnState? loanedPiece.returnState.toLowerCase() :
                     ''}} <br>
