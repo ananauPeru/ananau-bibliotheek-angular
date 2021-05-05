@@ -1,37 +1,20 @@
 <div class="card card-custom">
-    <!-- Header -->
 
+    <!-- Header -->
     <div class="row">
         <div class="col-12">
             <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
                 <div class="row">
                     <div class="col-12 col-md-8 w-100">
-                        <h3 class="card-title font-weight-bolder text-dark">All Loaned Out Items and Books</h3>
+                        <h3 class="card-title font-weight-bolder text-dark">
+                            {{"LIBRARY.OVERVIEW.LOAN.TITLE" | translate }}
+                        </h3>
                     </div>
-                    <!-- <div class="col-12 col-md-4">
-                        <button type="submit" id="kt_login_signin_submit"
-                            class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
-                            routerLink="/library/add-item">
-                            Add New Book
-                        </button>
-                    </div> -->
                 </div>
-
-
-                <!-- <div class="card-toolbar">
-                    <div ngbDropdown placement="bottom-right" class="dropdown dropdown-inline" title="Quick actions">
-                        <a ngbDropdownToggle class="btn btn-clean btn-hover-light-primary btn-sm btn-icon"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="ki ki-bold-more-ver"></i>
-                        </a>
-                        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                            <app-dropdown-menu1></app-dropdown-menu1>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
+
     <!-- Body -->
     <div class="card-body pt-2">
         <!--begin::Form Group-->
@@ -43,13 +26,12 @@
                             <i class="fa fa-search"></i>
                         </span>
                     </div>
-
                     <input (keyup)="filter = ($event.target.value)" type="email"
-                        class="form-control form-control-lg form-control-solid force-pl-5" placeholder="Filter..."
-                        style="padding-left: 10px;" />
+                        class="form-control form-control-lg form-control-solid force-pl-5"
+                        placeholder='{{"LIBRARY.OVERVIEW.LOAN.FILTER_PH" | translate }}' style="padding-left: 10px;" />
                 </div>
                 <div class="feedback">
-                    Try searching and filtering on <b>Title of the Item/Book, Name of User or Email of User.</b>
+                    {{"LIBRARY.OVERVIEW.LOAN.FILTER_SUB" | translate }}
                 </div>
             </div>
         </div>
@@ -64,11 +46,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Loaned By</th>
-                                <th>Loaned At</th>
-                                <th>Return Date</th>
-                                <th>Days Remaining</th>
+                                <th>{{"LIBRARY.OVERVIEW.LOAN.NAME" | translate }}</th>
+                                <th>{{"LIBRARY.OVERVIEW.LOAN.LOANED_BY" | translate }}</th>
+                                <th>{{"LIBRARY.OVERVIEW.LOAN.LOANED_AT" | translate }}</th>
+                                <th>{{"LIBRARY.OVERVIEW.LOAN.RETURN_DATE" | translate }}</th>
+                                <th>{{"LIBRARY.OVERVIEW.LOAN.DAYS_REMAINING" | translate }}</th>
                                 <th>•••</th>
                             </tr>
                         </thead>
@@ -82,7 +64,8 @@
                                 <ng-container *ngIf="diffDays(l.returnDate) > 3; else elseTemplate">
                                     <td>
                                         <div class="badge badge-pill badge-success text-light">
-                                            {{diffDays(l.returnDate) + ' Days Remaining' }}
+                                            {{diffDays(l.returnDate) + ' '+ ("LIBRARY.OVERVIEW.LOAN.DAYS_REMAINING" |
+                                            translate) }}
                                         </div>
                                     </td>
                                 </ng-container>
@@ -91,7 +74,8 @@
                                         *ngIf="diffDays(l.returnDate) > 0 && diffDays(l.returnDate) <= 3; else elseTemplate">
                                         <td>
                                             <div class="badge badge-pill badge-warning text-light">
-                                                {{diffDays(l.returnDate) + ' Days Remaining' }}
+                                                {{diffDays(l.returnDate) + ' '+ ("LIBRARY.OVERVIEW.LOAN.DAYS_REMAINING"
+                                                | translate) }}
                                             </div>
 
                                         </td>
@@ -99,7 +83,8 @@
                                     <ng-template #elseTemplate>
                                         <td>
                                             <div class="badge badge-pill badge-danger text-light">
-                                                {{(diffDays(l.returnDate)|positive) + ' Days Late' }}
+                                                {{(diffDays(l.returnDate)|positive) + ' '+
+                                                ("LIBRARY.OVERVIEW.LOAN.DAYS_LATE" | translate) }}
                                             </div>
                                         </td>
                                     </ng-template>
@@ -111,7 +96,9 @@
                                 </td>
                             </tr>
                             <tr *ngIf="filteredActiveLoansEmpty|async">
-                                <td colspan="7" class="text-center"><i>No results...</i></td>
+                                <td colspan="7" class="text-center"><i>
+                                        {{"LIBRARY.OVERVIEW.LOAN.NO_RESULTS" | translate }}
+                                    </i></td>
                             </tr>
                         </tbody>
                     </table>
