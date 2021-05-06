@@ -7,7 +7,7 @@
           <a class="nav-link" (click)='step = null' [ngClass]="!loanedPiece.loanedPieceId ? 'active' : ''"
             data-toggle="tab" href="#kt_tab_pane_7_1">
             <span class="nav-icon"><i class="fa fa-info-circle"></i></span>
-            <span class="nav-text">Loan Details</span>
+            <span class="nav-text">{{"LIBRARY.OVERVIEW.LOAN.ADD_LOAN.LOAN_DETAILS" | translate }}</span>
           </a>
         </li>
         <li class="nav-item">
@@ -16,13 +16,13 @@
               [ngClass]="loanedPiece.loanedPieceId && step!='final' ? 'active' : ''" data-toggle="tab"
               [attr.href]='loanedPiece.loanedPieceId ? "#kt_tab_pane_7_2":"#"'>
               <span class="nav-icon"><i class="fas fa-sign-in-alt"></i></span>
-              <span class="nav-text">Return Management</span></a>
+              <span class="nav-text">{{"LIBRARY.OVERVIEW.LOAN.ADD_LOAN.RETURN_MANAGEMENT" | translate }}</span></a>
           </ng-container>
           <ng-template #elseTemplateAnchor>
             <p class="nav-link"
               (click)='toastrUtil.showWarning("Cannot continue, please create loan first...","Cannot Proceed")'>
               <span class="nav-icon"><i class="fas fa-sign-in-alt"></i></span>
-              <span class="nav-text">Return Management</span>
+              <span class="nav-text">{{"LIBRARY.OVERVIEW.LOAN.ADD_LOAN.RETURN_MANAGEMENT" | translate }}</span>
             </p>
           </ng-template>
         </li>
@@ -32,13 +32,13 @@
               [ngClass]="loanedPiece.loanedPieceId && step=='final' ? 'active' : ''" data-toggle="tab"
               [attr.href]='loanedPiece.loanedPieceId ? "#kt_tab_pane_7_3":"#"'>
               <span class="nav-icon"><i class="fas fa-stamp"></i></span>
-              <span class="nav-text">Sign Off</span></a>
+              <span class="nav-text">{{"LIBRARY.OVERVIEW.LOAN.ADD_LOAN.SIGN_OFF" | translate }}</span></a>
           </ng-container>
           <ng-template #elseTemplateAnchorLast>
             <p class="nav-link"
               (click)='toastrUtil.showWarning("Cannot continue, please create loan first...","Cannot Proceed")'>
               <span class="nav-icon"><i class="fas fa-stamp"></i></span>
-              <span class="nav-text">Sign Off</span>
+              <span class="nav-text">{{"LIBRARY.OVERVIEW.LOAN.ADD_LOAN.SIGN_OFF" | translate }}</span>
             </p>
           </ng-template>
         </li>
@@ -48,14 +48,14 @@
       <button [disabled]="saving" (click)="saveForm()" class="btn btn-light-primary font-weight-bolder mr-2"
         [ngClass]="{'spinner spinner-left': saving}">
         <ng-container *ngIf="!loanedPiece.loanedPieceId; else elseTemplate">
-          Create Loan
+          {{"LIBRARY.OVERVIEW.LOAN.ADD_LOAN.CREATE_LOAN" | translate }}
         </ng-container>
         <ng-template #elseTemplate>
           <ng-container *ngIf="step=='final'; else elseTemplate">
-            Close Loan
+            {{"LIBRARY.OVERVIEW.LOAN.ADD_LOAN.CLOSE_LOAN" | translate }}
           </ng-container>
           <ng-template #elseTemplate>
-            Edit Loan
+            {{"LIBRARY.OVERVIEW.LOAN.ADD_LOAN.EDIT_LOAN" | translate }}
           </ng-template>
         </ng-template>
       </button>
@@ -72,9 +72,6 @@
             <div class="col-xl-8">
               <app-loan-details [loanedPiece]="loanedPiece" [loaningUser]="loaningUser" [loanForm]="loanForm">
               </app-loan-details>
-              <!-- <app-personal-information [(personalForm)]="formContainer.controls.personalForm"
-                (personalFormCounted)="personalFormProgress = $event" [role]="role" [initialData]="initialData">
-              </app-personal-information> -->
             </div>
             <div class="col-xl-2"></div>
           </div>
@@ -86,11 +83,6 @@
             <div class="col-xl-8">
               <app-return-details [loanedPiece]="loanedPiece" [loaningUser]="loaningUser" [loanForm]="loanForm">
               </app-return-details>
-              <!-- <app-organizational-information [(organizationalForm)]="
-                    formContainer.controls.organizationalForm
-                  " (organizationalFormCounted)="
-                    organizationalFormProgress = $event
-                  " [role]="role" [initialData]="initialData"></app-organizational-information> -->
             </div>
             <div class="col-xl-2"></div>
           </div>
@@ -102,9 +94,6 @@
             <div class="col-xl-8">
               <app-sign-off [loanedPiece]="loanedPiece" [loaningUser]="loaningUser" [loanForm]="loanForm">
               </app-sign-off>
-              <!-- <app-scan-uploads [(scansForm)]="formContainer.controls.scansForm"
-                (scansFormCounted)="scansFormProgress = $event" [upload]="saveScanFiles.asObservable()"
-                (saving)="savingScans = $event" (sending)="sendingScans = $event"></app-scan-uploads> -->
             </div>
             <div class="col-xl-2"></div>
           </div>

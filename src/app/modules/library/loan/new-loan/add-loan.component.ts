@@ -157,9 +157,9 @@ export class AddLoanComponent implements OnInit {
               ).getDate(),
             )
           : new NgbDate(
-              new Date(Date.now() + 12096e5).getFullYear(),
-              new Date(Date.now() + 12096e5).getMonth() + 1,
-              new Date(Date.now() + 12096e5).getDate(),
+              new Date(Date.now()).getFullYear(),
+              new Date(Date.now()).getMonth() + 1,
+              new Date(Date.now()).getDate(),
             ),
         Validators.compose([Validators.required]),
       ],

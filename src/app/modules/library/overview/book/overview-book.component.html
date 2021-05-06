@@ -1,38 +1,27 @@
 <div class="card card-custom">
-    <!-- Header -->
 
+    <!-- Header -->
     <div class="row">
         <div class="col-12">
             <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
                 <div class="row">
                     <div class="col-12 col-md-8 w-100">
-                        <h3 class="card-title font-weight-bolder text-dark">All Books in Library</h3>
+                        <h3 class="card-title font-weight-bolder text-dark">
+                            {{"LIBRARY.OVERVIEW.BOOK.TITLE" | translate }}
+                        </h3>
                     </div>
                     <div class="col-12 col-md-4">
                         <button type="submit" id="kt_login_signin_submit"
                             class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
                             routerLink="/library/books/add-book">
-                            Add New Book
-                            <!-- {{"AUTH.LOGIN.BUTTON" | translate }} -->
+                            {{"LIBRARY.OVERVIEW.BOOK.ADD" | translate }}
                         </button>
                     </div>
                 </div>
-
-
-                <!-- <div class="card-toolbar">
-                    <div ngbDropdown placement="bottom-right" class="dropdown dropdown-inline" title="Quick actions">
-                        <a ngbDropdownToggle class="btn btn-clean btn-hover-light-primary btn-sm btn-icon"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="ki ki-bold-more-ver"></i>
-                        </a>
-                        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                            <app-dropdown-menu1></app-dropdown-menu1>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
+
     <!-- Body -->
     <div class="card-body pt-2" *ngIf="AuthUtil.permitted(['admin'])">
         <!--begin::Form Group-->
@@ -45,14 +34,14 @@
                         </span>
                     </div>
                     <input (keyup)="applyFilter7($event.target.value)" type="email"
-                        class="form-control form-control-lg form-control-solid force-pl-5" placeholder="Filter..."
-                        style="padding-left: 10px;" />
+                        class="form-control form-control-lg form-control-solid force-pl-5"
+                        placeholder='{{"LIBRARY.OVERVIEW.BOOK.FILTER_PH" | translate }}' style="padding-left: 10px;" />
                 </div>
             </div>
             <div class="col-12 col-md-4">
                 <select class="form-control form-control-lg form-control-solid" placeholder="Genre"
                     (change)="applyGenre($event.target.value)">
-                    <option value="">Genre</option>
+                    <option value="">{{"LIBRARY.OVERVIEW.BOOK.GENRE" | translate }}</option>
                     <option *ngFor="let enum of BookCategories | keyvalue" value="{{enum.key}}">
                         {{enum.value | translate }}
                     </option>
@@ -78,14 +67,15 @@
             <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3" style="max-width: 365px; overflow: hidden;">
                 <a routerLink='/library/books/edit-book/{{book.bookId}}'
                     class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                    {{book.name}}
+                    {{book.name.length<=35 ? book.name : ((book.name | slice:0:35)+'...')}} 
                 </a>
                 <span class="text-muted font-weight-bold font-size-sm my-1">
-                    Description: {{book.description ? ((book.description | slice:0:45)+'...')
+                    {{"LIBRARY.OVERVIEW.BOOK.DESCRIPTION" | translate }}: {{book.description ? ((book.description |
+                    slice:0:45)+'...')
                     : 'No description provided.'}}
                 </span>
                 <span class="text-muted font-weight-bold font-size-sm">
-                    Author: {{book.author?book.author:'Author Unknown'}}
+                    {{"LIBRARY.OVERVIEW.BOOK.AUTHOR" | translate }}: {{book.author?book.author:'Author Unknown'}}
                 </span>
             </div>
             <!--end::Title-->
@@ -110,11 +100,13 @@
                     {{BookCategories[book.genre] | translate }}
                 </span>
                 <span class="text-muted font-weight-bold font-size-sm my-1">
-                    State: {{book.state?book.state:'State unknown.'}}
+                    {{"LIBRARY.OVERVIEW.BOOK.STATE" | translate }}: {{book.state?book.state:'State unknown.'}}
                 </span>
                 <span class="text-muted font-weight-bold font-size-sm">
-                    Created at: {{book.createdAt?(book.createdAt | date:'M/d/yy, H:mm'):'NULL/ERROR'}}
-                    | Last update: {{book.updatedAt?(book.updatedAt | date:'M/d/yy, H:mm'):'NULL/ERROR'}}
+                    {{"LIBRARY.OVERVIEW.BOOK.CREATED_AT" | translate }}: {{book.createdAt?(book.createdAt |
+                    date:'M/d/yy, H:mm'):'NULL/ERROR'}}
+                    | {{"LIBRARY.OVERVIEW.BOOK.LAST_UPDATE" | translate }}: {{book.updatedAt?(book.updatedAt |
+                    date:'M/d/yy, H:mm'):'NULL/ERROR'}}
                 </span>
             </div>
             <!--end::Title-->
@@ -126,7 +118,7 @@
                         {{book.pieces ? book.pieces.length : 0}}
                     </span>
                     <span class="text-muted font-weight-bolder font-size-sm">
-                        in stock
+                        {{"LIBRARY.OVERVIEW.BOOK.IN_STOCK" | translate }}
                     </span>
                 </div>
             </div>

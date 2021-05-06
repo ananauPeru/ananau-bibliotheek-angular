@@ -1,25 +1,19 @@
 <div class="card card-custom gutter-b">
-    <!-- <ng-container *ngIf="isLoading$ | async">
-        <div class="progress progress-modal">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
-                style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-    </ng-container> -->
 
     <div class="card-header">
         <div class="card-title">
             <h3 class="card-label">
                 <ng-container *ngIf="item; else elseTemplate">
-                    Edit Book
+                    {{"LIBRARY.CREATE.ITEM.EDIT_ITEM" | translate }}
                 </ng-container>
                 <ng-template #elseTemplate>
-                    Create New Book
+                    {{"LIBRARY.CREATE.ITEM.CREATE_NEW_ITEM" | translate }}
                 </ng-template>
             </h3>
         </div>
         <div class="card-toolbar">
             <a type="button" class="btn btn-light" routerLink="/library/items/overview">
-                <i class="fa fa-arrow-left"></i>Back
+                <i class="fa fa-arrow-left"></i>{{"LIBRARY.CREATE.ITEM.BACK" | translate }}
             </a>
         </div>
     </div>
@@ -29,45 +23,47 @@
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
             <div class="form-group row">
                 <div class="col-12 col-md-6">
-                    <label>Title </label>
+                    <label>{{"LIBRARY.CREATE.ITEM.TITLE.TITLE" | translate }}</label>
                     <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder="Title" name='name' [class.is-invalid]="isControlInvalid('name')"
-                        [class.is-valid]="isControlValid('name')" formControlName='name' required />
+                        placeholder='{{"LIBRARY.CREATE.ITEM.TITLE.TITLE" | translate }}' name='name'
+                        [class.is-invalid]="isControlInvalid('name')" [class.is-valid]="isControlValid('name')"
+                        formControlName='name' required />
                     <div class="feedback" *ngIf="!isControlTouched('name')">
-                        Please enter <b>the Title of the item.</b>
+                        {{"LIBRARY.CREATE.ITEM.TITLE.F1" | translate }}
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('name')">
                         <!-- Name was entered correct -->
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">
-                        Title is required
+                        {{"LIBRARY.CREATE.ITEM.TITLE.F2" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">
-                        Title should have at least 3 symbols
+                        {{"LIBRARY.CREATE.ITEM.TITLE.F3" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">
-                        Title should have maximum 100 symbols
+                        {{"LIBRARY.CREATE.ITEM.TITLE.F4" | translate }}
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label>Brand</label>
+                    <label>{{"LIBRARY.CREATE.ITEM.BRAND.TITLE" | translate }}</label>
                     <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder="Brand" name='brand' [class.is-invalid]="isControlInvalid('brand')"
-                        [class.is-valid]="isControlValid('brand')" formControlName='brand' required />
+                        placeholder='{{"LIBRARY.CREATE.ITEM.BRAND.TITLE" | translate }}' name='brand'
+                        [class.is-invalid]="isControlInvalid('brand')" [class.is-valid]="isControlValid('brand')"
+                        formControlName='brand' required />
                     <div class="feedback" *ngIf="!isControlTouched('brand')">
-                        Please enter <b>the Brand of the item.</b>
+                        {{"LIBRARY.CREATE.ITEM.BRAND.F1" | translate }}
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('brand')">
                         <!-- Brand was entered correct -->
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'brand')">
-                        Brand is required
+                        {{"LIBRARY.CREATE.ITEM.BRAND.F2" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'brand')">
-                        Brand should have at least 3 symbols
+                        {{"LIBRARY.CREATE.ITEM.BRAND.F3" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'brand')">
-                        Brand should have maximum 100 symbols
+                        {{"LIBRARY.CREATE.ITEM.BRAND.F4" | translate }}
                     </div>
                 </div>
             </div>
@@ -75,7 +71,7 @@
                 <!--begin::Form group-->
                 <div class="col-12 col-md-6">
                     <label>
-                        Purchased at
+                        {{"LIBRARY.CREATE.ITEM.PURCHASED_AT.TITLE" | translate }}
                     </label>
                     <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()"
                         placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" name="purchasedAt"
@@ -83,55 +79,56 @@
                         [class.is-invalid]="isControlInvalid('purchasedAt')"
                         [class.is-valid]="isControlValid('purchasedAt')" [(ngModel)]="modelDate" required />
                     <div class="feedback" *ngIf="!isControlTouched('purchasedAt')">
-                        Please enter <b>the Purchase Date of the item.</b>
+                        {{"LIBRARY.CREATE.ITEM.PURCHASED_AT.F1" | translate }}
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('purchasedAt')">
                         <!-- Brand was entered correct -->
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'purchasedAt')">
-                        Purchase date is required
+                        {{"LIBRARY.CREATE.ITEM.PURCHASED_AT.F2" | translate }}
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label>Purpose</label>
+                    <label>{{"LIBRARY.CREATE.ITEM.PURPOSE.TITLE" | translate }}</label>
                     <select class="form-control form-control-lg form-control-solid" name="purpose"
                         formControlName="purpose" aria-placeholder="Purpose"
                         [class.is-invalid]="isControlInvalid('purpose')" [class.is-valid]="isControlValid('purpose')"
                         required>
-                        <option value="">Select Purpose</option>
+                        <option value="">{{"LIBRARY.CREATE.ITEM.PURPOSE.D_DEFAULT" | translate }}</option>
                         <option *ngFor="let enum of ItemPurposes | keyvalue" value="{{enum.key.toUpperCase()}}">
                             {{enum.value | translate }}
                         </option>
                     </select>
-                    <div class="feedback" *ngIf="!isControlTouched('purpose')">Please select the <b>Purpose of the
-                            item.</b>
+                    <div class="feedback" *ngIf="!isControlTouched('purpose')">
+                        {{"LIBRARY.CREATE.ITEM.PURPOSE.F1" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'purpose')">
-                        Purpose is required
+                        {{"LIBRARY.CREATE.ITEM.PURPOSE.F2" | translate }}
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12 col-md-6">
-                    <label>Course</label>
+                    <label>{{"LIBRARY.CREATE.ITEM.COURSE.TITLE" | translate }}</label>
                     <select class="form-control form-control-lg form-control-solid" name="course"
                         formControlName="course" aria-placeholder="Course"
                         [class.is-invalid]="isControlInvalid('course')" [class.is-valid]="isControlValid('course')"
                         required>
-                        <option value="">Choose Course</option>
+                        <option value="">{{"LIBRARY.CREATE.ITEM.COURSE.D_DEFAULT" | translate }}</option>
                         <option *ngFor="let enum of EducationalCourses | keyvalue" value="{{enum.key.toUpperCase()}}">
                             {{enum.value | translate }}
                         </option>
                     </select>
-                    <div class="feedback" *ngIf="!isControlTouched('course')">Please select a <b>Course.</b></div>
+                    <div class="feedback" *ngIf="!isControlTouched('course')">
+                        {{"LIBRARY.CREATE.ITEM.COURSE.F1" | translate }}
+                    </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'course')">
-                        Course is required
+                        {{"LIBRARY.CREATE.ITEM.COURSE.F2" | translate }}
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label style="height:23px;">Code <span
+                    <label style="height:23px;">{{"LIBRARY.CREATE.ITEM.CODE.TITLE" | translate }}<span
                             style="color:red;font-weight: bold;margin-left: 3px; font-size: 1.2em;">*</span></label>
-
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" style="border-width:0px;">
@@ -170,81 +167,72 @@
                             </span>
                         </div>
                         <input type="text" class="form-control form-control-lg form-control-solid" name="code"
-                            formControlName="code" aria-placeholder="Code"
-                            [class.is-invalid]="isControlInvalid('code')" [class.is-valid]="isControlValid('code')"
-                            required />
+                            formControlName="code" aria-placeholder="Code" [class.is-invalid]="isControlInvalid('code')"
+                            [class.is-valid]="isControlValid('code')" required />
                     </div>
-
-                    <!-- <select class="form-control form-control-lg form-control-solid" name="course"
-                            formControlName="course" aria-placeholder="Course"
-                            [class.is-invalid]="isControlInvalid('course')" [class.is-valid]="isControlValid('course')"
-                            required>
-                            <option value="">Choose Course</option>
-                            <option *ngFor="let enum of EducationalCourses | keyvalue"
-                                value="{{enum.key.toUpperCase()}}">
-                                {{enum.value | translate }}
-                            </option>
-                        </select> -->
-                    <div class="feedback" *ngIf="!isControlTouched('code')">Please select a <b>Code.</b></div>
+                    <div class="feedback" *ngIf="!isControlTouched('code')">
+                        {{"LIBRARY.CREATE.ITEM.CODE.F1" | translate }}
+                    </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'code')">
-                        Code is required
+                        {{"LIBRARY.CREATE.ITEM.CODE.F2" | translate }}
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12 col-md-4">
-                    <label>Quantity</label>
+                    <label>{{"LIBRARY.CREATE.ITEM.QUANTITY.TITLE" | translate }}</label>
                     <input type="number" min="1" max="1000" step="1"
                         class="form-control form-control-lg form-control-solid" autocomplete="off" placeholder="1"
                         name='quantity' [class.is-invalid]="isControlInvalid('quantity')"
                         [class.is-valid]="isControlValid('quantity')" formControlName='quantity' required />
                     <div class="feedback" *ngIf="!isControlTouched('quantity')">
-                        Please enter <b>the Quantity of the item.</b>
+                        {{"LIBRARY.CREATE.ITEM.QUANTITY.F1" | translate }}
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('quantity')">
                         <!-- Name was entered correct -->
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'quantity')">
-                        Quantity is required.
+                        {{"LIBRARY.CREATE.ITEM.QUANTITY.F2" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('min', 'quantity')">
-                        The minimum Quantity should be 1.
+                        {{"LIBRARY.CREATE.ITEM.QUANTITY.F3" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('max', 'quantity')">
-                        The maximum Quantity should be 1000.
+                        {{"LIBRARY.CREATE.ITEM.QUANTITY.F4" | translate }}
                     </div>
                 </div>
                 <div class="col-12 col-md-8 ">
-                    <label>Pieces</label>
+                    <label>{{"LIBRARY.CREATE.ITEM.PIECES.TITLE" | translate }}</label>
                     <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder="Pieces" name='pieces' [class.is-invalid]="isControlInvalid('pieces')"
-                        [class.is-valid]="isControlValid('pieces')" formControlName='pieces' required />
+                        placeholder='{{"LIBRARY.CREATE.ITEM.PIECES.TITLE" | translate }}' name='pieces'
+                        [class.is-invalid]="isControlInvalid('pieces')" [class.is-valid]="isControlValid('pieces')"
+                        formControlName='pieces' required />
                     <div class="feedback" *ngIf="!isControlTouched('pieces')">
-                        Please explain <b>the Pieces of a Quantity for an item.</b>
+                        {{"LIBRARY.CREATE.ITEM.PIECES.F1" | translate }}
                     </div>
                     <div class="valid-feedback" *ngIf="isControlValid('pieces')">
                         <!-- Brand was entered correct -->
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'pieces')">
-                        Pieces is required
+                        {{"LIBRARY.CREATE.ITEM.PIECES.F2" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pieces')">
-                        Pieces should have at least 3 symbols
+                        {{"LIBRARY.CREATE.ITEM.PIECES.F3" | translate }}
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'pieces')">
-                        Pieces should have maximum 100 symbols
+                        {{"LIBRARY.CREATE.ITEM.PIECES.F4" | translate }}
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-12">
-                    <label>Upload a photo for this Book</label>
+                    <label>{{"LIBRARY.CREATE.ITEM.PHOTO.TITLE" | translate }}</label>
 
                     <div class="custom-dropzone form-control form-control-solid border" ngx-dropzone
                         [accept]="'image/*'" (change)="onSelectBookImage($event)" required>
                         <ngx-dropzone-label>
                             <p class="form-text text-muted">
-                                Drop your file(s) here or click to select your file(s).
+                                {{"LIBRARY.CREATE.ITEM.PHOTO.MESSAGE" | translate }}
                             </p>
                         </ngx-dropzone-label>
                         <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of itemImages"
@@ -255,154 +243,34 @@
                       formGroup.get('bookImage')['errors'] &&
                       formGroup.get('bookImage').touched
                     " class="text-danger form-text">
-                        <!-- {{
-                      getErrorMessage(scansForm.get("internationalPassport")["errors"])
-                    }} -->
                     </div>
                 </div>
             </div>
-            <!-- <div class="form-group row">
-                <div class="col-lg-4">
-                    <label>Enter Mileage</label>
-                    <input type="number" class="form-control form-control-lg form-control-solid" placeholder="Mileage"
-                        name="mileage" [class.is-invalid]="isControlInvalid('mileage')"
-                        [class.is-valid]="isControlValid('mileage')" formControlName="mileage" />
-                    <div class="feedback" *ngIf="!isControlTouched('mileage')">
-                        Please enter <b>Mileage</b>
-                    </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('mileage')">
-                        Mileage was entered correct
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'mileage')">
-                        Mileage is required
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'mileage')">
-                        Mileage should have at least 1 symbol
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'mileage')">
-                        Mileage year should have maximum 100 symbols
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <label>Select Color</label>
-                    <select class="form-control form-control-lg form-control-solid" name="color"
-                        formControlName="color">
-                        <option value="Red">Red</option>
-                        <option value="CadetBlue">CadetBlue</option>
-                        <option value="Eagle">Eagle</option>
-                        <option value="Gold">Gold</option>
-                        <option value="LightSlateGrey">LightSlateGrey</option>
-                        <option value="RoyalBlue">RoyalBlue</option>
-                        <option value="Crimson">Crimson</option>
-                        <option value="Blue">Blue</option>
-                        <option value="Sienna">Sienna</option>
-                        <option value="Indigo">Indigo</option>
-                        <option value="Green">Green</option>
-                        <option value="Violet">Violet</option>
-                        <option value="GoldenRod">GoldenRod</option>
-                        <option value="OrangeRed">OrangeRed</option>
-                        <option value="Khaki">Khaki</option>
-                        <option value="Teal">Teal</option>
-                        <option value="Purple">Purple</option>
-                        <option value="Orange">Orange</option>
-                        <option value="Pink">Pink</option>
-                        <option value="Black">Black</option>
-                        <option value="DarkTurquoise">DarkTurquoise</option>
-                    </select>
-                    <div class="feedback">Please select <b>Color</b></div>
-                </div>
-                <div class="col-lg-4">
-                    <label>Enter Price ($)</label>
-                    <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder="Price" name="price" [class.is-invalid]="isControlInvalid('price')"
-                        [class.is-valid]="isControlValid('price')" formControlName="price" />
-                    <div class="feedback" *ngIf="!isControlTouched('price')">
-                        Please enter <b>Price</b>
-                    </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('price')">
-                        Price was entered correct
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'price')">
-                        Price is required
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'price')">
-                        Price should have at least 3 symbols
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'price')">
-                        Price should have maximum 100 symbols
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-4">
-                    <label>Enter VIN code</label>
-                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder="VIN Code" name="VINCode" [class.is-invalid]="isControlInvalid('VINCode')"
-                        [class.is-valid]="isControlValid('VINCode')" formControlName="VINCode" />
-                    <div class="feedback" *ngIf="!isControlTouched('VINCode')">
-                        Please enter <b>VIN code</b>
-                    </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('VINCode')">
-                        VIN code was entered correct
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'VINCode')">
-                        VIN code is required
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <label>Select Status</label>
-                    <select class="form-control form-control-lg form-control-solid" name="status"
-                        formControlName="status">
-                        <option value="1">Selling</option>
-                        <option value="2">Sold</option>
-                    </select>
-                    <div class="feedback">Please select <b>Status</b></div>
-                </div>
-                <div class="col-lg-4">
-                    <label>Select Condition</label>
-                    <select class="form-control form-control-lg form-control-solid" name="condition"
-                        formControlName="condition">
-                        <option value="1">New</option>
-                        <option value="2">Used</option>
-                    </select>
-                    <div class="feedback">Please select <b>Condition</b></div>
-                </div>
-            </div> -->
             <div class="form-group">
-                <label>Description</label>
+                <label>{{"LIBRARY.CREATE.ITEM.DESCRIPTION.TITLE" | translate }}</label>
                 <textarea name="description" class="form-control form-control-lg form-control-solid"
                     formControlName="description" style="min-height: 250px; padding:13px"
-                    placeholder="Describe the item..."></textarea>
+                    placeholder='{{"LIBRARY.CREATE.ITEM.DESCRIPTION.PH" | translate }}'></textarea>
             </div>
             <div class="float-right">
-                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library/items/overview">Cancel</a>
+                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library/items/overview">
+                    {{"LIBRARY.CREATE.ITEM.CANCEL" | translate }}
+                </a>
                 <ng-container *ngIf="item">
-                    <button (click)='onDelete()' class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
-                      Delete
+                    <button (click)='onDelete()' class="btn btn-primary font-weight-bold mr-2"
+                        [disabled]="formGroup.invalid">
+                        {{"LIBRARY.CREATE.ITEM.DELETE" | translate }}
                     </button>
-                </ng-container>                
+                </ng-container>
                 <button (click)='save()' class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
                     <ng-container *ngIf="item; else elseTemplate">
-                        Save Changes
+                        {{"LIBRARY.CREATE.ITEM.SAVE_CHANGES" | translate }}
                     </ng-container>
                     <ng-template #elseTemplate>
-                        Create
+                        {{"LIBRARY.CREATE.ITEM.CREATE_NEW_ITEM" | translate }}
                     </ng-template>
                 </button>
             </div>
         </form>
-
-
-        <!-- <ng-container
-        *ngIf="activeTabId === tabs.REMARKS_TAB && product && product.id"
-      >
-        <app-remarks [productId]="product.id"></app-remarks>
-      </ng-container>
-  
-      <ng-container
-        *ngIf="activeTabId === tabs.SPECIFICATIONS_TAB && product && product.id"
-      >
-        <app-specifications [productId]="product.id"></app-specifications>
-      </ng-container> -->
     </div>
 </div>
