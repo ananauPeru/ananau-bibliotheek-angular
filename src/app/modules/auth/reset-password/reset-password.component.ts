@@ -29,13 +29,7 @@ export class ResetPasswordComponent implements OnInit {
     private router: Router,
     private toastr: ToastrUtil
   ) {
-    let urlToken = "";
-    this.route.params.subscribe((params) => (urlToken = params["token"]));
-    this._token = urlToken
-      .replace(/\//g, "%2F")
-      .replace(/\+/g, "%2B")
-      .replace(/\=/g, "%3D");
-    console.log(this._token);
+    this.route.params.subscribe((params) => (this._token = params["token"]));
 
     this.isLoading$ = this.authService.isLoading$;
   }
