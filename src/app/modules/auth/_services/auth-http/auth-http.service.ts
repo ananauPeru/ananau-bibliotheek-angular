@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { UserModel } from '../../_models/user.model'
-import { environment } from '../../../../../environments/environment'
-import { AuthModel } from '../../_models/auth.model'
-import { RegisterDTO } from '../../_dto/register-dto'
-
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { UserModel } from "../../_models/user.model";
+import { environment } from "../../../../../environments/environment";
+import { AuthModel } from "../../_models/auth.model";
+import { RegisterDTO } from "../../_dto/register-dto";
+import { ResetPasswordDTO } from "../../_dto/reset-password-dto";
 
 const API_USERS_URL = `${environment.apiUrl}/user`;
 
@@ -26,10 +26,14 @@ export class AuthHTTPService {
   }
 
   // Your server should check email => If email exists send link to the user and return true | If email doesn't exist return false
-  forgotPassword(email: string): Observable<boolean> {
-    return this.http.post<boolean>(`${API_USERS_URL}/forgot-password`, {
+  forgotPassword(email: string) {
+    return this.http.post(`${API_USERS_URL}/forgot-password`, {
       email,
     });
+  }
+
+  resetPassword(dto: ResetPasswordDTO) {
+    return this.http.post(`${API_USERS_URL}/reset-password`, dto);
   }
 
   getUserByToken(auth): Observable<UserModel> {

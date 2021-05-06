@@ -14,10 +14,13 @@ export const locale = {
 
     // BUTTONS
     BUTTONS: {
-      SAVE: 'Guardar',
-      SAVE_CHANGES: 'Guardar cambios',
-      SUBMIT: 'Enviar',
-      CANCEL: 'Cancelar',
+      SAVE: "Guardar",
+      SAVE_CHANGES: "Guardar cambios",
+      SUBMIT: "Enviar",
+      CANCEL: "Cancelar",
+      DOWNLOAD: "Descargar",
+      CONFIRM: "Confirmar",
+      DISCONFIRM: "Desconfirmar",
     },
 
     // MENU
@@ -54,6 +57,11 @@ export const locale = {
         S0_PREPARATIONS: '0 - Before Starting',
         S1_SETTING_UP: '1 - Setting Up',
       },
+      ORGANIZATION: {
+        TITLE: "Organización",
+        ROLES: "Gestión de roles",
+        REGISTRATIONS: "Inscripciones",
+      },
     },
 
     // AUTH PAGES
@@ -78,9 +86,9 @@ export const locale = {
         WEBSITE: 'Sitio web',
       },
       LOGIN: {
-        TITLE: 'Crear una cuenta',
-        BUTTON: 'Registrarse',
-        ERROR: 'Los datos de inicio de sesión son incorrectos',
+        TITLE: "Crear una cuenta",
+        BUTTON: "Registrarse",
+        ALREADY_ACCOUNT: "¿Ya tienes una cuenta?",
       },
       FORGOT: {
         TITLE: 'Contraseña olvidada?',
@@ -182,12 +190,12 @@ export const locale = {
     // REGISTRATION FORM
     REGISTRATION: {
       GENERAL: {
-        STUDENT: 'estudiante',
-        VOLUNTEER: 'voluntario',
-        PERSONAL: 'Personal',
-        ORGANIZATIONAL: 'Organizativo',
-        SCANS: 'Escaneos',
-        QUESTIONS: 'Preguntas',
+        STUDENT: "Estudiante",
+        VOLUNTEER: "Voluntario",
+        PERSONAL: "Personal",
+        ORGANIZATIONAL: "Organizativo",
+        SCANS: "Escaneos",
+        QUESTIONS: "Preguntas",
         ERRORS: {
           REQUIRED: 'Este campo es obligatorio.',
           EMAIL: 'Este campo espera una dirección de correo electrónico.',
@@ -275,18 +283,18 @@ export const locale = {
         SPANISH: {
           TITLE: 'Español',
           INFO_VOLUNTEER:
-            'Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 2 semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.',
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 2 meses de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
           INFO_STUDENT:
-            'Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 3 semanas de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.',
-          LEVEL: 'Describe tu nivel de español',
-          WEEKS_ONLINE: 'Número de semanas para lecciones de español online',
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 3 meses de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
+          LEVEL: "Describe tu nivel de español",
+          WEEKS_ONLINE: "Número de semanas para lecciones de español online",
           WEEKS_ONLINE_INFO_VOLUNTEER:
-            'Si aún no habla un nivel básico de español, le recomendamos que solicite 1 semana de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.',
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
           WEEKS_ONLINE_INFO_STUDENT:
-            'Si aún no habla un nivel básico de español, le recomendamos que solicite 2 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.',
-          WEEKS: 'Número de semanas para lecciones de español en el sitio',
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 8 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
+          WEEKS: "Número de semanas para lecciones de español en el sitio",
           WEEKS_INFO:
-            'Si aún no habla un nivel básico de español, le recomendamos que solicite 1 semana de lecciones de español en el sitio.',
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
         INFO: {
           TITLE: 'Info',
@@ -663,6 +671,53 @@ export const locale = {
           FIRST_NAME: 'Nombre propio',
           LAST_NAME: 'Apellido',
         },
+      },
+    },
+
+    // REGISTRATIONS OVERVIEW & DETAILS
+    REGISTRATIONS: {
+      STUDENT: "Estudiante",
+      VOLUNTEER: "Voluntario",
+      OVERVIEW: {
+        TITLE: "Inscripciones de voluntarios y estudiantes",
+        FILTER: "Filtrar...",
+        FILTER_INFO:
+          "Intente buscar y filtrar por nombre, apellido, correo electrónico, fecha de inicio, fecha de finalización o rol.",
+        FIRST_NAME: "Nombre propio",
+        LAST_NAME: "Apellido",
+        EMAIL: "Correo electrónico",
+        START_DATE: "Fecha de inicio",
+        END_DATE: "Fecha final",
+        ROLE: "Rol",
+        CONFIRMED: "Confirmado",
+        DETAILS: "Detalles",
+      },
+      DETAILS: {
+        STANDARD_TITLE: "Registro",
+        TITLE: "Registro de {{name}}",
+        DELETE: "Quitar de la lista",
+        FILE_NAMES: {
+          INTERNATIONAL_PASSPORT: "Pasaporte internacional",
+          GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
+          DIPLOMA: "Certificado educativo",
+          PASSPORT_PHOTO: "Foto del pasaporte",
+        },
+      },
+      TOASTS: {
+        SUCCESS: "Éxito",
+        ERROR: "Error",
+        CONFIRM_SUCCESS: "El registro se ha confirmado con éxito.",
+        DISCONFIRM_SUCCESS: "El registro se ha cancelado correctamente.",
+        CONFIRM_ERROR:
+          "Algo salió mal al confirmar el registro. Por favor, inténtelo de nuevo más tarde.",
+        DISCONFIRM_ERROR:
+          "Se produjo un error al anular la confirmación del registro. Por favor, inténtelo de nuevo más tarde.",
+        DELETE_SUCCESS:
+          "El registro se ha eliminado correctamente de la lista.",
+        DELETE_ERROR:
+          "Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.",
+        DOWNLOAD_ERROR:
+          "Se produjo un error al descargar el archivo. Por favor, inténtelo de nuevo más tarde.",
       },
     },
   },

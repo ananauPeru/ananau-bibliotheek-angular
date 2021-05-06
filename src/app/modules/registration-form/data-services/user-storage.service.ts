@@ -62,7 +62,7 @@ export class UserStorageService {
 
   private getContainerToken$(): Promise<string> {
     return this.http
-      .get(`${environment.apiUrl}/files/user/token`, {
+      .get(`${environment.apiUrl}/files/users/current/token`, {
         responseType: "text",
       })
       .pipe(take(1))

@@ -18,6 +18,9 @@ export const locale = {
       SAVE_CHANGES: "Wijzigingen opslaan",
       SUBMIT: "Verzenden",
       CANCEL: "Annuleer",
+      DOWNLOAD: "Download",
+      CONFIRM: "Bevestigen",
+      DISCONFIRM: "Bevestiging intrekken",
     },
 
     // MENU
@@ -29,9 +32,15 @@ export const locale = {
       FEATURES: "Features",
       APPS: "Apps",
       DASHBOARD: "Dashboard",
+      TODAY: "Vandaag",
       MANAGEMENT: {
         TITLE: "Gebruikersbeheer",
         REGISTRATION: "Registratieformulier",
+      },
+      ORGANIZATION: {
+        TITLE: "Organisatie",
+        ROLES: "Rolbeheer",
+        REGISTRATIONS: "Registraties",
       },
     },
 
@@ -60,6 +69,7 @@ export const locale = {
         TITLE: "Login Account",
         BUTTON: "Inloggen",
         ERROR: "Logingegevens zijn incorrect.",
+        ALREADY_ACCOUNT: "Heb je al een account?",
       },
       FORGOT: {
         TITLE: "Wachtwoord Vergeten?",
@@ -157,8 +167,8 @@ export const locale = {
     // REGISTRATION FORM
     REGISTRATION: {
       GENERAL: {
-        STUDENT: "student",
-        VOLUNTEER: "vrijwilliger",
+        STUDENT: "Student",
+        VOLUNTEER: "Vrijwilliger",
         PERSONAL: "Persoonlijk",
         ORGANIZATIONAL: "Organisatorisch",
         SCANS: "Scans",
@@ -249,18 +259,18 @@ export const locale = {
         SPANISH: {
           TITLE: "Spaans",
           INFO_VOLUNTEER:
-            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 2 weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
+            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 2 maanden Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
           INFO_STUDENT:
-            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 3 weken Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
+            "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 3 maanden Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
           LEVEL: "Beschrijf je niveau Spaans",
           WEEKS_ONLINE: "Aantal weken online Spaanse les",
           WEEKS_ONLINE_INFO_VOLUNTEER:
-            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 1 week online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 4 weken online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
           WEEKS_ONLINE_INFO_STUDENT:
-            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 2 weken online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 8 weken online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
           WEEKS: "Aantal weken Spaanse les ter plaatse",
           WEEKS_INFO:
-            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 1 week Spaanse les ter plaatse.",
+            "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 4 weken Spaanse les ter plaatse.",
         },
         INFO: {
           TITLE: "Info",
@@ -338,6 +348,53 @@ export const locale = {
         PART_3:
           "In geval van niet-naleving van al het bovenstaande, bent u onderworpen aan burgerlijke en strafrechtelijke aansprakelijkheid voor mogelijke schade die aan de vereniging is toegebracht, volgens de Peruaanse wet. Deze vertrouwelijkheidsovereenkomst zal voor onbepaalde tijd worden gehandhaafd, nu en in de toekomst, totdat de vereniging deze als beëindigd beschouwt, of door ontbinding ervan.",
         AGREE: "Ik ga akkoord met de bovenstaande voorwaarden.",
+      },
+    },
+
+    // REGISTRATIONS OVERVIEW & DETAILS
+    REGISTRATIONS: {
+      STUDENT: "Student",
+      VOLUNTEER: "Vrijwilliger",
+      OVERVIEW: {
+        TITLE: "Registraties van vrijwilligers en studenten",
+        FILTER: "Filteren...",
+        FILTER_INFO:
+          "Probeer te zoeken en te filteren op voornaam, familienaam, e-mail, startdatum, einddatum of rol.",
+        FIRST_NAME: "Voornaam",
+        LAST_NAME: "Familienaam",
+        EMAIL: "E-mail",
+        START_DATE: "Startdatum",
+        END_DATE: "Einddatum",
+        ROLE: "Rol",
+        CONFIRMED: "Bevestigd",
+        DETAILS: "Details",
+      },
+      DETAILS: {
+        STANDARD_TITLE: "Registratie",
+        TITLE: "Registratie van {{name}}",
+        DELETE: "Verwijder uit lijst",
+        FILE_NAMES: {
+          INTERNATIONAL_PASSPORT: "Internationaal paspoort",
+          GOOD_CONDUCT_CERTIFICATE: "Bewijs van goed gedrag",
+          DIPLOMA: "Onderwijscertificaat",
+          PASSPORT_PHOTO: "Pasfoto",
+        },
+      },
+      TOASTS: {
+        SUCCESS: "Geslaagd",
+        ERROR: "Fout",
+        CONFIRM_SUCCESS: "Registratie is succesvol bevestigd.",
+        DISCONFIRM_SUCCESS:
+          "Bevestiging van registratie is succesvol ingetrokken.",
+        CONFIRM_ERROR:
+          "Er ging iets mis bij het bevestigen van de registratie. Probeer het later nog eens.",
+        DISCONFIRM_ERROR:
+          "Er ging iets mis bij het intrekken van de bevestiging van de registratie. Probeer het later nog eens.",
+        DELETE_SUCCESS: "Registratie is succesvol uit lijst verwijderd.",
+        DELETE_ERROR:
+          "Er ging iets mis bij het verwijderen van de registratie. Probeer het later nog eens.",
+        DOWNLOAD_ERROR:
+          "Er ging iets mis bij het downloaden van het bestand. Probeer het later nog eens.",
       },
     },
   },

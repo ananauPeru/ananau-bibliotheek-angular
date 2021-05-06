@@ -25,7 +25,7 @@ export class RegistrationService {
 
   getVolunteerRegistration$(): Observable<RegistrationDTO> {
     return this.http
-      .get(`${environment.apiUrl}/registrations/volunteer`, {
+      .get(`${environment.apiUrl}/registrations/volunteers/current`, {
         responseType: "json",
       })
       .pipe(
@@ -50,7 +50,7 @@ export class RegistrationService {
 
   getStudentRegistration$(): Observable<RegistrationStudentDTO> {
     return this.http
-      .get(`${environment.apiUrl}/registrations/student`, {
+      .get(`${environment.apiUrl}/registrations/students/current`, {
         responseType: "json",
       })
       .pipe(
@@ -79,7 +79,7 @@ export class RegistrationService {
   ): Observable<RegistrationDTO> {
     return this.http
       .post(
-        `${environment.apiUrl}/registrations/volunteer${
+        `${environment.apiUrl}/registrations/volunteers/current${
           submit ? "/submit" : ""
         }`,
         registration,
@@ -113,7 +113,9 @@ export class RegistrationService {
   ): Observable<RegistrationStudentDTO> {
     return this.http
       .post(
-        `${environment.apiUrl}/registrations/student${submit ? "/submit" : ""}`,
+        `${environment.apiUrl}/registrations/students/current${
+          submit ? "/submit" : ""
+        }`,
         registration,
         {
           responseType: "json",
