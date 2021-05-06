@@ -1,1 +1,83 @@
-<p>s1-setting-up works!</p>
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-4">
+            Step 1 - Setting Up
+        </h1>
+        <hr />
+        <p class="lead h6"> Created: 29/04/2021 | Last Update: 06/05/2021</p>
+    </div>
+    <div class="col-12 mt-3">
+        <p class="lead">
+            Now you have access to the resources, what's next?
+        </p>
+        <p>
+            Now we have access we can start working for Ananau. For that, you need some programs to work efficiently. We
+            strongly recommend using the advised editors because this will make your life much easier with much needed
+            extensions.
+        </p>
+        <h4 class="display">Step 1 - Clone the Repo's</h4>
+
+        <p>If you have successfully finished the previous guide, you should have access to the Github repo's of Ananau.
+            Clone them locally to a desired place within your computer. For the purpose of this tutorial i created a new
+            map called <kbd>ananau-tutorial</kbd>.</p>
+        <pre>DESKTOP /ananau-tutorial<br>$ git clone https://github.com/ananauPeru/ananau-bibliotheek-angular.git<br>$ git clone https://github.com/ananauPeru/ananau-bibliotheek-api.git</pre>
+
+        <p>If everything went correctly you should now have two directories.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-1.png"
+            class="center-image w-75 d-block" alt="">
+
+        <h4 class="display">Step 2 - Necessary Software</h4>
+
+        <p>For the frontend we use <kbd>Visual Studio Code</kbd>, for the backend we use <kbd>Visual Studio
+                2019</kbd> and for DB Management we use <kbd>MySQL Workbench</kbd>. The frontend is written in Angular
+            11.0.9 and for the backend we use .NET Core 5.0.3</p>
+        <p>So next, you need to install:</p>
+        <ul>
+            <li>Visual Studio Code</li>
+            <li>Visual Studio 2019 (or any later version)</li>
+            <li>.NET Core 5.0.x</li>
+            <li>MySQL Workbench</li>
+            <li>Node.js</li>
+            <li>Angular</li>
+            <li>We trust you don't need instructions for this step... :)</li>
+        </ul>
+
+        <h4 class="display">Step 3 - Getting the frontend ready</h4>
+
+        <p>After you've installed all the mentioned software, let's open our frontend in vscode and run the following
+            command within our directory (this can take a while, be patient):</p>
+
+        <pre>DESKTOP /ananau-tutorial/ananau-bibliotheek-frontend<br>$ npm install</pre>
+
+        <p>This installs all the necessary packages for the project, this step should complete without any errors. If
+            you do get errors, please solve them and run it again until it finishes. The result should look something
+            like this:</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-2.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>Now, run the following command to see if our project builds. Don't worry about the backend for now... we just
+            want to see if our project builds and runs.</p>
+        <pre>DESKTOP /ananau-tutorial/ananau-bibliotheek-frontend<br>$ ng serve</pre>
+        <p>It should compile without issues and should be live on your localhost. The login screen should be shown like
+            this:</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-3.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>The last step is installing some extensions for vscode to make our life (a lot) easier, not all of them are
+            must-haves, the absolute necessary ones are labeled:</p>
+        <ul>
+            <li>Azure App Service (must-have)</li>
+            <li>Azure Account (must-have)</li>
+            <li>Azure Resources (must-have)</li>
+            <li>Angular Language Service (nice-to-have)</li>
+            <li>Angular 10 Snippets (nice-to-have)</li>
+            <li>Color Highlight (totally optional, highlights color codes in their color)</li>
+            <li>WakaTime (totally optional but GREAT tool to track all your work, more info <a href="www.wakatime.com"
+                    target="_blank">wakatime.com</a>)</li>
+            <li></li>
+        </ul>
+    </div>
+</div>

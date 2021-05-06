@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from '../auth/_services/auth.guard'
 import { S0PreparationsComponent } from './getting-started/s0-preparations/s0-preparations.component'
+import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting-up.component'
 import { ITDocumentationComponent } from './it-documentation'
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'getting-started/0-preparations',
         component: S0PreparationsComponent,
+      },
+      {
+        path: 'getting-started/1-setting-up',
+        component: S1SettingUpComponent,
       },
       // {
       //   path: 'books/add-book',
