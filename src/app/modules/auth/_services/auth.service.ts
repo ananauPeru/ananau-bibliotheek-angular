@@ -7,6 +7,7 @@ import { AuthHTTPService } from "./auth-http";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { RegisterDTO } from "../_dto/register-dto";
+import { ResetPasswordDTO } from "../_dto/reset-password-dto";
 
 @Injectable({
   providedIn: "root",
@@ -143,6 +144,13 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
     return this.authHttpService
       .forgotPassword(email)
+      .pipe(finalize(() => this.isLoadingSubject.next(false)));
+  }
+
+  resetPassword(dto: ResetPasswordDTO) {
+    this.isLoadingSubject.next(true);
+    return this.authHttpService
+      .resetPassword(dto)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 
