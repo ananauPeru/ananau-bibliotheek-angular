@@ -45,11 +45,7 @@ export const locale = {
       MANAGEMENT: {
         TITLE: 'Gestión de usuarios',
         REGISTRATION: 'Formulario de inscripción',
-      },
-      ORGANIZATION: {
-        TITLE: 'Organización',
-        ROLES: 'Gestión de Roles',
-      },
+      },     
       // We dont translate documentation (IT) to different languages
       DOCUMENTATION: {
         TITLE: 'IT - Documentation',
