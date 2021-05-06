@@ -21,8 +21,37 @@
         <p>Log in to Azure and open the Ananau Resource Group named <kbd>ananauAPI</kbd>. If you don't have access
             to the Azure portal yet please contact <kbd>Ellen Bosh</kbd> or <kbd>Gilmourd Cardeña Pérez</kbd>. They can
             give
-            you access to the portal, step-by-step instructions can be found <a (click)="scrollToElement(azureaccess)">below.</a></p>
+            you access to the portal, step-by-step instructions can be found <a
+                (click)="scrollToElement(azureaccess)">below.</a></p>
 
+        <h5 class="display">Cannot see Añañau resources?</h5>
+        <p>First, make sure one of the admins (Ellen or Gilmourd) has given you access to the resource group. If you're
+            sure you have access but still cannot see the Añañau resource group, it may be because you need to switch
+            directories. It is very simple, click on your profile picture located top-right of the screen and then click
+            on the button <kbd>Switch Directory</kbd>. You'll see a list of all the resources you have access to.
+            Select <kbd>Asociación ONG Añañau</kbd>.</p>
+        <div class="w-100">
+            <img src="../../../../../assets/images/it-documentation/getting-started/s0-6.png"
+                class="center-image w-25 d-block" alt="">
+        </div>
+
+        <h4 class="display">Step 2 - Give your personal Github account access to the ananauPeru repo. </h4>
+        <p>Log in to Github with the IT email address of Ananau; <kbd>it@ananau.org</kbd>. The password for this account
+            can be found in the Azure Vault; navigate to <kbd>Azure Ananau > ananau-master-vault > Secrets >
+                github-it-ananau</kbd>.</p>
+        <p>For each repository (there are currently two active; <kbd>ananau-bibliotheek-angular</kbd> and
+            <kbd>ananau-bibliotheek-api</kbd>) go to <kbd>Settings > Manage access</kbd> to add your personal (or
+            school) Github account to the collaborators. Also, if there are still accounts from previous students who
+            don't need access anymore (if you are sure), feel free to remove them.
+        </p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-7.png" class="center-image w-75"
+            alt="">
+
+        <h4 class="display">Step 3 - Finishing </h4>
+        <p>Now login to your personal Github account and make sure you have access to the repositories. Congrats! You
+            now have access to all resources you need to start developing some really good stuff for Ananau!</p>
+        <p>Don't forget, if you ever need access to a resource but don't know the username/password, the first place to
+            check is the Azure Vault. If it isn't listed there, contact Ellen or Gilmourd.</p>
 
         <h2 #azureaccess class="display">Giving Access to New Users</h2>
         <p>In the past everyone logged in from the same master account with all the permissions for the Azure portal.
@@ -34,24 +63,32 @@
         <h4 class="display">Step 1 - Log in to Azure </h4>
         <p>Log in to Azure with the owner account <kbd>ellen@quebonito.onmicrosoft.com</kbd>. You will be presented with
             an overview like below, please select the resource group named <kbd>ananauAPI</kbd>.</p>
-        <img src="../../../../../assets/images/it-documentation/getting-started/s0-1.png" class="center-image" alt="">
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-1.png" class="center-image w-75"
+            alt="">
 
         <h4 class="display">Step 2 - Navigate to Access Control (IAM)</h4>
         <p>Click on <kbd>Access Control (IAM)</kbd> which is located on the left navigation panel.</p>
-        <img src="../../../../../assets/images/it-documentation/getting-started/s0-2.png" class="center-image" alt="">
-        
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-2.png" class="center-image w-75"
+            alt="">
+
         <h4 class="display">Step 3 - Navigate to Role Assignments Tab</h4>
-        <p>Click on <kbd>Role Assignments (3)</kbd> which is located on the top navigation bar within the IAM control panel. Next click on <kbd>+ Add (4)</kbd> and select <kbd>Add role assignment</kbd> from the dropdown to assign a new role to a user.</p>
-        <img src="../../../../../assets/images/it-documentation/getting-started/s0-3.png" class="center-image" alt="">
+        <p>Click on <kbd>Role Assignments (3)</kbd> which is located on the top navigation bar within the IAM control
+            panel. Next click on <kbd>+ Add (4)</kbd> and select <kbd>Add role assignment</kbd> from the dropdown to
+            assign a new role to a user.</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-3.png" class="center-image w-75"
+            alt="">
 
         <h4 class="display">Step 4 - Add Role & User</h4>
-        <p>A side-panel will show up where you need to fill in the following information and click on <kbd>Save</kbd>.</p>
+        <p>A side-panel will show up where you need to fill in the following information and click on <kbd>Save</kbd>.
+        </p>
         <ul>
-            <li>Role: <u>contributer</u></li>
+            <li>Role: <strong><u>Ananau-Intern</u></strong> (very important to select the correct role, make sure you
+                select 'Ananau-Intern')</li>
             <li>Assign access to: <u>User, group, or service principal</u></li>
             <li>Select: <u>example@email.com</u></li>
         </ul>
         <p>The user has been granted access to the resource group.</p>
-        <img src="../../../../../assets/images/it-documentation/getting-started/s0-4.png" class="center-image" alt="">
+        <img src="../../../../../assets/images/it-documentation/getting-started/s0-4.png" class="center-image w-75"
+            alt="">
     </div>
 </div>
