@@ -36,8 +36,16 @@
         <ul>
             <li>Visual Studio Code</li>
             <li>Visual Studio 2019 (or any later version)</li>
-            <li>.NET Core 5.0.x</li>
-            <li>MySQL Workbench</li>
+            <li> <a href='https://dotnet.microsoft.com/download/dotnet/5.0' target='_blank'>.NET SDK 5.0.200</a>,
+                includes the following:
+                <ul>
+                    <li>.NET Runtime 5.0.3</li>
+                    <li>ASP.NET Core Runtime 5.0.3</li>
+                    <li>.NET Desktop Runtime 5.0.3</li>
+                </ul>
+            </li>
+            <li>MySQL Workbench, don't forget to add local server to your installation. A thorough guide can be found <a
+                    href="https://ladvien.com/data-analytics-mysql-localhost-setup/" target="_blank">here</a>.</li>
             <li>Node.js</li>
             <li>Angular</li>
             <li>We trust you don't need instructions for this step... :)</li>
@@ -60,7 +68,8 @@
         <p>Now, run the following command to see if our project builds. Don't worry about the backend for now... we just
             want to see if our project builds and runs.</p>
         <pre>DESKTOP /ananau-tutorial/ananau-bibliotheek-frontend<br>$ ng serve</pre>
-        <p>It should compile without issues and should be live on your localhost. The login screen should be shown like
+        <p>It should compile without issues and should be live on your localhost. The login screen should look something
+            like
             this:</p>
 
         <img src="../../../../../assets/images/it-documentation/getting-started/s1-3.png"
@@ -75,9 +84,121 @@
             <li>Angular Language Service (nice-to-have)</li>
             <li>Angular 10 Snippets (nice-to-have)</li>
             <li>Color Highlight (totally optional, highlights color codes in their color)</li>
-            <li>WakaTime (totally optional but GREAT tool to track all your work, more info <a href="www.wakatime.com"
-                    target="_blank">wakatime.com</a>)</li>
-            <li></li>
+            <li>WakaTime (totally optional but highly advised, GREAT tool to track all your work, more info <a
+                    href="https://www.wakatime.com" target="_blank">wakatime.com</a>)</li>
         </ul>
+
+        <p>Don't worry about the Azure extensions for now, we need them when deploying our app.</p>
+
+        <h4 class="display">Step 4 - Getting the backend ready</h4>
+
+        <p>Open the backend with VS 2019 (or later). Open the user-secrets and replace everything with the secret-value
+            of <kbd>ananau-secret-vs</kbd> which can be found in the Azure Vault</p>
+        <p>Opening user-secrets:</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-6.png"
+            class="center-image w-75 d-block" alt="">
+        <p>After copy-pasting the content should look like this:</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-7.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>We're almost there, we should be able to run our application now with the production database connected (look
+            into <kbd>appsettings.json</kbd>, the connection strings should already be present). But if we try to run
+            the app now we will get an error because Azure doesn't accept any connections outside the Azure environment.
+            Simply put, we need to add our own IP Address to the 'trusted' ones within our Azure MySQL Server to
+            connect. </p>
+
+        <p>So, head over to the Azure portal and click on the <kbd>ananauserver</kbd> MySQL Server resource, then
+            navigate to <kbd>Settings > Networking</kbd>. Under <kbd>Firewall rules</kbd> there should be a button
+            called <kbd>+ Add current client IP address</kbd>, click on it and give it a sensible name. The result
+            should look like this (with your IP added).</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-8.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>Now, we should be able to run the app without any errors. Change the build option from <kbd>ISS Express</kbd>
+            to <kbd>AnanauAPI</kbd> and run.
+        </p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-4.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>If you followed all the steps, the backend should be up and running and the <kbd>Swagger</kbd> api
+            documentation should automatically open. It should look like this:</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-5.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>The backend will run on port <kbd>localhost:5001</kbd>, by default the frontend you cloned is connected to
+            this port. So if you run the frontend and the backend at the same time you should have a fully working
+            development environment ready. There is a default IT account already registered: it@ananau.org (the password
+            can be found on... you guessed it :) ). However, you should have made an account for yourself already...</p>
+
+        <h5 class="display">IMPORTANT!</h5>
+        <p>Right now, you are running the apps locally but you are using the production (live) database on Azure! So
+            please, be carefull to not mess things up. If you would like to use a local development DB, follow the next
+            steps to quickly set one up.</p>
+
+        <h4 class="display">Step 5 - MySQL DB - Connecting to the production (live) database</h4>
+
+        <p>It is always handy to have a connection ready to the live DB on Azure to see how things look and to quickly
+            look up some data. We will connect to the MySQL DB on Azure using MySQL Workbench. If you have already
+            installed MySQL Workbench you can start by opening it and click on the <kbd>+</kbd> button.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-9.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>You will be presented with a screen to set-up a new connection. Fill in the fields with the following
+            information, leave the rest default. </p>
+        <ul>
+            <li>Connection name: Ananau MySQL DB Remote - LIVE</li>
+            <li>Connection method: Standard (TCP/IP)</li>
+            <li>Hostname: ananauserver.mysql.database.azure.com</li>
+            <li>Port: 3306</li>
+            <li>Username: admin_ananau</li>
+            <li>Password: You know where to look :p</li>
+        </ul>
+
+        <p>Click on test connection to see if it works, if not, first double check the data you entered. Also make sure
+            you added your IP Address to the 'trusted' listed like explained previously. If it still doesn't connect...
+            Google and Azure Documentation.</p>
+
+        <p>If the test connection succeeds you will see a screen like this.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-10.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>Now you can click on the newly created connection and access the DB!</p>
+
+        <h4 class="display">Step 6 - MySQL DB - Creating a local DB for testing</h4>
+
+        <p>Creating a local DB can be done in a couple ways, we can create a DB from scratch (locally), apply our
+            migrations and populate with dummy data. Or, we can go the easy way and create a local copy of our current
+            production DB to work on. I prefer this option (ez one) because: we don't need to apply any migration and we
+            have an up-to-date copy of our DB with all our data which means we can also login with our accounts (IT or
+            personal).</p>
+        <p>First, make sure you created a local server when installing MySQL Workbench. If you didn't, you can create
+            one following <a href="https://ladvien.com/data-analytics-mysql-localhost-setup/" target="_blank">this</a>
+            guide.</p>
+        <p>The first step is to make a local copy of the Remote DB. Open MySQL Workbench and connect to the Remote DB we
+            configured before. From the top menu click on <kbd>Server > Data Export</kbd>.</p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-11.png"
+            class="center-image w-75 d-block" alt="">
+        <p>You will be presented with a screen where you can choose a DB to backup and some options. Select the
+            <kbd>ananauapi_db</kbd>, change the export options, select a folder and start export.
+        </p>
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-12.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>Great! Now we have our up-to-date backup. The next step is to import it in our local server. Switch to your
+            local server.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-13.png"
+            class="center-image w-75 d-block" alt="">
+
+        <p>Next, from the top menu click on <kbd>Server > Data Import</kbd> and fill in the fields like this. We don't
+            have to create a new schema (DB), it will be auto generated for us.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s1-14.png"
+            class="center-image w-75 d-block" alt="">
+
+            <p>Great! We now have our perfect copy</p>
     </div>
 </div>
