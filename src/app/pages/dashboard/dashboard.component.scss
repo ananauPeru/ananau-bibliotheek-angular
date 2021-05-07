@@ -1,0 +1,60 @@
+.menu-card {
+  --menu-card-height: 400px;
+
+  height: var(--menu-card-height);
+  margin-bottom: 1.5rem;
+
+  .card {
+    background-repeat: no-repeat;
+    background-position: calc(100% + 0.5rem) 100%;
+
+    .btn {
+      min-width: 120px;
+      color: #303440 !important;
+      background-color: #ffd42d;
+    }
+  }
+
+  &:nth-of-type(odd) {
+    .card {
+      background-color: #0b5f3e;
+      background-image: url(../../../assets/media/svg/patterns/taieri.svg);
+      background-size: 100% auto;
+    }
+  }
+
+  &:nth-of-type(even) {
+    .card {
+      background-color: #303440;
+      background-image: url(../../../assets/media/svg/patterns/aare.svg);
+      background-size: 60% auto;
+    }
+  }
+
+  & > div {
+    height: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  &.one-big-child {
+    height: calc(var(--menu-card-height) + 1.5rem);
+  }
+
+  &.two-small-children {
+    margin-bottom: 3rem;
+
+    & > div {
+      height: 50%;
+    }
+  }
+
+  &.one-small-child {
+    height: calc(var(--menu-card-height) / 2);
+  }
+}
+
+@media (min-width: 992px) {
+  .menu-card {
+    --menu-card-height: 480px;
+  }
+}

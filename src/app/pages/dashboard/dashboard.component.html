@@ -1,0 +1,189 @@
+<div class="row">
+  <!--LIBRARY-->
+  <div
+    class="col-lg-3 menu-card one-big-child"
+    *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])"
+  >
+    <div>
+      <!--begin::Card-->
+      <div class="card card-custom h-100">
+        <!--begin::Body-->
+        <div class="card-body text-white d-flex align-items-center">
+          <div>
+            <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
+              {{ "MENU.LIBRARY.TITLE" | translate }}
+            </h3>
+            <h5 class="font-weight-bold line-height-lg">
+              {{ "MENU.LIBRARY.BOOKS" | translate }}
+            </h5>
+            <a
+              routerLink="/library/books/overview"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
+            >
+            <a
+              routerLink="/library/books/add-book"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.LIBRARY.ADD_BOOK" | translate }}</a
+            >
+            <h5 class="font-weight-bold line-height-lg mt-lg-2 mt-4">
+              {{ "MENU.LIBRARY.ITEMS" | translate }}
+            </h5>
+            <a
+              routerLink="/library/items/overview"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
+            >
+            <a
+              routerLink="/library/items/add-item"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.LIBRARY.ADD_ITEM" | translate }}</a
+            >
+            <h5 class="font-weight-bold line-height-lg mt-lg-2 mt-4">
+              {{ "MENU.LIBRARY.LOANING" | translate }}
+            </h5>
+            <a
+              routerLink="/library/loans/overview"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
+            >
+            <a
+              routerLink="/library/loans/new-loan"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.LIBRARY.NEW_LOAN" | translate }}</a
+            >
+          </div>
+        </div>
+        <!--end::Body-->
+      </div>
+      <!--end::Card-->
+    </div>
+  </div>
+  <!--STUDENT & VOLUNTEER-->
+  <div
+    class="col-lg-3 menu-card"
+    *ngIf="AuthUtil.permitted(['student', 'volunteer', 'superadmin'])"
+    [ngClass]="
+      AuthUtil.permitted(['student', 'superadmin']) &&
+      AuthUtil.permitted(['volunteer', 'superadmin'])
+        ? 'two-small-children'
+        : 'one-small-child'
+    "
+  >
+    <div *ngIf="AuthUtil.permitted(['student', 'superadmin'])">
+      <!--begin::Card-->
+      <div class="card card-custom h-100">
+        <!--begin::Body-->
+        <div class="card-body text-white d-flex align-items-center">
+          <div>
+            <h3 class="font-weight-bolder line-height-lg mb-lg-3 mb-5">
+              {{ "REGISTRATION.GENERAL.STUDENT" | translate }}
+            </h3>
+            <a
+              routerLink="/registration-form/student"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.MANAGEMENT.REGISTRATION" | translate }}</a
+            >
+          </div>
+        </div>
+        <!--end::Body-->
+      </div>
+      <!--end::Card-->
+    </div>
+    <div *ngIf="AuthUtil.permitted(['volunteer', 'superadmin'])">
+      <!--begin::Card-->
+      <div class="card card-custom h-100">
+        <!--begin::Body-->
+        <div class="card-body text-white d-flex align-items-center">
+          <div>
+            <h3 class="font-weight-bolder line-height-lg mb-lg-3 mb-5">
+              {{ "REGISTRATION.GENERAL.VOLUNTEER" | translate }}
+            </h3>
+            <a
+              routerLink="/registration-form/volunteer"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.MANAGEMENT.REGISTRATION" | translate }}</a
+            >
+          </div>
+        </div>
+        <!--end::Body-->
+      </div>
+      <!--end::Card-->
+    </div>
+  </div>
+  <!--ORGANIZATION-->
+  <div
+    class="col-lg-3 menu-card one-small-child"
+    *ngIf="AuthUtil.permitted(['admin', 'superadmin'])"
+  >
+    <div>
+      <!--begin::Card-->
+      <div class="card card-custom h-100">
+        <!--begin::Body-->
+        <div class="card-body text-white d-flex align-items-center">
+          <div>
+            <h3 class="font-weight-bolder line-height-lg mb-lg-3 mb-5">
+              {{ "MENU.ORGANIZATION.TITLE" | translate }}
+            </h3>
+            <a
+              routerLink="/organization/roles"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.ORGANIZATION.ROLES" | translate }}</a
+            >
+            <a
+              routerLink="/organization/registrations"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.ORGANIZATION.REGISTRATIONS" | translate }}</a
+            >
+          </div>
+        </div>
+        <!--end::Body-->
+      </div>
+      <!--end::Card-->
+    </div>
+  </div>
+  <!-- IT - DOCUMENTATION -->
+  <div
+    class="col-lg-3 menu-card one-big-child"
+    *ngIf="AuthUtil.permitted(['superadmin'])"
+  >
+    <div>
+      <!--begin::Card-->
+      <div class="card card-custom h-100">
+        <!--begin::Body-->
+        <div class="card-body text-white d-flex align-items-center">
+          <div>
+            <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
+              {{ "MENU.DOCUMENTATION.TITLE" | translate }}
+            </h3>
+            <h5 class="font-weight-bold line-height-lg">
+              {{ "MENU.DOCUMENTATION.GETTING_STARTED" | translate }}
+            </h5>
+            <a
+              routerLink="/documentation/getting-started/0-preparations"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.DOCUMENTATION.S0_PREPARATIONS" | translate }}</a
+            >
+            <a
+              routerLink="/documentation/getting-started/1-setting-up"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.DOCUMENTATION.S1_SETTING_UP" | translate }}</a
+            >
+            <a class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >Coming soon</a
+            >
+            <a class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >Coming soon</a
+            >
+            <h5 class="font-weight-bold line-height-lg mt-lg-2 mt-4">TODO</h5>
+            <a class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >Coming soon</a
+            >
+          </div>
+        </div>
+        <!--end::Body-->
+      </div>
+      <!--end::Card-->
+    </div>
+  </div>
+</div>
