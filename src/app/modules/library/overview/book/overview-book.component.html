@@ -127,6 +127,12 @@
         </div>
         <!--end: Item-->
 
+        <div *ngIf="filteredListEmpty|async" class="row">
+            <div class="col-12 text-center">
+                <p><i> {{"LIBRARY.OVERVIEW.LOAN.NO_RESULTS" | translate }}</i></p>
+            </div>
+        </div>
+
         <div class="d-flex flex-wrap align-items-center mb-10">
 
             <!-- ///////////////////// -->

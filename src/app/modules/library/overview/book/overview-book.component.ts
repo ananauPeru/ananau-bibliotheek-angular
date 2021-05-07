@@ -11,74 +11,9 @@ import { Categories } from '../../_models/categories.enum'
 import { concat, Observable, timer } from 'rxjs'
 import { BookService } from '../../_services/book/book.service'
 import { BookModel } from '../../_models/book.model'
-import { concatAll, map } from 'rxjs/operators'
+import { defaultIfEmpty, concatAll, map } from 'rxjs/operators'
 import { LoanedPieceModel } from '../../_models/loaned-piece.model'
 import { L } from '@angular/cdk/keycodes'
-
-export interface UserData {
-  id: string
-  name: string
-  description: string
-  color: string
-}
-
-const COLORS: string[] = [
-  'maroon',
-  'red',
-  'orange',
-  'yellow',
-  'olive',
-  'green',
-  'purple',
-  'fuchsia',
-  'lime',
-  'teal',
-  'aqua',
-  'blue',
-  'navy',
-  'black',
-  'gray',
-]
-
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-]
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.'
-
-  const description = 'Testing'
-
-  return {
-    id: id.toString(),
-    name,
-    description,
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
-  }
-}
 
 @Component({
   selector: 'app-overview',
@@ -91,11 +26,12 @@ export class OverviewBookComponent implements OnInit {
   public Categories = Categories
   public BookCategories = BookCategories
   public showErrorGenre: boolean = false
+  public filteredListEmpty: Observable<Boolean>
 
   // MatPaginator Output
   pageEvent: PageEvent
 
-  dataSource7: MatTableDataSource<UserData>
+  dataSource7: MatTableDataSource<[]>
   displayedColumns7: string[] = ['id', 'name', 'description', 'color']
 
   category: string = undefined
@@ -113,11 +49,7 @@ export class OverviewBookComponent implements OnInit {
     public bookService: BookService,
     public AuthUtil: AuthUtil,
   ) {
-    // super()
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1))
-
-    // Assign the data to the data source for the table to render
-    this.dataSource7 = new MatTableDataSource(users)
+    this.dataSource7 = new MatTableDataSource()
   }
 
   ngOnInit(): void {
@@ -134,21 +66,6 @@ export class OverviewBookComponent implements OnInit {
 
   applyFilter7(filterValue: string) {
     this.dataSource7.filter = filterValue.trim().toLowerCase()
-    // console.log(this.dataSource7)
-
-    // if (this.dataSource7.paginator) {
-    //   console.log('paginating')
-    //   this.dataSource7.paginator.firstPage()
-    // }
-
-    // this.bookService.filter(
-    //   filterValue,
-    //   this.category,
-    //   // this.itemsPerPage,
-    //   // this.page,
-    //   this.genre,
-    // )
-
     this.paginate()
   }
 
@@ -160,16 +77,6 @@ export class OverviewBookComponent implements OnInit {
     } else {
       this.category = undefined
     }
-
-    console.log(this.category)
-
-    // this.bookService.filter(
-    //   this.dataSource7.filter,
-    //   this.category,
-    //   // this.itemsPerPage,
-    //   // this.page,
-    //   this.genre,
-    // )
 
     this.paginate()
   }
@@ -183,26 +90,12 @@ export class OverviewBookComponent implements OnInit {
       this.genre = undefined
     }
 
-    console.log(this.genre)
-
-    // this.bookService.filter(
-    //   this.dataSource7.filter,
-    //   this.category,
-    //   // this.itemsPerPage,
-    //   // this.page,
-    //   this.genre,
-    // )
-
     this.paginate()
   }
 
   pageEvents(event: any) {
-    console.log(event.pageIndex)
-    console.log(event.pageSize)
     this.itemsPerPage = event.pageSize
     this.setPage(event.pageIndex)
-    // this.paginate()
-    // The code that you want to execute on clicking on next and previous buttons will be written here.
   }
 
   setPage(p: number) {
@@ -213,13 +106,7 @@ export class OverviewBookComponent implements OnInit {
   paginate(): Observable<BookModel[]> {
     console.log(this.dataSource7.filter)
 
-    this.bookService.filter(
-      this.dataSource7.filter,
-      this.category,
-      // this.itemsPerPage,
-      // this.page,
-      this.genre,
-    )
+    this.bookService.filter(this.dataSource7.filter, this.category, this.genre)
 
     let bookList = this.bookService.books.pipe(
       map((books) =>
@@ -232,7 +119,10 @@ export class OverviewBookComponent implements OnInit {
       ),
     )
 
-    console.log(bookList)
+    this.filteredListEmpty = bookList.pipe(
+      map((l) => l.length <= 0),
+      defaultIfEmpty(true),
+    )
 
     return bookList
   }

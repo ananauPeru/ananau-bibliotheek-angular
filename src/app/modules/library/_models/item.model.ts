@@ -16,7 +16,7 @@ export class ItemModel {
   deleted: boolean
   user: string
   pieces: string
-  LoanedPieces: LoanedPieceModel[]
+  loanedPieces: LoanedPieceModel[]
   photoUrl: string
   purchasedAt: Date
   createdAt: Date

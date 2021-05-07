@@ -467,17 +467,17 @@ export const locale = {
             F1: "Seleccione el curso del artículo.",
             F2: "Se requiere curso.",
           },
-          CODE: {
-            TITLE: "Código",
-            F1: "Ingrese la cantidad del artículo.",
-            F2: "Se requiere cantidad.",
-            F3: "La cantidad mínima debe ser 1.",
-            F4: "La cantidad máxima debe ser 1000.",
-          },
           QUANTITY: {
             TITLE: 'Cantidad',
-            F1: 'Inserte un cantidad para el artículo.',
-            F2: 'Se requiere el cantidad.',
+            F1: 'Ingrese la cantidad del artículo.',
+            F2: 'Se requiere cantidad.',
+            F3: 'La cantidad mínima debe ser 1.',
+            F4: 'La cantidad máxima debe ser 1000.',
+          },
+          CODE: {
+            TITLE: 'Código',
+            F1: 'Inserte un código para el artículo.',
+            F2: 'Se requiere el código.',
           },
           PIECES: {
             TITLE: "Piezas",
@@ -568,6 +568,7 @@ export const locale = {
             EXPECTED_RETURN_DATE_F1:
               "Ingrese la fecha de devolución esperada del artículo.",
             EXPECTED_RETURN_DATE_F2:
+<<<<<<< HEAD
               "Se requiere la fecha de devolución esperada",
             STATE: "Estado al prestar",
             STATE_GOOD: "Bueno",
@@ -581,6 +582,21 @@ export const locale = {
             QUANTITY_F3: "La cantidad mínima debe ser 1.",
             QUANTITY_F4: "La cantidad máxima debe ser 1000.",
             STATE_DESC: "Descripción del estado",
+=======
+              'Se requiere la fecha de devolución esperada',
+            STATE: 'Estado al prestar',
+            STATE_GOOD: 'Bueno',
+            STATE_NORMAL: 'Señales de uso normal',
+            STATE_BAD: 'Malo',
+            STATE_F1: 'Seleccione un estado para el artículo.',
+            STATE_F2: 'Se requiere estado',
+            QUANTITY: 'Cantidad',
+            QUANTITY_F1: 'Ingrese la cantidad de los artículos prestados.',
+            QUANTITY_F2: 'Se requiere cantidad.',
+            QUANTITY_F3: 'La cantidad mínima debe ser 1.',
+            QUANTITY_F4: 'Cantidad en inventario: ',
+            STATE_DESC: 'Descripción del estado',
+>>>>>>> 3d555da (Vertaling toegevoegd)
             STATE_DESC_PH:
               "Describa el estado con más detalle si es necesario.",
           },
