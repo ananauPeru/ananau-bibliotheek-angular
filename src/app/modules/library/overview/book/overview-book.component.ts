@@ -12,6 +12,7 @@ import { concat, Observable, timer } from 'rxjs'
 import { BookService } from '../../_services/book/book.service'
 import { BookModel } from '../../_models/book.model'
 import { concatAll, map } from 'rxjs/operators'
+import { LoanedPieceModel } from '../../_models/loaned-piece.model'
 
 export interface UserData {
   id: string
@@ -247,5 +248,9 @@ export class OverviewBookComponent implements OnInit {
       this.showErrorGenre = false
       console.log(this.showErrorGenre)
     })
+  }
+
+  getOpenLoans( lp : LoanedPieceModel[] ){
+
   }
 }

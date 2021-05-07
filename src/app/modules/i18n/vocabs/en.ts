@@ -408,6 +408,11 @@ export const locale = {
             TITLE: "Upload a photo for this Book",
             MESSAGE: "Drop your image here or click to select your image.",
           },
+          QUANTITY: {
+            TITLE: 'Quantity',
+            F1: 'Please insert a Quantity for the Book.',
+            F2: 'Quantity is required.',
+          },
           DESCRIPTION: {
             TITLE: "Description",
             PH: "Describe the item...",
@@ -462,9 +467,9 @@ export const locale = {
             F4: "The maximum Quantity should be 1000.",
           },
           QUANTITY: {
-            TITLE: "Quantity",
-            F1: "Please insert a Code for the Item.",
-            F2: "Code is required.",
+            TITLE: 'Quantity',
+            F1: 'Please insert a Quantity for the Item.',
+            F2: 'Quantity is required.',
           },
           PIECES: {
             TITLE: "Pieces",

@@ -75,7 +75,7 @@
             </div>
             <div class="form-group row">
                 <!--begin::Form group-->
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-6">
                     <label>{{"LIBRARY.CREATE.BOOK.PURCHASED_AT.TITLE" | translate }}</label>
                     <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()"
                         placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" name="purchasedAt"
@@ -92,7 +92,7 @@
                         {{"LIBRARY.CREATE.BOOK.PURCHASED_AT.F2" | translate }}
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
+                <div class="col-12 col-md-6">
                     <label>{{"LIBRARY.CREATE.BOOK.GENRE.TITLE" | translate }}</label>
                     <select class="form-control form-control-lg form-control-solid" name="genre" formControlName="genre"
                         aria-placeholder="Genre" [class.is-invalid]="isControlInvalid('genre')"
@@ -108,7 +108,9 @@
                         {{"LIBRARY.CREATE.BOOK.GENRE.F2" | translate }}
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
                     <label>{{"LIBRARY.CREATE.BOOK.STATE.TITLE" | translate }}</label>
                     <select class="form-control form-control-lg form-control-solid" name="state" formControlName="state"
                         aria-placeholder="State" [class.is-invalid]="isControlInvalid('state')"
@@ -129,6 +131,28 @@
                     </div>
                     <div class="invalid-feedback" *ngIf="controlHasError('required', 'state')">
                         {{"LIBRARY.CREATE.BOOK.STATE.F2" | translate }}
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label>{{"LIBRARY.CREATE.BOOK.QUANTITY.TITLE" | translate }}</label>
+                    <input type="number" min="1" max="1000" step="1"
+                        class="form-control form-control-lg form-control-solid" autocomplete="off" placeholder="1"
+                        name='quantity' [class.is-invalid]="isControlInvalid('quantity')"
+                        [class.is-valid]="isControlValid('quantity')" formControlName='quantity' required />
+                    <div class="feedback" *ngIf="!isControlTouched('quantity')">
+                        {{"LIBRARY.CREATE.BOOK.QUANTITY.F1" | translate }}
+                    </div>
+                    <div class="valid-feedback" *ngIf="isControlValid('quantity')">
+                        <!-- Name was entered correct -->
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'quantity')">
+                        {{"LIBRARY.CREATE.BOOK.QUANTITY.F2" | translate }}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('min', 'quantity')">
+                        {{"LIBRARY.CREATE.BOOK.QUANTITY.F3" | translate }}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('max', 'quantity')">
+                        {{"LIBRARY.CREATE.BOOK.QUANTITY.F4" | translate }}
                     </div>
                 </div>
             </div>

@@ -13,8 +13,9 @@ export class BookModel {
   state: string
   archived: boolean
   deleted: boolean
-  pieces: LoanedPieceModel[]
+  loanedPieces: LoanedPieceModel[]
   photoUrl: string
+  quantity: number
   purchasedAt: Date
   createdAt: Date
   updatedAt: Date
