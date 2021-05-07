@@ -75,8 +75,8 @@
                             : 'No description provided.'}}
                         </span>
                         <span class="text-muted font-weight-bold font-size-sm">
-                            {{"LIBRARY.OVERVIEW.BOOK.AUTHOR" | translate }}: {{book.author?book.author:'Author
-                            Unknown'}}
+                            {{"LIBRARY.OVERVIEW.BOOK.AUTHOR" | translate }}:
+                            {{book.author?book.author:'Author Unknown'}}
                         </span>
             </div>
             <!--end::Title-->
@@ -116,7 +116,7 @@
             <div class="d-flex align-items-center py-lg-0 py-2">
                 <div class="d-flex flex-column text-right">
                     <span class="text-dark-75 font-weight-bolder font-size-h4">
-                        {{book.loanedPieces ? book.quantity: book.quantity}}
+                        {{book.loanedPieces ? book.quantity - getOpenLoans(book.loanedPieces).length: book.quantity}}
                     </span>
                     <span class="text-muted font-weight-bolder font-size-sm">
                         {{"LIBRARY.OVERVIEW.BOOK.IN_STOCK" | translate }}

@@ -13,6 +13,7 @@ import { BookService } from '../../_services/book/book.service'
 import { BookModel } from '../../_models/book.model'
 import { concatAll, map } from 'rxjs/operators'
 import { LoanedPieceModel } from '../../_models/loaned-piece.model'
+import { L } from '@angular/cdk/keycodes'
 
 export interface UserData {
   id: string
@@ -228,7 +229,7 @@ export class OverviewBookComponent implements OnInit {
             index <= this.itemsPerPage * (this.page + 1)
           return i
         }),
-      )
+      ),
     )
 
     console.log(bookList)
@@ -250,7 +251,14 @@ export class OverviewBookComponent implements OnInit {
     })
   }
 
-  getOpenLoans( lp : LoanedPieceModel[] ){
-
+  getOpenLoans(lp: LoanedPieceModel[]) {
+    let l = lp
+    let r: LoanedPieceModel[] = []
+    l.forEach((element) => {
+      if (element.status.toLowerCase() == 'open') {
+        r.push(element)
+      }
+    })
+    return r
   }
 }
