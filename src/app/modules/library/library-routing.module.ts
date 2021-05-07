@@ -18,7 +18,7 @@ const routes: Routes = [
     component: LibraryComponent,
     canActivate: [AuthGuard],
     data: {
-      permittedRoles: ['Librarian'],
+      permittedRoles: ['Librarian','SuperAdmin'],
     },
     children: [
       {
