@@ -34,7 +34,7 @@
                     </div>
 
                     <input (keyup)="applyFilter($event.target.value)" type="email"
-                        class="form-control form-control-lg form-control-solid force-pl-5" 
+                        class="form-control form-control-lg form-control-solid force-pl-5"
                         placeholder='{{"ORGANIZATION.ROLES.OVERVIEW.FILTER" | translate }}'
                         style="padding-left: 10px;" />
                 </div>
@@ -55,11 +55,9 @@
                                 <th>{{"ORGANIZATION.ROLES.OVERVIEW.FIRST_NAME" | translate }}</th>
                                 <th>{{"ORGANIZATION.ROLES.OVERVIEW.LAST_NAME" | translate }}</th>
                                 <th>Email</th>
-                                <th>SuperAdmin</th>
-                                <th>Admin</th>
-                                <th>Librarian</th>
-                                <th>Volunteer</th>
-                                <th>Student</th>
+                                <th *ngFor="let role of roleService.roles | async">
+                                    {{role.name}}
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
