@@ -12,6 +12,7 @@ import { ItemDTO } from '../../_dto/item-dto'
 import { EducationalCourses } from '../../_models/educational-courses.enum'
 import { ItemPurposes } from '../../_models/item-purposes.enum'
 import { ItemService } from '../../_services/item/item.service'
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-create',
@@ -98,12 +99,22 @@ export class CreateItemComponent implements OnInit {
       ],
       purchasedAt: [
         this.item && this.item.purchasedAt
-          ? (this.modelDate = {
-              year: new Date(this.item.purchasedAt).getFullYear(),
-              month: new Date(this.item.purchasedAt).getMonth(),
-              day: new Date(this.item.purchasedAt).getDay(),
-            })
-          : '',
+          ? new NgbDate(
+              new Date(
+                this.datePipe.transform(this.item.purchasedAt, 'yyyy-MM-dd'),
+              ).getFullYear(),
+              new Date(
+                this.datePipe.transform(this.item.purchasedAt, 'yyyy-MM-dd'),
+              ).getMonth() + 1,
+              new Date(
+                this.datePipe.transform(this.item.purchasedAt, 'yyyy-MM-dd'),
+              ).getDate(),
+            )
+          : new NgbDate(
+              new Date().getFullYear(),
+              new Date().getMonth() + 1,
+              new Date().getDate(),
+            ),
         Validators.compose([Validators.required]),
       ],
       description: [
@@ -141,9 +152,11 @@ export class CreateItemComponent implements OnInit {
       item.description = formValues.description
       item.code = formValues.code
       item.purchasedAt = new Date(
-        formValues.purchasedAt.year,
-        formValues.purchasedAt.month,
-        formValues.purchasedAt.day,
+        Date.UTC(
+          formValues.purchasedAt.year,
+          formValues.purchasedAt.month - 1,
+          formValues.purchasedAt.day,
+        ),
       )
       item.quantity = formValues.quantity
       item.pieces = formValues.pieces
@@ -158,9 +171,11 @@ export class CreateItemComponent implements OnInit {
       this.item.description = formValues.description
       this.item.code = formValues.code
       this.item.purchasedAt = new Date(
-        formValues.purchasedAt.year,
-        formValues.purchasedAt.month,
-        formValues.purchasedAt.day,
+        Date.UTC(
+          formValues.purchasedAt.year,
+          formValues.purchasedAt.month - 1,
+          formValues.purchasedAt.day,
+        ),
       )
       this.item.quantity = formValues.quantity
       this.item.pieces = formValues.pieces
@@ -291,7 +306,7 @@ export class CreateItemComponent implements OnInit {
         'Error',
       )
     } else {
-      console.log("deleting item")
+      console.log('deleting item')
       const idelete = this.itemHTTPService
         .delete(this.item.itemId)
         .pipe(

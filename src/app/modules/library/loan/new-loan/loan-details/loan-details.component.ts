@@ -6,6 +6,7 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap'
 import { Observable } from 'rxjs'
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable'
 import { UserModel } from 'src/app/modules/auth'
+import { ToastrUtil } from 'src/app/_utils/toastr_util'
 import { BookModel } from '../../../_models/book.model'
 import { LoanedPieceModel } from '../../../_models/loaned-piece.model'
 import { BookService } from '../../../_services/book/book.service'
@@ -30,6 +31,7 @@ export class LoanDetailsComponent implements OnInit {
   public userFilter = this.loaningUser ? this.loaningUser.email : ''
 
   constructor(
+    public toastrUtil: ToastrUtil,
     public loanService: LoanService,
     public bookService: BookService,
     public itemService: ItemService,
@@ -49,12 +51,52 @@ export class LoanDetailsComponent implements OnInit {
   setItem(i: any) {
     this.item = i
     if (this.type.toLowerCase() == 'books') {
-      this.loanedPiece.book = this.item
-      this.loanedPiece.item = null
+      if (i.quantity - this.getOpenLoans(i.loanedPieces) <= 0) {
+        this.toastrUtil.showError(
+          'Please choose another Book. 0 in stock!',
+          'Out of Stock',
+        )
+        this.loanedPiece.book = null
+        this.loanedPiece.item = null
+        this.updateQuantityValidators(0)
+      } else {
+        this.loanedPiece.book = this.item
+        this.loanedPiece.item = null
+        this.updateQuantityValidators(i.quantity - this.getOpenLoans(i.loanedPieces))
+      }
     } else {
-      this.loanedPiece.book = null
-      this.loanedPiece.item = this.item
+      if (i.quantity - this.getOpenLoans(i.loanedPieces) <= 0) {
+        this.toastrUtil.showError(
+          'Please choose another Item. 0 in stock!',
+          'Out of Stock',
+        )
+        this.loanedPiece.book = null
+        this.loanedPiece.item = null
+        this.updateQuantityValidators(0)
+      } else {
+        this.loanedPiece.book = null
+        this.loanedPiece.item = this.item
+        this.updateQuantityValidators(i.quantity - this.getOpenLoans(i.loanedPieces))
+      }
     }
+  }
+
+  updateQuantityValidators(m: number) {
+    this.loanForm
+      .get('quantity')
+      .setValidators([Validators.required, Validators.min(1), Validators.max(m)])
+
+    this.loanForm.get('quantity').updateValueAndValidity()
+  }
+
+  getOpenLoans(lp: LoanedPieceModel[]): number {
+    let r = 0
+    lp.forEach((l) => {
+      if (l.status.toLowerCase() == 'open') {
+        r++
+      }
+    })
+    return r
   }
 
   setUser(u: any) {

@@ -10,6 +10,7 @@ import { BookDTO } from '../../_dto/book-dto'
 import { BookHTTPService } from '../../_services/book/book-http/book-http.service'
 import { BookModel } from '../../_models/book.model'
 import { DatePipe } from '@angular/common'
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-create',
@@ -66,11 +67,23 @@ export class CreateBookComponent implements OnInit {
       ],
       purchasedAt: [
         this.book && this.book.purchasedAt
-          ? this.datePipe.transform(
-              new Date(this.book.purchasedAt),
-              'yyyy-MM-dd',
+          ? new NgbDate(
+              new Date(
+                this.datePipe.transform(this.book.purchasedAt, 'yyyy-MM-dd'),
+              ).getFullYear(),
+              new Date(
+                this.datePipe.transform(this.book.purchasedAt, 'yyyy-MM-dd'),
+              ).getMonth() + 1,
+              new Date(
+                this.datePipe.transform(this.book.purchasedAt, 'yyyy-MM-dd'),
+              ).getDate(),
             )
-          : '',
+          : new NgbDate(
+              new Date().getFullYear(),
+              new Date().getMonth() + 1,
+              new Date().getDate(),
+            ),
+
         Validators.compose([Validators.required]),
       ],
       description: [
@@ -89,6 +102,14 @@ export class CreateBookComponent implements OnInit {
       bookImage: [
         false,
         // , Validators.requiredTrue
+      ],
+      quantity: [
+        this.book && this.book.quantity ? this.book.quantity : 1,
+        Validators.compose([
+          Validators.required,
+          Validators.min(1),
+          Validators.max(1000),
+        ]),
       ],
     })
   }
@@ -110,10 +131,13 @@ export class CreateBookComponent implements OnInit {
       item.description = formValues.description
       item.state = formValues.state
       item.purchasedAt = new Date(
-        formValues.purchasedAt.year,
-        formValues.purchasedAt.month,
-        formValues.purchasedAt.day,
+        Date.UTC(
+          formValues.purchasedAt.year,
+          formValues.purchasedAt.month - 1,
+          formValues.purchasedAt.day,
+        ),
       )
+      item.quantity = formValues.quantity
       this.create(item)
     } else {
       this.book.name = formValues.name
@@ -121,11 +145,14 @@ export class CreateBookComponent implements OnInit {
       this.book.category = 'BOOK'
       this.book.genre = formValues.genre.toUpperCase()
       this.book.description = formValues.description
+      this.book.quantity = formValues.quantity
       this.book.state = formValues.state
       this.book.purchasedAt = new Date(
-        formValues.purchasedAt.year,
-        formValues.purchasedAt.month,
-        formValues.purchasedAt.day,
+        Date.UTC(
+          formValues.purchasedAt.year,
+          formValues.purchasedAt.month - 1,
+          formValues.purchasedAt.day,
+        ),
       )
       this.create(this.book)
     }

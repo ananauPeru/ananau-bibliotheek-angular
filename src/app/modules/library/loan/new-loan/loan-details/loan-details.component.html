@@ -170,7 +170,11 @@
                 {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F3" | translate }}
             </div>
             <div class="invalid-feedback" *ngIf="controlHasError('max', 'quantity')">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F4" | translate }}
+                {{item ?
+                (("LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F4" | translate) + (item.quantity -
+                getOpenLoans(item.loanedPieces))):
+                'Please select an Item or Book first.'
+                }}
             </div>
         </div>
         <div class="col-12 mb-3">

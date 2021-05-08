@@ -67,16 +67,17 @@
             <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3" style="max-width: 365px; overflow: hidden;">
                 <a routerLink='/library/books/edit-book/{{book.bookId}}'
                     class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                    {{book.name.length<=35 ? book.name : ((book.name | slice:0:35)+'...')}} 
-                </a>
-                <span class="text-muted font-weight-bold font-size-sm my-1">
-                    {{"LIBRARY.OVERVIEW.BOOK.DESCRIPTION" | translate }}: {{book.description ? ((book.description |
-                    slice:0:45)+'...')
-                    : 'No description provided.'}}
-                </span>
-                <span class="text-muted font-weight-bold font-size-sm">
-                    {{"LIBRARY.OVERVIEW.BOOK.AUTHOR" | translate }}: {{book.author?book.author:'Author Unknown'}}
-                </span>
+                    {{book.name.length<=35 ? book.name : ((book.name | slice:0:35)+'...')}} </a>
+                        <span class="text-muted font-weight-bold font-size-sm my-1">
+                            {{"LIBRARY.OVERVIEW.BOOK.DESCRIPTION" | translate }}: {{book.description ?
+                            ((book.description |
+                            slice:0:45)+'...')
+                            : 'No description provided.'}}
+                        </span>
+                        <span class="text-muted font-weight-bold font-size-sm">
+                            {{"LIBRARY.OVERVIEW.BOOK.AUTHOR" | translate }}:
+                            {{book.author?book.author:'Author Unknown'}}
+                        </span>
             </div>
             <!--end::Title-->
 
@@ -115,7 +116,7 @@
             <div class="d-flex align-items-center py-lg-0 py-2">
                 <div class="d-flex flex-column text-right">
                     <span class="text-dark-75 font-weight-bolder font-size-h4">
-                        {{book.pieces ? book.pieces.length : 0}}
+                        {{book.loanedPieces ? book.quantity - getOpenLoans(book.loanedPieces).length: book.quantity}}
                     </span>
                     <span class="text-muted font-weight-bolder font-size-sm">
                         {{"LIBRARY.OVERVIEW.BOOK.IN_STOCK" | translate }}
@@ -125,6 +126,12 @@
             <!--end::Info-->
         </div>
         <!--end: Item-->
+
+        <div *ngIf="filteredListEmpty|async" class="row">
+            <div class="col-12 text-center">
+                <p><i> {{"LIBRARY.OVERVIEW.LOAN.NO_RESULTS" | translate }}</i></p>
+            </div>
+        </div>
 
         <div class="d-flex flex-wrap align-items-center mb-10">
 
