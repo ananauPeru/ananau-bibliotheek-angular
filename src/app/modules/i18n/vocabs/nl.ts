@@ -32,6 +32,8 @@ export const locale = {
       FEATURES: "Features",
       APPS: "Apps",
       DASHBOARD: "Dashboard",
+      NO_ROLES:
+        "Je hebt nog geen toegang tot een van de modules. Neem contact op om toegang te vragen.",
       TODAY: "Vandaag",
       MANAGEMENT: {
         TITLE: "Gebruikersbeheer",

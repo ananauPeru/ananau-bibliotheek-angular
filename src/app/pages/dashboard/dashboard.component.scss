@@ -15,6 +15,14 @@
     }
   }
 
+  &:first-of-type {
+    margin-left: auto;
+  }
+
+  &:last-of-type {
+    margin-right: auto;
+  }
+
   &:nth-of-type(odd) {
     .card {
       background-color: #0b5f3e;

@@ -1,4 +1,16 @@
-<div class="row">
+<div
+  class="row"
+  *ngIf="
+    AuthUtil.permitted([
+      'student',
+      'volunteer',
+      'librarian',
+      'admin',
+      'superadmin'
+    ]);
+    else noRoles
+  "
+>
   <!--LIBRARY-->
   <div
     class="col-lg-3 menu-card one-big-child"
@@ -187,3 +199,16 @@
     </div>
   </div>
 </div>
+
+<ng-template #noRoles>
+  <div class="w-100 mt-5 text-center">
+    <p class="font-weight-bold">{{ "MENU.NO_ROLES" | translate }}</p>
+    <a
+      href="mailto:info@ananau.org"
+      class="btn btn-primary font-weight-bold mt-2"
+    >
+      <i class="socicon-mail"></i
+      ><span class="text-white">info@ananau.org</span>
+    </a>
+  </div>
+</ng-template>
