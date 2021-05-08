@@ -1,188 +1,350 @@
 <div class="row">
-    <div class="col-12">
-        <div class="form-group">
-            <label>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.ITEM_INPUT" | translate }}</label>
-            <div class="input-group">
-                <div class="input-group-prepend col-2 pr-0 pl-0">
-                    <button type="button" class="btn btn-secondary btn-block dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" [disabled]="loanedPiece.loanedPieceId?true:false"
-                        id="bookitem">
-                        {{type}}&nbsp;
-                        <i class="fas fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="bookitem">
-                        <a class="dropdown-item text-dark"
-                            (click)='type = "Books"'>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.BOOKS" | translate }}</a>
-                        <a class="dropdown-item text-dark"
-                            (click)='type = "Items"'>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.ITEMS" | translate }}</a>
-                    </div>
-                </div>
-                <div class="input-group-append col-10 pl-0 pr-0">
-                    <input type="text" class="form-control form-control-lg form-control-solid dropdown-toggle"
-                        id="dropdownMenuButton" data-toggle="dropdown" aria-label="Text input with dropdown button"
-                        placeholder='{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.ITEM_INPUT_PH" | translate }}'
-                        value='{{item ? item.name : filter}}' (input)="setFilter($event.target.value)"
-                        [disabled]="loanedPiece.loanedPieceId?true:false" />
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="itemsDropdown">
-                        <a class="dropdown-item text-dark" (click)="setItem(i)"
-                            *ngFor="let i of filteredList() | async">{{i.name}}</a>
-                    </div>
-                </div>
-            </div>
-            <span class="form-text text-muted">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.ITEM_INPUT_SUB" | translate }}
-            </span>
+  <div class="col-12">
+    <div class="form-group">
+      <label>{{
+        "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.ITEM_INPUT" | translate
+      }}</label>
+      <div class="input-group">
+        <div class="input-group-prepend col-2 pr-0 pl-0">
+          <button
+            type="button"
+            class="btn btn-secondary btn-block dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            [disabled]="loanedPiece.loanedPieceId ? true : false"
+            id="bookitem"
+          >
+            {{ type }}&nbsp;
+            <i class="fas fa-caret-down"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="bookitem">
+            <a class="dropdown-item text-dark" (click)="type = 'Books'">{{
+              "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.BOOKS" | translate
+            }}</a>
+            <a class="dropdown-item text-dark" (click)="type = 'Items'">{{
+              "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.ITEMS" | translate
+            }}</a>
+          </div>
         </div>
+        <div class="input-group-append col-10 pl-0 pr-0">
+          <input
+            type="text"
+            class="form-control form-control-lg form-control-solid dropdown-toggle"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-label="Text input with dropdown button"
+            placeholder="{{
+              'LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.ITEM_INPUT_PH' | translate
+            }}"
+            value="{{ item ? item.name : filter }}"
+            (input)="setFilter($event.target.value)"
+            [disabled]="loanedPiece.loanedPieceId ? true : false"
+          />
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenuButton"
+            id="itemsDropdown"
+          >
+            <a
+              class="dropdown-item text-dark"
+              (click)="setItem(i)"
+              *ngFor="let i of filteredList() | async"
+              >{{ i.name }}</a
+            >
+          </div>
+        </div>
+      </div>
+      <span class="form-text text-muted">
+        {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.ITEM_INPUT_SUB" | translate }}
+      </span>
     </div>
+  </div>
 </div>
 <div class="row">
-    <div class="col-12">
-        <div class="form-group">
-            <label>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.USER_INPUT" | translate }}</label>
-            <div class="input-group">
-                <div class="input-group-prepend col-2 pr-0 pl-0">
-                    <button type="button" class="btn btn-secondary btn-block dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" id="bookitem"
-                        [disabled]="loanedPiece.loanedPieceId?true:false">
-                        {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.USER" | translate }}
-                    </button>
-                </div>
-                <div class="input-group-append col-10 pl-0 pr-0">
-                    <input type="text" class="form-control form-control-lg form-control-solid dropdown-toggle"
-                        id="dropdownMenuButtonUser" data-toggle="dropdown" aria-label="Text input with dropdown button"
-                        placeholder='{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.USER_INPUT_PH" | translate }}'
-                        value='{{loaningUser && loaningUser.userDetail ? loaningUser.userDetail.firstName+ " " +loaningUser.userDetail.lastName +" • "+loaningUser.email : ""}}'
-                        (input)="userFilter = $event.target.value" [disabled]="loanedPiece.loanedPieceId?true:false" />
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonUser" id="usersDropdown">
-                        <a class="dropdown-item text-dark" (click)="setUser(i.user)"
-                            *ngFor="let i of filteredUserList() | async">{{i.user.userDetail.firstName + '
-                            '+i.user.userDetail.lastName +' • '+i.user.email }}</a>
-                    </div>
-                </div>
-            </div>
-            <span class="form-text text-muted">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.USER_INPUT_SUB" | translate }}
-            </span>
+  <div class="col-12">
+    <div class="form-group">
+      <label>{{
+        "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.USER_INPUT" | translate
+      }}</label>
+      <div class="input-group">
+        <div class="input-group-prepend col-2 pr-0 pl-0">
+          <button
+            type="button"
+            class="btn btn-secondary btn-block dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            id="bookitem"
+            [disabled]="loanedPiece.loanedPieceId ? true : false"
+          >
+            {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.USER" | translate }}
+          </button>
         </div>
+        <div class="input-group-append col-10 pl-0 pr-0">
+          <input
+            type="text"
+            class="form-control form-control-lg form-control-solid dropdown-toggle"
+            id="dropdownMenuButtonUser"
+            data-toggle="dropdown"
+            aria-label="Text input with dropdown button"
+            placeholder="{{
+              'LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.USER_INPUT_PH' | translate
+            }}"
+            value="{{
+              loaningUser && loaningUser.userDetail
+                ? loaningUser.userDetail.firstName +
+                  ' ' +
+                  loaningUser.userDetail.lastName +
+                  ' • ' +
+                  loaningUser.email
+                : ''
+            }}"
+            (input)="userFilter = $event.target.value"
+            [disabled]="loanedPiece.loanedPieceId ? true : false"
+          />
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenuButtonUser"
+            id="usersDropdown"
+          >
+            <a
+              class="dropdown-item text-dark"
+              (click)="setUser(i.user)"
+              *ngFor="let i of filteredUserList() | async"
+              >{{
+                i.user.userDetail.firstName +
+                  "
+                            " +
+                  i.user.userDetail.lastName +
+                  " • " +
+                  i.user.email
+              }}</a
+            >
+          </div>
+        </div>
+      </div>
+      <span class="form-text text-muted">
+        {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.USER_INPUT_SUB" | translate }}
+      </span>
     </div>
+  </div>
 </div>
 <form action="#" class="form form-label-right" [formGroup]="loanForm">
-    <div class="row form-group">
-        <div class="col-12 col-md-6 mb-3">
-            <label>
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.LOANED_AT" | translate }}
-            </label>
-            <ng-container *ngIf="loanedPiece.loanedPieceId; else elseTemplate">
-                <input class="form-control form-control-solid form-control-lg" ngbDatepicker name="loanDate"
-                    formControlName="loanDate" placeholder="2000-01-01" autocomplete="off"
-                    [class.is-invalid]="isControlInvalid('loanDate')" [class.is-valid]="isControlValid('loanDate')"
-                    [disabled]="true" required />
-            </ng-container>
-            <ng-template #elseTemplate>
-                <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()" ngbDatepicker
-                    #d="ngbDatepicker" name="loanDate" formControlName="loanDate" placeholder="2000-01-01"
-                    autocomplete="off" [class.is-invalid]="isControlInvalid('loanDate')"
-                    [class.is-valid]="isControlValid('loanDate')" [disabled]="loanedPiece.loanedPieceId?true:false"
-                    required />
-            </ng-template>
+  <div class="row form-group">
+    <div class="col-12 col-md-6 mb-3">
+      <label>
+        {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.LOANED_AT" | translate }}
+      </label>
+      <ng-container *ngIf="loanedPiece.loanedPieceId; else elseTemplate">
+        <input
+          class="form-control form-control-solid form-control-lg"
+          ngbDatepicker
+          [minDate]="{ year: 1950, month: 1, day: 1 }"
+          [maxDate]="{ year: 2038, month: 1, day: 19 }"
+          name="loanDate"
+          formControlName="loanDate"
+          placeholder="2000-01-01"
+          autocomplete="off"
+          [class.is-invalid]="isControlInvalid('loanDate')"
+          [class.is-valid]="isControlValid('loanDate')"
+          [disabled]="true"
+          required
+        />
+      </ng-container>
+      <ng-template #elseTemplate>
+        <input
+          class="form-control form-control-solid form-control-lg"
+          (click)="d.toggle()"
+          ngbDatepicker
+          [minDate]="{ year: 1950, month: 1, day: 1 }"
+          [maxDate]="{ year: 2038, month: 1, day: 19 }"
+          #d="ngbDatepicker"
+          name="loanDate"
+          formControlName="loanDate"
+          placeholder="2000-01-01"
+          autocomplete="off"
+          [class.is-invalid]="isControlInvalid('loanDate')"
+          [class.is-valid]="isControlValid('loanDate')"
+          [disabled]="loanedPiece.loanedPieceId ? true : false"
+          required
+        />
+      </ng-template>
 
-            <div class="feedback" *ngIf="!isControlTouched('loanDate')">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.LOANED_AT_F1" | translate }}
-            </div>
-            <div class="valid-feedback" *ngIf="isControlValid('loanDate')">
-                <!-- Brand was entered correct -->
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'loanDate')">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.LOANED_AT_F2" | translate }}
-            </div>
-        </div>
-        <div class="col-12 col-md-6 mb-3">
-            <label>
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.EXPECTED_RETURN_DATE" | translate }}
-            </label>
-            <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()" ngbDatepicker
-                #d="ngbDatepicker" name="returnDate" formControlName="returnDate" placeholder="2000-01-01"
-                autocomplete="off" [class.is-invalid]="isControlInvalid('returnDate')"
-                [class.is-valid]="isControlValid('returnDate')" required />
-            <div class="feedback" *ngIf="!isControlTouched('returnDate')">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.EXPECTED_RETURN_DATE_F1" | translate }}
-            </div>
-            <div class="valid-feedback" *ngIf="isControlValid('returnDate')">
-                <!-- Brand was entered correct -->
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'returnDate')">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.EXPECTED_RETURN_DATE_F2" | translate }}
-            </div>
-        </div>
-        <div class="col-12 col-md-6 mb-3">
-            <label>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE" | translate }}</label>
-
-            <ng-container *ngIf="loanedPiece.loanedPieceId; else elseTemplateState">
-                <select class="form-control form-control-lg form-control-solid" name="loanState"
-                    formControlName="loanState" [class.is-invalid]="isControlInvalid('loanState')"
-                    [class.is-valid]="isControlValid('loanState')"
-                    [attr.disabled]='loanedPiece.loanedPieceId?true:false' required>
-                    <option value='GOOD'>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_GOOD" | translate }}</option>
-                    <option value="NORMAL USAGE SIGNS">{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_NORMAL" | translate
-                        }}</option>
-                    <option value="BAD">{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_BAD" | translate }}</option>
-                </select>
-                <div class="feedback" *ngIf="!isControlTouched('loanState')">
-                    {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_F1" | translate }}
-                </div>
-                <div class="invalid-feedback" *ngIf="controlHasError('required', 'loanState')">
-                    {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_F2" | translate }}
-                </div>
-            </ng-container>
-            <ng-template #elseTemplateState>
-                <select class="form-control form-control-lg form-control-solid" name="loanState"
-                    formControlName="loanState" [class.is-invalid]="isControlInvalid('loanState')"
-                    [class.is-valid]="isControlValid('loanState')" required>
-                    <option value='GOOD'>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_GOOD" | translate }}</option>
-                    <option value="NORMAL USAGE SIGNS">{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_NORMAL" | translate
-                        }}</option>
-                    <option value="BAD">{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_BAD" | translate }}</option>
-                </select>
-                <div class="feedback" *ngIf="!isControlTouched('loanState')">
-                    {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_F1" | translate }}
-                </div>
-                <div class="invalid-feedback" *ngIf="controlHasError('required', 'loanState')">
-                    {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_F2" | translate }}
-                </div>
-            </ng-template>
-        </div>
-        <div class="col-12 col-md-6 mb-3">
-            <label>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY" | translate }}</label>
-            <input type="number" min="1" max="1000" step="1" class="form-control form-control-lg form-control-solid"
-                autocomplete="off" placeholder="1" name='quantity' [class.is-invalid]="isControlInvalid('quantity')"
-                [class.is-valid]="isControlValid('quantity')" formControlName='quantity'
-                [readonly]="loanedPiece.loanedPieceId?true:false" required />
-            <div class="feedback" *ngIf="!isControlTouched('quantity')">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F1" | translate }}
-            </div>
-            <div class="valid-feedback" *ngIf="isControlValid('quantity')">
-                <!-- Name was entered correct -->
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'quantity')">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F2" | translate }}
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('min', 'quantity')">
-                {{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F3" | translate }}
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('max', 'quantity')">
-                {{item ?
-                (("LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F4" | translate) + (item.quantity -
-                getOpenLoans(item.loanedPieces))):
-                'Please select an Item or Book first.'
-                }}
-            </div>
-        </div>
-        <div class="col-12 mb-3">
-            <label>{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_DESC" | translate }}</label>
-            <textarea [readonly]="loanedPiece.loanedPieceId?true:false" style="min-height: 250px;"
-                class="form-control form-control-lg form-control-solid"
-                placeholder='{{"LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_DESC_PH" | translate }}'
-                formControlName='loanStateDescription'></textarea>
-        </div>
+      <div class="feedback" *ngIf="!isControlTouched('loanDate')">
+        {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.LOANED_AT_F1" | translate }}
+      </div>
+      <div class="valid-feedback" *ngIf="isControlValid('loanDate')">
+        <!-- Brand was entered correct -->
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="controlHasError('required', 'loanDate')"
+      >
+        {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.LOANED_AT_F2" | translate }}
+      </div>
     </div>
+    <div class="col-12 col-md-6 mb-3">
+      <label>
+        {{
+          "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.EXPECTED_RETURN_DATE" | translate
+        }}
+      </label>
+      <input
+        class="form-control form-control-solid form-control-lg"
+        (click)="d.toggle()"
+        ngbDatepicker
+        [minDate]="{ year: 1950, month: 1, day: 1 }"
+        [maxDate]="{ year: 2038, month: 1, day: 19 }"
+        #d="ngbDatepicker"
+        name="returnDate"
+        formControlName="returnDate"
+        placeholder="2000-01-01"
+        autocomplete="off"
+        [class.is-invalid]="isControlInvalid('returnDate')"
+        [class.is-valid]="isControlValid('returnDate')"
+        required
+      />
+      <div class="feedback" *ngIf="!isControlTouched('returnDate')">
+        {{
+          "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.EXPECTED_RETURN_DATE_F1"
+            | translate
+        }}
+      </div>
+      <div class="valid-feedback" *ngIf="isControlValid('returnDate')">
+        <!-- Brand was entered correct -->
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="controlHasError('required', 'returnDate')"
+      >
+        {{
+          "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.EXPECTED_RETURN_DATE_F2"
+            | translate
+        }}
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <label>{{
+        "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE" | translate
+      }}</label>
+
+      <ng-container *ngIf="loanedPiece.loanedPieceId; else elseTemplateState">
+        <select
+          class="form-control form-control-lg form-control-solid"
+          name="loanState"
+          formControlName="loanState"
+          [class.is-invalid]="isControlInvalid('loanState')"
+          [class.is-valid]="isControlValid('loanState')"
+          [attr.disabled]="loanedPiece.loanedPieceId ? true : false"
+          required
+        >
+          <option value="GOOD">
+            {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_GOOD" | translate }}
+          </option>
+          <option value="NORMAL USAGE SIGNS">
+            {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_NORMAL" | translate }}
+          </option>
+          <option value="BAD">
+            {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_BAD" | translate }}
+          </option>
+        </select>
+        <div class="feedback" *ngIf="!isControlTouched('loanState')">
+          {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_F1" | translate }}
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="controlHasError('required', 'loanState')"
+        >
+          {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_F2" | translate }}
+        </div>
+      </ng-container>
+      <ng-template #elseTemplateState>
+        <select
+          class="form-control form-control-lg form-control-solid"
+          name="loanState"
+          formControlName="loanState"
+          [class.is-invalid]="isControlInvalid('loanState')"
+          [class.is-valid]="isControlValid('loanState')"
+          required
+        >
+          <option value="GOOD">
+            {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_GOOD" | translate }}
+          </option>
+          <option value="NORMAL USAGE SIGNS">
+            {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_NORMAL" | translate }}
+          </option>
+          <option value="BAD">
+            {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_BAD" | translate }}
+          </option>
+        </select>
+        <div class="feedback" *ngIf="!isControlTouched('loanState')">
+          {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_F1" | translate }}
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="controlHasError('required', 'loanState')"
+        >
+          {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_F2" | translate }}
+        </div>
+      </ng-template>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <label>{{
+        "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY" | translate
+      }}</label>
+      <input
+        type="number"
+        min="1"
+        max="1000"
+        step="1"
+        class="form-control form-control-lg form-control-solid"
+        autocomplete="off"
+        placeholder="1"
+        name="quantity"
+        [class.is-invalid]="isControlInvalid('quantity')"
+        [class.is-valid]="isControlValid('quantity')"
+        formControlName="quantity"
+        [readonly]="loanedPiece.loanedPieceId ? true : false"
+        required
+      />
+      <div class="feedback" *ngIf="!isControlTouched('quantity')">
+        {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F1" | translate }}
+      </div>
+      <div class="valid-feedback" *ngIf="isControlValid('quantity')">
+        <!-- Name was entered correct -->
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="controlHasError('required', 'quantity')"
+      >
+        {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F2" | translate }}
+      </div>
+      <div class="invalid-feedback" *ngIf="controlHasError('min', 'quantity')">
+        {{ "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F3" | translate }}
+      </div>
+      <div class="invalid-feedback" *ngIf="controlHasError('max', 'quantity')">
+        {{
+          item
+            ? ("LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.QUANTITY_F4" | translate) +
+              (item.quantity - getOpenLoans(item.loanedPieces))
+            : "Please select an Item or Book first."
+        }}
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <label>{{
+        "LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_DESC" | translate
+      }}</label>
+      <textarea
+        [readonly]="loanedPiece.loanedPieceId ? true : false"
+        style="min-height: 250px"
+        class="form-control form-control-lg form-control-solid"
+        placeholder="{{
+          'LIBRARY.OVERVIEW.LOAN.LOAN_DETAILS.STATE_DESC_PH' | translate
+        }}"
+        formControlName="loanStateDescription"
+      ></textarea>
+    </div>
+  </div>
 </form>

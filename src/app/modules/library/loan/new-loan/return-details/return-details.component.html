@@ -1,44 +1,81 @@
 <form action="#" class="form form-label-right" [formGroup]="loanForm">
-    <div class="row form-group">
-        <div class="col-12 col-md-6 mb-3">
-            <label>
-                {{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.RETURNED_AT" | translate }}
-            </label>
-            <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()" ngbDatepicker
-                #d="ngbDatepicker" name="returnedAt" formControlName="returnedAt" placeholder="2000-01-01"
-                autocomplete="off" [class.is-invalid]="isControlInvalid('returnedAt')"
-                [class.is-valid]="isControlValid('returnedAt')" required />
-            <div class="feedback" *ngIf="!isControlTouched('returnedAt')">
-                {{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.RETURNED_AT_F1" | translate }}
-            </div>
-            <div class="valid-feedback" *ngIf="isControlValid('returnedAt')">
-                <!-- Brand was entered correct -->
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'returnedAt')">
-                {{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.RETURNED_AT_F2" | translate }}
-            </div>
-        </div>
-        <div class="col-12 col-md-6 mb-3">
-            <label>{{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE" | translate }}</label>
-            <select class="form-control form-control-lg form-control-solid" name="returnState"
-                formControlName="returnState" [class.is-invalid]="isControlInvalid('returnState')"
-                [class.is-valid]="isControlValid('returnState')" required>
-                <option value='GOOD'> {{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_GOOD" | translate }}</option>
-                <option value="NORMAL USAGE SIGNS">{{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_NORMAL" | translate }}</option>
-                <option value="BAD">{{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_BAD" | translate }}</option>
-            </select>
-            <div class="feedback" *ngIf="!isControlTouched('returnState')">
-                {{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_F1" | translate }}
-            </div>
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'returnState')">
-                {{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_F2" | translate }}
-            </div>
-        </div>
-        <div class="col-12 mb-3">
-            <label>{{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_DESC" | translate }}</label>
-            <textarea style="min-height: 250px;" class="form-control form-control-lg form-control-solid"
-                placeholder='{{"LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_DESC_PH" | translate }}'
-                formControlName='returnStateDescription'></textarea>
-        </div>
+  <div class="row form-group">
+    <div class="col-12 col-md-6 mb-3">
+      <label>
+        {{ "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.RETURNED_AT" | translate }}
+      </label>
+      <input
+        class="form-control form-control-solid form-control-lg"
+        (click)="d.toggle()"
+        ngbDatepicker
+        [minDate]="{ year: 1950, month: 1, day: 1 }"
+        [maxDate]="{ year: 2038, month: 1, day: 19 }"
+        #d="ngbDatepicker"
+        name="returnedAt"
+        formControlName="returnedAt"
+        placeholder="2000-01-01"
+        autocomplete="off"
+        [class.is-invalid]="isControlInvalid('returnedAt')"
+        [class.is-valid]="isControlValid('returnedAt')"
+        required
+      />
+      <div class="feedback" *ngIf="!isControlTouched('returnedAt')">
+        {{ "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.RETURNED_AT_F1" | translate }}
+      </div>
+      <div class="valid-feedback" *ngIf="isControlValid('returnedAt')">
+        <!-- Brand was entered correct -->
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="controlHasError('required', 'returnedAt')"
+      >
+        {{ "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.RETURNED_AT_F2" | translate }}
+      </div>
     </div>
+    <div class="col-12 col-md-6 mb-3">
+      <label>{{
+        "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE" | translate
+      }}</label>
+      <select
+        class="form-control form-control-lg form-control-solid"
+        name="returnState"
+        formControlName="returnState"
+        [class.is-invalid]="isControlInvalid('returnState')"
+        [class.is-valid]="isControlValid('returnState')"
+        required
+      >
+        <option value="GOOD">
+          {{ "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_GOOD" | translate }}
+        </option>
+        <option value="NORMAL USAGE SIGNS">
+          {{ "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_NORMAL" | translate }}
+        </option>
+        <option value="BAD">
+          {{ "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_BAD" | translate }}
+        </option>
+      </select>
+      <div class="feedback" *ngIf="!isControlTouched('returnState')">
+        {{ "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_F1" | translate }}
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="controlHasError('required', 'returnState')"
+      >
+        {{ "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_F2" | translate }}
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <label>{{
+        "LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_DESC" | translate
+      }}</label>
+      <textarea
+        style="min-height: 250px"
+        class="form-control form-control-lg form-control-solid"
+        placeholder="{{
+          'LIBRARY.OVERVIEW.LOAN.RETURN_DETAILS.STATE_DESC_PH' | translate
+        }}"
+        formControlName="returnStateDescription"
+      ></textarea>
+    </div>
+  </div>
 </form>

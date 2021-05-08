@@ -1,201 +1,330 @@
 <div class="card card-custom gutter-b">
-    <!-- <ng-container *ngIf="isLoading$ | async">
+  <!-- <ng-container *ngIf="isLoading$ | async">
         <div class="progress progress-modal">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
                 style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </ng-container> -->
 
-    <div class="card-header">
-        <div class="card-title">
-            <h3 class="card-label">
-                <ng-container *ngIf="book; else elseTemplate">
-                    {{"LIBRARY.CREATE.BOOK.EDIT_BOOK" | translate }}
-                </ng-container>
-                <ng-template #elseTemplate>
-                    {{"LIBRARY.CREATE.BOOK.CREATE_NEW_BOOK" | translate }}
-                </ng-template>
-            </h3>
-        </div>
-        <div class="card-toolbar">
-            <a type="button" class="btn btn-light" routerLink="/library/books/overview">
-                <i class="fa fa-arrow-left"></i>B{{"LIBRARY.CREATE.BOOK.BACK" | translate }}
-            </a>
-        </div>
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        <ng-container *ngIf="book; else elseTemplate">
+          {{ "LIBRARY.CREATE.BOOK.EDIT_BOOK" | translate }}
+        </ng-container>
+        <ng-template #elseTemplate>
+          {{ "LIBRARY.CREATE.BOOK.CREATE_NEW_BOOK" | translate }}
+        </ng-template>
+      </h3>
     </div>
-    <div class="card-body">
-
-
-        <form action="#" class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="save()">
-            <div class="form-group row">
-                <div class="col-12 col-md-6">
-                    <label>{{"LIBRARY.CREATE.BOOK.TITLE.TITLE" | translate }}</label>
-                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder='{{"LIBRARY.CREATE.BOOK.TITLE.TITLE" | translate }}' name='name'
-                        [class.is-invalid]="isControlInvalid('name')" [class.is-valid]="isControlValid('name')"
-                        formControlName='name' required />
-                    <div class="feedback" *ngIf="!isControlTouched('name')">
-                        {{"LIBRARY.CREATE.BOOK.TITLE.F1" | translate }}
-                    </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('name')">
-                        <!-- Name was entered correct -->
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">
-                        {{"LIBRARY.CREATE.BOOK.TITLE.F2" | translate }}
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">
-                        {{"LIBRARY.CREATE.BOOK.TITLE.F3" | translate }}
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">
-                        {{"LIBRARY.CREATE.BOOK.TITLE.F4" | translate }}
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <label>{{"LIBRARY.CREATE.BOOK.AUTHOR.TITLE" | translate }}</label>
-                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                        placeholder='{{"LIBRARY.CREATE.BOOK.AUTHOR.TITLE" | translate }}' name='author'
-                        [class.is-invalid]="isControlInvalid('author')" [class.is-valid]="isControlValid('author')"
-                        formControlName='author' required />
-                    <div class="feedback" *ngIf="!isControlTouched('author')">
-                        {{"LIBRARY.CREATE.BOOK.AUTHOR.F1" | translate }}
-                    </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('author')">
-                        <!-- Brand was entered correct -->
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'author')">
-                        {{"LIBRARY.CREATE.BOOK.AUTHOR.F2" | translate }}
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'author')">
-                        {{"LIBRARY.CREATE.BOOK.AUTHOR.F3" | translate }}
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'author')">
-                        {{"LIBRARY.CREATE.BOOK.AUTHOR.F4" | translate }}
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <!--begin::Form group-->
-                <div class="col-12 col-md-6">
-                    <label>{{"LIBRARY.CREATE.BOOK.PURCHASED_AT.TITLE" | translate }}</label>
-                    <input class="form-control form-control-solid form-control-lg" (click)="d.toggle()"
-                        placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" name="purchasedAt"
-                        formControlName="purchasedAt" placeholder="2000-01-01" autocomplete="off"
-                        [class.is-invalid]="isControlInvalid('purchasedAt')"
-                        [class.is-valid]="isControlValid('purchasedAt')" required />
-                    <div class="feedback" *ngIf="!isControlTouched('purchasedAt')">
-                        {{"LIBRARY.CREATE.BOOK.PURCHASED_AT.F1" | translate }}
-                    </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('purchasedAt')">
-                        <!-- Brand was entered correct -->
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'purchasedAt')">
-                        {{"LIBRARY.CREATE.BOOK.PURCHASED_AT.F2" | translate }}
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <label>{{"LIBRARY.CREATE.BOOK.GENRE.TITLE" | translate }}</label>
-                    <select class="form-control form-control-lg form-control-solid" name="genre" formControlName="genre"
-                        aria-placeholder="Genre" [class.is-invalid]="isControlInvalid('genre')"
-                        [class.is-valid]="isControlValid('genre')" required>
-                        <option value="">{{"LIBRARY.CREATE.BOOK.GENRE.D_DEFAULT" | translate }}</option>
-                        <option *ngFor="let enum of BookCategories | keyvalue" value="{{enum.key.toUpperCase()}}">
-                            {{enum.value | translate }}
-                        </option>
-                    </select>
-                    <div class="feedback" *ngIf="!isControlTouched('genre')">{{"LIBRARY.CREATE.BOOK.GENRE.F1" |
-                        translate }}</div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'genre')">
-                        {{"LIBRARY.CREATE.BOOK.GENRE.F2" | translate }}
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-12 col-md-6">
-                    <label>{{"LIBRARY.CREATE.BOOK.STATE.TITLE" | translate }}</label>
-                    <select class="form-control form-control-lg form-control-solid" name="state" formControlName="state"
-                        aria-placeholder="State" [class.is-invalid]="isControlInvalid('state')"
-                        [class.is-valid]="isControlValid('state')" required>
-                        <option value="">{{"LIBRARY.CREATE.BOOK.STATE.D_DEFAULT" | translate }}</option>
-                        <option value="BAD">
-                            {{"LIBRARY.STATE.BAD" | translate }}
-                        </option>
-                        <option value="REGULAR">
-                            {{"LIBRARY.STATE.REGULAR" | translate }}
-                        </option>
-                        <option value="GOOD">
-                            {{"LIBRARY.STATE.GOOD" | translate }}
-                        </option>
-                    </select>
-                    <div class="feedback" *ngIf="!isControlTouched('state')">{{"LIBRARY.CREATE.BOOK.STATE.F1" |
-                        translate }}
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'state')">
-                        {{"LIBRARY.CREATE.BOOK.STATE.F2" | translate }}
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <label>{{"LIBRARY.CREATE.BOOK.QUANTITY.TITLE" | translate }}</label>
-                    <input type="number" min="1" max="1000" step="1"
-                        class="form-control form-control-lg form-control-solid" autocomplete="off" placeholder="1"
-                        name='quantity' [class.is-invalid]="isControlInvalid('quantity')"
-                        [class.is-valid]="isControlValid('quantity')" formControlName='quantity' required />
-                    <div class="feedback" *ngIf="!isControlTouched('quantity')">
-                        {{"LIBRARY.CREATE.BOOK.QUANTITY.F1" | translate }}
-                    </div>
-                    <div class="valid-feedback" *ngIf="isControlValid('quantity')">
-                        <!-- Name was entered correct -->
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'quantity')">
-                        {{"LIBRARY.CREATE.BOOK.QUANTITY.F2" | translate }}
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('min', 'quantity')">
-                        {{"LIBRARY.CREATE.BOOK.QUANTITY.F3" | translate }}
-                    </div>
-                    <div class="invalid-feedback" *ngIf="controlHasError('max', 'quantity')">
-                        {{"LIBRARY.CREATE.BOOK.QUANTITY.F4" | translate }}
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-12">{{"LIBRARY.CREATE.BOOK.PHOTO.TITLE" | translate }}</label>
-                <div class="col-12">
-                    <div class="custom-dropzone form-control form-control-solid border" ngx-dropzone
-                        [accept]="'image/*'" (change)="onSelectBookImage($event)" required>
-                        <ngx-dropzone-label>
-                            <p class="form-text text-muted">
-                                {{"LIBRARY.CREATE.BOOK.PHOTO.MESSAGE" | translate }}
-                            </p>
-                        </ngx-dropzone-label>
-                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of bookImages"
-                            [file]="f" [removable]="true" (removed)="onRemoveBookImage(f)">
-                        </ngx-dropzone-image-preview>
-                    </div>
-                    <div *ngIf="
-                      formGroup.get('bookImage')['errors'] &&
-                      formGroup.get('bookImage').touched
-                    " class="text-danger form-text">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label> {{"LIBRARY.CREATE.BOOK.DESCRIPTION.TITLE" | translate }}</label>
-                <textarea name="description" class="form-control form-control-lg form-control-solid"
-                    formControlName="description" style="min-height: 250px; padding:13px"
-                    placeholder='{{"LIBRARY.CREATE.BOOK.DESCRIPTION.PH" | translate }}'></textarea>
-            </div>
-            <div class="float-right">
-                <a class="btn btn-default font-weight-bold mr-2" routerLink="/library/books/overview">
-                    {{"LIBRARY.CREATE.BOOK.CANCEL" | translate }}
-                </a>
-                <button type="submit" class="btn btn-primary font-weight-bold mr-2" [disabled]="formGroup.invalid">
-                    <ng-container *ngIf="book; else elseTemplate">
-                        {{"LIBRARY.CREATE.BOOK.SAVE" | translate }}
-                    </ng-container>
-                    <ng-template #elseTemplate>
-                        {{"LIBRARY.CREATE.BOOK.CREATE" | translate }}
-                    </ng-template>
-                </button>
-            </div>
-        </form>
+    <div class="card-toolbar">
+      <a
+        type="button"
+        class="btn btn-light"
+        routerLink="/library/books/overview"
+      >
+        <i class="fa fa-arrow-left"></i>B{{
+          "LIBRARY.CREATE.BOOK.BACK" | translate
+        }}
+      </a>
     </div>
+  </div>
+  <div class="card-body">
+    <form
+      action="#"
+      class="form form-label-right"
+      [formGroup]="formGroup"
+      (ngSubmit)="save()"
+    >
+      <div class="form-group row">
+        <div class="col-12 col-md-6">
+          <label>{{ "LIBRARY.CREATE.BOOK.TITLE.TITLE" | translate }}</label>
+          <input
+            type="text"
+            class="form-control form-control-lg form-control-solid"
+            autocomplete="off"
+            placeholder="{{ 'LIBRARY.CREATE.BOOK.TITLE.TITLE' | translate }}"
+            name="name"
+            [class.is-invalid]="isControlInvalid('name')"
+            [class.is-valid]="isControlValid('name')"
+            formControlName="name"
+            required
+          />
+          <div class="feedback" *ngIf="!isControlTouched('name')">
+            {{ "LIBRARY.CREATE.BOOK.TITLE.F1" | translate }}
+          </div>
+          <div class="valid-feedback" *ngIf="isControlValid('name')">
+            <!-- Name was entered correct -->
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'name')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.TITLE.F2" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('minlength', 'name')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.TITLE.F3" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('maxLength', 'name')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.TITLE.F4" | translate }}
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label>{{ "LIBRARY.CREATE.BOOK.AUTHOR.TITLE" | translate }}</label>
+          <input
+            type="text"
+            class="form-control form-control-lg form-control-solid"
+            autocomplete="off"
+            placeholder="{{ 'LIBRARY.CREATE.BOOK.AUTHOR.TITLE' | translate }}"
+            name="author"
+            [class.is-invalid]="isControlInvalid('author')"
+            [class.is-valid]="isControlValid('author')"
+            formControlName="author"
+            required
+          />
+          <div class="feedback" *ngIf="!isControlTouched('author')">
+            {{ "LIBRARY.CREATE.BOOK.AUTHOR.F1" | translate }}
+          </div>
+          <div class="valid-feedback" *ngIf="isControlValid('author')">
+            <!-- Brand was entered correct -->
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'author')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.AUTHOR.F2" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('minlength', 'author')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.AUTHOR.F3" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('maxLength', 'author')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.AUTHOR.F4" | translate }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <!--begin::Form group-->
+        <div class="col-12 col-md-6">
+          <label>{{
+            "LIBRARY.CREATE.BOOK.PURCHASED_AT.TITLE" | translate
+          }}</label>
+          <input
+            class="form-control form-control-solid form-control-lg"
+            (click)="d.toggle()"
+            placeholder="yyyy-mm-dd"
+            ngbDatepicker
+            [minDate]="{ year: 1950, month: 1, day: 1 }"
+            [maxDate]="{ year: 2038, month: 1, day: 19 }"
+            #d="ngbDatepicker"
+            name="purchasedAt"
+            formControlName="purchasedAt"
+            placeholder="2000-01-01"
+            autocomplete="off"
+            [class.is-invalid]="isControlInvalid('purchasedAt')"
+            [class.is-valid]="isControlValid('purchasedAt')"
+            required
+          />
+          <div class="feedback" *ngIf="!isControlTouched('purchasedAt')">
+            {{ "LIBRARY.CREATE.BOOK.PURCHASED_AT.F1" | translate }}
+          </div>
+          <div class="valid-feedback" *ngIf="isControlValid('purchasedAt')">
+            <!-- Brand was entered correct -->
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'purchasedAt')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.PURCHASED_AT.F2" | translate }}
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label>{{ "LIBRARY.CREATE.BOOK.GENRE.TITLE" | translate }}</label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="genre"
+            formControlName="genre"
+            aria-placeholder="Genre"
+            [class.is-invalid]="isControlInvalid('genre')"
+            [class.is-valid]="isControlValid('genre')"
+            required
+          >
+            <option value="">
+              {{ "LIBRARY.CREATE.BOOK.GENRE.D_DEFAULT" | translate }}
+            </option>
+            <option
+              *ngFor="let enum of BookCategories | keyvalue"
+              value="{{ enum.key.toUpperCase() }}"
+            >
+              {{ enum.value | translate }}
+            </option>
+          </select>
+          <div class="feedback" *ngIf="!isControlTouched('genre')">
+            {{ "LIBRARY.CREATE.BOOK.GENRE.F1" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'genre')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.GENRE.F2" | translate }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-12 col-md-6">
+          <label>{{ "LIBRARY.CREATE.BOOK.STATE.TITLE" | translate }}</label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="state"
+            formControlName="state"
+            aria-placeholder="State"
+            [class.is-invalid]="isControlInvalid('state')"
+            [class.is-valid]="isControlValid('state')"
+            required
+          >
+            <option value="">
+              {{ "LIBRARY.CREATE.BOOK.STATE.D_DEFAULT" | translate }}
+            </option>
+            <option value="BAD">
+              {{ "LIBRARY.STATE.BAD" | translate }}
+            </option>
+            <option value="REGULAR">
+              {{ "LIBRARY.STATE.REGULAR" | translate }}
+            </option>
+            <option value="GOOD">
+              {{ "LIBRARY.STATE.GOOD" | translate }}
+            </option>
+          </select>
+          <div class="feedback" *ngIf="!isControlTouched('state')">
+            {{ "LIBRARY.CREATE.BOOK.STATE.F1" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'state')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.STATE.F2" | translate }}
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label>{{ "LIBRARY.CREATE.BOOK.QUANTITY.TITLE" | translate }}</label>
+          <input
+            type="number"
+            min="1"
+            max="1000"
+            step="1"
+            class="form-control form-control-lg form-control-solid"
+            autocomplete="off"
+            placeholder="1"
+            name="quantity"
+            [class.is-invalid]="isControlInvalid('quantity')"
+            [class.is-valid]="isControlValid('quantity')"
+            formControlName="quantity"
+            required
+          />
+          <div class="feedback" *ngIf="!isControlTouched('quantity')">
+            {{ "LIBRARY.CREATE.BOOK.QUANTITY.F1" | translate }}
+          </div>
+          <div class="valid-feedback" *ngIf="isControlValid('quantity')">
+            <!-- Name was entered correct -->
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'quantity')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.QUANTITY.F2" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('min', 'quantity')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.QUANTITY.F3" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('max', 'quantity')"
+          >
+            {{ "LIBRARY.CREATE.BOOK.QUANTITY.F4" | translate }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-12">{{
+          "LIBRARY.CREATE.BOOK.PHOTO.TITLE" | translate
+        }}</label>
+        <div class="col-12">
+          <div
+            class="custom-dropzone form-control form-control-solid border"
+            ngx-dropzone
+            [accept]="'image/*'"
+            (change)="onSelectBookImage($event)"
+            required
+          >
+            <ngx-dropzone-label>
+              <p class="form-text text-muted">
+                {{ "LIBRARY.CREATE.BOOK.PHOTO.MESSAGE" | translate }}
+              </p>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of bookImages"
+              [file]="f"
+              [removable]="true"
+              (removed)="onRemoveBookImage(f)"
+            >
+            </ngx-dropzone-image-preview>
+          </div>
+          <div
+            *ngIf="
+              formGroup.get('bookImage')['errors'] &&
+              formGroup.get('bookImage').touched
+            "
+            class="text-danger form-text"
+          ></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          {{ "LIBRARY.CREATE.BOOK.DESCRIPTION.TITLE" | translate }}</label
+        >
+        <textarea
+          name="description"
+          class="form-control form-control-lg form-control-solid"
+          formControlName="description"
+          style="min-height: 250px; padding: 13px"
+          placeholder="{{ 'LIBRARY.CREATE.BOOK.DESCRIPTION.PH' | translate }}"
+        ></textarea>
+      </div>
+      <div class="float-right">
+        <a
+          class="btn btn-default font-weight-bold mr-2"
+          routerLink="/library/books/overview"
+        >
+          {{ "LIBRARY.CREATE.BOOK.CANCEL" | translate }}
+        </a>
+        <button
+          type="submit"
+          class="btn btn-primary font-weight-bold mr-2"
+          [disabled]="formGroup.invalid"
+        >
+          <ng-container *ngIf="book; else elseTemplate">
+            {{ "LIBRARY.CREATE.BOOK.SAVE" | translate }}
+          </ng-container>
+          <ng-template #elseTemplate>
+            {{ "LIBRARY.CREATE.BOOK.CREATE" | translate }}
+          </ng-template>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

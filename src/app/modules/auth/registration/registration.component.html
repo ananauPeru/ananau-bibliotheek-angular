@@ -318,6 +318,8 @@
           (click)="d.toggle()"
           placeholder="yyyy-mm-dd"
           ngbDatepicker
+          [minDate]="{ year: 1950, month: 1, day: 1 }"
+          [maxDate]="{ year: 2038, month: 1, day: 19 }"
           #d="ngbDatepicker"
           name="dateofbirth"
           formControlName="dateofbirth"
