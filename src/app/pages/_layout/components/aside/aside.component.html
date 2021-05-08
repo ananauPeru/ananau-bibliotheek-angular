@@ -59,7 +59,10 @@
 
       <!-- LIBRARY -->
       <!-- begin::section -->
-      <li class="menu-section" *ngIf="AuthUtil.permitted(['librarian','superadmin'])">
+      <li
+        class="menu-section"
+        *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])"
+      >
         <h4 class="menu-text">{{ "MENU.LIBRARY.TITLE" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
       </li>
@@ -73,7 +76,7 @@
         aria-haspopup="true"
         data-menu-toggle="hover"
         routerLinkActive="menu-item-open"
-        *ngIf="AuthUtil.permitted(['librarian','superadmin'])"
+        *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])"
       >
         <a
           class="menu-link menu-toggle"
@@ -159,7 +162,7 @@
         aria-haspopup="true"
         data-menu-toggle="hover"
         routerLinkActive="menu-item-open"
-        *ngIf="AuthUtil.permitted(['librarian','superadmin'])"
+        *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])"
       >
         <a
           class="menu-link menu-toggle"
@@ -243,7 +246,7 @@
         aria-haspopup="true"
         data-menu-toggle="hover"
         routerLinkActive="menu-item-open"
-        *ngIf="AuthUtil.permitted(['librarian','superadmin'])"
+        *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])"
       >
         <a
           class="menu-link menu-toggle"
@@ -428,7 +431,7 @@
       <!-- begin::section -->
       <li
         class="menu-section"
-        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Volunteer', 'Student'])"
+        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Admin'])"
       >
         <h4 class="menu-text">{{ "MENU.ORGANIZATION.TITLE" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
@@ -483,7 +486,7 @@
 
       <!-- USER MANAGEMENT -->
       <!-- begin::section -->
-      <li class="menu-section"  *ngIf="AuthUtil.permitted(['SuperAdmin'])">
+      <li class="menu-section" *ngIf="AuthUtil.permitted(['SuperAdmin'])">
         <h4 class="menu-text">{{ "MENU.DOCUMENTATION.TITLE" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
       </li>
