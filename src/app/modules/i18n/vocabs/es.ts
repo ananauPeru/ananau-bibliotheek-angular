@@ -14,13 +14,13 @@ export const locale = {
 
     // BUTTONS
     BUTTONS: {
-      SAVE: 'Guardar',
-      SAVE_CHANGES: 'Guardar cambios',
-      SUBMIT: 'Enviar',
-      CANCEL: 'Cancelar',
-      DOWNLOAD: 'Descargar',
-      CONFIRM: 'Confirmar',
-      DISCONFIRM: 'Desconfirmar',
+      SAVE: "Guardar",
+      SAVE_CHANGES: "Guardar cambios",
+      SUBMIT: "Enviar",
+      CANCEL: "Cancelar",
+      DOWNLOAD: "Descargar",
+      CONFIRM: "Confirmar",
+      DISCONFIRM: "Desconfirmar",
     },
 
     // MENU
@@ -34,6 +34,7 @@ export const locale = {
       DASHBOARD: "Tablero",
       NO_ROLES:
         "Todavía no tienes acceso a ningún módulo. Por favor contáctenos para solicitar acceso.",
+      HI: "Hola",
       LIBRARY: {
         TITLE: "Biblioteca",
         OVERVIEW: "Visión general",
@@ -45,8 +46,8 @@ export const locale = {
         NEW_LOAN: "Préstamo nuevo",
       },
       MANAGEMENT: {
-        TITLE: 'Gestión de usuarios',
-        REGISTRATION: 'Formulario de inscripción',
+        TITLE: "Gestión de usuarios",
+        REGISTRATION: "Formulario de inscripción",
       },
       // We dont translate documentation (IT) to different languages
       DOCUMENTATION: {
@@ -56,9 +57,9 @@ export const locale = {
         S1_SETTING_UP: "1 - Configuración",
       },
       ORGANIZATION: {
-        TITLE: 'Organización',
-        ROLES: 'Gestión de roles',
-        REGISTRATIONS: 'Inscripciones',
+        TITLE: "Organización",
+        ROLES: "Gestión de roles",
+        REGISTRATIONS: "Inscripciones",
       },
     },
 
@@ -84,9 +85,9 @@ export const locale = {
         WEBSITE: "Sitio web",
       },
       LOGIN: {
-        TITLE: 'Crear una cuenta',
-        BUTTON: 'Registrarse',
-        ALREADY_ACCOUNT: '¿Ya tienes una cuenta?',
+        TITLE: "Crear una cuenta",
+        BUTTON: "Registrarse",
+        ALREADY_ACCOUNT: "¿Ya tienes una cuenta?",
       },
       FORGOT: {
         TITLE: "Contraseña olvidada?",
@@ -188,12 +189,12 @@ export const locale = {
     // REGISTRATION FORM
     REGISTRATION: {
       GENERAL: {
-        STUDENT: 'Estudiante',
-        VOLUNTEER: 'Voluntario',
-        PERSONAL: 'Personal',
-        ORGANIZATIONAL: 'Organizativo',
-        SCANS: 'Escaneos',
-        QUESTIONS: 'Preguntas',
+        STUDENT: "Estudiante",
+        VOLUNTEER: "Voluntario",
+        PERSONAL: "Personal",
+        ORGANIZATIONAL: "Organizativo",
+        SCANS: "Escaneos",
+        QUESTIONS: "Preguntas",
         ERRORS: {
           REQUIRED: "Este campo es obligatorio.",
           EMAIL: "Este campo espera una dirección de correo electrónico.",
@@ -281,18 +282,18 @@ export const locale = {
         SPANISH: {
           TITLE: "Español",
           INFO_VOLUNTEER:
-            'Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 2 meses de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.',
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 2 meses de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
           INFO_STUDENT:
-            'Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 3 meses de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.',
-          LEVEL: 'Describe tu nivel de español',
-          WEEKS_ONLINE: 'Número de semanas para lecciones de español online',
+            "Si aún no hablas un nivel básico de español, es obligatorio tomar un mínimo de 3 meses de lecciones de español. Si ya tienes una base, las lecciones son sin compromiso, pero siempre recomendadas para mejorar tu nivel.",
+          LEVEL: "Describe tu nivel de español",
+          WEEKS_ONLINE: "Número de semanas para lecciones de español online",
           WEEKS_ONLINE_INFO_VOLUNTEER:
-            'Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.',
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
           WEEKS_ONLINE_INFO_STUDENT:
-            'Si aún no habla un nivel básico de español, le recomendamos que solicite 8 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.',
-          WEEKS: 'Número de semanas para lecciones de español en el sitio',
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 8 semanas de lecciones de español en línea. Estas lecciones se brindarán mediante videollamada, antes de su llegada a Añañau.",
+          WEEKS: "Número de semanas para lecciones de español en el sitio",
           WEEKS_INFO:
-            'Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.',
+            "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
         INFO: {
           TITLE: "Info",
@@ -417,9 +418,9 @@ export const locale = {
               "Suelta tu imagen aquí o haz clic para seleccionar tu imagen.",
           },
           QUANTITY: {
-            TITLE: 'Cantidad',
-            F1: 'Introduzca una cantidad para el libro.',
-            F2: 'Se requiere cantidad.',
+            TITLE: "Cantidad",
+            F1: "Introduzca una cantidad para el libro.",
+            F2: "Se requiere cantidad.",
           },
           DESCRIPTION: {
             TITLE: "Descripción",
@@ -468,16 +469,16 @@ export const locale = {
             F2: "Se requiere curso.",
           },
           QUANTITY: {
-            TITLE: 'Cantidad',
-            F1: 'Ingrese la cantidad del artículo.',
-            F2: 'Se requiere cantidad.',
-            F3: 'La cantidad mínima debe ser 1.',
-            F4: 'La cantidad máxima debe ser 1000.',
+            TITLE: "Cantidad",
+            F1: "Ingrese la cantidad del artículo.",
+            F2: "Se requiere cantidad.",
+            F3: "La cantidad mínima debe ser 1.",
+            F4: "La cantidad máxima debe ser 1000.",
           },
           CODE: {
-            TITLE: 'Código',
-            F1: 'Inserte un código para el artículo.',
-            F2: 'Se requiere el código.',
+            TITLE: "Código",
+            F1: "Inserte un código para el artículo.",
+            F2: "Se requiere el código.",
           },
           PIECES: {
             TITLE: "Piezas",
@@ -568,19 +569,19 @@ export const locale = {
             EXPECTED_RETURN_DATE_F1:
               "Ingrese la fecha de devolución esperada del artículo.",
             EXPECTED_RETURN_DATE_F2:
-              'Se requiere la fecha de devolución esperada',
-            STATE: 'Estado al prestar',
-            STATE_GOOD: 'Bueno',
-            STATE_NORMAL: 'Señales de uso normal',
-            STATE_BAD: 'Malo',
-            STATE_F1: 'Seleccione un estado para el artículo.',
-            STATE_F2: 'Se requiere estado',
-            QUANTITY: 'Cantidad',
-            QUANTITY_F1: 'Ingrese la cantidad de los artículos prestados.',
-            QUANTITY_F2: 'Se requiere cantidad.',
-            QUANTITY_F3: 'La cantidad mínima debe ser 1.',
-            QUANTITY_F4: 'Cantidad en inventario: ',
-            STATE_DESC: 'Descripción del estado',
+              "Se requiere la fecha de devolución esperada",
+            STATE: "Estado al prestar",
+            STATE_GOOD: "Bueno",
+            STATE_NORMAL: "Señales de uso normal",
+            STATE_BAD: "Malo",
+            STATE_F1: "Seleccione un estado para el artículo.",
+            STATE_F2: "Se requiere estado",
+            QUANTITY: "Cantidad",
+            QUANTITY_F1: "Ingrese la cantidad de los artículos prestados.",
+            QUANTITY_F2: "Se requiere cantidad.",
+            QUANTITY_F3: "La cantidad mínima debe ser 1.",
+            QUANTITY_F4: "Cantidad en inventario: ",
+            STATE_DESC: "Descripción del estado",
             STATE_DESC_PH:
               "Describa el estado con más detalle si es necesario.",
           },
@@ -679,48 +680,48 @@ export const locale = {
 
     // REGISTRATIONS OVERVIEW & DETAILS
     REGISTRATIONS: {
-      STUDENT: 'Estudiante',
-      VOLUNTEER: 'Voluntario',
+      STUDENT: "Estudiante",
+      VOLUNTEER: "Voluntario",
       OVERVIEW: {
-        TITLE: 'Inscripciones de voluntarios y estudiantes',
-        FILTER: 'Filtrar...',
+        TITLE: "Inscripciones de voluntarios y estudiantes",
+        FILTER: "Filtrar...",
         FILTER_INFO:
-          'Intente buscar y filtrar por nombre, apellido, correo electrónico, fecha de inicio, fecha de finalización o rol.',
-        FIRST_NAME: 'Nombre propio',
-        LAST_NAME: 'Apellido',
-        EMAIL: 'Correo electrónico',
-        START_DATE: 'Fecha de inicio',
-        END_DATE: 'Fecha final',
-        ROLE: 'Rol',
-        CONFIRMED: 'Confirmado',
-        DETAILS: 'Detalles',
+          "Intente buscar y filtrar por nombre, apellido, correo electrónico, fecha de inicio, fecha de finalización o rol.",
+        FIRST_NAME: "Nombre propio",
+        LAST_NAME: "Apellido",
+        EMAIL: "Correo electrónico",
+        START_DATE: "Fecha de inicio",
+        END_DATE: "Fecha final",
+        ROLE: "Rol",
+        CONFIRMED: "Confirmado",
+        DETAILS: "Detalles",
       },
       DETAILS: {
-        STANDARD_TITLE: 'Registro',
-        TITLE: 'Registro de {{name}}',
-        DELETE: 'Quitar de la lista',
+        STANDARD_TITLE: "Registro",
+        TITLE: "Registro de {{name}}",
+        DELETE: "Quitar de la lista",
         FILE_NAMES: {
-          INTERNATIONAL_PASSPORT: 'Pasaporte internacional',
-          GOOD_CONDUCT_CERTIFICATE: 'Certificado de buena conducta ',
-          DIPLOMA: 'Certificado educativo',
-          PASSPORT_PHOTO: 'Foto del pasaporte',
+          INTERNATIONAL_PASSPORT: "Pasaporte internacional",
+          GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
+          DIPLOMA: "Certificado educativo",
+          PASSPORT_PHOTO: "Foto del pasaporte",
         },
       },
       TOASTS: {
-        SUCCESS: 'Éxito',
-        ERROR: 'Error',
-        CONFIRM_SUCCESS: 'El registro se ha confirmado con éxito.',
-        DISCONFIRM_SUCCESS: 'El registro se ha cancelado correctamente.',
+        SUCCESS: "Éxito",
+        ERROR: "Error",
+        CONFIRM_SUCCESS: "El registro se ha confirmado con éxito.",
+        DISCONFIRM_SUCCESS: "El registro se ha cancelado correctamente.",
         CONFIRM_ERROR:
-          'Algo salió mal al confirmar el registro. Por favor, inténtelo de nuevo más tarde.',
+          "Algo salió mal al confirmar el registro. Por favor, inténtelo de nuevo más tarde.",
         DISCONFIRM_ERROR:
-          'Se produjo un error al anular la confirmación del registro. Por favor, inténtelo de nuevo más tarde.',
+          "Se produjo un error al anular la confirmación del registro. Por favor, inténtelo de nuevo más tarde.",
         DELETE_SUCCESS:
-          'El registro se ha eliminado correctamente de la lista.',
+          "El registro se ha eliminado correctamente de la lista.",
         DELETE_ERROR:
-          'Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.',
+          "Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.",
         DOWNLOAD_ERROR:
-          'Se produjo un error al descargar el archivo. Por favor, inténtelo de nuevo más tarde.',
+          "Se produjo un error al descargar el archivo. Por favor, inténtelo de nuevo más tarde.",
       },
     },
   },
