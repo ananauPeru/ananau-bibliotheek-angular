@@ -37,8 +37,6 @@ export class AuthHTTPService {
   }
 
   getUserByToken(auth): Observable<UserModel> {
-    console.log(auth.token);
-
     return this.http.get<UserModel>(`${API_USERS_URL}/${auth.user.id}`);
   }
 }

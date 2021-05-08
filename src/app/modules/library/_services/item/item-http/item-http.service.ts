@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core'
-import { Observable, of, throwError } from 'rxjs'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from '../../../../../../environments/environment'
-import { catchError, finalize, map } from 'rxjs/operators'
-import { ItemModel } from '../../../_models/item.model'
-import { ItemDTO } from '../../../_dto/item-dto'
+import { Injectable } from "@angular/core";
+import { Observable, of, throwError } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../../../../../environments/environment";
+import { catchError, finalize, map } from "rxjs/operators";
+import { ItemModel } from "../../../_models/item.model";
+import { ItemDTO } from "../../../_dto/item-dto";
 
-const API_ITEMS_URL = `${environment.apiUrl}/item`
+const API_ITEMS_URL = `${environment.apiUrl}/item`;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ItemHTTPService {
   constructor(private http: HttpClient) {}
@@ -17,20 +17,19 @@ export class ItemHTTPService {
   getAllItems$(): Observable<ItemModel[]> {
     return this.http
       .get(`${API_ITEMS_URL}/getall`, {
-        responseType: 'json',
+        responseType: "json",
       })
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
-            console.log('Login please...')
+            console.error("Login please...");
           }
-          return throwError(error)
+          return throwError(error);
         }),
         map((items: any): ItemModel[] => {
-          console.log(items)
-          return items
-        }),
-      )
+          return items;
+        })
+      );
   }
 
   // CREATE
@@ -39,75 +38,71 @@ export class ItemHTTPService {
     return this.http.post<ItemModel>(`${API_ITEMS_URL}`, item).pipe(
       catchError((error) => {
         if (error.status == 401) {
-          console.log('Login please...')
+          console.error("Login please...");
         }
-        return throwError(error)
+        return throwError(error);
       }),
       map(
         (item: any): ItemModel => {
-          console.log(item)
-          return item
-        },
-      ),
-    )
+          return item;
+        }
+      )
+    );
   }
 
   edit(id: number, item: ItemDTO): Observable<ItemModel> {
     return this.http.put<ItemModel>(`${API_ITEMS_URL}/${id}`, item).pipe(
       catchError((error) => {
         if (error.status == 401) {
-          console.log('Login please...')
+          console.error("Login please...");
         }
-        return throwError(error)
+        return throwError(error);
       }),
       map(
         (item: any): ItemModel => {
-          console.log(item)
-          return item
-        },
-      ),
-    )
+          return item;
+        }
+      )
+    );
   }
 
   getItemById(id: number): Observable<ItemModel> {
     return this.http
       .get(`${API_ITEMS_URL}/getById/${id}`, {
-        responseType: 'json',
+        responseType: "json",
       })
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
-            console.log('Login please...')
+            console.error("Login please...");
           }
-          return throwError(error)
+          return throwError(error);
         }),
         map(
           (item: any): ItemModel => {
-            console.log(item)
-            return item
-          },
-        ),
-      )
+            return item;
+          }
+        )
+      );
   }
 
   delete(id: number): Observable<ItemModel> {
     return this.http
       .delete(`${API_ITEMS_URL}/${id}`, {
-        responseType: 'json',
+        responseType: "json",
       })
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
-            console.log('Login please...')
+            console.error("Login please...");
           }
-          return throwError(error)
+          return throwError(error);
         }),
         map(
           (res: any): ItemModel => {
-            console.log(res)
-            return res
-          },
-        ),
-      )
+            return res;
+          }
+        )
+      );
   }
 }

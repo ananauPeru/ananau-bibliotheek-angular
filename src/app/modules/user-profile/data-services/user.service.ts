@@ -21,7 +21,7 @@ export class UserService {
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
-            console.log("Login please...");
+            console.error("Login please...");
           }
           return throwError(error);
         }),
@@ -33,7 +33,7 @@ export class UserService {
     return this.http.post(`${API_USERS_URL}/change-password`, dto).pipe(
       catchError((error) => {
         if (error.status == 401) {
-          console.log("Login please...");
+          console.error("Login please...");
         }
         return throwError(error);
       })

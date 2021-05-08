@@ -30,7 +30,7 @@ export class RegistrationService {
   loadInitialData() {
     this.registartionHttpService.getAllRegistrations$().subscribe(
       (registrations) => this._registrations.next(registrations),
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 

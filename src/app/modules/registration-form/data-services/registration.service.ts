@@ -143,15 +143,11 @@ export class RegistrationService {
 
   private getAuthFromLocalStorage(): AuthModel {
     try {
-      // console.log(localStorage)
-      // console.log(this.authLocalStorageToken)
       const authData = JSON.parse(
         localStorage.getItem(this.authLocalStorageToken)
       );
-      console.log(authData);
       return authData;
     } catch (error) {
-      // console.error(error)
       return undefined;
     }
   }

@@ -132,7 +132,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     );
     newUser.password = formValues.password;
     newUser.passwordConfirmation = formValues.cPassword;
-    console.log(newUser);
     const registrationSubscr = this.authService
       .registration(newUser)
       .pipe(first())

@@ -21,7 +21,7 @@ export class RegistrationHttpService {
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
-            console.log("Login please...");
+            console.error("Login please...");
           }
           return throwError(error);
         }),
@@ -39,7 +39,7 @@ export class RegistrationHttpService {
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
-            console.log("Login please...");
+            console.error("Login please...");
           }
           return throwError(error);
         }),
@@ -55,7 +55,7 @@ export class RegistrationHttpService {
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
-            console.log("Login please...");
+            console.error("Login please...");
           }
           return throwError(error);
         }),
@@ -74,7 +74,7 @@ export class RegistrationHttpService {
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
-            console.log("Login please...");
+            console.error("Login please...");
           }
           return throwError(error);
         })
@@ -85,7 +85,7 @@ export class RegistrationHttpService {
     return this.http.delete(`${API_REGISTRATIONS_URL}/${userId}`).pipe(
       catchError((error) => {
         if (error.status == 401) {
-          console.log("Login please...");
+          console.error("Login please...");
         }
         return throwError(error);
       })
