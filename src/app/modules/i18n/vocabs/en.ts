@@ -39,11 +39,11 @@ export const locale = {
         TITLE: "Library",
         OVERVIEW: "Overview",
         BOOKS: "Books",
-        ADD_BOOK: "Add Book",
+        ADD_BOOK: "Add book",
         ITEMS: "Items",
-        ADD_ITEM: "Add Item",
+        ADD_ITEM: "Add item",
         LOANING: "Loaning",
-        NEW_LOAN: "New Loan",
+        NEW_LOAN: "New loan",
       },
       MANAGEMENT: {
         TITLE: "User management",
@@ -57,9 +57,9 @@ export const locale = {
       // We dont translate documentation (IT) to different languages
       DOCUMENTATION: {
         TITLE: "IT - Documentation",
-        GETTING_STARTED: "Getting Started",
-        S0_PREPARATIONS: "0 - Before Starting",
-        S1_SETTING_UP: "1 - Setting Up",
+        GETTING_STARTED: "Getting started",
+        S0_PREPARATIONS: "0 - Before starting",
+        S1_SETTING_UP: "1 - Setting up",
       },
     },
 

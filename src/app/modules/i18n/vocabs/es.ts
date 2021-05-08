@@ -38,11 +38,11 @@ export const locale = {
         TITLE: "Biblioteca",
         OVERVIEW: "Visión general",
         BOOKS: "Libros",
-        ADD_BOOK: "Agregar Libro",
+        ADD_BOOK: "Agregar libro",
         ITEMS: "Artículos",
-        ADD_ITEM: "Añadir Artículo",
+        ADD_ITEM: "Añadir artículo",
         LOANING: "Préstamo",
-        NEW_LOAN: "Préstamo Nuevo",
+        NEW_LOAN: "Préstamo nuevo",
       },
       MANAGEMENT: {
         TITLE: "Gestión de usuarios",
@@ -50,10 +50,10 @@ export const locale = {
       },
       // We dont translate documentation (IT) to different languages
       DOCUMENTATION: {
-        TITLE: "IT - Documentation",
-        GETTING_STARTED: "Getting Started",
-        S0_PREPARATIONS: "0 - Before Starting",
-        S1_SETTING_UP: "1 - Setting Up",
+        TITLE: "IT - Documentación",
+        GETTING_STARTED: "Empezando",
+        S0_PREPARATIONS: "0 - Antes de empezar",
+        S1_SETTING_UP: "1 - Configuración",
       },
       ORGANIZATION: {
         TITLE: "Organización",

@@ -35,6 +35,16 @@ export const locale = {
       NO_ROLES:
         "Je hebt nog geen toegang tot een van de modules. Neem contact op om toegang te vragen.",
       TODAY: "Vandaag",
+      LIBRARY: {
+        TITLE: "Bibliotheek",
+        OVERVIEW: "Overzicht",
+        BOOKS: "Boeken",
+        ADD_BOOK: "Boek toevoegen",
+        ITEMS: "Items",
+        ADD_ITEM: "Item toevoegen",
+        LOANING: "Uitlenen",
+        NEW_LOAN: "Nieuwe uitlening",
+      },
       MANAGEMENT: {
         TITLE: "Gebruikersbeheer",
         REGISTRATION: "Registratieformulier",
@@ -43,6 +53,13 @@ export const locale = {
         TITLE: "Organisatie",
         ROLES: "Rolbeheer",
         REGISTRATIONS: "Registraties",
+      },
+      // We dont translate documentation (IT) to different languages
+      DOCUMENTATION: {
+        TITLE: "IT - Documentatie",
+        GETTING_STARTED: "Beginnen",
+        S0_PREPARATIONS: "0 - Voordat je begint",
+        S1_SETTING_UP: "1 - Klaarzetten",
       },
     },
 
