@@ -7,4 +7,5 @@ export class BookDTO {
   state: string
   purchasedAt: Date
   quantity: number
+  photoUrl:string
 }
