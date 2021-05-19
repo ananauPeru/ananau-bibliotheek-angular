@@ -465,6 +465,7 @@
         class="menu-item"
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
+        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Admin'])"
       >
         <a
           class="menu-link"
