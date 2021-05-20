@@ -53,7 +53,9 @@ import { QuillModule } from 'ngx-quill'
 import { S2BestPracticesComponent } from './getting-started/s2-best-practices/s2-best-practices.component'
 import { GithubComponent } from './getting-started/s2-best-practices/github/github.component'
 import { ModelsAndTablesComponent } from './getting-started/s2-best-practices/models-and-tables/models-and-tables.component'
-import { ToDosComponent } from './todos/todos.component'
+import { ToDosComponent } from './todos/todos.component';
+import { OverviewComponent } from './todos/overview/overview.component';
+import { CreateComponent } from './todos/create/create.component'
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { ToDosComponent } from './todos/todos.component'
     GithubComponent,
     ModelsAndTablesComponent,
     ToDosComponent,
+    OverviewComponent,
+    CreateComponent,
   ],
   imports: [
     CommonModule,
