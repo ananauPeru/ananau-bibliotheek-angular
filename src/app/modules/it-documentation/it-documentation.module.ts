@@ -47,9 +47,13 @@ import { NgxDropzoneModule } from 'ngx-dropzone'
 import { ITDocumentationComponent } from './it-documentation'
 import { ITDocumentationRoutingModule } from './it-documentation-routing.module'
 import { S0PreparationsComponent } from './getting-started/s0-preparations/s0-preparations.component'
-import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting-up.component';
+import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting-up.component'
 import { PostsComponent } from './posts/posts.component'
 import { QuillModule } from 'ngx-quill'
+import { S2BestPracticesComponent } from './getting-started/s2-best-practices/s2-best-practices.component'
+import { GithubComponent } from './getting-started/s2-best-practices/github/github.component'
+import { ModelsAndTablesComponent } from './getting-started/s2-best-practices/models-and-tables/models-and-tables.component'
+import { ToDosComponent } from './todos/todos.component'
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import { QuillModule } from 'ngx-quill'
     S0PreparationsComponent,
     S1SettingUpComponent,
     PostsComponent,
+    S2BestPracticesComponent,
+    GithubComponent,
+    ModelsAndTablesComponent,
+    ToDosComponent,
   ],
   imports: [
     CommonModule,

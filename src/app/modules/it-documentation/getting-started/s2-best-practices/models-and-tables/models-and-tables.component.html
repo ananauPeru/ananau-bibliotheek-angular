@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-4">
+            Step 2 - Best Practices - Models and Tables
+        </h1>
+        <hr />
+        <p class="lead h6"> Created: 30/04/2021 | Last Update: 20/05/2021</p>
+    </div>
+    <div class="col-12 mt-3">
+        <p class="lead">
+            The fun part starts... Think thrice code once!
+        </p>
+        <p>
+            Now we have installed everything and have acces to GitHub and Azure we can finally start coding for Añañau.
+            Both projects (backend & frontend) are built in a specific manner to make them stable, expandable and easy
+            to deploy.
+            We strongly advise you to follow these quidelines for some major tasks.
+        </p>
+
+        <p>
+            In this article we explain how our entity models can be expanded/altered and how to reflect these changes
+            instantly to our DB.
+        </p>
+
+        <h5 class="display">IMPORTANT!</h5>
+        <p>Use migrations cautiously. Yes, it is possible to revert or reapply migrations but it is NOT possible to get
+            data that is lost.</p>
+        <p>We advise to not work on the production (remote) DB but on a local DB instance. This way, you can test things
+            out and apply them on the production DB when you are satisfied.</p>
+        <p>Migrations make it very easy to work with multiple DB instances (test/local and production/remote). Since the
+            migrations for each DB are stored and tracked by the DB itself, you can try things out on a local one and
+            run them on the production one whenever you want. VS will automatically know which migrations still needs to
+            be applied and execute them. Just make sure to comment/uncomment the correct connection strings when
+            executing migrations.</p>
+
+        <p>Official documentation: <a
+                href="https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=vs" target="_blank"
+                rel="noopener noreferrer">.NET Core Migrations</a></p>
+
+        <h4 class="display">Step 1 - Understanding</h4>
+
+        <p>We are using .NET Core's built in <kbd>Migrations</kbd> feature to reflect our changes in our entities to our
+            DB. It is actually very easy and straightforward. Whenever we make a change to our entities and we are
+            satisfied and done, we run a simple command to update our DB accordingly.</p>
+
+        <p>Let's give a practical example. Let's say we want to add a new property (column) named <kbd>FavoriteColor
+                (string)</kbd> to our <kbd>UserDetail</kbd> entity. We start by adding the new property our model.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s2/tables/1.png"
+            class="center-image w-25 d-block" alt="">
+
+        <h4 class="display">Step 2 - Updating our DB</h4>
+
+        <p>If we now take a look at our DB in our <kbd>userdetails</kbd> table we will see that the new column is not
+            added.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s2/tables/2.PNG"
+            class="center-image w-25 d-block" alt="">
+
+        <p>So what's the problem? Well... we still need to reflect our changes to the DB. To do this we have to open the
+            <kbd>Package Manager Console</kbd> in Visual Studio. First, we need to create a new migration with our
+            changes and then update our DB with this new migration.
+        </p>
+
+        <p>Creating a new migration is done with this command, give your migration a logical name:</p>
+
+        <pre>Package Manager Console<br>PM> EntityFrameworkCore\Add-Migration AddFavoriteColorColumnToUserDetailsTable</pre>
+
+        <p>We don't have to specify anything. VS tracks our changes automatically and creates a migration based on the
+            changes we made since our last migration. Normally, in the <kbd>Migrations</kbd> folder, our newly created
+            migration should be added. Let's click on it to see the contents.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s2/tables/3.PNG"
+            class="center-image w-75 d-block" alt="">
+
+        <p>And indeed, we see that VS automatically found the newly added property and added a migration command. If we
+            look at our DB now we still won't see our column. We still need to execute one more command to push our
+            changes to the DB.</p>
+
+        <pre>Package Manager Console<br>PM> EntityFrameworkCore\Update-Database</pre>
+
+        <p>If we look at our table now, we will see that the new column has been added.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s2/tables/4.PNG"
+            class="center-image w-25 d-block" alt="">
+
+        <h4 class="display">Step 3 - Reverting our Changes</h4>
+
+        <p>Let's say you've changed your mind or thought of something else... but for some reason you want to revert
+            your changes. How do we do that? Again, it's very simple. Migrations are tracked in the DB and they each
+            have a unique name. They can't be executed twice and they are applied in a specific order, don't forget
+            this! To undo one or more migration we first need to get a list of all migrations with their unique name and
+            order in our DB. To get a list of all migrations applied to our DB run the following command.</p>
+
+        <pre>Package Manager Console<br>PM> EntityFrameworkCore\Get-Migration</pre>
+
+        <p>It will display a list of migrations. Like this:</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s2/tables/5.PNG"
+            class="center-image w-75 d-block" alt="">
+
+        <p>Now, we simply have to copy the unique ID of the latest 'good' migration we want to revert to. In our case,
+            we simply want to undo our latest migration, so I copy the ID of the previous migration. Now if I execute
+            the following command with the ID of the migration I want to go back to, all migrations that come after it
+            will be undone. Please be cautious, you could wipe out the entire DB if you pass in the ID of the initial
+            (first) migration, double check always!</p>
+
+        <pre>Package Manager Console<br>PM> EntityFrameworkCore\Update-Database 20210506133738_AddQuantityColumnToBooksTable</pre>
+
+        <p>Now, we need to manually delete the migration file in our <kbd>Migrations</kbd> folder within VS and revert
+            our changes on the <kbd>UserDetail</kbd> model. It is very important to not skip these steps. Otherwise,
+            next time we execute a migration command they will get picked up again and executed by VS.</p>
+
+        <p>If we look at our table in our DB we will see that the column <kbd>FavoriteColor</kbd> is removed.
+            And if we again run the command <kbd>EntityFrameworkCore\Get-Migration</kbd> we'll see that the latest
+            migration containing the new property is no longer there.</p>
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s2/tables/6.PNG"
+            class="center-image w-25 d-block" alt="">
+
+        <img src="../../../../../assets/images/it-documentation/getting-started/s2/tables/7.PNG"
+            class="center-image w-75 d-block" alt="">
+
+
+        <p>That's it for this tutorial... Have Fun!</p>
+
+
+
+    </div>
+</div>

@@ -52,6 +52,8 @@ export const locale = {
         GETTING_STARTED: 'Beginnen',
         S0_PREPARATIONS: '0 - Voordat je begint',
         S1_SETTING_UP: '1 - Klaarzetten',
+        S2_BEST_PRACTICES: '2 - Best practices',
+        S3_DEPLOYMENT_AND_AZURE: '3 - Deployment & Azure',
       },
       // We dont translate documentation (IT) to different languages
     },

@@ -3,8 +3,10 @@ import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from '../auth/_services/auth.guard'
 import { S0PreparationsComponent } from './getting-started/s0-preparations/s0-preparations.component'
 import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting-up.component'
+import { ModelsAndTablesComponent } from './getting-started/s2-best-practices/models-and-tables/models-and-tables.component'
 import { ITDocumentationComponent } from './it-documentation'
 import { PostsComponent } from './posts/posts.component'
+import { ToDosComponent } from './todos/todos.component'
 
 const routes: Routes = [
   {
@@ -24,8 +26,12 @@ const routes: Routes = [
         component: S1SettingUpComponent,
       },
       {
-        path: 'posts',
-        component: PostsComponent,
+        path: 'getting-started/2-best-practices/models-and-tables',
+        component: ModelsAndTablesComponent,
+      },
+      {
+        path: 'todos',
+        component: ToDosComponent,
       },
       // {
       //   path: 'books/add-book',
