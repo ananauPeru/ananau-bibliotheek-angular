@@ -47,13 +47,16 @@ import { NgxDropzoneModule } from 'ngx-dropzone'
 import { ITDocumentationComponent } from './it-documentation'
 import { ITDocumentationRoutingModule } from './it-documentation-routing.module'
 import { S0PreparationsComponent } from './getting-started/s0-preparations/s0-preparations.component'
-import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting-up.component'
+import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting-up.component';
+import { PostsComponent } from './posts/posts.component'
+import { QuillModule } from 'ngx-quill'
 
 @NgModule({
   declarations: [
     ITDocumentationComponent,
     S0PreparationsComponent,
     S1SettingUpComponent,
+    PostsComponent,
   ],
   imports: [
     CommonModule,
@@ -108,6 +111,7 @@ import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting
     LayoutModule,
     NgbModule,
     NgxDropzoneModule,
+    QuillModule.forRoot(),
   ],
   providers: [DatePipe],
 })

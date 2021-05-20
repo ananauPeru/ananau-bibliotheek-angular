@@ -4,6 +4,7 @@ import { AuthGuard } from '../auth/_services/auth.guard'
 import { S0PreparationsComponent } from './getting-started/s0-preparations/s0-preparations.component'
 import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting-up.component'
 import { ITDocumentationComponent } from './it-documentation'
+import { PostsComponent } from './posts/posts.component'
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'getting-started/1-setting-up',
         component: S1SettingUpComponent,
+      },
+      {
+        path: 'posts',
+        component: PostsComponent,
       },
       // {
       //   path: 'books/add-book',
