@@ -66,6 +66,11 @@
 // Toastr bootstrap theme
 @import "~ngx-toastr/toastr-bs4-alert";
 
+// Quill theme
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
 // hide bootstrap dropdown arrow globally
 .dropdown-toggle::after {
   display: none !important;
@@ -74,6 +79,7 @@
 .angular-bootstrap-table {
   overflow-x: auto;
 }
+
 .angular-bootstrap-table {
   th {
     outline: none;

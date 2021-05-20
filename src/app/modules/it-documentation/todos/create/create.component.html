@@ -1,0 +1,92 @@
+<div class="card card-custom gutter-b">
+
+    <!-- Header -->
+    <div class="card-header card-header-tabs-line">
+        <div class="card-toolbar mr-4">
+            <ul class="nav nav-tabs nav-bold nav-tabs-line">
+                <li class="nav-item">
+                    <div class="card-title">
+                        <h3 class="card-label">
+                            <ng-container *ngIf="todo; else elseTemplate">
+                                Edit Todo with ID #{{todo.toDoId}}
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                Create New Todo
+                            </ng-template>
+                        </h3>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="card-toolbar flex-grow-1  justify-content-end">
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="/documentation/todos">
+                Back
+            </a>
+
+            <ng-container *ngIf="(!todo && assignedUserId == undefined) || (todo && !todo.assignedUserId); else elseTemplateAssign">
+                <button [disabled]="!me()" (click)="assign()" class="btn btn-success font-weight-bolder mr-2">
+                    Assign Yourself
+                </button>
+            </ng-container>
+            <ng-template #elseTemplateAssign>
+                <ng-container *ngIf="me(); else elseTemplateAssignSub">
+                    <button (click)="assign()" class="btn btn-danger font-weight-bolder mr-2">
+                        Unassign Yourself
+                    </button>
+                </ng-container>
+                <ng-template #elseTemplateAssignSub>
+                    <button [disabled]="!me()" class="btn btn-info font-weight-bolder mr-2">
+                        Assigned to: {{todo.assignedUser.userDetail.firstName + '
+                        '+todo.assignedUser.userDetail.lastName}}
+                    </button>
+                </ng-template>
+            </ng-template>
+
+            <button [disabled]="saving" (click)="save()" class="btn btn-light-primary font-weight-bolder mr-2"
+                [ngClass]="{'spinner spinner-left': saving}">
+                <ng-container *ngIf="!todo; else elseTemplateTodo">
+                    Create Todo
+                </ng-container>
+                <ng-template #elseTemplateTodo>
+                    Save Changes
+                </ng-template>
+            </button>
+        </div>
+    </div>
+
+
+
+    <div class="card-body">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="save()">
+            <div class="form-group row">
+                <div class="col-12">
+                    <label>Title</label>
+                    <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                        placeholder="Title" name="title" [class.is-invalid]="isControlInvalid('title')"
+                        [class.is-valid]="isControlValid('title')" formControlName="title" required />
+
+                    <div class="valid-feedback" *ngIf="isControlValid('title')">
+                        <!-- Name was entered correct -->
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('required', 'title')">
+                        Required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'title')">
+                        Min length 3 characters
+                    </div>
+                    <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'title')">
+                        Max length 100 characters
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="form-group row">
+            <div class="col-12 mb-5">
+                <label>{{ "LIBRARY.CREATE.BOOK.STATE.TITLE" | translate }}</label>
+
+                <quill-editor [(ngModel)]="content" style="margin-bottom: 35px;">
+                </quill-editor>
+            </div>
+        </div>
+    </div>
+</div>

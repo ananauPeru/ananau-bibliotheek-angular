@@ -3,7 +3,12 @@ import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from '../auth/_services/auth.guard'
 import { S0PreparationsComponent } from './getting-started/s0-preparations/s0-preparations.component'
 import { S1SettingUpComponent } from './getting-started/s1-setting-up/s1-setting-up.component'
+import { ModelsAndTablesComponent } from './getting-started/s2-best-practices/models-and-tables/models-and-tables.component'
 import { ITDocumentationComponent } from './it-documentation'
+import { PostsComponent } from './posts/posts.component'
+import { CreateComponent } from './todos/create/create.component'
+import { ToDosComponent } from './todos/todos.component'
+import { TodoResolver } from './_resolvers/todo.resolver'
 
 const routes: Routes = [
   {
@@ -22,53 +27,23 @@ const routes: Routes = [
         path: 'getting-started/1-setting-up',
         component: S1SettingUpComponent,
       },
-      // {
-      //   path: 'books/add-book',
-      //   component: CreateBookComponent,
-      // },
-      // {
-      //   path: 'books/edit-book/:id',
-      //   resolve: { book: BookResolver },
-      //   component: CreateBookComponent,
-      // },
-      // {
-      //   path: 'items/overview',
-      //   component: OverviewItemComponent,
-      // },
-      // {
-      //   path: 'items/add-item',
-      //   component: CreateItemComponent,
-      // },
-      // {
-      //   path: 'items/edit-item/:id',
-      //   resolve: { item: ItemResolver },
-      //   component: CreateItemComponent,
-      // },
-      // {
-      //   path: 'loans/overview',
-      //   component: OverviewComponent,
-      // },
-      // {
-      //   path: 'loans/new-loan',
-      //   component: AddLoanComponent,
-      // },
-      // {
-      //   path: 'loans/edit-loan/:id',
-      //   resolve: { loan: LoanedPieceResolver },
-      //   component: AddLoanComponent,
-      // },
-      // {
-      //   path: 'registration',
-      //   component: RegistrationComponent
-      // },
-      // {
-      //   path: 'forgot-password',
-      //   component: ForgotPasswordComponent
-      // },
-      // {
-      //   path: 'logout',
-      //   component: LogoutComponent
-      // },
+      {
+        path: 'getting-started/2-best-practices/models-and-tables',
+        component: ModelsAndTablesComponent,
+      },
+      {
+        path: 'todos',
+        component: ToDosComponent,
+      },
+      {
+        path: 'todos/create',
+        component: CreateComponent,
+      },
+      {
+        path: 'todos/create/:id',
+        resolve: { todo: TodoResolver },
+        component: CreateComponent,
+      },
       { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'Dashboard', pathMatch: 'full' },
     ],

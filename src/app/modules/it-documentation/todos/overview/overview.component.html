@@ -1,0 +1,112 @@
+<div class="card card-custom">
+
+    <!-- Header -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
+                <div class="row">
+                    <div class="col-12 col-md-8 w-100">
+                        <h3 class="card-title font-weight-bolder text-dark">
+                            All ToDo's
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body pt-2">
+        <!--begin::Form Group-->
+        <div class="form-group row mb-10">
+            <div class="col-12 col-md-12">
+                <div class="input-group input-group-lg input-group-solid">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                    <input (keyup)="filter = ($event.target.value)" type="email"
+                        class="form-control form-control-lg form-control-solid force-pl-5" placeholder='Filter...'
+                        style="padding-left: 10px;" />
+                </div>
+                <div class="feedback">
+                    Try filtering on status, title, keyword...
+                </div>
+            </div>
+        </div>
+        <!--begin::Form Group-->
+
+        <!--begin: Item-->
+        <div class="row">
+            <div class="col-12">
+                <!--begin: Item-->
+                <div class="d-flex flex-wrap align-items-center mb-10 table-responsive">
+                    <table class="table table-fit">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Created by</th>
+                                <th>Assigned to</th>
+                                <th>Status</th>
+                                <th>Created at</th>
+                                <th>Last update at</th>
+                                <th>•••</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let l of filteredActiveTodos() | async">
+                                <td>{{l.toDoId}}</td>
+                                <td><a routerLink='/documentation/todos/create/{{l.toDoId}}'>{{l.title}}</a></td>
+                                <td>{{l.appUser.userDetail.firstName +' ' + l.appUser.userDetail.lastName}}</td>
+                                <td>{{l.assignedUser ? l.assignedUser.userDetail.firstName +' ' +
+                                    l.assignedUser.userDetail.lastName:"No assignee"}}</td>
+
+                                <ng-container *ngIf="l.status.toLowerCase() == 'open'; else elseTemplatePillTodo">
+                                    <td>
+                                        <div class="badge badge-pill badge-success text-light">
+                                            OPEN
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <ng-template #elseTemplatePillTodo>
+                                    <ng-container
+                                        *ngIf="l.status.toLowerCase() == 'assigned'; else elseTemplateTodoSub">
+                                        <td>
+                                            <div class="badge badge-pill badge-warning text-light">
+                                                WORKING
+                                            </div>
+
+                                        </td>
+                                    </ng-container>
+                                    <ng-template #elseTemplateTodoSub>
+                                        <td>
+                                            <div class="badge badge-pill badge-danger text-light">
+                                                CLOSED
+                                            </div>
+                                        </td>
+                                    </ng-template>
+                                </ng-template>
+
+                                <td>{{l.createdAt | date:'dd/MM/yy'}}</td>
+                                <td>{{l.updatedAt | date:'dd/MM/yy'}}</td>
+                                <td>
+                                    <a routerLink='/documentation/todos/create/{{l.toDoId}}' title="Edit the todo">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="filteredActiveTodosEmpty|async">
+                                <td colspan="7" class="text-center"><i>
+                                        {{"LIBRARY.OVERVIEW.LOAN.NO_RESULTS" | translate }}
+                                    </i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--end: Item-->
+            </div>
+        </div>
+    </div>
+</div>

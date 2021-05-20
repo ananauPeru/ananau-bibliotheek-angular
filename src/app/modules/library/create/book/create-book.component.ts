@@ -12,6 +12,7 @@ import { BookModel } from '../../_models/book.model'
 import { DatePipe } from '@angular/common'
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap'
 import { ItemStorageService } from '../../_services/storage/item-storage.service'
+import { BookService } from '../../_services/book/book.service'
 
 @Component({
   selector: 'app-create',
@@ -28,6 +29,7 @@ export class CreateBookComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private bservice: BookService,
     private bookService: BookHTTPService,
     private itemStorage: ItemStorageService,
     private router: Router,
@@ -169,6 +171,7 @@ export class CreateBookComponent implements OnInit {
                 'Book successfully created!',
                 'Book Created',
               )
+              this.bservice.loadInitialData()
               this.router.navigate(['/library/books/overview'])
             },
             (error) => {
@@ -199,6 +202,7 @@ export class CreateBookComponent implements OnInit {
                 'Book successfully edited!',
                 'Changes Saved',
               )
+              this.bservice.loadInitialData();
               this.router.navigate(['/library/books/overview'])
             },
             (error) => {
@@ -244,9 +248,7 @@ export class CreateBookComponent implements OnInit {
 
   public async onSelectBookImage(event: NgxDropzoneChangeEvent) {
     this.bookImages.push(...event.addedFiles)
-    console.log(event.addedFiles)
     var url = await this.itemStorage.storeImage$(event.addedFiles[0])
-    console.log(url)
     this.formGroup.get('photoUrl').setValue(url)
     // this.updateInternationalPassport()
   }
@@ -255,14 +257,4 @@ export class CreateBookComponent implements OnInit {
     this.bookImages.splice(this.bookImages.indexOf(event), 1)
     // this.updateInternationalPassport();
   }
-
-  // private updateInternationalPassport() {
-  //   const internationalPassport = this.scansForm.get("internationalPassport");
-  //   if (this.internationalPassportFiles.length > 0) {
-  //     internationalPassport.setValue(true);
-  //   } else {
-  //     internationalPassport.setValue(false);
-  //   }
-  //   internationalPassport.markAsTouched();
-  // }
 }
