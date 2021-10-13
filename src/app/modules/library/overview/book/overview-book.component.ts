@@ -14,7 +14,6 @@ import { BookModel } from '../../_models/book.model'
 import { defaultIfEmpty, concatAll, map } from 'rxjs/operators'
 import { LoanedPieceModel } from '../../_models/loaned-piece.model'
 import { L } from '@angular/cdk/keycodes'
-import color from 'metronic/theme/html/demo1/src/plugins/formvalidation/src/js/validators/color'
 
 @Component({
   selector: 'app-overview',

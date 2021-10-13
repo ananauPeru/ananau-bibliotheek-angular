@@ -13,6 +13,7 @@ import { LayoutModule } from 'src/app/pages/layout.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { httpInterceptorProviders } from 'src/app/http-interceptor';
 import { ResetPasswordComponent } from './reset-password/reset-password.component'
+import { RecaptchaModule } from 'ng-recaptcha'
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ReactiveFormsModule,
     HttpClientModule,
     LayoutModule,    
-    NgbModule,    
+    NgbModule,  
+    RecaptchaModule,
   ],
 })
 export class AuthModule {}

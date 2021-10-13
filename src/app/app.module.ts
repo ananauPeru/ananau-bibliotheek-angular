@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment'
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 
+
 // Highlight JS
 import { HighlightModule, HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
 import { SplashScreenModule } from "./_metronic/partials/layout/splash-screen/splash-screen.module";

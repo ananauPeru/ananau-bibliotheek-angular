@@ -79,6 +79,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
+  public resolved(captchaResponse: string) { 
+    console.log(`Resolved captcha with response: ${captchaResponse}`); // Write your logic here about once human verified what action you want to perform 
+    let button = <HTMLButtonElement> document.getElementById("kt_login_signin_submit");
+    button.disabled = false;
+  }
+
   submit() {
     this.hasError = false;
     const loginSubscr = this.authService

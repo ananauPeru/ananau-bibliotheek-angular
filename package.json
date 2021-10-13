@@ -46,6 +46,7 @@
     "moment": "^2.27.0",
     "ng-apexcharts": "^1.5.1",
     "ng-inline-svg": "^10.1.0",
+    "ng-recaptcha": "^8.0.1",
     "ngx-clipboard": "^13.0.1",
     "ngx-dropzone": "^3.0.0",
     "ngx-highlightjs": "^4.1.3",
