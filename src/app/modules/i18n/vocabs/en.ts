@@ -91,6 +91,8 @@ export const locale = {
         LEGAL: 'Legal',
         CONTACT: 'Contact us',
         WEBSITE: 'Website',
+        SUBSCRIBE: 'Subscribe to our newsletter',
+        SITE: 'https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup',
       },
       LOGIN: {
         TITLE: 'Login Account',
