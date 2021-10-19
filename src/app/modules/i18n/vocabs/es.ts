@@ -83,7 +83,7 @@ export const locale = {
         LEGAL: "Legal",
         CONTACT: "Contacta con nosotros",
         WEBSITE: "Sitio web",
-        SUBSCRIBE: 'Suscríbete a nuestro boletín',
+        SUBSCRIBE: 'Suscríbete a nuestro boletín aquí',
         SITE: 'https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup',
       },
       LOGIN: {
