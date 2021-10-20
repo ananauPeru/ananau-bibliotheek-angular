@@ -45,7 +45,7 @@
   }
 
   &.one-big-child {
-    height: calc(var(--menu-card-height) + 1.5rem);
+    height: calc(var(--menu-card-height)*1.3);
   }
 
   &.two-small-children {
