@@ -56,7 +56,9 @@ import { PositivePipe } from './pipes/positive.pipe'
 import { AddLoanComponent } from './loan/new-loan/add-loan.component';
 import { LoanDetailsComponent } from './loan/new-loan/loan-details/loan-details.component';
 import { ReturnDetailsComponent } from './loan/new-loan/return-details/return-details.component';
-import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component'
+import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component';
+import { OverviewClassComponent } from './overview/class/overview-class.component';
+import { CreateClassComponent } from './create/class/create-class.component'
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component'
     LoanDetailsComponent,
     ReturnDetailsComponent,
     SignOffComponent,
+    OverviewClassComponent,
+    CreateClassComponent,
   ],
   imports: [
     CommonModule,
