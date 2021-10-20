@@ -37,6 +37,8 @@ export const locale = {
         ADD_ITEM: 'Item toevoegen',
         LOANING: 'Uitlenen',
         NEW_LOAN: 'Nieuwe uitlening',
+        LES: 'Lessen',
+        ADD_LES: 'Les toevoegen',
       },
       MANAGEMENT: {
         TITLE: 'Gebruikersbeheer',

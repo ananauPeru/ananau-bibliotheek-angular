@@ -44,6 +44,8 @@ export const locale = {
         ADD_ITEM: "Añadir artículo",
         LOANING: "Préstamo",
         NEW_LOAN: "Préstamo nuevo",
+        LES: 'Clases',
+        ADD_LES: 'Agregar lección',
       },
       MANAGEMENT: {
         TITLE: "Gestión de usuarios",
