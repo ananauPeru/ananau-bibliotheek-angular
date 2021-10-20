@@ -661,6 +661,10 @@ export const locale = {
         SOCIO_EDUCATIONAL_ACTIVITIES: "Actividades Socioeducativas",
         STIMULATION: "Estímulo",
       },
+      CLASS_OVERVIEW:{
+        ALL: 'Todas las lecciones',
+        ADD: 'Agregar nueva lección',
+      },
       STATE: {
         BAD: "Malo",
         REGULAR: "Regular",
