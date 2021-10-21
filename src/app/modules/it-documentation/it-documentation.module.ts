@@ -55,7 +55,8 @@ import { GithubComponent } from './getting-started/s2-best-practices/github/gith
 import { ModelsAndTablesComponent } from './getting-started/s2-best-practices/models-and-tables/models-and-tables.component'
 import { ToDosComponent } from './todos/todos.component';
 import { OverviewComponent } from './todos/overview/overview.component';
-import { CreateComponent } from './todos/create/create.component'
+import { CreateComponent } from './todos/create/create.component';
+import { DeployComponent } from './deploy/deploy.component'
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { CreateComponent } from './todos/create/create.component'
     ToDosComponent,
     OverviewComponent,
     CreateComponent,
+    DeployComponent,
   ],
   imports: [
     CommonModule,

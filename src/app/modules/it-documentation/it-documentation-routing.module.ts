@@ -9,6 +9,7 @@ import { PostsComponent } from './posts/posts.component'
 import { CreateComponent } from './todos/create/create.component'
 import { ToDosComponent } from './todos/todos.component'
 import { TodoResolver } from './_resolvers/todo.resolver'
+import { DeployComponent } from './deploy/deploy.component'
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'getting-started/2-best-practices/models-and-tables',
         component: ModelsAndTablesComponent,
+      },
+      {
+        path: 'getting-started/3-deployment-azure',
+        component: DeployComponent,
       },
       {
         path: 'todos',

@@ -68,7 +68,7 @@ export const locale = {
           MODELS_AND_TABLES: 'Models and Tables',
           GITHUB: 'Working with GitHub',
         },
-        S3_DEPLOYMENT_AND_AZURE: '3 - Deployment & Azure',
+        S3_DEPLOYMENT_AND_AZURE: '3 - Deployment | Azure',
         TODOS: "ToDo's",
       },
     },
