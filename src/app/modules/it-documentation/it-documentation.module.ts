@@ -56,7 +56,7 @@ import { ModelsAndTablesComponent } from './getting-started/s2-best-practices/mo
 import { ToDosComponent } from './todos/todos.component';
 import { OverviewComponent } from './todos/overview/overview.component';
 import { CreateComponent } from './todos/create/create.component';
-import { DeployComponent } from './deploy/deploy.component'
+import { DeployComponent } from './getting-started/deploy/deploy.component'
 
 @NgModule({
   declarations: [

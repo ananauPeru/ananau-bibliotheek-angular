@@ -9,7 +9,7 @@ import { PostsComponent } from './posts/posts.component'
 import { CreateComponent } from './todos/create/create.component'
 import { ToDosComponent } from './todos/todos.component'
 import { TodoResolver } from './_resolvers/todo.resolver'
-import { DeployComponent } from './deploy/deploy.component'
+import { DeployComponent } from './getting-started/deploy/deploy.component'
 
 const routes: Routes = [
   {
