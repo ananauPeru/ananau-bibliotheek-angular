@@ -1,6 +1,6 @@
 export class ClassDTO {
     Title: string
-    Autor: string
+    Author: string
     Description: string
     Public: string
     PdfUrl: string

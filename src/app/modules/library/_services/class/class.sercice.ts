@@ -59,7 +59,7 @@ export class ClassService {
           classes.filter((c) => {
             let b = c.Title.includes(f) ||
               (c.Description? c.Description.toLowerCase().includes(f) : false) ||
-              (c.Autor ? c.Autor.toLowerCase().includes(f) : false);
+              (c.Author ? c.Author.toLowerCase().includes(f) : false);
             return b;
           })
         )

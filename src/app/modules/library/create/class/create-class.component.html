@@ -32,5 +32,263 @@
     
 <!-- Hier komt al de ret tussen -->
     <h1> LESSEN TOEVOEGEN</h1>
+    <div class="card-body">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="save()">
+        <div class="form-group row">
+
+          <div class="col-12 col-md-6">
+            <label>Titel</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="titelke voorbeeld"
+              name="Title"
+              [class.is-invalid]="isControlInvalid('Title')"
+              [class.is-valid]="isControlValid('Title')"
+              formControlName="Title"
+              required
+            />
+            <div class="feedback" *ngIf="!isControlTouched('Title')">
+              Vul hier de titel van het document in
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('Title')">
+              <!-- Name was entered correct -->
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'Title')"
+            >
+              ellaa dat mag niet leeg zijn
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'Title')"
+            >
+              elllaaaa dees is te kort
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'Title')"
+            >
+             eeeeelaaa dees is te lnag
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label>Geschreven door</label>
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              autocomplete="off"
+              placeholder="wie heeft dat hier geschreven"
+              name="Author"
+              [class.is-invalid]="isControlInvalid('Author')"
+              [class.is-valid]="isControlValid('Author')"
+              formControlName="Author"
+              required
+            />
+            <div class="feedback" *ngIf="!isControlTouched('Author')">
+              Vul hier de titel van het document in
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('Author')">
+              <!-- Name was entered correct -->
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'Author')"
+            >
+              ellaa dat mag niet leeg zijn
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'Author')"
+            >
+              elllaaaa dees is te kort
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('maxLength', 'Author')"
+            >
+             eeeeelaaa dees is te lnag
+            </div>
+          </div> 
+
+      </div>
+
+      <div class="form-group row">
+        <!--begin::Form group-->
+        <div class="col-12 col-md-6">
+          <label>Datum ofwa van toevoegen en zo</label>
+          <input
+            class="form-control form-control-solid form-control-lg"
+            (click)="d.toggle()"
+            placeholder="yyyy-mm-dd"
+            ngbDatepicker
+            [minDate]="{ year: 2020, month: 1, day: 1 }"
+            [maxDate]="{ year: 2050, month: 1, day: 19 }"
+            #d="ngbDatepicker"
+            name="CreationDate"
+            formControlName="CreationDate"
+            placeholder="2000-01-01"
+            autocomplete="off"
+            [class.is-invalid]="isControlInvalid('CreationDate')"
+            [class.is-valid]="isControlValid('CreationDate')"
+            required
+          />
+          <div class="feedback" *ngIf="!isControlTouched('CreationDate')">
+           datum aanduiden van uploaden
+          </div>
+          <div class="valid-feedback" *ngIf="isControlValid('CreationDate')">
+            <!-- Brand was entered correct -->
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'CreationDate')"
+          >
+            vult den datum is in peee
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label>Doelpubliek</label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="Public"
+            formControlName="Public"
+            aria-placeholder="voor wie is dat hier he"
+            [class.is-invalid]="isControlInvalid('Public')"
+            [class.is-valid]="isControlValid('Public')"
+            required
+          >
+            <option value="">
+              selecteer is een optie 
+            </option>
+            <option value="kleuterschool">
+             kleuterschool
+            </option>
+            <option value="lagerschool">
+              lagerschool
+            </option>
+            <option value="middelbaar">
+              middelbaar
+            </option>
+          </select>
+          <div class="feedback" *ngIf="!isControlTouched('Public')">
+            kies hier voor wie de les is
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'Public')" >
+            vult het doelpubliek is in
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>
+         Beschrijvingske toevoegen hieronder</label
+        >
+        <textarea
+          name="Description"
+          class="form-control form-control-lg form-control-solid"
+          formControlName="Description"
+          style="min-height: 250px; padding: 13px"
+          placeholder="kom schrijftj kfksfsdjfkdjfklsdjfdjfkdsjfkflkjdsfslfdskfdlskfjdlkfjdkl"
+          [class.is-invalid]="isControlInvalid('Description')"
+          [class.is-valid]="isControlValid('Description')"
+          required
+        ></textarea>
+        <div class="feedback" *ngIf="!isControlTouched('Description')">
+          Vul hier de beschrijving van het document in
+        </div>
+        <div class="valid-feedback" *ngIf="isControlValid('Description')">
+          <!-- Name was entered correct -->
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="controlHasError('required', 'Description')"
+        >
+          ellaa dat mag niet leeg zijn
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="controlHasError('minlength', 'Description')"
+        >
+          elllaaaa dees is te kort
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-12">Oplaadzone</label>
+        <div class="col-12">
+          <div
+            name="PdfUrl"
+            class="custom-dropzone form-control form-control-solid border"
+            ngx-dropzone
+            [accept]="'image/*'"
+            (change)="onSelectClassImage($event)"
+            required
+          >
+            <ngx-dropzone-label>
+              <p class="form-text text-muted">
+                Hier opladen
+              </p>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of classImages"
+              [file]="f"
+              [removable]="true"
+              (removed)="onRemoveClassImage(f)"
+            >
+            </ngx-dropzone-image-preview>
+          </div>
+          <div class="feedback" *ngIf="!isControlTouched('PdfUrl')">
+            Vul hier de beschrijving van het document in
+          </div>
+          <div class="valid-feedback" *ngIf="isControlValid('PdfUrl')">
+            <!-- Name was entered correct -->
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'PdfUrl')"
+          >
+            ellaa dat mag niet leeg zijn
+          </div>
+          </div>
+          <div
+            *ngIf="
+              formGroup.get('PdfUrl')['errors'] &&
+              formGroup.get('PdfUrl').touched
+            "
+            class="text-danger form-text"
+          >
+        </div>
+      </div>
+
+      <div class="float-right">
+        <a
+          class="btn btn-default font-weight-bold mr-2"
+          routerLink="/library/classes/overview"
+        >
+          anulleer knopje
+        </a>
+        <button
+          type="submit"
+          class="btn btn-primary font-weight-bold mr-2"
+          [disabled]="formGroup.invalid"
+        >
+          <ng-container *ngIf="class; else elseTemplate">
+            opslag knopje
+          </ng-container>
+          <ng-template #elseTemplate>
+           lekse aanmaken
+          </ng-template>
+        </button>
+      </div>
+
+      </form>
+    </div>
   </div>
   
