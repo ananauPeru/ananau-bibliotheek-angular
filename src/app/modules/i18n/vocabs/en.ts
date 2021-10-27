@@ -410,7 +410,7 @@ export const locale = {
             NAAM : 'Target audience',
             BES : 'What age group is this class for?',
             ER: 'Target audience is required',
-            Kleuter : 'Kindergarten',
+            Kleuter : 'Kindergarden',
             LAGERESCHOOL : 'Primary school',
             MIDDELBAAR : 'Secondary school',
           }, 
