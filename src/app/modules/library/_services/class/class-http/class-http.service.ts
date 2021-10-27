@@ -8,7 +8,7 @@ import { ItemDTO } from "../../../_dto/item-dto";
 import { ClassModel } from "../../../_models/class.model"
 import { ClassDTO } from "../../../_dto/class-dto";
 
-const API_ITEMS_URL = `${environment.apiUrl}/book`;
+const API_ITEMS_URL = `${environment.apiUrl}/class`;
 
 @Injectable({
   providedIn: "root",
@@ -36,8 +36,8 @@ export class ClassHTTPService {
 
   // CREATE
   // server should return the object with ID
-  create(book: ClassDTO): Observable<ClassModel> {
-    return this.http.post<ClassModel>(`${API_ITEMS_URL}`, book).pipe(
+  create(c: ClassDTO): Observable<ClassModel> {
+    return this.http.post<ClassModel>(`${API_ITEMS_URL}`, c).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.error("Login please...");
@@ -45,14 +45,14 @@ export class ClassHTTPService {
         return throwError(error);
       }),
       map(
-        (book: any): ClassModel => {
-          return book;
+        (c: any): ClassModel => {
+          return c;
         }
       )
     );
   }
-  edit(id: number, book: ClassDTO): Observable<ClassModel> {
-    return this.http.put<ClassModel>(`${API_ITEMS_URL}/${id}`, book).pipe(
+  edit(id: number, c: ClassDTO): Observable<ClassModel> {
+    return this.http.put<ClassModel>(`${API_ITEMS_URL}/${id}`, c).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.error("Login please...");
@@ -60,8 +60,8 @@ export class ClassHTTPService {
         return throwError(error);
       }),
       map(
-        (book: any): ClassModel => {
-          return book;
+        (c: any): ClassModel => {
+          return c;
         }
       )
     );
@@ -80,8 +80,8 @@ export class ClassHTTPService {
           return throwError(error);
         }),
         map(
-          (book: any): ClassModel => {
-            return book;
+          (c: any): ClassModel => {
+            return c;
           }
         )
       );

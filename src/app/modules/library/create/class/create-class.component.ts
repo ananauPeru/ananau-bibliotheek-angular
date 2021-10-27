@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { tap } from 'rxjs/operators';
 import { ToastrUtil } from 'src/app/_utils/toastr_util';
@@ -82,11 +83,24 @@ export class CreateClassComponent implements OnInit {
         ])
       ],
       CreationDate: [
-        this.class && this.class.CreationDate ? this.class.CreationDate : '',
+        this.class && this.class.CreationDate ?  new NgbDate(
+          new Date(
+            this.datePipe.transform(this.class.CreationDate, 'yyyy-MM-dd'),
+          ).getFullYear(),
+          new Date(
+            this.datePipe.transform(this.class.CreationDate, 'yyyy-MM-dd'),
+          ).getMonth() + 1,
+          new Date(
+            this.datePipe.transform(this.class.CreationDate, 'yyyy-MM-dd'),
+          ).getDate(),
+        )
+      : new NgbDate(
+          new Date().getFullYear(),
+          new Date().getMonth() + 1,
+          new Date().getDate(),
+        ),
         Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(200)
+          Validators.required
         ])
       ],
     })
@@ -103,7 +117,14 @@ export class CreateClassComponent implements OnInit {
       item.Title = formValues.Title
       item.Author = formValues.Author
       item.Description = formValues.Description
-      item.CreationDate = formValues.CreationDate
+      item.CreationDate = new Date(
+        Date.UTC(
+          formValues.CreationDate.year,
+          formValues.CreationDate.month - 1,
+          formValues.CreationDate.day,
+        ),
+      )
+     console.log(formValues.CreationDate)
       item.PdfUrl = formValues.PdfUrl
       item.Public = formValues.Public
       this.create(item);
@@ -112,14 +133,20 @@ export class CreateClassComponent implements OnInit {
       this.class.Title = formValues.Title
       this.class.Author = formValues.Author
       this.class.Description = formValues.Description
-      this.class.CreationDate = formValues.CreationDate
+      this.class.CreationDate = new Date(
+        Date.UTC(
+          formValues.CreationDate.year,
+          formValues.CreationDate.month - 1,
+          formValues.CreationDate.day,
+        ),
+      )
       this.class.PdfUrl = formValues.PdfUrl
       this.class.Public = formValues.Public
       this.create(this.class)
     }
   }
 
-  create(item: any) {
+  create(item: ClassDTO) {
     if (!this.class) {
       const icreate = this.classService
         .create(item)
