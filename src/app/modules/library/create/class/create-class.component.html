@@ -9,12 +9,12 @@
     <div class="card-header">
       <div class="card-title">
         <h3 class="card-label">
-   <!---   EDIT     <ng-container *ngIf="class; else elseTemplate">
-            {{ "LIBRARY.CREATE.BOOK.EDIT_BOOK" | translate }}
+     <ng-container *ngIf="class; else elseTemplate">
+           les je aanpassen
           </ng-container> 
           <ng-template #elseTemplate>
-            {{ "LIBRARY.CREATE.BOOK.CREATE_NEW_BOOK" | translate }}
-          </ng-template>--->
+           nieuwe lesje toevoegen
+          </ng-template>
         </h3>
       </div>
       <div class="card-toolbar">
@@ -31,7 +31,6 @@
     </div>
     
 <!-- Hier komt al de ret tussen -->
-    <h1> LESSEN TOEVOEGEN</h1>
     <div class="card-body">
       <form action="#" class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="save()">
         <div class="form-group row">
@@ -245,26 +244,9 @@
             </ngx-dropzone-image-preview>
           </div>
           <div class="feedback" *ngIf="!isControlTouched('PdfUrl')">
-            Vul hier de beschrijving van het document in
+            laad hier het document (als het laad symbool blijft draai klik er dan eens op)
           </div>
-          <div class="valid-feedback" *ngIf="isControlValid('PdfUrl')">
-            <!-- Name was entered correct -->
-          </div>
-          <div
-            class="invalid-feedback"
-            *ngIf="controlHasError('required', 'PdfUrl')"
-          >
-            ellaa dat mag niet leeg zijn
-          </div>
-          </div>
-          <div
-            *ngIf="
-              formGroup.get('PdfUrl')['errors'] &&
-              formGroup.get('PdfUrl').touched
-            "
-            class="text-danger form-text"
-          >
-        </div>
+          </div>    
       </div>
 
       <div class="float-right">

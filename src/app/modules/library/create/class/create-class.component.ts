@@ -71,8 +71,6 @@ export class CreateClassComponent implements OnInit {
         this.class && this.class.PdfUrl ? this.class.PdfUrl : '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(200)
         ])
       ],
       Public: [
@@ -108,8 +106,16 @@ export class CreateClassComponent implements OnInit {
       item.CreationDate = formValues.CreationDate
       item.PdfUrl = formValues.PdfUrl
       item.Public = formValues.Public
-
-
+      this.create(item);
+    }
+    else{
+      this.class.Title = formValues.Title
+      this.class.Author = formValues.Author
+      this.class.Description = formValues.Description
+      this.class.CreationDate = formValues.CreationDate
+      this.class.PdfUrl = formValues.PdfUrl
+      this.class.Public = formValues.Public
+      this.create(this.class)
     }
   }
 
@@ -192,12 +198,10 @@ export class CreateClassComponent implements OnInit {
     this.classImages.push(...event.addedFiles)
     var url = await this.itemStorage.storeImage$(event.addedFiles[0])
     this.formGroup.get('PdfUrl').setValue(url)
-    // this.updateInternationalPassport()
   }
 
   public onRemoveClassImage(event: File) {
     this.classImages.splice(this.classImages.indexOf(event), 1)
-    // this.updateInternationalPassport();
   }
 
 }
