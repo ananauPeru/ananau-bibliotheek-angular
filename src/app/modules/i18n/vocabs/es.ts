@@ -380,6 +380,54 @@ export const locale = {
 
     LIBRARY: {
       GENERAL: {},
+      CLASS : {
+        CREATE : {
+          NAAM: 'Maak nieuwe les aan',
+          TERUG : 'Terug',
+          CANCEL: 'Annuleren',
+          MAAK: 'Maan een nieuwe les',
+          BEWERK: 'Aanpassing opslaan',
+          TITEL: {
+            NAAM : 'Titel',
+            BES : 'Voer de titel van de les in.',
+            ER: 'Titel is vereist',
+            MIN : 'Titel moet minimaal 3 symbolen lang zijn',
+            MAX : 'De titel is te lang, maak hem korter.'
+          },
+          AUTEUR: {
+            NAAM : 'Auteur',
+            BES : 'Voer de auteur van de les in.',
+            ER: 'Auteur is vereist',
+            MIN : 'Auteur moet minimaal 3 symbolen lang zijn',
+            MAX : 'De Auteur is te lang, maak hem korter.'
+          }, 
+          DATUM: {
+            NAAM : 'Wanneer aangemakt',
+            BES : 'Voer de datum in van waneer deze les is gemaakt.',
+            ER: 'Datum is vereist'
+          },
+          PUBLIEK: {
+            NAAM : 'Doelgroep',
+            BES : 'Voor welke leeftijdsgroep is deze les?',
+            ER: 'Doelgroep is vereist',
+            Kleuter : 'Kleuter',
+            LAGERESCHOOL : 'Lagereschool',
+            MIDDELBAAR : 'Middelbareschool',
+          }, 
+          BESCHRIJVING: {
+            NAAM : 'Beschrijving',
+            BES : 'Geef hier extra info over de les.',
+            ER: 'Beschrijving is vereist',
+            MIN : 'Beschrijving moet minimaal 3 symbolen lang zijn',
+            MAX : 'De beschrijving is te lang, maak hem korter.'
+          }, 
+          UP : {
+            NAAM : "Uploadzone",
+            HIER : "Hier klikken om document te selecteren",
+            BES : "Als het document blijft laden na selecteren, klik dan eens op het document."
+          }
+        }
+      },
       CREATE: {
         BOOK: {
           EDIT_BOOK: "Editar Libro",

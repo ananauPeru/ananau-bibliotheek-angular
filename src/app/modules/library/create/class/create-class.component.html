@@ -10,10 +10,15 @@
       <div class="card-title">
         <h3 class="card-label">
      <ng-container *ngIf="class; else elseTemplate">
-           les je aanpassen
+      {{
+        "LIBRARY.CLASS.CREATE.BEWERK" | translate
+      }}
+      
           </ng-container> 
           <ng-template #elseTemplate>
-           nieuwe lesje toevoegen
+            {{
+              "LIBRARY.CLASS.CREATE.NAAM" | translate
+            }}
           </ng-template>
         </h3>
       </div>
@@ -24,7 +29,7 @@
           routerLink="/library/classes/overview"
         >
           <i class="fa fa-arrow-left"></i>{{
-            "LIBRARY.CREATE.BOOK.BACK" | translate
+            "LIBRARY.CLASS.CREATE.TERUG" | translate
           }}
         </a>
       </div>
@@ -36,12 +41,12 @@
         <div class="form-group row">
 
           <div class="col-12 col-md-6">
-            <label>Titel</label>
+            <label>{{"LIBRARY.CLASS.CREATE.TITEL.NAAM" | translate }}</label>
             <input
               type="text"
               class="form-control form-control-lg form-control-solid"
               autocomplete="off"
-              placeholder="titelke voorbeeld"
+              placeholder="..."
               name="Title"
               [class.is-invalid]="isControlInvalid('Title')"
               [class.is-valid]="isControlValid('Title')"
@@ -49,7 +54,7 @@
               required
             />
             <div class="feedback" *ngIf="!isControlTouched('Title')">
-              Vul hier de titel van het document in
+              {{"LIBRARY.CLASS.CREATE.TITEL.BES" | translate }}
             </div>
             <div class="valid-feedback" *ngIf="isControlValid('Title')">
               <!-- Name was entered correct -->
@@ -58,29 +63,29 @@
               class="invalid-feedback"
               *ngIf="controlHasError('required', 'Title')"
             >
-              ellaa dat mag niet leeg zijn
+            {{"LIBRARY.CLASS.CREATE.TITEL.ER" | translate }}
             </div>
             <div
               class="invalid-feedback"
               *ngIf="controlHasError('minlength', 'Title')"
             >
-              elllaaaa dees is te kort
+            {{"LIBRARY.CLASS.CREATE.TITEL.MIN" | translate }}
             </div>
             <div
               class="invalid-feedback"
               *ngIf="controlHasError('maxLength', 'Title')"
             >
-             eeeeelaaa dees is te lnag
+            {{"LIBRARY.CLASS.CREATE.TITEL.MAX" | translate }}
             </div>
           </div>
 
           <div class="col-12 col-md-6">
-            <label>Geschreven door</label>
+            <label>{{"LIBRARY.CLASS.CREATE.AUTEUR.NAAM" | translate }}</label>
             <input
               type="text"
               class="form-control form-control-lg form-control-solid"
               autocomplete="off"
-              placeholder="wie heeft dat hier geschreven"
+              placeholder=" ..."
               name="Author"
               [class.is-invalid]="isControlInvalid('Author')"
               [class.is-valid]="isControlValid('Author')"
@@ -88,7 +93,7 @@
               required
             />
             <div class="feedback" *ngIf="!isControlTouched('Author')">
-              Vul hier de titel van het document in
+              {{"LIBRARY.CLASS.CREATE.AUTEUR.BES" | translate }}
             </div>
             <div class="valid-feedback" *ngIf="isControlValid('Author')">
               <!-- Name was entered correct -->
@@ -97,19 +102,19 @@
               class="invalid-feedback"
               *ngIf="controlHasError('required', 'Author')"
             >
-              ellaa dat mag niet leeg zijn
+            {{"LIBRARY.CLASS.CREATE.AUTEUR.ER" | translate }}
             </div>
             <div
               class="invalid-feedback"
               *ngIf="controlHasError('minlength', 'Author')"
             >
-              elllaaaa dees is te kort
+            {{"LIBRARY.CLASS.CREATE.AUTEUR.MIN" | translate }}
             </div>
             <div
               class="invalid-feedback"
               *ngIf="controlHasError('maxLength', 'Author')"
             >
-             eeeeelaaa dees is te lnag
+            {{"LIBRARY.CLASS.CREATE.AUTEUR.MAX" | translate }}
             </div>
           </div> 
 
@@ -118,14 +123,14 @@
       <div class="form-group row">
         <!--begin::Form group-->
         <div class="col-12 col-md-6">
-          <label>Datum ofwa van toevoegen en zo</label>
+          <label>{{"LIBRARY.CLASS.CREATE.DATUM.NAAM" | translate }}</label>
           <input
             class="form-control form-control-solid form-control-lg"
             (click)="d.toggle()"
             placeholder="yyyy-mm-dd"
             ngbDatepicker
-            [minDate]="{ year: 2020, month: 1, day: 1 }"
-            [maxDate]="{ year: 2050, month: 1, day: 19 }"
+            [minDate]="{ year: 2000, month: 1, day: 1 }"
+            [maxDate]="{ year: 3050, month: 1, day: 19 }"
             #d="ngbDatepicker"
             name="CreationDate"
             formControlName="CreationDate"
@@ -136,7 +141,7 @@
             required
           />
           <div class="feedback" *ngIf="!isControlTouched('CreationDate')">
-           datum aanduiden van uploaden
+            {{"LIBRARY.CLASS.CREATE.DATUM.BES" | translate }}
           </div>
           <div class="valid-feedback" *ngIf="isControlValid('CreationDate')">
             <!-- Brand was entered correct -->
@@ -145,12 +150,12 @@
             class="invalid-feedback"
             *ngIf="controlHasError('required', 'CreationDate')"
           >
-            vult den datum is in peee
+          {{"LIBRARY.CLASS.CREATE.DATUM.ER" | translate }}
           </div>
         </div>
 
         <div class="col-12 col-md-6">
-          <label>Doelpubliek</label>
+          <label>{{"LIBRARY.CLASS.CREATE.PUBLIEK.NAAM" | translate }}</label>
           <select
             class="form-control form-control-lg form-control-solid"
             name="Public"
@@ -161,45 +166,43 @@
             required
           >
             <option value="">
-              selecteer is een optie 
+              {{"LIBRARY.CLASS.CREATE.PUBLIEK.BES" | translate }}
             </option>
             <option value="kleuterschool">
-             kleuterschool
+              {{"LIBRARY.CLASS.CREATE.PUBLIEK.Kleuter" | translate }}
             </option>
             <option value="lagerschool">
-              lagerschool
+              {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL" | translate }}
             </option>
             <option value="middelbaar">
-              middelbaar
+              {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR" | translate }}
             </option>
           </select>
           <div class="feedback" *ngIf="!isControlTouched('Public')">
-            kies hier voor wie de les is
+            {{"LIBRARY.CLASS.CREATE.PUBLIEK.BES" | translate }}
           </div>
           <div
             class="invalid-feedback"
             *ngIf="controlHasError('required', 'Public')" >
-            vult het doelpubliek is in
+            {{"LIBRARY.CLASS.CREATE.PUBLIEK.ER" | translate }}
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label>
-         Beschrijvingske toevoegen hieronder</label
-        >
+        <label>  {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}</label >
         <textarea
           name="Description"
           class="form-control form-control-lg form-control-solid"
           formControlName="Description"
           style="min-height: 250px; padding: 13px"
-          placeholder="kom schrijftj kfksfsdjfkdjfklsdjfdjfkdsjfkflkjdsfslfdskfdlskfjdlkfjdkl"
+          placeholder="The class is about ...."
           [class.is-invalid]="isControlInvalid('Description')"
           [class.is-valid]="isControlValid('Description')"
           required
         ></textarea>
         <div class="feedback" *ngIf="!isControlTouched('Description')">
-          Vul hier de beschrijving van het document in
+          {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.BES" | translate }}
         </div>
         <div class="valid-feedback" *ngIf="isControlValid('Description')">
           <!-- Name was entered correct -->
@@ -208,18 +211,18 @@
           class="invalid-feedback"
           *ngIf="controlHasError('required', 'Description')"
         >
-          ellaa dat mag niet leeg zijn
+        {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.ER" | translate }}
         </div>
         <div
           class="invalid-feedback"
           *ngIf="controlHasError('minlength', 'Description')"
         >
-          elllaaaa dees is te kort
+        {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.MIN" | translate }}
         </div>
       </div>
 
       <div class="form-group row">
-        <label class="col-12">Oplaadzone</label>
+        <label class="col-12">{{"LIBRARY.CLASS.CREATE.UP.NAAM" | translate }}</label>
         <div class="col-12">
           <div
             name="PdfUrl"
@@ -231,7 +234,7 @@
           >
             <ngx-dropzone-label>
               <p class="form-text text-muted">
-                Hier opladen
+                {{"LIBRARY.CLASS.CREATE.UP.HIER" | translate }}
               </p>
             </ngx-dropzone-label>
             <ngx-dropzone-image-preview
@@ -244,7 +247,7 @@
             </ngx-dropzone-image-preview>
           </div>
           <div class="feedback" *ngIf="!isControlTouched('PdfUrl')">
-            laad hier het document (als het laad symbool blijft draai klik er dan eens op)
+            {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}
           </div>
           </div>    
       </div>
@@ -254,7 +257,7 @@
           class="btn btn-default font-weight-bold mr-2"
           routerLink="/library/classes/overview"
         >
-          anulleer knopje
+        {{"LIBRARY.CLASS.CREATE.CANCEL" | translate }}
         </a>
         <button
           type="submit"
@@ -262,10 +265,10 @@
           [disabled]="formGroup.invalid"
         >
           <ng-container *ngIf="class; else elseTemplate">
-            opslag knopje
+            {{"LIBRARY.CLASS.CREATE.BEWERK" | translate }}
           </ng-container>
           <ng-template #elseTemplate>
-           lekse aanmaken
+            {{"LIBRARY.CLASS.CREATE.MAAK" | translate }}
           </ng-template>
         </button>
       </div>
