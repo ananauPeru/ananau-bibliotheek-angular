@@ -372,7 +372,7 @@ export const locale = {
           NAAM: 'Maak nieuwe les aan',
           TERUG : 'Terug',
           CANCEL: 'Annuleren',
-          MAAK: 'Maan een nieuwe les',
+          MAAK: 'Maak een nieuwe les',
           BEWERK: 'Aanpassing opslaan',
           TITEL: {
             NAAM : 'Titel',

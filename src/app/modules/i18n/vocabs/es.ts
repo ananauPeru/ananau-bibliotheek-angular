@@ -382,49 +382,49 @@ export const locale = {
       GENERAL: {},
       CLASS : {
         CREATE : {
-          NAAM: 'Maak nieuwe les aan',
-          TERUG : 'Terug',
-          CANCEL: 'Annuleren',
-          MAAK: 'Maan een nieuwe les',
-          BEWERK: 'Aanpassing opslaan',
+          NAAM: 'Crear una nueva lección',
+          TERUG : 'Esplada',
+          CANCEL: 'Cancelar',
+          MAAK: 'Crear una nueva lección',
+          BEWERK: 'Guardar ajustes',
           TITEL: {
-            NAAM : 'Titel',
-            BES : 'Voer de titel van de les in.',
-            ER: 'Titel is vereist',
-            MIN : 'Titel moet minimaal 3 symbolen lang zijn',
-            MAX : 'De titel is te lang, maak hem korter.'
+            NAAM : 'Título',
+            BES : 'ingrese el título de la lección.',
+            ER: 'el título es obligatorio',
+            MIN : 'El título debe tener al menos 3 letras',
+            MAX : 'El título es demasiado largo, hazlo más corto.'
           },
           AUTEUR: {
-            NAAM : 'Auteur',
-            BES : 'Voer de auteur van de les in.',
-            ER: 'Auteur is vereist',
-            MIN : 'Auteur moet minimaal 3 symbolen lang zijn',
-            MAX : 'De Auteur is te lang, maak hem korter.'
+            NAAM : 'Autor',
+            BES : 'Ingrese el autor de la lección.',
+            ER: 'Se requiere autor',
+            MIN : 'El autor debe tener al menos 3 letras',
+            MAX : 'El autor es demasiado largo, halzo más corto.'
           }, 
           DATUM: {
-            NAAM : 'Wanneer aangemakt',
-            BES : 'Voer de datum in van waneer deze les is gemaakt.',
-            ER: 'Datum is vereist'
+            NAAM : 'Cuando se crea',
+            BES : 'Ingrese la fecha a partir de la cual se creó esta lección.',
+            ER: 'La fecha es requerida'
           },
           PUBLIEK: {
-            NAAM : 'Doelgroep',
-            BES : 'Voor welke leeftijdsgroep is deze les?',
-            ER: 'Doelgroep is vereist',
-            Kleuter : 'Kleuter',
-            LAGERESCHOOL : 'Lagereschool',
-            MIDDELBAAR : 'Middelbareschool',
+            NAAM : 'Público objetivo',
+            BES : '¿Para qué grupo de edad es esta clase?',
+            ER: 'Se requiere audiencia objetivo',
+            Kleuter : 'Jardín de infancia',
+            LAGERESCHOOL : 'Escuela primaria',
+            MIDDELBAAR : 'Escuela secundaria',
           }, 
           BESCHRIJVING: {
-            NAAM : 'Beschrijving',
-            BES : 'Geef hier extra info over de les.',
-            ER: 'Beschrijving is vereist',
-            MIN : 'Beschrijving moet minimaal 3 symbolen lang zijn',
-            MAX : 'De beschrijving is te lang, maak hem korter.'
+            NAAM : 'Descripción',
+            BES : 'Proporcione información adicional sobre la lección aquí.',
+            ER: 'Se requiere descripción',
+            MIN : 'La descripción debe contener al menos 3 letras',
+            MAX : 'La descripción es demasiado larga, hazla más corta.'
           }, 
           UP : {
-            NAAM : "Uploadzone",
-            HIER : "Hier klikken om document te selecteren",
-            BES : "Als het document blijft laden na selecteren, klik dan eens op het document."
+            NAAM : "Zona de carga",
+            HIER : "Haga clic aquí para seleccionar un documento",
+            BES : "Si el documento continúa cargándose después de seleccionarlo, haga clic en el documento nuevamente."
           }
         }
       },
