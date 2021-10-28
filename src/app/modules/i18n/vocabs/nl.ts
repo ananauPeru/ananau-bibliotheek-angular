@@ -397,7 +397,7 @@ export const locale = {
             NAAM : 'Doelgroep',
             BES : 'Voor welke leeftijdsgroep is deze les?',
             ER: 'Doelgroep is vereist',
-            Kleuter : 'Kleuterschool',
+            KLEUTER : 'Kleuterschool',
             LAGERESCHOOL : 'Lagereschool',
             MIDDELBAAR : 'Middelbareschool',
           }, 

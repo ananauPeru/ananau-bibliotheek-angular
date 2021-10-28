@@ -1,5 +1,5 @@
 export class ClassModel {
-  classID: number
+  ClassID: number
   Title: string
   Author: string
   Description: string

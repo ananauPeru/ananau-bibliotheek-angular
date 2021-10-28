@@ -23,5 +23,101 @@
     </div>
 
     <!-- al de rest -->
-    <h1> Allemaal lessen </h1>
+    <div class="card-body pt-2" *ngIf="AuthUtil.permitted(['admin'])">
+        <!--begin::Form Group-->
+        <div class="form-group row mb-10" *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
+            <div class="col-12 col-md-8">
+                <div class="input-group input-group-lg input-group-solid">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                    <input (keyup)="applyFilter7($event.target.value)" type="email"
+                        class="form-control form-control-lg form-control-solid force-pl-5"
+                        placeholder='{{"LIBRARY.OVERVIEW.BOOK.FILTER_PH" | translate }}' style="padding-left: 10px;" />
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <select class="form-control form-control-lg form-control-solid" placeholder="Language"
+                    (change)="applyTaal($event.target.value)">
+                    <option value="">{{"LIBRARY.CLASS.CREATE.LANGUAGE.NAAM" | translate }}</option>
+                    <option *ngFor="let enum of ClassCategories | keyvalue" value="{{enum.key}}">
+                        {{enum.value | translate }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <!--begin: Item-->
+        <div class="d-flex flex-wrap align-items-center mb-10" *ngFor="let cl of paginate() | async">
+            <!--begin::Symbol-->
+            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
+                <span class="material-icons">
+                    description
+                    </span>
+            </div>
+            <!--end::Symbol-->
+
+             <!--begin::Title-->
+             <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3" style="max-width: 365px; overflow: hidden;">
+                <a href='{{cl.pdfurl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                    {{cl.title.length<=35 ? cl.title : ((cl.title | slice:0:35)+'...') }}</a>
+                        <span class="text-muted font-weight-bold font-size-sm my-1">
+                            {{"LIBRARY.CLASS.CREATE.AUTEUR.NAAM" | translate }}: {{cl.title.length<=35 ? cl.title : ((cl.title | slice:0:35)+'...') }}
+                        </span>
+                        <span class="text-muted font-weight-bold font-size-sm">
+                            {{"LIBRARY.CLASS.CREATE.LANGUAGE.NAAM" | translate }}: {{ClassCategories[cl.language] | translate }}
+                        </span>
+                        <span class="text-muted font-weight-bold font-size-sm">
+                            {{"LIBRARY.CLASS.CREATE.PUBLIEK.NAAM" | translate }}: {{ClassPubliek[cl.public] | translate }} 
+                        </span>
+                        
+            </div>
+            <!--end::Title-->
+
+            
+             <!--begin::Title-->
+             <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                <span class="text-muted font-weight-bold font-size-sm my-1">
+                    {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description.length<=100 ? cl.description : ((cl.description | slice:0:100)+'...') }}
+                </span>
+    
+            </div>
+            <!--end::Title-->
+
+             <!--begin::Info-->
+             <div class="d-flex align-items-center py-lg-0 py-2">
+                <div class="d-flex flex-column text-right">
+                    
+                    <!--hier download edit and open symbolen?::Info-->
+                </div>
+            </div>
+            <!--end::Info-->
+        </div>
+        <!--end: Item-->
+
+        <div *ngIf="filteredListEmpty|async" class="row">
+            <div class="col-12 text-center">
+                <p><i> {{"LIBRARY.OVERVIEW.LOAN.NO_RESULTS" | translate }}</i></p>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap align-items-center mb-10">
+
+            <!-- ///////////////////// -->
+            <div class="example-preview flex-grow-1  ">
+                <div class="example-container ">
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" (page)="pageEvents($event)" [pageIndex]="page"
+                        [showFirstLastButtons]="true" [length]="(classService.classes | async)?.length">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+
+
+
+            
 </div>

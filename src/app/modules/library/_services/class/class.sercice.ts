@@ -36,15 +36,9 @@ export class ClassService {
   filter(
     filter: any,
     _category: any,
-     pp: number,
-     p: number,
     _genre: any
   ) {
-    let f = undefined;
-    if (filter){
-      f = filter.toLowerCase();
-    }
-    
+    let f = filter.toLowerCase();
     let category = undefined;
     if (_category) {
       category = _category.toLowerCase();
@@ -53,28 +47,35 @@ export class ClassService {
     if (_genre) {
       genre = _genre.toLowerCase();
     }
-    if (category == undefined) {
+    return this._classes;
+   /* if (category == undefined) {
       this.classes = this._classes.pipe(
-        map((classes) =>
-          classes.filter((c) => {
-            let b = c.Title.includes(f) ||
-              (c.Description? c.Description.toLowerCase().includes(f) : false) ||
-              (c.Author ? c.Author.toLowerCase().includes(f) : false);
+        map((books) =>
+          books.filter((book) => {
+            let b =
+              book.Title.toLowerCase().includes(f) ||
+              (book.Description
+                ? book.Description.toLowerCase().includes(f)
+                : false) ||
+              (book.Author ? book.Author.toLowerCase().includes(f) : false) ||
+              (book.Public ? book.Public.toLowerCase().includes(f) : false) ||
+              (book.Language ? book.Language.toLowerCase().includes(f) : false);
             return b;
           })
         )
       );
     }
 
-    if (genre ) {
+    if (genre) {
       this.classes = this._classes.pipe(
-        map((c) =>
-          c.filter((cl) => {
-            let b = cl.Public.toLowerCase().includes(genre);
+        map((books) =>
+          books.filter((book) => {
+            let b = book.Language.toUpperCase().includes(genre);
             return b;
           })
         )
       );
-    }
+    }*/
   }
+
 }

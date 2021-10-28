@@ -410,7 +410,7 @@ export const locale = {
             NAAM : 'Público objetivo',
             BES : '¿Para qué grupo de edad es esta clase?',
             ER: 'Se requiere audiencia objetivo',
-            Kleuter : 'Jardín de infancia',
+            KLEUTER : 'Jardín de infancia',
             LAGERESCHOOL : 'Escuela primaria',
             MIDDELBAAR : 'Escuela secundaria',
           }, 
