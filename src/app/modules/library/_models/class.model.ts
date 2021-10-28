@@ -6,6 +6,7 @@ export class ClassModel {
   Public: string
   PdfUrl: string
   CreationDate: Date
+  Language: string
 
   constructor() {}
 

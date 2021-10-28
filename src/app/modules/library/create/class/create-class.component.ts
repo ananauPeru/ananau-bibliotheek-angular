@@ -82,6 +82,14 @@ export class CreateClassComponent implements OnInit {
           Validators.maxLength(100)
         ])
       ],
+      Language: [
+        this.class && this.class.Language ? this.class.Language : '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100)
+        ])
+      ],
       CreationDate: [
         this.class && this.class.CreationDate ?  new NgbDate(
           new Date(
@@ -127,6 +135,7 @@ export class CreateClassComponent implements OnInit {
      console.log(formValues.CreationDate)
       item.PdfUrl = formValues.PdfUrl
       item.Public = formValues.Public
+      item.Language = formValues.Language
       this.create(item);
     }
     else{
@@ -142,6 +151,7 @@ export class CreateClassComponent implements OnInit {
       )
       this.class.PdfUrl = formValues.PdfUrl
       this.class.Public = formValues.Public
+      this.class.Language = formValues.Language
       this.create(this.class)
     }
   }

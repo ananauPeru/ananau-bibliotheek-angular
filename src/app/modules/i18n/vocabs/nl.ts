@@ -401,6 +401,14 @@ export const locale = {
             LAGERESCHOOL : 'Lagereschool',
             MIDDELBAAR : 'Middelbareschool',
           }, 
+          LANGUAGE: {
+            NAAM : 'Taal',
+            BES : 'In welke taal is het document geschreven?',
+            ER: 'Taal is vereist',
+            NEDERLANDS : 'Nederlands',
+            ENGELS : 'Engels',
+            SPAANS : 'Spaans',
+          }, 
           BESCHRIJVING: {
             NAAM : 'Beschrijving',
             BES : 'Geef hier extra info over de les.',

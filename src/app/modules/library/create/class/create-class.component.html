@@ -192,36 +192,37 @@
       <div class="form-group row">
         <!--begin::Form group-->
         <div class="col-12 col-md-6">
-          <label>  {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}</label >
-            <textarea
-              name="Description"
-              class="form-control form-control-lg form-control-solid"
-              formControlName="Description"
-              style="min-height: 250px; padding: 13px"
-              placeholder="The class is about ...."
-              [class.is-invalid]="isControlInvalid('Description')"
-              [class.is-valid]="isControlValid('Description')"
-              required
-            ></textarea>
-            <div class="feedback" *ngIf="!isControlTouched('Description')">
-              {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.BES" | translate }}
-            </div>
-            <div class="valid-feedback" *ngIf="isControlValid('Description')">
-              <!-- Name was entered correct -->
-            </div>
-            <div
-              class="invalid-feedback"
-              *ngIf="controlHasError('required', 'Description')"
-            >
-            {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.ER" | translate }}
-            </div>
-            <div
-              class="invalid-feedback"
-              *ngIf="controlHasError('minlength', 'Description')"
-            >
-            {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.MIN" | translate }}
-            </div>
-          
+          <label>{{"LIBRARY.CLASS.CREATE.LANGUAGE.NAAM" | translate }}</label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="Language"
+            formControlName="Language"
+            aria-placeholder="Language"
+            [class.is-invalid]="isControlInvalid('Language')"
+            [class.is-valid]="isControlValid('Language')"
+            required
+          >
+            <option value="">
+              {{"LIBRARY.CLASS.CREATE.LANGUAGE.BES" | translate }}
+            </option>
+            <option value="NEDERLANDS">
+              {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS" | translate }}
+            </option>
+            <option value="ENGELS">
+              {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS" | translate }}
+            </option>
+            <option value="SPAANS">
+              {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS" | translate }}
+            </option>
+          </select>
+          <div class="feedback" *ngIf="!isControlTouched('Language')">
+            {{"LIBRARY.CLASS.CREATE.LANGUAGE.BES" | translate }}
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'Language')" >
+            {{"LIBRARY.CLASS.CREATE.LANGUAGE.ER" | translate }}
+          </div>        
         </div>
 
         <div class="col-12 col-md-6">
@@ -252,10 +253,43 @@
           {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}
         </div>
         </div>
-
       </div>
 
       
+      <div class="form-group row">
+        <!--begin::Form group-->     
+          <label>  {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}</label >
+            <textarea
+              name="Description"
+              class="form-control form-control-lg form-control-solid"
+              formControlName="Description"
+              style="min-height: 250px; padding: 13px"
+              placeholder="The class is about ...."
+              [class.is-invalid]="isControlInvalid('Description')"
+              [class.is-valid]="isControlValid('Description')"
+              required
+            ></textarea>
+            <div class="feedback" *ngIf="!isControlTouched('Description')">
+              {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.BES" | translate }}
+            </div>
+            <div class="valid-feedback" *ngIf="isControlValid('Description')">
+              <!-- Name was entered correct -->
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('required', 'Description')"
+            >
+            {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.ER" | translate }}
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="controlHasError('minlength', 'Description')"
+            >
+            {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.MIN" | translate }}
+            </div>
+        
+      </div>
+
 
      
 

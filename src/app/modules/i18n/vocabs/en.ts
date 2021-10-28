@@ -414,6 +414,14 @@ export const locale = {
             LAGERESCHOOL : 'Primary school',
             MIDDELBAAR : 'Secondary school',
           }, 
+          LANGUAGE: {
+            NAAM : 'Language',
+            BES : 'In what language is the document written?',
+            ER: 'Language is required',
+            NEDERLANDS : 'Dutch',
+            ENGELS : 'Englisch',
+            SPAANS : 'Spanish',
+          },
           BESCHRIJVING: {
             NAAM : 'Description',
             BES : 'Provide additional information about het lesson here.',

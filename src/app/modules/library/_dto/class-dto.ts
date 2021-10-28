@@ -5,4 +5,5 @@ export class ClassDTO {
     Public: string
     PdfUrl: string
     CreationDate: Date
+    Language: string
   }
