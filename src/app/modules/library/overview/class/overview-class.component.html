@@ -79,7 +79,7 @@
             
              <!--begin::Title-->
              <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-                <span class="text-muted font-weight-bold font-size-sm my-1">
+                <span class="text-muted font-weight-bold font-size-sm my-1" id='left'>
                     {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description.length<=100 ? cl.description : ((cl.description | slice:0:100)+'...') }}
                 </span>
     
@@ -94,6 +94,11 @@
                     <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
                         <span class="material-icons">
                             file_open
+                        </span>
+                    </a>
+                    <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                        <span class="material-icons">
+                           mode_edit
                         </span>
                     </a>
                 </div>
