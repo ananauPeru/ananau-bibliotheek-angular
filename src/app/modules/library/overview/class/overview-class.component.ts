@@ -34,6 +34,7 @@ export class OverviewClassComponent implements OnInit {
     displayedColumns7: string[] = ['Titel', 'Auteur', 'Beschrijving', 'taal','doelgroep']
   
     taal: string = undefined
+    publiek: string = undefined
     naam: string = undefined
   
     @ViewChild('matPaginator7', { static: true }) paginator7: MatPaginator
@@ -83,6 +84,17 @@ export class OverviewClassComponent implements OnInit {
       this.taal = taal
     } else {
       this.taal = undefined
+    }
+
+    this.paginate()
+  }
+  applyPubliek(p: string) {
+    this.showErrorTaal = false
+
+    if (p.length > 0) {
+      this.publiek = p
+    } else {
+      this.publiek = undefined
     }
 
     this.paginate()

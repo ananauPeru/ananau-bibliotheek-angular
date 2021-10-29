@@ -46,6 +46,14 @@
                         {{enum.value | translate }}
                     </option>
                 </select>
+                <br>
+                <select class="form-control form-control-lg form-control-solid" placeholder="Doelgroep"
+                (change)="applyPubliek($event.target.value)">
+                <option value="">{{"LIBRARY.CLASS.CREATE.PUBLIEK.NAAM" | translate }}</option>
+                <option *ngFor="let enum of ClassPubliek | keyvalue" value="{{enum.key}}">
+                    {{enum.value | translate }}
+                </option>
+            </select>
             </div>
         </div>
 
@@ -80,7 +88,7 @@
              <!--begin::Title-->
              <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3" id='left'>
                 <span class="text-muted font-weight-bold font-size-sm my-1" id='left'>
-                    {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description.length<=100 ? cl.description : ((cl.description | slice:0:100)+'...') }}
+                    {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description.length<=60 ? cl.description : ((cl.description | slice:0:60)+'...') }}
                 </span>
     
             </div>

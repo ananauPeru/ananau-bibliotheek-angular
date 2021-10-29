@@ -236,7 +236,7 @@
           name="PdfUrl"
           class="custom-dropzone form-control form-control-solid border"
           ngx-dropzone
-          [accept]="'.pdf , .docx, .doc, .xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf, image/*'"
+          [accept]="'.pdf , .docx, .doc, .xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf,.zip, image/*'"
           (change)="onSelectClassImage($event)"
           required
         >
@@ -252,6 +252,9 @@
             [removable]="true"
             (removed)="onRemoveClassImage(f)"
           >
+          <span class="material-icons">
+            attach_file
+            </span>
           </ngx-dropzone-image-preview>
         </div>
         <div class="feedback" *ngIf="!isControlTouched('PdfUrl')">
