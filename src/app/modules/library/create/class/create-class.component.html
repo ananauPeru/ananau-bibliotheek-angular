@@ -245,17 +245,16 @@
               {{"LIBRARY.CLASS.CREATE.UP.HIER" | translate }}
             </p>
           </ngx-dropzone-label>
-          <ngx-dropzone-image-preview
+         
+          <ngx-dropzone-preview
             ngProjectAs="ngx-dropzone-preview"
             *ngFor="let f of classImages"
             [file]="f"
             [removable]="true"
             (removed)="onRemoveClassImage(f)"
           >
-          <span class="material-icons">
-            attach_file
-            </span>
-          </ngx-dropzone-image-preview>
+          </ngx-dropzone-preview>
+          
         </div>
         <div class="feedback" *ngIf="!isControlTouched('PdfUrl')">
           {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}
