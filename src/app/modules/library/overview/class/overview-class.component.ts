@@ -11,6 +11,8 @@ import { AuthUtil } from '../../../../_utils/auth_util'
 import { ClassModel } from '../../_models/class.model';
 import { defaultIfEmpty, map } from 'rxjs/operators';
 import { ClassPubliek } from '../../_models/class-publiek.enum';
+import { BlobNamePrefix } from 'src/app/modules/organization/_models/blob-name-prefix';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-overview-class',
@@ -129,6 +131,9 @@ export class OverviewClassComponent implements OnInit {
     })
   }
 
-  
-
+  downloadFile(file: File ) {
+    let fileName = `document`;
+    FileSaver.saveAs(file, fileName);
+  }
+    
 }
