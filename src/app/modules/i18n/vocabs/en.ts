@@ -387,7 +387,7 @@ export const locale = {
           CANCEL: 'Cancel',
           MAAK: 'Make a new lesson',
           BEWERK: 'Save adjustments',
-          FILTER:'Filter bby title, author or description',
+          FILTER:'Filter by title, author or description',
           WAAR:'The document cannot be displayed below. It is present. If you want to upload another document, simply upload a new document below.',
           TITEL: {
             NAAM : 'Title',
