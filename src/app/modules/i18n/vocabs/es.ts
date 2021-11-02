@@ -387,6 +387,7 @@ export const locale = {
           CANCEL: 'Cancelar',
           MAAK: 'Crear una nueva lección',
           BEWERK: 'Guardar ajustes',
+          FILTER:'Filtrar por título, autor o descripción',
           WAAR:'El documento no se puede mostrar a continuación. Está presente. Si desea cargar otro documento, simplemente cargue un nuevo documento a continuación.',
           TITEL: {
             NAAM : 'Título',

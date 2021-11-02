@@ -374,6 +374,7 @@ export const locale = {
           CANCEL: 'Annuleren',
           MAAK: 'Maak een nieuwe les',
           BEWERK: 'Aanpassing opslaan',
+          FILTER:'Filter op titel, auteur of beschrijving',
           WAAR: 'Het document kan hieronder niet getoond worden. Het is wel aanwezig. Indien je een ander document wil uploaden moet je gewoon hieronder een nieuw document uploaden.',
           TITEL: {
             NAAM : 'Titel',

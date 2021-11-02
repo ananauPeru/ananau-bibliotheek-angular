@@ -35,7 +35,7 @@ export class OverviewClassComponent implements OnInit {
   
     taal: string = undefined
     publiek: string = undefined
-    naam: string = undefined
+ 
   
     @ViewChild('matPaginator7', { static: true }) paginator7: MatPaginator
     @ViewChild('sort7', { static: true }) sort7: MatSort
@@ -65,17 +65,7 @@ export class OverviewClassComponent implements OnInit {
     this.paginate()
   }
 
-  applyNaam(n: string) {
-    this.showErrorTaal = false
 
-    if (n.length > 0) {
-      this.naam = n
-    } else {
-      this.naam = undefined
-    }
-
-    this.paginate()
-  }
 
   applyTaal(taal: string) {
     this.showErrorTaal = false
@@ -111,7 +101,7 @@ export class OverviewClassComponent implements OnInit {
   }
 
   paginate(): Observable<ClassModel[]> {
-    this.classService.filter(this.dataSource7.filter,this.naam, this.taal)
+    this.classService.filter(this.dataSource7.filter, this.taal, this.publiek)
 
     let classList = this.classService.classes.pipe(
       map((c) =>
@@ -143,9 +133,6 @@ export class OverviewClassComponent implements OnInit {
     })
   }
 
-  downloadFile(file: File ) {
-    let fileName = `document`;
-    FileSaver.saveAs(file, fileName);
-  }
+ 
     
 }

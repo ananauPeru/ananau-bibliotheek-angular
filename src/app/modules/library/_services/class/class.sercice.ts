@@ -34,20 +34,133 @@ export class ClassService {
   }
 
   filter(
-    filter: any,
-    _category: any,
-    _genre: any
+    _naam: any,
+    _taal: any,
+    _doel: any
   ) {
-    let f = filter.toLowerCase();
-    let category = undefined;
-    if (_category) {
-      category = _category.toLowerCase();
+    
+    let taal = undefined;
+    if (_taal) {
+      taal = _taal
     }
-    let genre = undefined;
-    if (_genre) {
-      genre = _genre.toLowerCase();
+    let doel = undefined;
+    if (_doel) {
+      doel = _doel
     }
-    return this._classes;
+    let naam = undefined;
+    if (_naam) {
+      naam = _naam.toLowerCase()
+    }
+
+
+    if ( doel && taal && naam){
+      this.classes = this._classes.pipe(
+        map((lessen) =>
+          lessen.filter((cl) => {
+            let c = cl.language.includes(taal) && cl.public.includes(doel) && (
+              cl.title.toLowerCase().includes(naam) ||
+              cl.author.toLowerCase().includes(naam) ||
+              cl.description.toLowerCase().includes(naam)
+            )
+            return c;
+          })
+        )
+      );
+    }
+    else{
+      if (doel && taal){
+        this.classes = this._classes.pipe(
+          map((lessen) =>
+            lessen.filter((cl) => {
+              let c = cl.language.includes(taal) && cl.public.includes(doel)
+              return c;
+            })
+          )
+        );
+      }
+      else{
+        if(taal && naam){
+          this.classes = this._classes.pipe(
+            map((lessen) =>
+              lessen.filter((cl) => {
+                let c = cl.language.includes(taal)  && (
+                  cl.title.toLowerCase().includes(naam) ||
+                  cl.author.toLowerCase().includes(naam) ||
+                  cl.description.toLowerCase().includes(naam)
+                )
+                return c;
+              })
+            )
+          );
+        }
+        else{
+          if(doel && naam){
+            this.classes = this._classes.pipe(
+              map((lessen) =>
+                lessen.filter((cl) => {
+                  let c = cl.public.includes(doel) && (
+                    cl.title.toLowerCase().includes(naam) ||
+                    cl.author.toLowerCase().includes(naam) ||
+                    cl.description.toLowerCase().includes(naam)
+                  )
+                  return c;
+                })
+              )
+            );
+          }
+          else{
+            if(taal){
+              this.classes = this._classes.pipe(
+                map((lessen) =>
+                  lessen.filter((cl) => {
+                    let c = cl.language.includes(taal)
+                    return c;
+                  })
+                )
+              );
+            }
+            else{
+              if(doel){
+                this.classes = this._classes.pipe(
+                  map((lessen) =>
+                    lessen.filter((cl) => {
+                      let c = cl.public.includes(doel) 
+                      return c;
+                    })
+                  )
+                );
+              }
+              else{
+                if(naam){
+                  this.classes = this._classes.pipe(
+                    map((lessen) =>
+                      lessen.filter((cl) => {
+                        let c =  (
+                          cl.title.toLowerCase().includes(naam) ||
+                          cl.author.toLowerCase().includes(naam) ||
+                          cl.description.toLowerCase().includes(naam)
+                        )
+                        return c;
+                      })
+                    )
+                  );
+                }
+                else{
+                  this.classes = this._classes.pipe(
+                    map((lessen) =>  lessen )) 
+                }
+              }
+            }
+          }
+          
+        }
+      }
+    }
+
+  
+   
+   
+  
    /* if (category == undefined) {
       this.classes = this._classes.pipe(
         map((books) =>
