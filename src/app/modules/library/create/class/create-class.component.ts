@@ -37,6 +37,8 @@ export class CreateClassComponent implements OnInit {
   ) { 
     this.route.data.subscribe((data) => {
       this.class = data['class']
+      console.log(data)
+      console.log(data['class'])
     })
     this.route.params.subscribe((params) => {
       this.routeId = params['id']
@@ -46,7 +48,7 @@ export class CreateClassComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.fb.group({
       Title: [
-        this.class && this.class.Title ? this.class.Title : '',
+        this.class && this.class.title ? this.class.title : '',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -54,7 +56,7 @@ export class CreateClassComponent implements OnInit {
         ])
       ],
       Author: [
-        this.class && this.class.Author ? this.class.Author : '',
+        this.class && this.class.author ? this.class.author : '',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -62,44 +64,40 @@ export class CreateClassComponent implements OnInit {
         ])
       ],
       Description: [
-        this.class && this.class.Description ? this.class.Description : '',
+        this.class && this.class.description ? this.class.description : '',
         Validators.compose([
           Validators.required,
           Validators.minLength(3)
         ])
       ],
       PdfUrl: [
-        this.class && this.class.PdfUrl ? this.class.PdfUrl : '',
+        this.class && this.class.pdfUrl ? this.class.pdfUrl : '',
         Validators.compose([
           Validators.required,
         ])
       ],
       Public: [
-        this.class && this.class.Public ? this.class.Public : '',
+        this.class && this.class.public ? this.class.public : '',
         Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100)
+          Validators.required
         ])
       ],
       Language: [
-        this.class && this.class.Language ? this.class.Language : '',
+        this.class && this.class.language ? this.class.language : '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100)
         ])
       ],
       CreationDate: [
-        this.class && this.class.CreationDate ?  new NgbDate(
+        this.class && this.class.creationDate ?  new NgbDate(
           new Date(
-            this.datePipe.transform(this.class.CreationDate, 'yyyy-MM-dd'),
+            this.datePipe.transform(this.class.creationDate, 'yyyy-MM-dd'),
           ).getFullYear(),
           new Date(
-            this.datePipe.transform(this.class.CreationDate, 'yyyy-MM-dd'),
+            this.datePipe.transform(this.class.creationDate, 'yyyy-MM-dd'),
           ).getMonth() + 1,
           new Date(
-            this.datePipe.transform(this.class.CreationDate, 'yyyy-MM-dd'),
+            this.datePipe.transform(this.class.creationDate, 'yyyy-MM-dd'),
           ).getDate(),
         )
       : new NgbDate(
@@ -112,6 +110,10 @@ export class CreateClassComponent implements OnInit {
         ])
       ],
     })
+
+    if (this.class){
+      console.log(this.class.title);
+    }
   }
 
   save(){
@@ -122,36 +124,35 @@ export class CreateClassComponent implements OnInit {
     const formValues = this.formGroup.value
     if (!this.class){
       let item = new ClassDTO()
-      item.Title = formValues.Title
-      item.Author = formValues.Author
-      item.Description = formValues.Description
-      item.CreationDate = new Date(
+      item.title = formValues.Title
+      item.author = formValues.Author
+      item.description = formValues.Description
+      item.creationDate = new Date(
         Date.UTC(
           formValues.CreationDate.year,
           formValues.CreationDate.month - 1,
           formValues.CreationDate.day,
         ),
       )
-     console.log(formValues.CreationDate)
-      item.PdfUrl = formValues.PdfUrl
-      item.Public = formValues.Public
-      item.Language = formValues.Language
+      item.pdfUrl = formValues.PdfUrl
+      item.public = formValues.Public
+      item.language = formValues.Language
       this.create(item);
     }
     else{
-      this.class.Title = formValues.Title
-      this.class.Author = formValues.Author
-      this.class.Description = formValues.Description
-      this.class.CreationDate = new Date(
+      this.class.title = formValues.Title
+      this.class.author = formValues.Author
+      this.class.description = formValues.Description
+      this.class.creationDate = new Date(
         Date.UTC(
           formValues.CreationDate.year,
           formValues.CreationDate.month - 1,
           formValues.CreationDate.day,
         ),
       )
-      this.class.PdfUrl = formValues.PdfUrl
-      this.class.Public = formValues.Public
-      this.class.Language = formValues.Language
+      this.class.pdfUrl = formValues.PdfUrl
+      this.class.public = formValues.Public
+      this.class.language = formValues.Language
       this.create(this.class)
     }
   }
@@ -194,7 +195,7 @@ export class CreateClassComponent implements OnInit {
                 'Changes Saved',
               )
               this.cservice.loadInitialData();
-              this.router.navigate(['/library/Classes/overview'])
+              this.router.navigate(['/library/classes/overview'])
             },
             (error) => {
               console.error(error)

@@ -387,6 +387,7 @@ export const locale = {
           CANCEL: 'Cancel',
           MAAK: 'Make a new lesson',
           BEWERK: 'Save adjustments',
+          WAAR:'The document cannot be displayed below. It is present. If you want to upload another document, simply upload a new document below.',
           TITEL: {
             NAAM : 'Title',
             BES : ' Enter the title of the lesson',
@@ -432,7 +433,7 @@ export const locale = {
           UP : {
             NAAM : "Upload zone",
             HIER : "Click here to slect a document",
-            BES : "If the document continues to load after selecting, click on the document again."
+            BES : "Upload maximum 1 document."
           }
         }
       },

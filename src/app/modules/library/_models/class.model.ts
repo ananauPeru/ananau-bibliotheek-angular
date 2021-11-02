@@ -1,12 +1,12 @@
 export class ClassModel {
-  ClassID: number
-  Title: string
-  Author: string
-  Description: string
-  Public: string
-  PdfUrl: string
-  CreationDate: Date
-  Language: string
+  classID: number
+  title: string
+  author: string
+  description: string
+  public: string
+  pdfUrl: string
+  creationDate: Date
+  language: string
 
   constructor() {}
 

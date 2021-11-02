@@ -13,6 +13,7 @@ import { OverviewClassComponent } from './overview/class/overview-class.componen
 import { BookResolver } from './_resolvers/book.resolver'
 import { ItemResolver } from './_resolvers/item.resolver'
 import { LoanedPieceResolver } from './_resolvers/loaned-piece.resolver'
+import { ClassResolver } from './_resolvers/class.resolver'
 
 
 const routes: Routes = [
@@ -44,6 +45,11 @@ const routes: Routes = [
         path: 'books/edit-book/:id',
         resolve: { book: BookResolver },
         component: CreateBookComponent,
+      },
+      {
+        path: 'classes/edit-class/:id',
+        resolve: { class: ClassResolver },
+        component: CreateClassComponent,
       },
       {
         path: 'items/overview',

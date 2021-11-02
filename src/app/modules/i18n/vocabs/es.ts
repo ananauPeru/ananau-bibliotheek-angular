@@ -387,6 +387,7 @@ export const locale = {
           CANCEL: 'Cancelar',
           MAAK: 'Crear una nueva lección',
           BEWERK: 'Guardar ajustes',
+          WAAR:'El documento no se puede mostrar a continuación. Está presente. Si desea cargar otro documento, simplemente cargue un nuevo documento a continuación.',
           TITEL: {
             NAAM : 'Título',
             BES : 'ingrese el título de la lección.',
@@ -432,7 +433,7 @@ export const locale = {
           UP : {
             NAAM : "Zona de carga",
             HIER : "Haga clic aquí para seleccionar un documento",
-            BES : "Si el documento continúa cargándose después de seleccionarlo, haga clic en el documento nuevamente."
+            BES : "Subir 1 documento como máximo."
           }
         }
       },

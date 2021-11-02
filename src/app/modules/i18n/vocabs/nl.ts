@@ -374,6 +374,7 @@ export const locale = {
           CANCEL: 'Annuleren',
           MAAK: 'Maak een nieuwe les',
           BEWERK: 'Aanpassing opslaan',
+          WAAR: 'Het document kan hieronder niet getoond worden. Het is wel aanwezig. Indien je een ander document wil uploaden moet je gewoon hieronder een nieuw document uploaden.',
           TITEL: {
             NAAM : 'Titel',
             BES : 'Voer de titel van de les in.',
@@ -419,7 +420,7 @@ export const locale = {
           UP : {
             NAAM : "Uploadzone",
             HIER : "Hier klikken om document te selecteren",
-            BES : "Als het document blijft laden na selecteren, klik dan eens op het document."
+            BES : "Maximum 1 document uploaden."
           }
         }
       },
