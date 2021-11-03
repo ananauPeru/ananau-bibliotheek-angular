@@ -315,13 +315,30 @@
           [disabled]="formGroup.invalid"
         >
           <ng-container *ngIf="class; else elseTemplate">
+            <span class="material-icons">
+              edit
+              </span>
             {{"LIBRARY.CLASS.CREATE.BEWERK" | translate }}
           </ng-container>
           <ng-template #elseTemplate>
+            <span class="material-icons">
+              add
+              </span>
             {{"LIBRARY.CLASS.CREATE.MAAK" | translate }}
           </ng-template>
         </button>
       </div>
+
+      <button
+            (click)="onDelete()"
+            class="btn btn-primary font-weight-bold mr-2"
+            [disabled]="formGroup.invalid"
+          >
+          <span class="material-icons">
+            delete
+            </span>
+            {{ "LIBRARY.CREATE.ITEM.DELETE" | translate }}
+          </button>
 
       </form>
     </div>

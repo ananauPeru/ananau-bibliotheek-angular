@@ -242,4 +242,36 @@ export class CreateClassComponent implements OnInit {
     this.classImages.splice(this.classImages.indexOf(event), 1)
   }
 
+  onDelete() {
+    if (!this.class) {
+      this.toastrUtil.showError(
+        "Something went wrong, couldn't delete... Try again later.",
+        'Error',
+      )
+    } else {
+      const idelete = this.classService
+        .delete(this.class.classID)
+        .pipe(
+          tap(
+            (res) => {
+              this.toastrUtil.showSuccess(
+                'Item successfully deleted.',
+                'Item Deleted',
+              )
+              this.router.navigate(['/library/classes/overview'])
+            },
+            (error) => {
+              console.error(error)
+              this.toastrUtil.showError(
+                'Item could not be deleted... Try again later.',
+                'Error',
+              )
+            },
+          ),
+        )
+        .subscribe()
+    }
+    this.cservice.loadInitialData()
+  }
+
 }

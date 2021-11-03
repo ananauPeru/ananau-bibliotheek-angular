@@ -14,6 +14,27 @@ const API_ITEMS_URL = `${environment.apiUrl}/class`;
   providedIn: "root",
 })
 export class ClassHTTPService {
+
+
+  delete(id: number): Observable<ClassModel> {
+    return this.http
+      .delete(`${API_ITEMS_URL}/${id}`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map(
+          (res: any): ClassModel => {
+            return res;
+          }
+        )
+      );
+  }
   constructor(private http: HttpClient) {}
 
   getAllClasses$(): Observable<ClassModel[]> {
