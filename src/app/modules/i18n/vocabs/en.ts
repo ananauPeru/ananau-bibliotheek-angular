@@ -434,7 +434,8 @@ export const locale = {
           UP : {
             NAAM : "Upload zone",
             HIER : "Click here to slect a document",
-            BES : "Upload maximum 1 document."
+            BES : "Upload maximum 1 document. ",
+            BEST: "If the document continues to load after selecting, click on the document again. "
           }
         }
       },

@@ -421,7 +421,8 @@ export const locale = {
           UP : {
             NAAM : "Uploadzone",
             HIER : "Hier klikken om document te selecteren",
-            BES : "Maximum 1 document uploaden."
+            BES : "Maximum 1 document uploaden.",
+            BEST: "Als het document blijft laden na selecteren, klik dan eens op het document."
           }
         }
       },

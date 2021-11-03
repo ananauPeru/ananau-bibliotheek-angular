@@ -434,7 +434,8 @@ export const locale = {
           UP : {
             NAAM : "Zona de carga",
             HIER : "Haga clic aquí para seleccionar un documento",
-            BES : "Subir 1 documento como máximo."
+            BES : "Subir 1 documento como máximo.",
+            BEST: "Si el documento continúa cargándose después de seleccionarlo, haga clic en el documento nuevamente."
           }
         }
       },

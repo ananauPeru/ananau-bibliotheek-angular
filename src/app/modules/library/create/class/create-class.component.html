@@ -245,7 +245,7 @@
             </p>
           </ngx-dropzone-label>
          
-          <ngx-dropzone-preview
+          <ngx-dropzone-image-preview
             ngProjectAs="ngx-dropzone-preview"
             *ngFor="let f of classImages"
             [file]="f"
@@ -253,12 +253,13 @@
             (removed)="onRemoveClassImage(f)"
           >
           <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-          </ngx-dropzone-preview>
+          </ngx-dropzone-image-preview>
           
         </div>
        
         <div class="feedback" *ngIf="!isControlTouched('PdfUrl')">
-          {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}
+          {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }} <br>
+          {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }}        
         </div>
         </div>
       </div>
