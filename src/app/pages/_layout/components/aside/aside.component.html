@@ -226,7 +226,18 @@
       <!-- end::1 Level -->
 
 
-      <!-- Classes -->
+       <!-- LIBRARY -->
+      <!-- begin::section -->
+      <li class="menu-section" *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])">
+        <h4 class="menu-text">{{ "MENU.LIBRARY.LES" | translate }}</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <!-- end:: section -->
+
+      <!-- begin::1 Level -->
+      <!-- begin::1 Level -->
+
+     <!-- Classes -->
       <!-- begin::1 Level -->
 
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
@@ -252,7 +263,7 @@
             <!-- begin::2 Level -->
             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
               routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/library/classes/overview" routerLinkActive="active">
+              <a class="menu-link menu-toggle" routerLink="/library/classes/files" routerLinkActive="active">
                 <span [inlineSVG]="'./assets/media/svg/icons/Files/Folder-check.svg'" cacheSVG="true"
                   class="svg-icon menu-icon"></span>
                 <span class="menu-text">{{
@@ -274,10 +285,36 @@
                   }}</span>
               </a>
             </li>
+
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+              routerLinkActive="menu-item-open">
+              <a class="menu-link menu-toggle" routerLink="/library/classes/overview" routerLinkActive="active">
+                <span [inlineSVG]="'./assets/media/svg/icons/Files/Folder-check.svg'" cacheSVG="true"
+                  class="svg-icon menu-icon"></span>
+                <span class="menu-text">{{
+                  "MENU.ZOEK" | translate
+                  }}</span>
+              </a>
+            </li>
+
+
           </ul>
         </div>
       </li>
       <!-- end::1 Level -->
+
+      
+
+     
+          
+
+            
+
+   
+     
+      <!-- end::1 Level -->
+
+
 
       
 

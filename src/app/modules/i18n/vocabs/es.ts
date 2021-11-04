@@ -32,6 +32,7 @@ export const locale = {
       FEATURES: "Caracteristicas",
       APPS: "Aplicaciones",
       DASHBOARD: "Tablero",
+      ZOEK: 'Buscar',
       NO_ROLES:
         "Todavía no tienes acceso a ningún módulo. Por favor contáctenos para solicitar acceso.",
       HI: "Hola",

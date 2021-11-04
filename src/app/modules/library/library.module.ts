@@ -58,7 +58,8 @@ import { LoanDetailsComponent } from './loan/new-loan/loan-details/loan-details.
 import { ReturnDetailsComponent } from './loan/new-loan/return-details/return-details.component';
 import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component';
 import { OverviewClassComponent } from './overview/class/overview-class.component';
-import { CreateClassComponent } from './create/class/create-class.component'
+import { CreateClassComponent } from './create/class/create-class.component';
+import { FinderClassComponent } from './finder/class/class.component'
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { CreateClassComponent } from './create/class/create-class.component'
     SignOffComponent,
     OverviewClassComponent,
     CreateClassComponent,
+    FinderClassComponent,
   ],
   imports: [
     CommonModule,

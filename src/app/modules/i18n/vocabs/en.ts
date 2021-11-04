@@ -32,6 +32,7 @@ export const locale = {
       FEATURES: 'Features',
       APPS: 'Apps',
       DASHBOARD: 'Dashboard',
+      ZOEK: 'Search',
       NO_ROLES:
         "You don't have access to any modules yet. Please contact us to ask for access.",
       HI: 'Hi',
