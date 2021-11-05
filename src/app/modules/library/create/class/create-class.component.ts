@@ -7,6 +7,8 @@ import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { tap } from 'rxjs/operators';
 import { ToastrUtil } from 'src/app/_utils/toastr_util';
 import { ClassDTO } from '../../_dto/class-dto';
+import { ClassLanguages } from '../../_models/class-languages.enum';
+import { ClassSubject } from '../../_models/class-subject.enum';
 import { ClassModel } from '../../_models/class.model';
 import { ClassHTTPService } from '../../_services/class/class-http/class-http.service';
 import { ClassService } from '../../_services/class/class.sercice';
@@ -22,8 +24,10 @@ export class CreateClassComponent implements OnInit {
   public routeId: number
  // public BookCategories = BookCategories
   public classImages = new Array<File>()
-
+  value: string = 'no'; 
   formGroup: FormGroup
+  public ClassCategories = ClassLanguages
+  public ClassSubjects = ClassSubject
   
   constructor(
     private fb: FormBuilder,
@@ -34,6 +38,7 @@ export class CreateClassComponent implements OnInit {
     private route: ActivatedRoute,
     public toastrUtil: ToastrUtil,
     private datePipe: DatePipe,
+    
   ) { 
     this.route.data.subscribe((data) => {
       this.class = data['class']
@@ -273,5 +278,7 @@ export class CreateClassComponent implements OnInit {
     }
     this.cservice.loadInitialData()
   }
+
+
 
 }

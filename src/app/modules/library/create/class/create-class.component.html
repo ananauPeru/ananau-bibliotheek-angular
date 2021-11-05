@@ -216,7 +216,14 @@
             class="invalid-feedback"
             *ngIf="controlHasError('required', 'Language')" >
             {{"LIBRARY.CLASS.CREATE.LANGUAGE.ER" | translate }}
-          </div>        
+          </div>  <br>
+          <label>Vak</label>
+          <select class="form-control form-control-lg form-control-solid" placeholder="Language" required>
+                    <option value="">Vakken</option>
+                    <option *ngFor="let enum of ClassSubjects | keyvalue" value="{{enum.key}}">
+                        {{enum.value | translate }}
+                    </option>
+                </select>      
         </div>
 
         <div class="col-12 col-md-6">
@@ -300,7 +307,74 @@
       </div>
 
 
-     
+     <div>
+       <p>Do you want to upload the same class in an other language?</p>
+       Yes <input type="checkbox" name="extra"  [checked]="value === 'extra'" (click)="value = 'extra'"> <br>
+       No <input type="checkbox"  name="no" [checked]="value === 'no'" (click)="value = 'no'" >
+       <div *ngIf="value === 'extra'">
+        <div class="form-group row">
+          <!--begin::Form group-->
+          <div class="col-12 col-md-6">
+            <label>In welke taal nog?</label>
+            <select class="form-control form-control-lg form-control-solid" name="Extra_Language" formControlName="Extra_Language"  aria-placeholder="Language">
+                    <option value="">{{"LIBRARY.CLASS.CREATE.LANGUAGE.NAAM" | translate }}</option>
+                    <option *ngFor="let enum of ClassCategories | keyvalue" value="{{enum.key}}">
+                        {{enum.value | translate }}
+                    </option>
+                </select>
+            <div class="feedback" *ngIf="!isControlTouched('Extra_Language')">
+              {{"LIBRARY.CLASS.CREATE.LANGUAGE.BES" | translate }}
+            </div>
+               
+          </div>
+  
+          <div class="col-12 col-md-6">
+            <label class="col-12">
+              <span class="material-icons">
+              attach_file
+              </span>
+            hier te vertaling uploaden
+              <ng-container *ngIf="class">
+                <p class="waar">
+                 <br>het bestand zit er in maar zal niet in dropzone aanwezig zijn
+                </p>
+                    </ng-container> 
+            </label>
+            <div
+            name="Extra_PdfUrl"
+            class="custom-dropzone form-control form-control-solid border"
+            ngx-dropzone
+            [accept]="'.pdf , .docx, .doc, .xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf,.zip, image/*'"
+            (change)="onSelectClassImage($event)"
+            
+          >
+            <ngx-dropzone-label>
+              <p class="form-text text-muted">
+               sleep het hier maar in
+              </p>
+            </ngx-dropzone-label>
+           
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of classImages"
+              [file]="f"
+              [removable]="true"
+              (removed)="onRemoveClassImage(f)"
+            >
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-image-preview>
+            
+          </div>
+         
+          <div class="feedback" *ngIf="!isControlTouched('Extra_PdfUrl')">
+            max 1 document <br>
+           als blijft laden weet je wat te doen        
+          </div>
+          </div>
+        </div>
+       </div>
+      
+     </div>
 
       <div class="float-right">
         <a
