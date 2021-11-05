@@ -36,28 +36,33 @@ export class ClassService {
   filter(
     _naam: any,
     _taal: any,
-    _doel: any
+    _doel: any,
+    _vak: any
   ) {
     
-    let taal = undefined;
+    let taal = "";
     if (_taal) {
       taal = _taal
     }
-    let doel = undefined;
+    let vak = "";
+    if (_vak) {
+      vak = _vak
+    }
+    let doel = "";
     if (_doel) {
       doel = _doel
     }
-    let naam = undefined;
+    let naam = "";
     if (_naam) {
       naam = _naam.toLowerCase()
     }
+    console.log(vak)
 
-
-    if ( doel && taal && naam){
+  
       this.classes = this._classes.pipe(
         map((lessen) =>
           lessen.filter((cl) => {
-            let c = cl.language.includes(taal) && cl.public.includes(doel) && (
+            let c = cl.language.includes(taal) && cl.public.includes(doel) && cl.subjects.includes(vak) && (
               cl.title.toLowerCase().includes(naam) ||
               cl.author.toLowerCase().includes(naam) ||
               cl.description.toLowerCase().includes(naam)
@@ -66,129 +71,7 @@ export class ClassService {
           })
         )
       );
-    }
-    else{
-      if (doel && taal){
-        this.classes = this._classes.pipe(
-          map((lessen) =>
-            lessen.filter((cl) => {
-              let c = cl.language.includes(taal) && cl.public.includes(doel)
-              return c;
-            })
-          )
-        );
-      }
-      else{
-        if(taal && naam){
-          this.classes = this._classes.pipe(
-            map((lessen) =>
-              lessen.filter((cl) => {
-                let c = cl.language.includes(taal)  && (
-                  cl.title.toLowerCase().includes(naam) ||
-                  cl.author.toLowerCase().includes(naam) ||
-                  cl.description.toLowerCase().includes(naam)
-                )
-                return c;
-              })
-            )
-          );
-        }
-        else{
-          if(doel && naam){
-            this.classes = this._classes.pipe(
-              map((lessen) =>
-                lessen.filter((cl) => {
-                  let c = cl.public.includes(doel) && (
-                    cl.title.toLowerCase().includes(naam) ||
-                    cl.author.toLowerCase().includes(naam) ||
-                    cl.description.toLowerCase().includes(naam)
-                  )
-                  return c;
-                })
-              )
-            );
-          }
-          else{
-            if(taal){
-              this.classes = this._classes.pipe(
-                map((lessen) =>
-                  lessen.filter((cl) => {
-                    let c = cl.language.includes(taal)
-                    return c;
-                  })
-                )
-              );
-            }
-            else{
-              if(doel){
-                this.classes = this._classes.pipe(
-                  map((lessen) =>
-                    lessen.filter((cl) => {
-                      let c = cl.public.includes(doel) 
-                      return c;
-                    })
-                  )
-                );
-              }
-              else{
-                if(naam){
-                  this.classes = this._classes.pipe(
-                    map((lessen) =>
-                      lessen.filter((cl) => {
-                        let c =  (
-                          cl.title.toLowerCase().includes(naam) ||
-                          cl.author.toLowerCase().includes(naam) ||
-                          cl.description.toLowerCase().includes(naam)
-                        )
-                        return c;
-                      })
-                    )
-                  );
-                }
-                else{
-                  this.classes = this._classes.pipe(
-                    map((lessen) =>  lessen )) 
-                }
-              }
-            }
-          }
-          
-        }
-      }
-    }
-
   
-   
-   
-  
-   /* if (category == undefined) {
-      this.classes = this._classes.pipe(
-        map((books) =>
-          books.filter((book) => {
-            let b =
-              book.Title.toLowerCase().includes(f) ||
-              (book.Description
-                ? book.Description.toLowerCase().includes(f)
-                : false) ||
-              (book.Author ? book.Author.toLowerCase().includes(f) : false) ||
-              (book.Public ? book.Public.toLowerCase().includes(f) : false) ||
-              (book.Language ? book.Language.toLowerCase().includes(f) : false);
-            return b;
-          })
-        )
-      );
-    }
-
-    if (genre) {
-      this.classes = this._classes.pipe(
-        map((books) =>
-          books.filter((book) => {
-            let b = book.Language.toUpperCase().includes(genre);
-            return b;
-          })
-        )
-      );
-    }*/
   }
 
 }

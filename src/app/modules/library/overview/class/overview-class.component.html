@@ -28,7 +28,7 @@
         <div class="form-group row mb-10" *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
             <div class="col-12 col-md-8">
                  <select class="form-control form-control-lg form-control-solid" placeholder="Cource"
-                    (change)="applyTaal($event.target.value)">
+                    (change)="applyVak($event.target.value)">
                     <option value="">Cource</option>
                     <option *ngFor="let enum of ClassSubject | keyvalue" value="{{enum.key}}">
                         {{enum.value | translate }}
@@ -88,6 +88,9 @@
                         </span>
                         <span class="text-muted font-weight-bold font-size-sm">
                             {{"LIBRARY.CLASS.CREATE.PUBLIEK.NAAM" | translate }}: {{ClassPubliek[cl.public] | translate }} 
+                        </span>
+                        <span class="text-muted font-weight-bold font-size-sm">
+                            cours: {{ClassSubject[cl.subjects] }} 
                         </span>
                         
             </div>

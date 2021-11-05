@@ -36,6 +36,7 @@ export class OverviewClassComponent implements OnInit {
     displayedColumns7: string[] = ['Titel', 'Auteur', 'Beschrijving', 'taal','doelgroep']
   
     taal: string = undefined
+    vak: string = undefined
     publiek: string = undefined
  
   
@@ -80,6 +81,17 @@ export class OverviewClassComponent implements OnInit {
 
     this.paginate()
   }
+  applyVak(vak: string) {
+    this.showErrorTaal = false
+
+    if (vak.length > 0) {
+      this.vak = vak
+    } else {
+      this.vak = undefined
+    }
+
+    this.paginate()
+  }
   applyPubliek(p: string) {
     this.showErrorTaal = false
 
@@ -103,7 +115,7 @@ export class OverviewClassComponent implements OnInit {
   }
 
   paginate(): Observable<ClassModel[]> {
-    this.classService.filter(this.dataSource7.filter, this.taal, this.publiek)
+    this.classService.filter(this.dataSource7.filter, this.taal, this.publiek, this.vak)
 
     let classList = this.classService.classes.pipe(
       map((c) =>
