@@ -7,6 +7,9 @@ export class ClassModel {
   pdfUrl: string
   creationDate: Date
   language: string
+  tanslate: string
+  subjects: string
+  extraID: number
 
   constructor() {}
 
