@@ -218,7 +218,14 @@
             {{"LIBRARY.CLASS.CREATE.LANGUAGE.ER" | translate }}
           </div>  <br>
           <label>Vak</label>
-          <select class="form-control form-control-lg form-control-solid" placeholder="Language" required>
+          <select 
+          class="form-control form-control-lg form-control-solid"
+            name="Subject"
+            formControlName="Subject"
+            aria-placeholder="Subject"
+            [class.is-invalid]="isControlInvalid('Subject')"
+            [class.is-valid]="isControlValid('Subject')"
+            required>
                     <option value="">Vakken</option>
                     <option *ngFor="let enum of ClassSubjects | keyvalue" value="{{enum.key}}">
                         {{enum.value | translate }}

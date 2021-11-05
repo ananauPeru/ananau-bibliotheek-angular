@@ -93,6 +93,12 @@ export class CreateClassComponent implements OnInit {
           Validators.required,
         ])
       ],
+      Subject: [
+        this.class && this.class.subjects ? this.class.subjects : '',
+        Validators.compose([
+          Validators.required,
+        ])
+      ],
       CreationDate: [
         this.class && this.class.creationDate ?  new NgbDate(
           new Date(
@@ -115,10 +121,6 @@ export class CreateClassComponent implements OnInit {
         ])
       ],
     })
-
-    if (this.class){
-      console.log(this.class.title);
-    }
   }
 
   save(){
@@ -142,6 +144,7 @@ export class CreateClassComponent implements OnInit {
       item.pdfUrl = formValues.PdfUrl
       item.public = formValues.Public
       item.language = formValues.Language
+      item.subjects = formValues.Subject
       this.create(item);
     }
     else{
@@ -158,6 +161,7 @@ export class CreateClassComponent implements OnInit {
       this.class.pdfUrl = formValues.PdfUrl
       this.class.public = formValues.Public
       this.class.language = formValues.Language
+      this.class.subjects = formValues.Subject
       this.create(this.class)
     }
   }
