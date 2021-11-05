@@ -1,1 +1,131 @@
-<p>class works!</p>
+<div class="card card-custom">
+    <div class="row">
+    <div class="col-12">
+        <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
+            <div class="row">
+                <div class="col-12 col-md-8 w-100">
+                    <h3 class="card-title font-weight-bolder text-dark">
+                        {{"LIBRARY.CLASS_OVERVIEW.ALL" | translate }}
+                    </h3>
+                </div>
+                <div class="col-12 col-md-4">
+                    <button type="submit" id="kt_login_signin_submit"
+                        class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
+                        routerLink="/library/classes/add-class">
+                        {{"LIBRARY.CLASS_OVERVIEW.ADD" | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" >File explorer</a>
+              </h4>
+            </div>
+            <div >
+              <ul class="list-group">
+                <li class="list-group-item"> <a data-toggle="collapse" href="#collapse1"><span class="material-icons">folder</span>  Wiskunde </a>
+                   <div id="collapse1" class="panel-collapse collapse">
+                        <ul class="list-group">
+                          <li class="list-group-item" > <a data-toggle="collapse" href="#collapse2"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <ul class="list-group">
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse5"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                    <div id="collapse5" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item"><span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse6"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                    <div id="collapse6" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item"><span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse7"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                    <div id="collapse7" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item"><span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                </ul>
+                              </div>
+                        </li>
+                          <li class="list-group-item" > <a data-toggle="collapse" href="#collapse3"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL"| translate }}</a>
+                            <div id="collapse3" class="panel-collapse collapse">
+                                <ul class="list-group">
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse8"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                    <div id="collapse8" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item"><span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse9"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                    <div id="collapse9" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item"><span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse10"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                    <div id="collapse10" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item"><span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                </ul>
+                              </div>
+                        </li>
+                          <li class="list-group-item" > <a data-toggle="collapse" href="#collapse4"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR"| translate }}</a>
+                            <div id="collapse4" class="panel-collapse collapse">
+                                <ul class="list-group">
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse11"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                    <div id="collapse11" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item" > <span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse12"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                    <div id="collapse12" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item"><span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse13"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                    <div id="collapse13" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <li class="class-group-item"><span class="material-icons">  description   </span> file </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                </ul>
+                              </div>
+                        </li>
+                        </ul>
+                      </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+
+  
+
+ 

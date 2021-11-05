@@ -13,6 +13,7 @@ import { defaultIfEmpty, map } from 'rxjs/operators';
 import { ClassPubliek } from '../../_models/class-publiek.enum';
 import { BlobNamePrefix } from 'src/app/modules/organization/_models/blob-name-prefix';
 import * as FileSaver from 'file-saver';
+import { ClassSubject } from '../../_models/class-subject.enum';
 
 @Component({
   selector: 'app-overview-class',
@@ -24,6 +25,7 @@ export class OverviewClassComponent implements OnInit {
   public page: number = 0
   public ClassCategories = ClassLanguages
   public ClassPubliek = ClassPubliek
+  public ClassSubject = ClassSubject
   public showErrorTaal: boolean = false
   public filteredListEmpty: Observable<Boolean>
 
