@@ -51,6 +51,9 @@ export class CreateClassComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.class.translate != null){
+      this.value = 'extra'
+    }
     this.formGroup = this.fb.group({
       Title: [
         this.class && this.class.title ? this.class.title : '',
@@ -120,6 +123,11 @@ export class CreateClassComponent implements OnInit {
           Validators.required
         ])
       ],
+      Extra_Language: [
+        this.class && this.class.translate ? this.class.translate : '',
+        Validators.compose([
+        ])
+      ],
     })
   }
 
@@ -145,6 +153,12 @@ export class CreateClassComponent implements OnInit {
       item.public = formValues.Public
       item.language = formValues.Language
       item.subjects = formValues.Subject
+      if (this.value = 'no'){
+        item.translate = null
+      }
+      else{
+        item.translate = formValues.Extra_Language
+      }
       this.create(item);
     }
     else{
@@ -162,6 +176,13 @@ export class CreateClassComponent implements OnInit {
       this.class.public = formValues.Public
       this.class.language = formValues.Language
       this.class.subjects = formValues.Subject
+      console.log(this.value)
+      if (this.value = 'no'){
+        this.class.translate = null
+      }
+      else{
+        this.class.translate = formValues.Extra_Language
+      }
       this.create(this.class)
     }
   }

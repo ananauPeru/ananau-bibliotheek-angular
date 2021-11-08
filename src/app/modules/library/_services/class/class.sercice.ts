@@ -56,7 +56,6 @@ export class ClassService {
     if (_naam) {
       naam = _naam.toLowerCase()
     }
-    console.log(vak)
 
   
       this.classes = this._classes.pipe(

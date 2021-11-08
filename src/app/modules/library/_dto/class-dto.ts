@@ -6,7 +6,7 @@ export class ClassDTO {
     pdfUrl: string
     creationDate: Date
     language: string
-    tanslate: string
+    translate: string
     subjects: string
     extraID: number  
   }
