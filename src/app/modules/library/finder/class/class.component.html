@@ -9,11 +9,13 @@
                     </h3>
                 </div>
                 <div class="col-12 col-md-4">
+                  <div>
                     <button type="submit" id="kt_login_signin_submit"
-                        class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
-                        routerLink="/library/classes/add-class">
-                        {{"LIBRARY.CLASS_OVERVIEW.ADD" | translate }}
-                    </button>
+                  class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
+                  routerLink="/library/classes/add-class">
+                  {{"LIBRARY.CLASS_OVERVIEW.ADD" | translate }}
+              </button>
+                  </div> 
                 </div>
             </div>
         </div>
@@ -25,7 +27,9 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a data-toggle="collapse" >File explorer</a>
+                  <a href="/library/classes/overview" class="rechts">
+                    <span class="material-icons"> search </span>
+              </a> 
               </h4>
             </div>
             <div >

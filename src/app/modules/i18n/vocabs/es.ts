@@ -6,7 +6,9 @@ export const locale = {
     TRANSLATOR: {
       SELECT: "Elige tu idioma",
     },
-
+    EDIT: "Editar   ",
+    DOWNLOAD: "Descargar",
+    DOWNTAN: "Descargar traducción",
     // ERRORS
     ERRORS: {
       TRY_AGAIN: "Algo salió mal. Por favor, inténtelo de nuevo más tarde.",

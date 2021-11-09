@@ -1,3 +1,5 @@
+import { EducationalCourses } from "../../library/_models/educational-courses.enum";
+
 // USA
 export const locale = {
   lang: 'en',
@@ -6,7 +8,9 @@ export const locale = {
     TRANSLATOR: {
       SELECT: 'Select your language',
     },
-
+    EDIT: "Edit    ",
+    DOWNLOAD: "Download",
+    DOWNTAN: "Download translation",
     // ERRORS
     ERRORS: {
       TRY_AGAIN: 'Something went wrong. Please try again later.',

@@ -23,9 +23,9 @@
     </div>
 
     <!-- al de rest -->
-    <div class="card-body pt-2" *ngIf="AuthUtil.permitted(['admin'])">
+    <div class="card-body pt-2">
         <!--begin::Form Group-->
-        <div class="form-group row mb-10" *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
+        <div class="form-group row mb-10">
             <div class="col-12 col-md-8">
                  <select class="form-control form-control-lg form-control-solid" placeholder="Cource"
                     (change)="applyVak($event.target.value)">
@@ -117,11 +117,19 @@
                     
                     <!--hier download edit and open symbolen?::Info-->
                     <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                        {{"DOWNLOAD" | translate }}
+                        <span class="material-icons">
+                            file_open
+                        </span>
+                    </a>
+                    <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                        {{"DOWNTAN" | translate }}
                         <span class="material-icons">
                             file_open
                         </span>
                     </a>
                     <a routerLink='/library/classes/edit-class/{{cl.classID}}' class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                        {{"EDIT" | translate }}
                         <span class="material-icons">
                            mode_edit
                         </span>

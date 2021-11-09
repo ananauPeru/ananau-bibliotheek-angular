@@ -4,6 +4,10 @@ export const locale = {
     TRANSLATOR: {
       SELECT: 'Kies je taal',
     },
+    EDIT: "Bewerken  ",
+    DOWNLOAD: "Downloaden",
+    DOWNTAN: "Download vertaling",
+
     ERRORS: {
       TRY_AGAIN: 'Er is iets fout gegaan. Probeer het later nog eens.',
     },
