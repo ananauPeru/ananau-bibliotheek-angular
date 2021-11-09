@@ -41,8 +41,10 @@ export class ClassService {
   ) {
     
     let taal = "";
+    let trans = null;
     if (_taal) {
       taal = _taal
+      trans = _taal
     }
     let vak = "";
     if (_vak) {
@@ -61,7 +63,7 @@ export class ClassService {
       this.classes = this._classes.pipe(
         map((lessen) =>
           lessen.filter((cl) => {
-            let c = cl.language.includes(taal) && cl.public.includes(doel) && cl.subjects.includes(vak) && (
+            let c = (cl.language.includes(taal) || (cl.translate === trans)) && cl.public.includes(doel) && cl.subjects.includes(vak) && (
               cl.title.toLowerCase().includes(naam) ||
               cl.author.toLowerCase().includes(naam) ||
               cl.description.toLowerCase().includes(naam)

@@ -367,6 +367,7 @@ export const locale = {
     },
 
     LIBRARY: {
+      TRAN: "Vertaling",
       GENERAL: {},
       CLASS : {
         SUBJECT :{

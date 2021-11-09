@@ -380,6 +380,7 @@ export const locale = {
     },
 
     LIBRARY: {
+      TRAN: "Translation",
       GENERAL: {},
       CLASS : {
         SUBJECT :{

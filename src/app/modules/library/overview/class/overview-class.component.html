@@ -105,7 +105,9 @@
                 <span class="text-muted font-weight-bold font-size-sm my-1" id='left'>
                     {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description.length<=60 ? cl.description : ((cl.description | slice:0:60)+'...') }}
                 </span>
-    
+                <span class="text-muted font-weight-bold font-size-sm" *ngIf="cl.translate">
+                    {{"LIBRARY.TRAN" | translate }}: {{ClassCategories[cl.translate] | translate }}
+                </span>
             </div>
             <!--end::Title-->
 

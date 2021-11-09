@@ -182,6 +182,10 @@ export class CreateClassComponent implements OnInit {
       this.class.public = formValues.Public
       this.class.language = formValues.Language
       this.class.subjects = formValues.Subject
+      if (this.value === "extra"){
+        this.class.translate = formValues.Extra_Language
+        this.class.translatedPdf = formValues.Extra_PdfUrl
+      }
       this.create(this.class)
     }
   }
