@@ -132,6 +132,11 @@ export class CreateClassComponent implements OnInit {
         ])
       ],
     })
+
+    if(this.class.translate)
+    {
+      this.value = "extra";
+    }
   }
 
   save(){
