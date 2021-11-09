@@ -368,6 +368,8 @@ export const locale = {
 
     LIBRARY: {
       TRAN: "Vertaling",
+      DOWN: 'Het document is nog aan het uploaden',
+      DON:'Het document is geüpload',
       GENERAL: {},
       CLASS : {
         SUBJECT :{

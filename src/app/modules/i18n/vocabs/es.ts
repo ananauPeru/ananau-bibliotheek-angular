@@ -381,6 +381,8 @@ export const locale = {
 
     LIBRARY: {
       TRAN: "Traducción ",
+      DOWN: 'El documento aún se está cargando ',
+      DON:'El documento ha sido subido ',
       GENERAL: {},
       CLASS : {
         SUBJECT :{

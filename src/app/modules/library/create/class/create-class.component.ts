@@ -25,6 +25,8 @@ export class CreateClassComponent implements OnInit {
  // public BookCategories = BookCategories
  public classImages = new Array<File>()
  public classImage = new Array<File>()
+ public up: string
+ public load: string
   value: string = 'no'; 
   formGroup: FormGroup
   public ClassCategories = ClassLanguages
@@ -43,8 +45,6 @@ export class CreateClassComponent implements OnInit {
   ) { 
     this.route.data.subscribe((data) => {
       this.class = data['class']
-      console.log(data)
-      console.log(data['class'])
     })
     this.route.params.subscribe((params) => {
       this.routeId = params['id']
@@ -82,7 +82,7 @@ export class CreateClassComponent implements OnInit {
           Validators.required,
         ])
       ],
-      Extra_PdfUrl: [
+      translatedPdf: [
         this.class && this.class.translatedPdf ? this.class.translatedPdf : '',
         Validators.compose([
         ])
@@ -163,7 +163,11 @@ export class CreateClassComponent implements OnInit {
       item.subjects = formValues.Subject
       if (this.value === "extra"){
         item.translate = formValues.Extra_Language
-        item.translatedPdf = formValues.Extra_PdfUrl
+        item.translatedPdf = formValues.translatedPdf
+      }
+      else{
+        item.translate = null
+        item.translatedPdf = null
       }
       this.create(item);
     }
@@ -184,7 +188,11 @@ export class CreateClassComponent implements OnInit {
       this.class.subjects = formValues.Subject
       if (this.value === "extra"){
         this.class.translate = formValues.Extra_Language
-        this.class.translatedPdf = formValues.Extra_PdfUrl
+        this.class.translatedPdf = formValues.translatedPdf
+      }
+      else{
+        this.class.translate = null
+        this.class.translatedPdf = null
       }
       this.create(this.class)
     }
@@ -266,19 +274,53 @@ export class CreateClassComponent implements OnInit {
   }
 
   public async onSelectClassImage(event: NgxDropzoneChangeEvent) {
+    this.up = "bezig"
     this.classImages.push(...event.addedFiles)
-    var url = await this.itemStorage.storeImage$(event.addedFiles[0])
+    var url = await this.itemStorage.storeImage$(event.addedFiles[this.classImages.length - 1])
     this.formGroup.get('PdfUrl').setValue(url)
+    this.up = "klaar"
+  }
+
+  public isKlaar (): boolean{
+    if (this.up === "klaar"){
+      return true
+    }
+    return false
+  }
+
+  public isBezig (): boolean{
+    if (this.up === "bezig"){
+      return true
+    }
+    return false
   }
 
   public onRemoveClassImage(event: File) {
     this.classImages.splice(this.classImages.indexOf(event), 1)
   }
 
+  
+
   public async onSelectClassImages(event: NgxDropzoneChangeEvent) {
+    this.load = "bezig"
     this.classImage.push(...event.addedFiles)
-    var url = await this.itemStorage.storeImage$(event.addedFiles[0])
-    this.formGroup.get('Extra_PdfUrl').setValue(url)
+    var url = await this.itemStorage.storeImage$(event.addedFiles[this.classImage.length - 1])
+    this.formGroup.get('translatedPdf').setValue(url)
+    this.load = "klaar"
+  }
+
+  public isDone (): boolean{
+    if (this.load === "klaar"){
+      return true
+    }
+    return false
+  }
+
+  public isStill (): boolean{
+    if (this.load === "bezig"){
+      return true
+    }
+    return false
   }
 
   public onRemoveClassImages(event: File) {

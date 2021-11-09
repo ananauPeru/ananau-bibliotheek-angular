@@ -226,6 +226,9 @@
             [class.is-invalid]="isControlInvalid('Subject')"
             [class.is-valid]="isControlValid('Subject')"
             required>
+                   <option value="">
+                       {{"LIBRARY.CLASS.SUBJECT.TITLE" | translate }}
+                   </option>
                     <option *ngFor="let enum of ClassSubjects | keyvalue" value="{{enum.key}}">
                         {{enum.value | translate }}
                     </option>
@@ -248,7 +251,7 @@
             {{"LIBRARY.CLASS.CREATE.UP.NAAM" | translate }}
             <ng-container *ngIf="class">
               
-              <p class="waar">
+              <p>
                <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
                 '{{class.pdfUrl}}'
             </a>
@@ -280,11 +283,23 @@
           </ngx-dropzone-image-preview>
           
         </div>
-       
+        <div *ngIf="isKlaar()" class="klaar">
+          <span class="material-icons">
+            file_download_done
+            </span>
+            {{"LIBRARY.DON" | translate }}   
+         </div>
+         <div *ngIf="isBezig()" class="waar">
+          <span class="material-icons">
+            downloading
+            </span>
+            {{"LIBRARY.DOWN" | translate }}  
+         </div>
         <div class="feedback" *ngIf="!isControlTouched('PdfUrl')">
-          {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }} <br>
-          {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }}        
+          {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }} <br>
+          {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}        
         </div>
+       
         </div>
       </div>
 
@@ -350,42 +365,55 @@
               <span class="material-icons">
               attach_file
               </span>
-            hier te vertaling uploaden
-              <ng-container *ngIf="class">
-                <p class="waar">
-                 <br>het bestand zit er in maar zal niet in dropzone aanwezig zijn
-                </p>
+              {{"LIBRARY.CLASS.CREATE.UP.NAAM" | translate }}
+              <ng-container *ngIf="class.translatedPdf">
+                <p>
+                  <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.translatedPdf}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                   '{{class.translatedPdf}}'
+               </a>
+                 </p>
                     </ng-container> 
             </label>
             <div
-            name="Extra_PdfUrl"
+            name="translatedPdf"
             class="custom-dropzone form-control form-control-solid border"
             ngx-dropzone
             [accept]="'.pdf , .docx, .doc, .xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf,.zip, image/*'"
-            (change)="onSelectClassImage($event)"
+            (change)="onSelectClassImages($event)"
             
           >
             <ngx-dropzone-label>
               <p class="form-text text-muted">
-               sleep het hier maar in
+                {{"LIBRARY.CLASS.CREATE.UP.HIER" | translate }}
               </p>
             </ngx-dropzone-label>
            
             <ngx-dropzone-image-preview
               ngProjectAs="ngx-dropzone-preview"
-              *ngFor="let f of classImages"
+              *ngFor="let f of classImage"
               [file]="f"
               [removable]="true"
-              (removed)="onRemoveClassImage(f)"
+              (removed)="onRemoveClassImages(f)"
             >
             <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
             </ngx-dropzone-image-preview>
             
           </div>
-         
-          <div class="feedback" *ngIf="!isControlTouched('Extra_PdfUrl')">
-            max 1 document <br>
-           als blijft laden weet je wat te doen        
+         <div *ngIf="isDone()" class="klaar">
+          <span class="material-icons">
+            file_download_done
+            </span>
+            {{"LIBRARY.DON" | translate }}  
+         </div>
+         <div *ngIf="isStill()" class="waar">
+          <span class="material-icons">
+            downloading
+            </span>
+            {{"LIBRARY.DOWN" | translate }}  
+         </div>
+          <div class="feedback" *ngIf="!isControlTouched('translatedPdf')">
+            {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }}   <br>
+             {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}   
           </div>
           </div>
         </div>
