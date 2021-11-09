@@ -23,7 +23,8 @@ export class CreateClassComponent implements OnInit {
   public class: ClassModel
   public routeId: number
  // public BookCategories = BookCategories
-  public classImages = new Array<File>()
+ public classImages = new Array<File>()
+ public classImage = new Array<File>()
   value: string = 'no'; 
   formGroup: FormGroup
   public ClassCategories = ClassLanguages
@@ -81,6 +82,11 @@ export class CreateClassComponent implements OnInit {
           Validators.required,
         ])
       ],
+      Extra_PdfUrl: [
+        this.class && this.class.translatedPdf ? this.class.translatedPdf : '',
+        Validators.compose([
+        ])
+      ],
       Public: [
         this.class && this.class.public ? this.class.public : '',
         Validators.compose([
@@ -91,6 +97,11 @@ export class CreateClassComponent implements OnInit {
         this.class && this.class.language ? this.class.language : '',
         Validators.compose([
           Validators.required,
+        ])
+      ],
+      Extra_Language: [
+        this.class && this.class.translate ? this.class.translate : '',
+        Validators.compose([
         ])
       ],
       Subject: [
@@ -145,6 +156,10 @@ export class CreateClassComponent implements OnInit {
       item.public = formValues.Public
       item.language = formValues.Language
       item.subjects = formValues.Subject
+      if (this.value === "extra"){
+        item.translate = formValues.Extra_Language
+        item.translatedPdf = formValues.Extra_PdfUrl
+      }
       this.create(item);
     }
     else{
@@ -250,6 +265,17 @@ export class CreateClassComponent implements OnInit {
   public onRemoveClassImage(event: File) {
     this.classImages.splice(this.classImages.indexOf(event), 1)
   }
+
+  public async onSelectClassImages(event: NgxDropzoneChangeEvent) {
+    this.classImage.push(...event.addedFiles)
+    var url = await this.itemStorage.storeImage$(event.addedFiles[0])
+    this.formGroup.get('Extra_PdfUrl').setValue(url)
+  }
+
+  public onRemoveClassImages(event: File) {
+    this.classImage.splice(this.classImage.indexOf(event), 1)
+  }
+
 
   onDelete() {
     if (!this.class) {

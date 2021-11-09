@@ -382,6 +382,22 @@ export const locale = {
     LIBRARY: {
       GENERAL: {},
       CLASS : {
+        SUBJECT :{
+          TITLE: "Subject",
+          ER: 'Subject is required',
+          WISKUNDE: "Mathematics",
+          ICT: "Informatics",
+          ENGELS: "English",
+          FRANS: "French",
+          GESCHIEDENIS: "History",
+          AARDERIJKSKUNDE: "Geography",
+          SOCIALCARE: "Social Care",
+          PSYCHOLOGY: "Psychology",
+          ARTS: "Arts and Crafts",
+          NUTRITION: "Nutrition",
+          COMMUNICATION: "Communication for Development",
+          OTHER: "Other",
+        },
         CREATE : {
           NAAM: 'Create a new lesson',
           TERUG : 'Back',

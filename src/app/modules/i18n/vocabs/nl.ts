@@ -369,6 +369,22 @@ export const locale = {
     LIBRARY: {
       GENERAL: {},
       CLASS : {
+        SUBJECT :{
+          TITLE: "Vak",
+          ER: 'Vak is verplicht',
+          WISKUNDE: "Wiskunde",
+          ICT: "Informatica",
+          ENGELS: "Engels",
+          FRANS: "Frans",
+          GESCHIEDENIS: "Geschiedenis",
+          AARDERIJKSKUNDE: "Aarderijkskunde",
+          SOCIALCARE: "Socialcare",
+          PSYCHOLOGY: "Psychologie",
+          ARTS: "Arts & Crafts",
+          NUTRITION: "Voeding",
+          COMMUNICATION: "Communicatie voor de ontwikkeling",
+          OTHER: "Ander",
+        },
         CREATE : {
           NAAM: 'Maak nieuwe les aan',
           TERUG : 'Terug',

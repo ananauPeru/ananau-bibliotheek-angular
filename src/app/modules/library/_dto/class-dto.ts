@@ -8,5 +8,5 @@ export class ClassDTO {
     language: string
     translate: string
     subjects: string
-    extraID: number  
+    translatedPdf: string  
   }

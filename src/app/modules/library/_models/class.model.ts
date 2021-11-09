@@ -9,7 +9,7 @@ export class ClassModel {
   language: string
   translate: string
   subjects: string
-  extraID: number
+  translatedPdf: string
 
   constructor() {}
 

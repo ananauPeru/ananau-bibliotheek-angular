@@ -217,7 +217,7 @@
             *ngIf="controlHasError('required', 'Language')" >
             {{"LIBRARY.CLASS.CREATE.LANGUAGE.ER" | translate }}
           </div>  <br>
-          <label>Vak</label>
+          <label> {{ "LIBRARY.CLASS.SUBJECT.TITLE" | translate }}</label>
           <select 
           class="form-control form-control-lg form-control-solid"
             name="Subject"
@@ -226,12 +226,19 @@
             [class.is-invalid]="isControlInvalid('Subject')"
             [class.is-valid]="isControlValid('Subject')"
             required>
-                    <option value="">Vakken</option>
                     <option *ngFor="let enum of ClassSubjects | keyvalue" value="{{enum.key}}">
                         {{enum.value | translate }}
                     </option>
+                    <option value='OT'>
+                      {{ "LIBRARY.CLASS.SUBJECT.OTHER" | translate }}
+                    </option>
                 </select>      
         </div>
+        <div
+            class="invalid-feedback"
+            *ngIf="controlHasError('required', 'Subject')" >
+            {{"LIBRARY.CLASS.SUBJECT.ER" | translate }}
+          </div>
 
         <div class="col-12 col-md-6">
           <label class="col-12">
@@ -240,8 +247,11 @@
             </span>
             {{"LIBRARY.CLASS.CREATE.UP.NAAM" | translate }}
             <ng-container *ngIf="class">
+              
               <p class="waar">
-               <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}
+               <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                '{{class.pdfUrl}}'
+            </a>
               </p>
                   </ng-container> 
           </label>
@@ -409,17 +419,20 @@
           </ng-template>
         </button>
       </div>
-
-      <button
+      <div *ngIf="class">
+        <button
             (click)="onDelete()"
             class="btn btn-primary font-weight-bold mr-2"
-            [disabled]="formGroup.invalid"
+           
           >
           <span class="material-icons">
             delete
             </span>
             {{ "LIBRARY.CREATE.ITEM.DELETE" | translate }}
           </button>
+      </div>
+      
+      
 
       </form>
     </div>

@@ -382,6 +382,22 @@ export const locale = {
     LIBRARY: {
       GENERAL: {},
       CLASS : {
+        SUBJECT :{
+          TITLE: "Asunto",
+          ER: 'Asunto es obligatorio',
+          WISKUNDE: "Matemáticas",
+          ICT: "Informática",
+          ENGELS: "inglés",
+          FRANS: "francés",
+          GESCHIEDENIS: "Historia",
+          AARDERIJKSKUNDE: "Geografía",
+          SOCIALCARE: "Atención social",
+          PSYCHOLOGY: "Psicología",
+          ARTS: "Artes y manualidades",
+          NUTRITION: "Nutrición",
+          COMMUNICATION: "Comunicación para el desarrollo",
+          OTHER: "otro",
+        },
         CREATE : {
           NAAM: 'Crear una nueva lección',
           TERUG : 'Esplada',

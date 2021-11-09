@@ -33,6 +33,9 @@
                     <option *ngFor="let enum of ClassSubject | keyvalue" value="{{enum.key}}">
                         {{enum.value | translate }}
                     </option>
+                    <option value='OT'>
+                        {{ "LIBRARY.CLASS.SUBJECT.OTHER" | translate }}
+                      </option>
                 </select><br>
                 <div class="input-group input-group-lg input-group-solid">
                     <div class="input-group-prepend">
