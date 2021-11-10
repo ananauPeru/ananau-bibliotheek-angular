@@ -448,7 +448,7 @@ export const locale = {
             BES : 'In what language is the document written?',
             ER: 'Language is required',
             NEDERLANDS : 'Dutch',
-            ENGELS : 'Englisch',
+            ENGELS : 'English',
             SPAANS : 'Spanish',
           },
           BESCHRIJVING: {
