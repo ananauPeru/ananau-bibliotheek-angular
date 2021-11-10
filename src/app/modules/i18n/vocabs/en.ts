@@ -389,6 +389,9 @@ export const locale = {
       DON:'The document has been uploaded',
       GENERAL: {},
       CLASS : {
+        VRAAG: "Do you want to upload a translation of the document?",
+        YES: "Yes",
+        NO:"No",
         SUBJECT :{
           TITLE: "Subject",
           ER: 'Subject is required',

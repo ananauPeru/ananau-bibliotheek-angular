@@ -387,6 +387,9 @@ export const locale = {
       DON:'El documento ha sido subido ',
       GENERAL: {},
       CLASS : {
+        VRAAG: "¿Quieres subir una traducción del documento?",
+        YES: "Si",
+        NO:"No",
         SUBJECT :{
           TITLE: "Asunto",
           ER: 'Asunto es obligatorio',

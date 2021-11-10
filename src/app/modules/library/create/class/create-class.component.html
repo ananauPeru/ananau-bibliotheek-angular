@@ -217,31 +217,35 @@
             *ngIf="controlHasError('required', 'Language')" >
             {{"LIBRARY.CLASS.CREATE.LANGUAGE.ER" | translate }}
           </div>  <br>
-          <label> {{ "LIBRARY.CLASS.SUBJECT.TITLE" | translate }}</label>
-          <select 
-          class="form-control form-control-lg form-control-solid"
+          <label>{{"LIBRARY.CLASS.SUBJECT.TITLE" | translate }}</label>
+          <select
+            class="form-control form-control-lg form-control-solid"
             name="Subject"
             formControlName="Subject"
             aria-placeholder="Subject"
             [class.is-invalid]="isControlInvalid('Subject')"
             [class.is-valid]="isControlValid('Subject')"
-            required>
-                   <option value="">
-                       {{"LIBRARY.CLASS.SUBJECT.TITLE" | translate }}
-                   </option>
-                    <option *ngFor="let enum of ClassSubjects | keyvalue" value="{{enum.key}}">
-                        {{enum.value | translate }}
-                    </option>
-                    <option value='OT'>
-                      {{ "LIBRARY.CLASS.SUBJECT.OTHER" | translate }}
-                    </option>
-                </select>      
-        </div>
-        <div
+            required
+          >
+            <option value="">
+              {{"LIBRARY.CLASS.SUBJECT.TITLE" | translate }}
+            </option>
+            <option *ngFor="let enum of ClassSubjects | keyvalue" value="{{enum.key}}">
+              {{enum.value | translate }}
+           </option>
+          <option value='OT'>
+            {{ "LIBRARY.CLASS.SUBJECT.OTHER" | translate }}
+          </option>
+          </select>
+          <div class="feedback" *ngIf="!isControlTouched('Subject')">
+            {{"LIBRARY.CLASS.CREATE.LANGUAGE.BES" | translate }}
+          </div>
+          <div
             class="invalid-feedback"
             *ngIf="controlHasError('required', 'Subject')" >
             {{"LIBRARY.CLASS.SUBJECT.ER" | translate }}
-          </div>
+          </div>  
+         </div>
 
         <div class="col-12 col-md-6">
           <label class="col-12">
@@ -340,23 +344,35 @@
 
 
      <div>
-       <p>Do you want to upload the same class in an other language?</p>
-       Yes <input type="checkbox" name="extra"  [checked]="value === 'extra'" (click)="value = 'extra'"> <br>
-       No <input type="checkbox"  name="no" [checked]="value === 'no'" (click)="value = 'no'" >
+       <p> {{"LIBRARY.CLASS.VRAAG" | translate }}</p>
+       <input type="checkbox" name="extra"  [checked]="value === 'extra'" (click)="value = 'extra'"> {{"LIBRARY.CLASS.YES" | translate }} <br>
+       <input type="checkbox"  name="no" [checked]="value === 'no'" (click)="value = 'no'" >{{"LIBRARY.CLASS.NO" | translate }} 
        <div *ngIf="value === 'extra'">
         <div class="form-group row">
           <!--begin::Form group-->
           <div class="col-12 col-md-6">
-            <label>In welke taal nog?</label>
-            <select class="form-control form-control-lg form-control-solid" name="Extra_Language" formControlName="Extra_Language"  aria-placeholder="Language">
-                    <option value="">{{"LIBRARY.CLASS.CREATE.LANGUAGE.NAAM" | translate }}</option>
-                    <option *ngFor="let enum of ClassCategories | keyvalue" value="{{enum.key}}">
-                        {{enum.value | translate }}
-                    </option>
-                </select>
-            <div class="feedback" *ngIf="!isControlTouched('Extra_Language')">
+            <label>{{"LIBRARY.CLASS.CREATE.LANGUAGE.NAAM" | translate }}</label>
+          <select
+            class="form-control form-control-lg form-control-solid"
+            name="Extra_Language"
+            formControlName="Extra_Language"
+            aria-placeholder="Extra_Language"
+          >
+            <option value="">
               {{"LIBRARY.CLASS.CREATE.LANGUAGE.BES" | translate }}
-            </div>
+            </option>
+            <option value="NEDERLANDS">
+              {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS" | translate }}
+            </option>
+            <option value="ENGELS">
+              {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS" | translate }}
+            </option>
+            <option value="SPAANS">
+              {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS" | translate }}
+            </option>
+          </select>
+         
+
                
           </div>
   
@@ -367,11 +383,12 @@
               </span>
               {{"LIBRARY.CLASS.CREATE.UP.NAAM" | translate }}
               <ng-container *ngIf="class.translatedPdf">
+                
                 <p>
-                  <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.translatedPdf}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                   '{{class.translatedPdf}}'
-               </a>
-                 </p>
+                 <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.translatedPdf}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                  '{{class.translatedPdf}}'
+              </a>
+                </p>
                     </ng-container> 
             </label>
             <div
@@ -399,27 +416,27 @@
             </ngx-dropzone-image-preview>
             
           </div>
-         <div *ngIf="isDone()" class="klaar">
-          <span class="material-icons">
-            file_download_done
-            </span>
-            {{"LIBRARY.DON" | translate }}  
-         </div>
-         <div *ngIf="isStill()" class="waar">
-          <span class="material-icons">
-            downloading
-            </span>
-            {{"LIBRARY.DOWN" | translate }}  
-         </div>
+          <div *ngIf="isDone()" class="klaar">
+            <span class="material-icons">
+              file_download_done
+              </span>
+              {{"LIBRARY.DON" | translate }}   
+           </div>
+           <div *ngIf="isStill()" class="waar">
+            <span class="material-icons">
+              downloading
+              </span>
+              {{"LIBRARY.DOWN" | translate }}  
+           </div>
           <div class="feedback" *ngIf="!isControlTouched('translatedPdf')">
-            {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }}   <br>
-             {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}   
+            {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }} <br>
+            {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}        
           </div>
+         
           </div>
         </div>
-       </div>
-      
-     </div>
+        </div>
+        </div>
 
       <div class="float-right">
         <a
