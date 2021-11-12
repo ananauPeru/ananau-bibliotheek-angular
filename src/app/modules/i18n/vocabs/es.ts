@@ -404,6 +404,7 @@ export const locale = {
           PSYCHOLOGY: "Psicología",
           ARTS: "Artes y manualidades",
           NUTRITION: "Nutrición",
+          OCCUPATIONAL:"Terapia ocupacional",
           COMMUNICATION: "Comunicación para el desarrollo",
           OTHER: "otro",
         },

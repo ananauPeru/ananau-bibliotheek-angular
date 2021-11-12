@@ -394,6 +394,7 @@ export const locale = {
           ARTS: "Arts & Crafts",
           NUTRITION: "Voeding",
           COMMUNICATION: "Communicatie voor de ontwikkeling",
+          OCCUPATIONAL:"Ergotherapie",
           OTHER: "Ander",
         },
         CREATE : {
