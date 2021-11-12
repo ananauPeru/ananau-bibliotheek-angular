@@ -415,7 +415,7 @@ export const locale = {
           MAAK: 'Make a new lesson',
           BEWERK: 'Save adjustments',
           FILTER:'Filter by title, author or description',
-          WAAR:'The document cannot be displayed below. It is present. If you want to upload another document, simply upload a new document below.',
+          WAAR:'The document is present. If you want to upload another document, simply upload a new document here.',
           TITEL: {
             NAAM : 'Title',
             BES : ' Enter the title of the lesson',
@@ -461,7 +461,7 @@ export const locale = {
           UP : {
             NAAM : "Upload zone",
             HIER : "Click here to slect a document",
-            BES : "Upload maximum 1 document. ",
+            BES : "If you want to upload multiple documents, please create a zip file with them first. (This is the only way you can upload more than 1 document.)",
             BEST: "If the document continues to load after selecting, click on the document again. "
           }
         }

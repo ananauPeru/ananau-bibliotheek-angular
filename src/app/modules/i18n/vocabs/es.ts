@@ -413,7 +413,7 @@ export const locale = {
           MAAK: 'Crear una nueva lección',
           BEWERK: 'Guardar ajustes',
           FILTER:'Filtrar por título, autor o descripción',
-          WAAR:'El documento no se puede mostrar a continuación. Está presente. Si desea cargar otro documento, simplemente cargue un nuevo documento a continuación.',
+          WAAR:'El documento está presente. Si quieres subir otro documento, solo tienes que subir un nuevo documento aquí.',
           TITEL: {
             NAAM : 'Título',
             BES : 'ingrese el título de la lección.',
@@ -459,7 +459,7 @@ export const locale = {
           UP : {
             NAAM : "Zona de carga",
             HIER : "Haga clic aquí para seleccionar un documento",
-            BES : "Subir 1 documento como máximo.",
+            BES : "Si desea cargar varios documentos, primero cree un archivo zip con ellos. (Esta es la única forma en que puede cargar más de 1 documento).",
             BEST: "Si el documento continúa cargándose después de seleccionarlo, haga clic en el documento nuevamente."
           }
         }

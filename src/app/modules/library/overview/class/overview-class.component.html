@@ -103,7 +103,7 @@
              <!--begin::Title-->
              <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3" id='left'>
                 <span class="text-muted font-weight-bold font-size-sm my-1" id='left'>
-                    {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description.length<=60 ? cl.description : ((cl.description | slice:0:60)+'...') }}
+                    {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description.length<=40 ? cl.description : ((cl.description | slice:0:40)+'...') }}
                 </span>
                 <span class="text-muted font-weight-bold font-size-sm" *ngIf="cl.translate">
                     {{"LIBRARY.TRAN" | translate }}: {{ClassCategories[cl.translate] | translate }}

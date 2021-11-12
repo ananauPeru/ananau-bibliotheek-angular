@@ -252,15 +252,9 @@
             <span class="material-icons">
             attach_file
             </span>
-            {{"LIBRARY.CLASS.CREATE.UP.NAAM" | translate }}
-            <ng-container *ngIf="class">
-              
-              <p>
-               <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                '{{class.pdfUrl}}'
-            </a>
-              </p>
-                  </ng-container> 
+            {{"LIBRARY.CLASS.CREATE.UP.NAAM" | translate }}<br>
+            {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}   
+           
           </label>
           <div
           name="PdfUrl"
@@ -271,9 +265,19 @@
           required
         >
           <ngx-dropzone-label>
+            <ng-container *ngIf="!class">
             <p class="form-text text-muted">
               {{"LIBRARY.CLASS.CREATE.UP.HIER" | translate }}
             </p>
+            </ng-container>
+            <ng-container *ngIf="class">
+              
+              <p>
+               <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                '{{class.pdfUrl}}'
+            </a>
+              </p>
+                  </ng-container> 
           </ngx-dropzone-label>
          
           <ngx-dropzone-image-preview
@@ -300,8 +304,7 @@
             {{"LIBRARY.DOWN" | translate }}  
          </div>
         <div class="feedback" *ngIf="!isControlTouched('PdfUrl')">
-          {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }} <br>
-          {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}        
+          {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }}     
         </div>
        
         </div>
@@ -382,14 +385,9 @@
               attach_file
               </span>
               {{"LIBRARY.CLASS.CREATE.UP.NAAM" | translate }}
-              <ng-container *ngIf="class.translatedPdf">
-                
-                <p>
-                 <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.translatedPdf}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                  '{{class.translatedPdf}}'
-              </a>
-                </p>
-                    </ng-container> 
+              <br>
+                {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }} 
+          
             </label>
             <div
             name="translatedPdf"
@@ -400,9 +398,19 @@
             
           >
             <ngx-dropzone-label>
-              <p class="form-text text-muted">
-                {{"LIBRARY.CLASS.CREATE.UP.HIER" | translate }}
-              </p>
+              <ng-container *ngIf="!class.translatedPdf">
+                <p class="form-text text-muted">
+                  {{"LIBRARY.CLASS.CREATE.UP.HIER" | translate }}
+                </p>
+                </ng-container>
+                <ng-container *ngIf="class.translatedPdf">
+                  
+                  <p>
+                   <br> {{  "LIBRARY.CLASS.CREATE.WAAR" | translate }}<a href='{{class.translatedPdf}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                    '{{class.translatedPdf}}'
+                </a>
+                  </p>
+                      </ng-container> 
             </ngx-dropzone-label>
            
             <ngx-dropzone-image-preview
@@ -429,8 +437,7 @@
               {{"LIBRARY.DOWN" | translate }}  
            </div>
           <div class="feedback" *ngIf="!isControlTouched('translatedPdf')">
-            {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }} <br>
-            {{"LIBRARY.CLASS.CREATE.UP.BES" | translate }}        
+            {{"LIBRARY.CLASS.CREATE.UP.BEST" | translate }}    
           </div>
          
           </div>
@@ -483,3 +490,4 @@
     </div>
   </div>
   
+ 

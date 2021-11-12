@@ -402,7 +402,7 @@ export const locale = {
           MAAK: 'Maak een nieuwe les',
           BEWERK: 'Aanpassing opslaan',
           FILTER:'Filter op titel, auteur of beschrijving',
-          WAAR: 'Het document kan hieronder niet getoond worden. Het is wel aanwezig. Indien je een ander document wil uploaden moet je gewoon hieronder een nieuw document uploaden.',
+          WAAR: 'Het document is aanwezig. Indien je een ander document wil uploaden moet je gewoon hier een nieuw document uploaden.',
           TITEL: {
             NAAM : 'Titel',
             BES : 'Voer de titel van de les in.',
@@ -448,7 +448,7 @@ export const locale = {
           UP : {
             NAAM : "Uploadzone",
             HIER : "Hier klikken om document te selecteren",
-            BES : "Maximum 1 document uploaden.",
+            BES : " Als je meerdere document wil uploaden, maak er dan eerste een zip-file van. (Enkel zo kan je meer als 1 document uploaden.)",
             BEST: "Als het document blijft laden na selecteren, klik dan eens op het document."
           }
         }
