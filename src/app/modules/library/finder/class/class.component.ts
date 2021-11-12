@@ -240,7 +240,7 @@ this.filteredListEmpty = classList.pipe(
 
 return classList
 }
-//WISKUNDE-LAGERESCHOOL-ENGELS
+//WISKUNDE-MIDDELBAAR-ENGELS
 WME(): Observable<ClassModel[]> {
 this.classService.filter("","ENGELS", "middelbaar", "WI")
 
@@ -253,7 +253,7 @@ this.filteredListEmpty = classList.pipe(
 return classList
 }
 
-//WISKUNDE-LAGERESCHOOL-NEDERLANDS
+//WISKUNDE-MIDDELBAAR-NEDERLANDS
 WMN(): Observable<ClassModel[]> {
 this.classService.filter("","NEDERLANDS", "middelbaar", "WI")
 
@@ -266,9 +266,124 @@ this.filteredListEmpty = classList.pipe(
 return classList
 }
 
-//WISKUNDE-LAGERESCHOOL-SPAANS
+//WISKUNDE-MIDDELBAAR-SPAANS
 WMS(): Observable<ClassModel[]> {
 this.classService.filter("","SPAANS", "middelbaar", "WI")
+
+let classList = this.classService.classes.pipe( map((c) => c ),)
+this.filteredListEmpty = classList.pipe(
+  map((l) => l.length <= 0),
+  defaultIfEmpty(true),
+)
+
+return classList
+}
+
+ //ENGELS-KLEUTER-ENGELS
+ EKE(): Observable<ClassModel[]> {
+  this.classService.filter("","ENGELS", "kleuterschool", "EN")
+
+  let classList = this.classService.classes.pipe( map((c) => c ),)
+  this.filteredListEmpty = classList.pipe(
+    map((l) => l.length <= 0),
+    defaultIfEmpty(true),
+  )
+  
+  return classList
+}
+
+//ENGELS-KLEUTER-NEDERLANDS
+EKN(): Observable<ClassModel[]> {
+  this.classService.filter("","NEDERLANDS", "kleuterschool", "EN")
+
+  let classList = this.classService.classes.pipe( map((c) => c ),)
+  this.filteredListEmpty = classList.pipe(
+    map((l) => l.length <= 0),
+    defaultIfEmpty(true),
+  )
+  
+  return classList
+}
+
+ //ENGELS-KLEUTER-SPAANS
+ EKS(): Observable<ClassModel[]> {
+  this.classService.filter("","SPAANS", "kleuterschool", "EN")
+
+  let classList = this.classService.classes.pipe( map((c) => c ),)
+  this.filteredListEmpty = classList.pipe(
+    map((l) => l.length <= 0),
+    defaultIfEmpty(true),
+  )
+  
+  return classList
+}
+//ENGELS-LAGERESCHOOL-ENGELS
+ELE(): Observable<ClassModel[]> {
+this.classService.filter("","ENGELS", "lagerschool", "EN")
+
+let classList = this.classService.classes.pipe( map((c) => c ),)
+this.filteredListEmpty = classList.pipe(
+  map((l) => l.length <= 0),
+  defaultIfEmpty(true),
+)
+
+return classList
+}
+
+//ENGELS-LAGERESCHOOL-NEDERLANDS
+ELN(): Observable<ClassModel[]> {
+this.classService.filter("","NEDERLANDS", "lagerschool", "EN")
+
+let classList = this.classService.classes.pipe( map((c) => c ),)
+this.filteredListEmpty = classList.pipe(
+  map((l) => l.length <= 0),
+  defaultIfEmpty(true),
+)
+
+return classList
+}
+
+//ENGELS-LAGERESCHOOL-SPAANS
+ELS(): Observable<ClassModel[]> {
+this.classService.filter("","SPAANS", "lagerschool", "EN")
+
+let classList = this.classService.classes.pipe( map((c) => c ),)
+this.filteredListEmpty = classList.pipe(
+  map((l) => l.length <= 0),
+  defaultIfEmpty(true),
+)
+
+return classList
+}
+//ENGELS-MIDDELBAAR-ENGELS
+EME(): Observable<ClassModel[]> {
+this.classService.filter("","ENGELS", "middelbaar", "EN")
+
+let classList = this.classService.classes.pipe( map((c) => c ),)
+this.filteredListEmpty = classList.pipe(
+  map((l) => l.length <= 0),
+  defaultIfEmpty(true),
+)
+
+return classList
+}
+
+//ENGELS-MIDDELBAAR-NEDERLANDS
+EMN(): Observable<ClassModel[]> {
+this.classService.filter("","NEDERLANDS", "middelbaar", "EN")
+
+let classList = this.classService.classes.pipe( map((c) => c ),)
+this.filteredListEmpty = classList.pipe(
+  map((l) => l.length <= 0),
+  defaultIfEmpty(true),
+)
+
+return classList
+}
+
+//ENGELS-MIDDELBAAR-SPAANS
+EMS(): Observable<ClassModel[]> {
+this.classService.filter("","SPAANS", "middelbaar", "EN")
 
 let classList = this.classService.classes.pipe( map((c) => c ),)
 this.filteredListEmpty = classList.pipe(
