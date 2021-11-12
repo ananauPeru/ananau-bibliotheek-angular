@@ -7,6 +7,8 @@ import { ClassPubliek } from '../../_models/class-publiek.enum';
 import { ClassSubject } from '../../_models/class-subject.enum';
 import { ClassModel } from '../../_models/class.model';
 import { ClassService } from '../../_services/class/class.sercice';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ClassHTTPService } from '../../_services/class/class-http/class-http.service';
 
 @Component({
   selector: 'app-class',
@@ -18,11 +20,32 @@ export class FinderClassComponent implements OnInit {
   public classPubliek = ClassPubliek
   public classVakken = ClassSubject
   public filteredListEmpty: Observable<Boolean>
+  closeResult = '';
+  class :  Observable<ClassModel>
   
-  
-  constructor(public classService: ClassService) { }
+  constructor(public classService: ClassService, public classHttpService : ClassHTTPService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+  }
+
+  open(content) {
+    this.modalService.open(content,
+   {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = 
+         `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
  
   //INFORMATICA-KLEUTER-ENGELS

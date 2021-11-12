@@ -11,6 +11,7 @@ export const locale = {
     EDIT: "Edit    ",
     DOWNLOAD: "Download",
     DOWNTAN: "Download translation",
+    CLOSE: "Close",
     // ERRORS
     ERRORS: {
       TRY_AGAIN: 'Something went wrong. Please try again later.',

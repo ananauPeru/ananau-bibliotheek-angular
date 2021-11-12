@@ -7,6 +7,7 @@ export const locale = {
     EDIT: "Bewerken  ",
     DOWNLOAD: "Downloaden",
     DOWNTAN: "Download vertaling",
+    CLOSE: "Sluit",
 
     ERRORS: {
       TRY_AGAIN: 'Er is iets fout gegaan. Probeer het later nog eens.',

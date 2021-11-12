@@ -9,6 +9,7 @@ export const locale = {
     EDIT: "Editar   ",
     DOWNLOAD: "Descargar",
     DOWNTAN: "Descargar traducción",
+    CLOSE: "Cerrar",
     // ERRORS
     ERRORS: {
       TRY_AGAIN: "Algo salió mal. Por favor, inténtelo de nuevo más tarde.",
