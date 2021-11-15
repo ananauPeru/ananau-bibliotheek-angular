@@ -841,6 +841,18 @@ this.filteredListEmpty = classList.pipe(
 
 return classList
 }
+//AARDERIJKSKUNDE-MIDDELBAAR-ENGELS
+AMS(): Observable<ClassModel[]> {
+  this.classService.filter("","SPAANS", "middelbaar", "AA")
+  
+  let classList = this.classService.classes.pipe( map((c) => c ),)
+  this.filteredListEmpty = classList.pipe(
+    map((l) => l.length <= 0),
+    defaultIfEmpty(true),
+  )
+  
+  return classList
+  }
 
 
 //OCCUPATIONAL-KLEUTER-ENGELS
