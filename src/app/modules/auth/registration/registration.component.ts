@@ -35,8 +35,16 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
+    setTimeout(() => {
+      if(confirm("Do you want to subscribe to are newsletter?")){
+        document.location.href = 'https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d';
+      }
+      
+  }, 3000);
   }
 
+
+ 
   // convenience getter for easy access to form fields
   get f() {
     return this.registrationForm.controls;
