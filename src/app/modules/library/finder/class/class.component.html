@@ -296,7 +296,7 @@
                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse11"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
                                     <div id="collapse11" class="panel-collapse collapse">
                                         <ul class="list-group">
-                                          <li class="class-group-item" *ngFor="let cl of IMS() | async">
+                                          <li class="class-group-item" *ngFor="let cl of IME() | async">
                                             <span class="material-icons">  description   </span>
                                             <button class="btn btn-lg btn-outline-primary"  (click)="open(content)">
                                                {{cl.title}}
@@ -337,7 +337,7 @@
                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse12"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
                                     <div id="collapse12" class="panel-collapse collapse">
                                         <ul class="list-group">
-                                          <li class="class-group-item" *ngFor="let cl of IMS() | async">
+                                          <li class="class-group-item" *ngFor="let cl of IMN() | async">
                                                                                        <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
                                                  {{cl.title}}
                                               </button>
@@ -688,7 +688,7 @@
                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse25"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
                                    <div id="collapse25" class="panel-collapse collapse">
                                        <ul class="list-group">
-                                         <li class="class-group-item" *ngFor="let cl of WMS() | async">
+                                         <li class="class-group-item" *ngFor="let cl of WME() | async">
                                                                                     <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
                                                  {{cl.title}}
                                               </button>
@@ -728,7 +728,7 @@
                                  <li class="list-group-item" > <a data-toggle="collapse" href="#collapse26"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
                                    <div id="collapse26" class="panel-collapse collapse">
                                        <ul class="list-group">
-                                         <li class="class-group-item" *ngFor="let cl of WMS() | async">
+                                         <li class="class-group-item" *ngFor="let cl of WMN() | async">
                                                                                     <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
                                                  {{cl.title}}
                                               </button>
@@ -1076,7 +1076,7 @@
                                <li class="list-group-item" > <a data-toggle="collapse" href="#collapse38"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
                                  <div id="collapse38" class="panel-collapse collapse">
                                      <ul class="list-group">
-                                       <li class="class-group-item" *ngFor="let cl of EMS() | async">
+                                       <li class="class-group-item" *ngFor="let cl of EME() | async">
                                                                                   <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
                                                {{cl.title}}
                                             </button>
@@ -1116,7 +1116,7 @@
                                <li class="list-group-item" > <a data-toggle="collapse" href="#collapse39"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
                                  <div id="collapse39" class="panel-collapse collapse">
                                      <ul class="list-group">
-                                       <li class="class-group-item" *ngFor="let cl of EMS() | async">
+                                       <li class="class-group-item" *ngFor="let cl of EMN() | async">
                                                                                   <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
                                                {{cl.title}}
                                             </button>
@@ -1464,7 +1464,7 @@
                                    <li class="list-group-item" > <a data-toggle="collapse" href="#collapse51"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
                                      <div id="collapse51" class="panel-collapse collapse">
                                          <ul class="list-group">
-                                           <li class="class-group-item" *ngFor="let cl of FMS() | async">
+                                           <li class="class-group-item" *ngFor="let cl of FME() | async">
                                                                                       <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
                                                    {{cl.title}}
                                                 </button>
@@ -1504,7 +1504,7 @@
                                    <li class="list-group-item" > <a data-toggle="collapse" href="#collapse52"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
                                      <div id="collapse52" class="panel-collapse collapse">
                                          <ul class="list-group">
-                                           <li class="class-group-item" *ngFor="let cl of FMS() | async">
+                                           <li class="class-group-item" *ngFor="let cl of FMN() | async">
                                                                                       <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
                                                    {{cl.title}}
                                                 </button>
@@ -1586,10 +1586,399 @@
                          </li>
                          </ul>
                        </div>
-
-
-
              </li>
+
+
+
+             <li class="list-group-item"> <a data-toggle="collapse" href="#collapse54"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.GESCHIEDENIS"| translate }}   </a>
+                <div id="collapse54" class="panel-collapse collapse">
+                     <ul class="list-group">
+                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse55"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
+                         <div id="collapse55" class="panel-collapse collapse">
+                             <ul class="list-group">
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse56"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                 <div id="collapse56" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                         <li class="class-group-item" *ngFor="let cl of GKE() | async">
+                                                                                     <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
+                                               {{cl.title}}
+                                            </button>
+                                            <ng-template #content let-modal>
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title" 
+                                                      id="modal-basic-title">
+                                                      {{cl.title}}
+                                                  </h4>
+                                                  <button type="button" class="close"
+                                                          aria-label="Close" (click)=
+                                                          "modal.dismiss('Cross click')">
+                                              
+                                                      <span aria-hidden="true">
+                                                          ×
+                                                      </span>
+                                                  </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                                {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                                <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                               
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" 
+                                                      class="btn btn-outline-dark" 
+                                                      (click)="modal.close('Save click')">
+                                                      {{"CLOSE" | translate }}
+                                                  </button>
+                                              </div>
+                                              </ng-template>
+                                          </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse57"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                 <div id="collapse57" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                       <li class="class-group-item" *ngFor="let cl of GKN() | async">
+                                                                                   <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
+                                               {{cl.title}}
+                                            </button>
+                                            <ng-template #content let-modal>
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title" 
+                                                      id="modal-basic-title">
+                                                      {{cl.title}}
+                                                  </h4>
+                                                  <button type="button" class="close"
+                                                          aria-label="Close" (click)=
+                                                          "modal.dismiss('Cross click')">
+                                              
+                                                      <span aria-hidden="true">
+                                                          ×
+                                                      </span>
+                                                  </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                                {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                                <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                               
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" 
+                                                      class="btn btn-outline-dark" 
+                                                      (click)="modal.close('Save click')">
+                                                      {{"CLOSE" | translate }}
+                                                  </button>
+                                              </div>
+                                              </ng-template>
+                                        </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse58"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                 <div id="collapse58" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                       <li class="class-group-item" *ngFor="let cl of GKS() | async">
+                                        <span class="material-icons">  description   </span>
+                                        <button class="btn btn-lg btn-outline-primary"  (click)="open(content)">
+                                           {{cl.title}}
+                                        </button>
+                                        <ng-template #content let-modal>
+                                          <div class="modal-header">
+                                              <h4 class="modal-title" 
+                                                  id="modal-basic-title">
+                                                  {{cl.title}}
+                                              </h4>
+                                              <button type="button" class="close"
+                                                      aria-label="Close" (click)=
+                                                      "modal.dismiss('Cross click')">
+                                          
+                                                  <span aria-hidden="true">
+                                                      ×
+                                                  </span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                            {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                            <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                           
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" 
+                                                  class="btn btn-outline-dark" 
+                                                  (click)="modal.close('Save click')">
+                                                  close
+                                              </button>
+                                          </div>
+                                          </ng-template>
+                                        </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                             </ul>
+                           </div>
+                     </li>
+                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse59"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL"| translate }}</a>
+                         <div id="collapse59" class="panel-collapse collapse">
+                             <ul class="list-group">
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse60"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                 <div id="collapse60" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                       <li class="class-group-item" *ngFor="let cl of GLE() | async">
+                                        <span class="material-icons">  description   </span>
+                                        <button class="btn btn-lg btn-outline-primary"  (click)="open(content)">
+                                           {{cl.title}}
+                                        </button>
+                                        <ng-template #content let-modal>
+                                          <div class="modal-header">
+                                              <h4 class="modal-title" 
+                                                  id="modal-basic-title">
+                                                  {{cl.title}}
+                                              </h4>
+                                              <button type="button" class="close"
+                                                      aria-label="Close" (click)=
+                                                      "modal.dismiss('Cross click')">
+                                          
+                                                  <span aria-hidden="true">
+                                                      ×
+                                                  </span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                            {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                            <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                           
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" 
+                                                  class="btn btn-outline-dark" 
+                                                  (click)="modal.close('Save click')">
+                                                  close
+                                              </button>
+                                          </div>
+                                          </ng-template>
+                                        </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse61"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                 <div id="collapse61" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                       <li class="class-group-item" *ngFor="let cl of GLN() | async">
+                                                                                   <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
+                                               {{cl.title}}
+                                            </button>
+                                            <ng-template #content let-modal>
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title" 
+                                                      id="modal-basic-title">
+                                                      {{cl.title}}
+                                                  </h4>
+                                                  <button type="button" class="close"
+                                                          aria-label="Close" (click)=
+                                                          "modal.dismiss('Cross click')">
+                                              
+                                                      <span aria-hidden="true">
+                                                          ×
+                                                      </span>
+                                                  </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                                {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                                <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                               
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" 
+                                                      class="btn btn-outline-dark" 
+                                                      (click)="modal.close('Save click')">
+                                                      {{"CLOSE" | translate }}
+                                                  </button>
+                                              </div>
+                                              </ng-template>
+                                        </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse62"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                 <div id="collapse62" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                       <li class="class-group-item" *ngFor="let cl of GLS() | async">
+                                          <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
+                                               {{cl.title}}
+                                            </button>
+                                            <ng-template #content let-modal>
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title" 
+                                                      id="modal-basic-title">
+                                                      {{cl.title}}
+                                                  </h4>
+                                                  <button type="button" class="close"
+                                                          aria-label="Close" (click)=
+                                                          "modal.dismiss('Cross click')">
+                                              
+                                                      <span aria-hidden="true">
+                                                          ×
+                                                      </span>
+                                                  </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                                {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                                <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                               
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" 
+                                                      class="btn btn-outline-dark" 
+                                                      (click)="modal.close('Save click')">
+                                                      {{"CLOSE" | translate }}
+                                                  </button>
+                                              </div>
+                                              </ng-template>
+                                        </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                             </ul>
+                           </div>
+                     </li>
+                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse63"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR"| translate }}</a>
+                         <div id="collapse63" class="panel-collapse collapse">
+                             <ul class="list-group">
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse64"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                 <div id="collapse64" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                       <li class="class-group-item" *ngFor="let cl of GME() | async">
+                                                                                  <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
+                                               {{cl.title}}
+                                            </button>
+                                            <ng-template #content let-modal>
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title" 
+                                                      id="modal-basic-title">
+                                                      {{cl.title}}
+                                                  </h4>
+                                                  <button type="button" class="close"
+                                                          aria-label="Close" (click)=
+                                                          "modal.dismiss('Cross click')">
+                                              
+                                                      <span aria-hidden="true">
+                                                          ×
+                                                      </span>
+                                                  </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                                {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                                <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                               
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" 
+                                                      class="btn btn-outline-dark" 
+                                                      (click)="modal.close('Save click')">
+                                                      {{"CLOSE" | translate }}
+                                                  </button>
+                                              </div>
+                                              </ng-template>
+                                        </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse65"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                 <div id="collapse65" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                       <li class="class-group-item" *ngFor="let cl of GMN() | async">
+                                                                                  <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
+                                               {{cl.title}}
+                                            </button>
+                                            <ng-template #content let-modal>
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title" 
+                                                      id="modal-basic-title">
+                                                      {{cl.title}}
+                                                  </h4>
+                                                  <button type="button" class="close"
+                                                          aria-label="Close" (click)=
+                                                          "modal.dismiss('Cross click')">
+                                              
+                                                      <span aria-hidden="true">
+                                                          ×
+                                                      </span>
+                                                  </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                                {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                                <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                               
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" 
+                                                      class="btn btn-outline-dark" 
+                                                      (click)="modal.close('Save click')">
+                                                      {{"CLOSE" | translate }}
+                                                  </button>
+                                              </div>
+                                              </ng-template>
+                                        </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse66"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                 <div id="collapse66" class="panel-collapse collapse">
+                                     <ul class="list-group">
+                                       <li class="class-group-item" *ngFor="let cl of GMS() | async">
+                                                                                  <button class="btn btn-lg btn-outline-primary"  (click)="open(content)"><span class="material-icons">  description   </span>
+                                               {{cl.title}}
+                                            </button>
+                                            <ng-template #content let-modal>
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title" 
+                                                      id="modal-basic-title">
+                                                      {{cl.title}}
+                                                  </h4>
+                                                  <button type="button" class="close"
+                                                          aria-label="Close" (click)=
+                                                          "modal.dismiss('Cross click')">
+                                              
+                                                      <span aria-hidden="true">
+                                                          ×
+                                                      </span>
+                                                  </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                {{"LIBRARY.CLASS.CREATE.BESCHRIJVING.NAAM" | translate }}: {{cl.description}}<br>
+                                                {{classTalen[cl.language] | translate }} <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a>  
+                                                <div *ngIf="cl.translate">{{classTalen[cl.translate] | translate }} <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"><span class="material-icons"> file_open  </span>  </a></div>
+                                               
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" 
+                                                      class="btn btn-outline-dark" 
+                                                      (click)="modal.close('Save click')">
+                                                      {{"CLOSE" | translate }}
+                                                  </button>
+                                              </div>
+                                              </ng-template>
+                                        </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                             </ul>
+                           </div>
+                     </li>
+                     </ul>
+                   </div>
+         </li>
+
+
+
               </ul>
             </div>
           </div>
