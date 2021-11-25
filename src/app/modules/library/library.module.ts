@@ -59,7 +59,8 @@ import { ReturnDetailsComponent } from './loan/new-loan/return-details/return-de
 import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component';
 import { OverviewClassComponent } from './overview/class/overview-class.component';
 import { CreateClassComponent } from './create/class/create-class.component';
-import { FinderClassComponent } from './finder/class/class.component'
+import { FinderClassComponent } from './finder/class/class.component';
+import { ClassDocumentationComponent } from './documentation/class-documentation/class-documentation.component'
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { FinderClassComponent } from './finder/class/class.component'
     OverviewClassComponent,
     CreateClassComponent,
     FinderClassComponent,
+    ClassDocumentationComponent,
   ],
   imports: [
     CommonModule,

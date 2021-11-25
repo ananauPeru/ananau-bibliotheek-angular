@@ -15,6 +15,7 @@ import { ItemResolver } from './_resolvers/item.resolver'
 import { LoanedPieceResolver } from './_resolvers/loaned-piece.resolver'
 import { ClassResolver } from './_resolvers/class.resolver'
 import { FinderClassComponent } from './finder/class/class.component'
+import { ClassDocumentationComponent } from './documentation/class-documentation/class-documentation.component'
 
 
 const routes: Routes = [
@@ -41,6 +42,14 @@ const routes: Routes = [
       {
         path: 'classes/files',
         component: FinderClassComponent,
+      },
+      {
+        path: 'classes',
+        component: ClassDocumentationComponent,
+      },
+      {
+        path: 'classes/documentation',
+        component: ClassDocumentationComponent,
       },
       {
         path: 'classes/add-class',
