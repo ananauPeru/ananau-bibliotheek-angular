@@ -423,13 +423,14 @@
                 
 
 
-                <li class="list-group-item"> <a data-toggle="collapse" href="#collapse14"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.WISKUNDE"| translate }}   </a>
+                <li class="list-group-item"> <a data-toggle="collapse" href="#collapse14"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.WISKUNDE"| translate }} 
+                    ({{(WKE()| async).length+(WKN()| async).length+(WKS()| async).length+(WLE()| async).length+(WLN()| async).length+(WLS()| async).length+(WME()| async).length+(WMN()| async).length+(WMS()| async).length}})  </a>
                   <div id="collapse14" class="panel-collapse collapse">
                        <ul class="list-group">
-                         <li class="list-group-item" > <a data-toggle="collapse" href="#collapse15"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
+                         <li class="list-group-item" > <a data-toggle="collapse" href="#collapse15"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }} ({{(WKE()| async).length+(WKN()| async).length+(WKS()| async).length}}) </a>
                            <div id="collapse15" class="panel-collapse collapse">
                                <ul class="list-group">
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse16"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse16"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }} ({{(WKE()| async).length}}) </a>
                                    <div id="collapse16" class="panel-collapse collapse">
                                        <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of WKE() | async">
@@ -469,7 +470,7 @@
                                        </ul>
                                    </div>
                                </li>
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse17"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse17"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }} ({{(WKN()| async).length}}) </a>
                                    <div id="collapse17" class="panel-collapse collapse">
                                        <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of WKN() | async">
@@ -509,7 +510,7 @@
                                        </ul>
                                    </div>
                                </li>
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse18"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse18"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }} ({{(WKS()| async).length}}) </a>
                                    <div id="collapse18" class="panel-collapse collapse">
                                        <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of WKS() | async">
@@ -552,10 +553,10 @@
                                </ul>
                              </div>
                        </li>
-                         <li class="list-group-item" > <a data-toggle="collapse" href="#collapse19"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL"| translate }}</a>
+                         <li class="list-group-item" > <a data-toggle="collapse" href="#collapse19"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL"| translate }} ({{(WLE()| async).length+(WLN()| async).length+(WLS()| async).length}}) </a>
                            <div id="collapse19" class="panel-collapse collapse">
                                <ul class="list-group">
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse20"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse20"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }} ({{(WLE()| async).length}}) </a>
                                    <div id="collapse20" class="panel-collapse collapse">
                                        <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of WLE() | async">
@@ -595,7 +596,7 @@
                                        </ul>
                                    </div>
                                </li>
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse21"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse21"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }} ({{(WLN()| async).length}}) </a>
                                    <div id="collapse21" class="panel-collapse collapse">
                                        <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of WLN() | async">
@@ -635,7 +636,7 @@
                                        </ul>
                                    </div>
                                </li>
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse22"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse22"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }} ({{(WLS()| async).length}}) </a>
                                    <div id="collapse22" class="panel-collapse collapse">
                                        <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of WLS() | async">
@@ -678,10 +679,10 @@
                                </ul>
                              </div>
                        </li>
-                         <li class="list-group-item" > <a data-toggle="collapse" href="#collapse24"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR"| translate }}</a>
+                         <li class="list-group-item" > <a data-toggle="collapse" href="#collapse24"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR"| translate }} ({{(WME()| async).length+(WMN()| async).length+(WMS()| async).length}}) </a>
                            <div id="collapse24" class="panel-collapse collapse">
                                <ul class="list-group">
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse25"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse25"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }} ({{(WME()| async).length}})</a>
                                    <div id="collapse25" class="panel-collapse collapse">
                                        <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of WME() | async">
@@ -721,7 +722,7 @@
                                        </ul>
                                    </div>
                                </li>
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse26"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse26"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }} ({{(WMN()| async).length}})</a>
                                    <div id="collapse26" class="panel-collapse collapse">
                                        <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of WMN() | async">
@@ -761,7 +762,7 @@
                                        </ul>
                                    </div>
                                </li>
-                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse27"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                 <li class="list-group-item" > <a data-toggle="collapse" href="#collapse27"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }} ({{(WMS()| async).length}})</a>
                                    <div id="collapse27" class="panel-collapse collapse">
                                        <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of WMS() | async">
