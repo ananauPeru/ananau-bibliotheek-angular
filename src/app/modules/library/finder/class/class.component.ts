@@ -22,10 +22,11 @@ export class FinderClassComponent implements OnInit {
   public filteredListEmpty: Observable<Boolean>
   closeResult = '';
   class :  Observable<ClassModel>
-  
+  public XIKE: number  
   constructor(public classService: ClassService, public classHttpService : ClassHTTPService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    this.XIKE = this.IKE()._subscribe.length
   }
 
   open(content) {
