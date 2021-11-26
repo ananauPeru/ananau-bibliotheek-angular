@@ -810,13 +810,14 @@
                </li>
 
 
-               <li class="list-group-item"> <a data-toggle="collapse" href="#collapse28"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.ENGELS"| translate }}   </a>
+               <li class="list-group-item"> <a data-toggle="collapse" href="#collapse28"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.ENGELS"| translate }} 
+                ({{(EKE()| async).length+(EKN()| async).length+(EKS()| async).length+(ELE()| async).length+(ELN()| async).length+(ELS()| async).length+(EME()| async).length+(EMN()| async).length+(EMS()| async).length}}) </a>
                 <div id="collapse28" class="panel-collapse collapse">
                      <ul class="list-group">
-                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse29"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
+                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse29"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}   ({{(EKE()| async).length+(EKN()| async).length+(EKS()| async).length}})</a>
                          <div id="collapse29" class="panel-collapse collapse">
                              <ul class="list-group">
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse30"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse30"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}   ({{(EKE()| async).length}})</a>
                                  <div id="collapse30" class="panel-collapse collapse">
                                      <ul class="list-group">
                                          <li class="class-group-item" *ngFor="let cl of EKE() | async">
@@ -856,7 +857,7 @@
                                      </ul>
                                  </div>
                              </li>
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse31"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse31"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}   ({{(EKN()| async).length}})</a>
                                  <div id="collapse31" class="panel-collapse collapse">
                                      <ul class="list-group">
                                        <li class="class-group-item" *ngFor="let cl of EKN() | async">
@@ -896,7 +897,7 @@
                                      </ul>
                                  </div>
                              </li>
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse32"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse32"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}    ({{(EKS()| async).length}})</a>
                                  <div id="collapse32" class="panel-collapse collapse">
                                      <ul class="list-group">
                                        <li class="class-group-item" *ngFor="let cl of EKS() | async">
@@ -939,10 +940,10 @@
                              </ul>
                            </div>
                      </li>
-                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse33"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL"| translate }}</a>
+                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse33"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL"| translate }}   ({{(ELE()| async).length+(ELN()| async).length+(ELS()| async).length}})</a>
                          <div id="collapse33" class="panel-collapse collapse">
                              <ul class="list-group">
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse34"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse34"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}  ({{(ELE()| async).length)}})</a>
                                  <div id="collapse34" class="panel-collapse collapse">
                                      <ul class="list-group">
                                        <li class="class-group-item" *ngFor="let cl of ELE() | async">
@@ -982,7 +983,7 @@
                                      </ul>
                                  </div>
                              </li>
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse35"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse35"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}  ({{(ELN()| async).length}})</a>
                                  <div id="collapse35" class="panel-collapse collapse">
                                      <ul class="list-group">
                                        <li class="class-group-item" *ngFor="let cl of ELN() | async">
@@ -1022,7 +1023,7 @@
                                      </ul>
                                  </div>
                              </li>
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse36"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse36"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}  ({{(ELS()| async).length}})</a>
                                  <div id="collapse36" class="panel-collapse collapse">
                                      <ul class="list-group">
                                        <li class="class-group-item" *ngFor="let cl of ELS() | async">
@@ -1065,10 +1066,10 @@
                              </ul>
                            </div>
                      </li>
-                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse37"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR"| translate }}</a>
+                       <li class="list-group-item" > <a data-toggle="collapse" href="#collapse37"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR"| translate }}   ({{(EME()| async).length+(EMN()| async).length+(EMS()| async).length}})</a>
                          <div id="collapse37" class="panel-collapse collapse">
                              <ul class="list-group">
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse38"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse38"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}   ({{(EME()| async).length}})</a>
                                  <div id="collapse38" class="panel-collapse collapse">
                                      <ul class="list-group">
                                        <li class="class-group-item" *ngFor="let cl of EME() | async">
@@ -1108,7 +1109,7 @@
                                      </ul>
                                  </div>
                              </li>
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse39"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse39"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}   ({{(EMN()| async).length}})</a>
                                  <div id="collapse39" class="panel-collapse collapse">
                                      <ul class="list-group">
                                        <li class="class-group-item" *ngFor="let cl of EMN() | async">
@@ -1148,7 +1149,7 @@
                                      </ul>
                                  </div>
                              </li>
-                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse40"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                               <li class="list-group-item" > <a data-toggle="collapse" href="#collapse40"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}   ({{(EMS()| async).length}})</a>
                                  <div id="collapse40" class="panel-collapse collapse">
                                      <ul class="list-group">
                                        <li class="class-group-item" *ngFor="let cl of EMS() | async">
@@ -1196,13 +1197,15 @@
 
 
 
-                   <li class="list-group-item"> <a data-toggle="collapse" href="#collapse41"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.FRANS"| translate }}   </a>
+                   <li class="list-group-item"> <a data-toggle="collapse" href="#collapse41"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.FRANS"| translate }}  
+                    ({{(FKE()| async).length+(FKN()| async).length+(FKS()| async).length+(FLE()| async).length+(FLN()| async).length+(FLS()| async).length+(FME()| async).length+(FMN()| async).length+(FMS()| async).length}})  </a>
                     <div id="collapse41" class="panel-collapse collapse">
                          <ul class="list-group">
-                           <li class="list-group-item" > <a data-toggle="collapse" href="#collapse42"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
+                           <li class="list-group-item" > <a data-toggle="collapse" href="#collapse42"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}
+                            ({{(FKE()| async).length+(FKN()| async).length+(FKS()| async).length}}) </a>
                              <div id="collapse42" class="panel-collapse collapse">
                                  <ul class="list-group">
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse43"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse43"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }} ({{(FKE()| async).length}}) </a>
                                      <div id="collapse43" class="panel-collapse collapse">
                                          <ul class="list-group">
                                              <li class="class-group-item" *ngFor="let cl of FKE() | async">
@@ -1242,7 +1245,7 @@
                                          </ul>
                                      </div>
                                  </li>
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse44"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse44"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }} ({{(FKN()| async).length}}) </a>
                                      <div id="collapse44" class="panel-collapse collapse">
                                          <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of FKN() | async">
@@ -1282,7 +1285,7 @@
                                          </ul>
                                      </div>
                                  </li>
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse45"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse45"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }} ({{(FKS()| async).length}}) </a>
                                      <div id="collapse45" class="panel-collapse collapse">
                                          <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of FKS() | async">
@@ -1325,10 +1328,11 @@
                                  </ul>
                                </div>
                          </li>
-                           <li class="list-group-item" > <a data-toggle="collapse" href="#collapse46"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL"| translate }}</a>
+                           <li class="list-group-item" > <a data-toggle="collapse" href="#collapse46"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.LAGERESCHOOL"| translate }}
+                            ({{(FLE()| async).length+(FLN()| async).length+(FLS()| async).length}}) </a>
                              <div id="collapse46" class="panel-collapse collapse">
                                  <ul class="list-group">
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse47"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse47"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }} ({{(FLE()| async).length}})</a>
                                      <div id="collapse47" class="panel-collapse collapse">
                                          <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of FLE() | async">
@@ -1368,7 +1372,7 @@
                                          </ul>
                                      </div>
                                  </li>
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse48"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse48"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }} ({{(FLN()| async).length}})</a>
                                      <div id="collapse48" class="panel-collapse collapse">
                                          <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of FLN() | async">
@@ -1408,7 +1412,7 @@
                                          </ul>
                                      </div>
                                  </li>
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse49"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse49"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}  ({{(FLS()| async).length}})</a>
                                      <div id="collapse49" class="panel-collapse collapse">
                                          <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of FLS() | async">
@@ -1451,10 +1455,11 @@
                                  </ul>
                                </div>
                          </li>
-                           <li class="list-group-item" > <a data-toggle="collapse" href="#collapse50"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR"| translate }}</a>
+                           <li class="list-group-item" > <a data-toggle="collapse" href="#collapse50"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.MIDDELBAAR"| translate }}
+                            ({{(FME()| async).length+(FMN()| async).length+(FMS()| async).length}}) </a>
                              <div id="collapse50" class="panel-collapse collapse">
                                  <ul class="list-group">
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse51"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse51"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.ENGELS"| translate }}  ({{(FME()| async).length}})</a>
                                      <div id="collapse51" class="panel-collapse collapse">
                                          <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of FME() | async">
@@ -1494,7 +1499,7 @@
                                          </ul>
                                      </div>
                                  </li>
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse52"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse52"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.NEDERLANDS"| translate }}  ({{(FMN()| async).length}})</a>
                                      <div id="collapse52" class="panel-collapse collapse">
                                          <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of FMN() | async">
@@ -1534,7 +1539,7 @@
                                          </ul>
                                      </div>
                                  </li>
-                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse53"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}</a>
+                                   <li class="list-group-item" > <a data-toggle="collapse" href="#collapse53"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.LANGUAGE.SPAANS"| translate }}  ({{(FMS()| async).length}})</a>
                                      <div id="collapse53" class="panel-collapse collapse">
                                          <ul class="list-group">
                                            <li class="class-group-item" *ngFor="let cl of FMS() | async">
@@ -1583,7 +1588,8 @@
 
 
 
-             <li class="list-group-item"> <a data-toggle="collapse" href="#collapse54"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.GESCHIEDENIS"| translate }}   </a>
+             <li class="list-group-item"> <a data-toggle="collapse" href="#collapse54"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.GESCHIEDENIS"| translate }}  
+                ({{(GKE()| async).length+(GKN()| async).length+(GKS()| async).length+(GLE()| async).length+(GLN()| async).length+(GLS()| async).length+(GME()| async).length+(GMN()| async).length+(GMS()| async).length}})  </a>
                 <div id="collapse54" class="panel-collapse collapse">
                      <ul class="list-group">
                        <li class="list-group-item" > <a data-toggle="collapse" href="#collapse55"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
@@ -1969,7 +1975,8 @@
          </li>
 
 
-         <li class="list-group-item"> <a data-toggle="collapse" href="#collapse67"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.AARDERIJKSKUNDE"| translate }}   </a>
+         <li class="list-group-item"> <a data-toggle="collapse" href="#collapse67"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.AARDERIJKSKUNDE"| translate }}  
+            ({{(AKE()| async).length+(AKN()| async).length+(AKS()| async).length+(ALE()| async).length+(ALN()| async).length+(ALS()| async).length+(AME()| async).length+(AMN()| async).length+(AMS()| async).length}})  </a>
             <div id="collapse67" class="panel-collapse collapse">
                  <ul class="list-group">
                    <li class="list-group-item" > <a data-toggle="collapse" href="#collapse68"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
@@ -2355,7 +2362,8 @@
      </li>
 
 
-     <li class="list-group-item"> <a data-toggle="collapse" href="#collapse80"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.OCCUPATIONAL"| translate }}   </a>
+     <li class="list-group-item"> <a data-toggle="collapse" href="#collapse80"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.OCCUPATIONAL"| translate }}   
+        ({{(BKE()| async).length+(BKN()| async).length+(BKS()| async).length+(BLE()| async).length+(BLN()| async).length+(BLS()| async).length+(BME()| async).length+(BMN()| async).length+(BMS()| async).length}})  </a>
         <div id="collapse80" class="panel-collapse collapse">
              <ul class="list-group">
                <li class="list-group-item" > <a data-toggle="collapse" href="#collapse81"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
@@ -2742,7 +2750,8 @@
 
 
 
- <li class="list-group-item"> <a data-toggle="collapse" href="#collapse93"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.SOCIALCARE"| translate }}   </a>
+ <li class="list-group-item"> <a data-toggle="collapse" href="#collapse93"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.SOCIALCARE"| translate }}   
+    ({{(SKE()| async).length+(SKN()| async).length+(SKS()| async).length+(SLE()| async).length+(SLN()| async).length+(SLS()| async).length+(SME()| async).length+(SMN()| async).length+(SMS()| async).length}}) </a>
     <div id="collapse93" class="panel-collapse collapse">
          <ul class="list-group">
            <li class="list-group-item" > <a data-toggle="collapse" href="#collapse94"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
@@ -3128,7 +3137,8 @@
 </li>
 
 
-<li class="list-group-item"> <a data-toggle="collapse" href="#collapse106"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.PSYCHOLOGY"| translate }}   </a>
+<li class="list-group-item"> <a data-toggle="collapse" href="#collapse106"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.PSYCHOLOGY"| translate }} 
+    ({{(PKE()| async).length+(PKN()| async).length+(PKS()| async).length+(PLE()| async).length+(PLN()| async).length+(PLS()| async).length+(PME()| async).length+(PMN()| async).length+(PMS()| async).length}})   </a>
     <div id="collapse106" class="panel-collapse collapse">
          <ul class="list-group">
            <li class="list-group-item" > <a data-toggle="collapse" href="#collapse107"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
@@ -3514,7 +3524,8 @@
 </li>
 
 
-<li class="list-group-item"> <a data-toggle="collapse" href="#collapse119"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.ARTS"| translate }}   </a>
+<li class="list-group-item"> <a data-toggle="collapse" href="#collapse119"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.ARTS"| translate }}   
+    ({{(KKE()| async).length+(KKN()| async).length+(KKS()| async).length+(KLE()| async).length+(KLN()| async).length+(KLS()| async).length+(KME()| async).length+(KMN()| async).length+(KMS()| async).length}}) </a>
     <div id="collapse119" class="panel-collapse collapse">
          <ul class="list-group">
            <li class="list-group-item" > <a data-toggle="collapse" href="#collapse120"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
@@ -3900,7 +3911,8 @@
 </li>
 
 
-<li class="list-group-item"> <a data-toggle="collapse" href="#collapse132"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.NUTRITION"| translate }}   </a>
+<li class="list-group-item"> <a data-toggle="collapse" href="#collapse132"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.NUTRITION"| translate }}  
+    ({{(NKE()| async).length+(NKN()| async).length+(NKS()| async).length+(NLE()| async).length+(NLN()| async).length+(NLS()| async).length+(NME()| async).length+(NMN()| async).length+(NMS()| async).length}})  </a>
     <div id="collapse132" class="panel-collapse collapse">
          <ul class="list-group">
            <li class="list-group-item" > <a data-toggle="collapse" href="#collapse133"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
@@ -4285,7 +4297,8 @@
        </div>
 </li>
 
-<li class="list-group-item"> <a data-toggle="collapse" href="#collapse145"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.COMMUNICATION"| translate }}   </a>
+<li class="list-group-item"> <a data-toggle="collapse" href="#collapse145"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.COMMUNICATION"| translate }} 
+    ({{(CKE()| async).length+(CKN()| async).length+(CKS()| async).length+(CLE()| async).length+(CLN()| async).length+(CLS()| async).length+(CME()| async).length+(CMN()| async).length+(CMS()| async).length}})   </a>
     <div id="collapse145" class="panel-collapse collapse">
          <ul class="list-group">
            <li class="list-group-item" > <a data-toggle="collapse" href="#collapse146"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
@@ -4671,7 +4684,8 @@
 </li>
 
 
-<li class="list-group-item"> <a data-toggle="collapse" href="#collapse158"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.OTHER"| translate }}   </a>
+<li class="list-group-item"> <a data-toggle="collapse" href="#collapse158"><span class="material-icons">folder</span>{{"LIBRARY.CLASS.SUBJECT.OTHER"| translate }}  
+    ({{(OKE()| async).length+(OKN()| async).length+(OKS()| async).length+(OLE()| async).length+(OLN()| async).length+(OLS()| async).length+(OME()| async).length+(OMN()| async).length+(OMS()| async).length}})  </a>
     <div id="collapse158" class="panel-collapse collapse">
          <ul class="list-group">
            <li class="list-group-item" > <a data-toggle="collapse" href="#collapse159"><span class="material-icons">folder</span> {{"LIBRARY.CLASS.CREATE.PUBLIEK.KLEUTER"| translate }}</a>
