@@ -390,6 +390,7 @@ export const locale = {
       DON:'The document has been uploaded',
       GENERAL: {},
       CLASS : {
+        HELP: "How to add new lesson?",
         VRAAG: "Do you want to upload a translation of the document?",
         YES: "Yes",
         NO:"No",

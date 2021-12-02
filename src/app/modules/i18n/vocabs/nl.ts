@@ -377,6 +377,7 @@ export const locale = {
       DON:'Het document is geüpload',
       GENERAL: {},
       CLASS : {
+        HELP: "Hoe nieuwe les toevoegen?",
         VRAAG: "Wil je een vertaling van het document uploaden?",
         YES: "Ja",
         NO:"Nee",

@@ -296,7 +296,15 @@
                   }}</span>
               </a>
             </li>
-
+            
+            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+              routerLinkActive="menu-item-open">
+              <a class="menu-link menu-toggle" routerLink="/library/classes/documentation" routerLinkActive="active">
+                <span [inlineSVG]="'./assets/media/svg/icons/Code/Question-circle.svg'" cacheSVG="true"
+                  class="svg-icon menu-icon"></span>
+                <span class="menu-text">{{ "LIBRARY.CLASS.HELP" | translate }}</span>
+              </a>
+            </li>
 
           </ul>
         </div>

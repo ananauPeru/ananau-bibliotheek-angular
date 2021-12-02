@@ -388,6 +388,7 @@ export const locale = {
       DON:'El documento ha sido subido ',
       GENERAL: {},
       CLASS : {
+        HELP: "¿Cómo agregar una lección nueva?",
         VRAAG: "¿Quieres subir una traducción del documento?",
         YES: "Si",
         NO:"No",
