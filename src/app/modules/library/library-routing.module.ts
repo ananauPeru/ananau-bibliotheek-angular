@@ -14,7 +14,6 @@ import { BookResolver } from './_resolvers/book.resolver'
 import { ItemResolver } from './_resolvers/item.resolver'
 import { LoanedPieceResolver } from './_resolvers/loaned-piece.resolver'
 import { ClassResolver } from './_resolvers/class.resolver'
-import { FinderClassComponent } from './finder/class/class.component'
 import { ClassDocumentationComponent } from './documentation/class-documentation/class-documentation.component'
 
 
@@ -39,10 +38,7 @@ const routes: Routes = [
         path: 'classes/overview',
         component: OverviewClassComponent,
       },
-      {
-        path: 'classes/files',
-        component: FinderClassComponent,
-      },
+     
       {
         path: 'classes',
         component: ClassDocumentationComponent,
