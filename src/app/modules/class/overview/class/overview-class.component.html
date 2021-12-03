@@ -13,7 +13,7 @@
                     <div class="col-12 col-md-4">
                         <button type="submit" id="kt_login_signin_submit"
                             class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
-                            routerLink="/library/classes/add-class">
+                            routerLink="/class/add-class">
                             {{"LIBRARY.CLASS_OVERVIEW.ADD" | translate }}
                         </button>
                     </div>
@@ -128,7 +128,7 @@
                             file_open
                         </span>
                     </a>
-                    <a routerLink='/library/classes/edit-class/{{cl.classID}}' class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                    <a routerLink='/class/edit-class/{{cl.classID}}' class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
                         {{"EDIT" | translate }}
                         <span class="material-icons">
                            mode_edit

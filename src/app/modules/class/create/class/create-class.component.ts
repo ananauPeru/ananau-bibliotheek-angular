@@ -12,7 +12,7 @@ import { ClassSubject } from '../../_models/class-subject.enum';
 import { ClassModel } from '../../_models/class.model';
 import { ClassHTTPService } from '../../_services/class/class-http/class-http.service';
 import { ClassService } from '../../_services/class/class.sercice';
-import { ItemStorageService } from '../../_services/storage/item-storage.service';
+import { ItemStorageService } from '../../../library/_services/storage/item-storage.service';
 
 @Component({
   selector: 'app-create-class',
@@ -211,7 +211,7 @@ export class CreateClassComponent implements OnInit {
                 'Class Created',
               )
               this.cservice.loadInitialData()
-              this.router.navigate(['/library/classes/overview'])
+              this.router.navigate(['/class/overview'])
             },
             (error) => {
               console.error(error)
@@ -236,7 +236,7 @@ export class CreateClassComponent implements OnInit {
                 'Changes Saved',
               )
               this.cservice.loadInitialData();
-              this.router.navigate(['/library/classes/overview'])
+              this.router.navigate(['/class/overview'])
             },
             (error) => {
               console.error(error)
@@ -344,7 +344,7 @@ export class CreateClassComponent implements OnInit {
                 'Item successfully deleted.',
                 'Item Deleted',
               )
-              this.router.navigate(['/library/classes/overview'])
+              this.router.navigate(['/class/overview'])
             },
             (error) => {
               console.error(error)

@@ -3,18 +3,17 @@ import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from '../auth/_services/auth.guard'
 import { CreateBookComponent } from './create/book/create-book.component'
 import { CreateItemComponent } from './create/item/create-item.component'
-import { CreateClassComponent } from './create/class/create-class.component'
 import { LibraryComponent } from './library.component'
 import { AddLoanComponent } from './loan/new-loan/add-loan.component'
 import { OverviewComponent } from './loan/overview/overview.component'
 import { OverviewBookComponent } from './overview/book/overview-book.component'
 import { OverviewItemComponent } from './overview/item/overview-item.component'
-import { OverviewClassComponent } from './overview/class/overview-class.component'
 import { BookResolver } from './_resolvers/book.resolver'
 import { ItemResolver } from './_resolvers/item.resolver'
 import { LoanedPieceResolver } from './_resolvers/loaned-piece.resolver'
-import { ClassResolver } from './_resolvers/class.resolver'
-import { ClassDocumentationComponent } from './documentation/class-documentation/class-documentation.component'
+import { ClassDocumentationComponent } from '../class/documentation/class-documentation/class-documentation.component'
+
+
 
 
 const routes: Routes = [
@@ -35,32 +34,11 @@ const routes: Routes = [
         component: CreateBookComponent,
       },
       {
-        path: 'classes/overview',
-        component: OverviewClassComponent,
-      },
-     
-      {
-        path: 'classes',
-        component: ClassDocumentationComponent,
-      },
-      {
-        path: 'classes/documentation',
-        component: ClassDocumentationComponent,
-      },
-      {
-        path: 'classes/add-class',
-        component: CreateClassComponent,
-      },
-      {
         path: 'books/edit-book/:id',
         resolve: { book: BookResolver },
         component: CreateBookComponent,
       },
-      {
-        path: 'classes/edit-class/:id',
-        resolve: { class: ClassResolver },
-        component: CreateClassComponent,
-      },
+    
       {
         path: 'items/overview',
         component: OverviewItemComponent,
@@ -81,6 +59,10 @@ const routes: Routes = [
       {
         path: 'loans/new-loan',
         component: AddLoanComponent,
+      },
+      {
+        path: 'classes',
+        component: ClassDocumentationComponent,
       },
       {
         path: 'loans/edit-loan/:id',

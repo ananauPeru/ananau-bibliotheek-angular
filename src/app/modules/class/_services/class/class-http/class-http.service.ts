@@ -3,8 +3,6 @@ import { Observable, of, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../../../../environments/environment";
 import { catchError, finalize, map } from "rxjs/operators";
-import { ItemModel } from "../../../_models/item.model";
-import { ItemDTO } from "../../../_dto/item-dto";
 import { ClassModel } from "../../../_models/class.model"
 import { ClassDTO } from "../../../_dto/class-dto";
 

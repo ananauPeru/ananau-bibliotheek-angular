@@ -5,8 +5,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { TranslationModule } from '../i18n/translation.module'
 import { LayoutModule } from 'src/app/pages/layout.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { LibraryRoutingModule } from './library-routing.module'
-import { LibraryComponent } from './library.component'
+import { ClassRoutingModule } from './class-routing.module'
+import { ClassComponent } from './class.component'
 import { RouterModule } from '@angular/router'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet'
@@ -45,34 +45,26 @@ import { MatTreeModule } from '@angular/material/tree'
 import { routes } from 'src/app/app-routing.module'
 import { CoreModule } from 'src/app/_metronic/core'
 import { GeneralModule } from 'src/app/_metronic/partials/content/general/general.module'
-import { OverviewItemComponent } from './overview/item/overview-item.component'
-import { OverviewBookComponent } from './overview/book/overview-book.component'
-import { CreateItemComponent } from './create/item/create-item.component'
-import { CreateBookComponent } from './create/book/create-book.component'
+
 import { NgxDropzoneModule } from 'ngx-dropzone'
 import { MarkAsteriskDirective } from './directives/mark-asterisk.directive'
-import { OverviewComponent } from './loan/overview/overview.component'
+
 import { PositivePipe } from './pipes/positive.pipe'
-import { AddLoanComponent } from './loan/new-loan/add-loan.component';
-import { LoanDetailsComponent } from './loan/new-loan/loan-details/loan-details.component';
-import { ReturnDetailsComponent } from './loan/new-loan/return-details/return-details.component';
-import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component';
+import { CreateClassComponent } from './create/class/create-class.component'
+import { ClassDocumentationComponent } from './documentation/class-documentation/class-documentation.component'
+import { OverviewClassComponent } from './overview/class/overview-class.component'
+
+
 
 
 @NgModule({
   declarations: [
-    LibraryComponent,
-    OverviewItemComponent,
-    OverviewBookComponent,
-    CreateItemComponent,
-    CreateBookComponent,
-    MarkAsteriskDirective,
-    OverviewComponent,
-    AddLoanComponent,
+    ClassComponent,
+    OverviewClassComponent,
+    CreateClassComponent,
+    ClassDocumentationComponent,
     PositivePipe,
-    LoanDetailsComponent,
-    ReturnDetailsComponent,
-    SignOffComponent,
+    MarkAsteriskDirective
   ],
   imports: [
     CommonModule,
@@ -120,7 +112,7 @@ import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component';
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     TranslationModule,
-    LibraryRoutingModule,
+    ClassRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -130,4 +122,4 @@ import { SignOffComponent } from './loan/new-loan/sign-off/sign-off.component';
   ],
   providers: [DatePipe],
 })
-export class LibraryModule {}
+export class ClassModule {}
