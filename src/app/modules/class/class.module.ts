@@ -52,7 +52,8 @@ import { MarkAsteriskDirective } from './directives/mark-asterisk.directive'
 import { PositivePipe } from './pipes/positive.pipe'
 import { CreateClassComponent } from './create/class/create-class.component'
 import { ClassDocumentationComponent } from './documentation/class-documentation/class-documentation.component'
-import { OverviewClassComponent } from './overview/class/overview-class.component'
+import { OverviewClassComponent } from './overview/class/overview-class.component';
+import { FinderComponent } from './finder/finder.component'
 
 
 
@@ -64,7 +65,8 @@ import { OverviewClassComponent } from './overview/class/overview-class.componen
     CreateClassComponent,
     ClassDocumentationComponent,
     PositivePipe,
-    MarkAsteriskDirective
+    MarkAsteriskDirective,
+    FinderComponent
   ],
   imports: [
     CommonModule,
