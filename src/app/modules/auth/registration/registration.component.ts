@@ -7,6 +7,7 @@ import { ConfirmPasswordValidator } from "./confirm-password.validator";
 import { UserModel } from "../_models/user.model";
 import { first } from "rxjs/operators";
 import { RegisterDTO } from "../_dto/register-dto";
+import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-registration",
@@ -20,11 +21,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
+  closeResult = '';
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -36,11 +39,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     setTimeout(() => {
-      if(confirm("Do you want to subscribe to are newsletter?")){
-        document.location.href = 'https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d';
-      }
-      
-  }, 3000);
+      document.getElementById("pop").click();
+  }, 2000);
   }
 
 
@@ -156,4 +156,25 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
+
+  open(content) {
+    this.modalService.open(content,
+   {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = 
+         `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 }
