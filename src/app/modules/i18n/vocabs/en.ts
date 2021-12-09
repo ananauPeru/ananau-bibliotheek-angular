@@ -101,7 +101,7 @@ export const locale = {
         LEGAL: 'Legal',
         CONTACT: 'Contact us',
         WEBSITE: 'Website',
-        SUBSCRIBE: 'We would appriciate it if you subscribe to our newsletter. It is alwaus possible to unsubscribe afterwards.',
+        SUBSCRIBE: 'We would appriciate it if you subscribe to our newsletter. It is always possible to unsubscribe afterwards.',
         CLICK:'Click on the language in which you want to receive a newsletter.',
         NEWSLETTER: 'Newsletter',
         SITE: 'https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup',

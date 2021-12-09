@@ -524,21 +524,8 @@
 
 <button class="btn btn-lg btn-outline-primary" id="pop" (click)="open(content)"></button>
 <ng-template #content let-modal>
-  <div class="modal-header">
-      <h4 class="modal-title" 
-          id="modal-basic-title">
-          {{
-            "AUTH.GENERAL.NEWSLETTER" | translate
-        }}
-      </h4>
-      <button type="button" class="close"
-              aria-label="Close" (click)=
-              "modal.dismiss('Cross click')">
-  
-          <span aria-hidden="true">
-              X
-          </span>
-      </button>
+  <div id="modal-header">
+     <pre>   <h4 class="modal-title"  id="modal-basic-title">  {{ "AUTH.GENERAL.NEWSLETTER" | translate  }} </h4></pre> 
   </div>
   <div class="modal-body">
     {{
@@ -549,18 +536,13 @@
 }}
   </div>
   <div class="modal-footer">
-    <a href='https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup' target="_blank">  <button type="button" 
-      class="btn btn-outline-dark" >
+    <a href='https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup' target="_blank">  <button (click)="modal.close('Save click')"
+      class="btn btn-primary font-weight-bolder font-size-h6 px-6 py-2 my-0 mr-0">
       {{"ENGELS" | translate }}
   </button> </a> 
-  <a href='https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d' target="_blank">  <button type="button" 
-    class="btn btn-outline-dark" >
+  <a href='https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d' target="_blank">  <button (click)="modal.close('Save click')"
+    class="btn btn-primary font-weight-bolder font-size-h6 px-6 py-2 my-0 mr-0">
     {{"NEDERLANDS" | translate }}
 </button> </a> 
-      <button type="button" 
-          class="btn btn-outline-dark" 
-          (click)="modal.close('Save click')">
-          {{"CLOSE" | translate }}
-      </button>
   </div>
   </ng-template>
