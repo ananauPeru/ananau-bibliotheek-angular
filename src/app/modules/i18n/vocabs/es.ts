@@ -15,6 +15,9 @@ export const locale = {
       TRY_AGAIN: "Algo salió mal. Por favor, inténtelo de nuevo más tarde.",
     },
 
+    NEDERLANDS : 'holandés',
+    ENGELS : 'inglés',
+    
     // BUTTONS
     BUTTONS: {
       SAVE: "Guardar",
@@ -89,7 +92,9 @@ export const locale = {
         LEGAL: "Legal",
         CONTACT: "Contacta con nosotros",
         WEBSITE: "Sitio web",
-        SUBSCRIBE: 'Le agradecerìamos que se suscribiera a nuestra newsletter. Siempre es psible darse de baja después.',
+        SUBSCRIBE: 'Le agradecerìamos que se suscribiera a nuestra boletin informativa. Siempre es psible darse de baja después.',
+        NEWLSETTER: 'Boletin informativo',
+        CLICK:'Haga clic el idioma en el que desea recibir un boletìn.',
         SITE: 'https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup',
       },
       LOGIN: {

@@ -527,24 +527,36 @@
   <div class="modal-header">
       <h4 class="modal-title" 
           id="modal-basic-title">
-         nieuwsbrief
+          {{
+            "AUTH.GENERAL.NEWSLETTER" | translate
+        }}
       </h4>
       <button type="button" class="close"
               aria-label="Close" (click)=
               "modal.dismiss('Cross click')">
   
           <span aria-hidden="true">
-              ×
+              X
           </span>
       </button>
   </div>
   <div class="modal-body">
     {{
       "AUTH.GENERAL.SUBSCRIBE" | translate
-  }}
+  }}<br>
+  {{
+    "AUTH.GENERAL.CLICK" | translate
+}}
   </div>
   <div class="modal-footer">
-    <a href='{{ "AUTH.GENERAL.SITE" | translate }}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"> <span class="material-icons"> file_open</span> </a> 
+    <a href='https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup' target="_blank">  <button type="button" 
+      class="btn btn-outline-dark" >
+      {{"ENGELS" | translate }}
+  </button> </a> 
+  <a href='https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d' target="_blank">  <button type="button" 
+    class="btn btn-outline-dark" >
+    {{"NEDERLANDS" | translate }}
+</button> </a> 
       <button type="button" 
           class="btn btn-outline-dark" 
           (click)="modal.close('Save click')">

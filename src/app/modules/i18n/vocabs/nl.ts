@@ -9,6 +9,9 @@ export const locale = {
     DOWNTAN: "Download vertaling",
     CLOSE: "Sluit",
 
+    NEDERLANDS : 'Nederlands',
+    ENGELS : 'Engels',
+
     ERRORS: {
       TRY_AGAIN: 'Er is iets fout gegaan. Probeer het later nog eens.',
     },
@@ -85,6 +88,8 @@ export const locale = {
         CONTACT: 'Contacteer ons',
         WEBSITE: 'Website',
         SUBSCRIBE: 'Wij zouden het fijn vinden als je je inschrijft op onze nieuwsbrief. Het is altijd mogelijk om je achteraf uit te schrijven.',
+        NEWSLETTER: 'Nieuwsbrief',
+        CLICK:'Klik op de taal waarin je een nieuwsbrief wilt ontvangen.',
         SITE: 'https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d',
       },
       LOGIN: {
