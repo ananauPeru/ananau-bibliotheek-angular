@@ -84,7 +84,7 @@ export const locale = {
         LEGAL: 'Legal',
         CONTACT: 'Contacteer ons',
         WEBSITE: 'Website',
-        SUBSCRIBE: 'Schrijf je hier in op onze nieuwsletter',
+        SUBSCRIBE: 'Wij zouden het fijn vinden als je je inschrijft op onze nieuwsbrief. Het is altijd mogelijk om je achteraf uit te schrijven.',
         SITE: 'https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d',
       },
       LOGIN: {

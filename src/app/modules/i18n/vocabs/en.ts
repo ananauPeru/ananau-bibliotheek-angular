@@ -99,7 +99,7 @@ export const locale = {
         LEGAL: 'Legal',
         CONTACT: 'Contact us',
         WEBSITE: 'Website',
-        SUBSCRIBE: 'Subscribe to our newsletter here',
+        SUBSCRIBE: 'We would appriciate it if you subscribe to our newsletter. It is alwaus possible to unsubscribe afterwards.',
         SITE: 'https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup',
       },
       LOGIN: {

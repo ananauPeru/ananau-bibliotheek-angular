@@ -89,7 +89,7 @@ export const locale = {
         LEGAL: "Legal",
         CONTACT: "Contacta con nosotros",
         WEBSITE: "Sitio web",
-        SUBSCRIBE: 'Suscríbete a nuestro boletín aquí',
+        SUBSCRIBE: 'Le agradecerìamos que se suscribiera a nuestra newsletter. Siempre es psible darse de baja después.',
         SITE: 'https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup',
       },
       LOGIN: {
