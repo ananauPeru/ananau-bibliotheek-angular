@@ -50,6 +50,8 @@ import { OrganizationComponent } from "./organization.component";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationsOverviewComponent } from "./registrations-overview/registrations-overview.component";
 import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
+import { CalendarComponent } from './calendar/calendar.component';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { RegistrationDetailsComponent } from './registration-details/registratio
     OrganizationComponent,
     RegistrationsOverviewComponent,
     RegistrationDetailsComponent,
+    CalendarComponent,
   ],
   imports: [
     CommonModule,

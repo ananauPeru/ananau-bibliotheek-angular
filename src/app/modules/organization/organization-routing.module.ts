@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "../auth/_services/auth.guard";
+import { CalendarComponent } from "./calendar/calendar.component";
 import { OrganizationComponent } from "./organization.component";
 import { RegistrationDetailsComponent } from "./registration-details/registration-details.component";
 import { RegistrationsOverviewComponent } from "./registrations-overview/registrations-overview.component";
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: "roles",
         component: RolesComponent,
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent,
       },
       {
         path: "registrations",
