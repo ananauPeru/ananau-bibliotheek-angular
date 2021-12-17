@@ -286,6 +286,7 @@
             [file]="f"
             [removable]="true"
             (removed)="onRemoveClassImage(f)"
+            id='zone'
           >
           <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
           </ngx-dropzone-image-preview>
@@ -419,6 +420,7 @@
               [file]="f"
               [removable]="true"
               (removed)="onRemoveClassImages(f)"
+              id='zone'
             >
             <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
             </ngx-dropzone-image-preview>
