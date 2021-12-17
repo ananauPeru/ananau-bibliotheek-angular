@@ -7,7 +7,7 @@ import { CreateClassComponent } from './create/class/create-class.component'
 import { ClassDocumentationComponent } from './documentation/class-documentation/class-documentation.component'
 import { FinderComponent } from './finder/finder.component'
 import { OverviewClassComponent } from './overview/class/overview-class.component'
-
+import { ClassResolver} from './_resolvers/class.resolver'
 
 const routes: Routes = [
   {
@@ -33,6 +33,11 @@ const routes: Routes = [
       },
       {
         path: 'add-class',
+        component: CreateClassComponent,
+      },
+      {
+        path: 'edit-class/:id',
+        resolve: { class: ClassResolver },
         component: CreateClassComponent,
       },
    
