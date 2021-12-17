@@ -116,13 +116,14 @@
                 <div class="d-flex flex-column text-right">
                     
                     <!--hier download edit and open symbolen?::Info-->
+                    <button>
                     <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
                         {{"DOWNLOAD" | translate }}
                         <span class="material-icons">
                             file_open
                         </span>
-                    </a>
-                    <button>
+                    </a></button>
+                    <button *ngIf="cl.translatedPdf">
                     <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
                         {{"DOWNTAN" | translate }}
                         <span class="material-icons">
