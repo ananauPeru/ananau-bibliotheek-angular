@@ -31,6 +31,7 @@ export const locale = {
       PAGES: 'Paginas',
       FEATURES: 'Features',
       APPS: 'Apps',
+      KAL: 'Kalender',
       DASHBOARD: 'Dashboard',
       ZOEK: 'Zoeken',
       NO_ROLES:

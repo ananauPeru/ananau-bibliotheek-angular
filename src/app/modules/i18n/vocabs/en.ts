@@ -40,6 +40,7 @@ export const locale = {
       APPS: 'Apps',
       DASHBOARD: 'Dashboard',
       ZOEK: 'Search',
+      KAL: 'Calendar',
       NO_ROLES:
         "You don't have access to any modules yet. Please contact us to ask for access.",
       HI: 'Hi',

@@ -36,6 +36,7 @@ export const locale = {
       CREATE_POST: "Crear nueva publicación",
       PAGES: "Pages",
       FEATURES: "Caracteristicas",
+      KAL: 'Calendario',
       APPS: "Aplicaciones",
       DASHBOARD: "Tablero",
       ZOEK: 'Buscar',
