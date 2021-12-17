@@ -122,18 +122,20 @@
                             file_open
                         </span>
                     </a>
+                    <button>
                     <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
                         {{"DOWNTAN" | translate }}
                         <span class="material-icons">
                             file_open
                         </span>
-                    </a>
+                    </a></button>
+                    <button>
                     <a routerLink='/class/edit-class/{{cl.classID}}' class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
                         {{"EDIT" | translate }}
                         <span class="material-icons">
                            mode_edit
                         </span>
-                    </a>
+                    </a></button>
                 </div>
             </div>
             <!--end::Info-->
