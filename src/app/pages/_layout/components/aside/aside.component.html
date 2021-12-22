@@ -235,92 +235,44 @@
       <!-- end:: section -->
 
       <!-- begin::1 Level -->
-      <!-- begin::1 Level -->
-
-     <!-- Classes -->
-      <!-- begin::1 Level -->
-
-      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open" >
-        <a class="menu-link menu-toggle" routerLinkActive="active" href="/library/classes">
-          <span [inlineSVG]="'./assets/media/svg/icons/Files/Folder.svg'" cacheSVG="true"
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+        <a class="menu-link" routerLink="/class/files" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Files/Folder-check.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
-          <span class="menu-text"> {{ "MENU.LIBRARY.LES" | translate }}</span>
-          <i class="menu-arrow"></i>
+          <span class="menu-text">{{ "MENU.LIBRARY.OVERVIEW" | translate }}
+          </span>
         </a>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-              <span class="menu-link">
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.LES" | translate
-                  }}</span>
-              </span>
-            </li>
-
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/class/files" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Files/Folder-check.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.OVERVIEW" | translate
-                  }}</span>
-              </a>
-            </li>
-
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/class/add-class" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.ADD_LES" | translate
-                  }}</span>
-              </a>
-            </li>
-
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/class/overview" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/General/Search.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{
-                  "MENU.ZOEK" | translate
-                  }}</span>
-              </a>
-            </li>
-            
-            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-              routerLinkActive="menu-item-open">
-              <a class="menu-link menu-toggle" routerLink="/class/documentation" routerLinkActive="active">
-                <span [inlineSVG]="'./assets/media/svg/icons/Code/Question-circle.svg'" cacheSVG="true"
-                  class="svg-icon menu-icon"></span>
-                <span class="menu-text">{{ "LIBRARY.CLASS.HELP" | translate }}</span>
-              </a>
-            </li>
-
-          </ul>
-        </div>
       </li>
-      <!-- end::1 Level -->
 
-      
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+        <a class="menu-link" routerLink="/class/add-class" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ "MENU.LIBRARY.ADD_LES" | translate }}
+          </span>
+        </a>
+      </li>
 
-     
-          
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+        <a class="menu-link" routerLink="/class/overview" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/General/Search.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ "MENU.ZOEK" | translate }}
+          </span>
+        </a>
+      </li>
 
-            
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+        <a class="menu-link" routerLink="/class/documentation" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Code/Question-circle.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ "LIBRARY.CLASS.HELP" | translate }}
+          </span>
+        </a>
+      </li>
+      <!-- begin::1 Level -->
 
-   
-     
-      <!-- end::1 Level -->
+  
 
 
 
