@@ -1,7 +1,4 @@
 .menu-card {
-  --menu-card-height: 400px;
-
-  height: var(--menu-card-height);
   margin-bottom: 1.5rem;
 
   .card {
@@ -45,7 +42,7 @@
   }
 
   &.one-big-child {
-    height: calc(var(--menu-card-height)*1.3);
+    height: 100%;
   }
 
   &.two-small-children {
@@ -65,9 +62,14 @@
   .menu-card {
     --menu-card-height: 480px;
   }
+
+  .big-container {
+    height: 100%;
+    padding: 0 0 2rem 0;
+  }
 }
 
 a{
-  width: 190px;
+  width: 100%;
   text-align: left;
 }

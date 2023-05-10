@@ -9,6 +9,7 @@ import { RegistrationRole } from "../_models/registration-role";
 import { RegistrationModel } from "../_models/registration.model";
 import { RegistrationService } from "../_services/registration/registration.service";
 import { UserStorageService } from "../_services/registration/user-storage.service";
+import { CsvUtil } from 'src/app/_utils/csv_util';
 
 @Component({
   selector: "app-registration-details",
@@ -37,7 +38,8 @@ export class RegistrationDetailsComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private translate: TranslateService,
     private router: Router,
-    private userStorageService: UserStorageService
+    private userStorageService: UserStorageService,
+    private csvUtil: CsvUtil,
   ) {
     this.route.data.subscribe(
       (data) =>
@@ -86,6 +88,10 @@ export class RegistrationDetailsComponent implements OnInit {
     });
 
     this.userStorageService.fetchFiles$(this._userId);
+  }
+
+  async exportUserDetails() {
+    this.csvUtil.csvDownload([this._registration.value], `User detail of ${this._registration.value.firstName}`);
   }
 
   confirm(confirm: boolean) {

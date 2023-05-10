@@ -4,12 +4,19 @@
     <div class="row">
         <div class="col-12">
             <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
-                <div class="row">
+                <div class="d-flex justify-content-between">
                     <div class="col-12 col-md-8 w-100">
                         <h3 class="card-title font-weight-bolder text-dark">
                             {{"ORGANIZATION.ROLES.OVERVIEW.TITLE" | translate }}
                         </h3>
                     </div>
+
+                    <div class="d-flex">
+                      <button class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
+                        (click)="exportUsers()">
+                        {{"ORGANIZATION.ROLES.OVERVIEW.EXPORT" | translate }}
+                      </button>
+                  </div>
                 </div>
             </div>
         </div>
@@ -70,6 +77,14 @@
                                         id="flexCheckChecked" [checked]="user.roles.includes(role.name)"
                                         (change)="changeRoles($event, user, role.name)">
                                 </td>
+                                <td>
+                                  <div *ngIf="!(user.user.userName == loggedInUsername$)">
+
+                                    <a class="remove" data-toggle="modal"
+                                    data-target="#delete-box" (click)="setRemoveUser(user)">{{"ORGANIZATION.ROLES.OVERVIEW.DELETE" | translate }}</a>
+                                  </div>
+                                </td>
+
                                 <!-- <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('SuperAdmin')" (change)="changeRoles($event, user, 'SuperAdmin')"></td>
                                 <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Admin')"></td>
                                 <td class="text-center"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="user.roles.includes('Librarian')"></td>
@@ -93,4 +108,58 @@
             </div>
         </div> -->
     </div>
+</div>
+
+
+<!-- Agreement dialog -->
+<div
+  class="modal fade"
+  id="delete-box"
+  data-backdrop="static"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="staticBackdrop"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ "ORGANIZATION.ROLES.OVERVIEW.CONFIRM_TITLE" | translate }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <i aria-hidden="true" class="ki ki-close"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="my-2">
+          <p>{{ "ORGANIZATION.ROLES.OVERVIEW.CONFIRM_MESSAGE" | translate }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-light-primary font-weight-bolder"
+          data-dismiss="modal"
+        >
+          {{ "BUTTONS.CANCEL" | translate }}
+        </button>
+        <button
+          (click)="removeUser()"
+          type="submit"
+          class="btn btn-primary font-weight-bolder"
+          data-dismiss="modal"
+        >
+          {{ "BUTTONS.CONFIRM" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

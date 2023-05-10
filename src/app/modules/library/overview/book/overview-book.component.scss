@@ -1,4 +1,8 @@
 body {
   overflow-y: scroll !important;
   /* Show vertical scrollbar */
+
+  .gap-1 {
+    gap: 1rem;
+  }
 }

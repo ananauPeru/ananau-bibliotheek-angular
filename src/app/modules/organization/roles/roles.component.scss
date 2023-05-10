@@ -87,3 +87,12 @@ table tr {
     white-space: nowrap;
   }
 }
+
+.remove {
+  transition: ease-in-out 0.3s;
+
+  &:hover {
+    color: #D0342C !important;
+    cursor: pointer;
+  }
+}

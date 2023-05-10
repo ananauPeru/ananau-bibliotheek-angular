@@ -12,6 +12,7 @@ import { Observable, timer } from "rxjs";
 import { EducationalCourses } from "../../_models/educational-courses.enum";
 import { defaultIfEmpty, map } from "rxjs/operators";
 import { ItemModel } from "../../_models/item.model";
+import { CsvUtil } from 'src/app/_utils/csv_util'
 
 @Component({
   selector: "app-overview",
@@ -45,7 +46,8 @@ export class OverviewItemComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public itemService: ItemService,
-    public AuthUtil: AuthUtil
+    public AuthUtil: AuthUtil,
+    private csvUtil: CsvUtil,
   ) {
     this.dataSource7 = new MatTableDataSource();
   }
@@ -56,6 +58,22 @@ export class OverviewItemComponent implements OnInit {
     this.dataSource7.sort = this.sort7;
 
     this.applyFilter7("");
+  }
+
+  async exportItems() {
+    let items: any = await this.itemService.getAllBooksForExport();
+
+    const normalizedItems = items.map(item => ({
+      name: item.name || "not found",
+      description: item.description || "not found",
+      brand: item.brand || "not found",
+      category: item.category || "not found",
+      course: item.course || "not found",
+      quantity: item.quantity || "not found",
+      archived: item.archived,
+    }));
+
+    this.csvUtil.csvDownload(normalizedItems, "AllItemsInLibrary");
   }
 
   applyFilter7(filterValue: string) {

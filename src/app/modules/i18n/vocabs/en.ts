@@ -437,7 +437,7 @@ export const locale = {
             ER: 'Author is required',
             MIN : 'Author must have at least 3 letters',
             MAX : 'The author is too long, make is shorter.'
-          }, 
+          },
           DATUM: {
             NAAM : 'When created',
             BES : 'Enter the date from when this lesson was created',
@@ -450,7 +450,7 @@ export const locale = {
             KLEUTER : 'Kindergarden',
             LAGERESCHOOL : 'Primary school',
             MIDDELBAAR : 'Secondary school',
-          }, 
+          },
           LANGUAGE: {
             NAAM : 'Language',
             BES : 'In what language is the document written?',
@@ -465,7 +465,7 @@ export const locale = {
             ER: 'The description is required',
             MIN : 'Description must contain at least 3 letters',
             MAX : 'The description is too long, make it shorter.'
-          }, 
+          },
           UP : {
             NAAM : "Upload zone",
             HIER : "Click here to slect a document",
@@ -610,6 +610,7 @@ export const locale = {
           CREATED_AT: 'Created at',
           LAST_UPDATE: 'Last update',
           IN_STOCK: 'in stock',
+          EXPORT: 'Export to Excel'
         },
         ITEM: {
           TITLE: 'All Items in Library',
@@ -622,6 +623,7 @@ export const locale = {
           CREATED_AT: 'Created at',
           LAST_UPDATE: 'Last update',
           IN_STOCK: 'in stock',
+          EXPORT: 'Export to Excel'
         },
         LOAN: {
           TITLE: 'All Loaned Out Items and Books',
@@ -790,6 +792,7 @@ export const locale = {
           DIPLOMA: 'Certificate of education',
           PASSPORT_PHOTO: 'Passport photo',
         },
+        EXPORT: 'Export to Excel'
       },
       TOASTS: {
         SUCCESS: 'Success',
@@ -818,7 +821,18 @@ export const locale = {
             'Try searching and filtering on First name, Last name, Email or Role.',
           FIRST_NAME: 'First name',
           LAST_NAME: 'Last name',
+          DELETE: 'remove',
+          CONFIRM_MESSAGE: "Are you sure you want to delete this user? This action cannot be undone.",
+          CONFIRM_TITLE: "Attention!",
+          EXPORT: 'Export to Excel'
         },
+        TOASTS: {
+          SUCCESS: 'Succes',
+          ERROR: 'Error',
+          DELETE_SUCCESS: 'User has been successfully removed from list.',
+          DELETE_ERROR:
+          'Something went wrong while removing the user. Please try again later.',
+        }
       },
     },
   },

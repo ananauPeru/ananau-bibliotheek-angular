@@ -66,4 +66,17 @@ export class UserHTTPService {
         })
       );
   }
+
+  removeUser(id: number) {
+    return this.http
+      .delete(`${API_USERS_URL}/${id}`)
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        })
+      );
+  }
 }

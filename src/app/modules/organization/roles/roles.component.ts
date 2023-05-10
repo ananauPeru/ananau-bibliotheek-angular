@@ -5,6 +5,8 @@ import { AuthService } from "../../auth";
 import { RoleHTTPService } from "../_services/role/role-http/role-http.service";
 import { RoleService } from "../_services/role/role.service";
 import { UserService } from "../_services/user/user.service";
+import { TranslateService } from "@ngx-translate/core";
+import { CsvUtil } from 'src/app/_utils/csv_util'
 
 @Component({
   selector: "app-roles",
@@ -14,15 +16,39 @@ import { UserService } from "../_services/user/user.service";
 export class RolesComponent implements OnInit {
   private filter = "";
   public working = false;
+  private userToRemove;
+  loggedInUsername$: String;
 
   constructor(
     public userService: UserService,
     public authService: AuthService,
+    private csvUtil: CsvUtil,
     public roleService: RoleService,
-    public toastrUtil: ToastrUtil
+    public toastrUtil: ToastrUtil,
+    private translate: TranslateService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loggedInUsername$ = this.authService.getAuthFromLocalStorage().user.userName;
+  }
+
+  async exportUsers() {
+    let users: any = await this.userService.getAllUsersForExport();
+
+    const normalizedUsers= users.map(user => ({
+      firstname: user.user.userDetail.firstName || "not found",
+      lastname: user.user.userDetail.lastName || "not found",
+      dateofbirth: user.user.userDetail.dateOfBirth || "not found",
+      country: user.user.userDetail.country || "not found",
+      nationality: user.user.userDetail.nationality || "not found",
+      phone: user.user.userDetail.phone || "not found",
+      email: user.user.userName|| "not found",
+      roles: user.roles.join() || "not found"
+    }))
+
+
+    this.csvUtil.csvDownload(normalizedUsers, "All Users");
+  }
 
   applyFilter(filterValue: string) {
     this.filter = filterValue.trim().toLowerCase();
@@ -54,6 +80,33 @@ export class RolesComponent implements OnInit {
         this.changeRoleService(user.user.userName, user.user.id, user.roles);
       }
     }
+  }
+
+  setRemoveUser(user) {
+    this.userToRemove = user;
+  }
+
+  removeUser() {
+    this.working = true;
+
+    this.userService
+      .removeUser(this.userToRemove.user.id)
+      .subscribe(() => {
+        this.toastrUtil.showSuccess(
+          this.translate.instant("ORGANIZATION.ROLES.TOASTS.DELETE_SUCCESS"),
+          this.translate.instant("ORGANIZATION.ROLES.TOASTS.SUCCESS")
+        );
+      }, (err) => {
+        console.error(err);
+        this.toastrUtil.showError(
+          this.translate.instant("ORGANIZATION.ROLES.TOASTS.DELETE_ERROR"),
+          this.translate.instant("ORGANIZATION.ROLES.TOASTS.ERROR")
+        );
+      },
+      () => {
+        this.working = false;
+        this.userService.loadInitialData();
+      });
   }
 
   changeRoleService(email: string, id: number, roles: string[]) {

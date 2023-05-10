@@ -425,7 +425,7 @@ export const locale = {
             ER: 'Auteur is vereist',
             MIN : 'Auteur moet minimaal 3 symbolen lang zijn',
             MAX : 'De Auteur is te lang, maak hem korter.'
-          }, 
+          },
           DATUM: {
             NAAM : 'Wanneer aangemakt',
             BES : 'Voer de datum in van waneer deze les is gemaakt.',
@@ -438,7 +438,7 @@ export const locale = {
             KLEUTER : 'Kleuterschool',
             LAGERESCHOOL : 'Lagereschool',
             MIDDELBAAR : 'Middelbareschool',
-          }, 
+          },
           LANGUAGE: {
             NAAM : 'Taal',
             BES : 'In welke taal is het document geschreven?',
@@ -446,14 +446,14 @@ export const locale = {
             NEDERLANDS : 'Nederlands',
             ENGELS : 'Engels',
             SPAANS : 'Spaans',
-          }, 
+          },
           BESCHRIJVING: {
             NAAM : 'Beschrijving',
             BES : 'Geef hier extra info over de les.',
             ER: 'Beschrijving is vereist',
             MIN : 'Beschrijving moet minimaal 3 symbolen lang zijn',
             MAX : 'De beschrijving is te lang, maak hem korter.'
-          }, 
+          },
           UP : {
             NAAM : "Uploadzone",
             HIER : "Hier klikken om document te selecteren",
@@ -601,6 +601,7 @@ export const locale = {
           CREATED_AT: 'Gemaakt op',
           LAST_UPDATE: 'Laatste update',
           IN_STOCK: 'op voorraad',
+          EXPORT: 'Exporteer naar Excel'
         },
         ITEM: {
           TITLE: 'Alle items in bibliotheek',
@@ -613,6 +614,7 @@ export const locale = {
           CREATED_AT: 'Gemaakt op',
           LAST_UPDATE: 'Laatste update',
           IN_STOCK: 'op voorraad',
+          EXPORT: 'Exporteer naar Excel'
         },
         LOAN: {
           TITLE: 'Alle uitgeleende items en boeken',
@@ -776,6 +778,7 @@ export const locale = {
           DIPLOMA: 'Onderwijscertificaat',
           PASSPORT_PHOTO: 'Pasfoto',
         },
+        EXPORT: "Exporteer naar Excel"
       },
       TOASTS: {
         SUCCESS: 'Geslaagd',
@@ -804,7 +807,18 @@ export const locale = {
             'Probeer te zoeken en te filteren op voornaam, achternaam, e-mail of rol.',
           FIRST_NAME: 'Voornaam',
           LAST_NAME: 'Achternaam',
+          DELETE: 'verwijder',
+          CONFIRM_MESSAGE: "Bent u zeker dat u deze gebruiker wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+          CONFIRM_TITLE: "Opgelet!",
+          EXPORT: "Exporteer naar Excel"
         },
+        TOASTS: {
+          SUCCESS: 'Geslaagd',
+          ERROR: 'Fout',
+          DELETE_SUCCESS: 'Gebruiker is succesvol uit de lijst verwijderd.',
+          DELETE_ERROR:
+          'Er ging iets mis bij het verwijderen van de gebruiker. Probeer het later nog eens.',
+        }
       },
     },
   },

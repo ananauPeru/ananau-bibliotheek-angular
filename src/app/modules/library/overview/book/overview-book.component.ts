@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { ItemService } from '../../_services/item/item.service'
 import { AuthUtil } from '../../../../_utils/auth_util'
+import { CsvUtil } from 'src/app/_utils/csv_util'
 import { BookCategories } from '../../_models/book-categories.enum'
 import { Categories } from '../../_models/categories.enum'
 import { concat, Observable, timer } from 'rxjs'
@@ -48,6 +49,7 @@ export class OverviewBookComponent implements OnInit {
     private http: HttpClient,
     public bookService: BookService,
     public AuthUtil: AuthUtil,
+    private csvUtil: CsvUtil,
   ) {
     this.dataSource7 = new MatTableDataSource()
   }
@@ -58,6 +60,22 @@ export class OverviewBookComponent implements OnInit {
     this.dataSource7.sort = this.sort7
 
     this.applyFilter7('')
+  }
+
+  async exportBooks() {
+    let books: any = await this.bookService.getAllBooksForExport();
+
+    const normalizedBooks = books.map(book => ({
+      name: book.name || "not found",
+      description: book.description || "not found",
+      author: book.author || "not found",
+      genre: book.genre || "not found",
+      state: book.state || "not found",
+      quantity: book.quantity || "not found",
+      archived: book.archived,
+    }));
+
+    this.csvUtil.csvDownload(normalizedBooks, "AllBooksInLibrary")
   }
 
   applyFilter7(filterValue: string) {

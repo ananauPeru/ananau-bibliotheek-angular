@@ -41,6 +41,20 @@ export class ItemService {
     );
   }
 
+  async getAllBooksForExport() {
+    return new Promise((resolve, reject) => {
+      this.itemHttpService.getAllItems$().subscribe(
+        (res) => {
+          resolve(res)
+        },
+        (err) =>  {
+          reject(err)
+          console.error("Error retrieving items")
+        }
+      );
+    });
+  }
+
   filter(
     filter: any,
     _category: any,

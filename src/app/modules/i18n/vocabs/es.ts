@@ -17,7 +17,7 @@ export const locale = {
 
     NEDERLANDS : 'holandés',
     ENGELS : 'inglés',
-    
+
     // BUTTONS
     BUTTONS: {
       SAVE: "Guardar",
@@ -436,7 +436,7 @@ export const locale = {
             ER: 'Se requiere autor',
             MIN : 'El autor debe tener al menos 3 letras',
             MAX : 'El autor es demasiado largo, halzo más corto.'
-          }, 
+          },
           DATUM: {
             NAAM : 'Cuando se crea',
             BES : 'Ingrese la fecha a partir de la cual se creó esta lección.',
@@ -449,7 +449,7 @@ export const locale = {
             KLEUTER : 'Jardín de infancia',
             LAGERESCHOOL : 'Escuela primaria',
             MIDDELBAAR : 'Escuela secundaria',
-          }, 
+          },
           LANGUAGE: {
             NAAM : 'Idioma',
             BES : '¿En qué idioma está escrito el documento?',
@@ -464,7 +464,7 @@ export const locale = {
             ER: 'Se requiere descripción',
             MIN : 'La descripción debe contener al menos 3 letras',
             MAX : 'La descripción es demasiado larga, hazla más corta.'
-          }, 
+          },
           UP : {
             NAAM : "Zona de carga",
             HIER : "Haga clic aquí para seleccionar un documento",
@@ -611,6 +611,7 @@ export const locale = {
           CREATED_AT: "Creado en",
           LAST_UPDATE: "Última actualización",
           IN_STOCK: "en stock",
+          EXPORT: 'Exportar a Excel'
         },
         ITEM: {
           TITLE: "Todos los elementos de la biblioteca",
@@ -623,6 +624,7 @@ export const locale = {
           CREATED_AT: "Creado en",
           LAST_UPDATE: "Última actualización",
           IN_STOCK: "en stock",
+          EXPORT: 'Exportar a Excel'
         },
         LOAN: {
           TITLE: "Todos los artículos y libros prestados",
@@ -775,7 +777,18 @@ export const locale = {
             "Intente buscar y filtrar por nombre, apellido, correo electrónico o función.",
           FIRST_NAME: "Nombre propio",
           LAST_NAME: "Apellido",
+          DELETE: 'eliminar',
+          CONFIRM_MESSAGE: "¿Está seguro de que desea eliminar este usuario? Esta acción no se puede deshacer",
+          CONFIRM_TITLE: "Atención!",
+          EXPORT: 'Exportar a Excel'
         },
+        TOASTS: {
+          SUCCESS: 'Éxito',
+          ERROR: 'Error',
+          DELETE_SUCCESS: 'El usuario se ha eliminado correctamente de la lista.',
+          DELETE_ERROR:
+          'Algo ha ido mal al eliminar el usuario. Por favor, inténtalo de nuevo más tarde.',
+        }
       },
     },
 
@@ -807,6 +820,7 @@ export const locale = {
           DIPLOMA: "Certificado educativo",
           PASSPORT_PHOTO: "Foto del pasaporte",
         },
+        EXPORT: 'Exportar a Excel'
       },
       TOASTS: {
         SUCCESS: "Éxito",

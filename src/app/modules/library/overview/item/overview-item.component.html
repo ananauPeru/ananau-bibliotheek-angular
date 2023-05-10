@@ -4,16 +4,21 @@
     <div class="row">
         <div class="col-12">
             <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem;">
-                <div class="row">
-                    <div class="col-12 col-md-8 w-100">
+                <div class="d-flex justify-content-between">
+                    <div class="">
                         <h3 class="card-title font-weight-bolder text-dark">
                             {{"LIBRARY.OVERVIEW.ITEM.TITLE" | translate }}</h3>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="d-flex gap-1">
                         <button type="submit" id="kt_login_signin_submit"
                             class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
                             routerLink="/library/items/add-item">
                             {{"LIBRARY.OVERVIEW.ITEM.ADD" | translate }}
+                        </button>
+
+                        <button class="btn btn-primary font-weight-bolder font-size-h6 px-8 float-right" [disabled]="false"
+                          (click)="exportItems()">
+                          {{"LIBRARY.OVERVIEW.ITEM.EXPORT" | translate }}
                         </button>
                     </div>
                 </div>

@@ -41,6 +41,20 @@ export class BookService {
     );
   }
 
+  async getAllBooksForExport() {
+    return new Promise((resolve, reject) => {
+      this.bookHttpService.getAllBooks$().subscribe(
+        (res) => {
+          resolve(res)
+        },
+        (err) =>  {
+          reject(err)
+          console.error("Error retrieving books")
+        }
+      );
+    });
+  }
+
   filter(
     filter: any,
     _category: any,

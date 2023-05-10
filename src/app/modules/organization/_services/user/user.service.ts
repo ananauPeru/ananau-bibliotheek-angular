@@ -38,6 +38,20 @@ export class UserService {
     );
   }
 
+  async getAllUsersForExport() {
+    return new Promise((resolve, reject) => {
+      this.userHttpService.getAllUsersWithDetails$().subscribe(
+        (res) => {
+          resolve(res)
+        },
+        (err) =>  {
+          reject(err)
+          console.error("Error retrieving items")
+        }
+      );
+    });
+  }
+
   filter(filter: any) {
     let f = filter.toLowerCase();
     let category = undefined;
@@ -62,5 +76,9 @@ export class UserService {
 
   changeRoles(userId: number, roles: string[]): Observable<string[]> {
     return this.userHttpService.changeRoles(userId, roles);
+  }
+
+  removeUser(userId: number) {
+    return this.userHttpService.removeUser(userId);
   }
 }
