@@ -273,12 +273,12 @@ export const locale = {
           ONLINE: 'Online vrijwilligerwerk',
           ONLINE_INFO:
             'Naast het verrichten van vrijwilligerswerk bij de organisatie in Peru zelf, is het ook mogelijk om vanop afstand te werken.',
-          START_VOLUNTEER: 'Voorgestelde startdatum vrijwilligerswerk',
-          END_VOLUNTEER: 'Voorgestelde einddatum vrijwilligerswerk',
-          START_STUDENT: 'Voorgestelde startdatum stage',
-          END_STUDENT: 'Voorgestelde einddatum stage',
-          LEAVE_START: 'Voorgestelde startdatum verlofperiode',
-          LEAVE_END: 'Voorgestelde einddatum verlofperiode',
+          START_VOLUNTEER: 'Startdatum vrijwilligerswerk',
+          END_VOLUNTEER: 'Einddatum vrijwilligerswerk',
+          START_STUDENT: 'Startdatum stage',
+          END_STUDENT: 'Einddatum stage',
+          LEAVE_START: 'Aankomstdatum appartement',
+          LEAVE_END: 'Vertrekdatum appartement',
           LEAVE_INFO:
             'Je hebt de mogelijkheid om tijdens je stage een verlofperiode in te plannen. Dit wordt in overleg met je school en de organisatie bepaald. Het wordt sterk aangeraden en verzocht om deze verlofperiode aan het einde van de stage in te plannen. Indien je ervoor kiest om geen verlofperiode in te plannen, laat dit veld dan leeg.',
         },

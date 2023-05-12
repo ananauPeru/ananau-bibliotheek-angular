@@ -284,12 +284,12 @@ export const locale = {
           ONLINE: "Voluntariado online",
           ONLINE_INFO:
             "Además de realizar trabajo voluntario en la organización en el propio Perú, también es posible realizar trabajo de forma remota.",
-          START_VOLUNTEER: "Fecha de inicio propuesta para voluntariado",
-          END_VOLUNTEER: "Fecha final propuesta para voluntariado",
-          START_STUDENT: "Fecha de inicio propuesta para pasantía",
-          END_STUDENT: "Fecha final propuesta para pasantía",
-          LEAVE_START: "Fecha de inicio propuesta para período de licencia",
-          LEAVE_END: "Fecha final propuesta para período de licencia",
+            START_VOLUNTEER: "Fecha de inicio del voluntariado",
+            END_VOLUNTEER: "Fecha de finalización del voluntariado",
+            START_STUDENT: "Fecha de inicio de las prácticas",
+            END_STUDENT: "Fecha de finalización de las prácticas",
+            LEAVE_START: "Fecha de llegada plana",
+            LEAVE_END: "Fecha de salida plana",
           LEAVE_INFO:
             "Tiene la opción de programar un período de licencia durante su pasantía. Esto se determina en consulta con su escuela y la organización. Se recomienda y se solicita encarecidamente planificar este período de licencia al final de la pasantía. Si elige no programar un período de licencia, deje este campo vacío.",
         },

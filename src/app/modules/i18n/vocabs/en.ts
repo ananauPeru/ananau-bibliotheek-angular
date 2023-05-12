@@ -286,12 +286,12 @@ export const locale = {
           ONLINE: 'Online volunteering',
           ONLINE_INFO:
             'In addition to doing voluntary work at the organization in Peru itself, it is also possible to do work remotely.',
-          START_VOLUNTEER: 'Proposed start date volunteering',
-          END_VOLUNTEER: 'Proposed end date volunteering',
-          START_STUDENT: 'Proposed start date internship',
-          END_STUDENT: 'Proposed end date internship',
-          LEAVE_START: 'Proposed start date period of leave',
-          LEAVE_END: 'Proposed end date period of leave',
+          START_VOLUNTEER: 'Start date volunteering',
+          END_VOLUNTEER: 'End date volunteering',
+          START_STUDENT: 'Start date internship',
+          END_STUDENT: 'End date internship',
+          LEAVE_START: 'Arrival date to the apartment',
+          LEAVE_END: 'Departure date to the apartment',
           LEAVE_INFO:
             'You have the option to schedule a period of leave during your internship. This is determined in consultation with your school and the organization. It is strongly recommended and requested to plan this period of leave at the end of the internship. If you choose not to schedule a period of leave, please leave this field empty.',
         },
