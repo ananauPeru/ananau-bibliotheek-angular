@@ -291,7 +291,7 @@ export const locale = {
           START_STUDENT: 'Start date internship',
           END_STUDENT: 'End date internship',
           LEAVE_START: 'Arrival date to the apartment',
-          LEAVE_END: 'Departure date to the apartment',
+          LEAVE_END: 'Departure date from the apartment',
           LEAVE_INFO:
             'You have the option to schedule a period of leave during your internship. This is determined in consultation with your school and the organization. It is strongly recommended and requested to plan this period of leave at the end of the internship. If you choose not to schedule a period of leave, please leave this field empty.',
         },
@@ -310,6 +310,10 @@ export const locale = {
           WEEKS: 'Number of weeks Spanish lessons on-site',
           WEEKS_INFO:
             'If you do not yet speak a basic level of Spanish, we recommend you apply for 4 weeks of Spanish lessons on-site.',
+          START_ONLINE: 'Start online Spanish lessons',
+          END_ONLINE: 'End online Spanish lessons',
+          START_ONSITE: 'Start on-site Spanish lessons',
+          END_ONSITE: 'End on-site Spanish lessons',
         },
         INFO: {
           TITLE: 'Info',
