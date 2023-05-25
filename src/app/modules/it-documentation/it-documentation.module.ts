@@ -58,6 +58,8 @@ import { OverviewComponent } from './todos/overview/overview.component';
 import { CreateComponent } from './todos/create/create.component';
 import { DeployComponent } from './getting-started/deploy/deploy.component'
 import { W1ProjectsComponent } from './website/w1-projects/w1-projects.component'
+import { AutomaticEmails } from './automatic-emails/email.component'
+
 
 @NgModule({
   declarations: [
@@ -72,7 +74,8 @@ import { W1ProjectsComponent } from './website/w1-projects/w1-projects.component
     OverviewComponent,
     CreateComponent,
     DeployComponent,
-    W1ProjectsComponent
+    W1ProjectsComponent,
+    AutomaticEmails,
   ],
   imports: [
     CommonModule,

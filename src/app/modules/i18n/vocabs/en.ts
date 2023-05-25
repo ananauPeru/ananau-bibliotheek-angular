@@ -82,7 +82,9 @@ export const locale = {
         WEBSITE: 'Website',
         W1_PROJECTS: '1 - Projects',
         W2_TEAM_MEMBERS: '2 - Team members',
-        W3_INVOLVED_COUNTRIES: '3 - Involved countries'
+        W3_INVOLVED_COUNTRIES: '3 - Involved countries',
+        AUTOMATIC_EMAILS: 'Automatic emails',
+        INFO: '1 - Info',
       },
     },
 

@@ -68,7 +68,9 @@ export const locale = {
         WEBSITE: 'Página web',
         W1_PROJECTS: '1 - Proyectos',
         W2_TEAM_MEMBERS: '2 - Miembros del equipo',
-        W3_INVOLVED_COUNTRIES: '3 - Países implicados'
+        W3_INVOLVED_COUNTRIES: '3 - Países implicados',
+        AUTOMATIC_EMAILS: 'Correos electrónicos automáticos',
+        INFO: '1 - Información',
       },
       ORGANIZATION: {
         TITLE: "Organización",

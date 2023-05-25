@@ -11,6 +11,8 @@ import { ToDosComponent } from './todos/todos.component'
 import { TodoResolver } from './_resolvers/todo.resolver'
 import { DeployComponent } from './getting-started/deploy/deploy.component'
 import { W1ProjectsComponent } from './website/w1-projects/w1-projects.component'
+import { AutomaticEmails } from './automatic-emails/email.component'
+
 
 const routes: Routes = [
   {
@@ -40,6 +42,10 @@ const routes: Routes = [
       {
         path: 'website/1-projects',
         component: W1ProjectsComponent,
+      },
+      {
+        path: 'automatic-emails',
+        component: AutomaticEmails,
       },
       {
         path: 'todos',

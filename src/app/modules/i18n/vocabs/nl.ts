@@ -69,7 +69,9 @@ export const locale = {
         WEBSITE: 'Website',
         W1_PROJECTS: '1 - Projecten',
         W2_TEAM_MEMBERS: '2 - Teamleden',
-        W3_INVOLVED_COUNTRIES: '3 - Betrokken landen'
+        W3_INVOLVED_COUNTRIES: '3 - Betrokken landen',
+        AUTOMATIC_EMAILS: 'Automatische e-mails',
+        INFO: '1 - Informatie',
       },
       // We dont translate documentation (IT) to different languages
     },
