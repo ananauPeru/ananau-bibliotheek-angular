@@ -10,6 +10,7 @@ import { CreateComponent } from './todos/create/create.component'
 import { ToDosComponent } from './todos/todos.component'
 import { TodoResolver } from './_resolvers/todo.resolver'
 import { DeployComponent } from './getting-started/deploy/deploy.component'
+import { W1ProjectsComponent } from './website/w1-projects/w1-projects.component'
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
         component: DeployComponent,
       },
       {
+        path: 'website/1-projects',
+        component: W1ProjectsComponent,
+      },
+      {
         path: 'todos',
         component: ToDosComponent,
       },
@@ -59,4 +64,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ITDocumentationRoutingModule {}
+export class ITDocumentationRoutingModule { }

@@ -27,8 +27,8 @@ export const locale = {
       CONFIRM: 'Confirm',
       DISCONFIRM: 'Disconfirm',
     },
-    NEDERLANDS : 'Dutch',
-    ENGELS : 'English',
+    NEDERLANDS: 'Dutch',
+    ENGELS: 'English',
 
     // MENU
     MENU: {
@@ -79,6 +79,10 @@ export const locale = {
         },
         S3_DEPLOYMENT_AND_AZURE: '3 - Deployment - Azure',
         TODOS: "ToDo's",
+        WEBSITE: 'Website',
+        W1_PROJECTS: '1 - Projects',
+        W2_TEAM_MEMBERS: '2 - Team members',
+        W3_INVOLVED_COUNTRIES: '3 - Involved countries'
       },
     },
 
@@ -103,7 +107,7 @@ export const locale = {
         CONTACT: 'Contact us',
         WEBSITE: 'Website',
         SUBSCRIBE: 'We would appriciate it if you subscribe to our newsletter. It is always possible to unsubscribe afterwards.',
-        CLICK:'Click on the language in which you want to receive a newsletter.',
+        CLICK: 'Click on the language in which you want to receive a newsletter.',
         NEWSLETTER: 'Newsletter',
         SITE: 'https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup',
       },
@@ -396,14 +400,14 @@ export const locale = {
     LIBRARY: {
       TRAN: "Translation",
       DOWN: 'The document is still uploading',
-      DON:'The document has been uploaded',
+      DON: 'The document has been uploaded',
       GENERAL: {},
-      CLASS : {
+      CLASS: {
         HELP: "How to add new lesson?",
         VRAAG: "Do you want to upload a translation of the document?",
         YES: "Yes",
-        NO:"No",
-        SUBJECT :{
+        NO: "No",
+        SUBJECT: {
           TITLE: "Subject",
           ER: 'Subject is required',
           WISKUNDE: "Mathematics",
@@ -417,63 +421,63 @@ export const locale = {
           ARTS: "Arts and Crafts",
           NUTRITION: "Nutrition",
           COMMUNICATION: "Communication for Development",
-          OCCUPATIONAL:"Occupational therapy",
+          OCCUPATIONAL: "Occupational therapy",
           OTHER: "Other",
         },
-        CREATE : {
+        CREATE: {
           NAAM: 'Create a new lesson',
-          TERUG : 'Back',
+          TERUG: 'Back',
           CANCEL: 'Cancel',
           MAAK: 'Make a new lesson',
           BEWERK: 'Save adjustments',
-          FILTER:'Filter by title, author or description',
-          WAAR:'The document is present. If you want to upload another document, simply upload a new document here.',
+          FILTER: 'Filter by title, author or description',
+          WAAR: 'The document is present. If you want to upload another document, simply upload a new document here.',
           TITEL: {
-            NAAM : 'Title',
-            BES : ' Enter the title of the lesson',
+            NAAM: 'Title',
+            BES: ' Enter the title of the lesson',
             ER: 'Title is required',
-            MIN : 'Title must at least have 3 letters ',
-            MAX : 'The tittle is too long, make it shorter.'
+            MIN: 'Title must at least have 3 letters ',
+            MAX: 'The tittle is too long, make it shorter.'
           },
           AUTEUR: {
-            NAAM : 'Author',
-            BES : 'Enter the author of the lesson.',
+            NAAM: 'Author',
+            BES: 'Enter the author of the lesson.',
             ER: 'Author is required',
-            MIN : 'Author must have at least 3 letters',
-            MAX : 'The author is too long, make is shorter.'
+            MIN: 'Author must have at least 3 letters',
+            MAX: 'The author is too long, make is shorter.'
           },
           DATUM: {
-            NAAM : 'When created',
-            BES : 'Enter the date from when this lesson was created',
+            NAAM: 'When created',
+            BES: 'Enter the date from when this lesson was created',
             ER: 'Date is required'
           },
           PUBLIEK: {
-            NAAM : 'Target audience',
-            BES : 'What age group is this class for?',
+            NAAM: 'Target audience',
+            BES: 'What age group is this class for?',
             ER: 'Target audience is required',
-            KLEUTER : 'Kindergarden',
-            LAGERESCHOOL : 'Primary school',
-            MIDDELBAAR : 'Secondary school',
+            KLEUTER: 'Kindergarden',
+            LAGERESCHOOL: 'Primary school',
+            MIDDELBAAR: 'Secondary school',
           },
           LANGUAGE: {
-            NAAM : 'Language',
-            BES : 'In what language is the document written?',
+            NAAM: 'Language',
+            BES: 'In what language is the document written?',
             ER: 'Language is required',
-            NEDERLANDS : 'Dutch',
-            ENGELS : 'English',
-            SPAANS : 'Spanish',
+            NEDERLANDS: 'Dutch',
+            ENGELS: 'English',
+            SPAANS: 'Spanish',
           },
           BESCHRIJVING: {
-            NAAM : 'Description',
-            BES : 'Provide additional information about het lesson here.',
+            NAAM: 'Description',
+            BES: 'Provide additional information about het lesson here.',
             ER: 'The description is required',
-            MIN : 'Description must contain at least 3 letters',
-            MAX : 'The description is too long, make it shorter.'
+            MIN: 'Description must contain at least 3 letters',
+            MAX: 'The description is too long, make it shorter.'
           },
-          UP : {
-            NAAM : "Upload zone",
-            HIER : "Click here to slect a document",
-            BES : "If you want to upload multiple documents, please create a zip file with them first. (This is the only way you can upload more than 1 document.)",
+          UP: {
+            NAAM: "Upload zone",
+            HIER: "Click here to slect a document",
+            BES: "If you want to upload multiple documents, please create a zip file with them first. (This is the only way you can upload more than 1 document.)",
             BEST: "If the document continues to load after selecting, click on the document again. "
           }
         }
@@ -757,7 +761,7 @@ export const locale = {
         SOCIO_EDUCATIONAL_ACTIVITIES: 'Socio Educational Activities',
         STIMULATION: 'Stimulation',
       },
-      CLASS_OVERVIEW:{
+      CLASS_OVERVIEW: {
         ALL: 'All lessons',
         ADD: 'Add New Class',
       },
@@ -835,7 +839,7 @@ export const locale = {
           ERROR: 'Error',
           DELETE_SUCCESS: 'User has been successfully removed from list.',
           DELETE_ERROR:
-          'Something went wrong while removing the user. Please try again later.',
+            'Something went wrong while removing the user. Please try again later.',
         }
       },
     },

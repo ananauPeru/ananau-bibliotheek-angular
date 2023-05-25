@@ -9,8 +9,8 @@ export const locale = {
     DOWNTAN: "Download vertaling",
     CLOSE: "Sluit",
 
-    NEDERLANDS : 'Nederlands',
-    ENGELS : 'Engels',
+    NEDERLANDS: 'Nederlands',
+    ENGELS: 'Engels',
 
     ERRORS: {
       TRY_AGAIN: 'Er is iets fout gegaan. Probeer het later nog eens.',
@@ -66,6 +66,10 @@ export const locale = {
         S1_SETTING_UP: '1 - Klaarzetten',
         S2_BEST_PRACTICES: '2 - Best practices',
         S3_DEPLOYMENT_AND_AZURE: '3 - Deployment - Azure',
+        WEBSITE: 'Website',
+        W1_PROJECTS: '1 - Projecten',
+        W2_TEAM_MEMBERS: '2 - Teamleden',
+        W3_INVOLVED_COUNTRIES: '3 - Betrokken landen'
       },
       // We dont translate documentation (IT) to different languages
     },
@@ -90,7 +94,7 @@ export const locale = {
         WEBSITE: 'Website',
         SUBSCRIBE: 'Wij zouden het fijn vinden als je je inschrijft op onze nieuwsbrief. Het is altijd mogelijk om je achteraf uit te schrijven.',
         NEWSLETTER: 'Nieuwsbrief',
-        CLICK:'Klik op de taal waarin je een nieuwsbrief wilt ontvangen.',
+        CLICK: 'Klik op de taal waarin je een nieuwsbrief wilt ontvangen.',
         SITE: 'https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d',
       },
       LOGIN: {
@@ -380,14 +384,14 @@ export const locale = {
     LIBRARY: {
       TRAN: "Vertaling",
       DOWN: 'Het document is nog aan het uploaden',
-      DON:'Het document is geüpload',
+      DON: 'Het document is geüpload',
       GENERAL: {},
-      CLASS : {
+      CLASS: {
         HELP: "Hoe nieuwe les toevoegen?",
         VRAAG: "Wil je een vertaling van het document uploaden?",
         YES: "Ja",
-        NO:"Nee",
-        SUBJECT :{
+        NO: "Nee",
+        SUBJECT: {
           TITLE: "Vak",
           ER: 'Vak is verplicht',
           WISKUNDE: "Wiskunde",
@@ -401,63 +405,63 @@ export const locale = {
           ARTS: "Arts & Crafts",
           NUTRITION: "Voeding",
           COMMUNICATION: "Communicatie voor de ontwikkeling",
-          OCCUPATIONAL:"Ergotherapie",
+          OCCUPATIONAL: "Ergotherapie",
           OTHER: "Ander",
         },
-        CREATE : {
+        CREATE: {
           NAAM: 'Maak nieuwe les aan',
-          TERUG : 'Terug',
+          TERUG: 'Terug',
           CANCEL: 'Annuleren',
           MAAK: 'Maak een nieuwe les',
           BEWERK: 'Aanpassing opslaan',
-          FILTER:'Filter op titel, auteur of beschrijving',
+          FILTER: 'Filter op titel, auteur of beschrijving',
           WAAR: 'Het document is aanwezig. Indien je een ander document wil uploaden moet je gewoon hier een nieuw document uploaden.',
           TITEL: {
-            NAAM : 'Titel',
-            BES : 'Voer de titel van de les in.',
+            NAAM: 'Titel',
+            BES: 'Voer de titel van de les in.',
             ER: 'Titel is vereist',
-            MIN : 'Titel moet minimaal 3 symbolen lang zijn',
-            MAX : 'De titel is te lang, maak hem korter.'
+            MIN: 'Titel moet minimaal 3 symbolen lang zijn',
+            MAX: 'De titel is te lang, maak hem korter.'
           },
           AUTEUR: {
-            NAAM : 'Auteur',
-            BES : 'Voer de auteur van de les in.',
+            NAAM: 'Auteur',
+            BES: 'Voer de auteur van de les in.',
             ER: 'Auteur is vereist',
-            MIN : 'Auteur moet minimaal 3 symbolen lang zijn',
-            MAX : 'De Auteur is te lang, maak hem korter.'
+            MIN: 'Auteur moet minimaal 3 symbolen lang zijn',
+            MAX: 'De Auteur is te lang, maak hem korter.'
           },
           DATUM: {
-            NAAM : 'Wanneer aangemakt',
-            BES : 'Voer de datum in van waneer deze les is gemaakt.',
+            NAAM: 'Wanneer aangemakt',
+            BES: 'Voer de datum in van waneer deze les is gemaakt.',
             ER: 'Datum is vereist'
           },
           PUBLIEK: {
-            NAAM : 'Doelgroep',
-            BES : 'Voor welke leeftijdsgroep is deze les?',
+            NAAM: 'Doelgroep',
+            BES: 'Voor welke leeftijdsgroep is deze les?',
             ER: 'Doelgroep is vereist',
-            KLEUTER : 'Kleuterschool',
-            LAGERESCHOOL : 'Lagereschool',
-            MIDDELBAAR : 'Middelbareschool',
+            KLEUTER: 'Kleuterschool',
+            LAGERESCHOOL: 'Lagereschool',
+            MIDDELBAAR: 'Middelbareschool',
           },
           LANGUAGE: {
-            NAAM : 'Taal',
-            BES : 'In welke taal is het document geschreven?',
+            NAAM: 'Taal',
+            BES: 'In welke taal is het document geschreven?',
             ER: 'Taal is vereist',
-            NEDERLANDS : 'Nederlands',
-            ENGELS : 'Engels',
-            SPAANS : 'Spaans',
+            NEDERLANDS: 'Nederlands',
+            ENGELS: 'Engels',
+            SPAANS: 'Spaans',
           },
           BESCHRIJVING: {
-            NAAM : 'Beschrijving',
-            BES : 'Geef hier extra info over de les.',
+            NAAM: 'Beschrijving',
+            BES: 'Geef hier extra info over de les.',
             ER: 'Beschrijving is vereist',
-            MIN : 'Beschrijving moet minimaal 3 symbolen lang zijn',
-            MAX : 'De beschrijving is te lang, maak hem korter.'
+            MIN: 'Beschrijving moet minimaal 3 symbolen lang zijn',
+            MAX: 'De beschrijving is te lang, maak hem korter.'
           },
-          UP : {
-            NAAM : "Uploadzone",
-            HIER : "Hier klikken om document te selecteren",
-            BES : " Als je meerdere document wil uploaden, maak er dan eerste een zip-file van. (Enkel zo kan je meer als 1 document uploaden.)",
+          UP: {
+            NAAM: "Uploadzone",
+            HIER: "Hier klikken om document te selecteren",
+            BES: " Als je meerdere document wil uploaden, maak er dan eerste een zip-file van. (Enkel zo kan je meer als 1 document uploaden.)",
             BEST: "Als het document blijft laden na selecteren, klik dan eens op het document."
           }
         }
@@ -740,7 +744,7 @@ export const locale = {
         SOCIO_EDUCATIONAL_ACTIVITIES: 'Socio educatieve activiteiten',
         STIMULATION: 'Stimulatie',
       },
-      CLASS_OVERVIEW:{
+      CLASS_OVERVIEW: {
         ALL: 'Alle lessen',
         ADD: 'Nieuwe les toevoegen',
       },
@@ -817,7 +821,7 @@ export const locale = {
           ERROR: 'Fout',
           DELETE_SUCCESS: 'Gebruiker is succesvol uit de lijst verwijderd.',
           DELETE_ERROR:
-          'Er ging iets mis bij het verwijderen van de gebruiker. Probeer het later nog eens.',
+            'Er ging iets mis bij het verwijderen van de gebruiker. Probeer het later nog eens.',
         }
       },
     },

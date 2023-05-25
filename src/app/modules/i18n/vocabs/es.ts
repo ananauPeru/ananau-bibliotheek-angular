@@ -15,8 +15,8 @@ export const locale = {
       TRY_AGAIN: "Algo salió mal. Por favor, inténtelo de nuevo más tarde.",
     },
 
-    NEDERLANDS : 'holandés',
-    ENGELS : 'inglés',
+    NEDERLANDS: 'holandés',
+    ENGELS: 'inglés',
 
     // BUTTONS
     BUTTONS: {
@@ -65,6 +65,10 @@ export const locale = {
         GETTING_STARTED: "Empezando",
         S0_PREPARATIONS: "0 - Antes de empezar",
         S1_SETTING_UP: "1 - Configuración",
+        WEBSITE: 'Página web',
+        W1_PROJECTS: '1 - Proyectos',
+        W2_TEAM_MEMBERS: '2 - Miembros del equipo',
+        W3_INVOLVED_COUNTRIES: '3 - Países implicados'
       },
       ORGANIZATION: {
         TITLE: "Organización",
@@ -95,7 +99,7 @@ export const locale = {
         WEBSITE: "Sitio web",
         SUBSCRIBE: 'Le agradecerìamos que se suscribiera a nuestra boletin informativa. Siempre es psible darse de baja después.',
         NEWLSETTER: 'Boletin informativo',
-        CLICK:'Haga clic el idioma en el que desea recibir un boletìn.',
+        CLICK: 'Haga clic el idioma en el que desea recibir un boletìn.',
         SITE: 'https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup',
       },
       LOGIN: {
@@ -284,12 +288,12 @@ export const locale = {
           ONLINE: "Voluntariado online",
           ONLINE_INFO:
             "Además de realizar trabajo voluntario en la organización en el propio Perú, también es posible realizar trabajo de forma remota.",
-            START_VOLUNTEER: "Fecha de inicio del voluntariado",
-            END_VOLUNTEER: "Fecha de finalización del voluntariado",
-            START_STUDENT: "Fecha de inicio de las prácticas",
-            END_STUDENT: "Fecha de finalización de las prácticas",
-            LEAVE_START: "Fecha de llegada plana",
-            LEAVE_END: "Fecha de salida plana",
+          START_VOLUNTEER: "Fecha de inicio del voluntariado",
+          END_VOLUNTEER: "Fecha de finalización del voluntariado",
+          START_STUDENT: "Fecha de inicio de las prácticas",
+          END_STUDENT: "Fecha de finalización de las prácticas",
+          LEAVE_START: "Fecha de llegada plana",
+          LEAVE_END: "Fecha de salida plana",
           LEAVE_INFO:
             "Tiene la opción de programar un período de licencia durante su pasantía. Esto se determina en consulta con su escuela y la organización. Se recomienda y se solicita encarecidamente planificar este período de licencia al final de la pasantía. Si elige no programar un período de licencia, deje este campo vacío.",
         },
@@ -391,14 +395,14 @@ export const locale = {
     LIBRARY: {
       TRAN: "Traducción ",
       DOWN: 'El documento aún se está cargando ',
-      DON:'El documento ha sido subido ',
+      DON: 'El documento ha sido subido ',
       GENERAL: {},
-      CLASS : {
+      CLASS: {
         HELP: "¿Cómo agregar una lección nueva?",
         VRAAG: "¿Quieres subir una traducción del documento?",
         YES: "Si",
-        NO:"No",
-        SUBJECT :{
+        NO: "No",
+        SUBJECT: {
           TITLE: "Asunto",
           ER: 'Asunto es obligatorio',
           WISKUNDE: "Matemáticas",
@@ -411,64 +415,64 @@ export const locale = {
           PSYCHOLOGY: "Psicología",
           ARTS: "Artes y manualidades",
           NUTRITION: "Nutrición",
-          OCCUPATIONAL:"Terapia ocupacional",
+          OCCUPATIONAL: "Terapia ocupacional",
           COMMUNICATION: "Comunicación para el desarrollo",
           OTHER: "otro",
         },
-        CREATE : {
+        CREATE: {
           NAAM: 'Crear una nueva lección',
-          TERUG : 'Esplada',
+          TERUG: 'Esplada',
           CANCEL: 'Cancelar',
           MAAK: 'Crear una nueva lección',
           BEWERK: 'Guardar ajustes',
-          FILTER:'Filtrar por título, autor o descripción',
-          WAAR:'El documento está presente. Si quieres subir otro documento, solo tienes que subir un nuevo documento aquí.',
+          FILTER: 'Filtrar por título, autor o descripción',
+          WAAR: 'El documento está presente. Si quieres subir otro documento, solo tienes que subir un nuevo documento aquí.',
           TITEL: {
-            NAAM : 'Título',
-            BES : 'ingrese el título de la lección.',
+            NAAM: 'Título',
+            BES: 'ingrese el título de la lección.',
             ER: 'el título es obligatorio',
-            MIN : 'El título debe tener al menos 3 letras',
-            MAX : 'El título es demasiado largo, hazlo más corto.'
+            MIN: 'El título debe tener al menos 3 letras',
+            MAX: 'El título es demasiado largo, hazlo más corto.'
           },
           AUTEUR: {
-            NAAM : 'Autor',
-            BES : 'Ingrese el autor de la lección.',
+            NAAM: 'Autor',
+            BES: 'Ingrese el autor de la lección.',
             ER: 'Se requiere autor',
-            MIN : 'El autor debe tener al menos 3 letras',
-            MAX : 'El autor es demasiado largo, halzo más corto.'
+            MIN: 'El autor debe tener al menos 3 letras',
+            MAX: 'El autor es demasiado largo, halzo más corto.'
           },
           DATUM: {
-            NAAM : 'Cuando se crea',
-            BES : 'Ingrese la fecha a partir de la cual se creó esta lección.',
+            NAAM: 'Cuando se crea',
+            BES: 'Ingrese la fecha a partir de la cual se creó esta lección.',
             ER: 'La fecha es requerida'
           },
           PUBLIEK: {
-            NAAM : 'Público objetivo',
-            BES : '¿Para qué grupo de edad es esta clase?',
+            NAAM: 'Público objetivo',
+            BES: '¿Para qué grupo de edad es esta clase?',
             ER: 'Se requiere audiencia objetivo',
-            KLEUTER : 'Jardín de infancia',
-            LAGERESCHOOL : 'Escuela primaria',
-            MIDDELBAAR : 'Escuela secundaria',
+            KLEUTER: 'Jardín de infancia',
+            LAGERESCHOOL: 'Escuela primaria',
+            MIDDELBAAR: 'Escuela secundaria',
           },
           LANGUAGE: {
-            NAAM : 'Idioma',
-            BES : '¿En qué idioma está escrito el documento?',
+            NAAM: 'Idioma',
+            BES: '¿En qué idioma está escrito el documento?',
             ER: 'Se requiere idioma',
-            NEDERLANDS : 'holandés',
-            ENGELS : 'inglés',
-            SPAANS : 'Español',
+            NEDERLANDS: 'holandés',
+            ENGELS: 'inglés',
+            SPAANS: 'Español',
           },
           BESCHRIJVING: {
-            NAAM : 'Descripción',
-            BES : 'Proporcione información adicional sobre la lección aquí.',
+            NAAM: 'Descripción',
+            BES: 'Proporcione información adicional sobre la lección aquí.',
             ER: 'Se requiere descripción',
-            MIN : 'La descripción debe contener al menos 3 letras',
-            MAX : 'La descripción es demasiado larga, hazla más corta.'
+            MIN: 'La descripción debe contener al menos 3 letras',
+            MAX: 'La descripción es demasiado larga, hazla más corta.'
           },
-          UP : {
-            NAAM : "Zona de carga",
-            HIER : "Haga clic aquí para seleccionar un documento",
-            BES : "Si desea cargar varios documentos, primero cree un archivo zip con ellos. (Esta es la única forma en que puede cargar más de 1 documento).",
+          UP: {
+            NAAM: "Zona de carga",
+            HIER: "Haga clic aquí para seleccionar un documento",
+            BES: "Si desea cargar varios documentos, primero cree un archivo zip con ellos. (Esta es la única forma en que puede cargar más de 1 documento).",
             BEST: "Si el documento continúa cargándose después de seleccionarlo, haga clic en el documento nuevamente."
           }
         }
@@ -756,7 +760,7 @@ export const locale = {
         SOCIO_EDUCATIONAL_ACTIVITIES: "Actividades Socioeducativas",
         STIMULATION: "Estímulo",
       },
-      CLASS_OVERVIEW:{
+      CLASS_OVERVIEW: {
         ALL: 'Todas las lecciones',
         ADD: 'Agregar nueva lección',
       },
@@ -787,7 +791,7 @@ export const locale = {
           ERROR: 'Error',
           DELETE_SUCCESS: 'El usuario se ha eliminado correctamente de la lista.',
           DELETE_ERROR:
-          'Algo ha ido mal al eliminar el usuario. Por favor, inténtalo de nuevo más tarde.',
+            'Algo ha ido mal al eliminar el usuario. Por favor, inténtalo de nuevo más tarde.',
         }
       },
     },

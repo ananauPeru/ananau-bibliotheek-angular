@@ -57,6 +57,7 @@ import { ToDosComponent } from './todos/todos.component';
 import { OverviewComponent } from './todos/overview/overview.component';
 import { CreateComponent } from './todos/create/create.component';
 import { DeployComponent } from './getting-started/deploy/deploy.component'
+import { W1ProjectsComponent } from './website/w1-projects/w1-projects.component'
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { DeployComponent } from './getting-started/deploy/deploy.component'
     OverviewComponent,
     CreateComponent,
     DeployComponent,
+    W1ProjectsComponent
   ],
   imports: [
     CommonModule,
@@ -129,4 +131,4 @@ import { DeployComponent } from './getting-started/deploy/deploy.component'
   ],
   providers: [DatePipe],
 })
-export class ITDocumentationModule {}
+export class ITDocumentationModule { }
