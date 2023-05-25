@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { W1ProjectsComponent } from './w1-projects.component';
+import { W2TeamMembersComponent } from './w2-team-members.component';
 
-describe('W1ProjectsComponent', () => {
-    let component: W1ProjectsComponent;
-    let fixture: ComponentFixture<W1ProjectsComponent>;
+describe('W2TeamMembersComponent', () => {
+    let component: W2TeamMembersComponent;
+    let fixture: ComponentFixture<W2TeamMembersComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [W1ProjectsComponent]
+            declarations: [W2TeamMembersComponent]
         })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(W1ProjectsComponent);
+        fixture = TestBed.createComponent(W2TeamMembersComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -27,3 +27,29 @@
   a:hover {
     text-decoration: underline;
   }
+
+  .example {
+    padding: .75rem;
+    margin-block: .5rem;
+    background-color: #f1f1f1;
+    border-radius: .25rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    width: min(25rem, 100%);
+  }
+
+  .example div {
+    flex: 1;
+  }
+
+  .example span {
+    display: block;
+    font-size: .75rem;
+    color: hsl(0 0% 0% / .7);
+  }
+
+  .example p {
+    margin-block: 0;
+    font-weight: 700;
+  }

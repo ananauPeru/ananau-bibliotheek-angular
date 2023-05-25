@@ -59,6 +59,8 @@ import { CreateComponent } from './todos/create/create.component';
 import { DeployComponent } from './getting-started/deploy/deploy.component'
 import { W1ProjectsComponent } from './website/w1-projects/w1-projects.component'
 import { AutomaticEmails } from './automatic-emails/email.component'
+import { W2TeamMembersComponent } from './website/w2-team-members/w2-team-members.component'
+import { W3InvolvedCountriesComponent } from './website/w3-involved-countries/w3-involved-countries.component'
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import { AutomaticEmails } from './automatic-emails/email.component'
     CreateComponent,
     DeployComponent,
     W1ProjectsComponent,
+    W2TeamMembersComponent,
+    W3InvolvedCountriesComponent,
     AutomaticEmails,
   ],
   imports: [
