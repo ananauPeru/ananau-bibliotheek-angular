@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import * as FileSaver from "file-saver";
@@ -16,12 +17,13 @@ import { UserStorageService } from "../_services/registration/user-storage.servi
   styleUrls: ["./registration-details.component.scss"],
 })
 export class RegistrationDetailsComponent implements OnInit {
-  private _registration: BehaviorSubject<RegistrationModel> = new BehaviorSubject(
-    null
-  );
+
+  private _registration: BehaviorSubject<RegistrationModel> =
+    new BehaviorSubject(null);
   private _userId: number;
   public role: RegistrationRole;
-  public registration$: Observable<RegistrationModel> = this._registration.asObservable();
+  public registration$: Observable<RegistrationModel> =
+    this._registration.asObservable();
   public errorMessage: string;
   public confirming: boolean;
   public deleting: boolean;
@@ -29,6 +31,19 @@ export class RegistrationDetailsComponent implements OnInit {
   public goodConductCertificateFiles = new Array<File>();
   public diplomaFiles = new Array<File>();
   public passportPhotoFiles = new Array<File>();
+
+  public isEditingStartDateInternship = false;
+  public isEditingEndDateInternship = false;
+  public isEditingStartDateStay = false;
+  public isEditingEndDateStay = false;
+
+  dateForm = new FormGroup({
+    startDateInternship: new FormControl(),
+    endDateInternship: new FormControl(),
+    startDateStay: new FormControl(),
+    endDateStay: new FormControl(),
+  });
+
 
   constructor(
     private route: ActivatedRoute,
@@ -88,6 +103,24 @@ export class RegistrationDetailsComponent implements OnInit {
     this.userStorageService.fetchFiles$(this._userId);
   }
 
+  toggleEditingStartDateInternship(): void {
+    this.isEditingStartDateInternship = !this.isEditingStartDateInternship;
+  }
+
+  toggleEditingEndDateInternship(): void {
+    this.isEditingEndDateInternship = !this.isEditingEndDateInternship;
+  }
+
+  toggleEditingStartDateStay(): void {
+    this.isEditingStartDateStay = !this.isEditingStartDateStay;
+  }
+
+  toggleEditingEndDateStay(): void {
+    this.isEditingEndDateStay = !this.isEditingEndDateStay;
+  }
+
+
+  
   confirm(confirm: boolean) {
     this.confirming = true;
     this.registrationService

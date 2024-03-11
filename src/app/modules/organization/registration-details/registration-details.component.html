@@ -15,7 +15,7 @@
           *ngIf="registration$ | async as registration; else standardTitle"
           >{{
             "REGISTRATIONS.DETAILS.TITLE"
-              | translate: { name: registration.firstName }
+              | translate : { name: registration.firstName }
           }}</span
         >
         <small class="pl-2">{{
@@ -116,7 +116,7 @@
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.BIRTH_DATE" | translate }}
                 </td>
-                <td>{{ registration.dateOfBirth | date: "dd-MM-yyyy" }}</td>
+                <td>{{ registration.dateOfBirth | date : "dd-MM-yyyy" }}</td>
               </tr>
               <tr>
                 <td>
@@ -274,60 +274,228 @@
           <h5 class="text-dark font-weight-bold mb-3">
             {{ "REGISTRATION.ORGANIZATIONAL.DATES.TITLE" | translate }}
           </h5>
-          <table class="table table-hover">
-            <tbody>
-              <tr *ngIf="role === 'Volunteer'">
-                <td>
-                  {{ "REGISTRATION.ORGANIZATIONAL.DATES.ONLINE" | translate }}
-                </td>
-                <td>
-                  <img
-                    src="../../../../assets/media/svg/icons/Navigation/{{
-                      registration.internshipOnline ? 'Check' : 'Close'
-                    }}.svg"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  {{
-                    (role === "Student"
-                      ? "REGISTRATION.ORGANIZATIONAL.DATES.START_STUDENT"
-                      : "REGISTRATION.ORGANIZATIONAL.DATES.START_VOLUNTEER"
-                    ) | translate
-                  }}
-                </td>
-                <td>{{ registration.startDate | date: "dd-MM-yyyy" }}</td>
-              </tr>
-              <tr>
-                <td>
-                  {{
-                    (role === "Student"
-                      ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
-                      : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
-                    ) | translate
-                  }}
-                </td>
-                <td>{{ registration.endDate | date: "dd-MM-yyyy" }}</td>
-              </tr>
-              <tr *ngIf="role === 'Student'">
-                <td>
-                  {{
-                    "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_START" | translate
-                  }}
-                </td>
-                <td>{{ registration.leaveStartDate | date: "dd-MM-yyyy" }}</td>
-              </tr>
-              <tr *ngIf="role === 'Student'">
-                <td>
-                  {{
-                    "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
-                  }}
-                </td>
-                <td>{{ registration.leaveEndDate | date: "dd-MM-yyyy" }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- FORM START -->
+          <form [formGroup]="dateForm">
+            <table class="table table-hover">
+              <tbody>
+                <tr *ngIf="role === 'Volunteer'">
+                  <td>
+                    {{ "REGISTRATION.ORGANIZATIONAL.DATES.ONLINE" | translate }}
+                  </td>
+                  <td>
+                    <img
+                      src="../../../../assets/media/svg/icons/Navigation/{{
+                        registration.internshipOnline ? 'Check' : 'Close'
+                      }}.svg"
+                    />
+                  </td>
+                </tr>
+
+                <!-- START DATE INTERNSHIP -->
+                <tr>
+                  <td>
+                    {{
+                      (role === "Student"
+                        ? "REGISTRATION.ORGANIZATIONAL.DATES.START_STUDENT"
+                        : "REGISTRATION.ORGANIZATIONAL.DATES.START_VOLUNTEER"
+                      ) | translate
+                    }}
+                  </td>
+                  <td>{{ registration.startDate | date : "dd-MM-yyyy" }}</td>
+                  <td class="text-right">
+                    <button
+                      (click)="toggleEditingStartDateInternship()"
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                    >
+                      <img
+                        src="../../../../assets/media/svg/icons/General/Edit.svg"
+                        alt="Edit"
+                        height="20rem"
+                        *ngIf="!isEditingStartDateInternship"
+                      />
+                      <img
+                        src="../../../../assets/media/svg/icons/Navigation/Close.svg"
+                        alt="Edit"
+                        height="20rem"
+                        *ngIf="isEditingStartDateInternship"
+                      />
+                    </button>
+                  </td>
+                </tr>
+
+                <tr *ngIf="isEditingStartDateInternship">
+                  <td>
+                    <label for="start-date-internship">Enter a new date</label>
+                  </td>
+                  <td>
+                    <input
+                      class="form-control form-control-solid"
+                      id="start-date-internship"
+                      type="date"
+                      formControlName="startDateInternship"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
+                  <td></td>
+                </tr>
+
+                <!-- END DATE INTERNSHIP -->
+                <tr>
+                  <td>
+                    {{
+                      (role === "Student"
+                        ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
+                        : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
+                      ) | translate
+                    }}
+                  </td>
+                  <td>{{ registration.endDate | date : "dd-MM-yyyy" }}</td>
+                  <td class="text-right">
+                    <button
+                      (click)="toggleEditingEndDateInternship()"
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                    >
+                      <img
+                        src="../../../../assets/media/svg/icons/General/Edit.svg"
+                        alt="Edit"
+                        height="20rem"
+                        *ngIf="!isEditingEndDateInternship"
+                      />
+                      <img
+                        src="../../../../assets/media/svg/icons/Navigation/Close.svg"
+                        alt="Edit"
+                        height="20rem"
+                        *ngIf="isEditingEndDateInternship"
+                      />
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="isEditingEndDateInternship">
+                  <td>
+                    <label for="end-date-internship">Enter a new date</label>
+                  </td>
+                  <td>
+                    <input
+                      class="form-control form-control-solid"
+                      id="end-date-internship"
+                      type="date"
+                      formControlName="endDateInternship"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
+                  <td></td>
+                </tr>
+
+                <!-- START DATE STAY -->
+                <tr *ngIf="role === 'Student'">
+                  <td>
+                    {{
+                      "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_START"
+                        | translate
+                    }}
+                  </td>
+                  <td>
+                    {{ registration.leaveStartDate | date : "dd-MM-yyyy" }}
+                  </td>
+                  <td class="text-right">
+                    <button
+                      (click)="toggleEditingStartDateStay()"
+                      type="button"
+                      class="btn btn-secondary  btn-sm"
+                    >
+                      <img
+                        src="../../../../assets/media/svg/icons/General/Edit.svg"
+                        alt="Edit"
+                        height="20rem"
+                        *ngIf="!isEditingStartDateStay"
+                      />
+                      <img
+                        src="../../../../assets/media/svg/icons/Navigation/Close.svg"
+                        alt="Edit"
+                        height="20rem"
+                        *ngIf="isEditingStartDateStay"
+                      />
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="isEditingStartDateStay">
+                  <td><label for="start-date-stay">Enter a new date</label></td>
+                  <td>
+                    <input
+                      class="form-control form-control-solid"
+                      id="start-date-stay"
+                      type="date"
+                      formControlName="startDateStay"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
+                  <td></td>
+                </tr>
+
+                <!-- END DATE STAY -->
+                <tr *ngIf="role === 'Student'">
+                  <td>
+                    {{
+                      "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
+                    }}
+                  </td>
+                  <td>{{ registration.leaveEndDate | date : "dd-MM-yyyy" }}</td>
+                  <td class="text-right">
+                    <button
+                      (click)="toggleEditingEndDateStay()"
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                    >
+                      <img
+                        src="../../../../assets/media/svg/icons/General/Edit.svg"
+                        alt="Edit"
+                        height="20rem"
+                        *ngIf="!isEditingEndDateStay"
+                      />
+                      <img
+                        src="../../../../assets/media/svg/icons/Navigation/Close.svg"
+                        alt="Edit"
+                        height="20rem"
+                        *ngIf="isEditingEndDateStay"
+                      />
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="isEditingEndDateStay">
+                  <td><label for="end-date-stay">Enter a new date</label></td>
+                  <td>
+                    <input
+                      class="form-control form-control-solid"
+                      id="end-date-stay"
+                      type="date"
+                      formControlName="endDateStay"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
+                  <td></td>
+                </tr>
+                <tr *ngIf="isEditingEndDateInternship || isEditingEndDateStay || isEditingStartDateInternship || isEditingStartDateStay">
+                  <td></td>
+                  <td></td>
+                  <td class="text-right"><button
+                    (click)="toggleEditingEndDateStay()"
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                  >
+                    <img
+                      src="../../../../assets/media/svg/icons/General/Save.svg"
+                      alt="Edit"
+                      height="20rem"
+                    />
+                  </button></td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+
+          <!-- FORM END -->
         </div>
         <div>
           <h5 class="text-dark font-weight-bold mb-3">
