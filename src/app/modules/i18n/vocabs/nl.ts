@@ -278,6 +278,7 @@ export const locale = {
           ONLINE: 'Online vrijwilligerwerk',
           ONLINE_INFO:
             'Naast het verrichten van vrijwilligerswerk bij de organisatie in Peru zelf, is het ook mogelijk om vanop afstand te werken.',
+          ENTER_NEW: 'Voer een nieuwe datum in',
           START_VOLUNTEER: 'Voorgestelde startdatum vrijwilligerswerk',
           END_VOLUNTEER: 'Voorgestelde einddatum vrijwilligerswerk',
           START_STUDENT: 'Voorgestelde startdatum stage',

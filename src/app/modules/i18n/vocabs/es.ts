@@ -288,6 +288,7 @@ export const locale = {
           ONLINE: "Voluntariado online",
           ONLINE_INFO:
             "Además de realizar trabajo voluntario en la organización en el propio Perú, también es posible realizar trabajo de forma remota.",
+            ENTER_NEW: 'Ingrese una nueva fechae',
           START_VOLUNTEER: "Fecha de inicio propuesta para voluntariado",
           END_VOLUNTEER: "Fecha final propuesta para voluntariado",
           START_STUDENT: "Fecha de inicio propuesta para pasantía",

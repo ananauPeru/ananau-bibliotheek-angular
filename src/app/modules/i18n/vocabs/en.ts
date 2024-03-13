@@ -290,6 +290,7 @@ export const locale = {
           ONLINE: 'Online volunteering',
           ONLINE_INFO:
             'In addition to doing voluntary work at the organization in Peru itself, it is also possible to do work remotely.',
+          ENTER_NEW: 'Enter a new date',
           START_VOLUNTEER: 'Proposed start date volunteering',
           END_VOLUNTEER: 'Proposed end date volunteering',
           START_STUDENT: 'Proposed start date internship',
