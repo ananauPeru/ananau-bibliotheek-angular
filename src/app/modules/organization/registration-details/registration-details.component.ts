@@ -142,6 +142,11 @@ export class RegistrationDetailsComponent implements OnInit {
     this.isEditingEndDateStay = false;
   }
 
+  isDateSaveButtonDisabled(): boolean {
+    const formValues = Object.values(this.dateForm.value);
+    return formValues.every(value => value === null);
+  }
+ 
 
   
   confirm(confirm: boolean) {

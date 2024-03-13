@@ -326,7 +326,9 @@
 
                 <tr *ngIf="isEditingStartDateInternship">
                   <td>
-                    <label for="start-date-internship">{{ "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate }}</label>
+                    <label for="start-date-internship">{{
+                      "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate
+                    }}</label>
                   </td>
                   <td>
                     <input
@@ -374,7 +376,9 @@
                 </tr>
                 <tr *ngIf="isEditingEndDateInternship">
                   <td>
-                    <label for="end-date-internship">{{ "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate }}</label>
+                    <label for="end-date-internship">{{
+                      "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate
+                    }}</label>
                   </td>
                   <td>
                     <input
@@ -403,7 +407,7 @@
                     <button
                       (click)="toggleEditingStartDateStay()"
                       type="button"
-                      class="btn btn-secondary  btn-sm"
+                      class="btn btn-secondary btn-sm"
                     >
                       <img
                         src="../../../../assets/media/svg/icons/General/Edit.svg"
@@ -421,7 +425,11 @@
                   </td>
                 </tr>
                 <tr *ngIf="isEditingStartDateStay">
-                  <td><label for="start-date-stay">{{ "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate }}</label></td>
+                  <td>
+                    <label for="start-date-stay">{{
+                      "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate
+                    }}</label>
+                  </td>
                   <td>
                     <input
                       class="form-control form-control-solid"
@@ -464,7 +472,11 @@
                   </td>
                 </tr>
                 <tr *ngIf="isEditingEndDateStay">
-                  <td><label for="end-date-stay">{{ "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate }}</label></td>
+                  <td>
+                    <label for="end-date-stay">{{
+                      "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate
+                    }}</label>
+                  </td>
                   <td>
                     <input
                       class="form-control form-control-solid"
@@ -476,15 +488,25 @@
                   </td>
                   <td></td>
                 </tr>
-                <tr *ngIf="isEditingEndDateInternship || isEditingEndDateStay || isEditingStartDateInternship || isEditingStartDateStay">
+                <tr
+                  *ngIf="
+                    isEditingEndDateInternship ||
+                    isEditingEndDateStay ||
+                    isEditingStartDateInternship ||
+                    isEditingStartDateStay
+                  "
+                >
                   <td></td>
                   <td></td>
-                  <td class="text-right"><button
-                    type="submit"
-                    class="btn btn-primary"
-                  >
-                    {{ "BUTTONS.SAVE_CHANGES " | translate }}
-                  </button></td>
+                  <td class="text-right">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="isDateSaveButtonDisabled()"
+                    >
+                      {{ "BUTTONS.SAVE_CHANGES" | translate }}
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
