@@ -275,7 +275,7 @@
             {{ "REGISTRATION.ORGANIZATIONAL.DATES.TITLE" | translate }}
           </h5>
           <!-- FORM START -->
-          <form [formGroup]="dateForm">
+          <form [formGroup]="dateForm" (ngSubmit)="onSubmitDateChange()">
             <table class="table table-hover">
               <tbody>
                 <tr *ngIf="role === 'Volunteer'">
@@ -480,15 +480,10 @@
                   <td></td>
                   <td></td>
                   <td class="text-right"><button
-                    (click)="toggleEditingEndDateStay()"
-                    type="button"
+                    type="submit"
                     class="btn btn-primary btn-sm"
                   >
-                    <img
-                      src="../../../../assets/media/svg/icons/General/Save.svg"
-                      alt="Edit"
-                      height="20rem"
-                    />
+                    Save changes
                   </button></td>
                 </tr>
               </tbody>

@@ -119,6 +119,13 @@ export class RegistrationDetailsComponent implements OnInit {
     this.isEditingEndDateStay = !this.isEditingEndDateStay;
   }
 
+  private setEditingFalse() : void {
+    this.isEditingStartDateInternship = false;
+    this.isEditingEndDateInternship = false;
+    this.isEditingStartDateStay = false;
+    this.isEditingEndDateStay = false;
+  }
+
 
   
   confirm(confirm: boolean) {
@@ -215,5 +222,16 @@ export class RegistrationDetailsComponent implements OnInit {
         this.translate.instant("REGISTRATIONS.TOASTS.DOWNLOAD_ERROR")
       );
     }
+  }
+
+  onSubmitDateChange() {
+
+
+    console.log(this.dateForm.value);
+
+
+
+    this.toastr.showSuccess("Succesfully updated dates.", "Success");
+    this.setEditingFalse();
   }
 }
