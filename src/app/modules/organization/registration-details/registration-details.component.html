@@ -301,7 +301,16 @@
                       ) | translate
                     }}
                   </td>
-                  <td>{{ registration.startDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingStartDateInternship">{{ registration.startDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="isEditingStartDateInternship">
+                    <input
+                      class="form-control form-control-solid"
+                      id="start-date-internship"
+                      type="date"
+                      formControlName="startDate"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
                   <td class="text-right">
                     <button
                       (click)="toggleEditingStartDateInternship()"
@@ -324,24 +333,6 @@
                   </td>
                 </tr>
 
-                <tr *ngIf="isEditingStartDateInternship">
-                  <td>
-                    <label for="start-date-internship">{{
-                      "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate
-                    }}</label>
-                  </td>
-                  <td>
-                    <input
-                      class="form-control form-control-solid"
-                      id="start-date-internship"
-                      type="date"
-                      formControlName="startDate"
-                      placeholder="yyyy-mm-dd"
-                    />
-                  </td>
-                  <td></td>
-                </tr>
-
                 <!-- END DATE INTERNSHIP -->
                 <tr>
                   <td>
@@ -352,7 +343,16 @@
                       ) | translate
                     }}
                   </td>
-                  <td>{{ registration.endDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingEndDateInternship">{{ registration.endDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="isEditingEndDateInternship">
+                    <input
+                      class="form-control form-control-solid"
+                      id="end-date-internship"
+                      type="date"
+                      formControlName="endDate"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
                   <td class="text-right">
                     <button
                       (click)="toggleEditingEndDateInternship()"
@@ -374,23 +374,6 @@
                     </button>
                   </td>
                 </tr>
-                <tr *ngIf="isEditingEndDateInternship">
-                  <td>
-                    <label for="end-date-internship">{{
-                      "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate
-                    }}</label>
-                  </td>
-                  <td>
-                    <input
-                      class="form-control form-control-solid"
-                      id="end-date-internship"
-                      type="date"
-                      formControlName="endDate"
-                      placeholder="yyyy-mm-dd"
-                    />
-                  </td>
-                  <td></td>
-                </tr>
 
                 <!-- START DATE STAY -->
                 <tr *ngIf="role === 'Student'">
@@ -400,8 +383,15 @@
                         | translate
                     }}
                   </td>
-                  <td>
-                    {{ registration.leaveStartDate | date : "dd-MM-yyyy" }}
+                  <td *ngIf="!isEditingStartDateStay">{{ registration.leaveStartDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="isEditingStartDateStay">
+                    <input
+                      class="form-control form-control-solid"
+                      id="start-date-stay"
+                      type="date"
+                      formControlName="leaveStartDate"
+                      placeholder="yyyy-mm-dd"
+                    />
                   </td>
                   <td class="text-right">
                     <button
@@ -424,23 +414,6 @@
                     </button>
                   </td>
                 </tr>
-                <tr *ngIf="isEditingStartDateStay">
-                  <td>
-                    <label for="start-date-stay">{{
-                      "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate
-                    }}</label>
-                  </td>
-                  <td>
-                    <input
-                      class="form-control form-control-solid"
-                      id="start-date-stay"
-                      type="date"
-                      formControlName="leaveStartDate"
-                      placeholder="yyyy-mm-dd"
-                    />
-                  </td>
-                  <td></td>
-                </tr>
 
                 <!-- END DATE STAY -->
                 <tr *ngIf="role === 'Student'">
@@ -449,7 +422,16 @@
                       "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
                     }}
                   </td>
-                  <td>{{ registration.leaveEndDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingEndDateStay">{{ registration.leaveEndDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="isEditingEndDateStay">
+                    <input
+                      class="form-control form-control-solid"
+                      id="end-date-stay"
+                      type="date"
+                      formControlName="leaveEndDate"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
                   <td class="text-right">
                     <button
                       (click)="toggleEditingEndDateStay()"
@@ -471,23 +453,8 @@
                     </button>
                   </td>
                 </tr>
-                <tr *ngIf="isEditingEndDateStay">
-                  <td>
-                    <label for="end-date-stay">{{
-                      "REGISTRATION.ORGANIZATIONAL.DATES.ENTER_NEW" | translate
-                    }}</label>
-                  </td>
-                  <td>
-                    <input
-                      class="form-control form-control-solid"
-                      id="end-date-stay"
-                      type="date"
-                      formControlName="leaveEndDate"
-                      placeholder="yyyy-mm-dd"
-                    />
-                  </td>
-                  <td></td>
-                </tr>
+
+                <!-- Save Changes Button -->
                 <tr
                   *ngIf="
                     isEditingEndDateInternship ||
