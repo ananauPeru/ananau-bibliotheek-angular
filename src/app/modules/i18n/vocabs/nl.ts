@@ -222,7 +222,12 @@ export const locale = {
           IMAGE_SUBMIT_ERROR:
             'Er ging iets mis bij het verzenden van je afbeeldingsbestanden. Probeer het later nog eens.',
           IMAGE_SAVE_ERROR:
-            'Er ging iets mis bij het opslaan van je afbeeldingsbestanden. Probeer het later nog eens.',
+            'Er ging iets mis bij het opslaan van je afbeeldingsbestanden. Probeer het later nog eens.',  
+          DATES_CHANGE_SUCCESS:
+            'Data succesvol bijgewerkt.',
+          DATES_CHANGE_ERROR:
+            'Er is iets misgegaan bij het bijwerken van de data. Probeer het later nog eens.'
+        
         },
       },
       PERSONAL: {

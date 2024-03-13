@@ -245,11 +245,11 @@ export class RegistrationDetailsComponent implements OnInit {
       () => {
         this.setEditingFalse();
         this.fetchRegistrationData();
-        this.toastr.showSuccess("Succesfully updated dates.", this.translate.instant("REGISTRATIONS.TOASTS.SUCCESS"));
+        this.toastr.showSuccess(this.translate.instant("REGISTRATIONS.TOASTS.DATES_CHANGE_SUCCESS"), this.translate.instant("REGISTRATIONS.TOASTS.SUCCESS"));
       },
       (err) => {
         console.error(err);
-        this.toastr.showError("Error while updating dates.", this.translate.instant("REGISTRATIONS.TOASTS.ERROR"));
+        this.toastr.showError(this.translate.instant("REGISTRATIONS.TOASTS.DATES_CHANGE_ERROR"), this.translate.instant("REGISTRATIONS.TOASTS.ERROR"));
       },
       () => {
         this.cdRef.detectChanges();
