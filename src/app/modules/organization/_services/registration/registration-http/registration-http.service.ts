@@ -91,4 +91,20 @@ export class RegistrationHttpService {
       })
     );
   }
+
+  updateRegistrationDates$(userId: number, dates: any) {
+    return this.http
+    .put(
+      `${API_REGISTRATIONS_URL}/students/${userId}`,
+      dates
+    )
+    .pipe(
+      catchError((error) => {
+        if(error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      })
+    )
+  }
 }

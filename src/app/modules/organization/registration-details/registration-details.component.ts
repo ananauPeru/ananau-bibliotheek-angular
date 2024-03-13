@@ -10,6 +10,7 @@ import { RegistrationRole } from "../_models/registration-role";
 import { RegistrationModel } from "../_models/registration.model";
 import { RegistrationService } from "../_services/registration/registration.service";
 import { UserStorageService } from "../_services/registration/user-storage.service";
+import { M } from "@angular/cdk/keycodes";
 
 @Component({
   selector: "app-registration-details",
@@ -38,12 +39,11 @@ export class RegistrationDetailsComponent implements OnInit {
   public isEditingEndDateStay = false;
 
   dateForm = new FormGroup({
-    startDateInternship: new FormControl(),
-    endDateInternship: new FormControl(),
-    startDateStay: new FormControl(),
-    endDateStay: new FormControl(),
+    startDate: new FormControl(),
+    endDate: new FormControl(),
+    leaveStartDate: new FormControl(),
+    leaveEndDate: new FormControl(),
   });
-
 
   constructor(
     private route: ActivatedRoute,
@@ -60,26 +60,26 @@ export class RegistrationDetailsComponent implements OnInit {
     );
     this.route.params.subscribe((params) => (this._userId = params["id"]));
 
+    this.fetchRegistrationData();
+  }
+
+  private fetchRegistrationData() {
     if (this.role === RegistrationRole.STUDENT) {
-      this.registrationService
-        .getStudentRegistrationById$(this._userId)
-        .subscribe(
-          (registration) => this._registration.next(registration),
-          (err) => {
-            console.error(err);
-            this.errorMessage = err;
-          }
-        );
+      this.registrationService.getStudentRegistrationById$(this._userId).subscribe(
+        (registration) => this._registration.next(registration),
+        (err) => {
+          console.error(err);
+          this.errorMessage = err;
+        }
+      );
     } else {
-      this.registrationService
-        .getVolunteerRegistrationById$(this._userId)
-        .subscribe(
-          (registration) => this._registration.next(registration),
-          (err) => {
-            console.error(err);
-            this.errorMessage = err;
-          }
-        );
+      this.registrationService.getVolunteerRegistrationById$(this._userId).subscribe(
+        (registration) => this._registration.next(registration),
+        (err) => {
+          console.error(err);
+          this.errorMessage = err;
+        }
+      );
     }
   }
 
@@ -105,18 +105,34 @@ export class RegistrationDetailsComponent implements OnInit {
 
   toggleEditingStartDateInternship(): void {
     this.isEditingStartDateInternship = !this.isEditingStartDateInternship;
+
+    if(!this.isEditingStartDateInternship) {
+      this.dateForm.patchValue({ startDate: null });
+    }
   }
 
   toggleEditingEndDateInternship(): void {
     this.isEditingEndDateInternship = !this.isEditingEndDateInternship;
+
+    if(!this.isEditingEndDateInternship) {
+      this.dateForm.patchValue({ endDate: null });
+    }
   }
 
   toggleEditingStartDateStay(): void {
     this.isEditingStartDateStay = !this.isEditingStartDateStay;
+
+    if(!this.isEditingStartDateStay) {
+      this.dateForm.patchValue({ leaveStartDate: null });
+    }
   }
 
   toggleEditingEndDateStay(): void {
     this.isEditingEndDateStay = !this.isEditingEndDateStay;
+
+    if(!this.isEditingEndDateStay) {
+      this.dateForm.patchValue({ leaveEndDate: null });
+    }
   }
 
   private setEditingFalse() : void {
@@ -225,13 +241,19 @@ export class RegistrationDetailsComponent implements OnInit {
   }
 
   onSubmitDateChange() {
-
-
-    console.log(this.dateForm.value);
-
-
-
-    this.toastr.showSuccess("Succesfully updated dates.", "Success");
-    this.setEditingFalse();
+    this.registrationService.updateRegistrationDates$(this._userId, this.dateForm.value).subscribe(
+      () => {
+        this.setEditingFalse();
+        this.fetchRegistrationData();
+        this.toastr.showSuccess("Succesfully updated dates.", this.translate.instant("REGISTRATIONS.TOASTS.SUCCESS"));
+      },
+      (err) => {
+        console.error(err);
+        this.toastr.showError("Error while updating dates.", this.translate.instant("REGISTRATIONS.TOASTS.ERROR"));
+      },
+      () => {
+        this.cdRef.detectChanges();
+      }
+    )
   }
 }
