@@ -235,11 +235,7 @@ export const locale = {
           IMAGE_SUBMIT_ERROR:
             'Something went wrong while submitting your image files. Please try again later.',
           IMAGE_SAVE_ERROR:
-            'Something went wrong while saving your image files. Please try again later.',
-          DATES_CHANGE_SUCCESS:
-            'Succesfully updated dates.',
-          DATES_CHANGE_ERROR:
-            'Something went wrong while updating dates. Please try again later.'
+            'Something went wrong while saving your image files. Please try again later.'
         },
       },
       PERSONAL: {
@@ -810,6 +806,10 @@ export const locale = {
           'Something went wrong while removing the registration. Please try again later.',
         DOWNLOAD_ERROR:
           'Something went wrong while downloading the file. Please try again later.',
+          DATES_CHANGE_SUCCESS:
+            'Succesfully updated dates.',
+          DATES_CHANGE_ERROR:
+            'Something went wrong while updating dates. Please try again later.'
       },
     },
 

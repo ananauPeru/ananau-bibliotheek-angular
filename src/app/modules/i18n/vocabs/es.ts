@@ -233,11 +233,7 @@ export const locale = {
           IMAGE_SUBMIT_ERROR:
             "Se produjo un error al enviar sus archivos de imagen. Por favor, inténtelo de nuevo más tarde.",
           IMAGE_SAVE_ERROR:
-            "Se produjo un error al guardar sus archivos de imagen. Por favor, inténtelo de nuevo más tarde.",
-          DATES_CHANGE_SUCCESS:
-            'Fechas actualizadas correctamente.',
-          DATES_CHANGE_ERROR:
-            'Ocurrió un error al actualizar las fechas. Por favor, inténtalo de nuevo más tarde.'
+            "Se produjo un error al guardar sus archivos de imagen. Por favor, inténtelo de nuevo más tarde."
         },
       },
       PERSONAL: {
@@ -828,6 +824,10 @@ export const locale = {
           "Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.",
         DOWNLOAD_ERROR:
           "Se produjo un error al descargar el archivo. Por favor, inténtelo de nuevo más tarde.",
+          DATES_CHANGE_SUCCESS:
+            'Fechas actualizadas correctamente.',
+          DATES_CHANGE_ERROR:
+            'Ocurrió un error al actualizar las fechas. Por favor, inténtalo de nuevo más tarde.'
       },
     },
   },
