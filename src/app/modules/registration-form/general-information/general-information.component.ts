@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralInformationService } from '../_services/general-information/general-information.service';
 import { VaccinationModel } from '../_models/vaccination.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-general-information',
@@ -9,13 +10,17 @@ import { VaccinationModel } from '../_models/vaccination.model';
 })
 export class GeneralInformationComponent implements OnInit {
 
+  vaccinations$: Observable<VaccinationModel[]>;
+
+
   constructor(private generalInformationService: GeneralInformationService) { }
 
   ngOnInit() {
+    this.fetchVaccinations();
   }
-
-  submitTestButton() {
-      
+  
+  private fetchVaccinations() {
+    this.vaccinations$ = this.generalInformationService.getAllVaccinationInformation$();
   }
 
 }

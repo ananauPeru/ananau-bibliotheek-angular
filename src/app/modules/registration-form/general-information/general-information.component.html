@@ -28,15 +28,12 @@
     <h4 class="text-dark font-weight-bold mb-4">
       Vaccinations
     </h4>
-    
-    <ul class="mb-4">
-      <li class="text-muted">Vaccination A (required)</li>
-      <li class="text-muted">Vaccination B</li>
-      <li class="text-muted">Vaccination C</li>
-      <li class="text-muted">Vaccination D</li>
-    </ul>
 
-    <button class="btn btn-primary" (click)="submitTestButton()">Test button</button>
+    <ul class="mb-4">
+      <li *ngFor="let vaccination of vaccinations$ | async" class="text-muted">
+        {{ vaccination.name }}{{ vaccination.required ? ' (required)' : '' }}
+      </li>
+    </ul>
 
   </div>
 
