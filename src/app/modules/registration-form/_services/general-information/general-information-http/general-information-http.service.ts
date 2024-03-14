@@ -6,7 +6,7 @@ import { environment } from "src/environments/environment";
 import { VaccinationModel } from "../../../_models/vaccination.model";
 import { HolidayModel } from "../../../_models/holiday.model";
 
-const API_GENERAL_INFORMATION_URL = `${environment.apiUrl}/general-information`;
+const API_GENERAL_INFORMATION_URL = `${environment.apiUrl}`;
 
 @Injectable({
   providedIn: "root",
