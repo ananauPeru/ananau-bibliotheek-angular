@@ -52,7 +52,6 @@ export class RegistrationModel {
   tasks: string;
   expectations: string;
   proposals: string;
-  motivationLatter: string;
 
   // QUESTIONS
   otherQuestions: string;

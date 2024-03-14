@@ -50,7 +50,6 @@ export class RegistrationDTO {
   tasks: string;
   expectations: string;
   proposals: string;
-  motivationLatter: string;
 
   // QUESTIONS
   otherQuestions: string;

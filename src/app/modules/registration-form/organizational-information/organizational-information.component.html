@@ -311,7 +311,7 @@
     <form [formGroup]="organizationalForm.controls.motivationLetter">
       
       <div class="form-group row">
-        <label for="infoMotivation" class="col-3">{{
+        <label for="motivationLetter" class="col-3">{{
       "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION" | translate
     }}</label>
         <div class="col-9">
@@ -555,37 +555,6 @@
           }}</span>
         </div>
       </div>
-      <!-- motivation (motivational letter) -->
-      <div class="form-group row">
-        <label for="infoMotivation" class="col-3">{{
-          "REGISTRATION.ORGANIZATIONAL.INFO.MOTIVATION" | translate
-        }}</label>
-        <div class="col-9">
-          <textarea
-            class="form-control form-control-solid"
-            id="infoMotivation"
-            formControlName="motivationLatter"
-            rows="3"
-          ></textarea>
-          <div
-            *ngIf="
-              organizationalForm.controls.info.get('motivationLatter')['errors'] &&
-              organizationalForm.controls.info.get('motivationLatter').touched
-            "
-            class="text-danger form-text"
-          >
-            {{
-              getErrorMessage(
-                organizationalForm.controls.info.get("motivationLatter")["errors"]
-              )
-            }}
-          </div>
-          <span class="form-text text-muted">{{
-            "REGISTRATION.ORGANIZATIONAL.INFO.MOTIVATION_INFO" | translate
-          }}</span>
-        </div>
-      </div>
-
     </form>
   </div>
 </div>

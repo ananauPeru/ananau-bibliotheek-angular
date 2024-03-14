@@ -326,8 +326,6 @@ export const locale = {
           PROPOSALS: 'Heb je zelf voorstellen?',
           PROPOSALS_INFO:
             'Als je voorstellen hebt met betrekking tot je werk binnen de organisatie, beschrijf ze dan hier.',
-          MOTIVATION: 'Wat is je motivatie?',
-          MOTIVATION_INFO: 'Aanvullende informatie over je motivatie.',
         },
       },
       SCANS: {

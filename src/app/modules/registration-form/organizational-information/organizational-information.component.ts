@@ -70,7 +70,6 @@ export class OrganizationalInformationComponent implements OnInit {
         tasks: [this.initialData.tasks, Validators.required],
         expectations: [this.initialData.expectations],
         proposals: [this.initialData.proposals],
-        motivationLatter: [this.initialData.motivationLatter],
       }),
     });
 
