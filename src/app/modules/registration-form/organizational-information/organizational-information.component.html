@@ -291,11 +291,55 @@
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>
-  <!-- motivational letter -->
+  <!-- motivation letter -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">
       {{ "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.TITLE" | translate }}
     </h4>
+    <!--
+    <p class="text-muted mb-4">
+      Please fill in the field with your motivation letter.
+      
+      {{
+        (role === "Student"
+          ? "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO_STUDENT"
+          : "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO_VOLUNTEER"
+        ) | translate
+      }} 
+    </p>-->
+    
+    <form [formGroup]="organizationalForm.controls.motivation_letter">
+      
+      <div class="form-group row">
+        <label for="infoMotivation" class="col-3">{{
+      "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION" | translate
+    }}</label>
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="motivationLetter"
+            formControlName="motivationLetter"
+            rows="5"
+            required
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.motivation_letter.get('motivationLetter')['errors'] &&
+              organizationalForm.controls.motivation_letter.get('motivationLetter').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.motivation_letter.get("motivationLetter")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+    </form>
+
+
   </div>
   <div class="separator separator-dashed my-10"></div>  
   <!-- info -->

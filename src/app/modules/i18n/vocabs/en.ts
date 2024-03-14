@@ -313,6 +313,7 @@ export const locale = {
         },
         MOTIVATION_LETTER: {
           TITLE: 'Motivation letter',
+          MOTIVATION: 'Fill in the field with your motivation letter',
         },
         INFO: {
           TITLE: 'Info',

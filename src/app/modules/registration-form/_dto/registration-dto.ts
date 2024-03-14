@@ -42,6 +42,9 @@ export class RegistrationDTO {
   weeksOnline: number;
   weeks: number;
 
+  // Motivation letter
+  motivationLetter: string;
+
   // Info
   occupation: string;
   tasks: string;
