@@ -308,7 +308,7 @@
       }} 
     </p>-->
     
-    <form [formGroup]="organizationalForm.controls.motivation_letter">
+    <form [formGroup]="organizationalForm.controls.motivationLetter">
       
       <div class="form-group row">
         <label for="infoMotivation" class="col-3">{{
@@ -324,14 +324,14 @@
           ></textarea>
           <div
             *ngIf="
-              organizationalForm.controls.motivation_letter.get('motivationLetter')['errors'] &&
-              organizationalForm.controls.motivation_letter.get('motivationLetter').touched
+              organizationalForm.controls.motivationLetter.get('motivationLetter')['errors'] &&
+              organizationalForm.controls.motivationLetter.get('motivationLetter').touched
             "
             class="text-danger form-text"
           >
             {{
               getErrorMessage(
-                organizationalForm.controls.motivation_letter.get("motivationLetter")["errors"]
+                organizationalForm.controls.motivationLetter.get("motivationLetter")["errors"]
               )
             }}
           </div>
