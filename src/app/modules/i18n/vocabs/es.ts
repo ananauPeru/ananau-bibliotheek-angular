@@ -333,6 +333,9 @@ export const locale = {
           PROPOSALS: "¿Tiene alguna propuesta?",
           PROPOSALS_INFO:
             "Si tiene alguna propuesta relacionada con su trabajo dentro de la organización, proporcione aquí.",
+          MOTIVATION: "¿Cuál es tu motivación?",
+          MOTIVATION_INFO:
+            "Información adicional sobre tu motivación.",
         },
       },
       SCANS: {

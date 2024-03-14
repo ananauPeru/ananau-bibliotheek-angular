@@ -335,6 +335,8 @@ export const locale = {
           PROPOSALS: 'Do you have any proposals?',
           PROPOSALS_INFO:
             'If you have any proposals concerning your work within the organization, please provide them here.',
+          MOTIVATION: 'What is your motivation?',
+          MOTIVATION_INFO: 'Additional information about your motivation.',
         },
       },
       SCANS: {

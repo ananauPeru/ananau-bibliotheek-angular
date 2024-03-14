@@ -212,6 +212,7 @@ export class ContainerComponent implements OnInit {
     dto.tasks = info.get("tasks").value;
     dto.expectations = info.get("expectations").value;
     dto.proposals = info.get("proposals").value;
+    dto.motivationLatter = info.get("motivationLatter").value;
 
     const questionsForm = this.formContainer.get("questionsForm") as FormGroup;
     dto.otherQuestions = questionsForm.get("otherQuestions").value;
