@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralInformationService } from '../_services/general-information/general-information.service';
+import { VaccinationModel } from '../_models/vaccination.model';
 
 @Component({
   selector: 'app-general-information',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralInformationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private generalInformationService: GeneralInformationService) { }
 
   ngOnInit() {
+  }
+
+  submitTestButton() {
+      
   }
 
 }
