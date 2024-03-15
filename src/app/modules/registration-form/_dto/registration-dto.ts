@@ -39,6 +39,7 @@ export class RegistrationDTO {
 
   // Flight information
   flightNumber: string;
+  flightDateArrival: Date;
 
   // Spanish
   level: string;

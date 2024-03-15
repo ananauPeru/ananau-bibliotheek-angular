@@ -64,7 +64,14 @@ export class OrganizationalInformationComponent implements OnInit {
       }),
       flightInformation: this.fb.group({
         flightNumber: [this.initialData.flightNumber],
-        
+        flightDateArrival: [
+          this.initialData.flightDateArrival
+            ? this.datePipe.transform(
+                new Date(this.initialData.flightDateArrival),
+                "yyyy-MM-dd"
+              )
+            : "",
+        ],
       }),
       motivationLetter: this.fb.group({
         motivationLetter: [this.initialData.motivationLetter, Validators.required],

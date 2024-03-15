@@ -296,6 +296,7 @@ export const locale = {
         FLIGHT_INFORMATION: {
           TITLE: 'Informacion de vuelo',
           NUMBER: 'Número de vuelo',
+          DATE_ARRIVAL: 'Fecha de llegada',
         },
         SPANISH: {
           TITLE: "Español",
