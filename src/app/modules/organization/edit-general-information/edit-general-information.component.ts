@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { GeneralInformationService } from '../../registration-form/_services/general-information/general-information.service';
 import { Observable } from 'rxjs';
@@ -17,7 +17,8 @@ export class EditGeneralInformationComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private generalInformationService: GeneralInformationService
+    private generalInformationService: GeneralInformationService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -38,15 +39,15 @@ export class EditGeneralInformationComponent implements OnInit {
   }
 
   getVisaInformation() {
-    this.visaInformation$ = this.generalInformationService.getVisaInformation$();
-    this.visaInformation$.subscribe(
-      (visaInfo) => {
-        this.visaInformationForm.patchValue({ visaInformation: visaInfo });
-      },
-      (error) => {
-        console.error('Error retrieving visa information:', error);
-      }
-    );
+    // this.visaInformation$ = this.generalInformationService.getVisaInformation$();
+    // this.visaInformation$.subscribe(
+    //   (visaInfo) => {
+    //     this.visaInformationForm.patchValue({ visaInformation: visaInfo });
+    //   },
+    //   (error) => {
+    //     console.error('Error retrieving visa information:', error);
+    //   }
+    // );
   }
 
   getAllVaccinations() {
@@ -59,14 +60,16 @@ export class EditGeneralInformationComponent implements OnInit {
     }
   }
 
-  //Not working untill new API endpoints
   addVaccination() {
     if (this.vaccinationForm.valid) {
       const vaccination: VaccinationModel = this.vaccinationForm.value;
+      vaccination.required = vaccination.required ?? false; //when unchecking the checkbox, it sets it to null instead of false. Therefore we override it here
+
       this.generalInformationService.addVaccinationInformation$(vaccination).subscribe(
         (addedVaccination) => {
           this.vaccinations$ = this.generalInformationService.getAllVaccinationInformation$();
           this.vaccinationForm.reset();
+          this.cdr.detectChanges();
         },
         (error) => {
           console.error('Error adding vaccination:', error);
@@ -75,11 +78,11 @@ export class EditGeneralInformationComponent implements OnInit {
     }
   }
 
-  //Not working untill new API endpoints
   removeVaccination(vaccination: VaccinationModel) {
     this.generalInformationService.deleteVaccinationInformation$(vaccination.id).subscribe(
       () => {
         this.vaccinations$ = this.generalInformationService.getAllVaccinationInformation$();
+        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Error removing vaccination:', error);
