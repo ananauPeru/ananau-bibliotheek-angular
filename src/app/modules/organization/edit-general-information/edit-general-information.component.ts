@@ -91,17 +91,17 @@ export class EditGeneralInformationComponent implements OnInit {
   }
 
   saveVisaInformation() {
-    if (this.visaInformationForm.valid) {
-      const visaData = this.visaInformationForm.value.visaInformation;
-      this.generalInformationService.postVisaInformation$(visaData).subscribe(
-        () => {
-          console.log('Visa information updated successfully');
-        },
-        (error) => {
-          console.error('Error updating visa information:', error);
-        }
-      );
-    }
+    // if (this.visaInformationForm.valid) {
+    //   const visaData = this.visaInformationForm.value.visaInformation;
+    //   this.generalInformationService.postVisaInformation$(visaData).subscribe(
+    //     () => {
+    //       console.log('Visa information updated successfully');
+    //     },
+    //     (error) => {
+    //       console.error('Error updating visa information:', error);
+    //     }
+    //   );
+    // }
   }
 
   adjustTextareaHeight(event: any) {
