@@ -51,6 +51,7 @@ import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationsOverviewComponent } from "./registrations-overview/registrations-overview.component";
 import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { EditGeneralInformationComponent } from "./edit-general-information/edit-general-information.component";
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     RegistrationsOverviewComponent,
     RegistrationDetailsComponent,
     CalendarComponent,
+    EditGeneralInformationComponent,
   ],
   imports: [
     CommonModule,

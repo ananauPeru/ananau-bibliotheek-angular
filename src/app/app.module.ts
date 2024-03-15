@@ -13,6 +13,7 @@ import { AuthService } from './modules/auth/_services/auth.service'
 import { environment } from 'src/environments/environment'
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 // Highlight JS
@@ -44,6 +45,7 @@ function appInitializer(authService: AuthService) {
     NgbModule,
     ToastrModule.forRoot(),
     QuillModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [
     {

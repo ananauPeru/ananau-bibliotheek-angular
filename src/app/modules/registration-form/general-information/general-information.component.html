@@ -29,11 +29,16 @@
       Vaccinations
     </h4>
 
-    <ul class="mb-4">
-      <li *ngFor="let vaccination of vaccinations$ | async" class="text-muted">
-        {{ vaccination.name }}{{ vaccination.required ? ' (required)' : '' }}
-      </li>
-    </ul>
+    <ng-container *ngIf="vaccinations$ | async as vaccinations">
+      <ul class="mb-4" *ngIf="vaccinations.length > 0; else noResults">
+        <li *ngFor="let vaccination of vaccinations" class="text-muted">
+          {{ vaccination.name }}{{ vaccination.required ? ' (required)' : '' }}
+        </li>
+      </ul>
+      <ng-template #noResults>
+        <p>Currently no results</p>
+      </ng-template>
+    </ng-container>
 
   </div>
 
