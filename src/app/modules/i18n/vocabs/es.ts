@@ -293,6 +293,10 @@ export const locale = {
           LEAVE_INFO:
             "Tiene la opción de programar un período de licencia durante su pasantía. Esto se determina en consulta con su escuela y la organización. Se recomienda y se solicita encarecidamente planificar este período de licencia al final de la pasantía. Si elige no programar un período de licencia, deje este campo vacío.",
         },
+        FLIGHT_INFORMATION: {
+          TITLE: 'Informacion de vuelo',
+          NUMBER: 'Número de vuelo',
+        },
         SPANISH: {
           TITLE: "Español",
           INFO_VOLUNTEER:

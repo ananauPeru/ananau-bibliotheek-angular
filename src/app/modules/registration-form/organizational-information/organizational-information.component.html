@@ -181,6 +181,91 @@
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>
+
+
+  
+  <!-- flight information -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.TITLE" | translate }}
+    </h4>
+    <form [formGroup]="organizationalForm.controls.flightInformation">
+
+
+     <!-- flight number -->
+     <div class="form-group row">
+        <label for="flightNumber" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.NUMBER" | translate
+        }}</label>
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="flightNumber"
+            formControlName="flightNumber"
+            rows="1"
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.flightInformation.get('flightNumber')['errors'] &&
+              organizationalForm.controls.flightInformation.get('flightNumber').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.flightInformation.get("flightNumber")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+
+
+      <!-- date of arrival -->
+      <div *ngIf="role === 'Student'" class="form-group row">
+        <label for="flightDateArrival" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.DATE_ARRIVAL" | translate
+        }}</label>
+        <div class="col-9">
+          <input
+            class="form-control form-control-solid"
+            id="flightDateArrival"
+            type="date"
+            formControlName="flightDateArrival"
+            placeholder="yyyy-mm-dd"
+          />
+          <div
+            *ngIf="
+              organizationalForm.controls.flightInformation.get('flightDateArrival')[
+                'errors'
+              ] &&
+              organizationalForm.controls.flightInformation.get('flightDateArrival').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.flightInformation.get("flightDateArrival")[
+                  "errors"
+                ]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>  
+  
+
+
+
+
   <!-- spanish -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">

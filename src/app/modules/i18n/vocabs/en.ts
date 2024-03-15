@@ -295,6 +295,10 @@ export const locale = {
           LEAVE_INFO:
             'You have the option to schedule a period of leave during your internship. This is determined in consultation with your school and the organization. It is strongly recommended and requested to plan this period of leave at the end of the internship. If you choose not to schedule a period of leave, please leave this field empty.',
         },
+        FLIGHT_INFORMATION: {
+          TITLE: 'Flight information',
+          NUMBER: 'Flight number',
+        },
         SPANISH: {
           TITLE: 'Spanish',
           INFO_VOLUNTEER:

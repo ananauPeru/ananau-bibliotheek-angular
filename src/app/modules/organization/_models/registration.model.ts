@@ -39,6 +39,9 @@ export class RegistrationModel {
   startDate: Date;
   endDate: Date;
 
+  // Flight information
+  flightNumber: string;
+
   // Spanish
   level: string;
   weeksOnline: number;

@@ -282,6 +282,10 @@ export const locale = {
           LEAVE_INFO:
             'Je hebt de mogelijkheid om tijdens je stage een verlofperiode in te plannen. Dit wordt in overleg met je school en de organisatie bepaald. Het wordt sterk aangeraden en verzocht om deze verlofperiode aan het einde van de stage in te plannen. Indien je ervoor kiest om geen verlofperiode in te plannen, laat dit veld dan leeg.',
         },
+        FLIGHT_INFORMATION: {
+          TITLE: 'Vlucht informatie',
+          NUMBER: 'Vluchtnummer',
+        },
         SPANISH: {
           TITLE: 'Spaans',
           INFO_VOLUNTEER:

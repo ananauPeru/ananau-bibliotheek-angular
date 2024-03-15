@@ -62,6 +62,10 @@ export class OrganizationalInformationComponent implements OnInit {
         weeksOnline: [this.initialData.weeksOnline],
         weeks: [this.initialData.weeks],
       }),
+      flightInformation: this.fb.group({
+        flightNumber: [this.initialData.flightNumber],
+        
+      }),
       motivationLetter: this.fb.group({
         motivationLetter: [this.initialData.motivationLetter, Validators.required],
       }),
