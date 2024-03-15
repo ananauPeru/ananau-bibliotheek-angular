@@ -136,4 +136,14 @@ export class OrganizationalInformationComponent implements OnInit {
       ContainerComponent.countFields(this.organizationalForm)
     );
   }
+
+  adjustTextareaHeight(event: any) {
+    const textarea = event.target;
+    const initialHeight = textarea.offsetHeight;
+    
+    textarea.style.height = 'auto';
+    
+    const newHeight = textarea.scrollHeight + 2;
+    textarea.style.height = (newHeight > initialHeight ? newHeight : initialHeight) + 'px';
+  } 
 }

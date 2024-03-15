@@ -296,20 +296,7 @@
     <h4 class="text-dark font-weight-bold mb-4">
       {{ "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.TITLE" | translate }}
     </h4>
-    <!--
-    <p class="text-muted mb-4">
-      Please fill in the field with your motivation letter.
-      
-      {{
-        (role === "Student"
-          ? "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO_STUDENT"
-          : "REGISTRATION.ORGANIZATIONAL.SPANISH.INFO_VOLUNTEER"
-        ) | translate
-      }} 
-    </p>-->
-    
     <form [formGroup]="organizationalForm.controls.motivationLetter">
-      
       <div class="form-group row">
         <label for="motivationLetter" class="col-3">{{
       "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION" | translate
@@ -321,6 +308,7 @@
             formControlName="motivationLetter"
             rows="5"
             required
+            (input)="adjustTextareaHeight($event)"
           ></textarea>
           <div
             *ngIf="
@@ -338,8 +326,6 @@
         </div>
       </div>
     </form>
-
-
   </div>
   <div class="separator separator-dashed my-10"></div>  
   <!-- info -->
