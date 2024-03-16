@@ -70,6 +70,7 @@ export const locale = {
         TITLE: "Organización",
         ROLES: "Gestión de roles",
         REGISTRATIONS: "Inscripciones",
+        GENERAL_INFORMATION: "Información General"
       },
     },
 

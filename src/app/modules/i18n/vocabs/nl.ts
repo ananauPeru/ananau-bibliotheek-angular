@@ -58,6 +58,7 @@ export const locale = {
         TITLE: "Organisatie",
         ROLES: "Rolbeheer",
         REGISTRATIONS: "Registraties",
+        GENERAL_INFORMATION: "Algemene Informatie"
       },
       DOCUMENTATION: {
         TITLE: "IT - Documentatie",

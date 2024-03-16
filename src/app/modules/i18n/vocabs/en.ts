@@ -65,6 +65,7 @@ export const locale = {
         TITLE: "Organization",
         ROLES: "Role Management",
         REGISTRATIONS: "Registrations",
+        GENERAL_INFORMATION: "General Information"
       },
       // We dont translate documentation (IT) to different languages
       DOCUMENTATION: {
