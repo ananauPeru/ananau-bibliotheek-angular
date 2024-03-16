@@ -83,19 +83,19 @@
 
       <div class="my-2">
         <h4 class="text-dark font-weight-bold mb-4">
-          {{ "GENERAL_INFORMATION.VACCINATIONS.TITLE" | translate }}
+          {{ "GENERAL_INFORMATION.VACCINATION.TITLE" | translate }}
         </h4>
 
         <div class="row">
           <div class="col-md-6 mb-8">
             <!-- Add new vaccination form -->
             <h5 class="text-dark font-weight-bold mb-4">
-              {{ "GENERAL_INFORMATION.VACCINATIONS.ADD_NEW" | translate }}
+              {{ "GENERAL_INFORMATION.VACCINATION.ADD_NEW" | translate }}
             </h5>
             <form [formGroup]="vaccinationForm" (ngSubmit)="addVaccination()">
               <div class="form-group">
                 <label for="vaccinationName">{{
-                  "GENERAL_INFORMATION.VACCINATIONS.NAME_LABEL" | translate
+                  "GENERAL_INFORMATION.VACCINATION.NAME_LABEL" | translate
                 }}</label>
                 <input
                   type="text"
@@ -120,7 +120,7 @@
                     class="form-check-label mb-0"
                     for="vaccinationRequired"
                     >{{
-                      "GENERAL_INFORMATION.VACCINATIONS.REQUIRED_LABEL"
+                      "GENERAL_INFORMATION.VACCINATION.REQUIRED_LABEL"
                         | translate
                     }}</label
                   >
@@ -131,14 +131,14 @@
                 class="btn btn-primary btn-lg"
                 [disabled]="!vaccinationForm.valid"
               >
-                {{ "GENERAL_INFORMATION.VACCINATIONS.BUTTON" | translate }}
+                {{ "GENERAL_INFORMATION.VACCINATION.BUTTON" | translate }}
               </button>
             </form>
           </div>
           <div class="col-md-6">
             <!-- List of vaccinations -->
             <h5 class="text-dark font-weight-bold mb-14">
-              {{ "GENERAL_INFORMATION.VACCINATIONS.TITLE" | translate }}
+              {{ "GENERAL_INFORMATION.VACCINATION.TITLE" | translate }}
             </h5>
             <ul class="list-group">
               <ng-container *ngIf="vaccinations$ | async as vaccinations">
@@ -157,10 +157,10 @@
                         {{
                           vaccination.required
                             ? getTranslatedText(
-                                "GENERAL_INFORMATION.VACCINATIONS.REQUIRED"
+                                "GENERAL_INFORMATION.VACCINATION.REQUIRED"
                               )
                             : getTranslatedText(
-                                "GENERAL_INFORMATION.VACCINATIONS.OPTIONAL"
+                                "GENERAL_INFORMATION.VACCINATION.OPTIONAL"
                               )
                         }}</span
                       >
@@ -177,7 +177,7 @@
 
               <ng-template #noVaccinationResults>
                 <li class="list-group-item">
-                  {{ "GENERAL_INFORMATION.VACCINATIONS.NO_RESULT" | translate }}
+                  {{ "GENERAL_INFORMATION.VACCINATION.NO_RESULT" | translate }}
                 </li>
               </ng-template>
             </ul>

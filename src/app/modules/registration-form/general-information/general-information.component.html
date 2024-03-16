@@ -2,7 +2,7 @@
 
   <!-- title -->
   <h3 class="text-dark font-weight-bold mb-10">
-    General Information
+    {{"GENERAL_INFORMATION.PAGE_TITLE" | translate}}
   </h3>
 
 
@@ -10,7 +10,7 @@
   <div class="my-2">
 
     <h4 class="text-dark font-weight-bold mb-4">
-      Visa
+      {{"GENERAL_INFORMATION.VISA.TITLE" | translate}}
     </h4>
 
     <p class="text-muted mb-4">
@@ -26,17 +26,17 @@
   <div class="my-2">
 
     <h4 class="text-dark font-weight-bold mb-4">
-      Vaccinations
+      {{"GENERAL_INFORMATION.VACCINATION.TITLE" | translate}}
     </h4>
 
     <ng-container *ngIf="vaccinations$ | async as vaccinations">
       <ul class="mb-4 list-group" *ngIf="vaccinations.length > 0; else noResults">
         <li *ngFor="let vaccination of vaccinations" class="list-group-item">
-          {{ vaccination.name }}{{ vaccination.required ? ' (required)' : '' }}
+          {{ vaccination.name }} {{ vaccination.required ? getTranslatedText("GENERAL_INFORMATION.VACCINATION.REQUIRED") : getTranslatedText("GENERAL_INFORMATION.VACCINATION.OPTIONAL") }}
         </li>
       </ul>
       <ng-template #noResults>
-        <p>Currently no results</p>
+        <p>{{"GENERAL_INFORMATION.VACCINATION.NO_RESULT" | translate}}</p>
       </ng-template>
     </ng-container>
 
@@ -49,7 +49,7 @@
   <div class="my-2">
 
     <h4 class="text-dark font-weight-bold mb-4">
-      National holidays
+      {{"GENERAL_INFORMATION.HOLIDAY.TITLE" | translate}}
     </h4>
 
     <ng-container *ngIf="holidays$ | async as holidays">
@@ -59,7 +59,7 @@
         </li>
       </ul>
       <ng-template #noResults>
-        <p>Currently no results</p>
+        <p>{{"GENERAL_INFORMATION.HOLIDAY.NO_RESULT" | translate}}</p>
       </ng-template>
     </ng-container>
     

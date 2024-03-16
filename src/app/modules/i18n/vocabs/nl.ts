@@ -822,7 +822,7 @@ export const locale = {
         LABEL: "Voer visuminformatie in",
         BUTTON: "Opslaan"
       },
-      VACCINATIONS: {
+      VACCINATION: {
         TITLE: "Vaccinaties",
         ADD_NEW: "Vaccinatie Toevoegen",
         NAME_LABEL: "Naam van Vaccinatie",

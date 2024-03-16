@@ -835,7 +835,7 @@ export const locale = {
         LABEL: "Enter visa information",
         BUTTON: "Save"
       },
-      VACCINATIONS: {
+      VACCINATION: {
         TITLE: "Vaccinations",
         ADD_NEW: "Add Vaccination",
         NAME_LABEL: "Vaccination Name",
