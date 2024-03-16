@@ -310,6 +310,10 @@ export const locale = {
           WEEKS_INFO:
             "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
+        MOTIVATION_LETTER: {
+          TITLE: 'Carta de motivación',
+          MOTIVATION: 'Rellene el campo con tu carta de motivación',
+        },
         INFO: {
           TITLE: "Info",
           OCCUPATION_VOLUNTEER: "Describe tu profesión",

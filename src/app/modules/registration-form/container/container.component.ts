@@ -207,6 +207,9 @@ export class ContainerComponent implements OnInit {
     dto.weeksOnline = Number(spanish.get("weeksOnline").value);
     dto.weeks = Number(spanish.get("weeks").value);
 
+    const motivationLetter = organizationalForm.get("motivationLetter") as FormGroup;
+    dto.motivationLetter = motivationLetter.get("motivationLetter").value;
+
     const info = organizationalForm.get("info") as FormGroup;
     dto.occupation = info.get("occupation").value;
     dto.tasks = info.get("tasks").value;

@@ -300,6 +300,10 @@ export const locale = {
           WEEKS_INFO:
             'Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 4 weken Spaanse les ter plaatse.',
         },
+        MOTIVATION_LETTER: {
+          TITLE: 'Motivatiebrief',
+          MOTIVATION: 'Vul je motivatiebrief in',
+        },
         INFO: {
           TITLE: 'Info',
           OCCUPATION_VOLUNTEER: 'Beschrijf je beroep',

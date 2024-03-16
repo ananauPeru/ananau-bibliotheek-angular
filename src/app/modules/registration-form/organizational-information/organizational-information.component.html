@@ -291,6 +291,43 @@
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>
+  <!-- motivation letter -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.TITLE" | translate }}
+    </h4>
+    <form [formGroup]="organizationalForm.controls.motivationLetter">
+      <div class="form-group row">
+        <label for="motivationLetter" class="col-3">{{
+      "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION" | translate
+    }}</label>
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="motivationLetter"
+            formControlName="motivationLetter"
+            rows="5"
+            required
+            (input)="adjustTextareaHeight($event)"
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.motivationLetter.get('motivationLetter')['errors'] &&
+              organizationalForm.controls.motivationLetter.get('motivationLetter').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.motivationLetter.get("motivationLetter")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>  
   <!-- info -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">

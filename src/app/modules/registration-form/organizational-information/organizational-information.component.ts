@@ -62,6 +62,9 @@ export class OrganizationalInformationComponent implements OnInit {
         weeksOnline: [this.initialData.weeksOnline],
         weeks: [this.initialData.weeks],
       }),
+      motivationLetter: this.fb.group({
+        motivationLetter: [this.initialData.motivationLetter, Validators.required],
+      }),
       info: this.fb.group({
         occupation: [this.initialData.occupation, Validators.required],
         tasks: [this.initialData.tasks, Validators.required],
@@ -133,4 +136,14 @@ export class OrganizationalInformationComponent implements OnInit {
       ContainerComponent.countFields(this.organizationalForm)
     );
   }
+
+  adjustTextareaHeight(event: any) {
+    const textarea = event.target;
+    const initialHeight = textarea.offsetHeight;
+    
+    textarea.style.height = 'auto';
+    
+    const newHeight = textarea.scrollHeight + 2;
+    textarea.style.height = (newHeight > initialHeight ? newHeight : initialHeight) + 'px';
+  } 
 }

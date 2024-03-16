@@ -44,6 +44,9 @@ export class RegistrationModel {
   weeksOnline: number;
   weeks: number;
 
+  // Motivation letter
+  motivationLetter: string;
+
   // Info
   occupation: string;
   tasks: string;

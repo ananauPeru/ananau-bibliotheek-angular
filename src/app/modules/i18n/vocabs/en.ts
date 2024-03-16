@@ -312,6 +312,10 @@ export const locale = {
           WEEKS_INFO:
             'If you do not yet speak a basic level of Spanish, we recommend you apply for 4 weeks of Spanish lessons on-site.',
         },
+        MOTIVATION_LETTER: {
+          TITLE: 'Motivation letter',
+          MOTIVATION: 'Fill in the field with your motivation letter',
+        },
         INFO: {
           TITLE: 'Info',
           OCCUPATION_VOLUNTEER: 'Describe your profession',
