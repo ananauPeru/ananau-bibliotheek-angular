@@ -52,18 +52,16 @@
       National holidays
     </h4>
 
-    <ul class="mb-4">
-      <li class="text-muted">Holiday name A</li>
-      <li class="text-muted">Holiday name B</li>
-      <li class="text-muted">Holiday name C</li>
-      <li class="text-muted">Holiday name D</li>
-      <li class="text-muted">Holiday name E</li>
-      <li class="text-muted">Holiday name F</li>
-      <li class="text-muted">Holiday name G</li>
-      <li class="text-muted">Holiday name H</li>
-      <li class="text-muted">Holiday name I</li>
-      <li class="text-muted">Holiday name J</li>
-    </ul>
+    <ng-container *ngIf="holidays$ | async as holidays">
+      <ul class="mb-4" *ngIf="holidays.length > 0; else noResults">
+        <li *ngFor="let holiday of holidays" class="text-muted">
+          {{ holiday.name }} {{ holiday.date | date: 'dd/MM/yyyy'}}
+        </li>
+      </ul>
+      <ng-template #noResults>
+        <p>Currently no results</p>
+      </ng-template>
+    </ng-container>
     
   </div>
 
