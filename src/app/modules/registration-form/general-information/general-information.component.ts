@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GeneralInformationService } from '../_services/general-information/general-information.service';
+import { GeneralInformationService } from '../../organization/_services/general-information/general-information.service';
 import { VaccinationModel } from '../_models/vaccination.model';
 import { Observable } from 'rxjs';
 

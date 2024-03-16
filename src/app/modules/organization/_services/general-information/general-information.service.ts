@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
-import { VaccinationModel } from '../../_models/vaccination.model';
-import { HolidayModel } from '../../_models/holiday.model';
+import { VaccinationModel } from '../../../registration-form/_models/vaccination.model';
+import { HolidayModel } from '../../../registration-form/_models/holiday.model';
 import { GeneralInformationHTTPService } from './general-information-http/general-information-http.service';
 
 @Injectable({

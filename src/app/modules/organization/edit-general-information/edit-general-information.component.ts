@@ -5,7 +5,7 @@ import {
   Validators,
   FormControl,
 } from "@angular/forms";
-import { GeneralInformationService } from "../../registration-form/_services/general-information/general-information.service";
+import { GeneralInformationService } from "../_services/general-information/general-information.service";
 import { Observable } from "rxjs";
 import { VaccinationModel } from "../../registration-form/_models/vaccination.model";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
