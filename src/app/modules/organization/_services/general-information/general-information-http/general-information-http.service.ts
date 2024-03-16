@@ -3,8 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { VaccinationModel } from "../../../../registration-form/_models/vaccination.model";
-import { HolidayModel } from "../../../../registration-form/_models/holiday.model";
+import { VaccinationModel } from "../../../_models/vaccination.model";
+import { HolidayModel } from "../../../_models/holiday.model";
 
 const API_GENERAL_INFORMATION_URL = `${environment.apiUrl}`;
 

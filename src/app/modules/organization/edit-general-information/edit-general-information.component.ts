@@ -7,10 +7,10 @@ import {
 } from "@angular/forms";
 import { GeneralInformationService } from "../_services/general-information/general-information.service";
 import { Observable } from "rxjs";
-import { VaccinationModel } from "../../registration-form/_models/vaccination.model";
+import { VaccinationModel } from "../_models/vaccination.model";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { TranslateService } from "@ngx-translate/core";
-import { HolidayModel } from "../../registration-form/_models/holiday.model";
+import { HolidayModel } from "../_models/holiday.model";
 
 @Component({
   selector: "app-edit-general-information",
