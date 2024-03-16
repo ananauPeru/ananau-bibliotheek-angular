@@ -852,7 +852,8 @@ export const locale = {
         DATE_LABEL: "Holiday Date",
         BUTTON: "Add Holiday",
         NO_RESULT: "No holidays found",
-        DELETE_ALL: "Delete all Holidays"
+        DELETE_ALL: "Delete all Holidays",
+        DELETE_ALL_CONFIRMATION_MESSAGE: "Are you sure you want to remove all holidays? This action is irreversible."
       },
       TOASTS: {
         SUCCESS: "Success",

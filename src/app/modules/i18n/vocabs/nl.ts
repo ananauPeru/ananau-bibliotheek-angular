@@ -839,7 +839,8 @@ export const locale = {
         DATE_LABEL: "Datum van Feestdag",
         BUTTON: "Feestdag Toevoegen",
         NO_RESULT: "Geen feestdagen gevonden",
-        DELETE_ALL: "Alle Feestdagen Verwijderen"
+        DELETE_ALL: "Alle Feestdagen Verwijderen",
+        DELETE_ALL_CONFIRMATION_MESSAGE: "Weet u zeker dat u alle feestdagen wilt verwijderen? Deze actie is onomkeerbaar."
       },
       TOASTS: {
         SUCCESS: "Succes",

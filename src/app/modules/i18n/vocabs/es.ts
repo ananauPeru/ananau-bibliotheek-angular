@@ -856,7 +856,8 @@ export const locale = {
         DATE_LABEL: "Fecha del Día Festivo",
         BUTTON: "Agregar Día Festivo",
         NO_RESULT: "No se encontraron días festivos",
-        DELETE_ALL: "Eliminar todos los Días Festivos"
+        DELETE_ALL: "Eliminar todos los Días Festivos",
+        DELETE_ALL_CONFIRMATION_MESSAGE: "¿Estás seguro de que deseas eliminar todos los días festivos? Esta acción es irreversible."
       },
       TOASTS: {
         SUCCESS: "Éxito",

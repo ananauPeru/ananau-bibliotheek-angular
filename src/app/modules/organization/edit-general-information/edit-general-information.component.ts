@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +11,7 @@ import { VaccinationModel } from "../_models/vaccination.model";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { TranslateService } from "@ngx-translate/core";
 import { HolidayModel } from "../_models/holiday.model";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-edit-general-information",
@@ -26,12 +27,14 @@ export class EditGeneralInformationComponent implements OnInit {
   vaccinationForm: FormGroup;
   holidayForm: FormGroup;
 
+  @ViewChild('confirmationModal') confirmationModal: TemplateRef<any>;
+
   constructor(
     private formBuilder: FormBuilder,
     private generalInformationService: GeneralInformationService,
-    private cdr: ChangeDetectorRef,
     private toastr: ToastrUtil,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -223,6 +226,10 @@ export class EditGeneralInformationComponent implements OnInit {
           );
         }
       );
+  }
+
+  openConfirmationModal() {
+    this.modalService.open(this.confirmationModal, { centered: true });
   }
 
   /**

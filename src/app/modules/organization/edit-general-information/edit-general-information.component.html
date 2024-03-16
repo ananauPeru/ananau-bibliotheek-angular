@@ -274,13 +274,32 @@
               <div class="mt-4" *ngIf="holidays.length > 0">
                 <button
                   class="btn btn-danger btn-lg"
-                  (click)="removeHolidays()"
+                  (click)="openConfirmationModal()"
                 >
                   <i class="fas fa-trash mr-2"></i>
                   {{ "GENERAL_INFORMATION.HOLIDAY.DELETE_ALL" | translate }}
                 </button>
               </div>
             </ng-container>
+
+            <!-- Confirmation Modal -->
+            <ng-template #confirmationModal let-modal>
+              <div class="modal-header">
+                <h5 class="modal-title">{{ "GENERAL_INFORMATION.HOLIDAY.DELETE_ALL" | translate }}</h5>
+                <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {{ "GENERAL_INFORMATION.HOLIDAY.DELETE_ALL_CONFIRMATION_MESSAGE" | translate }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">{{ "BUTTONS.CANCEL" | translate }}</button>
+                <button type="button" class="btn btn-danger" (click)="removeHolidays(); modal.close()">{{ "BUTTONS.CONFIRM" | translate }}</button>
+              </div>
+            </ng-template>
+
+
           </ul>
         </div>
       </div>
