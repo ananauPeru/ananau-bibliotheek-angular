@@ -16,11 +16,11 @@ export class GeneralInformationHTTPService {
 
   // Visa requests
 
-  getVisaInformation$(): Observable<string> {
+  getVisaInformation$(): Observable<{ visaId: number; description: string; createdAt: string; updatedAt: string }> {
     return this.http
-      .get(`${API_GENERAL_INFORMATION_URL}/visa`, {
-        responseType: "text",
-      })
+      .get<{ visaId: number; description: string; createdAt: string; updatedAt: string }>(
+        `${API_GENERAL_INFORMATION_URL}/visa`
+      )
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -33,14 +33,9 @@ export class GeneralInformationHTTPService {
       );
   }
 
-  postVisaInformation$(visaData: string): Observable<any> {
+  postVisaInformation$(visaDescription: {description: string}): Observable<any> {
     return this.http
-      .post(`${API_GENERAL_INFORMATION_URL}/visa`, visaData, {
-        responseType: "text",
-        headers: {
-          "Content-Type": "text/plain",
-        },
-      })
+      .post(`${API_GENERAL_INFORMATION_URL}/visa`, visaDescription)
       .pipe(
         catchError((error) => {
           if (error.status === 401) {
