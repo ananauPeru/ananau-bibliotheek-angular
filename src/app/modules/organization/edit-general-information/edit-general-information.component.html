@@ -141,39 +141,38 @@
               {{ "GENERAL_INFORMATION.VACCINATIONS.TITLE" | translate }}
             </h5>
             <ul class="list-group">
-              <ng-container
-                *ngIf="
-                  vaccinations$ | async as vaccinations;
-                  else noVaccinationResults
-                "
-              >
-                <li
-                  class="list-group-item"
-                  *ngFor="let vaccination of vaccinations"
+              <ng-container *ngIf="vaccinations$ | async as vaccinations">
+                <ng-container
+                  *ngIf="vaccinations.length > 0; else noVaccinationResults"
                 >
-                  <div
-                    class="d-flex justify-content-between align-items-center"
+                  <li
+                    class="list-group-item"
+                    *ngFor="let vaccination of vaccinations"
                   >
-                    <span
-                      >{{ vaccination.name }} -
-                      {{
-                        vaccination.required
-                          ? getTranslatedText(
-                              "GENERAL_INFORMATION.VACCINATIONS.REQUIRED"
-                            )
-                          : getTranslatedText(
-                              "GENERAL_INFORMATION.VACCINATIONS.OPTIONAL"
-                            )
-                      }}</span
+                    <div
+                      class="d-flex justify-content-between align-items-center"
                     >
-                    <button
-                      class="btn btn-sm btn-icon btn-danger"
-                      (click)="removeVaccination(vaccination)"
-                    >
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </div>
-                </li>
+                      <span
+                        >{{ vaccination.name }} -
+                        {{
+                          vaccination.required
+                            ? getTranslatedText(
+                                "GENERAL_INFORMATION.VACCINATIONS.REQUIRED"
+                              )
+                            : getTranslatedText(
+                                "GENERAL_INFORMATION.VACCINATIONS.OPTIONAL"
+                              )
+                        }}</span
+                      >
+                      <button
+                        class="btn btn-sm btn-icon btn-danger"
+                        (click)="removeVaccination(vaccination)"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </li>
+                </ng-container>
               </ng-container>
 
               <ng-template #noVaccinationResults>
