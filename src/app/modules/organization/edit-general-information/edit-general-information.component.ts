@@ -203,6 +203,28 @@ export class EditGeneralInformationComponent implements OnInit {
       );
   }
 
+  removeHolidays() {
+    this.generalInformationService
+      .removeHolidays()
+      .subscribe(
+        () => {
+          this.generalInformationService.refreshHolidayInformation();
+
+          this.toastr.showSuccess(
+            this.t_translate("HOLIDAY.DELETE_ALL_SUCCESS"),
+            this.t_translate("SUCCESS")
+          );
+        },
+        (error) => {
+          console.error("Error removing holidays:", error);
+          this.toastr.showError(
+            this.t_translate("HOLIDAY.DELETE_ERROR"),
+            this.t_translate("ERROR")
+          );
+        }
+      );
+  }
+
   /**
    * Saves the new visa information.
    */

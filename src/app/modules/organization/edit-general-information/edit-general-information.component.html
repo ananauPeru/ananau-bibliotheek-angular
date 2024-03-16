@@ -240,35 +240,34 @@
           {{ "GENERAL_INFORMATION.HOLIDAY.TITLE" | translate }}
         </h5>
         <ul class="list-group">
-          <ng-container
-            *ngIf="holidays$ | async as holiday; else noHolidayResults"
-          >
-            <li
-              class="list-group-item"
-              *ngFor="let holiday of holiday"
-            >
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <span
-                  >{{ holiday.name }} -
-                  {{ holiday.date | date: 'dd/MM/yyyy' }}</span
-                >
-                <button
-                  class="btn btn-sm btn-icon btn-danger"
-                  (click)="removeHoliday(holiday)"
-                >
-                  <i class="fas fa-trash"></i>
-                </button>
-              </div>
-            </li>
+          <ng-container *ngIf="holidays$ | async as holidays">
+            <ng-container *ngIf="holidays.length > 0; else noHolidayResults">
+              <li class="list-group-item" *ngFor="let holiday of holidays">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>{{ holiday.name }} - {{ holiday.date | date: 'dd/MM/yyyy' }}</span>
+                  <button class="btn btn-sm btn-icon btn-danger" (click)="removeHoliday(holiday)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </li>
+            </ng-container>
           </ng-container>
-
+          
           <ng-template #noHolidayResults>
             <li class="list-group-item">
               {{ "GENERAL_INFORMATION.HOLIDAY.NO_RESULT" | translate }}
             </li>
           </ng-template>
+
+          <!-- Remove All button -->
+    <ng-container *ngIf="holidays$ | async as holidays">
+      <div class="mt-4" *ngIf="holidays.length > 0">
+        <button class="btn btn-danger btn-lg" (click)="removeHolidays()">
+          <i class="fas fa-trash mr-2"></i>
+          {{ "GENERAL_INFORMATION.HOLIDAY.DELETE_ALL" | translate }}
+        </button>
+      </div>
+    </ng-container>
         </ul>
       </div>
     </div>
