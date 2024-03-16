@@ -19,10 +19,11 @@ import { HolidayModel } from "../_models/holiday.model";
 })
 export class EditGeneralInformationComponent implements OnInit {
   visaInformation$: Observable<string>;
-  visaInformationForm: FormGroup;
   vaccinations$: Observable<VaccinationModel[]>;
-  vaccinationForm: FormGroup;
   holidays$: Observable<HolidayModel[]>;
+
+  visaInformationForm: FormGroup;
+  vaccinationForm: FormGroup;
   holidayForm: FormGroup;
 
   constructor(
@@ -35,9 +36,9 @@ export class EditGeneralInformationComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.fetchVaccinations();
+    this.fetchHolidays();
     this.getVisaInformation();
-    this.getAllVaccinations();
-    this.getAllHolidays();
   }
 
   /**
@@ -60,35 +61,26 @@ export class EditGeneralInformationComponent implements OnInit {
   }
 
   /**
-   * Gets the visa information, and loads it to the UI.
+   * Fetches all vaccinations from the server.
+   */
+  private fetchVaccinations() {
+    this.vaccinations$ = this.generalInformationService.getVaccinations();
+  }
+
+  /**
+   * Fetches all holidays from the server.
+   */
+  private fetchHolidays() {
+    this.holidays$ = this.generalInformationService.getHolidays();
+  }
+
+  /**
+   * Fetches the visa information from the server.
    */
   private getVisaInformation() {
-    this.visaInformation$ =
-      this.generalInformationService.getVisaInformation$();
-    this.visaInformation$.subscribe(
-      (visaInfo) => {
-        this.visaInformationForm.patchValue({ visaInformation: visaInfo });
-      },
-      (error) => {
-        console.error("Error retrieving visa information:", error);
-      }
-    );
+    this.visaInformation$ = this.generalInformationService.getVisaInformation();
   }
 
-  /**
-   * Gets the vaccinations, and loads them to the UI.
-   */
-  private getAllVaccinations() {
-    this.vaccinations$ =
-      this.generalInformationService.getAllVaccinationInformation$();
-  }
-
-  /**
-   * Gets the holidays, and loads them to the UI.
-   */
-  private getAllHolidays() {
-    this.holidays$ = this.generalInformationService.getAllHolidayInformation$();
-  }
 
   /**
    * Gets an error message for a specific error.
@@ -110,13 +102,11 @@ export class EditGeneralInformationComponent implements OnInit {
     const vaccination: VaccinationModel = this.vaccinationForm.value;
     vaccination.required = vaccination.required ?? false; //when unchecking the checkbox, it sets it to null instead of false. Therefore we override it here
 
-    this.generalInformationService
-      .addVaccinationInformation$(vaccination)
+    this.generalInformationService.createVaccination(vaccination)
       .subscribe(
         (addedVaccination) => {
-          this.getAllVaccinations();
+          this.generalInformationService.refreshVaccinationInformation();
           this.vaccinationForm.reset();
-          this.cdr.detectChanges();
 
           this.toastr.showSuccess(
             this.t_translate("VACCINATION.CREATE_SUCCESS"),
@@ -134,6 +124,30 @@ export class EditGeneralInformationComponent implements OnInit {
       );
   }
 
+  /**
+   * Removes the given vaccination from the list.
+   * @param vaccination The vaccination to be removed.
+   */
+  removeVaccination(vaccination: VaccinationModel) {
+    this.generalInformationService
+      .removeVaccination(vaccination.id)
+      .subscribe(
+        () => {
+          this.generalInformationService.refreshVaccinationInformation();
+          this.toastr.showSuccess(
+            this.t_translate("VACCINATION.DELETE_SUCCESS"),
+            this.t_translate("SUCCESS")
+          );
+        },
+        (error) => {
+          console.error("Error removing vaccination:", error);
+          this.toastr.showError(
+            this.t_translate("VACCINATION.DELETE_ERROR"),
+            this.t_translate("ERROR")
+          );
+        }
+      );
+  }
 
   /**
    * Adds a new holiday to the list.
@@ -143,11 +157,10 @@ export class EditGeneralInformationComponent implements OnInit {
 
     const holiday: HolidayModel = this.holidayForm.value;
 
-    this.generalInformationService.addHolidayInformation$(holiday).subscribe(
+    this.generalInformationService.createHoliday(holiday).subscribe(
       (addedHoliday) => {
-        this.getAllHolidays();
+        this.generalInformationService.refreshHolidayInformation();
         this.holidayForm.reset();
-        this.cdr.detectChanges();
 
         this.toastr.showSuccess(
           this.t_translate("HOLIDAY.CREATE_SUCCESS"),
@@ -165,68 +178,15 @@ export class EditGeneralInformationComponent implements OnInit {
   }
 
   /**
-   * Saves the new visa information.
-   */
-  saveVisaInformation() {
-    if (!this.visaInformationForm.valid) return;
-
-    const visaData = this.visaInformationForm.value.visaInformation;
-    this.generalInformationService.postVisaInformation$(visaData).subscribe(
-      () => {
-        this.getVisaInformation();
-        this.toastr.showSuccess(
-          this.t_translate("VISA.UPDATE_SUCCESS"),
-          this.t_translate("SUCCESS")
-        );
-      },
-      (error) => {
-        console.error("Error updating visa information:", error);
-        this.toastr.showError(
-          this.t_translate("VISA.UPDATE_ERROR"),
-          this.t_translate("ERROR")
-        );
-      }
-    );
-  }
-
-  /**
-   * Removes the given vaccination from the list.
-   * @param vaccination The vaccination to be removed.
-   */
-  removeVaccination(vaccination: VaccinationModel) {
-    this.generalInformationService
-      .deleteVaccinationInformation$(vaccination.id)
-      .subscribe(
-        () => {
-          this.getAllVaccinations();
-          this.cdr.detectChanges();
-
-          this.toastr.showSuccess(
-            this.t_translate("VACCINATION.DELETE_SUCCESS"),
-            this.t_translate("SUCCESS")
-          );
-        },
-        (error) => {
-          console.error("Error removing vaccination:", error);
-          this.toastr.showError(
-            this.t_translate("VACCINATION.DELETE_ERROR"),
-            this.t_translate("ERROR")
-          );
-        }
-      );
-  }
-
-  /**
    * Removes the given holiday from the list.
    * @param holiday The holiday to be removed.
    */
   removeHoliday(holiday: HolidayModel) {
     this.generalInformationService
-      .deleteVaccinationInformation$(holiday.id)
+      .removeHoliday(holiday.id)
       .subscribe(
         () => {
-          this.getAllHolidays();
-          this.cdr.detectChanges();
+          this.generalInformationService.refreshHolidayInformation();
 
           this.toastr.showSuccess(
             this.t_translate("HOLIDAY.DELETE_SUCCESS"),
@@ -242,6 +202,34 @@ export class EditGeneralInformationComponent implements OnInit {
         }
       );
   }
+
+  /**
+   * Saves the new visa information.
+   */
+  saveVisaInformation() {
+    if (!this.visaInformationForm.valid) return;
+
+    const visaData = this.visaInformationForm.value.visaInformation;
+    this.generalInformationService.updateVisaInformation(visaData).subscribe(
+      () => {
+        this.generalInformationService.refreshVisaInformation();
+
+        this.toastr.showSuccess(
+          this.t_translate("VISA.UPDATE_SUCCESS"),
+          this.t_translate("SUCCESS")
+        );
+      },
+      (error) => {
+        console.error("Error updating visa information:", error);
+        this.toastr.showError(
+          this.t_translate("VISA.UPDATE_ERROR"),
+          this.t_translate("ERROR")
+        );
+      }
+    );
+  }
+
+  
 
   /**
    * Translates the identifier.

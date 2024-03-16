@@ -11,16 +11,23 @@ import { Observable } from 'rxjs';
 export class GeneralInformationComponent implements OnInit {
 
   vaccinations$: Observable<VaccinationModel[]>;
-
+  visaInformation$: Observable<string>;
 
   constructor(private generalInformationService: GeneralInformationService) { }
 
   ngOnInit() {
     this.fetchVaccinations();
+    this.fetchVisaInformation();
   }
   
   private fetchVaccinations() {
-    this.vaccinations$ = this.generalInformationService.getAllVaccinationInformation$();
+    this.vaccinations$ = this.generalInformationService.getVaccinations();
   }
+
+  private fetchVisaInformation() {
+    this.visaInformation$ = this.generalInformationService.getVisaInformation();
+  }
+
+
 
 }

@@ -44,7 +44,7 @@
               rows="5"
               required
               (input)="adjustTextareaHeight($event)"
-              [value]="visaInformation$"
+              [value]="visaInformation$ | async"
             >
             </textarea>
             <div

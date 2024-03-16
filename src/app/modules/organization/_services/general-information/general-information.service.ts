@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from "rxjs/operators";
 import { VaccinationModel } from '../../_models/vaccination.model';
 import { HolidayModel } from '../../_models/holiday.model';
@@ -10,53 +10,131 @@ import { GeneralInformationHTTPService } from './general-information-http/genera
 })
 export class GeneralInformationService {
 
+  private visaInformation: BehaviorSubject<string> = new BehaviorSubject<string>("");
+  private vaccinationInformation: BehaviorSubject<VaccinationModel[]> = new BehaviorSubject<VaccinationModel[]>([]);
+  private holidayInformation: BehaviorSubject<HolidayModel[]> = new BehaviorSubject<HolidayModel[]>([]);
+
   constructor(
     private generalInformationHttpService: GeneralInformationHTTPService
-  ) {}
+  ) {
+    this.loadInitialData();
+  }
 
-  getVisaInformation$(): Observable<string> {
-    return this.generalInformationHttpService.getVisaInformation$().pipe(
-      map((response) => response.description)
+  /**
+   * Load initial data from the server
+   */
+  private loadInitialData() {
+    this.refreshVisaInformation();
+    this.refreshVaccinationInformation();
+    this.refreshHolidayInformation();
+  }
+
+  /**
+   * Refresh visa information from the server
+   */
+  public refreshVisaInformation() {
+    this.generalInformationHttpService.getVisaInformation$().subscribe(
+      (res) => {
+        this.visaInformation.next(res.description);
+      },
+      (err) => console.error("Error refreshing visa information", err)
     );
   }
 
-  postVisaInformation$(visaData: string): Observable<any> {
+  /**
+   * Refresh vaccination information from the server
+   */
+  public refreshVaccinationInformation() {
+    this.generalInformationHttpService.getAllVaccinationInformation$().subscribe(
+      (res) => {
+        this.vaccinationInformation.next(res);
+      },
+      (err) => console.error("Error refreshing vaccination information", err)
+    );
+  }
+
+  /**
+   * Refresh holiday information from the server
+   */
+  public refreshHolidayInformation() {
+    this.generalInformationHttpService.getAllHolidayInformation$().subscribe(
+      (res) => {
+        this.holidayInformation.next(res);
+      },
+      (err) => console.error("Error refreshing holiday information", err)
+    );
+  }
+
+  /**
+   * Get visa information
+   * @returns Visa information
+   */
+  public getVisaInformation(): Observable<string> {
+    return this.visaInformation.asObservable();
+  }
+
+  /**
+   * Post visa information
+   * @param visaData Visa information
+   */
+  public updateVisaInformation(visaData: string): Observable<any> {
+
+    //TODO: Change post to put
     return this.generalInformationHttpService.postVisaInformation$({description: visaData});
   }
 
-  getAllVaccinationInformation$(): Observable<VaccinationModel[]> {
-    return this.generalInformationHttpService.getAllVaccinationInformation$();
+  /**
+   * Get all vaccinations
+   * @returns All vaccinations
+   */
+  public getVaccinations(): Observable<VaccinationModel[]> {
+    return this.vaccinationInformation.asObservable();
   }
 
-  addVaccinationInformation$(vaccination: VaccinationModel): Observable<VaccinationModel> {
+  /**
+   * Create vaccination
+   * @param vaccination Vaccination
+   */
+  public createVaccination(vaccination: VaccinationModel): Observable<VaccinationModel> {
     return this.generalInformationHttpService.postVaccinationInformation$(vaccination);
   }
 
-  deleteVaccinationInformation$(vaccinationId: number): Observable<any> {
+  /**
+   * Remove vaccination
+   * @param vaccinationId Vaccination ID
+   */
+  public removeVaccination(vaccinationId: number): Observable<any> {
     return this.generalInformationHttpService.deleteVaccinationInformation$(vaccinationId);
   }
 
-  getAllHolidayInformation$(): Observable<HolidayModel[]> {
-    return this.generalInformationHttpService.getAllHolidayInformation$();
+  /**
+   * Get all holiday information
+   * @returns All holiday information
+   */
+  public getHolidays(): Observable<HolidayModel[]> {
+    return this.holidayInformation.asObservable();
   }
 
-  getHolidayInformationById$(holidayId: number): Observable<HolidayModel> {
-    return this.generalInformationHttpService.getHolidayInformationById$(holidayId);
-  }
-
-  addHolidayInformation$(holiday: HolidayModel): Observable<HolidayModel> {
+  /**
+   * Create holiday
+   * @param holiday Holiday
+   */
+  public createHoliday(holiday: HolidayModel): Observable<HolidayModel> {
     return this.generalInformationHttpService.postHolidayInformation$(holiday);
   }
 
-  updateHolidayInformation$(holidayId: number, updatedHoliday: HolidayModel): Observable<HolidayModel> {
-    return this.generalInformationHttpService.putHolidayInformation$(holidayId, updatedHoliday);
-  }
-
-  deleteHolidayInformation$(holidayId: number): Observable<any> {
+  /**
+   * Remove holiday
+   * @param holidayId Holiday ID
+   */
+  public removeHoliday(holidayId: number): Observable<any> {
     return this.generalInformationHttpService.deleteHolidayInformation$(holidayId);
   }
 
-  deleteAllHolidayInformation$(): Observable<any> {
+  /**
+   * Remove all holidays
+   */
+  public removeHolidays(): Observable<any> {
     return this.generalInformationHttpService.deleteAllHolidayInformation$();
   }
 
