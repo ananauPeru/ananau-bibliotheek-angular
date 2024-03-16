@@ -813,5 +813,34 @@ export const locale = {
         },
       },
     },
+
+    GENERAL_INFORMATION: {
+      PAGE_TITLE: 'Algemene Informatie',
+      VISA: {
+        TITLE: 'Visum',
+        LABEL: 'Voer visuminformatie in',
+        BUTTON: 'Opslaan'
+      },
+      VACCINATIONS: {
+        TITLE: 'Vaccinaties',
+        ADD_NEW: 'Vaccinatie Toevoegen',
+        NAME_LABEL: 'Naam van de Vaccinatie',
+        REQUIRED_LABEL: 'Is vaccinatie verplicht?',
+        BUTTON: 'Vaccinatie Toevoegen',
+        REQUIRED: 'Verplicht',
+        OPTIONAL: 'Optioneel',
+        NO_RESULT: 'Er zijn nog geen vaccinaties toegevoegd.'
+      },
+      TOASTS: {
+        SUCCESS: 'Succes',
+        ERROR: 'Fout',
+        VACCINATION: {
+          CREATE_SUCCESS: 'Nieuwe vaccinatie succesvol toegevoegd.',
+          CREATE_ERROR: 'Er is iets misgegaan bij het toevoegen van een nieuwe vaccinatie. Probeer het later opnieuw.',
+          DELETE_SUCCESS: 'Vaccinatie succesvol verwijderd.',
+          DELETE_ERROR: 'Er is iets misgegaan bij het verwijderen van een vaccinatie. Probeer het later opnieuw.'
+        }
+      }
+    }
   },
 }

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { GeneralInformationService } from '../../registration-form/_services/general-information/general-information.service';
 import { Observable } from 'rxjs';
 import { VaccinationModel } from '../../registration-form/_models/vaccination.model';
+import { ToastrUtil } from 'src/app/_utils/toastr_util';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-general-information',
@@ -18,7 +20,9 @@ export class EditGeneralInformationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private generalInformationService: GeneralInformationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrUtil,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -43,6 +47,7 @@ export class EditGeneralInformationComponent implements OnInit {
     // this.visaInformation$.subscribe(
     //   (visaInfo) => {
     //     this.visaInformationForm.patchValue({ visaInformation: visaInfo });
+    //     this.cdr.detectChanges();
     //   },
     //   (error) => {
     //     console.error('Error retrieving visa information:', error);
@@ -70,9 +75,17 @@ export class EditGeneralInformationComponent implements OnInit {
           this.vaccinations$ = this.generalInformationService.getAllVaccinationInformation$();
           this.vaccinationForm.reset();
           this.cdr.detectChanges();
+          this.toastr.showSuccess(
+            this.translate.instant("GENERAL_INFORMATION.TOASTS.VACCINATION.CREATE_SUCCESS"),
+            this.translate.instant("GENERAL_INFORMATION.TOASTS.SUCCESS")
+          );
         },
         (error) => {
           console.error('Error adding vaccination:', error);
+          this.toastr.showError(
+            this.translate.instant("GENERAL_INFORMATION.TOASTS.VACCINATION.CREATE_ERROR"),
+            this.translate.instant("GENERAL_INFORMATION.TOASTS.ERROR")
+          )
         }
       );
     }
@@ -83,9 +96,17 @@ export class EditGeneralInformationComponent implements OnInit {
       () => {
         this.vaccinations$ = this.generalInformationService.getAllVaccinationInformation$();
         this.cdr.detectChanges();
+        this.toastr.showSuccess(
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.VACCINATION.DELETE_SUCCESS"),
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.SUCCESS")
+        );
       },
       (error) => {
         console.error('Error removing vaccination:', error);
+        this.toastr.showError(
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.VACCINATION.DELETE_ERROR"),
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.ERROR")
+        )
       }
     );
   }
@@ -102,6 +123,10 @@ export class EditGeneralInformationComponent implements OnInit {
     //     }
     //   );
     // }
+  }
+
+  getTranslatedText(input: string) : string {
+    return this.translate.instant(input);
   }
 
   adjustTextareaHeight(event: any) {

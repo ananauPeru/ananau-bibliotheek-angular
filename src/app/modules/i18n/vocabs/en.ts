@@ -826,5 +826,36 @@ export const locale = {
         },
       },
     },
+
+    GENERAL_INFORMATION: {
+      PAGE_TITLE: 'General Information',
+      VISA: {
+        TITLE: 'Visa',
+        LABEL: 'Enter visa information',
+        BUTTON: 'Save'
+      },
+      VACCINATIONS: {
+        TITLE: 'Vaccinations',
+        ADD_NEW: 'Add Vaccination',
+        NAME_LABEL: 'Vaccination Name',
+        REQUIRED_LABEL: 'Is vaccine required?',
+        BUTTON: 'Add Vaccine',
+        REQUIRED: 'Required',
+        OPTIONAL: 'Optional',
+        NO_RESULT: 'No vaccinations added yet.'
+      },
+      TOASTS: {
+        SUCCESS: 'Success',
+        ERROR: 'Error',
+        VACCINATION: {
+          CREATE_SUCCESS: 'Successfully added a new vaccination.',
+          CREATE_ERROR: 'Something went wrong while adding a new vaccination. Please try again later.',
+          DELETE_SUCCESS:'Successfully deleted a vaccination.',
+          DELETE_ERROR: 'Something went wrong while deleting a vaccination. Please try again later.',
+        }
+        
+      },
+
+    }
   },
 }

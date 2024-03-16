@@ -830,5 +830,34 @@ export const locale = {
             'Ocurrió un error al actualizar las fechas. Por favor, inténtalo de nuevo más tarde.'
       },
     },
+
+    GENERAL_INFORMATION: {
+      PAGE_TITLE: 'Información General',
+      VISA: {
+        TITLE: 'Visa',
+        LABEL: 'Ingrese información de visa',
+        BUTTON: 'Guardar'
+      },
+      VACCINATIONS: {
+        TITLE: 'Vacunas',
+        ADD_NEW: 'Añadir Vacuna',
+        NAME_LABEL: 'Nombre de la Vacuna',
+        REQUIRED_LABEL: '¿Es requerida la vacuna?',
+        BUTTON: 'Agregar Vacuna',
+        REQUIRED: 'Requerida',
+        OPTIONAL: 'Opcional',
+        NO_RESULT: 'Aún no se han agregado vacunas.',
+      },
+      TOASTS: {
+        SUCCESS: 'Éxito',
+        ERROR: 'Error',
+        VACCINATION: {
+          CREATE_SUCCESS: 'Se agregó una nueva vacuna exitosamente.',
+          CREATE_ERROR: 'Algo salió mal al agregar una nueva vacuna. Por favor, inténtelo de nuevo más tarde.',
+          DELETE_SUCCESS: 'Se eliminó una vacuna exitosamente.',
+          DELETE_ERROR: 'Algo salió mal al eliminar una vacuna. Por favor, inténtelo de nuevo más tarde.'
+        }
+      }
+    }
   },
 };

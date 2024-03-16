@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-12 col-md-8 w-100">
             <h3 class="card-title font-weight-bolder text-dark">
-              General Information
+              {{ "GENERAL_INFORMATION.PAGE_TITLE" | translate }}
             </h3>
           </div>
         </div>
@@ -22,13 +22,18 @@
   <div class="card-body pt=2">
     <!-- visa information -->
     <div class="my-2">
-      <h4 class="text-dark font-weight-bold mb-4">Visa</h4>
+      <h4 class="text-dark font-weight-bold mb-4">
+        {{ "GENERAL_INFORMATION.VISA.TITLE" | translate }}
+      </h4>
 
-      <form [formGroup]="visaInformationForm" (ngSubmit)="saveVisaInformation()">
+      <form
+        [formGroup]="visaInformationForm"
+        (ngSubmit)="saveVisaInformation()"
+      >
         <div class="form-group row">
           <!-- Input label -->
           <label for="visa" class="col-12">
-            Enter visa information
+            {{ "GENERAL_INFORMATION.VISA.LABEL" | translate }}
           </label>
           <!-- Input textarea -->
           <div class="col-12">
@@ -50,7 +55,9 @@
               class="text-danger form-text"
             >
               {{
-                getErrorMessage(visaInformationForm.get('visaInformation')['errors'])
+                getErrorMessage(
+                  visaInformationForm.get("visaInformation")["errors"]
+                )
               }}
             </div>
             <!-- Input textarea -->
@@ -59,8 +66,12 @@
         <!-- Save button -->
         <div class="form-group row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-lg" [disabled]="!visaInformationForm.valid">
-              Save
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+              [disabled]="!visaInformationForm.valid"
+            >
+              {{ "GENERAL_INFORMATION.VISA.BUTTON" | translate }}
             </button>
           </div>
         </div>
@@ -71,15 +82,21 @@
       <!-- Seperator -->
 
       <div class="my-2">
-        <h4 class="text-dark font-weight-bold mb-4">Vaccinations</h4>
+        <h4 class="text-dark font-weight-bold mb-4">
+          {{ "GENERAL_INFORMATION.VACCINATIONS.TITLE" | translate }}
+        </h4>
 
         <div class="row">
           <div class="col-md-6 mb-8">
             <!-- Add new vaccination form -->
-            <h5 class="text-dark font-weight-bold mb-4">Add Vaccination</h5>
+            <h5 class="text-dark font-weight-bold mb-4">
+              {{ "GENERAL_INFORMATION.VACCINATIONS.ADD_NEW" | translate }}
+            </h5>
             <form [formGroup]="vaccinationForm" (ngSubmit)="addVaccination()">
               <div class="form-group">
-                <label for="vaccinationName">Vaccination Name</label>
+                <label for="vaccinationName">{{
+                  "GENERAL_INFORMATION.VACCINATIONS.NAME_LABEL" | translate
+                }}</label>
                 <input
                   type="text"
                   class="form-control form-control-lg form-control-solid"
@@ -99,8 +116,13 @@
                     id="vaccinationRequired"
                     formControlName="required"
                   />
-                  <label class="form-check-label mb-0" for="vaccinationRequired"
-                    >Is vaccine required</label
+                  <label
+                    class="form-check-label mb-0"
+                    for="vaccinationRequired"
+                    >{{
+                      "GENERAL_INFORMATION.VACCINATIONS.REQUIRED_LABEL"
+                        | translate
+                    }}</label
                   >
                 </div>
               </div>
@@ -109,32 +131,53 @@
                 class="btn btn-primary btn-lg"
                 [disabled]="!vaccinationForm.valid"
               >
-                Add Vaccine
+                {{ "GENERAL_INFORMATION.VACCINATIONS.BUTTON" | translate }}
               </button>
             </form>
           </div>
           <div class="col-md-6">
             <!-- List of vaccinations -->
-            <h5 class="text-dark font-weight-bold mb-14">Vaccinations</h5>
+            <h5 class="text-dark font-weight-bold mb-14">
+              {{ "GENERAL_INFORMATION.VACCINATIONS.TITLE" | translate }}
+            </h5>
             <ul class="list-group">
-
-              <ng-container *ngIf="vaccinations$ | async as vaccinations; else noResults">
-                <li class="list-group-item" *ngFor="let vaccination of vaccinations">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <span>{{ vaccination.name }} - {{ vaccination.required ? "Required" : "Optional" }}</span>
-                    <button class="btn btn-sm btn-icon btn-danger" (click)="removeVaccination(vaccination)">
+              <ng-container
+                *ngIf="vaccinations$ | async as vaccinations; else noResults"
+              >
+                <li
+                  class="list-group-item"
+                  *ngFor="let vaccination of vaccinations"
+                >
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span
+                      >{{ vaccination.name }} -
+                      {{
+                        vaccination.required
+                          ? getTranslatedText(
+                              "GENERAL_INFORMATION.VACCINATIONS.REQUIRED"
+                            )
+                          : getTranslatedText(
+                              "GENERAL_INFORMATION.VACCINATIONS.OPTIONAL"
+                            )
+                      }}</span
+                    >
+                    <button
+                      class="btn btn-sm btn-icon btn-danger"
+                      (click)="removeVaccination(vaccination)"
+                    >
                       <i class="fas fa-trash"></i>
                     </button>
                   </div>
                 </li>
               </ng-container>
-              
+
               <ng-template #noResults>
                 <li class="list-group-item">
-                  No vaccinations added yet.
+                  {{ "GENERAL_INFORMATION.VACCINATIONS.NO_RESULT" | translate }}
                 </li>
               </ng-template>
-
             </ul>
           </div>
         </div>

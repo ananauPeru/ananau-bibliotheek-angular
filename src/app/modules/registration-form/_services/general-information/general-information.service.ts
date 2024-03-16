@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { VaccinationModel } from '../../_models/vaccination.model';
 import { HolidayModel } from '../../_models/holiday.model';
 import { GeneralInformationHTTPService } from './general-information-http/general-information-http.service';
+import { VisaModel } from '../../_models/visa.model';
 
 @Injectable({
   providedIn: 'root'
