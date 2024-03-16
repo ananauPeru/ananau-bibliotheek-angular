@@ -355,6 +355,18 @@
       <!-- begin::1 Level -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
         *ngIf="AuthUtil.permitted(['SuperAdmin', 'Admin'])">
+        <a class="menu-link" routerLink="/organization/general-information" routerLinkActive="active"
+          *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
+          <span [inlineSVG]="'./assets/media/svg/icons/Code/Info-circle.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ "MENU.ORGANIZATION.GENERAL_INFORMATION" | translate }}
+          </span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+      <!-- begin::1 Level -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
+        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Admin'])">
         <a class="menu-link" routerLink="/organization/calendar" routerLinkActive="active"
           *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
           <span [inlineSVG]="'./assets/media/svg/icons/Code/Time-schedule.svg'" cacheSVG="true"

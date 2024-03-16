@@ -15,6 +15,7 @@ import { RegistrationFormRoutingModule } from "./registration-form-routing.modul
 import { HttpClientModule } from "@angular/common/http";
 import { RegistrationFormComponent } from "./registration-form.component";
 import { NgxDropzoneModule } from "ngx-dropzone";
+import { GeneralInformationComponent } from "./general-information/general-information.component";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NgxDropzoneModule } from "ngx-dropzone";
     OrganizationalInformationComponent,
     ScanUploadsComponent,
     QuestionsComponent,
+    GeneralInformationComponent,
     MarkAsteriskDirective,
   ],
   imports: [

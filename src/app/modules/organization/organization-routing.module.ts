@@ -7,6 +7,7 @@ import { RegistrationDetailsComponent } from "./registration-details/registratio
 import { RegistrationsOverviewComponent } from "./registrations-overview/registrations-overview.component";
 import { RolesComponent } from "./roles/roles.component";
 import { RegistrationRole } from "./_models/registration-role";
+import { EditGeneralInformationComponent } from "./edit-general-information/edit-general-information.component";
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
             },
           },
         ],
+      },
+      {
+        path: "general-information",
+        component: EditGeneralInformationComponent
       },
       { path: "", redirectTo: "", pathMatch: "full" },
       { path: "**", redirectTo: "", pathMatch: "full" },

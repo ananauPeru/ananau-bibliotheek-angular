@@ -82,6 +82,33 @@
             ></a
           >
         </li>
+
+        
+        <!-- GENERAL INFORMATION START -->
+
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_5">
+            <!-- <span class="nav-icon"><i class="fa fa-earth-americas"></i></span> -->
+            <span class="nav-icon"><i class="fa fa-info-circle"></i></span>
+            <span class="nav-text">{{"GENERAL_INFORMATION.PAGE_TITLE" | translate}}</span>
+            <span
+              *ngIf="
+                questionsFormProgress.required -
+                  questionsFormProgress.requiredAndValid >
+                0
+              "
+              class="label label-rounded ml-2"
+              >{{
+                questionsFormProgress.required -
+                  questionsFormProgress.requiredAndValid
+              }}</span
+            ></a
+          >
+        </li>
+
+        <!-- GENERAL INFORMATION END -->
+
+
       </ul>
     </div>
     <div class="card-toolbar flex-grow-1">
@@ -225,6 +252,26 @@
             <div class="col-xl-2"></div>
           </div>
         </div>
+        
+        <!-- GENERAL INFORMATION BODY START -->
+
+        <div
+          class="tab-pane fade"
+          id="kt_tab_pane_7_5"
+          role="tabpanel"
+          aria-labelledby="kt_tab_pane_7_5"
+        >
+          <div class="row">
+            <div class="col-xl-2"></div>
+            <div class="col-xl-8">
+              <app-general-information></app-general-information>
+            </div>
+            <div class="col-xl-2"></div>
+          </div>
+        </div>
+
+        <!-- GENERAL INFORMATION BODY END -->
+
       </div>
     </div>
   </div>
