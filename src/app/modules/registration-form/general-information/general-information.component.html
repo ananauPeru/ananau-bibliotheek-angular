@@ -30,8 +30,8 @@
     </h4>
 
     <ng-container *ngIf="vaccinations$ | async as vaccinations">
-      <ul class="mb-4" *ngIf="vaccinations.length > 0; else noResults">
-        <li *ngFor="let vaccination of vaccinations" class="text-muted">
+      <ul class="mb-4 list-group" *ngIf="vaccinations.length > 0; else noResults">
+        <li *ngFor="let vaccination of vaccinations" class="list-group-item">
           {{ vaccination.name }}{{ vaccination.required ? ' (required)' : '' }}
         </li>
       </ul>
@@ -53,8 +53,8 @@
     </h4>
 
     <ng-container *ngIf="holidays$ | async as holidays">
-      <ul class="mb-4" *ngIf="holidays.length > 0; else noResults">
-        <li *ngFor="let holiday of holidays" class="text-muted">
+      <ul class="mb-4 list-group" *ngIf="holidays.length > 0; else noResults">
+        <li *ngFor="let holiday of holidays" class="list-group-item">
           {{ holiday.name }} {{ holiday.date | date: 'dd/MM/yyyy'}}
         </li>
       </ul>
