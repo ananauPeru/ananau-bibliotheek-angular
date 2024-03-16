@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { VaccinationModel } from '../../registration-form/_models/vaccination.model';
 import { ToastrUtil } from 'src/app/_utils/toastr_util';
 import { TranslateService } from '@ngx-translate/core';
+import { HolidayModel } from '../../registration-form/_models/holiday.model';
 
 @Component({
   selector: 'app-edit-general-information',
@@ -16,6 +17,8 @@ export class EditGeneralInformationComponent implements OnInit {
   visaInformationForm: FormGroup;
   vaccinations$: Observable<VaccinationModel[]>;
   vaccinationForm: FormGroup;
+  holidays$: Observable<HolidayModel[]>;
+  holidayForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +32,7 @@ export class EditGeneralInformationComponent implements OnInit {
     this.initForm();
     this.getVisaInformation();
     this.getAllVaccinations();
+    this.getAllHolidays();
   }
 
   initForm() {
@@ -40,7 +44,15 @@ export class EditGeneralInformationComponent implements OnInit {
       name: new FormControl('', Validators.required),
       required: new FormControl(false)
     });
+
+    this.holidayForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      date: new FormControl('', Validators.required),
+    });
   }
+
+
+  
 
   getVisaInformation() {
     // this.visaInformation$ = this.generalInformationService.getVisaInformation$();
@@ -59,6 +71,10 @@ export class EditGeneralInformationComponent implements OnInit {
     this.vaccinations$ = this.generalInformationService.getAllVaccinationInformation$();
   }
 
+  getAllHolidays() {
+    this.holidays$ = this.generalInformationService.getAllHolidayInformation$();
+  }
+
   getErrorMessage(errors: any) {
     if (errors.required) {
       return 'This field is required';
@@ -75,10 +91,12 @@ export class EditGeneralInformationComponent implements OnInit {
           this.vaccinations$ = this.generalInformationService.getAllVaccinationInformation$();
           this.vaccinationForm.reset();
           this.cdr.detectChanges();
+
           this.toastr.showSuccess(
             this.translate.instant("GENERAL_INFORMATION.TOASTS.VACCINATION.CREATE_SUCCESS"),
             this.translate.instant("GENERAL_INFORMATION.TOASTS.SUCCESS")
           );
+
         },
         (error) => {
           console.error('Error adding vaccination:', error);
@@ -89,6 +107,32 @@ export class EditGeneralInformationComponent implements OnInit {
         }
       );
     }
+  }
+
+  addHoliday() {
+    if(!this.holidayForm.valid) return;
+
+    const holiday: HolidayModel = this.holidayForm.value;
+
+    this.generalInformationService.addHolidayInformation$(holiday).subscribe(
+      (addedHoliday) => {
+        this.holidays$ = this.generalInformationService.getAllHolidayInformation$();
+        this.holidayForm.reset();
+        this.cdr.detectChanges();
+
+        this.toastr.showSuccess(
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.HOLIDAY.CREATE_SUCCESS"),
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.SUCCESS")
+        );
+      },
+      (error) => {
+        console.error('Error adding holiday:', error);
+        this.toastr.showError(
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.HOLIDAY.CREATE_ERROR"),
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.ERROR")
+        )
+      }
+    );
   }
 
   removeVaccination(vaccination: VaccinationModel) {
@@ -105,6 +149,27 @@ export class EditGeneralInformationComponent implements OnInit {
         console.error('Error removing vaccination:', error);
         this.toastr.showError(
           this.translate.instant("GENERAL_INFORMATION.TOASTS.VACCINATION.DELETE_ERROR"),
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.ERROR")
+        )
+      }
+    );
+  }
+
+  removeHoliday(holiday: HolidayModel) {
+    this.generalInformationService.deleteVaccinationInformation$(holiday.id).subscribe(
+      () => {
+        this.holidays$ = this.generalInformationService.getAllHolidayInformation$();
+        this.cdr.detectChanges();
+
+        this.toastr.showSuccess(
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.HOLIDAY.DELETE_SUCCESS"),
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.SUCCESS")
+        );
+      },
+      (error) => {
+        console.error('Error removing holiday:', error);
+        this.toastr.showError(
+          this.translate.instant("GENERAL_INFORMATION.TOASTS.HOLIDAY.DELETE_ERROR"),
           this.translate.instant("GENERAL_INFORMATION.TOASTS.ERROR")
         )
       }
