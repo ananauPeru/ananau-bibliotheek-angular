@@ -153,7 +153,7 @@ export class OrganizationalInformationComponent implements OnInit {
 
       const days = leaveDiff / (1000 * 3600 * 24);
 
-      if (days > 90) {
+      if (days >= 90) {
         this.isTimeExceedingLimit = true;
       } else {
         this.isTimeExceedingLimit = false;
