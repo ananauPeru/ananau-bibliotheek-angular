@@ -9,8 +9,8 @@ export const locale = {
     DOWNTAN: "Download vertaling",
     CLOSE: "Sluit",
 
-    NEDERLANDS : "Nederlands",
-    ENGELS : "Engels",
+    NEDERLANDS: "Nederlands",
+    ENGELS: "Engels",
 
     ERRORS: {
       TRY_AGAIN: "Er is iets fout gegaan. Probeer het later nog eens.",
@@ -58,7 +58,7 @@ export const locale = {
         TITLE: "Organisatie",
         ROLES: "Rolbeheer",
         REGISTRATIONS: "Registraties",
-        GENERAL_INFORMATION: "Algemene Informatie"
+        GENERAL_INFORMATION: "Algemene Informatie",
       },
       DOCUMENTATION: {
         TITLE: "IT - Documentatie",
@@ -72,8 +72,7 @@ export const locale = {
     },
     AUTH: {
       GENERAL: {
-        NEW:
-          "Ben je op zoek naar vrijwilligerswerk, zoek je een stageplek of ben je een nieuwe medewerker bij Añañau?",
+        NEW: "Ben je op zoek naar vrijwilligerswerk, zoek je een stageplek of ben je een nieuwe medewerker bij Añañau?",
         TITLE: "Welkom bij Añañau",
         WELCOMETITLE1: "Welkom bij Asociación ONG Añañau!",
         WELCOMETITLE2:
@@ -89,9 +88,10 @@ export const locale = {
         LEGAL: "Legal",
         CONTACT: "Contacteer ons",
         WEBSITE: "Website",
-        SUBSCRIBE: "Wij zouden het fijn vinden als je je inschrijft op onze nieuwsbrief. Het is altijd mogelijk om je achteraf uit te schrijven.",
+        SUBSCRIBE:
+          "Wij zouden het fijn vinden als je je inschrijft op onze nieuwsbrief. Het is altijd mogelijk om je achteraf uit te schrijven.",
         NEWSLETTER: "Nieuwsbrief",
-        CLICK:"Klik op de taal waarin je een nieuwsbrief wilt ontvangen.",
+        CLICK: "Klik op de taal waarin je een nieuwsbrief wilt ontvangen.",
         SITE: "https://us10.list-manage.com/subscribe?u=7feff0165ae28c19590484311&id=51158cd80d",
       },
       LOGIN: {
@@ -163,10 +163,11 @@ export const locale = {
         CONFIRMPASSWORD_MAXLENGTH:
           "Wachtwoordbevestiging mag maximaal 360 karakters lang zijn.",
         PASSWORD_NO_MATCH:
-          "\"Wachtwoord\" en \"Wachtwoordbevestiging\" komen niet overeen.",
+          '"Wachtwoord" en "Wachtwoordbevestiging" komen niet overeen.',
         PHONE_REQUIRED: "Telefoon is verplicht.",
         PHONE_PATTERN:
-          "Telefoon mag enkel cijfers bevatten en moet beginnen met "+" gevolgd door de landcode.",
+          "Telefoon mag enkel cijfers bevatten en moet beginnen met " +
+          " gevolgd door de landcode.",
         PHONE_MINLENGTH: "Telefoon moet minimaal 3 karakters lang zijn.",
         PHONE_MAXLENGTH: "Telefoon mag maximaal 360 karakters lang zijn.",
         DATEOFBIRTH_REQUIRED: "Geboortedatum is verplicht",
@@ -223,8 +224,7 @@ export const locale = {
           IMAGE_SUBMIT_ERROR:
             "Er ging iets mis bij het verzenden van je afbeeldingsbestanden. Probeer het later nog eens.",
           IMAGE_SAVE_ERROR:
-            "Er ging iets mis bij het opslaan van je afbeeldingsbestanden. Probeer het later nog eens."
-        
+            "Er ging iets mis bij het opslaan van je afbeeldingsbestanden. Probeer het later nog eens.",
         },
       },
       PERSONAL: {
@@ -253,8 +253,7 @@ export const locale = {
         },
         CONTACT_PERSON: {
           TITLE: "Contactpersoon",
-          INFO:
-            "Je contactpersoon is de persoon met wie we in geval van nood contact moeten kunnen opnemen.",
+          INFO: "Je contactpersoon is de persoon met wie we in geval van nood contact moeten kunnen opnemen.",
           FIRST_NAME: "Voornaam",
           MIDDLE_NAME: "Tweede naam",
           LAST_NAME: "Familienaam",
@@ -284,6 +283,8 @@ export const locale = {
           LEAVE_END: "Voorgestelde einddatum verlofperiode",
           LEAVE_INFO:
             "Je hebt de mogelijkheid om tijdens je stage een verlofperiode in te plannen. Dit wordt in overleg met je school en de organisatie bepaald. Het wordt sterk aangeraden en verzocht om deze verlofperiode aan het einde van de stage in te plannen. Indien je ervoor kiest om geen verlofperiode in te plannen, laat dit veld dan leeg.",
+          LEAVE_EXCEEDS_LIMIT:
+            "De verlofperiode overschrijdt de maximale duur van een normaal visum.",
         },
         SPANISH: {
           TITLE: "Spaans",
@@ -302,8 +303,8 @@ export const locale = {
             "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 4 weken Spaanse les ter plaatse.",
         },
         MOTIVATION_LETTER: {
-          TITLE: 'Motivatiebrief',
-          MOTIVATION: 'Vul je motivatiebrief in',
+          TITLE: "Motivatiebrief",
+          MOTIVATION: "Vul je motivatiebrief in",
         },
         INFO: {
           TITLE: "Info",
@@ -368,8 +369,7 @@ export const locale = {
         },
         CONTACT: {
           TITLE: "Heb jij nog vragen voor ons?",
-          INFO:
-            "Nadat je je registratieformulier hebt ingediend, proberen we zo snel mogelijk contact met je op te nemen. Meestal zullen we zelfs een videogesprek inplannen om een aantal dingen te bespreken en elkaars vragen te beantwoorden. Mocht je toch al vragen hebben over het aanmeldingsproces of de stage in het algemeen, dan kun je altijd contact met ons opnemen via e-mail of WhatsApp.",
+          INFO: "Nadat je je registratieformulier hebt ingediend, proberen we zo snel mogelijk contact met je op te nemen. Meestal zullen we zelfs een videogesprek inplannen om een aantal dingen te bespreken en elkaars vragen te beantwoorden. Mocht je toch al vragen hebben over het aanmeldingsproces of de stage in het algemeen, dan kun je altijd contact met ons opnemen via e-mail of WhatsApp.",
         },
       },
       TERMS: {
@@ -387,14 +387,14 @@ export const locale = {
     LIBRARY: {
       TRAN: "Vertaling",
       DOWN: "Het document is nog aan het uploaden",
-      DON:"Het document is geüpload",
+      DON: "Het document is geüpload",
       GENERAL: {},
-      CLASS : {
+      CLASS: {
         HELP: "Hoe nieuwe les toevoegen?",
         VRAAG: "Wil je een vertaling van het document uploaden?",
         YES: "Ja",
-        NO:"Nee",
-        SUBJECT :{
+        NO: "Nee",
+        SUBJECT: {
           TITLE: "Vak",
           ER: "Vak is verplicht",
           WISKUNDE: "Wiskunde",
@@ -408,66 +408,66 @@ export const locale = {
           ARTS: "Arts & Crafts",
           NUTRITION: "Voeding",
           COMMUNICATION: "Communicatie voor de ontwikkeling",
-          OCCUPATIONAL:"Ergotherapie",
+          OCCUPATIONAL: "Ergotherapie",
           OTHER: "Ander",
         },
-        CREATE : {
+        CREATE: {
           NAAM: "Maak nieuwe les aan",
-          TERUG : "Terug",
+          TERUG: "Terug",
           CANCEL: "Annuleren",
           MAAK: "Maak een nieuwe les",
           BEWERK: "Aanpassing opslaan",
-          FILTER:"Filter op titel, auteur of beschrijving",
+          FILTER: "Filter op titel, auteur of beschrijving",
           WAAR: "Het document is aanwezig. Indien je een ander document wil uploaden moet je gewoon hier een nieuw document uploaden.",
           TITEL: {
-            NAAM : "Titel",
-            BES : "Voer de titel van de les in.",
+            NAAM: "Titel",
+            BES: "Voer de titel van de les in.",
             ER: "Titel is vereist",
-            MIN : "Titel moet minimaal 3 symbolen lang zijn",
-            MAX : "De titel is te lang, maak hem korter."
+            MIN: "Titel moet minimaal 3 symbolen lang zijn",
+            MAX: "De titel is te lang, maak hem korter.",
           },
           AUTEUR: {
-            NAAM : "Auteur",
-            BES : "Voer de auteur van de les in.",
+            NAAM: "Auteur",
+            BES: "Voer de auteur van de les in.",
             ER: "Auteur is vereist",
-            MIN : "Auteur moet minimaal 3 symbolen lang zijn",
-            MAX : "De Auteur is te lang, maak hem korter."
-          }, 
+            MIN: "Auteur moet minimaal 3 symbolen lang zijn",
+            MAX: "De Auteur is te lang, maak hem korter.",
+          },
           DATUM: {
-            NAAM : "Wanneer aangemakt",
-            BES : "Voer de datum in van waneer deze les is gemaakt.",
-            ER: "Datum is vereist"
+            NAAM: "Wanneer aangemakt",
+            BES: "Voer de datum in van waneer deze les is gemaakt.",
+            ER: "Datum is vereist",
           },
           PUBLIEK: {
-            NAAM : "Doelgroep",
-            BES : "Voor welke leeftijdsgroep is deze les?",
+            NAAM: "Doelgroep",
+            BES: "Voor welke leeftijdsgroep is deze les?",
             ER: "Doelgroep is vereist",
-            KLEUTER : "Kleuterschool",
-            LAGERESCHOOL : "Lagereschool",
-            MIDDELBAAR : "Middelbareschool",
-          }, 
+            KLEUTER: "Kleuterschool",
+            LAGERESCHOOL: "Lagereschool",
+            MIDDELBAAR: "Middelbareschool",
+          },
           LANGUAGE: {
-            NAAM : "Taal",
-            BES : "In welke taal is het document geschreven?",
+            NAAM: "Taal",
+            BES: "In welke taal is het document geschreven?",
             ER: "Taal is vereist",
-            NEDERLANDS : "Nederlands",
-            ENGELS : "Engels",
-            SPAANS : "Spaans",
-          }, 
+            NEDERLANDS: "Nederlands",
+            ENGELS: "Engels",
+            SPAANS: "Spaans",
+          },
           BESCHRIJVING: {
-            NAAM : "Beschrijving",
-            BES : "Geef hier extra info over de les.",
+            NAAM: "Beschrijving",
+            BES: "Geef hier extra info over de les.",
             ER: "Beschrijving is vereist",
-            MIN : "Beschrijving moet minimaal 3 symbolen lang zijn",
-            MAX : "De beschrijving is te lang, maak hem korter."
-          }, 
-          UP : {
-            NAAM : "Uploadzone",
-            HIER : "Hier klikken om document te selecteren",
-            BES : " Als je meerdere document wil uploaden, maak er dan eerste een zip-file van. (Enkel zo kan je meer als 1 document uploaden.)",
-            BEST: "Als het document blijft laden na selecteren, klik dan eens op het document."
-          }
-        }
+            MIN: "Beschrijving moet minimaal 3 symbolen lang zijn",
+            MAX: "De beschrijving is te lang, maak hem korter.",
+          },
+          UP: {
+            NAAM: "Uploadzone",
+            HIER: "Hier klikken om document te selecteren",
+            BES: " Als je meerdere document wil uploaden, maak er dan eerste een zip-file van. (Enkel zo kan je meer als 1 document uploaden.)",
+            BEST: "Als het document blijft laden na selecteren, klik dan eens op het document.",
+          },
+        },
       },
       CREATE: {
         BOOK: {
@@ -575,8 +575,7 @@ export const locale = {
           },
           PIECES: {
             TITLE: "Stukken",
-            F1:
-              "Leg alstublieft de stuks van een hoeveelheid voor een item uit.",
+            F1: "Leg alstublieft de stuks van een hoeveelheid voor een item uit.",
             F2: "Stukken zijn vereist",
             F3: "Stukken moeten minimaal 3 symbolen hebben",
             F4: "Stukken mogen maximaal 100 symbolen bevatten",
@@ -745,7 +744,7 @@ export const locale = {
         SOCIO_EDUCATIONAL_ACTIVITIES: "Socio educatieve activiteiten",
         STIMULATION: "Stimulatie",
       },
-      CLASS_OVERVIEW:{
+      CLASS_OVERVIEW: {
         ALL: "Alle lessen",
         ADD: "Nieuwe les toevoegen",
       },
@@ -798,11 +797,10 @@ export const locale = {
         DELETE_ERROR:
           "Er ging iets mis bij het verwijderen van de registratie. Probeer het later nog eens.",
         DOWNLOAD_ERROR:
-          "Er ging iets mis bij het downloaden van het bestand. Probeer het later nog eens.", 
-          DATES_CHANGE_SUCCESS:
-            "Data succesvol bijgewerkt.",
-          DATES_CHANGE_ERROR:
-            "Er is iets misgegaan bij het bijwerken van de data. Probeer het later nog eens."
+          "Er ging iets mis bij het downloaden van het bestand. Probeer het later nog eens.",
+        DATES_CHANGE_SUCCESS: "Data succesvol bijgewerkt.",
+        DATES_CHANGE_ERROR:
+          "Er is iets misgegaan bij het bijwerken van de data. Probeer het later nog eens.",
       },
     },
     ORGANIZATION: {
@@ -824,7 +822,7 @@ export const locale = {
       VISA: {
         TITLE: "Visum",
         LABEL: "Voer visuminformatie in",
-        BUTTON: "Opslaan"
+        BUTTON: "Opslaan",
       },
       VACCINATION: {
         TITLE: "Vaccinaties",
@@ -834,7 +832,7 @@ export const locale = {
         BUTTON: "Vaccinatie Toevoegen",
         REQUIRED: "Verplicht",
         OPTIONAL: "Optioneel",
-        NO_RESULT: "Nog geen vaccinaties toegevoegd."
+        NO_RESULT: "Nog geen vaccinaties toegevoegd.",
       },
       HOLIDAY: {
         TITLE: "Feestdagen",
@@ -844,30 +842,37 @@ export const locale = {
         BUTTON: "Feestdag Toevoegen",
         NO_RESULT: "Geen feestdagen gevonden",
         DELETE_ALL: "Alle Feestdagen Verwijderen",
-        DELETE_ALL_CONFIRMATION_MESSAGE: "Weet u zeker dat u alle feestdagen wilt verwijderen? Deze actie is onomkeerbaar."
+        DELETE_ALL_CONFIRMATION_MESSAGE:
+          "Weet u zeker dat u alle feestdagen wilt verwijderen? Deze actie is onomkeerbaar.",
       },
       TOASTS: {
         SUCCESS: "Succes",
         ERROR: "Fout",
         VACCINATION: {
           CREATE_SUCCESS: "Nieuwe vaccinatie succesvol toegevoegd.",
-          CREATE_ERROR: "Er is iets misgegaan bij het toevoegen van een nieuwe vaccinatie. Probeer het later opnieuw.",
+          CREATE_ERROR:
+            "Er is iets misgegaan bij het toevoegen van een nieuwe vaccinatie. Probeer het later opnieuw.",
           DELETE_SUCCESS: "Vaccinatie succesvol verwijderd.",
-          DELETE_ERROR: "Er is iets misgegaan bij het verwijderen van een vaccinatie. Probeer het later opnieuw.",
+          DELETE_ERROR:
+            "Er is iets misgegaan bij het verwijderen van een vaccinatie. Probeer het later opnieuw.",
         },
         VISA: {
           UPDATE_SUCCESS: "Visuminformatie succesvol bijgewerkt.",
-          UPDATE_ERROR: "Er is iets misgegaan bij het bijwerken van visuminformatie. Probeer het later opnieuw.",
+          UPDATE_ERROR:
+            "Er is iets misgegaan bij het bijwerken van visuminformatie. Probeer het later opnieuw.",
         },
         HOLIDAY: {
           CREATE_SUCCESS: "Nieuwe feestdag succesvol toegevoegd.",
-          CREATE_ERROR: "Er is iets misgegaan bij het toevoegen van een nieuwe feestdag. Probeer het later opnieuw.",
+          CREATE_ERROR:
+            "Er is iets misgegaan bij het toevoegen van een nieuwe feestdag. Probeer het later opnieuw.",
           DELETE_SUCCESS: "Feestdag succesvol verwijderd.",
-          DELETE_ERROR: "Er is iets misgegaan bij het verwijderen van een feestdag. Probeer het later opnieuw.",
+          DELETE_ERROR:
+            "Er is iets misgegaan bij het verwijderen van een feestdag. Probeer het later opnieuw.",
           DELETE_ALL_SUCCESS: "Alle feestdagen succesvol verwijderd.",
-          DELETE_ALL_ERROR: "Er is iets misgegaan bij het verwijderen van alle feestdagen. Probeer het later opnieuw.",
+          DELETE_ALL_ERROR:
+            "Er is iets misgegaan bij het verwijderen van alle feestdagen. Probeer het later opnieuw.",
         },
       },
-    }
+    },
   },
-}
+};
