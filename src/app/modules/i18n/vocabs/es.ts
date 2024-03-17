@@ -15,9 +15,9 @@ export const locale = {
       TRY_AGAIN: "Algo salió mal. Por favor, inténtelo de nuevo más tarde.",
     },
 
-    NEDERLANDS : "holandés",
-    ENGELS : "inglés",
-    
+    NEDERLANDS: "holandés",
+    ENGELS: "inglés",
+
     // BUTTONS
     BUTTONS: {
       SAVE: "Guardar",
@@ -70,15 +70,14 @@ export const locale = {
         TITLE: "Organización",
         ROLES: "Gestión de roles",
         REGISTRATIONS: "Inscripciones",
-        GENERAL_INFORMATION: "Información General"
+        GENERAL_INFORMATION: "Información General",
       },
     },
 
     // AUTH PAGES
     AUTH: {
       GENERAL: {
-        NEW:
-          "¿Buscas voluntariado, buscas prácticas o eres nuevo empleado en Añañau?",
+        NEW: "¿Buscas voluntariado, buscas prácticas o eres nuevo empleado en Añañau?",
         TITLE: "Bienvenido a Añañau",
         WELCOMETITLE1: "¡Bienvenido a Asociación ONG Añañau!",
         WELCOMETITLE2:
@@ -94,9 +93,10 @@ export const locale = {
         LEGAL: "Legal",
         CONTACT: "Contacta con nosotros",
         WEBSITE: "Sitio web",
-        SUBSCRIBE: "Le agradecerìamos que se suscribiera a nuestra boletin informativa. Siempre es psible darse de baja después.",
+        SUBSCRIBE:
+          "Le agradecerìamos que se suscribiera a nuestra boletin informativa. Siempre es psible darse de baja después.",
         NEWLSETTER: "Boletin informativo",
-        CLICK:"Haga clic el idioma en el que desea recibir un boletìn.",
+        CLICK: "Haga clic el idioma en el que desea recibir un boletìn.",
         SITE: "https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup",
       },
       LOGIN: {
@@ -170,10 +170,11 @@ export const locale = {
         CONFIRMPASSWORD_MAXLENGTH:
           "La confirmación de la contraseña debe tener un máximo de 360 símbolos.",
         PASSWORD_NO_MATCH:
-          "\"Contraseña\" y \"Confirmar contraseña\" no coinciden.",
+          '"Contraseña" y "Confirmar contraseña" no coinciden.',
         PHONE_REQUIRED: "Se requiere teléfono.",
         PHONE_PATTERN:
-          "El teléfono solo puede contener números, debe comenzar con el símbolo "+" y el código de su país.",
+          "El teléfono solo puede contener números, debe comenzar con el símbolo " +
+          " y el código de su país.",
         PHONE_MINLENGTH: "El teléfono debe tener al menos 3 símbolos.",
         PHONE_MAXLENGTH: "El teléfono debe tener un máximo de 100 símbolos.",
         DATEOFBIRTH_REQUIRED: "Se requiere fecha de nacimiento.",
@@ -234,7 +235,7 @@ export const locale = {
           IMAGE_SUBMIT_ERROR:
             "Se produjo un error al enviar sus archivos de imagen. Por favor, inténtelo de nuevo más tarde.",
           IMAGE_SAVE_ERROR:
-            "Se produjo un error al guardar sus archivos de imagen. Por favor, inténtelo de nuevo más tarde."
+            "Se produjo un error al guardar sus archivos de imagen. Por favor, inténtelo de nuevo más tarde.",
         },
       },
       PERSONAL: {
@@ -263,8 +264,7 @@ export const locale = {
         },
         CONTACT_PERSON: {
           TITLE: "Persona de contacto",
-          INFO:
-            "Su persona de contacto es la persona con la que deberíamos poder comunicarnos en caso de una emergencia.",
+          INFO: "Su persona de contacto es la persona con la que deberíamos poder comunicarnos en caso de una emergencia.",
           FIRST_NAME: "Primer nombre",
           MIDDLE_NAME: "Segundo nombre",
           LAST_NAME: "Apellido",
@@ -285,7 +285,7 @@ export const locale = {
           ONLINE: "Voluntariado online",
           ONLINE_INFO:
             "Además de realizar trabajo voluntario en la organización en el propio Perú, también es posible realizar trabajo de forma remota.",
-            ENTER_NEW: "Ingrese una nueva fechae",
+          ENTER_NEW: "Ingrese una nueva fechae",
           START_VOLUNTEER: "Fecha de inicio propuesta para voluntariado",
           END_VOLUNTEER: "Fecha final propuesta para voluntariado",
           START_STUDENT: "Fecha de inicio propuesta para pasantía",
@@ -294,6 +294,8 @@ export const locale = {
           LEAVE_END: "Fecha final propuesta para período de licencia",
           LEAVE_INFO:
             "Tiene la opción de programar un período de licencia durante su pasantía. Esto se determina en consulta con su escuela y la organización. Se recomienda y se solicita encarecidamente planificar este período de licencia al final de la pasantía. Si elige no programar un período de licencia, deje este campo vacío.",
+          LEAVE_EXCEEDS_LIMIT:
+            "El período de ausencia excede la duración máxima de una visa normal.",
         },
         SPANISH: {
           TITLE: "Español",
@@ -312,8 +314,8 @@ export const locale = {
             "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
         MOTIVATION_LETTER: {
-          TITLE: 'Carta de motivación',
-          MOTIVATION: 'Rellene el campo con tu carta de motivación',
+          TITLE: "Carta de motivación",
+          MOTIVATION: "Rellene el campo con tu carta de motivación",
         },
         INFO: {
           TITLE: "Info",
@@ -378,8 +380,7 @@ export const locale = {
         },
         CONTACT: {
           TITLE: "¿Tienes alguna pregunta para nosotros?",
-          INFO:
-            "Una vez que haya enviado su registro, intentaremos comunicarnos con usted lo antes posible. Por lo general, incluso configuraremos una videollamada para discutir algunas cosas y responder las preguntas de los demás. Aún así, si ya tiene preguntas sobre el proceso de registro o la pasantía en general, siempre puede contactarnos por correo electrónico o WhatsApp.",
+          INFO: "Una vez que haya enviado su registro, intentaremos comunicarnos con usted lo antes posible. Por lo general, incluso configuraremos una videollamada para discutir algunas cosas y responder las preguntas de los demás. Aún así, si ya tiene preguntas sobre el proceso de registro o la pasantía en general, siempre puede contactarnos por correo electrónico o WhatsApp.",
         },
       },
       TERMS: {
@@ -397,14 +398,14 @@ export const locale = {
     LIBRARY: {
       TRAN: "Traducción ",
       DOWN: "El documento aún se está cargando ",
-      DON:"El documento ha sido subido ",
+      DON: "El documento ha sido subido ",
       GENERAL: {},
-      CLASS : {
+      CLASS: {
         HELP: "¿Cómo agregar una lección nueva?",
         VRAAG: "¿Quieres subir una traducción del documento?",
         YES: "Si",
-        NO:"No",
-        SUBJECT :{
+        NO: "No",
+        SUBJECT: {
           TITLE: "Asunto",
           ER: "Asunto es obligatorio",
           WISKUNDE: "Matemáticas",
@@ -417,67 +418,67 @@ export const locale = {
           PSYCHOLOGY: "Psicología",
           ARTS: "Artes y manualidades",
           NUTRITION: "Nutrición",
-          OCCUPATIONAL:"Terapia ocupacional",
+          OCCUPATIONAL: "Terapia ocupacional",
           COMMUNICATION: "Comunicación para el desarrollo",
           OTHER: "otro",
         },
-        CREATE : {
+        CREATE: {
           NAAM: "Crear una nueva lección",
-          TERUG : "Esplada",
+          TERUG: "Esplada",
           CANCEL: "Cancelar",
           MAAK: "Crear una nueva lección",
           BEWERK: "Guardar ajustes",
-          FILTER:"Filtrar por título, autor o descripción",
-          WAAR:"El documento está presente. Si quieres subir otro documento, solo tienes que subir un nuevo documento aquí.",
+          FILTER: "Filtrar por título, autor o descripción",
+          WAAR: "El documento está presente. Si quieres subir otro documento, solo tienes que subir un nuevo documento aquí.",
           TITEL: {
-            NAAM : "Título",
-            BES : "ingrese el título de la lección.",
+            NAAM: "Título",
+            BES: "ingrese el título de la lección.",
             ER: "el título es obligatorio",
-            MIN : "El título debe tener al menos 3 letras",
-            MAX : "El título es demasiado largo, hazlo más corto."
+            MIN: "El título debe tener al menos 3 letras",
+            MAX: "El título es demasiado largo, hazlo más corto.",
           },
           AUTEUR: {
-            NAAM : "Autor",
-            BES : "Ingrese el autor de la lección.",
+            NAAM: "Autor",
+            BES: "Ingrese el autor de la lección.",
             ER: "Se requiere autor",
-            MIN : "El autor debe tener al menos 3 letras",
-            MAX : "El autor es demasiado largo, halzo más corto."
-          }, 
+            MIN: "El autor debe tener al menos 3 letras",
+            MAX: "El autor es demasiado largo, halzo más corto.",
+          },
           DATUM: {
-            NAAM : "Cuando se crea",
-            BES : "Ingrese la fecha a partir de la cual se creó esta lección.",
-            ER: "La fecha es requerida"
+            NAAM: "Cuando se crea",
+            BES: "Ingrese la fecha a partir de la cual se creó esta lección.",
+            ER: "La fecha es requerida",
           },
           PUBLIEK: {
-            NAAM : "Público objetivo",
-            BES : "¿Para qué grupo de edad es esta clase?",
+            NAAM: "Público objetivo",
+            BES: "¿Para qué grupo de edad es esta clase?",
             ER: "Se requiere audiencia objetivo",
-            KLEUTER : "Jardín de infancia",
-            LAGERESCHOOL : "Escuela primaria",
-            MIDDELBAAR : "Escuela secundaria",
-          }, 
+            KLEUTER: "Jardín de infancia",
+            LAGERESCHOOL: "Escuela primaria",
+            MIDDELBAAR: "Escuela secundaria",
+          },
           LANGUAGE: {
-            NAAM : "Idioma",
-            BES : "¿En qué idioma está escrito el documento?",
+            NAAM: "Idioma",
+            BES: "¿En qué idioma está escrito el documento?",
             ER: "Se requiere idioma",
-            NEDERLANDS : "holandés",
-            ENGELS : "inglés",
-            SPAANS : "Español",
+            NEDERLANDS: "holandés",
+            ENGELS: "inglés",
+            SPAANS: "Español",
           },
           BESCHRIJVING: {
-            NAAM : "Descripción",
-            BES : "Proporcione información adicional sobre la lección aquí.",
+            NAAM: "Descripción",
+            BES: "Proporcione información adicional sobre la lección aquí.",
             ER: "Se requiere descripción",
-            MIN : "La descripción debe contener al menos 3 letras",
-            MAX : "La descripción es demasiado larga, hazla más corta."
-          }, 
-          UP : {
-            NAAM : "Zona de carga",
-            HIER : "Haga clic aquí para seleccionar un documento",
-            BES : "Si desea cargar varios documentos, primero cree un archivo zip con ellos. (Esta es la única forma en que puede cargar más de 1 documento).",
-            BEST: "Si el documento continúa cargándose después de seleccionarlo, haga clic en el documento nuevamente."
-          }
-        }
+            MIN: "La descripción debe contener al menos 3 letras",
+            MAX: "La descripción es demasiado larga, hazla más corta.",
+          },
+          UP: {
+            NAAM: "Zona de carga",
+            HIER: "Haga clic aquí para seleccionar un documento",
+            BES: "Si desea cargar varios documentos, primero cree un archivo zip con ellos. (Esta es la única forma en que puede cargar más de 1 documento).",
+            BEST: "Si el documento continúa cargándose después de seleccionarlo, haga clic en el documento nuevamente.",
+          },
+        },
       },
       CREATE: {
         BOOK: {
@@ -760,7 +761,7 @@ export const locale = {
         SOCIO_EDUCATIONAL_ACTIVITIES: "Actividades Socioeducativas",
         STIMULATION: "Estímulo",
       },
-      CLASS_OVERVIEW:{
+      CLASS_OVERVIEW: {
         ALL: "Todas las lecciones",
         ADD: "Agregar nueva lección",
       },
@@ -829,10 +830,9 @@ export const locale = {
           "Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.",
         DOWNLOAD_ERROR:
           "Se produjo un error al descargar el archivo. Por favor, inténtelo de nuevo más tarde.",
-          DATES_CHANGE_SUCCESS:
-            "Fechas actualizadas correctamente.",
-          DATES_CHANGE_ERROR:
-            "Ocurrió un error al actualizar las fechas. Por favor, inténtalo de nuevo más tarde."
+        DATES_CHANGE_SUCCESS: "Fechas actualizadas correctamente.",
+        DATES_CHANGE_ERROR:
+          "Ocurrió un error al actualizar las fechas. Por favor, inténtalo de nuevo más tarde.",
       },
     },
 
@@ -841,7 +841,7 @@ export const locale = {
       VISA: {
         TITLE: "Visa",
         LABEL: "Ingrese información de visa",
-        BUTTON: "Guardar"
+        BUTTON: "Guardar",
       },
       VACCINATION: {
         TITLE: "Vacunas",
@@ -851,7 +851,7 @@ export const locale = {
         BUTTON: "Agregar Vacuna",
         REQUIRED: "Obligatoria",
         OPTIONAL: "Opcional",
-        NO_RESULT: "No se han agregado vacunas todavía."
+        NO_RESULT: "No se han agregado vacunas todavía.",
       },
       HOLIDAY: {
         TITLE: "Días Festivos",
@@ -861,30 +861,38 @@ export const locale = {
         BUTTON: "Agregar Día Festivo",
         NO_RESULT: "No se encontraron días festivos",
         DELETE_ALL: "Eliminar todos los Días Festivos",
-        DELETE_ALL_CONFIRMATION_MESSAGE: "¿Estás seguro de que deseas eliminar todos los días festivos? Esta acción es irreversible."
+        DELETE_ALL_CONFIRMATION_MESSAGE:
+          "¿Estás seguro de que deseas eliminar todos los días festivos? Esta acción es irreversible.",
       },
       TOASTS: {
         SUCCESS: "Éxito",
         ERROR: "Error",
         VACCINATION: {
           CREATE_SUCCESS: "Se agregó una nueva vacuna con éxito.",
-          CREATE_ERROR: "Algo salió mal al agregar una nueva vacuna. Por favor, inténtelo de nuevo más tarde.",
+          CREATE_ERROR:
+            "Algo salió mal al agregar una nueva vacuna. Por favor, inténtelo de nuevo más tarde.",
           DELETE_SUCCESS: "Se eliminó una vacuna con éxito.",
-          DELETE_ERROR: "Algo salió mal al eliminar una vacuna. Por favor, inténtelo de nuevo más tarde.",
+          DELETE_ERROR:
+            "Algo salió mal al eliminar una vacuna. Por favor, inténtelo de nuevo más tarde.",
         },
         VISA: {
           UPDATE_SUCCESS: "Se actualizó la información de visa con éxito.",
-          UPDATE_ERROR: "Algo salió mal al actualizar la información de visa. Por favor, inténtelo de nuevo más tarde.",
+          UPDATE_ERROR:
+            "Algo salió mal al actualizar la información de visa. Por favor, inténtelo de nuevo más tarde.",
         },
         HOLIDAY: {
           CREATE_SUCCESS: "Se agregó un nuevo día festivo con éxito.",
-          CREATE_ERROR: "Algo salió mal al agregar un nuevo día festivo. Por favor, inténtelo de nuevo más tarde.",
+          CREATE_ERROR:
+            "Algo salió mal al agregar un nuevo día festivo. Por favor, inténtelo de nuevo más tarde.",
           DELETE_SUCCESS: "Se eliminó un día festivo con éxito.",
-          DELETE_ERROR: "Algo salió mal al eliminar un día festivo. Por favor, inténtelo de nuevo más tarde.",
-          DELETE_ALL_SUCCESS: "Se eliminaron todos los días festivos con éxito.",
-          DELETE_ALL_ERROR: "Algo salió mal al eliminar todos los días festivos. Por favor, inténtelo de nuevo más tarde.",
+          DELETE_ERROR:
+            "Algo salió mal al eliminar un día festivo. Por favor, inténtelo de nuevo más tarde.",
+          DELETE_ALL_SUCCESS:
+            "Se eliminaron todos los días festivos con éxito.",
+          DELETE_ALL_ERROR:
+            "Algo salió mal al eliminar todos los días festivos. Por favor, inténtelo de nuevo más tarde.",
         },
       },
-    }
+    },
   },
 };

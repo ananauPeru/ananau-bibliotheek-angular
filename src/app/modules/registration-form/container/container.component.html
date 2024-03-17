@@ -4,7 +4,11 @@
     <div class="card-toolbar mr-4">
       <ul class="nav nav-tabs nav-bold nav-tabs-line">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_7_1">
+          <div 
+          class="nav-link" 
+          role="button"
+          [class.active]="activeTabId === 'kt_tab_pane_7_1'" 
+          (click)="onNavigateToTab('kt_tab_pane_7_1')">
             <span class="nav-icon"><i class="fa fa-user"></i></span>
             <span class="nav-text">{{
               "REGISTRATION.GENERAL.PERSONAL" | translate
@@ -20,11 +24,15 @@
                 personalFormProgress.required -
                   personalFormProgress.requiredAndValid
               }}</span
-            ></a
+            ></div
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_2">
+          <div 
+          class="nav-link" 
+          role="button"
+          [class.active]="activeTabId === 'kt_tab_pane_7_2'" 
+          (click)="onNavigateToTab('kt_tab_pane_7_2')">
             <span class="nav-icon"><i class="fa fa-info-circle"></i></span>
             <span class="nav-text">{{
               "REGISTRATION.GENERAL.ORGANIZATIONAL" | translate
@@ -40,11 +48,15 @@
                 organizationalFormProgress.required -
                   organizationalFormProgress.requiredAndValid
               }}</span
-            ></a
+            ></div
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_3">
+          <div 
+          class="nav-link" 
+          role="button"
+          [class.active]="activeTabId === 'kt_tab_pane_7_3'" 
+          (click)="onNavigateToTab('kt_tab_pane_7_3')">
             <span class="nav-icon"><i class="fa fa-file-image"></i></span>
             <span class="nav-text">{{
               "REGISTRATION.GENERAL.SCANS" | translate
@@ -59,11 +71,15 @@
               >{{
                 scansFormProgress.required - scansFormProgress.requiredAndValid
               }}</span
-            ></a
+            ></div
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_4">
+          <div 
+          class="nav-link" 
+          role="button"
+          [class.active]="activeTabId === 'kt_tab_pane_7_4'" 
+          (click)="onNavigateToTab('kt_tab_pane_7_4')">
             <span class="nav-icon"><i class="fa fa-question-circle"></i></span>
             <span class="nav-text">{{
               "REGISTRATION.GENERAL.QUESTIONS" | translate
@@ -79,7 +95,7 @@
                 questionsFormProgress.required -
                   questionsFormProgress.requiredAndValid
               }}</span
-            ></a
+            ></div
           >
         </li>
 
@@ -87,7 +103,11 @@
         <!-- GENERAL INFORMATION START -->
 
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_5">
+          <div 
+          class="nav-link" 
+          role="button"
+          [class.active]="activeTabId === 'kt_tab_pane_7_5'" 
+          (click)="onNavigateToTab('kt_tab_pane_7_5')">
             <!-- <span class="nav-icon"><i class="fa fa-earth-americas"></i></span> -->
             <span class="nav-icon"><i class="fa fa-info-circle"></i></span>
             <span class="nav-text">{{"GENERAL_INFORMATION.PAGE_TITLE" | translate}}</span>
@@ -102,7 +122,7 @@
                 questionsFormProgress.required -
                   questionsFormProgress.requiredAndValid
               }}</span
-            ></a
+            ></div
           >
         </li>
 
@@ -173,7 +193,8 @@
       <div class="tab-content">
         <div
           class="tab-pane fade show active"
-          id="kt_tab_pane_7_1"
+          [class.active]="activeTabId === 'kt_tab_pane_7_1'" id="kt_tab_pane_7_1"
+          [class.show]="activeTabId === 'kt_tab_pane_7_1'"
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_1"
         >
@@ -192,7 +213,8 @@
         </div>
         <div
           class="tab-pane fade"
-          id="kt_tab_pane_7_2"
+          [class.active]="activeTabId === 'kt_tab_pane_7_2'" id="kt_tab_pane_7_2"
+          [class.show]="activeTabId === 'kt_tab_pane_7_2'"
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_2"
         >
@@ -208,6 +230,7 @@
                 "
                 [role]="role"
                 [initialData]="initialData"
+                (navigateToTab)="onNavigateToTab($event)"
               ></app-organizational-information>
             </div>
             <div class="col-xl-2"></div>
@@ -215,7 +238,8 @@
         </div>
         <div
           class="tab-pane fade"
-          id="kt_tab_pane_7_3"
+          [class.active]="activeTabId === 'kt_tab_pane_7_3'" id="kt_tab_pane_7_3"
+          [class.show]="activeTabId === 'kt_tab_pane_7_3'"
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_3"
         >
@@ -235,7 +259,8 @@
         </div>
         <div
           class="tab-pane fade"
-          id="kt_tab_pane_7_4"
+          [class.active]="activeTabId === 'kt_tab_pane_7_4'" id="kt_tab_pane_7_4"
+          [class.show]="activeTabId === 'kt_tab_pane_7_4'"
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_4"
         >
@@ -257,7 +282,8 @@
 
         <div
           class="tab-pane fade"
-          id="kt_tab_pane_7_5"
+          [class.active]="activeTabId === 'kt_tab_pane_7_5'" id="kt_tab_pane_7_5"
+          [class.show]="activeTabId === 'kt_tab_pane_7_5'"
           role="tabpanel"
           aria-labelledby="kt_tab_pane_7_5"
         >
