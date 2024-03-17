@@ -19,14 +19,18 @@ import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
 })
 export class OrganizationalInformationComponent implements OnInit {
   @Input() public organizationalForm: FormGroup;
+  @Input() public role: FormRole;
+  @Input() public initialData: RegistrationDTO;
+
+  @Output() navigateToTab = new EventEmitter<string>();
   @Output() public organizationalFormChange = new EventEmitter<FormGroup>();
   @Output() public organizationalFormCounted = new EventEmitter<{
     all: number;
     required: number;
     requiredAndValid: number;
   }>();
-  @Input() public role: FormRole;
-  @Input() public initialData: RegistrationDTO;
+
+  public isTimeExceedingLimit = false;
 
   constructor(
     private fb: FormBuilder,
@@ -135,6 +139,34 @@ export class OrganizationalInformationComponent implements OnInit {
     this.organizationalFormCounted.emit(
       ContainerComponent.countFields(this.organizationalForm)
     );
+  }
+
+  calculateTimeDifference() {
+    const leaveStartDate = this.organizationalForm.get("dates.leaveStartDate").value;
+    const leaveEndDate = this.organizationalForm.get("dates.leaveEndDate").value;
+
+    if (leaveStartDate && leaveEndDate) {
+      const leaveStart = leaveStartDate ? new Date(leaveStartDate) : null;
+      const leaveEnd = leaveEndDate ? new Date(leaveEndDate) : null;
+
+      const leaveDiff = leaveStart && leaveEnd ? leaveEnd.getTime() - leaveStart.getTime() : 0;
+
+      const days = leaveDiff / (1000 * 3600 * 24);
+
+      if (days > 90) {
+        this.isTimeExceedingLimit = true;
+      } else {
+        this.isTimeExceedingLimit = false;
+      }
+    }
+  }
+
+  /**
+   * Emits the navigation to the parent class.
+   * @param tabId The tabId to navigate to.
+   */
+  onNavigateToTab(tabId: string) {
+    this.navigateToTab.emit(tabId);
   }
 
   adjustTextareaHeight(event: any) {
