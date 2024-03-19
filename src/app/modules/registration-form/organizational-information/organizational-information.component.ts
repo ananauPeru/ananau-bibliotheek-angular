@@ -57,11 +57,6 @@ export class OrganizationalInformationComponent implements OnInit {
           Validators.required,
         ],
       }),
-      spanish: this.fb.group({
-        level: [this.initialData.level, Validators.required],
-        weeksOnline: [this.initialData.weeksOnline],
-        weeks: [this.initialData.weeks],
-      }),
       flightInformation: this.fb.group({
         flightNumber: [this.initialData.flightNumber],
         flightDateArrival: [
@@ -72,6 +67,11 @@ export class OrganizationalInformationComponent implements OnInit {
               )
             : "",
         ],
+      }),
+      spanish: this.fb.group({
+        level: [this.initialData.level, Validators.required],
+        weeksOnline: [this.initialData.weeksOnline],
+        weeks: [this.initialData.weeks],
       }),
       motivationLetter: this.fb.group({
         motivationLetter: [this.initialData.motivationLetter, Validators.required],
