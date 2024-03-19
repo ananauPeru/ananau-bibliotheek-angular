@@ -68,6 +68,13 @@ export class OverviewClassComponent implements OnInit {
     this.paginate()
   }
 
+  downloadPdf(url: string, name: string) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${name}.pdf`;
+    link.target = '_blank';
+    link.click();
+  }
 
 
   applyTaal(taal: string) {

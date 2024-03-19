@@ -113,30 +113,21 @@
 
              <!--begin::Info-->
              <div class="d-flex align-items-center py-lg-0 py-2">
-                <div class="d-flex flex-column text-right">
+                <div class="d-flex text-right">
                     
                     <!--hier download edit and open symbolen?::Info-->
-                    <button>
-                    <a href='{{cl.pdfUrl}}' target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                        {{"DOWNLOAD" | translate }}
-                        <span class="material-icons">
-                            file_open
-                        </span>
-                    </a></button>
-                    <button *ngIf="cl.translatedPdf">
-                    <a href='{{cl.translatedPdf}}' *ngIf="cl.translatedPdf" target="_blank"  class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                        {{"DOWNTAN" | translate }}
-                        <span class="material-icons">
-                            file_open
-                        </span>
-                    </a></button>
-                    <button>
-                    <a routerLink='/class/edit-class/{{cl.classID}}' class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
-                        {{"EDIT" | translate }}
-                        <span class="material-icons">
-                           mode_edit
-                        </span>
-                    </a></button>
+
+                    <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="Download pdf" (click)="downloadPdf(cl.pdfUrl, cl.title)">
+                        <i class="fas fa-download pr-0"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="Download translated pdf" (click)="downloadPdf(cl.translatedPdf, cl.title)" *ngIf="cl.translatedPdf">
+                        <i class="fas fa-download pr-0"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Edit pdf" routerLink="/class/edit-class/{{cl.classID}}">
+                        <i class="fas fa-pen pr-0"></i>
+                    </button>
                 </div>
             </div>
             <!--end::Info-->
