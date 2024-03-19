@@ -25,6 +25,7 @@ export const locale = {
       SUBMIT: "Enviar",
       CANCEL: "Cancelar",
       DOWNLOAD: "Descargar",
+      DOWNLOAD_FILE_NUMBER: "Descargar archivo {{number}}",
       CONFIRM: "Confirmar",
       DISCONFIRM: "Desconfirmar",
     },

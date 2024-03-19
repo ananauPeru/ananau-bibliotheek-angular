@@ -314,21 +314,12 @@
                   <td class="text-right">
                     <button
                       (click)="toggleEditingStartDateInternship()"
-                      type="button"
-                      class="btn btn-secondary btn-sm"
+                      type="button" 
+                      class="btn btn-primary mr-2" 
+                      placement="top" 
+                      ngbTooltip="{{ (isEditingStartDateInternship ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
                     >
-                      <img
-                        src="../../../../assets/media/svg/icons/General/Edit.svg"
-                        alt="Edit"
-                        height="20rem"
-                        *ngIf="!isEditingStartDateInternship"
-                      />
-                      <img
-                        src="../../../../assets/media/svg/icons/Navigation/Close.svg"
-                        alt="Edit"
-                        height="20rem"
-                        *ngIf="isEditingStartDateInternship"
-                      />
+                      <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingStartDateInternship, 'fa-times': isEditingStartDateInternship}"></i>
                     </button>
                   </td>
                 </tr>
@@ -356,21 +347,12 @@
                   <td class="text-right">
                     <button
                       (click)="toggleEditingEndDateInternship()"
-                      type="button"
-                      class="btn btn-secondary btn-sm"
+                      type="button" 
+                      class="btn btn-primary mr-2" 
+                      placement="top" 
+                      ngbTooltip="{{ (isEditingEndDateInternship ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
                     >
-                      <img
-                        src="../../../../assets/media/svg/icons/General/Edit.svg"
-                        alt="Edit"
-                        height="20rem"
-                        *ngIf="!isEditingEndDateInternship"
-                      />
-                      <img
-                        src="../../../../assets/media/svg/icons/Navigation/Close.svg"
-                        alt="Edit"
-                        height="20rem"
-                        *ngIf="isEditingEndDateInternship"
-                      />
+                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingEndDateInternship, 'fa-times': isEditingEndDateInternship}"></i>
                     </button>
                   </td>
                 </tr>
@@ -391,26 +373,17 @@
                       type="date"
                       formControlName="leaveStartDate"
                       placeholder="yyyy-mm-dd"
+                      ngbTooltip="{{ (isEditingStartDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
                     />
                   </td>
                   <td class="text-right">
                     <button
                       (click)="toggleEditingStartDateStay()"
-                      type="button"
-                      class="btn btn-secondary btn-sm"
+                      type="button" 
+                      class="btn btn-primary mr-2" 
+                      placement="top" 
                     >
-                      <img
-                        src="../../../../assets/media/svg/icons/General/Edit.svg"
-                        alt="Edit"
-                        height="20rem"
-                        *ngIf="!isEditingStartDateStay"
-                      />
-                      <img
-                        src="../../../../assets/media/svg/icons/Navigation/Close.svg"
-                        alt="Edit"
-                        height="20rem"
-                        *ngIf="isEditingStartDateStay"
-                      />
+                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingStartDateStay, 'fa-times': isEditingStartDateStay}"></i>
                     </button>
                   </td>
                 </tr>
@@ -430,26 +403,17 @@
                       type="date"
                       formControlName="leaveEndDate"
                       placeholder="yyyy-mm-dd"
+                      ngbTooltip="{{ (isEditingEndDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
                     />
                   </td>
                   <td class="text-right">
                     <button
                       (click)="toggleEditingEndDateStay()"
-                      type="button"
-                      class="btn btn-secondary btn-sm"
+                      type="button" 
+                      class="btn btn-primary mr-2" 
+                      placement="top" 
                     >
-                      <img
-                        src="../../../../assets/media/svg/icons/General/Edit.svg"
-                        alt="Edit"
-                        height="20rem"
-                        *ngIf="!isEditingEndDateStay"
-                      />
-                      <img
-                        src="../../../../assets/media/svg/icons/Navigation/Close.svg"
-                        alt="Edit"
-                        height="20rem"
-                        *ngIf="isEditingEndDateStay"
-                      />
+                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingEndDateStay, 'fa-times': isEditingEndDateStay}"></i>
                     </button>
                   </td>
                 </tr>
@@ -618,7 +582,8 @@
                     )
                   "
                 >
-                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                <i class="fas fa-download"></i>
+                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
                 </button>
               </td>
             </tr>
@@ -640,7 +605,8 @@
                     )
                   "
                 >
-                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                <i class="fas fa-download"></i>
+                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
                 </button>
               </td>
             </tr>
@@ -659,7 +625,8 @@
                     )
                   "
                 >
-                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                <i class="fas fa-download"></i>
+                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
                 </button>
               </td>
             </tr>
@@ -678,7 +645,8 @@
                     )
                   "
                 >
-                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                <i class="fas fa-download"></i>
+                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
                 </button>
               </td>
             </tr>
