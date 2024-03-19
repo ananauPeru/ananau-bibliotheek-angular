@@ -8,7 +8,7 @@ export const locale = {
     TRANSLATOR: {
       SELECT: "Select your language",
     },
-    EDIT: "Edit    ",
+    EDIT: "Edit",
     DOWNLOAD: "Download",
     DOWNTAN: "Download translation",
     CLOSE: "Close",

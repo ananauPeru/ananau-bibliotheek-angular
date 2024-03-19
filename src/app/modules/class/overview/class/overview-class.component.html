@@ -117,15 +117,15 @@
                     
                     <!--hier download edit and open symbolen?::Info-->
 
-                    <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="Download pdf" (click)="downloadPdf(cl.pdfUrl, cl.title)">
+                    <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="{{'DOWNLOAD' | translate}}" (click)="downloadPdf(cl.pdfUrl, cl.title)">
                         <i class="fas fa-download pr-0"></i>
                     </button>
 
-                    <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="Download translated pdf" (click)="downloadPdf(cl.translatedPdf, cl.title)" *ngIf="cl.translatedPdf">
+                    <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="{{'DOWNTAN' | translate}}" (click)="downloadPdf(cl.translatedPdf, cl.title)" *ngIf="cl.translatedPdf">
                         <i class="fas fa-download pr-0"></i>
                     </button>
 
-                    <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Edit pdf" routerLink="/class/edit-class/{{cl.classID}}">
+                    <button type="button" class="btn btn-primary" placement="top" ngbTooltip="{{'EDIT' | translate}}" routerLink="/class/edit-class/{{cl.classID}}">
                         <i class="fas fa-pen pr-0"></i>
                     </button>
                 </div>
