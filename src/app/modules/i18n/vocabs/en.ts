@@ -204,6 +204,21 @@ export const locale = {
         EMAIL_ALT: "Changing email address is not possible.",
         DATEOFBIRTH: "Date of Birth",
       },
+      CHANGE_PASSWORD: {
+        TITLE: "Change password",
+        SUBTITLE: "Change your account password",
+        CURRENT_PASSWORD: "Current Password",
+        CURRENT_PASSWORD_PLACEHOLDER: "Current password",
+        CURRENT_PASSWORD_REQUIRED: "Current password is required",
+        CURRENT_PASSWORD_VALID: "Current password was entered correctly",
+        NEW_PASSWORD: "New Password",
+        NEW_PASSWORD_PLACEHOLDER: "New password",
+        VERIFY_PASSWORD: "Verify Password",
+        VERIFY_PASSWORD_PLACEHOLDER: "Confirm password",
+        VERIFY_PASSWORD_VALID: "Password confirmation was entered correctly",
+        VERIFY_PASSWORD_INVALID: "'Passsword' and 'Confirm Password' didn't match.",
+        FORGOT_PASSWORD: "Forgot password?",
+      }
     },
 
     // REGISTRATION FORM

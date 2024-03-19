@@ -192,6 +192,21 @@ export const locale = {
         EMAIL_ALT: "E-mailadres veranderen is niet mogelijk.",
         DATEOFBIRTH: "Geboortedatum",
       },
+      CHANGE_PASSWORD: {
+        TITLE: "Wachtwoord wijzigen",
+        SUBTITLE: "Wijzig het wachtwoord van uw account",
+        CURRENT_PASSWORD: "Huidig wachtwoord",
+        CURRENT_PASSWORD_PLACEHOLDER: "Huidig wachtwoord",
+        CURRENT_PASSWORD_REQUIRED: "Huidig wachtwoord is vereist",
+        CURRENT_PASSWORD_VALID: "Huidig wachtwoord is correct ingevoerd",
+        NEW_PASSWORD: "Nieuw wachtwoord",
+        NEW_PASSWORD_PLACEHOLDER: "Nieuw wachtwoord",
+        VERIFY_PASSWORD: "Wachtwoord verifiëren",
+        VERIFY_PASSWORD_PLACEHOLDER: "Bevestig wachtwoord",
+        VERIFY_PASSWORD_VALID: "Wachtwoordbevestiging is correct ingevoerd",
+        VERIFY_PASSWORD_INVALID: "'Wachtwoord' en 'Wachtwoord bevestigen' komen niet overeen.",
+        FORGOT_PASSWORD: "Wachtwoord vergeten?"
+      }
     },
     // REGISTRATION FORM
     REGISTRATION: {
