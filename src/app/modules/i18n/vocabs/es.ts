@@ -25,6 +25,7 @@ export const locale = {
       SUBMIT: "Enviar",
       CANCEL: "Cancelar",
       DOWNLOAD: "Descargar",
+      DOWNLOAD_FILE_NUMBER: "Descargar archivo {{number}}",
       CONFIRM: "Confirmar",
       DISCONFIRM: "Desconfirmar",
     },
@@ -200,6 +201,21 @@ export const locale = {
         EMAIL_ALT: "No es posible cambiar el email.",
         DATEOFBIRTH: "Fecha de Nacimiento",
       },
+      CHANGE_PASSWORD: {
+        TITLE: "Cambiar contraseña",
+        SUBTITLE: "Cambia la contraseña de tu cuenta",
+        CURRENT_PASSWORD: "Contraseña actual",
+        CURRENT_PASSWORD_PLACEHOLDER: "Contraseña actual",
+        CURRENT_PASSWORD_REQUIRED: "Se requiere la contraseña actual",
+        CURRENT_PASSWORD_VALID: "La contraseña actual se ingresó correctamente",
+        NEW_PASSWORD: "Nueva contraseña",
+        NEW_PASSWORD_PLACEHOLDER: "Nueva contraseña",
+        VERIFY_PASSWORD: "Verificar contraseña",
+        VERIFY_PASSWORD_PLACEHOLDER: "Confirmar contraseña",
+        VERIFY_PASSWORD_VALID: "La confirmación de contraseña se ingresó correctamente",
+        VERIFY_PASSWORD_INVALID: "'Contraseña' y 'Confirmar contraseña' no coinciden.",
+        FORGOT_PASSWORD: "¿Olvidaste tu contraseña?"
+      }
     },
 
     // REGISTRATION FORM
@@ -808,6 +824,7 @@ export const locale = {
         STANDARD_TITLE: "Registro",
         TITLE: "Registro de {{name}}",
         DELETE: "Quitar de la lista",
+        DELETE_CONFIRMATION_MESSAGE: "¿Está seguro de que desea eliminar este registro? Esta acción es irreversible.",
         FILE_NAMES: {
           INTERNATIONAL_PASSPORT: "Pasaporte internacional",
           GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",

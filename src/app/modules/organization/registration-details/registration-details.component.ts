@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
@@ -11,6 +11,7 @@ import { RegistrationModel } from "../_models/registration.model";
 import { RegistrationService } from "../_services/registration/registration.service";
 import { UserStorageService } from "../_services/registration/user-storage.service";
 import { M } from "@angular/cdk/keycodes";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-registration-details",
@@ -45,6 +46,8 @@ export class RegistrationDetailsComponent implements OnInit {
     leaveEndDate: new FormControl(),
   });
 
+  @ViewChild('confirmationModal') confirmationModal: TemplateRef<any>;
+
   constructor(
     private route: ActivatedRoute,
     private registrationService: RegistrationService,
@@ -52,7 +55,8 @@ export class RegistrationDetailsComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private translate: TranslateService,
     private router: Router,
-    private userStorageService: UserStorageService
+    private userStorageService: UserStorageService,
+    private modalService: NgbModal
   ) {
     this.route.data.subscribe(
       (data) =>
@@ -133,6 +137,10 @@ export class RegistrationDetailsComponent implements OnInit {
     if(!this.isEditingEndDateStay) {
       this.dateForm.patchValue({ leaveEndDate: null });
     }
+  }
+
+  openConfirmationModal() {
+    this.modalService.open(this.confirmationModal, { centered: true });
   }
 
   private setEditingFalse() : void {

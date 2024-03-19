@@ -90,15 +90,15 @@
               />
             </td>
             <td>
-              <a
-                routerLink="/organization/registrations/{{
-                  registration.role === 1 ? 'students' : 'volunteers'
-                }}/{{ registration.userId }}"
+              <button 
+              type="button" 
+              class="btn btn-primary mr-2" 
+              placement="top" 
+              ngbTooltip="{{'REGISTRATIONS.OVERVIEW.DETAILS' | translate}}" 
+              routerLink="/organization/registrations/{{registration.role === 1 ? 'students' : 'volunteers'}}/{{ registration.userId }}"
               >
-                <img
-                  src="../../../..//assets/media/svg/icons/Navigation/Sign-in.svg"
-                />
-              </a>
+                <i class="fas fa-sign-in-alt pr-0"></i>
+              </button>
             </td>
           </tr>
         </tbody>
