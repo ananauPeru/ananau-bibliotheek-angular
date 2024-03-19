@@ -140,3 +140,38 @@ td a {
     color: $primary
   }
 }
+
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 2em;
+  height: 2em;
+  border: 1px solid #F3F6F9;
+  border-radius: 4px;
+  background-color: #F3F6F9;
+  cursor: pointer;
+  position: relative;
+  margin-right: 5px;
+
+  &:focus {
+      outline: 2px solid $primary;
+    }
+
+  &:checked {
+    background-color: $primary;
+    border-color: $primary;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 47%;
+      transform: translate(-50%, -53%) rotate(45deg);
+      width: 5px;
+      height: 10px;
+      border: solid #F3F6F9;
+      border-width: 0 2px 2px 0;
+    }
+  }
+}
