@@ -32,7 +32,7 @@
         [ngClass]="{
           'spinner spinner-left': deleting
         }"
-        (click)="delete()"
+        (click)="openConfirmationModal()"
       >
         {{ "REGISTRATIONS.DETAILS.DELETE" | translate }}
       </button>
@@ -730,4 +730,21 @@
   <ng-template #loading>
     <div class="spinner spinner-primary spinner-lg"></div>
   </ng-template>
+</ng-template>
+
+<!-- Confirmation Modal -->
+<ng-template #confirmationModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "REGISTRATIONS.DETAILS.DELETE" | translate }}</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ "REGISTRATIONS.DETAILS.DELETE_CONFIRMATION_MESSAGE" | translate }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">{{ "BUTTONS.CANCEL" | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="delete(); modal.close()">{{ "BUTTONS.CONFIRM" | translate }}</button>
+  </div>
 </ng-template>

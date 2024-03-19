@@ -809,6 +809,7 @@ export const locale = {
         STANDARD_TITLE: "Registro",
         TITLE: "Registro de {{name}}",
         DELETE: "Quitar de la lista",
+        DELETE_CONFIRMATION_MESSAGE: "¿Está seguro de que desea eliminar este registro? Esta acción es irreversible.",
         FILE_NAMES: {
           INTERNATIONAL_PASSPORT: "Pasaporte internacional",
           GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
