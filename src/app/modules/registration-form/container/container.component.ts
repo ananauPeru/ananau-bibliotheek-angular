@@ -204,6 +204,10 @@ export class ContainerComponent implements OnInit {
     dto.startDate = new Date(dates.get("startDate").value);
     dto.endDate = new Date(dates.get("endDate").value);
 
+    const flightInformation = organizationalForm.get("flightInformation") as FormGroup;
+    dto.flightNumber = flightInformation.get("flightNumber").value;  
+    dto.flightDateArrival = new Date(flightInformation.get("flightDateArrival").value);
+
     const spanish = organizationalForm.get("spanish") as FormGroup;
     dto.level = spanish.get("level").value;
     dto.weeksOnline = Number(spanish.get("weeksOnline").value);

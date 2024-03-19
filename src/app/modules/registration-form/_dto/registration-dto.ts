@@ -37,6 +37,10 @@ export class RegistrationDTO {
   startDate: Date;
   endDate: Date;
 
+  // Flight information
+  flightNumber: string;
+  flightDateArrival: Date;
+
   // Spanish
   level: string;
   weeksOnline: number;
