@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <div class="card mt-5">
+        <div class="card-header">
+          <h4>Search Check-In History</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmitCheckin()">
+            <div class="mb-3">
+              <label for="userIdCheckIn" class="form-label">User ID</label>
+              <input type="number" class="form-control" id="userId" name="userIdCheckIn" [(ngModel)]="checkInUserId" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Checkin</button>
+          </form>
+        </div>
+      </div>
+
+
+
+      <!-- QR code scanner -->
+
+      <!-- <div class="card mt-5" *ngIf="!qrCodeResult">
+        <div class="card-header">
+          <h4>Check-In</h4>
+        </div>
+        <div class="card-body">
+          <div class="text-center">
+            <ngx-scanner-qrcode #scanner="scanner" (event)="onCodeResult($event)"></ngx-scanner-qrcode>
+            <div class="mt-3">
+              <button class="btn btn-primary" (click)="scanner.start()">
+                <i class="fas fa-camera"></i> Activate Camera
+              </button>
+            </div>
+          </div>
+          <div class="mt-4" *ngIf="qrCodeResult">
+            <h5>Scanned QR Code:</h5>
+            <p>{{ qrCodeResult }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-5" *ngIf="qrCodeResult">
+        <div class="card-header">
+          <h4>Scanned QR Code</h4>
+        </div>
+        <div class="card-body">
+          <p>{{ qrCodeResult }}</p>
+          <button class="btn btn-primary" (click)="resetScanner()">Scan Again</button>
+        </div>
+      </div> -->
+
+      <div class="card mt-5">
+        <div class="card-header">
+          <h4>Search Check-In History</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSearch()">
+            <div class="mb-3">
+              <label for="userId" class="form-label">User ID</label>
+              <input type="number" class="form-control" id="userId" name="userId" [(ngModel)]="searchUserId" required>
+            </div>
+            <div class="mb-3">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="searchStartDate">
+            </div>
+            <div class="mb-3">
+              <label for="endDate" class="form-label">End Date</label>
+              <input type="date" class="form-control" id="endDate" name="endDate" [(ngModel)]="searchEndDate">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+        </div>
+        <!-- <div>
+          <p [(ngModel)]="searchResult"></p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

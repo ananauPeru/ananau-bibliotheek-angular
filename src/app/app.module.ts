@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment'
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
 
 
 // Highlight JS
@@ -29,6 +30,8 @@ function appInitializer(authService: AuthService) {
     });
   };
 }
+
+LOAD_WASM().subscribe();
 
 @NgModule({
   declarations: [AppComponent],
@@ -46,6 +49,7 @@ function appInitializer(authService: AuthService) {
     ToastrModule.forRoot(),
     QuillModule.forRoot(),
     ReactiveFormsModule,
+    NgxScannerQrcodeModule,
   ],
   providers: [
     {

@@ -52,7 +52,10 @@ import { RegistrationsOverviewComponent } from "./registrations-overview/registr
 import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { EditGeneralInformationComponent } from "./edit-general-information/edit-general-information.component";
+import { CheckInComponent } from "./check-in/check-in.component";
+import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
 
+// LOAD_WASM().subscribe();
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { EditGeneralInformationComponent } from "./edit-general-information/edit
     RegistrationDetailsComponent,
     CalendarComponent,
     EditGeneralInformationComponent,
+    CheckInComponent,
   ],
   imports: [
     CommonModule,
@@ -113,6 +117,8 @@ import { EditGeneralInformationComponent } from "./edit-general-information/edit
     LayoutModule,
     NgbModule,
     NgxDropzoneModule,
+
+    NgxScannerQrcodeModule,
   ],
   providers: [DatePipe],
 })

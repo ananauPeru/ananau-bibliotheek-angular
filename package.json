@@ -52,6 +52,7 @@
     "ngx-highlightjs": "^4.1.3",
     "ngx-perfect-scrollbar": "^9.0.0",
     "ngx-quill": "^13.4.0",
+    "ngx-scanner-qrcode": "^1.6.6",
     "ngx-toastr": "^13.2.1",
     "object-path": "^0.11.4",
     "perfect-scrollbar": "^1.5.0",
