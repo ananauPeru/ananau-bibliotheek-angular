@@ -75,10 +75,13 @@ export class CheckInDetailsComponent implements OnInit {
     if(!checkInHistory) return 0;
     let totalTime = 0;
 
+    if(typeof startDate === 'string') startDate = new Date(startDate);
+    if(typeof endDate === 'string') endDate = new Date(endDate);
+
 
     startDate = startDate || new Date(-8640000000000000); // Minimum date value
     endDate = endDate || new Date(8640000000000000); // Maximum date value
-  
+    
     for (const entry of checkInHistory) {
       const checkInTime = new Date(entry.checkInTime);
       const checkOutTime = entry.checkOutTime ? new Date(entry.checkOutTime) : new Date();
@@ -107,6 +110,16 @@ export class CheckInDetailsComponent implements OnInit {
     const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
     return `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+  }
+
+  getFirstDayOfMonth(): Date {
+    const currentDate = new Date();
+    return new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+  }
+  
+  getLastDayOfMonth(): Date {
+    const currentDate = new Date();
+    return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
   }
 
   isCheckedIn$(userId: number): Observable<boolean> {
