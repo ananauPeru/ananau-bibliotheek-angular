@@ -10,6 +10,7 @@ import { RegistrationRole } from "./_models/registration-role";
 import { EditGeneralInformationComponent } from "./edit-general-information/edit-general-information.component";
 import { CheckInComponent } from "./check-in/check-in.component";
 import { CheckInListComponent } from "./check-in-list/check-in-list.component";
+import { CheckInDetailsComponent } from "./check-in-details/check-in-details.component";
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
       {
         path: "check-in-list",
         component: CheckInListComponent
+      },
+      {
+        path: "check-in-details/:id",
+        component: CheckInDetailsComponent
       },
       { path: "", redirectTo: "", pathMatch: "full" },
       { path: "**", redirectTo: "", pathMatch: "full" },
