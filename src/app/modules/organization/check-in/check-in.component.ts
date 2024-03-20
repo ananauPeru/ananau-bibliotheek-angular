@@ -4,6 +4,7 @@ import { CheckInService } from "../_services/check-in/check-in.service";
 import { ToastrService } from "ngx-toastr";
 import { ChangeDetectorRef } from "@angular/core";
 import { QRCodeData } from "../_models/qr-code-data";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-check-in",
@@ -26,6 +27,8 @@ export class CheckInComponent implements OnInit {
   searchStartDate: Date | null;
   searchEndDate: Date | null;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
     private checkInService: CheckInService,
     private toastr: ToastrService,
@@ -36,6 +39,10 @@ export class CheckInComponent implements OnInit {
 
   ngAfterViewInit() {
     this.scanner.start();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   onCodeResult(resultString: any) {
@@ -117,9 +124,9 @@ export class CheckInComponent implements OnInit {
    */
   private onSubmitCheckin(userId: number) {
     userId = parseInt(userId.toString());
-    this.checkInService.isCheckedIn(userId).subscribe((result) => {
+    const checkSubscription = this.checkInService.isCheckedIn(userId).subscribe((result) => {
       if (result === true) {
-        this.checkInService
+        const checkOutSubscription = this.checkInService
           .checkOut(userId)
           .subscribe((res: CheckInHistory) => {
             this.isLoading = false;
@@ -130,8 +137,10 @@ export class CheckInComponent implements OnInit {
             );
             this.cdr.detectChanges();
           });
+
+        this.subscriptions.push(checkOutSubscription);
       } else {
-        this.checkInService.checkIn(userId).subscribe((res: CheckInHistory) => {
+        const checkInSubscription = this.checkInService.checkIn(userId).subscribe((res: CheckInHistory) => {
           this.isLoading = false;
           this.toastr.success(
             `Checked in successfully at ${this.getLocalTime(
@@ -140,7 +149,11 @@ export class CheckInComponent implements OnInit {
           );
           this.cdr.detectChanges();
         });
+
+        this.subscriptions.push(checkInSubscription);
       }
     });
+
+    this.subscriptions.push(checkSubscription);
   }
 }
