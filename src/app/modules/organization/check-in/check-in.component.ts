@@ -71,7 +71,7 @@ export class CheckInComponent implements OnInit {
 
   onSearch() {
     this.checkInService
-      .getCheckinHistory(
+      .getCheckInHistory(
         this.searchUserId,
         this.searchStartDate,
         this.searchEndDate
