@@ -58,19 +58,24 @@
         <tbody>
           <tr
             *ngFor="
-              let registration of registrationService.registrations | async
+              let registration of registrationService.registrations | async | checkInSort | async
             "
           >
             <td>{{ registration.firstName }}</td>
             <td>{{ registration.lastName }}</td>
             <td>
-              <span
-                class="label label-lg label-light-primary label-inline"
-                >{{ checkInService.isCheckedIn(registration.userId) | async }}</span
-              >
+              <span class="label label-lg label-light-primary label-inline" *ngIf="checkInService.isCheckedIn(registration.userId) | async; else checkedOut">
+                Checked in
+              </span>
+              <ng-template #checkedOut>
+                <span class="label label-lg label-light-danger label-inline">
+                  Checked out
+                </span>
+              </ng-template>
             </td>
             <td class="text-right">
               <button 
+              routerLink="/organization/check-in-details/{{ registration.userId }}"
               type="button" 
               class="btn btn-primary mr-2" 
               placement="top" 
@@ -83,15 +88,5 @@
       </table>
     </div>
     <!--end: Item-->
-
-    <!-- <div class="d-flex flex-wrap align-items-center mb-10">
-            <div class="example-preview flex-grow-1  ">
-                <div class="example-container ">
-                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" (page)="pageEvents($event)" [pageIndex]="page"
-                        [showFirstLastButtons]="true" [length]="(bookService.books | async)?.length">
-                    </mat-paginator>
-                </div>
-            </div>
-        </div> -->
   </div>
 </div>
