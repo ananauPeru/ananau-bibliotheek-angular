@@ -56,7 +56,7 @@ export class CheckInService {
     return this.checkInHttpService.putCheckOut$(userId);
   }
 
-  getCheckinHistory(userId: number, startDate: Date | null, endDate: Date | null): Observable<CheckInHistory[]> {
+  getCheckInHistory(userId: number, startDate: Date | null, endDate: Date | null): Observable<CheckInHistory[]> {
     return this.checkInHttpService.getAllCheckInHistoryOfUser$(userId, startDate, endDate);
   }
 }

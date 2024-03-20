@@ -2,8 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
-import { catchError, delay, map } from "rxjs/operators";
-import { start } from "repl";
+import { delay } from "rxjs/operators";
 
 const API_GENERAL_INFORMATION_URL = `${environment.apiUrl}/checkin`;
 
@@ -27,6 +26,7 @@ const MOCK_CHECKIN_HISTORY: CheckInHistory[] = [
     checkOutTime: "2023-06-01T16:30:00",
   },
   { id: 4, userId: 2, checkInTime: "2023-06-03T08:45:00", checkOutTime: null },
+  { id: 5, userId: 72, checkInTime: "2024-03-03T08:45:00", checkOutTime: null },
 ];
 
 @Injectable({
