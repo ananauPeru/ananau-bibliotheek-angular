@@ -46,7 +46,6 @@ import { NgxDropzoneModule } from "ngx-dropzone";
 import { OrganizationRoutingModule } from "./organization-routing.module";
 import { RolesComponent } from "./roles/roles.component";
 import { OrganizationComponent } from "./organization.component";
-import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationsOverviewComponent } from "./registrations-overview/registrations-overview.component";
 import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
 import { CalendarComponent } from './calendar/calendar.component';
