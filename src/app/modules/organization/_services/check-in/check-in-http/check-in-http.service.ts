@@ -147,8 +147,6 @@ export class CheckInHttpService {
     //         })
     //     );
 
-
-
     let filteredHistory = MOCK_CHECKIN_HISTORY.filter(
       (history) => history.userId === userId
     );
@@ -170,5 +168,27 @@ export class CheckInHttpService {
     }
   
     return of(filteredHistory).pipe(delay(500));
+  }
+
+  getAllCheckInHistory$(): Observable<CheckInHistory[]> {
+    // const url = `${API_GENERAL_INFORMATION_URL}/history`;
+
+    // return this.http
+    //     .get<CheckInHistory[]>(url)
+    //     .pipe(
+    //         catchError((error) => {
+    //             if(error.status === 401) {
+    //                 console.error("Login please...");
+    //             } else {
+    //                 console.error(error);
+    //             }
+    //             return throwError(error);
+    //         }),
+    //         map((checkInHisories: any): CheckInHistory[] => {
+    //             return checkInHisories;
+    //         })
+    //     );
+
+    return of(MOCK_CHECKIN_HISTORY).pipe(delay(500));
   }
 }

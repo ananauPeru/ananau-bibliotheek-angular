@@ -850,6 +850,17 @@ export const locale = {
       },
     },
 
+    CHECK_IN: {
+      LIST: {
+        FIRST_NAME: "First name",
+        LAST_NAME: "Last name",
+        CHECK_IN_STATUS: "Check in status",
+        CHECKED_IN: "Checked in",
+        CHECKED_OUT: "Checked out",
+        DETAILS: "Details",
+      }
+    },
+
     GENERAL_INFORMATION: {
       PAGE_TITLE: "General Information",
       VISA: {

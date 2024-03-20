@@ -15,6 +15,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+import { QRCodeModule } from 'angularx-qrcode';
+import { AsyncPipe } from '@angular/common';
 
 
 // Highlight JS
@@ -50,6 +52,7 @@ LOAD_WASM().subscribe();
     QuillModule.forRoot(),
     ReactiveFormsModule,
     NgxScannerQrcodeModule,
+    QRCodeModule,
   ],
   providers: [
     {
