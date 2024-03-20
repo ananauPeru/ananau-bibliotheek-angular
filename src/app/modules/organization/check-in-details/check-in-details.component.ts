@@ -20,6 +20,8 @@ export class CheckInDetailsComponent implements OnInit {
   endDate: Date;
   checkInHistory$: Observable<CheckInHistory[]>;
 
+  selectedMonth: Date = new Date();
+
   constructor(
     private route: ActivatedRoute,
     private checkInService: CheckInService,
@@ -120,6 +122,26 @@ export class CheckInDetailsComponent implements OnInit {
   getLastDayOfMonth(): Date {
     const currentDate = new Date();
     return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+  }
+
+  getFirstDayOfSelectedMonth(): Date {
+    return new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth(), 1);
+  }
+  
+  getLastDayOfSelectedMonth(): Date {
+    return new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth() + 1, 0);
+  }
+  
+  goToPreviousMonth(): void {
+    this.selectedMonth = new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth() - 1, 1);
+  }
+  
+  goToNextMonth(): void {
+    this.selectedMonth = new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth() + 1, 1);
+  }
+  
+  resetToCurrentMonth(): void {
+    this.selectedMonth = new Date();
   }
 
   isCheckedIn$(userId: number): Observable<boolean> {
