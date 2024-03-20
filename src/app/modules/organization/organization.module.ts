@@ -55,6 +55,7 @@ import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
 import { QRCodeModule } from 'angularx-qrcode';
 import { CheckInListComponent } from "./check-in-list/check-in-list.component";
 import { CheckInSortPipe } from "./_pipe/check-in-sort.pipe";
+import { CheckInDetailsComponent } from "./check-in-details/check-in-details.component";
 
 // LOAD_WASM().subscribe();
 
@@ -68,6 +69,7 @@ import { CheckInSortPipe } from "./_pipe/check-in-sort.pipe";
     EditGeneralInformationComponent,
     CheckInComponent,
     CheckInListComponent,
+    CheckInDetailsComponent,
     CheckInSortPipe,
   ],
   imports: [

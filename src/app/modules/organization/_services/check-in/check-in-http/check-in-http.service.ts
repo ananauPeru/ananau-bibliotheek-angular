@@ -26,7 +26,9 @@ const MOCK_CHECKIN_HISTORY: CheckInHistory[] = [
     checkOutTime: "2023-06-01T16:30:00",
   },
   { id: 4, userId: 2, checkInTime: "2023-06-03T08:45:00", checkOutTime: null },
-  { id: 5, userId: 72, checkInTime: "2024-03-03T08:45:00", checkOutTime: null },
+  { id: 5, userId: 72, checkInTime: "2024-03-19T15:45:00", checkOutTime: "2024-03-19T17:50:00" },
+  { id: 6, userId: 72, checkInTime: "2024-03-20T08:45:00", checkOutTime: "2024-03-20T10:45:00" },
+  { id: 7, userId: 72, checkInTime: "2024-03-20T12:07:00", checkOutTime: "2024-03-20T13:12:00" },
 ];
 
 @Injectable({

@@ -1,3 +1,84 @@
-<p>
-  check-in-details works!
-</p>
+<div
+  class="card card-custom card-stretch"
+  *ngIf="isLoading == false; else loadingSpinner"
+>
+  <div class="card-header py-3">
+    <div class="card-title align-items-start flex-column">
+      <h3 class="card-label font-weight-bolder text-dark">Check In Details</h3>
+      <span class="text-muted font-weight-bold font-size-sm mt-1">
+        <!-- access data of registration -->
+        {{ registration.firstName }} {{ registration.lastName }}
+      </span>
+    </div>
+    <div class="card-toolbar">
+      <button
+        type="button"
+        class="btn btn-light-primary font-weight-bolder"
+        routerLink="/organization/check-in-list"
+      >
+        <i class="flaticon2-back"></i> Back
+      </button>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="row my-4">
+      <div class="col-12 col-md-3">Check in status</div>
+      <div class="col-12 col-md-9">
+        <div class="d-flex align-items-center">
+          <div class="font-weight-bolder font-size-lg">
+            <span
+              *ngIf="isCheckedIn$(id) | async; else notCheckedIn"
+              class="label label-lg label-light-primary label-inline font-weight-bold"
+              >Checked in</span
+            >
+            <ng-template #notCheckedIn>
+              <span
+                class="label label-lg label-light-danger label-inline font-weight-bold"
+                >Not checked in</span
+              >
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-3">Time checked in today</div>
+      <div class="col-12 col-md-9">
+        <div class="d-flex align-items-center">
+          <div class="font-weight-bolder font-size-lg">
+            {{
+              formatDuration(
+                calculateTotalCheckedInTimeToday(checkInHistory$ | async)
+              )
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-3">Total checked in time</div>
+      <div class="col-12 col-md-9">
+        <div class="d-flex align-items-center">
+          <div class="font-weight-bolder font-size-lg">
+            <ng-container *ngIf="checkInHistory$ | async as checkInHistory">
+              {{
+                formatDuration(
+                  calculateTotalCheckedInTime(checkInHistory, undefined, undefined)
+                )
+              }}
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingSpinner>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="spinner spinner-primary spinner-lg"></div>
+  </div>
+</ng-template>
