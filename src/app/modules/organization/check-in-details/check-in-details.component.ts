@@ -22,7 +22,7 @@ export class CheckInDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public checkInService: CheckInService,
+    private checkInService: CheckInService,
     private registrationService: RegistrationService,
     private cdr: ChangeDetectorRef
   ) {
