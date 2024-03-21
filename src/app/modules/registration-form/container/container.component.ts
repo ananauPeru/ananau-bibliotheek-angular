@@ -211,6 +211,9 @@ export class ContainerComponent implements OnInit {
     dto.weeksOnline = Number(spanish.get("weeksOnline").value);
     dto.weeks = Number(spanish.get("weeks").value);
 
+    const payments = organizationalForm.get("payments") as FormGroup;
+    dto.paymentDescription = payments.get("paymentDescription").value;
+
     const motivationLetter = organizationalForm.get("motivationLetter") as FormGroup;
     dto.motivationLetter = motivationLetter.get("motivationLetter").value;
 

@@ -314,6 +314,15 @@ export const locale = {
           WEEKS_INFO:
             "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
+        PAYMENTS: {
+          TITLE: 'Pagos',
+          INFO_PAYMENTS: 'Subir comprobante de pago de alojamiento (apartamento), garantía de apartamento, clases de español. Si estos pagos se realizaron en una sola transacción, cargue el documento del campo del apartamento y complete un campo de descripción debajo.',
+          PAYMENT_APARTMENT: 'Departamento',
+          PAYMENT_GUARANTEE: 'Garantizar',
+          PAYMENT_SPANISH: 'Lecciones de español',
+          PAYMENT_DESCRIPTION: 'Descripción de pago',
+          PAYMENT_DROP_SELECT: 'Suelte su(s) archivo(s) aquí o haga clic para seleccionarlo(s).',
+        },
         MOTIVATION_LETTER: {
           TITLE: 'Carta de motivación',
           MOTIVATION: 'Rellene el campo con tu carta de motivación',

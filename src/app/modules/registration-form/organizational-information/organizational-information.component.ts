@@ -7,10 +7,19 @@ import {
   Validators,
 } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
+import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
 import { RegistrationDTO } from "../_dto/registration-dto";
 import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
+import { UserStorageService } from "../data-services/user-storage.service";
+import { ScansFile } from "../models/scans-file";
+import { v4 as uuidv4 } from "uuid";
+import { BlobNamePrefix } from "../models/blob-name-prefix";
+import { HttpClient } from "@angular/common/http";
+import { ToastrUtil } from "src/app/_utils/toastr_util";
+import { Observable } from "rxjs";
+
 
 @Component({
   selector: "app-organizational-information",
@@ -27,11 +36,21 @@ export class OrganizationalInformationComponent implements OnInit {
   }>();
   @Input() public role: FormRole;
   @Input() public initialData: RegistrationDTO;
+  @Input() public upload: Observable<boolean>;
+  @Output() public saving = new EventEmitter<boolean>();
+  @Output() public sending = new EventEmitter<boolean>();
+  public paymentApartmentFiles = new Array<ScansFile>();
+  private filesToDelete = new Array<ScansFile>();
+  private previewImageForNonImageFiles: File;
+
 
   constructor(
     private fb: FormBuilder,
     private datePipe: DatePipe,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private userStorageService: UserStorageService,
+    private toastr: ToastrUtil,
+    private http: HttpClient,
   ) {}
 
   ngOnInit() {
@@ -72,6 +91,12 @@ export class OrganizationalInformationComponent implements OnInit {
         level: [this.initialData.level, Validators.required],
         weeksOnline: [this.initialData.weeksOnline],
         weeks: [this.initialData.weeks],
+      }),
+      payments: this.fb.group({
+        paymentApartment: [false],
+        paymentGuarantee: [false],
+        paymentSpanish: [false],
+        paymentDescription: [this.initialData.paymentDescription],
       }),
       motivationLetter: this.fb.group({
         motivationLetter: [this.initialData.motivationLetter, Validators.required],
@@ -135,6 +160,98 @@ export class OrganizationalInformationComponent implements OnInit {
 
     // When the form is changed, the parent form is also updated
     this.organizationalForm.valueChanges.subscribe(() => this.emitForm());
+
+
+
+    // Everytime a new Azure blob image comes in, update the form
+    this.userStorageService.getNewFile$.subscribe((file) => {
+      if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
+        this.paymentApartmentFiles.push(file);
+        this.updatePaymentApartment(false);
+      }/* 
+      if (file.name.startsWith(BlobNamePrefix.GoodConductCertificate)) {
+        this.goodConductCertificateFiles.push(file);
+        this.updateGoodConductCertificate(false);
+      } */
+    });
+
+
+
+
+    // Fetch the preview image from assets (will be shown when file is no image)
+    this.http.get("/assets/images/pdf.png", { responseType: "blob" }).subscribe(
+      (image) => {
+        this.previewImageForNonImageFiles = new File([image], "pdf.png", {
+          type: "image/png",
+        });
+      },
+      (error) => console.error(error),
+      () =>
+        // Ask the storage service to begin fetching blob images from Azure
+        this.userStorageService.fetchImages$()
+    );
+
+    // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards
+    this.upload.subscribe((submit) => {
+      if (submit) this.sending.emit(true);
+      else this.saving.emit(true);
+
+      Promise.all([
+        this.userStorageService.storeImages$(
+          this.paymentApartmentFiles.filter((file) => file.isNew)
+        ),
+        /* this.userStorageService.storeImages$(
+          this.passportPhotoFiles.filter((file) => file.isNew)
+        ), */
+        this.userStorageService.deleteImages$(this.filesToDelete),
+      ])
+        .then(() => {
+          this.paymentApartmentFiles.forEach(
+            (file) => (file.isNew = false)
+          );
+          /* this.passportPhotoFiles.forEach((file) => (file.isNew = false)); */
+          this.filesToDelete.length = 0;
+
+          this.toastr.showSuccess(
+            submit
+              ? this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_SUCCESS"
+                )
+              : this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SAVE_SUCCESS"
+                ),
+            this.translate.instant("REGISTRATION.GENERAL.TOASTS.SUCCESS")
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+          this.toastr.showError(
+            submit
+              ? this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_ERROR"
+                )
+              : this.translate.instant(
+                  "REGISTRATION.GENERAL.TOASTS.IMAGE_SAVE_ERROR"
+                ),
+            this.translate.instant("REGISTRATION.GENERAL.TOASTS.ERROR")
+          );
+        })
+        .finally(() => {
+          this.sending.emit(false);
+          this.saving.emit(false);
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
   }
 
   getErrorMessage(errors: ValidationErrors): string {
@@ -157,4 +274,54 @@ export class OrganizationalInformationComponent implements OnInit {
     const newHeight = textarea.scrollHeight + 2;
     textarea.style.height = (newHeight > initialHeight ? newHeight : initialHeight) + 'px';
   } 
+
+  public isImageFile(file: ScansFile): boolean {
+    if (file.type.startsWith("image")) return true;
+    else return false;
+  }
+
+  public getPreviewImage(file: ScansFile): File {
+    if (this.isImageFile(file)) return file;
+    else return this.previewImageForNonImageFiles;
+  }
+
+  
+
+  public onSelectApartmentFile(event: NgxDropzoneChangeEvent) {
+    const newFiles = this.createNewScansFiles(
+      event.addedFiles,
+      BlobNamePrefix.PaymentApartment
+    );
+    this.paymentApartmentFiles.push(...newFiles);
+    this.updatePaymentApartment(true);
+  }
+
+  public onRemoveApartmentFile(event: ScansFile) {
+    if (!event.isNew) this.filesToDelete.push(event); // files that are already stored in Azure, will need to be deleted when the form is saved
+    this.paymentApartmentFiles.splice(this.paymentApartmentFiles.indexOf(event), 1);
+    this.updatePaymentApartment(true);
+  }
+
+  private updatePaymentApartment(markAsTouched: boolean) {
+      const paymentApartment = this.organizationalForm.get("paymentApartment");
+      if (this.paymentApartmentFiles.length > 0) {
+        paymentApartment.setValue(true);
+      } else {
+        paymentApartment.setValue(false);
+      }
+      if (markAsTouched) paymentApartment.markAsTouched();
+    }
+
+  private createNewScansFiles(files: File[], prefix: string): ScansFile[] {
+    return files.map((file) => {
+      let f: any = file;
+      f.uniqueName = `${prefix}-${uuidv4()}`;
+      f.isNew = true;
+      return file as ScansFile;
+    });
+  }
+  
+
 }
+
+
