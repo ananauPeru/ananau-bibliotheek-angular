@@ -58,15 +58,20 @@ const routes: Routes = [
       },
       {
         path: "check-in",
-        component: CheckInComponent
-      },
-      {
-        path: "check-in-list",
-        component: CheckInListComponent
-      },
-      {
-        path: "check-in-details/:id",
-        component: CheckInDetailsComponent
+        children: [
+          {
+            path: "",
+            component: CheckInComponent,
+          },
+          {
+            path: "list",
+            component: CheckInListComponent,
+          },
+          {
+            path: ":id",
+            component: CheckInDetailsComponent,
+          },
+        ],
       },
       { path: "", redirectTo: "", pathMatch: "full" },
       { path: "**", redirectTo: "", pathMatch: "full" },
