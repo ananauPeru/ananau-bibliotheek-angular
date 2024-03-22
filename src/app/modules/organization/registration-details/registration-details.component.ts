@@ -262,16 +262,15 @@ export class RegistrationDetailsComponent implements OnInit {
   }
 
   async downloadQRCode(): Promise<void> {
-
     const data: QRCodeData = {
       id: this._userId,
       firstName: `${this._registration.value.firstName}`,
       lastName: `${this._registration.value.lastName}`,
       dateOfBirth: `${this._registration.value.dateOfBirth}`
-    }
-
+    };
+  
     const qrCodeData = JSON.stringify(data);
-    
+  
     const qrCodeOptions = {
       errorCorrectionLevel: "M",
       type: "png",
@@ -279,16 +278,43 @@ export class RegistrationDetailsComponent implements OnInit {
       color: {
         dark: "#008037",
         light: "#F7EBDA",
-      },
+      }
     };
-
+  
     try {
-      const qrCodeDataUrl = await QRCode.toDataURL(qrCodeData, qrCodeOptions);
+      const canvas = document.createElement('canvas');
+      await QRCode.toCanvas(canvas, qrCodeData, qrCodeOptions);
+  
+      // Load the image
+      const image = await this.loadImage('../../../../../assets/images/ananau-logo-color.png');
+  
+      // Calculate the position to place the image at the center
+      const imageSize = 128; // Adjust the size of the image as needed
+      const imageX = (canvas.width - imageSize) / 2;
+      const imageY = (canvas.height - imageSize) / 2;
+  
+      // Draw the image on the QR code canvas
+      const context = canvas.getContext('2d');
+      context.drawImage(image, imageX, imageY, imageSize, imageSize);
+  
+      // Convert the canvas to a data URL
+      const qrCodeDataUrl = canvas.toDataURL();
+  
+      // Convert the data URL to a Blob and save it
       const blob = this.dataURLtoBlob(qrCodeDataUrl);
       saveAs(blob, `${data.firstName}_${data.lastName}_qr_code.png`);
     } catch (error) {
       console.error('Error generating QR code:', error);
     }
+  }
+  
+  private async loadImage(url: string): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = (error) => reject(error);
+      image.src = url;
+    });
   }
 
   private dataURLtoBlob(dataUrl: string): Blob {
