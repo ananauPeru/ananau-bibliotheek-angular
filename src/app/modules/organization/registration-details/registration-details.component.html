@@ -384,6 +384,105 @@
             </tbody>
           </table>
         </div>
+
+
+
+
+
+
+
+        <div>
+          <h5 class="text-dark font-weight-bold mb-3">
+            {{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.TITLE" | translate }}
+          </h5>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>{{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_APARTMENT" | translate }}</td>
+                <td>
+                  <button
+                    *ngFor="let file of paymentApartmentFiles; let i = index"
+                    class="btn btn-primary mr-2"
+                    (click)="
+                      downloadFile(
+                        file,
+                        registration.firstName,
+                        registration.lastName,
+                        i
+                      )
+                    "
+                  >
+                    {{ "BUTTONS.DOWNLOAD" | translate }}
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_GUARANTEE" | translate }}</td>
+                <td>
+                  <button
+                    *ngFor="
+                      let file of paymentGuaranteeFiles;
+                      let i = index
+                    "
+                    class="btn btn-primary mr-2"
+                    (click)="
+                      downloadFile(
+                        file,
+                        registration.firstName,
+                        registration.lastName,
+                        i
+                      )
+                    "
+                  >
+                    {{ "BUTTONS.DOWNLOAD" | translate }}
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_SPANISH" | translate }}</td>
+                <td>
+                  <button
+                    *ngFor="let file of paymentSpanishFiles; let i = index"
+                    class="btn btn-primary mr-2"
+                    (click)="
+                      downloadFile(
+                        file,
+                        registration.firstName,
+                        registration.lastName,
+                        i
+                      )
+                    "
+                  >
+                    {{ "BUTTONS.DOWNLOAD" | translate }}
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_DESCRIPTION" | translate }}
+                </td>
+                <td>{{ registration.paymentDescription }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div>
           <h5 class="text-dark font-weight-bold mb-3">
             {{ "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.TITLE" | translate }}

@@ -793,6 +793,9 @@ export const locale = {
           GOOD_CONDUCT_CERTIFICATE: 'Bewijs van goed gedrag',
           DIPLOMA: 'Onderwijscertificaat',
           PASSPORT_PHOTO: 'Pasfoto',
+          PAYMENT_APARTMENT: 'Betaling appartement',
+          PAYMENT_GUARANTEE: 'Betalingsgarantie',
+          PAYMENT_SPANISH: 'Betaling Spaanse lessen',
         },
       },
       TOASTS: {
@@ -812,6 +815,7 @@ export const locale = {
           'Er ging iets mis bij het downloaden van het bestand. Probeer het later nog eens.',
       },
     },
+
     ORGANIZATION: {
       ROLES: {
         OVERVIEW: {

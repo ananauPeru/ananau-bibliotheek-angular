@@ -807,6 +807,9 @@ export const locale = {
           GOOD_CONDUCT_CERTIFICATE: 'Certificate of good conduct',
           DIPLOMA: 'Certificate of education',
           PASSPORT_PHOTO: 'Passport photo',
+          PAYMENT_APARTMENT: 'Payment apartment',
+          PAYMENT_GUARANTEE: 'Payment guarantee',
+          PAYMENT_SPANISH: 'Payment spanish lessons',
         },
       },
       TOASTS: {

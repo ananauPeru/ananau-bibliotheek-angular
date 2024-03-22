@@ -783,20 +783,6 @@ export const locale = {
       },
     },
 
-    ORGANIZATION: {
-      ROLES: {
-        OVERVIEW: {
-          TITLE: "Cambiar y asignar roles",
-          PLEASE_WAIT: "Espere por favor...",
-          FILTER: "Filtrar...",
-          FILTER_SUB:
-            "Intente buscar y filtrar por nombre, apellido, correo electrónico o función.",
-          FIRST_NAME: "Nombre propio",
-          LAST_NAME: "Apellido",
-        },
-      },
-    },
-
     // REGISTRATIONS OVERVIEW & DETAILS
     REGISTRATIONS: {
       STUDENT: "Estudiante",
@@ -824,6 +810,9 @@ export const locale = {
           GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
           DIPLOMA: "Certificado educativo",
           PASSPORT_PHOTO: "Foto del pasaporte",
+          PAYMENT_APARTMENT: 'Apartamento de pago',
+          PAYMENT_GUARANTEE: 'Garantía de pago',
+          PAYMENT_SPANISH: 'Clases de español de pago',
         },
       },
       TOASTS: {
@@ -841,6 +830,20 @@ export const locale = {
           "Se produjo un error al eliminar el registro. Por favor, inténtelo de nuevo más tarde.",
         DOWNLOAD_ERROR:
           "Se produjo un error al descargar el archivo. Por favor, inténtelo de nuevo más tarde.",
+      },
+    },
+
+    ORGANIZATION: {
+      ROLES: {
+        OVERVIEW: {
+          TITLE: "Cambiar y asignar roles",
+          PLEASE_WAIT: "Espere por favor...",
+          FILTER: "Filtrar...",
+          FILTER_SUB:
+            "Intente buscar y filtrar por nombre, apellido, correo electrónico o función.",
+          FIRST_NAME: "Nombre propio",
+          LAST_NAME: "Apellido",
+        },
       },
     },
   },
