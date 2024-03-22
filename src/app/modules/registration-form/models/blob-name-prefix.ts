@@ -5,4 +5,6 @@ export enum BlobNamePrefix {
   PassportPhoto = "passportphoto",
 
   PaymentApartment = "paymentapartment",
+  PaymentGuarantee = "paymentguarantee",
+  PaymentSpanish = "paymentspanish",
 }

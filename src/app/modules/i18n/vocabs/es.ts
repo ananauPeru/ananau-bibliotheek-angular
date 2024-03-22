@@ -316,7 +316,7 @@ export const locale = {
         },
         PAYMENTS: {
           TITLE: 'Pagos',
-          INFO_PAYMENTS: 'Subir comprobante de pago de alojamiento (apartamento), garantía de apartamento, clases de español. Si estos pagos se realizaron en una sola transacción, cargue el documento del campo del apartamento y complete un campo de descripción debajo.',
+          INFO_PAYMENTS: 'Subir confirmación de pago de alojamiento (apartamento), garantía de apartamento, clases de español. Si estos pagos se realizaron en una sola transacción, cargue el documento del campo del apartamento y complete un campo de descripción debajo.',
           PAYMENT_APARTMENT: 'Departamento',
           PAYMENT_GUARANTEE: 'Garantizar',
           PAYMENT_SPANISH: 'Lecciones de español',

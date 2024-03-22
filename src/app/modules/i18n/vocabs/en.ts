@@ -318,7 +318,7 @@ export const locale = {
         },
         PAYMENTS: {
           TITLE: 'Payments',
-          INFO_PAYMENTS: 'Upload proof of payment for accommodation (apartment), guarantee for apartment, Spanish classes. If these payments were made in a single transaction, upload the document for the apartment field and fill in a describtion field under.',
+          INFO_PAYMENTS: 'Upload confirmation of payment for accommodation (apartment), guarantee for apartment, Spanish classes. If these payments were made in a single transaction, upload the document for the apartment field and fill in a describtion field under.',
           PAYMENT_APARTMENT: 'Apartment',
           PAYMENT_GUARANTEE: 'Guarantee',
           PAYMENT_SPANISH: 'Spanish lessons',

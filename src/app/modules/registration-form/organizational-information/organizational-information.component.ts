@@ -40,6 +40,8 @@ export class OrganizationalInformationComponent implements OnInit {
   @Output() public saving = new EventEmitter<boolean>();
   @Output() public sending = new EventEmitter<boolean>();
   public paymentApartmentFiles = new Array<ScansFile>();
+  public paymentGuaranteeFiles = new Array<ScansFile>();
+  public paymentSpanishFiles = new Array<ScansFile>();
   private filesToDelete = new Array<ScansFile>();
   private previewImageForNonImageFiles: File;
 
@@ -161,8 +163,6 @@ export class OrganizationalInformationComponent implements OnInit {
     // When the form is changed, the parent form is also updated
     this.organizationalForm.valueChanges.subscribe(() => this.emitForm());
 
-
-
     // Everytime a new Azure blob image comes in, update the form
     this.userStorageService.getNewFile$.subscribe((file) => {
       if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
@@ -174,9 +174,6 @@ export class OrganizationalInformationComponent implements OnInit {
         this.updateGoodConductCertificate(false);
       } */
     });
-
-
-
 
     // Fetch the preview image from assets (will be shown when file is no image)
     this.http.get("/assets/images/pdf.png", { responseType: "blob" }).subscribe(
@@ -241,17 +238,6 @@ export class OrganizationalInformationComponent implements OnInit {
           this.saving.emit(false);
         });
     });
-
-
-
-
-
-
-
-
-
-
-
   }
 
   getErrorMessage(errors: ValidationErrors): string {
@@ -285,8 +271,6 @@ export class OrganizationalInformationComponent implements OnInit {
     else return this.previewImageForNonImageFiles;
   }
 
-  
-
   public onSelectApartmentFile(event: NgxDropzoneChangeEvent) {
     const newFiles = this.createNewScansFiles(
       event.addedFiles,
@@ -296,10 +280,40 @@ export class OrganizationalInformationComponent implements OnInit {
     this.updatePaymentApartment(true);
   }
 
+  public onSelectGuaranteeFile(event: NgxDropzoneChangeEvent) {
+    const newFiles = this.createNewScansFiles(
+      event.addedFiles,
+      BlobNamePrefix.PaymentGuarantee
+    );
+    this.paymentGuaranteeFiles.push(...newFiles);
+    this.updatePaymentGuarantee(true);
+  }
+
+  public onSelectSpanishFile(event: NgxDropzoneChangeEvent) {
+    const newFiles = this.createNewScansFiles(
+      event.addedFiles,
+      BlobNamePrefix.PaymentSpanish
+    );
+    this.paymentSpanishFiles.push(...newFiles);
+    this.updatePaymentSpanish(true);
+  }
+
   public onRemoveApartmentFile(event: ScansFile) {
     if (!event.isNew) this.filesToDelete.push(event); // files that are already stored in Azure, will need to be deleted when the form is saved
     this.paymentApartmentFiles.splice(this.paymentApartmentFiles.indexOf(event), 1);
     this.updatePaymentApartment(true);
+  }
+
+  public onRemoveGuaranteeFile(event: ScansFile) {
+    if (!event.isNew) this.filesToDelete.push(event); // files that are already stored in Azure, will need to be deleted when the form is saved
+    this.paymentGuaranteeFiles.splice(this.paymentGuaranteeFiles.indexOf(event), 1);
+    this.updatePaymentGuarantee(true);
+  }
+
+  public onRemoveSpanishFile(event: ScansFile) {
+    if (!event.isNew) this.filesToDelete.push(event); // files that are already stored in Azure, will need to be deleted when the form is saved
+    this.paymentSpanishFiles.splice(this.paymentSpanishFiles.indexOf(event), 1);
+    this.updatePaymentSpanish(true);
   }
 
   private updatePaymentApartment(markAsTouched: boolean) {
@@ -311,6 +325,26 @@ export class OrganizationalInformationComponent implements OnInit {
       }
       if (markAsTouched) paymentApartment.markAsTouched();
     }
+
+  private updatePaymentGuarantee(markAsTouched: boolean) {
+    const paymentGuarantee = this.organizationalForm.get("paymentGuarantee");
+    if (this.paymentGuaranteeFiles.length > 0) {
+      paymentGuarantee.setValue(true);
+    } else {
+      paymentGuarantee.setValue(false);
+    }
+    if (markAsTouched) paymentGuarantee.markAsTouched();
+  }
+
+  private updatePaymentSpanish(markAsTouched: boolean) {
+    const paymentSpanish = this.organizationalForm.get("paymentSpanish");
+    if (this.paymentSpanishFiles.length > 0) {
+      paymentSpanish.setValue(true);
+    } else {
+      paymentSpanish.setValue(false);
+    }
+    if (markAsTouched) paymentSpanish.markAsTouched();
+  }
 
   private createNewScansFiles(files: File[], prefix: string): ScansFile[] {
     return files.map((file) => {
