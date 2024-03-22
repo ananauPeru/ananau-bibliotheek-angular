@@ -20,6 +20,7 @@ export class CheckInDetailsComponent implements OnInit {
   endDate: Date;
   checkInHistory$: Observable<CheckInHistory[]>;
 
+  selectedWeek: Date = new Date();
   selectedMonth: Date = new Date();
 
   constructor(
@@ -112,6 +113,50 @@ export class CheckInDetailsComponent implements OnInit {
     const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
     return `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+  }
+
+  getFirstDayOfWeek(): Date {
+    const currentDate = new Date();
+    const day = currentDate.getDay();
+    const diff = currentDate.getDate() - day + (day === 0 ? -6 : 1);
+    return new Date(currentDate.setDate(diff));
+  }
+
+  getLastDayOfWeek(): Date {
+    const currentDate = new Date();
+    const day = currentDate.getDay();
+    const diff = currentDate.getDate() - day + (day === 0 ? 0 : 7);
+    return new Date(currentDate.setDate(diff));
+  }
+
+  getFirstDayOfSelectedWeek(): Date {
+    const day = this.selectedWeek.getDay();
+    const diff = this.selectedWeek.getDate() - day + (day === 0 ? -6 : 1);
+    return new Date(this.selectedWeek.setDate(diff));
+  }
+
+  getLastDayOfSelectedWeek(): Date {
+    const day = this.selectedWeek.getDay();
+    const diff = this.selectedWeek.getDate() - day + (day === 0 ? 0 : 7);
+    return new Date(this.selectedWeek.setDate(diff));
+  }
+
+  goToPreviousWeek(): void {
+    this.selectedWeek = new Date(this.selectedWeek.getFullYear(), this.selectedWeek.getMonth(), this.selectedWeek.getDate() - 7);
+  }
+
+  goToNextWeek(): void {
+    this.selectedWeek = new Date(this.selectedWeek.getFullYear(), this.selectedWeek.getMonth(), this.selectedWeek.getDate() + 7);
+  }
+
+  resetToCurrentWeek(): void {
+    this.selectedWeek = new Date();
+  }
+
+  getWeekRange(date: Date): string {
+    const startDate = this.getFirstDayOfSelectedWeek();
+    const endDate = this.getLastDayOfSelectedWeek();
+    return `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
   }
 
   getFirstDayOfMonth(): Date {
