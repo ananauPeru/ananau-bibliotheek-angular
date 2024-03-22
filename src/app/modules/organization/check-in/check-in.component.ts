@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { ChangeDetectorRef } from "@angular/core";
 import { QRCodeData } from "../_models/qr-code-data";
 import { Subscription } from "rxjs";
+import { OverlayService } from "../../overlay/_service/overlay.service";
 
 @Component({
   selector: "app-check-in",
@@ -32,7 +33,8 @@ export class CheckInComponent implements OnInit {
   constructor(
     private checkInService: CheckInService,
     private toastr: ToastrService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private overlayService: OverlayService
   ) {}
 
   ngOnInit() {}
@@ -42,7 +44,7 @@ export class CheckInComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
     this.scanner.stop();
   }
 
@@ -116,7 +118,7 @@ export class CheckInComponent implements OnInit {
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
 
-    return `${hours}:${minutes}:${seconds}`;
+    return `${hours}:${minutes}`;
   }
 
   /**
@@ -125,36 +127,72 @@ export class CheckInComponent implements OnInit {
    */
   private onSubmitCheckin(userId: number) {
     userId = parseInt(userId.toString());
-    const checkSubscription = this.checkInService.isCheckedIn(userId).subscribe((result) => {
-      if (result === true) {
-        const checkOutSubscription = this.checkInService
-          .checkOut(userId)
-          .subscribe((res: CheckInHistory) => {
-            this.isLoading = false;
-            this.toastr.success(
-              `Checked out successfully at ${this.getLocalTime(
-                new Date(res.checkOutTime)
-              )}`
-            );
-            this.cdr.detectChanges();
-          });
+    const checkSubscription = this.checkInService
+      .isCheckedIn(userId)
+      .subscribe((result) => {
+        if (result === true) {
+          const checkOutSubscription = this.checkInService
+            .checkOut(userId)
+            .subscribe((res: CheckInHistory) => {
+              this.isLoading = false;
 
-        this.subscriptions.push(checkOutSubscription);
-      } else {
-        const checkInSubscription = this.checkInService.checkIn(userId).subscribe((res: CheckInHistory) => {
-          this.isLoading = false;
-          this.toastr.success(
-            `Checked in successfully at ${this.getLocalTime(
-              new Date(res.checkInTime)
-            )}`
-          );
-          this.cdr.detectChanges();
-        });
+              this.showSuccessMessage(`
+            <h3>Goodbye ${this.qrCodeReusltJson.firstName}</h3>
+            <h3>Checked out successfully at <strong>${this.getLocalTime(
+              new Date(res.checkOutTime)
+            )}.</strong></h3>
+            `);
+              this.cdr.detectChanges();
+            });
 
-        this.subscriptions.push(checkInSubscription);
-      }
-    });
+          this.subscriptions.push(checkOutSubscription);
+        } else {
+          const checkInSubscription = this.checkInService
+            .checkIn(userId)
+            .subscribe((res: CheckInHistory) => {
+              this.isLoading = false;
+
+              const dateOfBirth = new Date(this.qrCodeReusltJson.dateOfBirth);
+              const today = new Date();
+
+              if (
+                dateOfBirth.getDate() === today.getDate() &&
+                dateOfBirth.getMonth() === today.getMonth()
+              ) {
+                this.showBirthdayMessage(
+                  this.getLocalTime(new Date(res.checkInTime))
+                );
+              } else {
+                this.showSuccessMessage(`
+          <h3>Welcome ${this.qrCodeReusltJson.firstName}</h3>
+          <h3>Checked in successfully at <strong>${this.getLocalTime(
+            new Date(res.checkInTime)
+          )}</strong></h3>
+          `);
+              }
+
+              this.cdr.detectChanges();
+            });
+
+          this.subscriptions.push(checkInSubscription);
+        }
+      });
 
     this.subscriptions.push(checkSubscription);
+  }
+
+  private showSuccessMessage(message: string) {
+    this.overlayService.open(message, 4000);
+  }
+
+  private showBirthdayMessage(time: string) {
+    this.overlayService.open(
+      `
+    <h3>Happy Birthday ${this.qrCodeReusltJson.firstName}!</h3>
+    <h3>Enjoy your day!</h3>
+    <h3>Checked in successfully at <strong>${time}</strong></h3>
+    `,
+      4000
+    );
   }
 }

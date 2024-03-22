@@ -16,7 +16,7 @@ import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
 import { QRCodeModule } from 'angularx-qrcode';
-import { AsyncPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 
 // Highlight JS
@@ -24,6 +24,8 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
 import { SplashScreenModule } from "./_metronic/partials/layout/splash-screen/splash-screen.module";
 
 import { httpInterceptorProviders } from "./http-interceptor";
+import { OverlayComponent } from './modules/overlay/overlay.component'
+import { OverlayService } from './modules/overlay/_service/overlay.service'
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -36,7 +38,7 @@ function appInitializer(authService: AuthService) {
 LOAD_WASM().subscribe();
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, OverlayComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -53,6 +55,8 @@ LOAD_WASM().subscribe();
     ReactiveFormsModule,
     NgxScannerQrcodeModule,
     QRCodeModule,
+    CommonModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
@@ -74,6 +78,7 @@ LOAD_WASM().subscribe();
       },
     },
     httpInterceptorProviders,
+    OverlayService,
   ],
   bootstrap: [AppComponent],
 })

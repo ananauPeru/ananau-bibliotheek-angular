@@ -277,8 +277,8 @@ export class RegistrationDetailsComponent implements OnInit {
       type: "png",
       width: 256,
       color: {
-        dark: "#000000",
-        light: "#ffffff",
+        dark: "#008037",
+        light: "#F7EBDA",
       },
     };
 
