@@ -43,6 +43,7 @@ export class CheckInComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.scanner.stop();
   }
 
   onCodeResult(resultString: any) {
