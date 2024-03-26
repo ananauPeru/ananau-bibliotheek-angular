@@ -64,7 +64,11 @@ export class OrganizationalInformationComponent implements OnInit {
       spanish: this.fb.group({
         level: [this.initialData.level, Validators.required],
         weeksOnline: [this.initialData.weeksOnline],
+        onlineStartDate: [this.initialData.onlineStartDate],
+        onlineEndDate: [this.initialData.onlineEndDate],
         weeks: [this.initialData.weeks],
+        offlineStartDate: [this.initialData.offlineStartDate],
+        offlineEndDate: [this.initialData.offlineEndDate],
       }),
       motivationLetter: this.fb.group({
         motivationLetter: [this.initialData.motivationLetter, Validators.required],
@@ -124,10 +128,14 @@ export class OrganizationalInformationComponent implements OnInit {
       );
     }
 
+    this.organizationalForm.controls.spanish.get("onlineEndDate").disable();
+    this.organizationalForm.controls.spanish.get("offlineEndDate").disable();
+
     this.emitForm();
 
     // When the form is changed, the parent form is also updated
     this.organizationalForm.valueChanges.subscribe(() => this.emitForm());
+
   }
 
   getErrorMessage(errors: ValidationErrors): string {
@@ -178,4 +186,19 @@ export class OrganizationalInformationComponent implements OnInit {
     const newHeight = textarea.scrollHeight + 2;
     textarea.style.height = (newHeight > initialHeight ? newHeight : initialHeight) + 'px';
   } 
+
+  calculateSpanishEndDate(startDateIdentifier: string, weeksIdentifier: string, endDateIdentifier: string) {
+    const spanishStartDate = this.organizationalForm.get(`spanish.${startDateIdentifier}`).value;
+    const spanishWeeks = this.organizationalForm.get(`spanish.${weeksIdentifier}`).value;
+  
+    if (spanishStartDate && spanishWeeks) {
+      const startDate = new Date(spanishStartDate);
+      const endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + (spanishWeeks * 7));
+  
+      this.organizationalForm.get(`spanish.${endDateIdentifier}`).setValue(
+        this.datePipe.transform(endDate, 'yyyy-MM-dd')
+      );
+    }
+  }
 }

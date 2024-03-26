@@ -247,6 +247,7 @@
             id="spanishWeeksOnline"
             type="number"
             formControlName="weeksOnline"
+            (input)="calculateSpanishEndDate('onlineStartDate', 'weeksOnline', 'onlineEndDate')"
           />
           <div
             *ngIf="
@@ -271,6 +272,80 @@
           }}</span>
         </div>
       </div>
+
+      <ng-container *ngIf="organizationalForm.get('spanish.weeksOnline').value > 0">
+        <div class="form-group row">
+          <label for="spanishOnlineStartDate" class="col-3">
+            <!-- {{
+              (role === "Student"
+                ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
+                : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
+              ) | translate
+            }} -->
+            Proposed Start Date Online Spanish
+          </label>
+          <div class="col-9">
+            <input
+              class="form-control form-control-solid"
+              id="spanishOnlineStartDate"
+              type="date"
+              formControlName="onlineStartDate"
+              placeholder="yyyy-mm-dd"
+              (input)="calculateSpanishEndDate('onlineStartDate', 'weeksOnline', 'onlineEndDate')"
+            />
+            <div
+              *ngIf="
+                organizationalForm.controls.dates.get('endDate')['errors'] &&
+                organizationalForm.controls.dates.get('endDate').touched
+              "
+              class="text-danger form-text"
+            >
+              {{
+                getErrorMessage(
+                  organizationalForm.controls.dates.get("endDate")["errors"]
+                )
+              }}
+            </div>
+          </div>
+        </div>
+  
+  
+        <div class="form-group row">
+          <label for="spanishOnlineEndDate" class="col-3">
+            <!-- {{
+              (role === "Student"
+                ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
+                : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
+              ) | translate
+            }} -->
+            Calculated End Date Online Spanish
+          </label>
+          <div class="col-9">
+            <input
+              class="form-control form-control-solid"
+              id="spanishOnlineEndDate"
+              type="date"
+              formControlName="onlineEndDate"
+              placeholder="yyyy-mm-dd"
+            />
+            <div
+              *ngIf="
+                organizationalForm.controls.dates.get('endDate')['errors'] &&
+                organizationalForm.controls.dates.get('endDate').touched
+              "
+              class="text-danger form-text"
+            >
+              {{
+                getErrorMessage(
+                  organizationalForm.controls.dates.get("endDate")["errors"]
+                )
+              }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      
+
       <!-- weeks -->
       <div class="form-group row">
         <label for="spanishWeeks" class="col-3">{{
@@ -301,6 +376,78 @@
           }}</span>
         </div>
       </div>
+
+      <ng-container *ngIf="organizationalForm.get('spanish.weeks').value > 0">
+        <div class="form-group row">
+          <label for="spanishStartDate" class="col-3">
+            <!-- {{
+              (role === "Student"
+                ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
+                : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
+              ) | translate
+            }} -->
+            Proposed Start Date Spanish
+          </label>
+          <div class="col-9">
+            <input
+              class="form-control form-control-solid"
+              id="spanishStartDate"
+              type="date"
+              formControlName="offlineStartDate"
+              placeholder="yyyy-mm-dd"
+              (input)="calculateSpanishEndDate('offlineStartDate', 'weeks', 'offlineEndDate')"
+            />
+            <div
+              *ngIf="
+                organizationalForm.controls.dates.get('endDate')['errors'] &&
+                organizationalForm.controls.dates.get('endDate').touched
+              "
+              class="text-danger form-text"
+            >
+              {{
+                getErrorMessage(
+                  organizationalForm.controls.dates.get("endDate")["errors"]
+                )
+              }}
+            </div>
+          </div>
+        </div>
+  
+  
+        <div class="form-group row">
+          <label for="spanishOfflineEndDate" class="col-3">
+            <!-- {{
+              (role === "Student"
+                ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
+                : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
+              ) | translate
+            }} -->
+            Calculated End Date Spanish
+          </label>
+          <div class="col-9">
+            <input
+              class="form-control form-control-solid"
+              id="spanishOfflineEndDate"
+              type="date"
+              formControlName="offlineEndDate"
+              placeholder="yyyy-mm-dd"
+            />
+            <div
+              *ngIf="
+                organizationalForm.controls.dates.get('endDate')['errors'] &&
+                organizationalForm.controls.dates.get('endDate').touched
+              "
+              class="text-danger form-text"
+            >
+              {{
+                getErrorMessage(
+                  organizationalForm.controls.dates.get("endDate")["errors"]
+                )
+              }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>

@@ -40,7 +40,11 @@ export class RegistrationDTO {
   // Spanish
   level: string;
   weeksOnline: number;
+  onlineStartDate: Date;
+  onlineEndDate: Date;
   weeks: number;
+  offlineStartDate: Date;
+  offlineEndDate: Date;
 
   // Motivation letter
   motivationLetter: string;
