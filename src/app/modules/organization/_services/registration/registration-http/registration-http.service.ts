@@ -107,4 +107,20 @@ export class RegistrationHttpService {
       })
     )
   }
+
+  updateSpanishDates$(userId: number, dates: any) {
+    return this.http
+    .put(
+      `${API_REGISTRATIONS_URL}/students/${userId}/spanish`,
+      dates
+    )
+    .pipe(
+      catchError((error) => {
+        if(error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      })
+    )
+  }
 }

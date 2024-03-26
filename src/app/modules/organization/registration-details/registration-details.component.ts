@@ -39,11 +39,24 @@ export class RegistrationDetailsComponent implements OnInit {
   public isEditingStartDateStay = false;
   public isEditingEndDateStay = false;
 
+  public isEditingStartDateOnline = false;
+  public isEditingEndDateOnline = false;
+  public isEditingStartDateOffline = false;
+  public isEditingEndDateOffline = false;
+
+
   dateForm = new FormGroup({
     startDate: new FormControl(),
     endDate: new FormControl(),
     leaveStartDate: new FormControl(),
     leaveEndDate: new FormControl(),
+  });
+
+  spanishDateForm = new FormGroup({
+    onlineStartDate: new FormControl(),
+    onlineEndDate: new FormControl(),
+    offlineStartDate: new FormControl(),
+    offlineEndDate: new FormControl(),
   });
 
   @ViewChild('confirmationModal') confirmationModal: TemplateRef<any>;
@@ -139,6 +152,38 @@ export class RegistrationDetailsComponent implements OnInit {
     }
   }
 
+  toggleEditingStartDateOnline(): void {
+    this.isEditingStartDateOnline = !this.isEditingStartDateOnline;
+
+    if(!this.isEditingStartDateOnline) {
+      this.dateForm.patchValue({ onlineStartDate: null });
+    }
+  }
+
+  toggleEditingEndDateOnline(): void {
+    this.isEditingEndDateOnline = !this.isEditingEndDateOnline;
+
+    if(!this.isEditingEndDateOnline) {
+      this.dateForm.patchValue({ onlineEndDate: null });
+    }
+  }
+
+  toggleEditingStartDateOffline(): void {
+    this.isEditingStartDateOffline = !this.isEditingStartDateOffline;
+
+    if(!this.isEditingStartDateOffline) {
+      this.dateForm.patchValue({ offlineStartDate: null });
+    }
+  }
+
+  toggleEditingEndDateOffline(): void {
+    this.isEditingEndDateOffline = !this.isEditingEndDateOffline;
+
+    if(!this.isEditingEndDateOffline) {
+      this.dateForm.patchValue({ offlineEndDate: null });
+    }
+  }
+
   openConfirmationModal() {
     this.modalService.open(this.confirmationModal, { centered: true });
   }
@@ -150,10 +195,25 @@ export class RegistrationDetailsComponent implements OnInit {
     this.isEditingEndDateStay = false;
   }
 
+  private setSpanishEditingFalse() : void {
+    this.isEditingStartDateOnline = false;
+    this.isEditingEndDateOnline = false;
+    this.isEditingStartDateOffline = false;
+    this.isEditingEndDateOffline = false;
+  }
+
   isDateSaveButtonDisabled(): boolean {
     const formValues = Object.values(this.dateForm.value);
     return formValues.every(value => value === null);
   }
+
+  isSpanishDateSaveButtonDisabled() {
+    const formValues = Object.values(this.spanishDateForm.value);
+    return formValues.every(value => value === null);
+  }
+
+  // Fix the errors in registration-detauls.component.html
+
  
 
   
@@ -257,6 +317,23 @@ export class RegistrationDetailsComponent implements OnInit {
     this.registrationService.updateRegistrationDates$(this._userId, this.dateForm.value).subscribe(
       () => {
         this.setEditingFalse();
+        this.fetchRegistrationData();
+        this.toastr.showSuccess(this.translate.instant("REGISTRATIONS.TOASTS.DATES_CHANGE_SUCCESS"), this.translate.instant("REGISTRATIONS.TOASTS.SUCCESS"));
+      },
+      (err) => {
+        console.error(err);
+        this.toastr.showError(this.translate.instant("REGISTRATIONS.TOASTS.DATES_CHANGE_ERROR"), this.translate.instant("REGISTRATIONS.TOASTS.ERROR"));
+      },
+      () => {
+        this.cdRef.detectChanges();
+      }
+    )
+  }
+
+  onSubmitSpanishDateChange() {
+    this.registrationService.updateSpanishDates$(this._userId, this.spanishDateForm.value).subscribe(
+      () => {
+        this.setSpanishEditingFalse();
         this.fetchRegistrationData();
         this.toastr.showSuccess(this.translate.instant("REGISTRATIONS.TOASTS.DATES_CHANGE_SUCCESS"), this.translate.instant("REGISTRATIONS.TOASTS.SUCCESS"));
       },

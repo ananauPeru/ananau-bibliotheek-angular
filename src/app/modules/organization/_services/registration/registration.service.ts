@@ -81,4 +81,8 @@ export class RegistrationService {
   updateRegistrationDates$(userId: number, dates: any) {
     return this.registartionHttpService.updateRegistrationDates$(userId, dates);
   }
+
+  updateSpanishDates$(userId: number, dates: any) {
+    return this.registartionHttpService.updateSpanishDates$(userId, dates);
+  }
 }

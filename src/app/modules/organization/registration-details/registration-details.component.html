@@ -301,7 +301,9 @@
                       ) | translate
                     }}
                   </td>
-                  <td *ngIf="!isEditingStartDateInternship">{{ registration.startDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingStartDateInternship">
+                    {{ registration.startDate | date : "dd-MM-yyyy" }}
+                  </td>
                   <td *ngIf="isEditingStartDateInternship">
                     <input
                       class="form-control form-control-solid"
@@ -314,12 +316,23 @@
                   <td class="text-right">
                     <button
                       (click)="toggleEditingStartDateInternship()"
-                      type="button" 
-                      class="btn btn-primary mr-2" 
-                      placement="top" 
-                      ngbTooltip="{{ (isEditingStartDateInternship ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                      type="button"
+                      class="btn btn-primary mr-2"
+                      placement="top"
+                      ngbTooltip="{{
+                        (isEditingStartDateInternship
+                          ? 'BUTTONS.CANCEL'
+                          : 'EDIT'
+                        ) | translate
+                      }}"
                     >
-                      <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingStartDateInternship, 'fa-times': isEditingStartDateInternship}"></i>
+                      <i
+                        class="fas pr-0"
+                        [ngClass]="{
+                          'fa-pen': !isEditingStartDateInternship,
+                          'fa-times': isEditingStartDateInternship
+                        }"
+                      ></i>
                     </button>
                   </td>
                 </tr>
@@ -334,7 +347,9 @@
                       ) | translate
                     }}
                   </td>
-                  <td *ngIf="!isEditingEndDateInternship">{{ registration.endDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingEndDateInternship">
+                    {{ registration.endDate | date : "dd-MM-yyyy" }}
+                  </td>
                   <td *ngIf="isEditingEndDateInternship">
                     <input
                       class="form-control form-control-solid"
@@ -347,12 +362,21 @@
                   <td class="text-right">
                     <button
                       (click)="toggleEditingEndDateInternship()"
-                      type="button" 
-                      class="btn btn-primary mr-2" 
-                      placement="top" 
-                      ngbTooltip="{{ (isEditingEndDateInternship ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                      type="button"
+                      class="btn btn-primary mr-2"
+                      placement="top"
+                      ngbTooltip="{{
+                        (isEditingEndDateInternship ? 'BUTTONS.CANCEL' : 'EDIT')
+                          | translate
+                      }}"
                     >
-                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingEndDateInternship, 'fa-times': isEditingEndDateInternship}"></i>
+                      <i
+                        class="fas pr-0"
+                        [ngClass]="{
+                          'fa-pen': !isEditingEndDateInternship,
+                          'fa-times': isEditingEndDateInternship
+                        }"
+                      ></i>
                     </button>
                   </td>
                 </tr>
@@ -365,7 +389,9 @@
                         | translate
                     }}
                   </td>
-                  <td *ngIf="!isEditingStartDateStay">{{ registration.leaveStartDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingStartDateStay">
+                    {{ registration.leaveStartDate | date : "dd-MM-yyyy" }}
+                  </td>
                   <td *ngIf="isEditingStartDateStay">
                     <input
                       class="form-control form-control-solid"
@@ -373,17 +399,26 @@
                       type="date"
                       formControlName="leaveStartDate"
                       placeholder="yyyy-mm-dd"
-                      ngbTooltip="{{ (isEditingStartDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                      ngbTooltip="{{
+                        (isEditingStartDateStay ? 'BUTTONS.CANCEL' : 'EDIT')
+                          | translate
+                      }}"
                     />
                   </td>
                   <td class="text-right">
                     <button
                       (click)="toggleEditingStartDateStay()"
-                      type="button" 
-                      class="btn btn-primary mr-2" 
-                      placement="top" 
+                      type="button"
+                      class="btn btn-primary mr-2"
+                      placement="top"
                     >
-                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingStartDateStay, 'fa-times': isEditingStartDateStay}"></i>
+                      <i
+                        class="fas pr-0"
+                        [ngClass]="{
+                          'fa-pen': !isEditingStartDateStay,
+                          'fa-times': isEditingStartDateStay
+                        }"
+                      ></i>
                     </button>
                   </td>
                 </tr>
@@ -395,7 +430,9 @@
                       "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
                     }}
                   </td>
-                  <td *ngIf="!isEditingEndDateStay">{{ registration.leaveEndDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingEndDateStay">
+                    {{ registration.leaveEndDate | date : "dd-MM-yyyy" }}
+                  </td>
                   <td *ngIf="isEditingEndDateStay">
                     <input
                       class="form-control form-control-solid"
@@ -403,17 +440,26 @@
                       type="date"
                       formControlName="leaveEndDate"
                       placeholder="yyyy-mm-dd"
-                      ngbTooltip="{{ (isEditingEndDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                      ngbTooltip="{{
+                        (isEditingEndDateStay ? 'BUTTONS.CANCEL' : 'EDIT')
+                          | translate
+                      }}"
                     />
                   </td>
                   <td class="text-right">
                     <button
                       (click)="toggleEditingEndDateStay()"
-                      type="button" 
-                      class="btn btn-primary mr-2" 
-                      placement="top" 
+                      type="button"
+                      class="btn btn-primary mr-2"
+                      placement="top"
                     >
-                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingEndDateStay, 'fa-times': isEditingEndDateStay}"></i>
+                      <i
+                        class="fas pr-0"
+                        [ngClass]="{
+                          'fa-pen': !isEditingEndDateStay,
+                          'fa-times': isEditingEndDateStay
+                        }"
+                      ></i>
                     </button>
                   </td>
                 </tr>
@@ -445,17 +491,25 @@
 
           <!-- FORM END -->
         </div>
+
+        <!-- ESPAÑOL CHICO -->
+        <!-- COMÓ ESTAS? TODOS BIEN? -->
+        <!-- IF YOU WANT MORE INFORMATION CONTACT ME ON WHATSAPP (+32 493 43 60 69) -->
+
         <div>
           <h5 class="text-dark font-weight-bold mb-3">
             {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.TITLE" | translate }}
           </h5>
+
+          <form [formGroup]="spanishDateForm" (ngSubmit)="onSubmitSpanishDateChange()">
           <table class="table table-hover">
             <tbody>
               <tr>
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.LEVEL" | translate }}
                 </td>
-                <td>{{ registration.level }}</td>
+                <td style="width: 50%;">{{ registration.level }}</td>
+                <td></td>
               </tr>
               <tr>
                 <td>
@@ -465,25 +519,224 @@
                   }}
                 </td>
                 <td>{{ registration.weeksOnline }}</td>
+                <td></td>
               </tr>
+
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.SPANISH.START_DATE_ONLINE"
+                      | translate
+                  }}
+                </td>
+                <td *ngIf="!isEditingStartDateOnline">
+                  {{ registration.startDateOnline | date : "dd-MM-yyyy" }}
+                </td>
+                <td *ngIf="isEditingStartDateOnline">
+                  <input
+                    class="form-control form-control-solid"
+                    id="start-date-online"
+                    type="date"
+                    formControlName="onlineStartDate"
+                    placeholder="yyyy-mm-dd"
+                  />
+                </td>
+                <td class="text-right">
+                  <button
+                    (click)="toggleEditingStartDateOnline()"
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    placement="top"
+                    ngbTooltip="{{
+                      (isEditingStartDateOnline ? 'BUTTONS.CANCEL' : 'EDIT')
+                        | translate
+                    }}"
+                  >
+                    <i
+                      class="fas pr-0"
+                      [ngClass]="{
+                        'fa-pen': !isEditingStartDateOnline,
+                        'fa-times': isEditingStartDateOnline
+                      }"
+                    ></i>
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.SPANISH.END_DATE_ONLINE"
+                      | translate
+                  }}
+                </td>
+                <td *ngIf="!isEditingEndDateOnline">
+                  {{ registration.startDateOnline | date : "dd-MM-yyyy" }}
+                </td>
+                <td *ngIf="isEditingEndDateOnline">
+                  <input
+                    class="form-control form-control-solid"
+                    id="end-date-online"
+                    type="date"
+                    formControlName="onlineEndDate"
+                    placeholder="yyyy-mm-dd"
+                  />
+                </td>
+                <td class="text-right flex">
+                  <button
+                    (click)="toggleEditingEndDateOnline()"
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    placement="top"
+                    ngbTooltip="{{
+                      (isEditingEndDateOnline ? 'BUTTONS.CANCEL' : 'EDIT')
+                        | translate
+                    }}"
+                  >
+                    <i
+                      class="fas pr-0"
+                      [ngClass]="{
+                        'fa-pen': !isEditingEndDateOnline,
+                        'fa-times': isEditingEndDateOnline
+                      }"
+                    ></i>
+                  </button>
+                </td>
+              </tr>
+
               <tr>
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS" | translate }}
                 </td>
                 <td>{{ registration.weeks }}</td>
+                <td></td>
               </tr>
+
+
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.SPANISH.START_DATE"
+                      | translate
+                  }}
+                </td>
+                <td *ngIf="!isEditingStartDateOffline">
+                  {{ registration.startDateOffline | date : "dd-MM-yyyy" }}
+                </td>
+                <td *ngIf="isEditingStartDateOffline">
+                  <input
+                    class="form-control form-control-solid"
+                    id="start-date-offline"
+                    type="date"
+                    formControlName="offlineStartDate"
+                    placeholder="yyyy-mm-dd"
+                  />
+                </td>
+                <td class="text-right">
+                  <button
+                    (click)="toggleEditingStartDateOffline()"
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    placement="top"
+                    ngbTooltip="{{
+                      (isEditingStartDateOffline ? 'BUTTONS.CANCEL' : 'EDIT')
+                        | translate
+                    }}"
+                  >
+                    <i
+                      class="fas pr-0"
+                      [ngClass]="{
+                        'fa-pen': !isEditingStartDateOffline,
+                        'fa-times': isEditingStartDateOffline
+                      }"
+                    ></i>
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.SPANISH.END_DATE_ONLINE"
+                      | translate
+                  }}
+                </td>
+                <td *ngIf="!isEditingEndDateOffline">
+                  {{ registration.startDateOffline | date : "dd-MM-yyyy" }}
+                </td>
+                <td *ngIf="isEditingEndDateOffline">
+                  <input
+                    class="form-control form-control-solid"
+                    id="end-date-offline"
+                    type="date"
+                    formControlName="offlineEndDate"
+                    placeholder="yyyy-mm-dd"
+                  />
+                </td>
+                <td class="text-right flex">
+                  <button
+                    (click)="toggleEditingEndDateOffline()"
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    placement="top"
+                    ngbTooltip="{{
+                      (isEditingEndDateOffline ? 'BUTTONS.CANCEL' : 'EDIT')
+                        | translate
+                    }}"
+                  >
+                    <i
+                      class="fas pr-0"
+                      [ngClass]="{
+                        'fa-pen': !isEditingEndDateOffline,
+                        'fa-times': isEditingEndDateOffline
+                      }"
+                    ></i>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Save Changes Button -->
+              <tr
+              *ngIf="
+                isEditingStartDateOnline ||
+                isEditingEndDateOnline ||
+                isEditingStartDateOffline ||
+                isEditingEndDateOffline
+              "
+            >
+              <td></td>
+              <td></td>
+              <td class="text-right">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="isSpanishDateSaveButtonDisabled()"
+                >
+                  {{ "BUTTONS.SAVE_CHANGES" | translate }}
+                </button>
+              </td>
+            </tr>
+
+
+
             </tbody>
           </table>
+        </form>
         </div>
         <div>
           <h5 class="text-dark font-weight-bold mb-3">
-            {{ "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.TITLE" | translate }}
+            {{
+              "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.TITLE" | translate
+            }}
           </h5>
           <table class="table table-hover">
             <tbody>
               <tr>
                 <td>
-                  {{ "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION" | translate }}
+                  {{
+                    "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION"
+                      | translate
+                  }}
                 </td>
                 <td>{{ registration.motivationLetter }}</td>
               </tr>
@@ -582,8 +835,11 @@
                     )
                   "
                 >
-                <i class="fas fa-download"></i>
-                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
+                  <i class="fas fa-download"></i>
+                  {{
+                    "BUTTONS.DOWNLOAD_FILE_NUMBER"
+                      | translate : { number: i + 1 }
+                  }}
                 </button>
               </td>
             </tr>
@@ -605,8 +861,11 @@
                     )
                   "
                 >
-                <i class="fas fa-download"></i>
-                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
+                  <i class="fas fa-download"></i>
+                  {{
+                    "BUTTONS.DOWNLOAD_FILE_NUMBER"
+                      | translate : { number: i + 1 }
+                  }}
                 </button>
               </td>
             </tr>
@@ -625,8 +884,11 @@
                     )
                   "
                 >
-                <i class="fas fa-download"></i>
-                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
+                  <i class="fas fa-download"></i>
+                  {{
+                    "BUTTONS.DOWNLOAD_FILE_NUMBER"
+                      | translate : { number: i + 1 }
+                  }}
                 </button>
               </td>
             </tr>
@@ -645,8 +907,11 @@
                     )
                   "
                 >
-                <i class="fas fa-download"></i>
-                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
+                  <i class="fas fa-download"></i>
+                  {{
+                    "BUTTONS.DOWNLOAD_FILE_NUMBER"
+                      | translate : { number: i + 1 }
+                  }}
                 </button>
               </td>
             </tr>
@@ -735,8 +1000,15 @@
 <!-- Confirmation Modal -->
 <ng-template #confirmationModal let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">{{ "REGISTRATIONS.DETAILS.DELETE" | translate }}</h5>
-    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+    <h5 class="modal-title">
+      {{ "REGISTRATIONS.DETAILS.DELETE" | translate }}
+    </h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -744,7 +1016,15 @@
     {{ "REGISTRATIONS.DETAILS.DELETE_CONFIRMATION_MESSAGE" | translate }}
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">{{ "BUTTONS.CANCEL" | translate }}</button>
-    <button type="button" class="btn btn-danger" (click)="delete(); modal.close()">{{ "BUTTONS.CONFIRM" | translate }}</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
+      {{ "BUTTONS.CANCEL" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="delete(); modal.close()"
+    >
+      {{ "BUTTONS.CONFIRM" | translate }}
+    </button>
   </div>
 </ng-template>
