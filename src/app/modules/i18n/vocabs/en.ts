@@ -322,6 +322,10 @@ export const locale = {
             "If you do not yet speak a basic level of Spanish, it is mandatory to take a minimum of 3 months of Spanish lessons. If you already have a basis, the lessons are without obligation, but always recommended to improve your level.",
           LEVEL: "Describe your level of Spanish",
           WEEKS_ONLINE: "Number of weeks online Spanish lessons",
+          START_DATE_ONLINE: "Start date online Spanish lessons",
+          END_DATE_ONLINE: "End date online Spanish lessons",
+          START_DATE: "Start date Spanish lessons on-site",
+          END_DATE: "End date Spanish lessons on-site",
           WEEKS_ONLINE_INFO_VOLUNTEER:
             "If you do not yet speak a basic level of Spanish, we recommend you apply for 4 weeks of online Spanish lessons. These lessons will be provided through video call, prior to your arrival at Añañau.",
           WEEKS_ONLINE_INFO_STUDENT:

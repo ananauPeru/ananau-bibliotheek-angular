@@ -310,6 +310,10 @@ export const locale = {
             "Als je nog geen basisniveau Spaans spreekt, is het verplicht om minimaal 3 maanden Spaanse les te volgen. Als je al een basis hebt, zijn de lessen vrijblijvend, maar steeds aangeraden om je niveau te verbeteren.",
           LEVEL: "Beschrijf je niveau Spaans",
           WEEKS_ONLINE: "Aantal weken online Spaanse les",
+          START_DATE_ONLINE: "Startdatum online Spaanse les",
+          END_DATE_ONLINE: "Einddatum online Spaanse les",
+          START_DATE: "Startdatum Spaanse les ter plaatse",
+          END_DATE: "Einddatum Spaanse les ter plaatse",
           WEEKS_ONLINE_INFO_VOLUNTEER:
             "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 4 weken online Spaanse les. Deze lessen zullen gegeven worden via een videogesprek, voorafgaand aan je aankomst in Añañau.",
           WEEKS_ONLINE_INFO_STUDENT:
