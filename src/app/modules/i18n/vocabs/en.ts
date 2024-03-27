@@ -853,6 +853,7 @@ export const locale = {
     },
 
     CHECK_IN: {
+      SCAN_QR_CODE: "Scan QR code",
       LIST: {
         FIRST_NAME: "First name",
         LAST_NAME: "Last name",
