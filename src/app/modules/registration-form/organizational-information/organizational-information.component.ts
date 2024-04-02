@@ -46,7 +46,7 @@ export class OrganizationalInformationComponent implements OnInit {
   public paymentSpanishFiles = new Array<ScansFile>();
   private filesToDelete = new Array<ScansFile>();
   private previewImageForNonImageFiles: File;
-  private isTimeExceedingLimit = false;
+  public isTimeExceedingLimit = false;
 
   constructor(
     private fb: FormBuilder,
