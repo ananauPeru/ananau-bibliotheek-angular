@@ -193,18 +193,21 @@
           "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.NUMBER" | translate
         }}</label>
         <div class="col-9">
-          <textarea
+          <input
+            type="text"
             class="form-control form-control-solid"
             id="flightNumber"
             formControlName="flightNumber"
             rows="1"
-          ></textarea>
+            aria-describedby="flightNumberError"
+          />
           <div
             *ngIf="
               organizationalForm.controls.flightInformation.get('flightNumber')['errors'] &&
               organizationalForm.controls.flightInformation.get('flightNumber').touched
             "
             class="text-danger form-text"
+            id="flightNumberError"
           >
             {{
               getErrorMessage(
