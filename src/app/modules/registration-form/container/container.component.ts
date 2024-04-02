@@ -35,6 +35,9 @@ export class ContainerComponent implements OnInit {
   public savingScans: boolean;
   public sendingScans: boolean;
   public saveScanFiles = new Subject<boolean>();
+  public savingPayments: boolean;
+  public sendingPayments: boolean;
+  public savePaymentFiles = new Subject<boolean>();
   public personalFormProgress: {
     all: number;
     required: number;
@@ -160,6 +163,7 @@ export class ContainerComponent implements OnInit {
     else this.saving = true;
 
     this.saveScanFiles.next(submit);
+    this.savePaymentFiles.next(submit);
 
     let dto = new RegistrationDTO();
 
@@ -212,6 +216,9 @@ export class ContainerComponent implements OnInit {
     dto.level = spanish.get("level").value;
     dto.weeksOnline = Number(spanish.get("weeksOnline").value);
     dto.weeks = Number(spanish.get("weeks").value);
+
+    const payments = organizationalForm.get("payments") as FormGroup;
+    dto.paymentDescription = payments.get("paymentDescription").value;
 
     const motivationLetter = organizationalForm.get("motivationLetter") as FormGroup;
     dto.motivationLetter = motivationLetter.get("motivationLetter").value;

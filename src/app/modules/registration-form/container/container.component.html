@@ -230,6 +230,9 @@
                 "
                 [role]="role"
                 [initialData]="initialData"
+                [upload]="savePaymentFiles.asObservable()"
+                (saving)="savingPayments = $event"
+                (sending)="sendingPayments = $event"
                 (navigateToTab)="onNavigateToTab($event)"
               ></app-organizational-information>
             </div>

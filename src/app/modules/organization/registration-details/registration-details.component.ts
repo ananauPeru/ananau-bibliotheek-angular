@@ -39,6 +39,9 @@ export class RegistrationDetailsComponent implements OnInit {
   public goodConductCertificateFiles = new Array<File>();
   public diplomaFiles = new Array<File>();
   public passportPhotoFiles = new Array<File>();
+  public paymentApartmentFiles = new Array<File>();
+  public paymentGuaranteeFiles = new Array<File>();
+  public paymentSpanishFiles = new Array<File>();
 
   public isEditingStartDateInternship = false;
   public isEditingEndDateInternship = false;
@@ -110,6 +113,15 @@ export class RegistrationDetailsComponent implements OnInit {
       }
       if (file.name.startsWith(BlobNamePrefix.PassportPhoto)) {
         this.passportPhotoFiles.push(file);
+      }
+      if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
+        this.paymentApartmentFiles.push(file);
+      }
+      if (file.name.startsWith(BlobNamePrefix.PaymentGuarantee)) {
+        this.paymentGuaranteeFiles.push(file);
+      }
+      if (file.name.startsWith(BlobNamePrefix.PaymentSpanish)) {
+        this.paymentSpanishFiles.push(file);
       }
       this.cdRef.detectChanges();
     });
@@ -251,6 +263,25 @@ export class RegistrationDetailsComponent implements OnInit {
       fileName =
         this.translate.instant(
           "REGISTRATIONS.DETAILS.FILE_NAMES.PASSPORT_PHOTO"
+        ) + ` - ${fileName}`;
+      FileSaver.saveAs(file, fileName);
+    } else if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
+      fileName =
+        this.translate.instant(
+          "REGISTRATIONS.DETAILS.FILE_NAMES.PAYMENT_APARTMENT"
+        ) + ` - ${fileName}`;
+      FileSaver.saveAs(file, fileName);
+    } else if (file.name.startsWith(BlobNamePrefix.PaymentGuarantee)) {
+      fileName =
+        this.translate.instant(
+          "REGISTRATIONS.DETAILS.FILE_NAMES.PAYMENT_GUARANTEE"
+        ) + ` - ${fileName}`;
+      FileSaver.saveAs(file, fileName);
+    } 
+    else if (file.name.startsWith(BlobNamePrefix.PaymentSpanish)) {
+      fileName =
+        this.translate.instant(
+          "REGISTRATIONS.DETAILS.FILE_NAMES.PAYMENT_SPANISH"
         ) + ` - ${fileName}`;
       FileSaver.saveAs(file, fileName);
     } else {

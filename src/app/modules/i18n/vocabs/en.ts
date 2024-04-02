@@ -341,6 +341,15 @@ export const locale = {
           WEEKS_INFO:
             "If you do not yet speak a basic level of Spanish, we recommend you apply for 4 weeks of Spanish lessons on-site.",
         },
+        PAYMENTS: {
+          TITLE: 'Payments',
+          INFO_PAYMENTS: 'Upload confirmation of payment for accommodation (apartment), guarantee for apartment, Spanish classes. If these payments were made in a single transaction, upload the document for the apartment field and fill in a describtion field under.',
+          PAYMENT_APARTMENT: 'Apartment',
+          PAYMENT_GUARANTEE: 'Guarantee',
+          PAYMENT_SPANISH: 'Spanish lessons',
+          PAYMENT_DESCRIPTION: 'Payment description',
+          PAYMENT_DROP_SELECT: 'Drop your file(s) here or click to select your file(s).',
+        },
         MOTIVATION_LETTER: {
           TITLE: "Motivation letter",
           MOTIVATION: "Fill in the field with your motivation letter",
@@ -820,10 +829,13 @@ export const locale = {
         DELETE_CONFIRMATION_MESSAGE:
           "Are you sure you want to remove this registration? This action is irreversible.",
         FILE_NAMES: {
-          INTERNATIONAL_PASSPORT: "International passport",
-          GOOD_CONDUCT_CERTIFICATE: "Certificate of good conduct",
-          DIPLOMA: "Certificate of education",
-          PASSPORT_PHOTO: "Passport photo",
+          INTERNATIONAL_PASSPORT: 'International passport',
+          GOOD_CONDUCT_CERTIFICATE: 'Certificate of good conduct',
+          DIPLOMA: 'Certificate of education',
+          PASSPORT_PHOTO: 'Passport photo',
+          PAYMENT_APARTMENT: 'Payment apartment',
+          PAYMENT_GUARANTEE: 'Payment guarantee',
+          PAYMENT_SPANISH: 'Payment spanish lessons',
         },
       },
       TOASTS: {
