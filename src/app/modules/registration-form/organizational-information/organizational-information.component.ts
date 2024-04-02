@@ -38,8 +38,6 @@ export class OrganizationalInformationComponent implements OnInit {
     required: number;
     requiredAndValid: number;
   }>();
-  @Input() public role: FormRole;
-  @Input() public initialData: RegistrationDTO;
   @Input() public upload: Observable<boolean>;
   @Output() public saving = new EventEmitter<boolean>();
   @Output() public sending = new EventEmitter<boolean>();
@@ -48,6 +46,7 @@ export class OrganizationalInformationComponent implements OnInit {
   public paymentSpanishFiles = new Array<ScansFile>();
   private filesToDelete = new Array<ScansFile>();
   private previewImageForNonImageFiles: File;
+  private isTimeExceedingLimit = false;
 
   constructor(
     private fb: FormBuilder,
