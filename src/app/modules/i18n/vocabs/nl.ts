@@ -325,15 +325,6 @@ export const locale = {
           WEEKS_INFO:
             "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 4 weken Spaanse les ter plaatse.",
         },
-        PAYMENTS: {
-          TITLE: 'Betalingen',
-          INFO_PAYMENTS: 'Upload een betalingsbewijs voor accommodatie (appartement), garantie voor appartement, Spaanse lessen. Als deze betalingen in één transactie zijn gedaan, upload dan het document voor het appartementveld en vul daaronder een beschrijvingsveld in.',
-          PAYMENT_APARTMENT: 'Appartement',
-          PAYMENT_GUARANTEE: 'Garantie',
-          PAYMENT_SPANISH: 'Spaanse lessen',
-          PAYMENT_DESCRIPTION: 'Betalingsomschrijving',
-          PAYMENT_DROP_SELECT: 'Zet uw bestand(en) hier neer of klik om uw bestand(en) te selecteren.',
-        },
         MOTIVATION_LETTER: {
           TITLE: "Motivatiebrief",
           MOTIVATION: "Vul je motivatiebrief in",
@@ -811,13 +802,10 @@ export const locale = {
         DELETE_CONFIRMATION_MESSAGE:
           "Weet u zeker dat u deze registratie wilt verwijderen? Deze actie is onomkeerbaar.",
         FILE_NAMES: {
-          INTERNATIONAL_PASSPORT: 'Internationaal paspoort',
-          GOOD_CONDUCT_CERTIFICATE: 'Bewijs van goed gedrag',
-          DIPLOMA: 'Onderwijscertificaat',
-          PASSPORT_PHOTO: 'Pasfoto',
-          PAYMENT_APARTMENT: 'Betaling appartement',
-          PAYMENT_GUARANTEE: 'Betalingsgarantie',
-          PAYMENT_SPANISH: 'Betaling Spaanse lessen',
+          INTERNATIONAL_PASSPORT: "Internationaal paspoort",
+          GOOD_CONDUCT_CERTIFICATE: "Bewijs van goed gedrag",
+          DIPLOMA: "Onderwijscertificaat",
+          PASSPORT_PHOTO: "Pasfoto",
         },
       },
       TOASTS: {
@@ -840,7 +828,6 @@ export const locale = {
           "Er is iets misgegaan bij het bijwerken van de data. Probeer het later nog eens.",
       },
     },
-
     ORGANIZATION: {
       ROLES: {
         OVERVIEW: {
