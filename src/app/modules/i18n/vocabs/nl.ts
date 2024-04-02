@@ -205,9 +205,10 @@ export const locale = {
         VERIFY_PASSWORD: "Wachtwoord verifiëren",
         VERIFY_PASSWORD_PLACEHOLDER: "Bevestig wachtwoord",
         VERIFY_PASSWORD_VALID: "Wachtwoordbevestiging is correct ingevoerd",
-        VERIFY_PASSWORD_INVALID: "'Wachtwoord' en 'Wachtwoord bevestigen' komen niet overeen.",
-        FORGOT_PASSWORD: "Wachtwoord vergeten?"
-      }
+        VERIFY_PASSWORD_INVALID:
+          "'Wachtwoord' en 'Wachtwoord bevestigen' komen niet overeen.",
+        FORGOT_PASSWORD: "Wachtwoord vergeten?",
+      },
     },
     // REGISTRATION FORM
     REGISTRATION: {
@@ -793,7 +794,8 @@ export const locale = {
         STANDARD_TITLE: "Registratie",
         TITLE: "Registratie van {{name}}",
         DELETE: "Verwijder uit lijst",
-        DELETE_CONFIRMATION_MESSAGE: "Weet u zeker dat u deze registratie wilt verwijderen? Deze actie is onomkeerbaar.",
+        DELETE_CONFIRMATION_MESSAGE:
+          "Weet u zeker dat u deze registratie wilt verwijderen? Deze actie is onomkeerbaar.",
         FILE_NAMES: {
           INTERNATIONAL_PASSPORT: "Internationaal paspoort",
           GOOD_CONDUCT_CERTIFICATE: "Bewijs van goed gedrag",
@@ -839,6 +841,7 @@ export const locale = {
       SCAN_QR_CODE: "Scan de QR-code",
       CHECKED_IN: "Ingecheckt",
       CHECKED_OUT: "Uitgecheckt",
+      SCAN: { TITLE: "Scan uw QR-code om in/uit te checken" },
       DETAILS: {
         PAGE_TITLE: "Check-in Details",
         OVERVIEW: "Overzicht van inchecken",
@@ -858,6 +861,7 @@ export const locale = {
         SECONDS: "Seconden",
       },
       LIST: {
+        PAGE_TITLE: "Check-in Lijst", 
         FIRST_NAME: "Voornaam",
         LAST_NAME: "Familienaam",
         CHECK_IN_STATUS: "Check-in status",

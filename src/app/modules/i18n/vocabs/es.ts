@@ -861,6 +861,7 @@ export const locale = {
       SCAN_QR_CODE: "Escanear código QR",
       CHECKED_IN: "Registrado",
       CHECKED_OUT: "No registrado",
+      SCAN: { TITLE: "Escanea tu código QR para registrar tu entrada/salida" },
       DETAILS: {
         PAGE_TITLE: "Detalles de Registro",
         OVERVIEW: "Resumen de registro de entrada",
@@ -880,6 +881,7 @@ export const locale = {
         SECONDS: "Segundos",
       },
       LIST: {
+        PAGE_TITLE: "Lista de Registro",
         FIRST_NAME: "Nombre propio",
         LAST_NAME: "Apellido",
         CHECK_IN_STATUS: "Estado de registro",

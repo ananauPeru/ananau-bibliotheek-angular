@@ -859,6 +859,9 @@ export const locale = {
       SCAN_QR_CODE: "Scan QR code",
       CHECKED_IN: "Checked in",
       CHECKED_OUT: "Checked out",
+      SCAN: {
+        TITLE: "Scan your QR code to check-in/check-out",
+      },
       DETAILS: {
         PAGE_TITLE: "Check in details",
         OVERVIEW: "Check in overview",
@@ -877,13 +880,15 @@ export const locale = {
         MINUTES: "Minutes",
         SECONDS: "Seconds",
       },
+      LIST: {
+        PAGE_TITLE: "Check-in list",
+        FIRST_NAME: "First name",
+        LAST_NAME: "Last name",
+        CHECK_IN_STATUS: "Check in status",
+        DETAILS: "Details",
+      },
     },
-    LIST: {
-      FIRST_NAME: "First name",
-      LAST_NAME: "Last name",
-      CHECK_IN_STATUS: "Check in status",
-      DETAILS: "Details",
-    },
+    
   },
 
   GENERAL_INFORMATION: {

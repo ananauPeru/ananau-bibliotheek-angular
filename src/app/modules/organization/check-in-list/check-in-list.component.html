@@ -10,7 +10,7 @@
           <div class="col-12 col-md-8 w-100">
             <h3 class="card-title font-weight-bolder text-dark">
               <!-- {{ "REGISTRATIONS.OVERVIEW.TITLE" | translate }} -->
-              Check-in list
+              {{ "CHECK_IN.LIST.PAGE_TITLE" | translate }}
             </h3>
           </div>
         </div>
@@ -66,11 +66,11 @@
             <td>{{ registration.lastName }}</td>
             <td>
               <span class="label label-lg label-light-primary label-inline" *ngIf="checkInService.isCheckedIn(registration.userId) | async; else checkedOut">
-                Checked in
+                {{ "CHECK_IN.CHECKED_IN" | translate }}
               </span>
               <ng-template #checkedOut>
                 <span class="label label-lg label-light-danger label-inline">
-                  Checked out
+                  {{ "CHECK_IN.CHECKED_OUT" | translate }}
                 </span>
               </ng-template>
             </td>
