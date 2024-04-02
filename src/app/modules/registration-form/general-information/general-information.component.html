@@ -1,0 +1,68 @@
+<div class="my-2">
+
+  <!-- title -->
+  <h3 class="text-dark font-weight-bold mb-10">
+    {{"GENERAL_INFORMATION.PAGE_TITLE" | translate}}
+  </h3>
+
+
+  <!-- subtitle -->
+  <div class="my-2">
+
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{"GENERAL_INFORMATION.VISA.TITLE" | translate}}
+    </h4>
+
+    <p class="text-muted mb-4">
+      {{visaInformation$ | async}}
+    </p>
+    
+  </div>
+
+  <div class="separator separator-dashed my-10"></div>
+
+
+  <!-- subtitle -->
+  <div class="my-2">
+
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{"GENERAL_INFORMATION.VACCINATION.TITLE" | translate}}
+    </h4>
+
+    <ng-container *ngIf="vaccinations$ | async as vaccinations">
+      <ul class="mb-4 list-group" *ngIf="vaccinations.length > 0; else noResults">
+        <li *ngFor="let vaccination of vaccinations" class="list-group-item">
+          {{ vaccination.name }} {{ vaccination.required ? getTranslatedText("GENERAL_INFORMATION.VACCINATION.REQUIRED") : getTranslatedText("GENERAL_INFORMATION.VACCINATION.OPTIONAL") }}
+        </li>
+      </ul>
+      <ng-template #noResults>
+        <p>{{"GENERAL_INFORMATION.VACCINATION.NO_RESULT" | translate}}</p>
+      </ng-template>
+    </ng-container>
+
+  </div>
+
+  <div class="separator separator-dashed my-10"></div>
+
+
+  <!-- subtitle -->
+  <div class="my-2">
+
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{"GENERAL_INFORMATION.HOLIDAY.TITLE" | translate}}
+    </h4>
+
+    <ng-container *ngIf="holidays$ | async as holidays">
+      <ul class="mb-4 list-group" *ngIf="holidays.length > 0; else noResults">
+        <li *ngFor="let holiday of holidays" class="list-group-item">
+          {{ holiday.name }} {{ holiday.date | date: 'dd/MM/yyyy'}}
+        </li>
+      </ul>
+      <ng-template #noResults>
+        <p>{{"GENERAL_INFORMATION.HOLIDAY.NO_RESULT" | translate}}</p>
+      </ng-template>
+    </ng-container>
+    
+  </div>
+
+</div>

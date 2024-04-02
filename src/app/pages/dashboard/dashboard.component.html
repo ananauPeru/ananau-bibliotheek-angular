@@ -2,19 +2,42 @@
   class="row"
   *ngIf="
     AuthUtil.permitted([
-      'student',
-      'volunteer',
-      'librarian',
-      'admin',
-      'superadmin'
+      AuthUtil.roles.SuperAdmin,
+      AuthUtil.roles.Admin,
+      AuthUtil.roles.Librarian,
+      AuthUtil.roles.Student,
+      AuthUtil.roles.Volunteer,
+      AuthUtil.roles.QRCodeReader
     ]);
     else noRoles
   "
 >
+<div class="col-lg-3 menu-card one-big-child" *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])">
+  <div>
+    <!--begin::Card-->
+    <div class="card card-custom h-100">
+      <!--begin::Body-->
+      <div class="card-body text-white d-flex align-items-center">
+        <div class="w-100">
+          <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
+            {{ "MENU.ORGANIZATION.CHECK_IN" | translate }}
+          </h3>
+          <button routerLink="/organization/check-in" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
+            <span>{{ "CHECK_IN.SCAN_QR_CODE" | translate }}</span>
+            <i class="fas fa-qrcode text-dark"></i>
+          </button>
+        </div>
+      </div>
+      <!--end::Body-->
+    </div>
+    <!--end::Card-->
+  </div>
+</div>
+
   <!--LIBRARY-->
   <div
     class="col-lg-3 menu-card one-big-child"
-    *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])"
+    *ngIf="AuthUtil.permitted([AuthUtil.roles.Librarian, AuthUtil.roles.SuperAdmin])"
   >
     <div>
       <!--begin::Card-->
@@ -64,7 +87,6 @@
               class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
               >{{ "MENU.LIBRARY.NEW_LOAN" | translate }}</a
             >
-           
           </div>
         </div>
         <!--end::Body-->
@@ -75,15 +97,15 @@
   <!--STUDENT & VOLUNTEER-->
   <div
     class="col-lg-3 menu-card"
-    *ngIf="AuthUtil.permitted(['student', 'volunteer', 'superadmin'])"
+    *ngIf="AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.Volunteer, AuthUtil.roles.SuperAdmin])"
     [ngClass]="
-      AuthUtil.permitted(['student', 'superadmin']) &&
-      AuthUtil.permitted(['volunteer', 'superadmin'])
+      AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.SuperAdmin]) &&
+      AuthUtil.permitted([AuthUtil.roles.Volunteer, AuthUtil.roles.SuperAdmin])
         ? 'two-small-children'
         : 'one-small-child'
     "
   >
-    <div *ngIf="AuthUtil.permitted(['student', 'superadmin'])">
+    <div *ngIf="AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.SuperAdmin])">
       <!--begin::Card-->
       <div class="card card-custom h-100">
         <!--begin::Body-->
@@ -103,7 +125,7 @@
       </div>
       <!--end::Card-->
     </div>
-    <div *ngIf="AuthUtil.permitted(['volunteer', 'superadmin'])">
+    <div *ngIf="AuthUtil.permitted([AuthUtil.roles.Volunteer, AuthUtil.roles.SuperAdmin])">
       <!--begin::Card-->
       <div class="card card-custom h-100">
         <!--begin::Body-->
@@ -126,88 +148,98 @@
   </div>
 
   <div
-  class="col-lg-3 menu-card"
-  *ngIf="AuthUtil.permitted(['student', 'volunteer','admin', 'superadmin'])"
-  [ngClass]="
-    AuthUtil.permitted(['admin', 'superadmin']) &&
-    AuthUtil.permitted(['volunteer', 'student', 'superadmin'])
-      ? 'two-small-children'
-      : 'one-small-child'
-  "
->
-  <div *ngIf="AuthUtil.permitted(['admin', 'superadmin'])">
-    <!--begin::Card-->
-    <div class="card card-custom h-100">
-      <!--begin::Body-->
-      <div class="card-body text-white d-flex align-items-center">
-        <div>
-          <h3 class="font-weight-bolder line-height-lg mb-lg-3 mb-5">
-            {{ "MENU.ORGANIZATION.TITLE" | translate }}
-          </h3>
-          <a
-            routerLink="/organization/roles"
-            class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-            >{{ "MENU.ORGANIZATION.ROLES" | translate }}</a
-          >
-          <a
-            routerLink="/organization/registrations"
-            class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-            >{{ "MENU.ORGANIZATION.REGISTRATIONS" | translate }}</a
-          > <a
-          routerLink="/organization/calendar"
-          class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-          >{{ "MENU.KAL" | translate }}</a
-        >
+    class="col-lg-3 menu-card"
+    *ngIf="AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.Volunteer, AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin])"
+    [ngClass]="
+      AuthUtil.permitted([AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin]) &&
+      AuthUtil.permitted([AuthUtil.roles.Volunteer, AuthUtil.roles.Student, AuthUtil.roles.SuperAdmin])
+        ? 'two-small-children'
+        : 'one-small-child'
+    "
+  >
+    <div *ngIf="AuthUtil.permitted([AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin])">
+      <!--begin::Card-->
+      <div class="card card-custom h-100">
+        <!--begin::Body-->
+        <div class="card-body text-white d-flex align-items-center">
+          <div>
+            <h3 class="font-weight-bolder line-height-lg mb-lg-3 mb-5">
+              {{ "MENU.ORGANIZATION.TITLE" | translate }}
+            </h3>
+            <a
+              routerLink="/organization/roles"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.ORGANIZATION.ROLES" | translate }}</a
+            >
+            <a
+              routerLink="/organization/registrations"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.ORGANIZATION.REGISTRATIONS" | translate }}</a
+            >
+            <a
+              routerLink="/organization/calendar"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.KAL" | translate }}</a
+            >
+          </div>
         </div>
+        <!--end::Body-->
       </div>
-      <!--end::Body-->
+      <!--end::Card-->
     </div>
-    <!--end::Card-->
-  </div>
-  <div>
-    <!--begin::Card-->
-    <div class="card card-custom h-200"  *ngIf="AuthUtil.permitted(['admin', 'superadmin','librarian', 'student', 'volenteer'])">
-      <!--begin::Body-->
-      <div class="card-body text-white d-flex align-items-center">
-        <div>
-          <h3 class="font-weight-bold line-height-lg">
-            {{ "MENU.LIBRARY.LES" | translate }}
-          </h3>
-          <a
-            routerLink="/class/files"
-            class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-            >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
-          >
-          <a
-          routerLink="/class/overview"
-          class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-          >{{ "MENU.ZOEK" | translate }}</a
-        >
-          <a
-            routerLink="/class/add-class"
-            class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-            >{{ "MENU.LIBRARY.ADD_LES" | translate }}</a
-          >
+    <div>
+      <!--begin::Card-->
+      <div
+        class="card card-custom h-200"
+        *ngIf="
+          AuthUtil.permitted([
+            AuthUtil.roles.Admin,
+            AuthUtil.roles.SuperAdmin,
+            AuthUtil.roles.Librarian,
+            AuthUtil.roles.Student,
+            AuthUtil.roles.Volunteer
+          ])
+        "
+      >
+        <!--begin::Body-->
+        <div class="card-body text-white d-flex align-items-center">
+          <div>
+            <h3 class="font-weight-bold line-height-lg">
+              {{ "MENU.LIBRARY.LES" | translate }}
+            </h3>
+            <a
+              routerLink="/class/files"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
+            >
+            <a
+              routerLink="/class/overview"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.ZOEK" | translate }}</a
+            >
+            <a
+              routerLink="/class/add-class"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.LIBRARY.ADD_LES" | translate }}</a
+            >
 
-          <a
-          routerLink="/class/documentation"
-          class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-          >{{ "LIBRARY.CLASS.HELP" | translate }}</a
-        >
-
+            <a
+              routerLink="/class/documentation"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "LIBRARY.CLASS.HELP" | translate }}</a
+            >
+          </div>
         </div>
+        <!--end::Body-->
       </div>
-      <!--end::Body-->
+      <!--end::Card-->
     </div>
-    <!--end::Card-->
   </div>
-</div>
-
 
   <!-- IT - DOCUMENTATION -->
   <div
     class="col-lg-3 menu-card one-big-child"
-    *ngIf="AuthUtil.permitted(['superadmin'])"
+    *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
   >
     <div>
       <!--begin::Card-->
@@ -231,18 +263,20 @@
               class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
               >{{ "MENU.DOCUMENTATION.S1_SETTING_UP" | translate }}</a
             >
-            <a routerLink="/documentation//getting-started/2-best-practices/models-and-tables" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-              >{{
-                "MENU.DOCUMENTATION.S2_BEST_PRACTICES.TITLE" | translate
-                }}</a
+            <a
+              routerLink="/documentation//getting-started/2-best-practices/models-and-tables"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.DOCUMENTATION.S2_BEST_PRACTICES.TITLE" | translate }}</a
             >
-            <a routerLink="/documentation/getting-started/3-deployment-azure" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-              >{{
-                "MENU.DOCUMENTATION.S3_DEPLOYMENT_AND_AZURE" | translate
-                }}</a
+            <a
+              routerLink="/documentation/getting-started/3-deployment-azure"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+              >{{ "MENU.DOCUMENTATION.S3_DEPLOYMENT_AND_AZURE" | translate }}</a
             >
             <h5 class="font-weight-bold line-height-lg mt-lg-2 mt-4">TODO</h5>
-            <a routerLink="/documentation/todos" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
+            <a
+              routerLink="/documentation/todos"
+              class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
               >Todo</a
             >
           </div>

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9">
+      <div class="card mt-5">
+        <!-- QR code scanner -->
+
+        <div class="card text-center" *ngIf="!qrCodeResult">
+          <div class="card-body">
+            <div class="font-weight-bold pb-4">
+              {{"CHECK_IN.SCAN.TITLE" | translate}}
+            </div>
+            <ngx-scanner-qrcode
+              class="mb-4"
+              #scanner="scanner"
+              (event)="onCodeResult($event)"
+            ></ngx-scanner-qrcode>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
