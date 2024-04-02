@@ -374,6 +374,156 @@
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>
+  <!-- payments -->
+  <div class="my-2">
+    <h4 class="text-dark font-weight-bold mb-4">
+      {{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.TITLE" | translate }}
+    </h4>
+    <p class="text-muted mb-4">
+      {{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.INFO_PAYMENTS" | translate }}
+    </p>
+    <form [formGroup]="organizationalForm.controls.payments">
+      <!-- apartment -->
+      <div class="form-group row">
+        <label class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_APARTMENT" | translate
+        }}</label>
+        <div class="col-9">
+          <div
+            class="custom-dropzone form-control form-control-solid border" style="height: 100px;"
+            ngx-dropzone
+            [accept]="'image/*,.pdf'"
+            (change)="onSelectApartmentFile($event)"
+          >
+            <ngx-dropzone-label>
+              <p class="form-text text-muted">
+                {{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_DROP_SELECT" | translate }}
+              </p>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of paymentApartmentFiles"
+              [file]="getPreviewImage(f)"
+              [removable]="true"
+              (removed)="onRemoveApartmentFile(f)"
+            >
+            </ngx-dropzone-image-preview>
+          </div>
+          <div
+            *ngIf="
+              organizationalForm.controls.payments.get('paymentApartment')['errors'] &&
+              organizationalForm.controls.payments.get('paymentApartment').touched
+            "
+            class="text-danger form-text"
+          >
+            {{ getErrorMessage(organizationalForm.controls.payments.get("paymentApartment")["errors"]) }}
+          </div>
+        </div>
+      </div>
+      <!-- guarantee -->
+      <div class="form-group row">
+        <label class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_GUARANTEE" | translate
+        }}</label>
+        <div class="col-9">
+          <div
+            class="custom-dropzone form-control form-control-solid border" style="height: 100px;"
+            ngx-dropzone
+            [accept]="'image/*,.pdf'"
+            (change)="onSelectGuaranteeFile($event)"
+          >
+            <ngx-dropzone-label>
+              <p class="form-text text-muted">
+                {{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_DROP_SELECT" | translate }}
+              </p>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of paymentGuaranteeFiles"
+              [file]="getPreviewImage(f)"
+              [removable]="true"
+              (removed)="onRemoveGuaranteeFile(f)"
+            >
+            </ngx-dropzone-image-preview>
+          </div>
+          <div
+            *ngIf="
+              organizationalForm.controls.payments.get('paymentGuarantee')['errors'] &&
+              organizationalForm.controls.payments.get('paymentGuarantee').touched
+            "
+            class="text-danger form-text"
+          >
+            {{ getErrorMessage(organizationalForm.controls.payments.get("paymentGuarantee")["errors"]) }}
+          </div>
+        </div>
+      </div>
+      <!-- spanish lessons -->
+      <div class="form-group row">
+        <label class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_SPANISH" | translate
+        }}</label>
+        <div class="col-9">
+          <div
+            class="custom-dropzone form-control form-control-solid border" style="height: 100px;"
+            ngx-dropzone
+            [accept]="'image/*,.pdf'"
+            (change)="onSelectSpanishFile($event)"
+          >
+            <ngx-dropzone-label>
+              <p class="form-text text-muted">
+                {{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_DROP_SELECT" | translate }}
+              </p>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of paymentSpanishFiles"
+              [file]="getPreviewImage(f)"
+              [removable]="true"
+              (removed)="onRemoveSpanishFile(f)"
+            >
+            </ngx-dropzone-image-preview>
+          </div>
+          <div
+            *ngIf="
+              organizationalForm.controls.payments.get('paymentSpanish')['errors'] &&
+              organizationalForm.controls.payments.get('paymentSpanish').touched
+            "
+            class="text-danger form-text"
+          >
+            {{ getErrorMessage(organizationalForm.controls.payments.get("paymentSpanish")["errors"]) }}
+          </div>
+        </div>
+      </div>
+      <!-- description -->
+      <div class="form-group row">
+        <label for="paymentDescription" class="col-3">{{
+          "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_DESCRIPTION" | translate
+        }}</label>
+        <div class="col-9">
+          <textarea
+            class="form-control form-control-solid"
+            id="paymentDescription"
+            formControlName="paymentDescription"
+            rows="3"
+          ></textarea>
+          <div
+            *ngIf="
+              organizationalForm.controls.payments.get('paymentDescription')['errors'] &&
+              organizationalForm.controls.payments.get('paymentDescription').touched
+            "
+            class="text-danger form-text"
+          >
+            {{
+              getErrorMessage(
+                organizationalForm.controls.payments.get("paymentDescription")["errors"]
+              )
+            }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="separator separator-dashed my-10"></div>  
   <!-- motivation letter -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">
