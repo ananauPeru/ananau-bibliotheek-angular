@@ -3,8 +3,4 @@ export enum BlobNamePrefix {
   GoodConductCertificate = "goodconductcertificate",
   Diploma = "diploma",
   PassportPhoto = "passportphoto",
-
-  PaymentApartment = "paymentapartment",
-  PaymentGuarantee = "paymentguarantee",
-  PaymentSpanish = "paymentspanish",
 }
