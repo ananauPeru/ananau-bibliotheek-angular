@@ -107,12 +107,12 @@ export class CheckInDetailsComponent implements OnInit {
     return this.calculateTotalCheckedInTime(checkInHistory, today, tomorrow);
   }
 
-  formatDuration(duration: number): string {
+  formatDuration(duration: number, hoursLabel: string, minutesLabel: string, secondsLabel: string): string {
     const seconds = Math.floor((duration / 1000) % 60);
     const minutes = Math.floor((duration / (1000 * 60)) % 60);
     const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-    return `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    return `${hours} ${hoursLabel}, ${minutes} ${minutesLabel}, ${seconds} ${secondsLabel}`;
   }
 
   getFirstDayOfWeek(): Date {

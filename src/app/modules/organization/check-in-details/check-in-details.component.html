@@ -14,9 +14,9 @@
       <button
         type="button"
         class="btn btn-secondary font-weight-bolder"
-        routerLink="/organization/check-in-list"
+        routerLink="/organization/check-in/list"
       >
-      <i class="fas fa-chevron-left"></i> Back
+        <i class="fas fa-chevron-left"></i> {{ "BUTTONS.BACK" | translate }}
       </button>
     </div>
   </div>
@@ -25,7 +25,7 @@
     <div class="row my-4">
       <div class="col-12">
         <h4 class="text-dark font-weight-bold mb-4">
-          Check in status
+          {{ "CHECK_IN.DETAILS.PAGE_TITLE" | translate }}
         </h4>
       </div>
       <div class="col-12">
@@ -34,12 +34,12 @@
             <span
               *ngIf="isCheckedIn$(id) | async; else notCheckedIn"
               class="label label-lg label-light-primary label-inline font-weight-bold"
-              >Checked in</span
+              >{{ "CHECK_IN.CHECKED_IN" | translate }}</span
             >
             <ng-template #notCheckedIn>
               <span
                 class="label label-lg label-light-danger label-inline font-weight-bold"
-                >Not checked in</span
+                >{{ "CHECK_IN.CHECKED_OUT" | translate }}</span
               >
             </ng-template>
           </div>
@@ -54,16 +54,21 @@
     <div class="row my-2">
       <div class="col-12">
         <h4 class="text-dark font-weight-bold mb-4">
-          Check in overview
+          {{ "CHECK_IN.DETAILS.OVERVIEW" | translate }}
         </h4>
       </div>
-      <div class="col-12 col-sm-6 col-md-3">Time checked in today</div>
+      <div class="col-12 col-sm-6 col-md-3">
+        {{ "CHECK_IN.DETAILS.TIME_TODAY" | translate }}
+      </div>
       <div class="col-12 col-sm-6 col-md-9">
         <div class="d-flex align-items-center">
           <div class="font-weight-bolder font-size-lg">
             {{
               formatDuration(
-                calculateTotalCheckedInTimeToday(checkInHistory$ | async)
+                calculateTotalCheckedInTimeToday(checkInHistory$ | async),
+                "CHECK_IN.DETAILS.HOURS" | translate,
+                "CHECK_IN.DETAILS.MINUTES" | translate,
+                "CHECK_IN.DETAILS.SECONDS" | translate
               )
             }}
           </div>
@@ -72,14 +77,23 @@
     </div>
 
     <div class="row my-2">
-      <div class="col-12 col-md-3 col-sm-6">Time checked in this week</div>
+      <div class="col-12 col-md-3 col-sm-6">
+        {{ "CHECK_IN.DETAILS.TIME_WEEK" | translate }}
+      </div>
       <div class="col-12 col-md-9 col-sm-6">
         <div class="d-flex align-items-center">
           <div class="font-weight-bolder font-size-lg">
             <ng-container *ngIf="checkInHistory$ | async as checkInHistory">
               {{
                 formatDuration(
-                  calculateTotalCheckedInTime(checkInHistory, getFirstDayOfWeek(), getLastDayOfWeek())
+                  calculateTotalCheckedInTime(
+                    checkInHistory,
+                    getFirstDayOfWeek(),
+                    getLastDayOfWeek()
+                  ),
+                  "CHECK_IN.DETAILS.HOURS" | translate,
+                  "CHECK_IN.DETAILS.MINUTES" | translate,
+                  "CHECK_IN.DETAILS.SECONDS" | translate
                 )
               }}
             </ng-container>
@@ -89,14 +103,23 @@
     </div>
 
     <div class="row my-2">
-      <div class="col-12 col-md-3 col-sm-6">Time checked in this month</div>
+      <div class="col-12 col-md-3 col-sm-6">
+        {{ "CHECK_IN.DETAILS.TIME_MONTH" | translate }}
+      </div>
       <div class="col-12 col-md-9 col-sm-6">
         <div class="d-flex align-items-center">
           <div class="font-weight-bolder font-size-lg">
             <ng-container *ngIf="checkInHistory$ | async as checkInHistory">
               {{
                 formatDuration(
-                  calculateTotalCheckedInTime(checkInHistory, getFirstDayOfMonth(), getLastDayOfMonth())
+                  calculateTotalCheckedInTime(
+                    checkInHistory,
+                    getFirstDayOfMonth(),
+                    getLastDayOfMonth()
+                  ),
+                  "CHECK_IN.DETAILS.HOURS" | translate,
+                  "CHECK_IN.DETAILS.MINUTES" | translate,
+                  "CHECK_IN.DETAILS.SECONDS" | translate
                 )
               }}
             </ng-container>
@@ -106,14 +129,23 @@
     </div>
 
     <div class="row my-2 mb-4">
-      <div class="col-12 col-md-3 col-sm-6">Total checked in time</div>
+      <div class="col-12 col-md-3 col-sm-6">
+        {{ "CHECK_IN.DETAILS.TIME_TOTAL" | translate }}
+      </div>
       <div class="col-12 col-md-9 col-sm-6">
         <div class="d-flex align-items-center">
           <div class="font-weight-bolder font-size-lg">
             <ng-container *ngIf="checkInHistory$ | async as checkInHistory">
               {{
                 formatDuration(
-                  calculateTotalCheckedInTime(checkInHistory, undefined, undefined)
+                  calculateTotalCheckedInTime(
+                    checkInHistory,
+                    undefined,
+                    undefined
+                  ),
+                  "CHECK_IN.DETAILS.HOURS" | translate,
+                  "CHECK_IN.DETAILS.MINUTES" | translate,
+                  "CHECK_IN.DETAILS.SECONDS" | translate
                 )
               }}
             </ng-container>
@@ -124,23 +156,31 @@
     <!-- Separator -->
     <div class="separator separator-dashed my-10"></div>
     <!-- Separator -->
-    
+
     <div class="row my-2">
       <div class="col-12">
         <h4 class="text-dark font-weight-bold mb-4">
-          Time checked in by week
+          {{ "CHECK_IN.DETAILS.TIME_BY_WEEK" | translate }}
         </h4>
       </div>
       <div class="col-12">
         <div class="d-flex align-items-center mb-4">
           <div class="col-3 col-sm-1 text-left pl-0">
-            <button class="btn btn-icon btn-secondary mr-2" (click)="goToPreviousWeek()">
+            <button
+              class="btn btn-icon btn-secondary mr-2"
+              (click)="goToPreviousWeek()"
+            >
               <i class="fas fa-chevron-left"></i>
             </button>
           </div>
-          <div class="font-weight-bold col-6 col-sm-2 text-center">{{ getWeekRange(selectedWeek) }}</div>
+          <div class="font-weight-bold col-6 col-sm-2 text-center">
+            {{ getWeekRange(selectedWeek) }}
+          </div>
           <div class="col-3 col-sm-1 text-right pr-0">
-            <button class="btn btn-icon btn-secondary ml-2" (click)="goToNextWeek()">
+            <button
+              class="btn btn-icon btn-secondary ml-2"
+              (click)="goToNextWeek()"
+            >
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
@@ -148,7 +188,18 @@
         <div class="d-flex align-items-center">
           <div class="font-weight-bolder font-size-lg">
             <ng-container *ngIf="checkInHistory$ | async as checkInHistory">
-              {{ formatDuration(calculateTotalCheckedInTime(checkInHistory, getFirstDayOfSelectedWeek(), getLastDayOfSelectedWeek())) }}
+              {{
+                formatDuration(
+                  calculateTotalCheckedInTime(
+                    checkInHistory,
+                    getFirstDayOfSelectedWeek(),
+                    getLastDayOfSelectedWeek()
+                  ),
+                  "CHECK_IN.DETAILS.HOURS" | translate,
+                  "CHECK_IN.DETAILS.MINUTES" | translate,
+                  "CHECK_IN.DETAILS.SECONDS" | translate
+                )
+              }}
             </ng-container>
           </div>
         </div>
@@ -162,19 +213,27 @@
     <div class="row my-2">
       <div class="col-12">
         <h4 class="text-dark font-weight-bold mb-4">
-          Time checked in by month
+          {{ "CHECK_IN.DETAILS.TIME_BY_MONTH" | translate }}
         </h4>
       </div>
       <div class="col-12">
         <div class="d-flex align-items-center mb-4">
           <div class="col-3 col-sm-1 text-left pl-0">
-            <button class="btn btn-icon btn-secondary mr-2" (click)="goToPreviousMonth()">
+            <button
+              class="btn btn-icon btn-secondary mr-2"
+              (click)="goToPreviousMonth()"
+            >
               <i class="fas fa-chevron-left"></i>
             </button>
           </div>
-          <div class="font-weight-bold col-6 col-sm-2 text-center">{{ selectedMonth | date: 'MMMM yyyy' }}</div>
+          <div class="font-weight-bold col-6 col-sm-2 text-center">
+            {{ selectedMonth | date : "MMMM yyyy" }}
+          </div>
           <div class="col-3 col-sm-1 text-right pr-0">
-            <button class="btn btn-icon btn-secondary ml-2" (click)="goToNextMonth()">
+            <button
+              class="btn btn-icon btn-secondary ml-2"
+              (click)="goToNextMonth()"
+            >
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
@@ -182,7 +241,18 @@
         <div class="d-flex align-items-center">
           <div class="font-weight-bolder font-size-lg">
             <ng-container *ngIf="checkInHistory$ | async as checkInHistory">
-              {{ formatDuration(calculateTotalCheckedInTime(checkInHistory, getFirstDayOfSelectedMonth(), getLastDayOfSelectedMonth())) }}
+              {{
+                formatDuration(
+                  calculateTotalCheckedInTime(
+                    checkInHistory,
+                    getFirstDayOfSelectedMonth(),
+                    getLastDayOfSelectedMonth()
+                  ),
+                  "CHECK_IN.DETAILS.HOURS" | translate,
+                  "CHECK_IN.DETAILS.MINUTES" | translate,
+                  "CHECK_IN.DETAILS.SECONDS" | translate
+                )
+              }}
             </ng-container>
           </div>
         </div>
@@ -196,14 +266,16 @@
     <div class="row my-2">
       <div class="col-12">
         <h4 class="text-dark font-weight-bold mb-4">
-          Time checked in between dates
+          {{ "CHECK_IN.DETAILS.TIME_BETWEEN_DATES.TITLE" | translate }}
         </h4>
       </div>
       <div class="col-12">
         <div class="row">
           <div class="col-12 col-md-6">
             <div class="form-group">
-              <label for="startDate">Start Date</label>
+              <label for="startDate">{{
+                "CHECK_IN.DETAILS.TIME_BETWEEN_DATES.START_DATE" | translate
+              }}</label>
               <input
                 class="form-control form-control-solid"
                 id="startDate"
@@ -215,7 +287,9 @@
           </div>
           <div class="col-12 col-md-6">
             <div class="form-group">
-              <label for="endDate">End Date</label>
+              <label for="endDate">{{
+                "CHECK_IN.DETAILS.TIME_BETWEEN_DATES.END_DATE" | translate
+              }}</label>
               <input
                 class="form-control form-control-solid"
                 id="endDate"
@@ -229,13 +303,23 @@
         <div class="d-flex align-items-center">
           <div class="font-weight-bolder font-size-lg">
             <ng-container *ngIf="checkInHistory$ | async as checkInHistory">
-              {{ formatDuration(calculateTotalCheckedInTime(checkInHistory, startDate, endDate)) }}
+              {{
+                formatDuration(
+                  calculateTotalCheckedInTime(
+                    checkInHistory,
+                    startDate,
+                    endDate
+                  ),
+                  "CHECK_IN.DETAILS.HOURS" | translate,
+                  "CHECK_IN.DETAILS.MINUTES" | translate,
+                  "CHECK_IN.DETAILS.SECONDS" | translate
+                )
+              }}
             </ng-container>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 

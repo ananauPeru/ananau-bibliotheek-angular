@@ -24,6 +24,7 @@ export const locale = {
       DOWNLOAD_FILE_NUMBER: "Bestand {{number}} downloaden",
       CONFIRM: "Bevestigen",
       DISCONFIRM: "Bevestiging intrekken",
+      BACK: "Terug",
     },
     MENU: {
       NEW: "nieuw",
@@ -831,6 +832,36 @@ export const locale = {
           FIRST_NAME: "Voornaam",
           LAST_NAME: "Achternaam",
         },
+      },
+    },
+
+    CHECK_IN: {
+      SCAN_QR_CODE: "Scan de QR-code",
+      CHECKED_IN: "Ingecheckt",
+      CHECKED_OUT: "Uitgecheckt",
+      DETAILS: {
+        PAGE_TITLE: "Check-in Details",
+        OVERVIEW: "Overzicht van inchecken",
+        TIME_TODAY: "Tijd van inchecken vandaag",
+        TIME_WEEK: "Tijd van inchecken deze week",
+        TIME_MONTH: "Tijd van inchecken deze maand",
+        TIME_TOTAL: "Tijd van ingechekt in totaal",
+        TIME_BY_WEEK: "Tijd van inchecken per week",
+        TIME_BY_MONTH: "Tijd van inchecken per maand",
+        TIME_BETWEEN_DATES: {
+          TITLE: "Tijd van inchecken tussen data",
+          START_DATE: "Startdatum",
+          END_DATE: "Einddatum",
+        },
+        HOURS: "Uren",
+        MINUTES: "Minuten",
+        SECONDS: "Seconden",
+      },
+      LIST: {
+        FIRST_NAME: "Voornaam",
+        LAST_NAME: "Familienaam",
+        CHECK_IN_STATUS: "Check-in status",
+        DETAILS: "Details",
       },
     },
 

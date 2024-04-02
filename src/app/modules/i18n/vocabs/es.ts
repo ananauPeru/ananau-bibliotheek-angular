@@ -28,6 +28,7 @@ export const locale = {
       DOWNLOAD_FILE_NUMBER: "Descargar archivo {{number}}",
       CONFIRM: "Confirmar",
       DISCONFIRM: "Desconfirmar",
+      BACK: "Espalda",
     },
 
     // MENU
@@ -212,10 +213,12 @@ export const locale = {
         NEW_PASSWORD_PLACEHOLDER: "Nueva contraseña",
         VERIFY_PASSWORD: "Verificar contraseña",
         VERIFY_PASSWORD_PLACEHOLDER: "Confirmar contraseña",
-        VERIFY_PASSWORD_VALID: "La confirmación de contraseña se ingresó correctamente",
-        VERIFY_PASSWORD_INVALID: "'Contraseña' y 'Confirmar contraseña' no coinciden.",
-        FORGOT_PASSWORD: "¿Olvidaste tu contraseña?"
-      }
+        VERIFY_PASSWORD_VALID:
+          "La confirmación de contraseña se ingresó correctamente",
+        VERIFY_PASSWORD_INVALID:
+          "'Contraseña' y 'Confirmar contraseña' no coinciden.",
+        FORGOT_PASSWORD: "¿Olvidaste tu contraseña?",
+      },
     },
 
     // REGISTRATION FORM
@@ -824,7 +827,8 @@ export const locale = {
         STANDARD_TITLE: "Registro",
         TITLE: "Registro de {{name}}",
         DELETE: "Quitar de la lista",
-        DELETE_CONFIRMATION_MESSAGE: "¿Está seguro de que desea eliminar este registro? Esta acción es irreversible.",
+        DELETE_CONFIRMATION_MESSAGE:
+          "¿Está seguro de que desea eliminar este registro? Esta acción es irreversible.",
         FILE_NAMES: {
           INTERNATIONAL_PASSPORT: "Pasaporte internacional",
           GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
@@ -850,6 +854,36 @@ export const locale = {
         DATES_CHANGE_SUCCESS: "Fechas actualizadas correctamente.",
         DATES_CHANGE_ERROR:
           "Ocurrió un error al actualizar las fechas. Por favor, inténtalo de nuevo más tarde.",
+      },
+    },
+
+    CHECK_IN: {
+      SCAN_QR_CODE: "Escanear código QR",
+      CHECKED_IN: "Registrado",
+      CHECKED_OUT: "No registrado",
+      DETAILS: {
+        PAGE_TITLE: "Detalles de Registro",
+        OVERVIEW: "Resumen de registro de entrada",
+        TIME_TODAY: "Hora de registro de entrada hoy",
+        TIME_WEEK: "Hora de registro de entrada esta semana",
+        TIME_MONTH: "Hora de registro de entrada este mes",
+        TIME_TOTAL: "Hora de registro de entrada total",
+        TIME_BY_WEEK: "Hora de registro de entrada por semana",
+        TIME_BY_MONTH: "Hora de registro de entrada por mes",
+        TIME_BETWEEN_DATES: {
+          TITLE: "Hora de registro de entrada entre fechas",
+          START_DATE: "Fecha de inicio",
+          END_DATE: "Fecha final",
+        },
+        HOURS: "Horas",
+        MINUTES: "Minutos",
+        SECONDS: "Segundos",
+      },
+      LIST: {
+        FIRST_NAME: "Nombre propio",
+        LAST_NAME: "Apellido",
+        CHECK_IN_STATUS: "Estado de registro",
+        DETAILS: "Detalles",
       },
     },
 
