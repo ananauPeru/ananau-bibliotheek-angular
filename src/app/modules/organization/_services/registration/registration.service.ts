@@ -44,13 +44,13 @@ export class RegistrationService {
               ? this.translate.instant("REGISTRATIONS.STUDENT")
               : this.translate.instant("REGISTRATIONS.VOLUNTEER");
           return (
-            registration.firstName.toLowerCase().includes(f) ||
-            registration.lastName.toLowerCase().includes(f) ||
-            registration.email.toLowerCase().includes(f) ||
-            formatDate(registration.startDate, "dd-MM-yyyy", "en-US").includes(
+            registration.firstName?.toLowerCase().includes(f) ||
+            registration.lastName?.toLowerCase().includes(f) ||
+            registration.email?.toLowerCase().includes(f) ||
+            formatDate(registration?.startDate, "dd-MM-yyyy", "en-US").includes(
               f
             ) ||
-            formatDate(registration.endDate, "dd-MM-yyyy", "en-US").includes(
+            formatDate(registration?.endDate, "dd-MM-yyyy", "en-US").includes(
               f
             ) ||
             role.toLowerCase().includes(f)

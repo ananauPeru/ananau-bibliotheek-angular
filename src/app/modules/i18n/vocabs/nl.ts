@@ -24,6 +24,7 @@ export const locale = {
       DOWNLOAD_FILE_NUMBER: "Bestand {{number}} downloaden",
       CONFIRM: "Bevestigen",
       DISCONFIRM: "Bevestiging intrekken",
+      BACK: "Terug",
     },
     MENU: {
       NEW: "nieuw",
@@ -204,9 +205,10 @@ export const locale = {
         VERIFY_PASSWORD: "Wachtwoord verifiëren",
         VERIFY_PASSWORD_PLACEHOLDER: "Bevestig wachtwoord",
         VERIFY_PASSWORD_VALID: "Wachtwoordbevestiging is correct ingevoerd",
-        VERIFY_PASSWORD_INVALID: "'Wachtwoord' en 'Wachtwoord bevestigen' komen niet overeen.",
-        FORGOT_PASSWORD: "Wachtwoord vergeten?"
-      }
+        VERIFY_PASSWORD_INVALID:
+          "'Wachtwoord' en 'Wachtwoord bevestigen' komen niet overeen.",
+        FORGOT_PASSWORD: "Wachtwoord vergeten?",
+      },
     },
     // REGISTRATION FORM
     REGISTRATION: {
@@ -792,7 +794,8 @@ export const locale = {
         STANDARD_TITLE: "Registratie",
         TITLE: "Registratie van {{name}}",
         DELETE: "Verwijder uit lijst",
-        DELETE_CONFIRMATION_MESSAGE: "Weet u zeker dat u deze registratie wilt verwijderen? Deze actie is onomkeerbaar.",
+        DELETE_CONFIRMATION_MESSAGE:
+          "Weet u zeker dat u deze registratie wilt verwijderen? Deze actie is onomkeerbaar.",
         FILE_NAMES: {
           INTERNATIONAL_PASSPORT: "Internationaal paspoort",
           GOOD_CONDUCT_CERTIFICATE: "Bewijs van goed gedrag",
@@ -831,6 +834,38 @@ export const locale = {
           FIRST_NAME: "Voornaam",
           LAST_NAME: "Achternaam",
         },
+      },
+    },
+
+    CHECK_IN: {
+      SCAN_QR_CODE: "Scan de QR-code",
+      CHECKED_IN: "Ingecheckt",
+      CHECKED_OUT: "Uitgecheckt",
+      SCAN: { TITLE: "Scan uw QR-code om in/uit te checken" },
+      DETAILS: {
+        PAGE_TITLE: "Check-in Details",
+        OVERVIEW: "Overzicht van inchecken",
+        TIME_TODAY: "Tijd van inchecken vandaag",
+        TIME_WEEK: "Tijd van inchecken deze week",
+        TIME_MONTH: "Tijd van inchecken deze maand",
+        TIME_TOTAL: "Tijd van ingechekt in totaal",
+        TIME_BY_WEEK: "Tijd van inchecken per week",
+        TIME_BY_MONTH: "Tijd van inchecken per maand",
+        TIME_BETWEEN_DATES: {
+          TITLE: "Tijd van inchecken tussen data",
+          START_DATE: "Startdatum",
+          END_DATE: "Einddatum",
+        },
+        HOURS: "Uren",
+        MINUTES: "Minuten",
+        SECONDS: "Seconden",
+      },
+      LIST: {
+        PAGE_TITLE: "Check-in Lijst", 
+        FIRST_NAME: "Voornaam",
+        LAST_NAME: "Familienaam",
+        CHECK_IN_STATUS: "Check-in status",
+        DETAILS: "Details",
       },
     },
 

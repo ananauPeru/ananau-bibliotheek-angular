@@ -27,9 +27,10 @@ export const locale = {
       DOWNLOAD_FILE_NUMBER: "Download file {{number}}",
       CONFIRM: "Confirm",
       DISCONFIRM: "Disconfirm",
+      BACK: "Back",
     },
-    NEDERLANDS : "Dutch",
-    ENGELS : "English",
+    NEDERLANDS: "Dutch",
+    ENGELS: "English",
 
     // MENU
     MENU: {
@@ -66,7 +67,9 @@ export const locale = {
         TITLE: "Organization",
         ROLES: "Role Management",
         REGISTRATIONS: "Registrations",
-        GENERAL_INFORMATION: "General Information"
+        GENERAL_INFORMATION: "General Information",
+        CHECK_IN: "Check-in",
+        CHECK_IN_LIST: "Check-in list",
       },
       // We dont translate documentation (IT) to different languages
       DOCUMENTATION: {
@@ -87,8 +90,7 @@ export const locale = {
     // AUTH PAGES
     AUTH: {
       GENERAL: {
-        NEW:
-          "Are you looking to volunteer, are you looking for an internship or are you a new employee at Añañau?",
+        NEW: "Are you looking to volunteer, are you looking for an internship or are you a new employee at Añañau?",
         TITLE: "Welcome to Añañau",
         WELCOMETITLE1: "Welcome to Asociación ONG Añañau!",
         WELCOMETITLE2:
@@ -104,8 +106,10 @@ export const locale = {
         LEGAL: "Legal",
         CONTACT: "Contact us",
         WEBSITE: "Website",
-        SUBSCRIBE: "We would appriciate it if you subscribe to our newsletter. It is always possible to unsubscribe afterwards.",
-        CLICK:"Click on the language in which you want to receive a newsletter.",
+        SUBSCRIBE:
+          "We would appriciate it if you subscribe to our newsletter. It is always possible to unsubscribe afterwards.",
+        CLICK:
+          "Click on the language in which you want to receive a newsletter.",
         NEWSLETTER: "Newsletter",
         SITE: "https://mailchi.mp/ed0773cba4b8/ananaunewlettersignup",
       },
@@ -177,10 +181,11 @@ export const locale = {
           "Password confirmation should have at least 3 symbols.",
         CONFIRMPASSWORD_MAXLENGTH:
           "Password confirmation should have maximum 360 symbols.",
-        PASSWORD_NO_MATCH: "\"Password\" and \"Confirm Password\" didn't match.",
+        PASSWORD_NO_MATCH: '"Password" and "Confirm Password" didn\'t match.',
         PHONE_REQUIRED: "Phone is required.",
         PHONE_PATTERN:
-          "Phone can only contain numbers, must begin with the symbol "+" and your country code.",
+          "Phone can only contain numbers, must begin with the symbol " +
+          " and your country code.",
         PHONE_MINLENGTH: "Phone should have at least 3 symbols.",
         PHONE_MAXLENGTH: "Phone should have maximum 100 symbols.",
         DATEOFBIRTH_REQUIRED: "Date of birth is required.",
@@ -216,9 +221,10 @@ export const locale = {
         VERIFY_PASSWORD: "Verify Password",
         VERIFY_PASSWORD_PLACEHOLDER: "Confirm password",
         VERIFY_PASSWORD_VALID: "Password confirmation was entered correctly",
-        VERIFY_PASSWORD_INVALID: "'Passsword' and 'Confirm Password' didn't match.",
+        VERIFY_PASSWORD_INVALID:
+          "'Passsword' and 'Confirm Password' didn't match.",
         FORGOT_PASSWORD: "Forgot password?",
-      }
+      },
     },
 
     // REGISTRATION FORM
@@ -252,7 +258,7 @@ export const locale = {
           IMAGE_SUBMIT_ERROR:
             "Something went wrong while submitting your image files. Please try again later.",
           IMAGE_SAVE_ERROR:
-            "Something went wrong while saving your image files. Please try again later."
+            "Something went wrong while saving your image files. Please try again later.",
         },
       },
       PERSONAL: {
@@ -281,8 +287,7 @@ export const locale = {
         },
         CONTACT_PERSON: {
           TITLE: "Contact person",
-          INFO:
-            "Your contact person is the person we should be able to contact in case of an emergency.",
+          INFO: "Your contact person is the person we should be able to contact in case of an emergency.",
           FIRST_NAME: "First name",
           MIDDLE_NAME: "Middle name",
           LAST_NAME: "Last name",
@@ -312,7 +317,8 @@ export const locale = {
           LEAVE_END: "Proposed end date period of leave",
           LEAVE_INFO:
             "You have the option to schedule a period of leave during your internship. This is determined in consultation with your school and the organization. It is strongly recommended and requested to plan this period of leave at the end of the internship. If you choose not to schedule a period of leave, please leave this field empty.",
-          LEAVE_EXCEEDS_LIMIT: "The period of leave exceeds the maximum duration of a normal visa.",
+          LEAVE_EXCEEDS_LIMIT:
+            "The period of leave exceeds the maximum duration of a normal visa.",
         },
         SPANISH: {
           TITLE: "Spanish",
@@ -331,8 +337,8 @@ export const locale = {
             "If you do not yet speak a basic level of Spanish, we recommend you apply for 4 weeks of Spanish lessons on-site.",
         },
         MOTIVATION_LETTER: {
-          TITLE: 'Motivation letter',
-          MOTIVATION: 'Fill in the field with your motivation letter',
+          TITLE: "Motivation letter",
+          MOTIVATION: "Fill in the field with your motivation letter",
         },
         INFO: {
           TITLE: "Info",
@@ -396,8 +402,7 @@ export const locale = {
         },
         CONTACT: {
           TITLE: "Do you have any questions for us?",
-          INFO:
-            "After you have submitted your registration, we will try to contact you as soon as possible. Usually, we will even set up a video call to discuss some things and answer each other's questions. Still, if you already have questions about the registration process or the internship in general, you can always contact us via email or WhatsApp.",
+          INFO: "After you have submitted your registration, we will try to contact you as soon as possible. Usually, we will even set up a video call to discuss some things and answer each other's questions. Still, if you already have questions about the registration process or the internship in general, you can always contact us via email or WhatsApp.",
         },
       },
       TERMS: {
@@ -415,14 +420,14 @@ export const locale = {
     LIBRARY: {
       TRAN: "Translation",
       DOWN: "The document is still uploading",
-      DON:"The document has been uploaded",
+      DON: "The document has been uploaded",
       GENERAL: {},
-      CLASS : {
+      CLASS: {
         HELP: "How to add new lesson?",
         VRAAG: "Do you want to upload a translation of the document?",
         YES: "Yes",
-        NO:"No",
-        SUBJECT :{
+        NO: "No",
+        SUBJECT: {
           TITLE: "Subject",
           ER: "Subject is required",
           WISKUNDE: "Mathematics",
@@ -436,66 +441,66 @@ export const locale = {
           ARTS: "Arts and Crafts",
           NUTRITION: "Nutrition",
           COMMUNICATION: "Communication for Development",
-          OCCUPATIONAL:"Occupational therapy",
+          OCCUPATIONAL: "Occupational therapy",
           OTHER: "Other",
         },
-        CREATE : {
+        CREATE: {
           NAAM: "Create a new lesson",
-          TERUG : "Back",
+          TERUG: "Back",
           CANCEL: "Cancel",
           MAAK: "Make a new lesson",
           BEWERK: "Save adjustments",
-          FILTER:"Filter by title, author or description",
-          WAAR:"The document is present. If you want to upload another document, simply upload a new document here.",
+          FILTER: "Filter by title, author or description",
+          WAAR: "The document is present. If you want to upload another document, simply upload a new document here.",
           TITEL: {
-            NAAM : "Title",
-            BES : " Enter the title of the lesson",
+            NAAM: "Title",
+            BES: " Enter the title of the lesson",
             ER: "Title is required",
-            MIN : "Title must at least have 3 letters ",
-            MAX : "The tittle is too long, make it shorter."
+            MIN: "Title must at least have 3 letters ",
+            MAX: "The tittle is too long, make it shorter.",
           },
           AUTEUR: {
-            NAAM : "Author",
-            BES : "Enter the author of the lesson.",
+            NAAM: "Author",
+            BES: "Enter the author of the lesson.",
             ER: "Author is required",
-            MIN : "Author must have at least 3 letters",
-            MAX : "The author is too long, make is shorter."
-          }, 
+            MIN: "Author must have at least 3 letters",
+            MAX: "The author is too long, make is shorter.",
+          },
           DATUM: {
-            NAAM : "When created",
-            BES : "Enter the date from when this lesson was created",
-            ER: "Date is required"
+            NAAM: "When created",
+            BES: "Enter the date from when this lesson was created",
+            ER: "Date is required",
           },
           PUBLIEK: {
-            NAAM : "Target audience",
-            BES : "What age group is this class for?",
+            NAAM: "Target audience",
+            BES: "What age group is this class for?",
             ER: "Target audience is required",
-            KLEUTER : "Kindergarden",
-            LAGERESCHOOL : "Primary school",
-            MIDDELBAAR : "Secondary school",
-          }, 
+            KLEUTER: "Kindergarden",
+            LAGERESCHOOL: "Primary school",
+            MIDDELBAAR: "Secondary school",
+          },
           LANGUAGE: {
-            NAAM : "Language",
-            BES : "In what language is the document written?",
+            NAAM: "Language",
+            BES: "In what language is the document written?",
             ER: "Language is required",
-            NEDERLANDS : "Dutch",
-            ENGELS : "English",
-            SPAANS : "Spanish",
+            NEDERLANDS: "Dutch",
+            ENGELS: "English",
+            SPAANS: "Spanish",
           },
           BESCHRIJVING: {
-            NAAM : "Description",
-            BES : "Provide additional information about het lesson here.",
+            NAAM: "Description",
+            BES: "Provide additional information about het lesson here.",
             ER: "The description is required",
-            MIN : "Description must contain at least 3 letters",
-            MAX : "The description is too long, make it shorter."
-          }, 
-          UP : {
-            NAAM : "Upload zone",
-            HIER : "Click here to slect a document",
-            BES : "If you want to upload multiple documents, please create a zip file with them first. (This is the only way you can upload more than 1 document.)",
-            BEST: "If the document continues to load after selecting, click on the document again. "
-          }
-        }
+            MIN: "Description must contain at least 3 letters",
+            MAX: "The description is too long, make it shorter.",
+          },
+          UP: {
+            NAAM: "Upload zone",
+            HIER: "Click here to slect a document",
+            BES: "If you want to upload multiple documents, please create a zip file with them first. (This is the only way you can upload more than 1 document.)",
+            BEST: "If the document continues to load after selecting, click on the document again. ",
+          },
+        },
       },
       CREATE: {
         BOOK: {
@@ -774,7 +779,7 @@ export const locale = {
         SOCIO_EDUCATIONAL_ACTIVITIES: "Socio Educational Activities",
         STIMULATION: "Stimulation",
       },
-      CLASS_OVERVIEW:{
+      CLASS_OVERVIEW: {
         ALL: "All lessons",
         ADD: "Add New Class",
       },
@@ -807,7 +812,8 @@ export const locale = {
         STANDARD_TITLE: "Registration",
         TITLE: "Registration of {{name}}",
         DELETE: "Remove from list",
-        DELETE_CONFIRMATION_MESSAGE: "Are you sure you want to remove this registration? This action is irreversible.",
+        DELETE_CONFIRMATION_MESSAGE:
+          "Are you sure you want to remove this registration? This action is irreversible.",
         FILE_NAMES: {
           INTERNATIONAL_PASSPORT: "International passport",
           GOOD_CONDUCT_CERTIFICATE: "Certificate of good conduct",
@@ -829,10 +835,9 @@ export const locale = {
           "Something went wrong while removing the registration. Please try again later.",
         DOWNLOAD_ERROR:
           "Something went wrong while downloading the file. Please try again later.",
-          DATES_CHANGE_SUCCESS:
-            "Succesfully updated dates.",
-          DATES_CHANGE_ERROR:
-            "Something went wrong while updating dates. Please try again later."
+        DATES_CHANGE_SUCCESS: "Succesfully updated dates.",
+        DATES_CHANGE_ERROR:
+          "Something went wrong while updating dates. Please try again later.",
       },
     },
 
@@ -850,12 +855,45 @@ export const locale = {
       },
     },
 
+    CHECK_IN: {
+      SCAN_QR_CODE: "Scan QR code",
+      CHECKED_IN: "Checked in",
+      CHECKED_OUT: "Checked out",
+      SCAN: {
+        TITLE: "Scan your QR code to check-in/check-out",
+      },
+      DETAILS: {
+        PAGE_TITLE: "Check in details",
+        OVERVIEW: "Check in overview",
+        TIME_TODAY: "Time checked in today",
+        TIME_WEEK: "Time checked in this week",
+        TIME_MONTH: "Time checked in this month",
+        TIME_TOTAL: "Total time checked in",
+        TIME_BY_WEEK: "Time checked in by week",
+        TIME_BY_MONTH: "Time checked in by month",
+        TIME_BETWEEN_DATES: {
+          TITLE: "Time checked in between dates",
+          START_DATE: "Start date",
+          END_DATE: "End date",
+        },
+        HOURS: "Hours",
+        MINUTES: "Minutes",
+        SECONDS: "Seconds",
+      },
+      LIST: {
+        PAGE_TITLE: "Check-in list",
+        FIRST_NAME: "First name",
+        LAST_NAME: "Last name",
+        CHECK_IN_STATUS: "Check in status",
+        DETAILS: "Details",
+      },
+    },
     GENERAL_INFORMATION: {
       PAGE_TITLE: "General Information",
       VISA: {
         TITLE: "Visa",
         LABEL: "Enter visa information",
-        BUTTON: "Save"
+        BUTTON: "Save",
       },
       VACCINATION: {
         TITLE: "Vaccinations",
@@ -865,7 +903,7 @@ export const locale = {
         BUTTON: "Add Vaccine",
         REQUIRED: "Required",
         OPTIONAL: "Optional",
-        NO_RESULT: "No vaccinations added yet."
+        NO_RESULT: "No vaccinations added yet.",
       },
       HOLIDAY: {
         TITLE: "Holidays",
@@ -875,32 +913,37 @@ export const locale = {
         BUTTON: "Add Holiday",
         NO_RESULT: "No holidays found",
         DELETE_ALL: "Delete all Holidays",
-        DELETE_ALL_CONFIRMATION_MESSAGE: "Are you sure you want to remove all holidays? This action is irreversible."
+        DELETE_ALL_CONFIRMATION_MESSAGE:
+          "Are you sure you want to remove all holidays? This action is irreversible.",
       },
       TOASTS: {
         SUCCESS: "Success",
         ERROR: "Error",
         VACCINATION: {
           CREATE_SUCCESS: "Successfully added a new vaccination.",
-          CREATE_ERROR: "Something went wrong while adding a new vaccination. Please try again later.",
-          DELETE_SUCCESS:"Successfully deleted a vaccination.",
-          DELETE_ERROR: "Something went wrong while deleting a vaccination. Please try again later.",
+          CREATE_ERROR:
+            "Something went wrong while adding a new vaccination. Please try again later.",
+          DELETE_SUCCESS: "Successfully deleted a vaccination.",
+          DELETE_ERROR:
+            "Something went wrong while deleting a vaccination. Please try again later.",
         },
         VISA: {
           UPDATE_SUCCESS: "Successfully updated visa information.",
-          UPDATE_ERROR: "Something went wrong while updating visa information. Please try again later.",
+          UPDATE_ERROR:
+            "Something went wrong while updating visa information. Please try again later.",
         },
         HOLIDAY: {
           CREATE_SUCCESS: "Successfully added a new holiday.",
-          CREATE_ERROR: "Something went wrong while adding a new holiday. Please try again later.",
-          DELETE_SUCCESS:"Successfully deleted a holiday.",
-          DELETE_ERROR: "Something went wrong while deleting a holiday. Please try again later.",
-          DELETE_ALL_SUCCESS:"Successfully deleted all holidays.",
-          DELETE_ALL_ERROR: "Something went wrong while deleting all holidays. Please try again later.",
+          CREATE_ERROR:
+            "Something went wrong while adding a new holiday. Please try again later.",
+          DELETE_SUCCESS: "Successfully deleted a holiday.",
+          DELETE_ERROR:
+            "Something went wrong while deleting a holiday. Please try again later.",
+          DELETE_ALL_SUCCESS: "Successfully deleted all holidays.",
+          DELETE_ALL_ERROR:
+            "Something went wrong while deleting all holidays. Please try again later.",
         },
-        
       },
-
-    }
+    },
   },
-}
+};

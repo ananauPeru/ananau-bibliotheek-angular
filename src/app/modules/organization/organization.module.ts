@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule, DatePipe } from "@angular/common";
+import { CommonModule, DatePipe, AsyncPipe } from "@angular/common";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { TranslationModule } from "../i18n/translation.module";
@@ -40,19 +40,24 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatTreeModule } from "@angular/material/tree";
-import { routes } from "src/app/app-routing.module";
 import { CoreModule } from "src/app/_metronic/core";
 import { GeneralModule } from "src/app/_metronic/partials/content/general/general.module";
 import { NgxDropzoneModule } from "ngx-dropzone";
 import { OrganizationRoutingModule } from "./organization-routing.module";
 import { RolesComponent } from "./roles/roles.component";
 import { OrganizationComponent } from "./organization.component";
-import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationsOverviewComponent } from "./registrations-overview/registrations-overview.component";
 import { RegistrationDetailsComponent } from './registration-details/registration-details.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { EditGeneralInformationComponent } from "./edit-general-information/edit-general-information.component";
+import { CheckInComponent } from "./check-in/check-in.component";
+import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+import { QRCodeModule } from 'angularx-qrcode';
+import { CheckInListComponent } from "./check-in-list/check-in-list.component";
+import { CheckInSortPipe } from "./_pipe/check-in-sort.pipe";
+import { CheckInDetailsComponent } from "./check-in-details/check-in-details.component";
 
+// LOAD_WASM().subscribe();
 
 @NgModule({
   declarations: [
@@ -62,6 +67,10 @@ import { EditGeneralInformationComponent } from "./edit-general-information/edit
     RegistrationDetailsComponent,
     CalendarComponent,
     EditGeneralInformationComponent,
+    CheckInComponent,
+    CheckInListComponent,
+    CheckInDetailsComponent,
+    CheckInSortPipe,
   ],
   imports: [
     CommonModule,
@@ -113,7 +122,10 @@ import { EditGeneralInformationComponent } from "./edit-general-information/edit
     LayoutModule,
     NgbModule,
     NgxDropzoneModule,
+
+    NgxScannerQrcodeModule,
+    QRCodeModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, AsyncPipe],
 })
 export class OrganizationModule {}
