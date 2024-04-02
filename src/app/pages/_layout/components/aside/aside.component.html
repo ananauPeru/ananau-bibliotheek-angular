@@ -42,7 +42,7 @@
 
       <!-- LIBRARY -->
       <!-- begin::section -->
-      <li class="menu-section" *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])">
+      <li class="menu-section" *ngIf="AuthUtil.permitted([AuthUtil.roles.Librarian, AuthUtil.roles.SuperAdmin])">
         <h4 class="menu-text">{{ "MENU.LIBRARY.TITLE" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
       </li>
@@ -52,7 +52,7 @@
       <!-- begin::1 Level -->
 
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])">
+        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted([AuthUtil.roles.Librarian, AuthUtil.roles.SuperAdmin])">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/library/books">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
@@ -104,7 +104,7 @@
       <!-- begin::1 Level -->
       <!-- begin::1 Level -->
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])">
+        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted([AuthUtil.roles.Librarian, AuthUtil.roles.SuperAdmin])">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/library/items">
           <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Box3.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
@@ -154,7 +154,7 @@
 
       <!-- begin::1 Level -->
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])">
+        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted([AuthUtil.roles.Librarian, AuthUtil.roles.SuperAdmin])">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/library/loans">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
@@ -228,7 +228,7 @@
 
        <!-- LIBRARY -->
       <!-- begin::section -->
-      <li class="menu-section" *ngIf="AuthUtil.permitted(['librarian', 'superadmin'])">
+      <li class="menu-section" *ngIf="AuthUtil.permitted([AuthUtil.roles.Librarian, AuthUtil.roles.SuperAdmin])">
         <h4 class="menu-text">{{ "MENU.LIBRARY.LES" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
       </li>
@@ -280,7 +280,7 @@
 
       <!-- STUDENT -->
       <!-- begin::section -->
-      <li class="menu-section" *ngIf="AuthUtil.permitted(['SuperAdmin', 'Student'])">
+      <li class="menu-section" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Student])">
         <h4 class="menu-text">
           {{ "REGISTRATION.GENERAL.STUDENT" | translate }}
         </h4>
@@ -289,7 +289,7 @@
       <!-- end:: section -->
       <!-- begin::1 Level - Student registration form -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Student'])">
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Student])">
         <a class="menu-link" routerLink="/registration-form/student" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
@@ -302,7 +302,7 @@
 
       <!-- VOLUNTEER -->
       <!-- begin::section -->
-      <li class="menu-section" *ngIf="AuthUtil.permitted(['SuperAdmin', 'Volunteer'])">
+      <li class="menu-section" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Volunteer])">
         <h4 class="menu-text">
           {{ "REGISTRATION.GENERAL.VOLUNTEER" | translate }}
         </h4>
@@ -311,7 +311,7 @@
       <!-- end:: section -->
       <!-- begin::1 Level - Student registration form -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Volunteer'])">
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Volunteer])">
         <a class="menu-link" routerLink="/registration-form/volunteer" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
@@ -324,14 +324,14 @@
 
       <!-- ORGANIZATION -->
       <!-- begin::section -->
-      <li class="menu-section" *ngIf="AuthUtil.permitted(['SuperAdmin', 'Admin'])">
+      <li class="menu-section" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
         <h4 class="menu-text">{{ "MENU.ORGANIZATION.TITLE" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
       </li>
       <!-- end:: section -->
       <!-- begin::1 Level -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
         <a class="menu-link" routerLink="/organization/roles" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Door-open.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
@@ -342,9 +342,9 @@
       <!-- end::1 Level -->
       <!-- begin::1 Level -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Admin'])">
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
         <a class="menu-link" routerLink="/organization/registrations" routerLinkActive="active"
-          *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
           <span [inlineSVG]="'./assets/media/svg/icons/Communication/Mail-box.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
           <span class="menu-text">{{ "MENU.ORGANIZATION.REGISTRATIONS" | translate }}
@@ -354,9 +354,45 @@
       <!-- end::1 Level -->
       <!-- begin::1 Level -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['SuperAdmin', 'Admin'])">
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin, AuthUtil.roles.QRCodeReader])">
+        <a class="menu-link" routerLink="/organization/check-in" routerLinkActive="active"
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin, AuthUtil.roles.QRCodeReader])">
+          <span [inlineSVG]="'./assets/media/svg/icons/General/Thunder.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ "MENU.ORGANIZATION.CHECK_IN" | translate }}
+          </span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+      <!-- begin::1 Level -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
+        <a class="menu-link" routerLink="/organization/check-in/list" routerLinkActive="active"
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
+          <span [inlineSVG]="'./assets/media/svg/icons/General/Thunder-move.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ "MENU.ORGANIZATION.CHECK_IN_LIST" | translate }}
+          </span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+      <!-- begin::1 Level -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
+        <a class="menu-link" routerLink="/organization/general-information" routerLinkActive="active"
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
+          <span [inlineSVG]="'./assets/media/svg/icons/Code/Info-circle.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ "MENU.ORGANIZATION.GENERAL_INFORMATION" | translate }}
+          </span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+      <!-- begin::1 Level -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
         <a class="menu-link" routerLink="/organization/calendar" routerLinkActive="active"
-          *ngIf="AuthUtil.permitted(['SuperAdmin', 'admin'])">
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])">
           <span [inlineSVG]="'./assets/media/svg/icons/Code/Time-schedule.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
           <span class="menu-text">{{ "MENU.KAL" | translate }}
@@ -367,14 +403,14 @@
 
       <!-- USER MANAGEMENT -->
       <!-- begin::section -->
-      <li class="menu-section" *ngIf="AuthUtil.permitted(['SuperAdmin'])">
+      <li class="menu-section" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])">
         <h4 class="menu-text">{{ "MENU.DOCUMENTATION.TITLE" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
       </li>
       <!-- end:: section -->
       <!-- begin::1 Level -->
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
-        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted(['superadmin'])">
+        routerLinkActive="menu-item-open" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])">
         <a class="menu-link menu-toggle" routerLinkActive="active" href="/documentation">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Book.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>
@@ -486,7 +522,7 @@
 
       <!-- begin::1 Level -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted(['SuperAdmin'])">
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])">
         <a class="menu-link" routerLink="/documentation/todos" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Tools/Roller.svg'" cacheSVG="true"
             class="svg-icon menu-icon"></span>

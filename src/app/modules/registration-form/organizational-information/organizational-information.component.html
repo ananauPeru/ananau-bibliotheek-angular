@@ -124,6 +124,7 @@
             type="date"
             formControlName="leaveStartDate"
             placeholder="yyyy-mm-dd"
+            (change)="calculateTimeDifference()"
           />
           <div
             *ngIf="
@@ -159,6 +160,7 @@
             type="date"
             formControlName="leaveEndDate"
             placeholder="yyyy-mm-dd"
+            (change)="calculateTimeDifference()"
           />
           <div
             *ngIf="
@@ -178,6 +180,17 @@
           }}</span>
         </div>
       </div>
+      <div class="form-group row" *ngIf="isTimeExceedingLimit">
+        <div class="col-12">
+          <div class="alert alert-warning d-flex align-items-center" role="alert">
+            <i class="fas fa-exclamation-triangle mr-2 text-white"></i>
+            <div (click)="onNavigateToTab('kt_tab_pane_7_5')" role="button">{{
+              "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_EXCEEDS_LIMIT"
+                | translate
+            }}</div>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
   <div class="separator separator-dashed my-10"></div>
@@ -193,18 +206,20 @@
           "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.NUMBER" | translate
         }}</label>
         <div class="col-9">
-          <textarea
+          <input
+            type="text"
             class="form-control form-control-solid"
             id="flightNumber"
             formControlName="flightNumber"
-            rows="1"
-          ></textarea>
+            aria-describedby="flightNumberError"
+          />
           <div
             *ngIf="
               organizationalForm.controls.flightInformation.get('flightNumber')['errors'] &&
               organizationalForm.controls.flightInformation.get('flightNumber').touched
             "
             class="text-danger form-text"
+            id="flightNumberError"
           >
             {{
               getErrorMessage(
@@ -517,8 +532,8 @@
     <form [formGroup]="organizationalForm.controls.motivationLetter">
       <div class="form-group row">
         <label for="motivationLetter" class="col-3">{{
-      "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION" | translate
-    }}</label>
+          "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION" | translate
+        }}</label>
         <div class="col-9">
           <textarea
             class="form-control form-control-solid"
@@ -530,14 +545,20 @@
           ></textarea>
           <div
             *ngIf="
-              organizationalForm.controls.motivationLetter.get('motivationLetter')['errors'] &&
-              organizationalForm.controls.motivationLetter.get('motivationLetter').touched
+              organizationalForm.controls.motivationLetter.get(
+                'motivationLetter'
+              )['errors'] &&
+              organizationalForm.controls.motivationLetter.get(
+                'motivationLetter'
+              ).touched
             "
             class="text-danger form-text"
           >
             {{
               getErrorMessage(
-                organizationalForm.controls.motivationLetter.get("motivationLetter")["errors"]
+                organizationalForm.controls.motivationLetter.get(
+                  "motivationLetter"
+                )["errors"]
               )
             }}
           </div>
@@ -545,7 +566,7 @@
       </div>
     </form>
   </div>
-  <div class="separator separator-dashed my-10"></div>  
+  <div class="separator separator-dashed my-10"></div>
   <!-- info -->
   <div class="my-2">
     <h4 class="text-dark font-weight-bold mb-4">

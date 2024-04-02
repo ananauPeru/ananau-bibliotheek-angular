@@ -1,0 +1,93 @@
+<div class="card card-custom">
+  <!-- Header -->
+  <div class="row">
+    <div class="col-12">
+      <div
+        class="card-header border-0 text-white"
+        style="background-color: white; padding: 2rem 2.25rem"
+      >
+        <div class="row">
+          <div class="col-12 col-md-8 w-100">
+            <h3 class="card-title font-weight-bolder text-dark">
+              <!-- {{ "REGISTRATIONS.OVERVIEW.TITLE" | translate }} -->
+              {{ "CHECK_IN.LIST.PAGE_TITLE" | translate }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="card-body pt-2">
+    <!--begin::Form Group-->
+    <div class="form-group row mb-10">
+      <div class="col-12 col-md-12">
+        <div class="input-group input-group-lg input-group-solid">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+
+          <input
+            (keyup)="registrationService.filter($event.target.value)"
+            type="email"
+            class="form-control form-control-lg form-control-solid force-pl-5"
+            placeholder="{{ 'REGISTRATIONS.OVERVIEW.FILTER' | translate }}"
+            style="padding-left: 10px"
+          />
+        </div>
+        <div class="feedback">
+          {{ "REGISTRATIONS.OVERVIEW.FILTER_INFO" | translate }}
+        </div>
+      </div>
+    </div>
+    <!--begin::Form Group-->
+
+    <!--begin: Item-->
+    <div class="d-flex flex-wrap align-items-center mb-10">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>{{ "CHECK_IN.LIST.FIRST_NAME" | translate }}</th>
+            <th>{{ "CHECK_IN.LIST.LAST_NAME" | translate }}</th>
+            <th>{{ "CHECK_IN.LIST.CHECK_IN_STATUS" | translate }}</th>
+            <th class="text-right">{{ "CHECK_IN.LIST.DETAILS" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let registration of registrationService.registrations | async | checkInSort | async
+            "
+          >
+            <td>{{ registration.firstName }}</td>
+            <td>{{ registration.lastName }}</td>
+            <td>
+              <span class="label label-lg label-light-primary label-inline" *ngIf="checkInService.isCheckedIn(registration.userId) | async; else checkedOut">
+                {{ "CHECK_IN.CHECKED_IN" | translate }}
+              </span>
+              <ng-template #checkedOut>
+                <span class="label label-lg label-light-danger label-inline">
+                  {{ "CHECK_IN.CHECKED_OUT" | translate }}
+                </span>
+              </ng-template>
+            </td>
+            <td class="text-right">
+              <button 
+              routerLink="/organization/check-in/{{ registration.userId }}"
+              type="button" 
+              class="btn btn-primary mr-2" 
+              placement="top" 
+              >
+                <i class="fas fa-sign-in-alt pr-0"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--end: Item-->
+  </div>
+</div>

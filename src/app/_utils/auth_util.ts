@@ -6,8 +6,10 @@ import { ToastrUtil } from "./toastr_util";
 @Injectable({
   providedIn: "root",
 })
+
 export class AuthUtil {
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
+  public roles = Roles;
 
   getAuthFromLocalStorage(): AuthModel {
     try {
@@ -31,4 +33,15 @@ export class AuthUtil {
     })
     return b
   }
+}
+
+
+
+export enum Roles {
+  SuperAdmin = "SuperAdmin",
+  Admin = "Admin",
+  Librarian = "Librarian",
+  Student = "Student",
+  Volunteer = "Volunteer",
+  QRCodeReader = "QRCodeReader",
 }

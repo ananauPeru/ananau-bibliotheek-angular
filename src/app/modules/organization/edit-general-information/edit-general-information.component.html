@@ -1,0 +1,308 @@
+<!-- The entire card -->
+<div class="card card-custom">
+  <!-- The card header -->
+  <div class="row">
+    <div class="col-12">
+      <div
+        class="card-header border-0 text-white"
+        style="background-color: white; padding: 2rem 2.25rem"
+      >
+        <div class="row">
+          <div class="col-12 col-md-8 w-100">
+            <h3 class="card-title font-weight-bolder text-dark">
+              {{ "GENERAL_INFORMATION.PAGE_TITLE" | translate }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The card body -->
+  <div class="card-body pt=2">
+    <!-- visa information -->
+    <div class="my-2">
+      <h4 class="text-dark font-weight-bold mb-4">
+        {{ "GENERAL_INFORMATION.VISA.TITLE" | translate }}
+      </h4>
+
+      <form
+        [formGroup]="visaInformationForm"
+        (ngSubmit)="saveVisaInformation()"
+      >
+        <div class="form-group row">
+          <!-- Input label -->
+          <label for="visa" class="col-12">
+            {{ "GENERAL_INFORMATION.VISA.LABEL" | translate }}
+          </label>
+          <!-- Input textarea -->
+          <div class="col-12">
+            <textarea
+              class="form-control form-control-solid"
+              id="visa"
+              formControlName="visaInformation"
+              rows="5"
+              required
+              (input)="adjustTextareaHeight($event)"
+              [value]="visaInformation$ | async"
+            >
+            </textarea>
+            <div
+              *ngIf="
+                visaInformationForm.get('visaInformation')['errors'] &&
+                visaInformationForm.get('visaInformation').touched
+              "
+              class="text-danger form-text"
+            >
+              {{
+                getErrorMessage(
+                  visaInformationForm.get("visaInformation")["errors"]
+                )
+              }}
+            </div>
+            <!-- Input textarea -->
+          </div>
+        </div>
+        <!-- Save button -->
+        <div class="form-group row">
+          <div class="col-12">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+              [disabled]="!visaInformationForm.valid"
+            >
+              {{ "GENERAL_INFORMATION.VISA.BUTTON" | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Seperator -->
+      <div class="separator separator-dashed my-10"></div>
+      <!-- Seperator -->
+
+      <div class="my-2">
+        <h4 class="text-dark font-weight-bold mb-4">
+          {{ "GENERAL_INFORMATION.VACCINATION.TITLE" | translate }}
+        </h4>
+
+        <div class="row">
+          <div class="col-md-6 mb-8">
+            <!-- Add new vaccination form -->
+            <h5 class="text-dark font-weight-bold mb-4">
+              {{ "GENERAL_INFORMATION.VACCINATION.ADD_NEW" | translate }}
+            </h5>
+            <form [formGroup]="vaccinationForm" (ngSubmit)="addVaccination()">
+              <div class="form-group">
+                <label for="vaccinationName">{{
+                  "GENERAL_INFORMATION.VACCINATION.NAME_LABEL" | translate
+                }}</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg form-control-solid"
+                  id="vaccinationName"
+                  formControlName="name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <div
+                  class="form-check d-flex align-items-center"
+                  style="padding-left: 0 !important"
+                >
+                  <input
+                    type="checkbox"
+                    class="custom-checkbox mr-3"
+                    id="vaccinationRequired"
+                    formControlName="required"
+                  />
+                  <label
+                    class="form-check-label mb-0"
+                    for="vaccinationRequired"
+                    >{{
+                      "GENERAL_INFORMATION.VACCINATION.REQUIRED_LABEL"
+                        | translate
+                    }}</label
+                  >
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                [disabled]="!vaccinationForm.valid"
+              >
+                {{ "GENERAL_INFORMATION.VACCINATION.BUTTON" | translate }}
+              </button>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <!-- List of vaccinations -->
+            <h5 class="text-dark font-weight-bold mb-14">
+              {{ "GENERAL_INFORMATION.VACCINATION.TITLE" | translate }}
+            </h5>
+            <ul class="list-group">
+              <ng-container *ngIf="vaccinations$ | async as vaccinations">
+                <ng-container
+                  *ngIf="vaccinations.length > 0; else noVaccinationResults"
+                >
+                  <li
+                    class="list-group-item"
+                    *ngFor="let vaccination of vaccinations"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <span
+                        >{{ vaccination.name }} -
+                        {{
+                          vaccination.required
+                            ? getTranslatedText(
+                                "GENERAL_INFORMATION.VACCINATION.REQUIRED"
+                              )
+                            : getTranslatedText(
+                                "GENERAL_INFORMATION.VACCINATION.OPTIONAL"
+                              )
+                        }}</span
+                      >
+                      <button
+                        class="btn btn-sm btn-icon btn-danger"
+                        (click)="removeVaccination(vaccination)"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </li>
+                </ng-container>
+              </ng-container>
+
+              <ng-template #noVaccinationResults>
+                <li class="list-group-item">
+                  {{ "GENERAL_INFORMATION.VACCINATION.NO_RESULT" | translate }}
+                </li>
+              </ng-template>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seperator -->
+    <div class="separator separator-dashed my-10"></div>
+    <!-- Seperator -->
+
+    <div class="my-2">
+      <h4 class="text-dark font-weight-bold mb-4">
+        {{ "GENERAL_INFORMATION.HOLIDAY.TITLE" | translate }}
+      </h4>
+
+      <div class="row">
+        <div class="col-md-6 mb-8">
+          <!-- Add new holiday form -->
+          <h5 class="text-dark font-weight-bold mb-4">
+            {{ "GENERAL_INFORMATION.HOLIDAY.ADD_NEW" | translate }}
+          </h5>
+          <form [formGroup]="holidayForm" (ngSubmit)="addHoliday()">
+            <div class="form-group">
+              <label for="holidayName">{{
+                "GENERAL_INFORMATION.HOLIDAY.NAME_LABEL" | translate
+              }}</label>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                id="holidayName"
+                formControlName="name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="holidayDate">{{
+                "GENERAL_INFORMATION.HOLIDAY.DATE_LABEL" | translate
+              }}</label>
+              <input
+                class="form-control form-control-solid"
+                id="holidayDate"
+                type="date"
+                formControlName="date"
+                placeholder="yyyy-mm-dd"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+              [disabled]="!holidayForm.valid"
+            >
+              {{ "GENERAL_INFORMATION.HOLIDAY.BUTTON" | translate }}
+            </button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <!-- List of HOLIDAY -->
+          <h5 class="text-dark font-weight-bold mb-14">
+            {{ "GENERAL_INFORMATION.HOLIDAY.TITLE" | translate }}
+          </h5>
+          <ul class="list-group">
+            <ng-container *ngIf="holidays$ | async as holidays">
+              <ng-container *ngIf="holidays.length > 0; else noHolidayResults">
+                <li class="list-group-item" *ngFor="let holiday of holidays">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span
+                      >{{ holiday.name }} -
+                      {{ holiday.date | date : "dd/MM/yyyy" }}</span
+                    >
+                    <button
+                      class="btn btn-sm btn-icon btn-danger"
+                      (click)="removeHoliday(holiday)"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </li>
+              </ng-container>
+            </ng-container>
+
+            <ng-template #noHolidayResults>
+              <li class="list-group-item">
+                {{ "GENERAL_INFORMATION.HOLIDAY.NO_RESULT" | translate }}
+              </li>
+            </ng-template>
+
+            <!-- Remove All button -->
+            <ng-container *ngIf="holidays$ | async as holidays">
+              <div class="mt-4" *ngIf="holidays.length > 0">
+                <button
+                  class="btn btn-danger btn-lg"
+                  (click)="openConfirmationModal()"
+                >
+                  <i class="fas fa-trash mr-2"></i>
+                  {{ "GENERAL_INFORMATION.HOLIDAY.DELETE_ALL" | translate }}
+                </button>
+              </div>
+            </ng-container>
+
+            <!-- Confirmation Modal -->
+            <ng-template #confirmationModal let-modal>
+              <div class="modal-header">
+                <h5 class="modal-title">{{ "GENERAL_INFORMATION.HOLIDAY.DELETE_ALL" | translate }}</h5>
+                <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {{ "GENERAL_INFORMATION.HOLIDAY.DELETE_ALL_CONFIRMATION_MESSAGE" | translate }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">{{ "BUTTONS.CANCEL" | translate }}</button>
+                <button type="button" class="btn btn-danger" (click)="removeHolidays(); modal.close()">{{ "BUTTONS.CONFIRM" | translate }}</button>
+              </div>
+            </ng-template>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

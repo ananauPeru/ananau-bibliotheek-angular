@@ -15,7 +15,7 @@
           *ngIf="registration$ | async as registration; else standardTitle"
           >{{
             "REGISTRATIONS.DETAILS.TITLE"
-              | translate: { name: registration.firstName }
+              | translate : { name: registration.firstName }
           }}</span
         >
         <small class="pl-2">{{
@@ -32,7 +32,7 @@
         [ngClass]="{
           'spinner spinner-left': deleting
         }"
-        (click)="delete()"
+        (click)="openConfirmationModal()"
       >
         {{ "REGISTRATIONS.DETAILS.DELETE" | translate }}
       </button>
@@ -48,13 +48,20 @@
       </button>
       <button
         *ngIf="registration.confirmed"
-        class="btn btn-warning font-weight-bolder"
+        class="btn btn-warning font-weight-bolder mr-2"
         [ngClass]="{
           'spinner spinner-left': confirming
         }"
         (click)="confirm(false)"
       >
         {{ "BUTTONS.DISCONFIRM" | translate }}
+      </button>
+      <button
+      *ngIf="registration.confirmed"
+      class="btn btn-primary"
+      (click)="downloadQRCode()"
+      >
+        <i class="fas fa-qrcode"></i> Download QR Code
       </button>
     </div>
   </div>
@@ -116,7 +123,7 @@
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.BIRTH_DATE" | translate }}
                 </td>
-                <td>{{ registration.dateOfBirth | date: "dd-MM-yyyy" }}</td>
+                <td>{{ registration.dateOfBirth | date : "dd-MM-yyyy" }}</td>
               </tr>
               <tr>
                 <td>
@@ -274,60 +281,176 @@
           <h5 class="text-dark font-weight-bold mb-3">
             {{ "REGISTRATION.ORGANIZATIONAL.DATES.TITLE" | translate }}
           </h5>
-          <table class="table table-hover">
-            <tbody>
-              <tr *ngIf="role === 'Volunteer'">
-                <td>
-                  {{ "REGISTRATION.ORGANIZATIONAL.DATES.ONLINE" | translate }}
-                </td>
-                <td>
-                  <img
-                    src="../../../../assets/media/svg/icons/Navigation/{{
-                      registration.internshipOnline ? 'Check' : 'Close'
-                    }}.svg"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  {{
-                    (role === "Student"
-                      ? "REGISTRATION.ORGANIZATIONAL.DATES.START_STUDENT"
-                      : "REGISTRATION.ORGANIZATIONAL.DATES.START_VOLUNTEER"
-                    ) | translate
-                  }}
-                </td>
-                <td>{{ registration.startDate | date: "dd-MM-yyyy" }}</td>
-              </tr>
-              <tr>
-                <td>
-                  {{
-                    (role === "Student"
-                      ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
-                      : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
-                    ) | translate
-                  }}
-                </td>
-                <td>{{ registration.endDate | date: "dd-MM-yyyy" }}</td>
-              </tr>
-              <tr *ngIf="role === 'Student'">
-                <td>
-                  {{
-                    "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_START" | translate
-                  }}
-                </td>
-                <td>{{ registration.leaveStartDate | date: "dd-MM-yyyy" }}</td>
-              </tr>
-              <tr *ngIf="role === 'Student'">
-                <td>
-                  {{
-                    "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
-                  }}
-                </td>
-                <td>{{ registration.leaveEndDate | date: "dd-MM-yyyy" }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- FORM START -->
+          <form [formGroup]="dateForm" (ngSubmit)="onSubmitDateChange()">
+            <table class="table table-hover">
+              <tbody>
+                <tr *ngIf="role === 'Volunteer'">
+                  <td>
+                    {{ "REGISTRATION.ORGANIZATIONAL.DATES.ONLINE" | translate }}
+                  </td>
+                  <td>
+                    <img
+                      src="../../../../assets/media/svg/icons/Navigation/{{
+                        registration.internshipOnline ? 'Check' : 'Close'
+                      }}.svg"
+                    />
+                  </td>
+                </tr>
+
+                <!-- START DATE INTERNSHIP -->
+                <tr>
+                  <td>
+                    {{
+                      (role === "Student"
+                        ? "REGISTRATION.ORGANIZATIONAL.DATES.START_STUDENT"
+                        : "REGISTRATION.ORGANIZATIONAL.DATES.START_VOLUNTEER"
+                      ) | translate
+                    }}
+                  </td>
+                  <td *ngIf="!isEditingStartDateInternship">{{ registration.startDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="isEditingStartDateInternship">
+                    <input
+                      class="form-control form-control-solid"
+                      id="start-date-internship"
+                      type="date"
+                      formControlName="startDate"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
+                  <td class="text-right">
+                    <button
+                      (click)="toggleEditingStartDateInternship()"
+                      type="button" 
+                      class="btn btn-primary mr-2" 
+                      placement="top" 
+                      ngbTooltip="{{ (isEditingStartDateInternship ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                    >
+                      <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingStartDateInternship, 'fa-times': isEditingStartDateInternship}"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- END DATE INTERNSHIP -->
+                <tr>
+                  <td>
+                    {{
+                      (role === "Student"
+                        ? "REGISTRATION.ORGANIZATIONAL.DATES.END_STUDENT"
+                        : "REGISTRATION.ORGANIZATIONAL.DATES.END_VOLUNTEER"
+                      ) | translate
+                    }}
+                  </td>
+                  <td *ngIf="!isEditingEndDateInternship">{{ registration.endDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="isEditingEndDateInternship">
+                    <input
+                      class="form-control form-control-solid"
+                      id="end-date-internship"
+                      type="date"
+                      formControlName="endDate"
+                      placeholder="yyyy-mm-dd"
+                    />
+                  </td>
+                  <td class="text-right">
+                    <button
+                      (click)="toggleEditingEndDateInternship()"
+                      type="button" 
+                      class="btn btn-primary mr-2" 
+                      placement="top" 
+                      ngbTooltip="{{ (isEditingEndDateInternship ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                    >
+                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingEndDateInternship, 'fa-times': isEditingEndDateInternship}"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- START DATE STAY -->
+                <tr *ngIf="role === 'Student'">
+                  <td>
+                    {{
+                      "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_START"
+                        | translate
+                    }}
+                  </td>
+                  <td *ngIf="!isEditingStartDateStay">{{ registration.leaveStartDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="isEditingStartDateStay">
+                    <input
+                      class="form-control form-control-solid"
+                      id="start-date-stay"
+                      type="date"
+                      formControlName="leaveStartDate"
+                      placeholder="yyyy-mm-dd"
+                      ngbTooltip="{{ (isEditingStartDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                    />
+                  </td>
+                  <td class="text-right">
+                    <button
+                      (click)="toggleEditingStartDateStay()"
+                      type="button" 
+                      class="btn btn-primary mr-2" 
+                      placement="top" 
+                    >
+                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingStartDateStay, 'fa-times': isEditingStartDateStay}"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- END DATE STAY -->
+                <tr *ngIf="role === 'Student'">
+                  <td>
+                    {{
+                      "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
+                    }}
+                  </td>
+                  <td *ngIf="!isEditingEndDateStay">{{ registration.leaveEndDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="isEditingEndDateStay">
+                    <input
+                      class="form-control form-control-solid"
+                      id="end-date-stay"
+                      type="date"
+                      formControlName="leaveEndDate"
+                      placeholder="yyyy-mm-dd"
+                      ngbTooltip="{{ (isEditingEndDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                    />
+                  </td>
+                  <td class="text-right">
+                    <button
+                      (click)="toggleEditingEndDateStay()"
+                      type="button" 
+                      class="btn btn-primary mr-2" 
+                      placement="top" 
+                    >
+                    <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingEndDateStay, 'fa-times': isEditingEndDateStay}"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Save Changes Button -->
+                <tr
+                  *ngIf="
+                    isEditingEndDateInternship ||
+                    isEditingEndDateStay ||
+                    isEditingStartDateInternship ||
+                    isEditingStartDateStay
+                  "
+                >
+                  <td></td>
+                  <td></td>
+                  <td class="text-right">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="isDateSaveButtonDisabled()"
+                    >
+                      {{ "BUTTONS.SAVE_CHANGES" | translate }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+
+          <!-- FORM END -->
         </div>
         <div>
           <h5 class="text-dark font-weight-bold mb-3">
@@ -566,7 +689,8 @@
                     )
                   "
                 >
-                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                <i class="fas fa-download"></i>
+                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
                 </button>
               </td>
             </tr>
@@ -588,7 +712,8 @@
                     )
                   "
                 >
-                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                <i class="fas fa-download"></i>
+                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
                 </button>
               </td>
             </tr>
@@ -607,7 +732,8 @@
                     )
                   "
                 >
-                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                <i class="fas fa-download"></i>
+                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
                 </button>
               </td>
             </tr>
@@ -626,7 +752,8 @@
                     )
                   "
                 >
-                  {{ "BUTTONS.DOWNLOAD" | translate }}
+                <i class="fas fa-download"></i>
+                {{ "BUTTONS.DOWNLOAD_FILE_NUMBER" | translate: { number: i + 1 } }}
                 </button>
               </td>
             </tr>
@@ -710,4 +837,21 @@
   <ng-template #loading>
     <div class="spinner spinner-primary spinner-lg"></div>
   </ng-template>
+</ng-template>
+
+<!-- Confirmation Modal -->
+<ng-template #confirmationModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "REGISTRATIONS.DETAILS.DELETE" | translate }}</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ "REGISTRATIONS.DETAILS.DELETE_CONFIRMATION_MESSAGE" | translate }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">{{ "BUTTONS.CANCEL" | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="delete(); modal.close()">{{ "BUTTONS.CONFIRM" | translate }}</button>
+  </div>
 </ng-template>

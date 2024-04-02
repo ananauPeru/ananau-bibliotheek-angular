@@ -59,6 +59,8 @@ export class ContainerComponent implements OnInit {
     requiredAndValid: number;
   };
 
+  public activeTabId: string = "kt_tab_pane_7_1";
+
   constructor(
     private auth: AuthUtil,
     private registrationService: RegistrationService,
@@ -412,5 +414,13 @@ export class ContainerComponent implements OnInit {
       }
     }
     return isRequired;
+  }
+
+  /**
+   * Navigates to the tab with the given tabId.
+   * @param tabId The tabId to navigate to.
+   */
+  onNavigateToTab(tabId: string) {
+    this.activeTabId = tabId;
   }
 }
