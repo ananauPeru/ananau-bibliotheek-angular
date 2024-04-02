@@ -45,7 +45,6 @@ export class OrganizationalInformationComponent implements OnInit {
   private filesToDelete = new Array<ScansFile>();
   private previewImageForNonImageFiles: File;
 
-
   constructor(
     private fb: FormBuilder,
     private datePipe: DatePipe,
@@ -168,11 +167,15 @@ export class OrganizationalInformationComponent implements OnInit {
       if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
         this.paymentApartmentFiles.push(file);
         this.updatePaymentApartment(false);
-      }/* 
-      if (file.name.startsWith(BlobNamePrefix.GoodConductCertificate)) {
-        this.goodConductCertificateFiles.push(file);
-        this.updateGoodConductCertificate(false);
-      } */
+      }
+      if (file.name.startsWith(BlobNamePrefix.PaymentGuarantee)) {
+        this.paymentGuaranteeFiles.push(file);
+        this.updatePaymentGuarantee(false);
+      }
+      if (file.name.startsWith(BlobNamePrefix.PaymentSpanish)) {
+        this.paymentSpanishFiles.push(file);
+        this.updatePaymentSpanish(false);  
+      }
     });
 
     // Fetch the preview image from assets (will be shown when file is no image)
@@ -197,16 +200,21 @@ export class OrganizationalInformationComponent implements OnInit {
         this.userStorageService.storeImages$(
           this.paymentApartmentFiles.filter((file) => file.isNew)
         ),
-        /* this.userStorageService.storeImages$(
-          this.passportPhotoFiles.filter((file) => file.isNew)
-        ), */
+        this.userStorageService.storeImages$(
+          this.paymentGuaranteeFiles.filter((file) => file.isNew)
+        ),
+        this.userStorageService.storeImages$(
+          this.paymentSpanishFiles.filter((file) => file.isNew)
+        ),
         this.userStorageService.deleteImages$(this.filesToDelete),
       ])
         .then(() => {
           this.paymentApartmentFiles.forEach(
             (file) => (file.isNew = false)
           );
-          /* this.passportPhotoFiles.forEach((file) => (file.isNew = false)); */
+          this.paymentGuaranteeFiles.forEach((file) => (file.isNew = false));
+          this.paymentSpanishFiles.forEach((file) => (file.isNew = false));
+
           this.filesToDelete.length = 0;
 
           this.toastr.showSuccess(
@@ -317,7 +325,7 @@ export class OrganizationalInformationComponent implements OnInit {
   }
 
   private updatePaymentApartment(markAsTouched: boolean) {
-      const paymentApartment = this.organizationalForm.get("paymentApartment");
+      const paymentApartment = this.organizationalForm.get('paymentApartment');
       if (this.paymentApartmentFiles.length > 0) {
         paymentApartment.setValue(true);
       } else {
@@ -327,7 +335,7 @@ export class OrganizationalInformationComponent implements OnInit {
     }
 
   private updatePaymentGuarantee(markAsTouched: boolean) {
-    const paymentGuarantee = this.organizationalForm.get("paymentGuarantee");
+    const paymentGuarantee = this.organizationalForm.get('paymentGuarantee');
     if (this.paymentGuaranteeFiles.length > 0) {
       paymentGuarantee.setValue(true);
     } else {
@@ -337,7 +345,7 @@ export class OrganizationalInformationComponent implements OnInit {
   }
 
   private updatePaymentSpanish(markAsTouched: boolean) {
-    const paymentSpanish = this.organizationalForm.get("paymentSpanish");
+    const paymentSpanish = this.organizationalForm.get('paymentSpanish');
     if (this.paymentSpanishFiles.length > 0) {
       paymentSpanish.setValue(true);
     } else {
@@ -355,7 +363,6 @@ export class OrganizationalInformationComponent implements OnInit {
     });
   }
   
-
 }
 
 
