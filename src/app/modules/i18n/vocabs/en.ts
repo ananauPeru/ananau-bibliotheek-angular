@@ -888,63 +888,61 @@ export const locale = {
         DETAILS: "Details",
       },
     },
-    
-  },
-
-  GENERAL_INFORMATION: {
-    PAGE_TITLE: "General Information",
-    VISA: {
-      TITLE: "Visa",
-      LABEL: "Enter visa information",
-      BUTTON: "Save",
-    },
-    VACCINATION: {
-      TITLE: "Vaccinations",
-      ADD_NEW: "Add Vaccination",
-      NAME_LABEL: "Vaccination Name",
-      REQUIRED_LABEL: "Is vaccine required?",
-      BUTTON: "Add Vaccine",
-      REQUIRED: "Required",
-      OPTIONAL: "Optional",
-      NO_RESULT: "No vaccinations added yet.",
-    },
-    HOLIDAY: {
-      TITLE: "Holidays",
-      ADD_NEW: "Add New Holiday",
-      NAME_LABEL: "Holiday Name",
-      DATE_LABEL: "Holiday Date",
-      BUTTON: "Add Holiday",
-      NO_RESULT: "No holidays found",
-      DELETE_ALL: "Delete all Holidays",
-      DELETE_ALL_CONFIRMATION_MESSAGE:
-        "Are you sure you want to remove all holidays? This action is irreversible.",
-    },
-    TOASTS: {
-      SUCCESS: "Success",
-      ERROR: "Error",
-      VACCINATION: {
-        CREATE_SUCCESS: "Successfully added a new vaccination.",
-        CREATE_ERROR:
-          "Something went wrong while adding a new vaccination. Please try again later.",
-        DELETE_SUCCESS: "Successfully deleted a vaccination.",
-        DELETE_ERROR:
-          "Something went wrong while deleting a vaccination. Please try again later.",
-      },
+    GENERAL_INFORMATION: {
+      PAGE_TITLE: "General Information",
       VISA: {
-        UPDATE_SUCCESS: "Successfully updated visa information.",
-        UPDATE_ERROR:
-          "Something went wrong while updating visa information. Please try again later.",
+        TITLE: "Visa",
+        LABEL: "Enter visa information",
+        BUTTON: "Save",
+      },
+      VACCINATION: {
+        TITLE: "Vaccinations",
+        ADD_NEW: "Add Vaccination",
+        NAME_LABEL: "Vaccination Name",
+        REQUIRED_LABEL: "Is vaccine required?",
+        BUTTON: "Add Vaccine",
+        REQUIRED: "Required",
+        OPTIONAL: "Optional",
+        NO_RESULT: "No vaccinations added yet.",
       },
       HOLIDAY: {
-        CREATE_SUCCESS: "Successfully added a new holiday.",
-        CREATE_ERROR:
-          "Something went wrong while adding a new holiday. Please try again later.",
-        DELETE_SUCCESS: "Successfully deleted a holiday.",
-        DELETE_ERROR:
-          "Something went wrong while deleting a holiday. Please try again later.",
-        DELETE_ALL_SUCCESS: "Successfully deleted all holidays.",
-        DELETE_ALL_ERROR:
-          "Something went wrong while deleting all holidays. Please try again later.",
+        TITLE: "Holidays",
+        ADD_NEW: "Add New Holiday",
+        NAME_LABEL: "Holiday Name",
+        DATE_LABEL: "Holiday Date",
+        BUTTON: "Add Holiday",
+        NO_RESULT: "No holidays found",
+        DELETE_ALL: "Delete all Holidays",
+        DELETE_ALL_CONFIRMATION_MESSAGE:
+          "Are you sure you want to remove all holidays? This action is irreversible.",
+      },
+      TOASTS: {
+        SUCCESS: "Success",
+        ERROR: "Error",
+        VACCINATION: {
+          CREATE_SUCCESS: "Successfully added a new vaccination.",
+          CREATE_ERROR:
+            "Something went wrong while adding a new vaccination. Please try again later.",
+          DELETE_SUCCESS: "Successfully deleted a vaccination.",
+          DELETE_ERROR:
+            "Something went wrong while deleting a vaccination. Please try again later.",
+        },
+        VISA: {
+          UPDATE_SUCCESS: "Successfully updated visa information.",
+          UPDATE_ERROR:
+            "Something went wrong while updating visa information. Please try again later.",
+        },
+        HOLIDAY: {
+          CREATE_SUCCESS: "Successfully added a new holiday.",
+          CREATE_ERROR:
+            "Something went wrong while adding a new holiday. Please try again later.",
+          DELETE_SUCCESS: "Successfully deleted a holiday.",
+          DELETE_ERROR:
+            "Something went wrong while deleting a holiday. Please try again later.",
+          DELETE_ALL_SUCCESS: "Successfully deleted all holidays.",
+          DELETE_ALL_ERROR:
+            "Something went wrong while deleting all holidays. Please try again later.",
+        },
       },
     },
   },
