@@ -48,9 +48,6 @@ export class RegistrationModel {
   weeksOnline: number;
   weeks: number;
 
-  // Payments
-  paymentDescription: string;
-
   // Motivation letter
   motivationLetter: string;
 

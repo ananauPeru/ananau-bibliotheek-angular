@@ -337,15 +337,6 @@ export const locale = {
           WEEKS_INFO:
             "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
-        PAYMENTS: {
-          TITLE: 'Pagos',
-          INFO_PAYMENTS: 'Subir confirmación de pago de alojamiento (apartamento), garantía de apartamento, clases de español. Si estos pagos se realizaron en una sola transacción, cargue el documento del campo del apartamento y complete un campo de descripción debajo.',
-          PAYMENT_APARTMENT: 'Departamento',
-          PAYMENT_GUARANTEE: 'Garantizar',
-          PAYMENT_SPANISH: 'Lecciones de español',
-          PAYMENT_DESCRIPTION: 'Descripción de pago',
-          PAYMENT_DROP_SELECT: 'Suelte su(s) archivo(s) aquí o haga clic para seleccionarlo(s).',
-        },
         MOTIVATION_LETTER: {
           TITLE: "Carta de motivación",
           MOTIVATION: "Rellene el campo con tu carta de motivación",
@@ -805,6 +796,20 @@ export const locale = {
       },
     },
 
+    ORGANIZATION: {
+      ROLES: {
+        OVERVIEW: {
+          TITLE: "Cambiar y asignar roles",
+          PLEASE_WAIT: "Espere por favor...",
+          FILTER: "Filtrar...",
+          FILTER_SUB:
+            "Intente buscar y filtrar por nombre, apellido, correo electrónico o función.",
+          FIRST_NAME: "Nombre propio",
+          LAST_NAME: "Apellido",
+        },
+      },
+    },
+
     // REGISTRATIONS OVERVIEW & DETAILS
     REGISTRATIONS: {
       STUDENT: "Estudiante",
@@ -834,9 +839,6 @@ export const locale = {
           GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
           DIPLOMA: "Certificado educativo",
           PASSPORT_PHOTO: "Foto del pasaporte",
-          PAYMENT_APARTMENT: 'Apartamento de pago',
-          PAYMENT_GUARANTEE: 'Garantía de pago',
-          PAYMENT_SPANISH: 'Clases de español de pago',
         },
       },
       TOASTS: {
@@ -947,20 +949,6 @@ export const locale = {
             "Se eliminaron todos los días festivos con éxito.",
           DELETE_ALL_ERROR:
             "Algo salió mal al eliminar todos los días festivos. Por favor, inténtelo de nuevo más tarde.",
-        },
-      },
-    },
-
-    ORGANIZATION: {
-      ROLES: {
-        OVERVIEW: {
-          TITLE: "Cambiar y asignar roles",
-          PLEASE_WAIT: "Espere por favor...",
-          FILTER: "Filtrar...",
-          FILTER_SUB:
-            "Intente buscar y filtrar por nombre, apellido, correo electrónico o función.",
-          FIRST_NAME: "Nombre propio",
-          LAST_NAME: "Apellido",
         },
       },
     },
