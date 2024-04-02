@@ -35,6 +35,9 @@ export class ContainerComponent implements OnInit {
   public savingScans: boolean;
   public sendingScans: boolean;
   public saveScanFiles = new Subject<boolean>();
+  public savingPayments: boolean;
+  public sendingPayments: boolean;
+  public savePaymentFiles = new Subject<boolean>();
   public personalFormProgress: {
     all: number;
     required: number;
@@ -158,6 +161,7 @@ export class ContainerComponent implements OnInit {
     else this.saving = true;
 
     this.saveScanFiles.next(submit);
+    this.savePaymentFiles.next(submit);
 
     let dto = new RegistrationDTO();
 

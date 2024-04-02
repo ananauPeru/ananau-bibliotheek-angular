@@ -181,6 +181,9 @@
                 "
                 [role]="role"
                 [initialData]="initialData"
+                [upload]="savePaymentFiles.asObservable()"
+                (saving)="savingPayments = $event"
+                (sending)="sendingPayments = $event"
               ></app-organizational-information>
             </div>
             <div class="col-xl-2"></div>
