@@ -304,6 +304,11 @@ export const locale = {
           LEAVE_EXCEEDS_LIMIT:
             "De verlofperiode overschrijdt de maximale duur van een normaal visum.",
         },
+        FLIGHT_INFORMATION: {
+          TITLE: 'Vlucht informatie',
+          NUMBER: 'Vluchtnummer',
+          DATE_ARRIVAL: 'Datum van aankomst',
+        },
         SPANISH: {
           TITLE: "Spaans",
           INFO_VOLUNTEER:

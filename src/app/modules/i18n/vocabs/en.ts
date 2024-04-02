@@ -320,6 +320,11 @@ export const locale = {
           LEAVE_EXCEEDS_LIMIT:
             "The period of leave exceeds the maximum duration of a normal visa.",
         },
+        FLIGHT_INFORMATION: {
+          TITLE: 'Flight information',
+          NUMBER: 'Flight number',
+          DATE_ARRIVAL: 'Date of arrival',
+        },
         SPANISH: {
           TITLE: "Spanish",
           INFO_VOLUNTEER:

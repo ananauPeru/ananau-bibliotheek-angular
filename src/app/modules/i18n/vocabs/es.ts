@@ -316,6 +316,11 @@ export const locale = {
           LEAVE_EXCEEDS_LIMIT:
             "El período de ausencia excede la duración máxima de una visa normal.",
         },
+        FLIGHT_INFORMATION: {
+          TITLE: 'Informacion de vuelo',
+          NUMBER: 'Número de vuelo',
+          DATE_ARRIVAL: 'Fecha de llegada',
+        },
         SPANISH: {
           TITLE: "Español",
           INFO_VOLUNTEER:

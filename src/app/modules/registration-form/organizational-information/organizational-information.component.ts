@@ -61,6 +61,17 @@ export class OrganizationalInformationComponent implements OnInit {
           Validators.required,
         ],
       }),
+      flightInformation: this.fb.group({
+        flightNumber: [this.initialData.flightNumber],
+        flightDateArrival: [
+          this.initialData.flightDateArrival
+            ? this.datePipe.transform(
+                new Date(this.initialData.flightDateArrival),
+                "yyyy-MM-dd"
+              )
+            : "",
+        ],
+      }),
       spanish: this.fb.group({
         level: [this.initialData.level, Validators.required],
         weeksOnline: [this.initialData.weeksOnline],
