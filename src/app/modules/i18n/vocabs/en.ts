@@ -341,6 +341,13 @@ export const locale = {
           WEEKS_INFO:
             "If you do not yet speak a basic level of Spanish, we recommend you apply for 4 weeks of Spanish lessons on-site.",
         },
+        TERMS_AND_CONDITIONS: {
+          TITLE: "Terms and conditions",
+          INFO_TERMS_AND_CONDITIONS: "This document outlines the rules and guidelines for using our website and associated services. By downloading, reading, signing, and uploading this document, you acknowledge and agree to abide by these terms. It covers user responsibilities, intellectual property, privacy policy, liability limitations, and dispute resolution. Please review it carefully.",
+          TAC_DOWNLOAD: "Download the document",
+          TAC_UPLOAD: "Upload the document",
+          TAC_DROP_SELECT: 'Drop your file(s) here or click to select your file(s).',
+        },
         PAYMENTS: {
           TITLE: 'Payments',
           INFO_PAYMENTS: 'Upload confirmation of payment for accommodation (apartment), guarantee for apartment, Spanish classes. If these payments were made in a single transaction, upload the document for the apartment field and fill in a describtion field under.',

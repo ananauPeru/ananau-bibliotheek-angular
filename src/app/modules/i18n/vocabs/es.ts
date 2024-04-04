@@ -337,6 +337,13 @@ export const locale = {
           WEEKS_INFO:
             "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
+        TERMS_AND_CONDITIONS: {
+          TITLE: "Términos y condiciones",
+          INFO_TERMS_AND_CONDITIONS: "Este documento describe las reglas y pautas para el uso de nuestro sitio web y los servicios asociados. Al descargar, leer, firmar y cargar este documento, usted reconoce y acepta cumplir con estos términos. Cubre las responsabilidades del usuario, la propiedad intelectual, la política de privacidad, las limitaciones de responsabilidad y la resolución de disputas. Por favor revíselo detenidamente.",
+          TAC_DOWNLOAD: "Descarga el documento",
+          TAC_UPLOAD: "Sube el documento",
+          TAC_DROP_SELECT: 'Suelte su(s) archivo(s) aquí o haga clic para seleccionarlo(s).',
+        },
         PAYMENTS: {
           TITLE: 'Pagos',
           INFO_PAYMENTS: 'Subir confirmación de pago de alojamiento (apartamento), garantía de apartamento, clases de español. Si estos pagos se realizaron en una sola transacción, cargue el documento del campo del apartamento y complete un campo de descripción debajo.',

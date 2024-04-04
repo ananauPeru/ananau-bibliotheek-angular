@@ -325,6 +325,13 @@ export const locale = {
           WEEKS_INFO:
             "Als je nog geen basisniveau Spaans spreekt, raden we je aan om je in te schrijven voor 4 weken Spaanse les ter plaatse.",
         },
+        TERMS_AND_CONDITIONS: {
+          TITLE: "Termen en voorwaarden",
+          INFO_TERMS_AND_CONDITIONS: "Dit document schetst de regels en richtlijnen voor het gebruik van onze website en bijbehorende diensten. Door dit document te downloaden, lezen, ondertekenen en uploaden, erkent u en gaat u ermee akkoord deze voorwaarden na te leven. Het heeft betrekking op gebruikersverantwoordelijkheden, intellectueel eigendom, privacybeleid, aansprakelijkheidsbeperkingen en geschillenbeslechting. Bekijk het zorgvuldig.",
+          TAC_DOWNLOAD: "Download het document",
+          TAC_UPLOAD: "Upload het document",
+          TAC_DROP_SELECT: 'Zet uw bestand(en) hier neer of klik om uw bestand(en) te selecteren.',
+        },
         PAYMENTS: {
           TITLE: 'Betalingen',
           INFO_PAYMENTS: 'Upload een betalingsbewijs voor accommodatie (appartement), garantie voor appartement, Spaanse lessen. Als deze betalingen in één transactie zijn gedaan, upload dan het document voor het appartementveld en vul daaronder een beschrijvingsveld in.',

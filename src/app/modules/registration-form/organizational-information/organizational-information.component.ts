@@ -41,6 +41,7 @@ export class OrganizationalInformationComponent implements OnInit {
   @Input() public upload: Observable<boolean>;
   @Output() public saving = new EventEmitter<boolean>();
   @Output() public sending = new EventEmitter<boolean>();
+  public termsAndConditionsFiles = new Array<ScansFile>();
   public paymentApartmentFiles = new Array<ScansFile>();
   public paymentGuaranteeFiles = new Array<ScansFile>();
   public paymentSpanishFiles = new Array<ScansFile>();
@@ -96,6 +97,9 @@ export class OrganizationalInformationComponent implements OnInit {
         level: [this.initialData.level, Validators.required],
         weeksOnline: [this.initialData.weeksOnline],
         weeks: [this.initialData.weeks],
+      }),
+      termsAndConditions: this.fb.group({
+        termsAndConditions: [false],
       }),
       payments: this.fb.group({
         paymentApartment: [false],
@@ -311,6 +315,15 @@ export class OrganizationalInformationComponent implements OnInit {
     else return this.previewImageForNonImageFiles;
   }
 
+  public onSelectTermsAndConditionsFile(event: NgxDropzoneChangeEvent) {
+    const newFiles = this.createNewScansFiles(
+      event.addedFiles,
+      BlobNamePrefix.TermsAndConditions
+    );
+    this.termsAndConditionsFiles.push(...newFiles);
+    this.updateTermsAndConditions(true);
+  }
+
   public onSelectApartmentFile(event: NgxDropzoneChangeEvent) {
     const newFiles = this.createNewScansFiles(
       event.addedFiles,
@@ -338,6 +351,12 @@ export class OrganizationalInformationComponent implements OnInit {
     this.updatePaymentSpanish(true);
   }
 
+  public onRemoveTermsAndConditionsFile(event: ScansFile) {
+    if (!event.isNew) this.filesToDelete.push(event); // files that are already stored in Azure, will need to be deleted when the form is saved
+    this.termsAndConditionsFiles.splice(this.termsAndConditionsFiles.indexOf(event), 1);
+    this.updatePaymentApartment(true);
+  }
+
   public onRemoveApartmentFile(event: ScansFile) {
     if (!event.isNew) this.filesToDelete.push(event); // files that are already stored in Azure, will need to be deleted when the form is saved
     this.paymentApartmentFiles.splice(this.paymentApartmentFiles.indexOf(event), 1);
@@ -354,6 +373,16 @@ export class OrganizationalInformationComponent implements OnInit {
     if (!event.isNew) this.filesToDelete.push(event); // files that are already stored in Azure, will need to be deleted when the form is saved
     this.paymentSpanishFiles.splice(this.paymentSpanishFiles.indexOf(event), 1);
     this.updatePaymentSpanish(true);
+  }
+
+  private updateTermsAndConditions(markAsTouched: boolean) {
+    const termsAndConditions = this.organizationalForm.get('termsAndConditions');
+    if (this.termsAndConditionsFiles.length > 0) {
+      termsAndConditions.setValue(true);
+    } else {
+      termsAndConditions.setValue(false);
+    }
+    if (markAsTouched) termsAndConditions.markAsTouched();
   }
 
   private updatePaymentApartment(markAsTouched: boolean) {
