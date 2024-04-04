@@ -152,6 +152,18 @@ export class RegistrationDetailsComponent implements OnInit {
     }
   }
 
+  toggleSpanishDateLock(isOnline: boolean): void {
+    const isLocked = isOnline ? this._registration.value.isOnlineDateLocked : this._registration.value.isOfflineDateLocked;
+    this.registrationService.setSpanishDateLocked$(this._userId, isOnline, !isLocked).subscribe(
+      () => {
+        this.fetchRegistrationData();
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
   toggleEditingStartDateOnline(): void {
     this.isEditingStartDateOnline = !this.isEditingStartDateOnline;
 

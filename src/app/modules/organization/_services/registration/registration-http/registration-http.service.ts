@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { RegistrationStudentModel } from "../../../_models/registration-student.model";
 import { RegistrationModel } from "../../../_models/registration.model";
 import { SmallRegistrationModel } from "../../../_models/small-registration.model";
+import { on } from "events";
 
 const API_REGISTRATIONS_URL = `${environment.apiUrl}/registrations`;
 
@@ -113,6 +114,22 @@ export class RegistrationHttpService {
     .put(
       `${API_REGISTRATIONS_URL}/students/${userId}/spanish`,
       dates
+    )
+    .pipe(
+      catchError((error) => {
+        if(error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      })
+    )
+  }
+
+  setSpanishDateLocked$(userId: number, online: boolean, locked: boolean) {
+    return this.http
+    .put(
+      `${API_REGISTRATIONS_URL}/students/${userId}/spanish/${online ? "online" : "offline"}/lock`,
+      { locked }
     )
     .pipe(
       catchError((error) => {

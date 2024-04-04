@@ -519,7 +519,25 @@
                   }}
                 </td>
                 <td>{{ registration.weeksOnline }}</td>
-                <td></td>
+                <td class="text-right">
+                  <button
+                    (click)="toggleSpanishDateLock(true)"
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    placement="top"
+                    ngbTooltip="{{
+                      (registration.isOnlineDateLocked ? 'Locked - The user will not be able to edit these dates' : 'Unlocked - The user will be able to edit these dates') 
+                    }}"
+                  >
+                    <i
+                      class="fas pr-0"
+                      [ngClass]="{
+                        'fa-lock-open': !registration.isOnlineDateLocked,
+                        'fa-lock': registration.isOnlineDateLocked
+                      }"
+                    ></i>
+                  </button>
+                </td>
               </tr>
 
               <tr>
@@ -609,7 +627,25 @@
                   {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS" | translate }}
                 </td>
                 <td>{{ registration.weeks }}</td>
-                <td></td>
+                <td class="text-right">
+                  <button
+                    (click)="toggleSpanishDateLock(false)"
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    placement="top"
+                    ngbTooltip="{{
+                      (registration.isOfflineDateLocked ? 'Locked - The user will not be able to edit these dates' : 'Unlocked - The user will be able to edit these dates') 
+                    }}"
+                  >
+                    <i
+                      class="fas pr-0"
+                      [ngClass]="{
+                        'fa-lock-open': !registration.isOfflineDateLocked,
+                        'fa-lock': registration.isOfflineDateLocked
+                      }"
+                    ></i>
+                  </button>
+                </td>
               </tr>
 
 

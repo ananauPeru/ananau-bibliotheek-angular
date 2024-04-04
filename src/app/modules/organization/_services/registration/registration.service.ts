@@ -85,4 +85,8 @@ export class RegistrationService {
   updateSpanishDates$(userId: number, dates: any) {
     return this.registartionHttpService.updateSpanishDates$(userId, dates);
   }
+
+  setSpanishDateLocked$(userId: number, online: boolean, isLocked: boolean) {
+    return this.registartionHttpService.setSpanishDateLocked$(userId, online, isLocked);
+  }
 }
