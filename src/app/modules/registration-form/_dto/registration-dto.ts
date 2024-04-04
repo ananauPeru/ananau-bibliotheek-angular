@@ -42,9 +42,11 @@ export class RegistrationDTO {
   weeksOnline: number;
   onlineStartDate: Date;
   onlineEndDate: Date;
+  isOnlineDateLocked: boolean;
   weeks: number;
   offlineStartDate: Date;
   offlineEndDate: Date;
+  isOfflineDateLocked: boolean;
 
   // Motivation letter
   motivationLetter: string;

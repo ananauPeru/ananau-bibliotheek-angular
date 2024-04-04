@@ -128,6 +128,16 @@ export class OrganizationalInformationComponent implements OnInit {
       );
     }
 
+    if(this.initialData.isOnlineDateLocked) {
+      this.organizationalForm.controls.spanish.get("onlineStartDate").disable();
+      this.organizationalForm.controls.spanish.get("weeksOnline").disable();
+    }
+
+    if(this.initialData.isOfflineDateLocked) {
+      this.organizationalForm.controls.spanish.get("offlineStartDate").disable();
+      this.organizationalForm.controls.spanish.get("weeks").disable();
+    }
+
     this.organizationalForm.controls.spanish.get("onlineEndDate").disable();
     this.organizationalForm.controls.spanish.get("offlineEndDate").disable();
 
