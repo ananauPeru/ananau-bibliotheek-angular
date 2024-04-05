@@ -456,6 +456,7 @@
           <h5 class="text-dark font-weight-bold mb-3">
             {{ "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.TITLE" | translate }}
           </h5>
+          <form [formGroup]="flightForm" (ngSubmit)="onSubmitFlightChange()">
           <table class="table table-hover">
             <tbody>
               <tr>
@@ -464,7 +465,26 @@
                     "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.NUMBER" | translate
                   }}
                 </td>
-                <td>{{ registration.flightNumber }}</td>
+                <td *ngIf="!isEditingFlightNumber">{{ registration.flightNumber }}</td>
+                <td *ngIf="isEditingFlightNumber">
+                  <input
+                    class="form-control form-control-solid"
+                    id="flight-number"
+                    type="text"
+                    formControlName="flightNumber"
+                    placeholder="Eg. LH1234"
+                  />
+                </td>
+                <td class="text-right">
+                  <button
+                    (click)="toggleEditingFlightNumber()"
+                    type="button" 
+                    class="btn btn-primary mr-2" 
+                    placement="top" 
+                  >
+                  <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingFlightNumber, 'fa-times': isEditingFlightNumber}"></i>
+                  </button>
+                </td>
               </tr>
               <tr>
                 <td>
@@ -472,10 +492,49 @@
                     "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.DATE_ARRIVAL" | translate
                   }}
                 </td>
-                <td>{{ registration.flightDateArrival | date: "dd-MM-yyyy" }}</td>
+                <td *ngIf="!isEditingFlightDateArrival">{{ registration.flightDateArrival | date: "dd-MM-yyyy" }}</td>
+                <td *ngIf="isEditingFlightDateArrival">
+                  <input
+                    class="form-control form-control-solid"
+                    id="flight-date-arrival"
+                    type="date"
+                    formControlName="flightDateArrival"
+                    placeholder="yyyy-mm-dd"
+                  />
+                </td>
+                <td class="text-right">
+                  <button
+                    (click)="toggleEditingFlightDateArrival()"
+                    type="button" 
+                    class="btn btn-primary mr-2" 
+                    placement="top" 
+                  >
+                  <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingFlightDateArrival, 'fa-times': isEditingFlightDateArrival}"></i>
+                  </button>
+                </td>
               </tr>
+              <!-- Save Changes Button -->
+              <tr
+              *ngIf="
+                isEditingFlightDateArrival ||
+                isEditingFlightNumber
+              "
+            >
+              <td></td>
+              <td></td>
+              <td class="text-right">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="isFlightSaveButtonDisabled()"
+                >
+                  {{ "BUTTONS.SAVE_CHANGES" | translate }}
+                </button>
+              </td>
+            </tr>
             </tbody>
           </table>
+        </form>
         </div>
         <div>
           <h5 class="text-dark font-weight-bold mb-3">

@@ -81,4 +81,8 @@ export class RegistrationService {
   updateRegistrationDates$(userId: number, dates: any) {
     return this.registartionHttpService.updateRegistrationDates$(userId, dates);
   }
+
+  updateRegistrationFlight$(userId: number, flight: {flightNumber: string, flightDate: string}) {
+    return this.registartionHttpService.updateRegistrationFlight$(userId, flight);
+  }
 }

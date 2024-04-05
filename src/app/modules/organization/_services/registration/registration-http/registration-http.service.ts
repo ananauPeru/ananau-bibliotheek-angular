@@ -95,8 +95,24 @@ export class RegistrationHttpService {
   updateRegistrationDates$(userId: number, dates: any) {
     return this.http
     .put(
-      `${API_REGISTRATIONS_URL}/students/${userId}`,
+      `${API_REGISTRATIONS_URL}/dates/${userId}`,
       dates
+    )
+    .pipe(
+      catchError((error) => {
+        if(error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      })
+    )
+  }
+
+  updateRegistrationFlight$(userId: number, flight: {flightNumber: string, flightDate: string}) {
+    return this.http
+    .put(
+      `${API_REGISTRATIONS_URL}/flight/${userId}`,
+      flight
     )
     .pipe(
       catchError((error) => {

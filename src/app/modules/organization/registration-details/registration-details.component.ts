@@ -48,11 +48,19 @@ export class RegistrationDetailsComponent implements OnInit {
   public isEditingStartDateStay = false;
   public isEditingEndDateStay = false;
 
+  public isEditingFlightNumber = false;
+  public isEditingFlightDateArrival = false;
+
   dateForm = new FormGroup({
     startDate: new FormControl(),
     endDate: new FormControl(),
     leaveStartDate: new FormControl(),
     leaveEndDate: new FormControl(),
+  });
+
+  flightForm = new FormGroup({
+    flightNumber: new FormControl(),
+    flightDateArrival: new FormControl(),
   });
 
   @ViewChild("confirmationModal") confirmationModal: TemplateRef<any>;
@@ -129,6 +137,22 @@ export class RegistrationDetailsComponent implements OnInit {
     this.userStorageService.fetchFiles$(this._userId);
   }
 
+  toggleEditingFlightNumber() : void {
+    this.isEditingFlightNumber = !this.isEditingFlightNumber;
+
+    if(!this.isEditingFlightNumber) {
+      this.flightForm.patchValue({ flightNumber: null });
+    }
+  }
+
+  toggleEditingFlightDateArrival() : void {
+    this.isEditingFlightDateArrival = !this.isEditingFlightDateArrival;
+
+    if(!this.isEditingFlightDateArrival) {
+      this.flightForm.patchValue({ flightDateArrival: null });
+    }
+  }
+
   toggleEditingStartDateInternship(): void {
     this.isEditingStartDateInternship = !this.isEditingStartDateInternship;
 
@@ -174,6 +198,11 @@ export class RegistrationDetailsComponent implements OnInit {
 
   isDateSaveButtonDisabled(): boolean {
     const formValues = Object.values(this.dateForm.value);
+    return formValues.every((value) => value === null);
+  }
+
+  isFlightSaveButtonDisabled(): boolean {
+    const formValues = Object.values(this.flightForm.value);
     return formValues.every((value) => value === null);
   }
 
@@ -376,6 +405,34 @@ export class RegistrationDetailsComponent implements OnInit {
           console.error(err);
           this.toastr.showError(
             this.translate.instant("REGISTRATIONS.TOASTS.DATES_CHANGE_ERROR"),
+            this.translate.instant("REGISTRATIONS.TOASTS.ERROR")
+          );
+        },
+        () => {
+          this.cdRef.detectChanges();
+        }
+      );
+  }
+
+  onSubmitFlightChange() {
+
+    console.log(this.flightForm.value)
+
+    this.registrationService
+      .updateRegistrationFlight$(this._userId, this.flightForm.value)
+      .subscribe(
+        () => {
+          this.setEditingFalse();
+          this.fetchRegistrationData();
+          this.toastr.showSuccess(
+            this.translate.instant("REGISTRATIONS.TOASTS.FLIGHT_CHANGE_SUCCESS"),
+            this.translate.instant("REGISTRATIONS.TOASTS.SUCCESS")
+          );
+        },
+        (err) => {
+          console.error(err);
+          this.toastr.showError(
+            this.translate.instant("REGISTRATIONS.TOASTS.FLIGHT_CHANGE_ERROR"),
             this.translate.instant("REGISTRATIONS.TOASTS.ERROR")
           );
         },
