@@ -211,19 +211,23 @@ export class OrganizationalInformationComponent implements OnInit {
 
     // Helper function to upload Payments and Terms
     // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards
-    const helper = (upload: Observable<boolean>, sending: EventEmitter<boolean>, saving: EventEmitter<boolean>, files: ScansFile[]): void => {
+    const helper = (upload: Observable<boolean>, sending: EventEmitter<boolean>, saving: EventEmitter<boolean>, files: ScansFile[][]): void => {
       upload.subscribe((submit) => {
         if (submit) sending.emit(true);
         else saving.emit(true);
+
+        const promises = files.map((files) =>
+      Promise.all([
+        this.userStorageService.storeImages$(files.filter((file) => file.isNew)),
+        this.userStorageService.deleteImages$(this.filesToDelete),
+      ])
+    );
   
-        Promise.all([
-          this.userStorageService.storeImages$(
-            files.filter((file) => file.isNew)
-          ),
-          this.userStorageService.deleteImages$(this.filesToDelete),
-        ])
-          .then(() => {
-            files.forEach((file) => (file.isNew = false));
+      Promise.all(promises)
+      .then(() => {
+        files.forEach((files) =>
+          files.forEach((file) => (file.isNew = false))
+        );
   
             this.filesToDelete.length = 0;
   
@@ -258,9 +262,21 @@ export class OrganizationalInformationComponent implements OnInit {
       });
     }
 
-    helper(this.uploadTerms, this.sendingTerms, this.savingTerms, this.termsAndConditionsFiles);
-    helper(this.uploadPayments, this.sendingPayments, this.savingPayments, this.paymentApartmentFiles);
-
+    helper(
+      this.uploadTerms,
+      this.sendingTerms,
+      this.savingTerms,
+      [this.termsAndConditionsFiles]
+    );
+    
+    helper(
+      this.uploadPayments,
+      this.sendingPayments,
+      this.savingPayments,
+      [this.paymentApartmentFiles, this.paymentGuaranteeFiles, this.paymentSpanishFiles]
+    );
+    
+    
 /** 
     this.upload.subscribe((submit) => {
       if (submit) this.sending.emit(true);
