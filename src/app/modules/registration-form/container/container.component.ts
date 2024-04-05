@@ -32,12 +32,21 @@ export class ContainerComponent implements OnInit {
   public errorMessage: string;
   public saving: boolean;
   public sending: boolean;
+  
   public savingScans: boolean;
   public sendingScans: boolean;
   public saveScanFiles = new Subject<boolean>();
+
+
+  public savingTermsAndConditions:boolean;
+  public sendingTermsAndConditions:boolean;
+  public saveTermsAndConditionsFiles = new Subject<boolean>();
+
   public savingPayments: boolean;
   public sendingPayments: boolean;
   public savePaymentFiles = new Subject<boolean>();
+
+
   public personalFormProgress: {
     all: number;
     required: number;
@@ -163,6 +172,7 @@ export class ContainerComponent implements OnInit {
     else this.saving = true;
 
     this.saveScanFiles.next(submit);
+    this.saveTermsAndConditionsFiles.next(submit);
     this.savePaymentFiles.next(submit);
 
     let dto = new RegistrationDTO();
@@ -312,6 +322,16 @@ export class ContainerComponent implements OnInit {
           }
         );
     }
+  }
+
+  onSaving(event: boolean): void {
+    this.savingTermsAndConditions = event;
+    this.savingPayments = event;
+  }
+
+  onSending(event: boolean): void {
+    this.sendingTermsAndConditions = event;
+    this.sendingPayments = event;
   }
 
   static getErrorMessage(

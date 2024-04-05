@@ -39,6 +39,7 @@ export class RegistrationDetailsComponent implements OnInit {
   public goodConductCertificateFiles = new Array<File>();
   public diplomaFiles = new Array<File>();
   public passportPhotoFiles = new Array<File>();
+  public termsAndConditionsFiles = new Array<File>();
   public paymentApartmentFiles = new Array<File>();
   public paymentGuaranteeFiles = new Array<File>();
   public paymentSpanishFiles = new Array<File>();
@@ -113,6 +114,9 @@ export class RegistrationDetailsComponent implements OnInit {
       }
       if (file.name.startsWith(BlobNamePrefix.PassportPhoto)) {
         this.passportPhotoFiles.push(file);
+      }
+      if (file.name.startsWith(BlobNamePrefix.TermsAndConditions)) {
+      this.termsAndConditionsFiles.push(file);
       }
       if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
         this.paymentApartmentFiles.push(file);
@@ -263,6 +267,12 @@ export class RegistrationDetailsComponent implements OnInit {
       fileName =
         this.translate.instant(
           "REGISTRATIONS.DETAILS.FILE_NAMES.PASSPORT_PHOTO"
+        ) + ` - ${fileName}`;
+      FileSaver.saveAs(file, fileName);
+    } else if (file.name.startsWith(BlobNamePrefix.TermsAndConditions)) {
+      fileName =
+        this.translate.instant(
+          "REGISTRATIONS.DETAILS.FILE_NAMES.TERMS_AND_CONDITIONS"
         ) + ` - ${fileName}`;
       FileSaver.saveAs(file, fileName);
     } else if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {

@@ -841,9 +841,10 @@ export const locale = {
           GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
           DIPLOMA: "Certificado educativo",
           PASSPORT_PHOTO: "Foto del pasaporte",
-          PAYMENT_APARTMENT: 'Apartamento de pago',
-          PAYMENT_GUARANTEE: 'Garantía de pago',
-          PAYMENT_SPANISH: 'Clases de español de pago',
+          TERMS_AND_CONDITIONS: "Términos y condiciones",
+          PAYMENT_APARTMENT: "Apartamento de pago",
+          PAYMENT_GUARANTEE: "Garantía de pago",
+          PAYMENT_SPANISH: "Clases de español de pago",
         },
       },
       TOASTS: {

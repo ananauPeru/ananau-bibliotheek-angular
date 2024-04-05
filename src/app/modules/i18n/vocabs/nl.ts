@@ -822,6 +822,7 @@ export const locale = {
           GOOD_CONDUCT_CERTIFICATE: 'Bewijs van goed gedrag',
           DIPLOMA: 'Onderwijscertificaat',
           PASSPORT_PHOTO: 'Pasfoto',
+          TERMS_AND_CONDITIONS: "Termen en voorwaarden",
           PAYMENT_APARTMENT: 'Betaling appartement',
           PAYMENT_GUARANTEE: 'Betalingsgarantie',
           PAYMENT_SPANISH: 'Betaling Spaanse lessen',

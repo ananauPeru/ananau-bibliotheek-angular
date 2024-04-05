@@ -38,9 +38,15 @@ export class OrganizationalInformationComponent implements OnInit {
     required: number;
     requiredAndValid: number;
   }>();
-  @Input() public upload: Observable<boolean>;
-  @Output() public saving = new EventEmitter<boolean>();
-  @Output() public sending = new EventEmitter<boolean>();
+
+  @Input() public uploadPayments: Observable<boolean>;
+  @Output() public savingPayments = new EventEmitter<boolean>();
+  @Output() public sendingPayments = new EventEmitter<boolean>();
+
+  @Input() public uploadTerms: Observable<boolean>;
+  @Output() public savingTerms = new EventEmitter<boolean>();
+  @Output() public sendingTerms = new EventEmitter<boolean>();
+
   public termsAndConditionsFiles = new Array<ScansFile>();
   public paymentApartmentFiles = new Array<ScansFile>();
   public paymentGuaranteeFiles = new Array<ScansFile>();
@@ -172,6 +178,10 @@ export class OrganizationalInformationComponent implements OnInit {
 
     // Everytime a new Azure blob image comes in, update the form
     this.userStorageService.getNewFile$.subscribe((file) => {
+      if (file.name.startsWith(BlobNamePrefix.TermsAndConditions)) {
+        this.termsAndConditionsFiles.push(file);
+        this.updateTermsAndConditions(false);
+      }
       if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
         this.paymentApartmentFiles.push(file);
         this.updatePaymentApartment(false);
@@ -199,12 +209,67 @@ export class OrganizationalInformationComponent implements OnInit {
         this.userStorageService.fetchImages$()
     );
 
+    // Helper function to upload Payments and Terms
     // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards
+    const helper = (upload: Observable<boolean>, sending: EventEmitter<boolean>, saving: EventEmitter<boolean>, files: ScansFile[]): void => {
+      upload.subscribe((submit) => {
+        if (submit) sending.emit(true);
+        else saving.emit(true);
+  
+        Promise.all([
+          this.userStorageService.storeImages$(
+            files.filter((file) => file.isNew)
+          ),
+          this.userStorageService.deleteImages$(this.filesToDelete),
+        ])
+          .then(() => {
+            files.forEach((file) => (file.isNew = false));
+  
+            this.filesToDelete.length = 0;
+  
+            this.toastr.showSuccess(
+              submit
+                ? this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_SUCCESS"
+                  )
+                : this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.IMAGE_SAVE_SUCCESS"
+                  ),
+              this.translate.instant("REGISTRATION.GENERAL.TOASTS.SUCCESS")
+            );
+          })
+          .catch((error) => {
+            console.error(error);
+            this.toastr.showError(
+              submit
+                ? this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.IMAGE_SUBMIT_ERROR"
+                  )
+                : this.translate.instant(
+                    "REGISTRATION.GENERAL.TOASTS.IMAGE_SAVE_ERROR"
+                  ),
+              this.translate.instant("REGISTRATION.GENERAL.TOASTS.ERROR")
+            );
+          })
+          .finally(() => {
+            sending.emit(false);
+            saving.emit(false);
+          });
+      });
+    }
+
+    helper(this.uploadTerms, this.sendingTerms, this.savingTerms, this.termsAndConditionsFiles);
+    helper(this.uploadPayments, this.sendingPayments, this.savingPayments, this.paymentApartmentFiles);
+
+/** 
     this.upload.subscribe((submit) => {
       if (submit) this.sending.emit(true);
       else this.saving.emit(true);
 
       Promise.all([
+        this.userStorageService.storeImages$(
+          this.termsAndConditionsFiles.filter((file) => file.isNew)
+        ),
         this.userStorageService.storeImages$(
           this.paymentApartmentFiles.filter((file) => file.isNew)
         ),
@@ -217,9 +282,10 @@ export class OrganizationalInformationComponent implements OnInit {
         this.userStorageService.deleteImages$(this.filesToDelete),
       ])
         .then(() => {
-          this.paymentApartmentFiles.forEach(
+          this.termsAndConditionsFiles.forEach(
             (file) => (file.isNew = false)
           );
+          this.paymentApartmentFiles.forEach((file) => (file.isNew = false));
           this.paymentGuaranteeFiles.forEach((file) => (file.isNew = false));
           this.paymentSpanishFiles.forEach((file) => (file.isNew = false));
 
@@ -253,7 +319,7 @@ export class OrganizationalInformationComponent implements OnInit {
           this.sending.emit(false);
           this.saving.emit(false);
         });
-    });
+    });*/
   }
 
   getErrorMessage(errors: ValidationErrors): string {

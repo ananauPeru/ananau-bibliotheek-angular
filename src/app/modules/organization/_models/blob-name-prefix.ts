@@ -4,6 +4,8 @@ export enum BlobNamePrefix {
   Diploma = "diploma",
   PassportPhoto = "passportphoto",
 
+  TermsAndConditions = "termsandconditions",
+
   PaymentApartment = "paymentapartment",
   PaymentGuarantee = "paymentguarantee",
   PaymentSpanish = "paymentspanish",
