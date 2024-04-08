@@ -28,11 +28,6 @@ export class CheckInService {
     );
   }
 
-  // isCheckedIn(userId: number): Observable<boolean> {
-  //   console.log("Fetching...")
-  //   return this.checkInHttpService.getIsCheckedIn$(userId);
-  // }
-
   isCheckedIn(userId: number): Observable<boolean> {
     return this._checkInHistory.pipe(
       map((checkInHistory: CheckInHistory[]) => {
@@ -50,10 +45,6 @@ export class CheckInService {
 
   checkIn(userId: number): Observable<CheckInHistory> {
     return this.checkInHttpService.postCheckIn$(userId);
-  }
-
-  checkOut(userId: number): Observable<CheckInHistory> {
-    return this.checkInHttpService.putCheckOut$(userId);
   }
 
   getCheckInHistory(userId: number, startDate: Date | null, endDate: Date | null): Observable<CheckInHistory[]> {

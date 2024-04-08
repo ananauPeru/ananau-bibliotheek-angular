@@ -7,7 +7,7 @@ import { AuthModel } from "../../_models/auth.model";
 import { RegisterDTO } from "../../_dto/register-dto";
 import { ResetPasswordDTO } from "../../_dto/reset-password-dto";
 
-const API_USERS_URL = `${environment.apiUrl}/user`;
+const API_USERS_URL = `${environment.apiUrl}/users`;
 
 @Injectable({
   providedIn: "root",
@@ -17,7 +17,7 @@ export class AuthHTTPService {
 
   // public methods
   login(email: string, password: string): Observable<any> {
-    return this.http.post<AuthModel>(API_USERS_URL, { email, password });
+    return this.http.post<AuthModel>(`${API_USERS_URL}/login`, { email, password });
   }
 
   // CREATE =>  POST: add a new user to the server

@@ -120,7 +120,7 @@ export class GeneralInformationService {
    * @param holiday Holiday
    */
   public createHoliday(holiday: HolidayModel): Observable<HolidayModel> {
-    return this.generalInformationHttpService.postHolidayInformation$(holiday);
+    return this.generalInformationHttpService.postHolidayInformation$(holiday.name, holiday.date.toISOString());
   }
 
   /**
@@ -135,7 +135,8 @@ export class GeneralInformationService {
    * Remove all holidays
    */
   public removeHolidays(): Observable<any> {
-    return this.generalInformationHttpService.deleteAllHolidayInformation$();
+    return null;
+    // return this.generalInformationHttpService.deleteAllHolidayInformation$();
   }
 
 }

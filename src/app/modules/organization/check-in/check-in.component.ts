@@ -132,7 +132,7 @@ export class CheckInComponent implements OnInit {
       .subscribe((result) => {
         if (result === true) {
           const checkOutSubscription = this.checkInService
-            .checkOut(userId)
+            .checkIn(userId)
             .subscribe((res: CheckInHistory) => {
               this.isLoading = false;
 
