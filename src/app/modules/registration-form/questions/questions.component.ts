@@ -25,10 +25,10 @@ export class QuestionsComponent implements OnInit {
 
   ngOnInit() {
     this.questionsForm = this.fb.group({
-      otherQuestions: [this.initialData.otherQuestions],
-      experience: [this.initialData.experience],
-      whyAnanau: [this.initialData.whyAnanau],
-      firstHeard: [this.initialData.firstHeard],
+      otherQuestions: [this.initialData.internDetails.otherQuestions],
+      experience: [this.initialData.internDetails.experience],
+      whyAnanau: [this.initialData.internDetails.whyAnanau],
+      firstHeard: [this.initialData.internDetails.whereFirstHeard],
     });
 
     this.emitForm();

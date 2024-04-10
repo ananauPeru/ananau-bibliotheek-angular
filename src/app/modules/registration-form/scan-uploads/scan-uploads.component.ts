@@ -90,8 +90,9 @@ export class ScanUploadsComponent implements OnInit {
       },
       (error) => console.error(error),
       () =>
-        // Ask the storage service to begin fetching blob images from Azure
-        this.userStorageService.fetchImages$()
+        {console.log("FETCHING IMAGES")
+      // Ask the storage service to begin fetching blob images from Azure
+      this.userStorageService.fetchImages$()}
     );
 
     // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards

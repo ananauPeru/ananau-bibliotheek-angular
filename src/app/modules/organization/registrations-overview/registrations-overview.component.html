@@ -76,7 +76,7 @@
             <td>{{ registration.endDate | date: "dd-MM-yyyy" }}</td>
             <td>
               {{
-                (registration.role === 1
+                (registration.role === "Student"
                   ? "REGISTRATIONS.STUDENT"
                   : "REGISTRATIONS.VOLUNTEER"
                 ) | translate
@@ -95,8 +95,9 @@
               class="btn btn-primary mr-2" 
               placement="top" 
               ngbTooltip="{{'REGISTRATIONS.OVERVIEW.DETAILS' | translate}}" 
-              routerLink="/organization/registrations/{{registration.role === 1 ? 'students' : 'volunteers'}}/{{ registration.userId }}"
+              routerLink={{getDetailUrl(registration)}}
               >
+              {{registration.role}}
                 <i class="fas fa-sign-in-alt pr-0"></i>
               </button>
             </td>

@@ -39,10 +39,7 @@ export class RegistrationService {
     this.registrations = this._registrations.pipe(
       map((registrations) =>
         registrations.filter((registration) => {
-          const role =
-            registration.role === SmallRegistrationModelRole.STUDENT
-              ? this.translate.instant("REGISTRATIONS.STUDENT")
-              : this.translate.instant("REGISTRATIONS.VOLUNTEER");
+          const role = registration.role
           return (
             registration.firstName?.toLowerCase().includes(f) ||
             registration.lastName?.toLowerCase().includes(f) ||

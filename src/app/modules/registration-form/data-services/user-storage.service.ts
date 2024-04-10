@@ -35,6 +35,21 @@ export class UserStorageService {
     }
   }
 
+  public async fetchImagesByUserId$(id: string) {
+    const containerClient = await this.getContainerClientByUserId$(id);
+    let blobItems = containerClient.listBlobsFlat();
+
+    for await (const blobItem of blobItems) {
+      const blobClient = containerClient.getBlobClient(blobItem.name);
+      blobClient.download().then((resp) => {
+        resp.blobBody.then((blob) => {
+          const file = this.createOldScansFile(blob, blobItem.name);
+          this._newFileSubject.next(file);
+        });
+      });
+    }
+  }
+
   public async storeImages$(files: ScansFile[]) {
     const containerClient = await this.getContainerClient$();
     for await (const file of files) {
@@ -60,9 +75,25 @@ export class UserStorageService {
     ).getContainerClient(this._containerName);
   }
 
+  private async getContainerClientByUserId$(id: string): Promise<ContainerClient> {
+    const token = await this.getContainerTokenByUserId$(id);
+    return new BlobServiceClient(
+      `https://${this._accountName}.blob.core.windows.net?${token}`
+    ).getContainerClient(this._containerName);
+  }
+
   private getContainerToken$(): Promise<string> {
     return this.http
       .get(`${environment.apiUrl}/files/users/current/token`, {
+        responseType: "text",
+      })
+      .pipe(take(1))
+      .toPromise();
+  }
+
+  private getContainerTokenByUserId$(id: string): Promise<string> {
+    return this.http
+      .get(`${environment.apiUrl}/files/${id}/current/token`, {
         responseType: "text",
       })
       .pipe(take(1))

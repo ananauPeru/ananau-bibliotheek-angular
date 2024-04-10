@@ -80,9 +80,7 @@ export class RegistrationService {
   ): Observable<RegistrationDTO> {
     return this.http
       .post(
-        `${environment.apiUrl}/registrations/volunteers/current${
-          submit ? "/submit" : ""
-        }`,
+        `${environment.apiUrl}/registrations/volunteers/current`,
         registration,
         {
           responseType: "json",
@@ -114,9 +112,7 @@ export class RegistrationService {
   ): Observable<RegistrationStudentDTO> {
     return this.http
       .post(
-        `${environment.apiUrl}/registrations/students/current${
-          submit ? "/submit" : ""
-        }`,
+        `${environment.apiUrl}/registrations/students/current`,
         registration,
         {
           responseType: "json",

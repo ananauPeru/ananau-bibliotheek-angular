@@ -25,7 +25,7 @@ export class RegistrationHttpService {
           }
           return throwError(error);
         }),
-        map((registrations: any): SmallRegistrationModel[] => registrations)
+        map((response: any): SmallRegistrationModel[] => response.registrations)
       );
   }
 
@@ -43,7 +43,7 @@ export class RegistrationHttpService {
           }
           return throwError(error);
         }),
-        map((registration: any): RegistrationStudentModel => registration)
+        map((response: any): RegistrationStudentModel => response.details)
       );
   }
 
@@ -59,17 +59,17 @@ export class RegistrationHttpService {
           }
           return throwError(error);
         }),
-        map((registration: any): RegistrationModel => registration)
+        map((response: any): RegistrationModel => response.details)
       );
   }
 
   confirmRegistration$(userId: number, confirm: boolean) {
     return this.http
       .patch(
-        `${API_REGISTRATIONS_URL}/${userId}/${
-          confirm ? "confirm" : "disconfirm"
-        }`,
-        null
+        `${API_REGISTRATIONS_URL}/${userId}/confirm`,
+        {
+          "internshipConfirmed": confirm
+        }
       )
       .pipe(
         catchError((error) => {

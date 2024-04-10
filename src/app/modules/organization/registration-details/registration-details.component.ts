@@ -77,7 +77,8 @@ export class RegistrationDetailsComponent implements OnInit {
   }
 
   private fetchRegistrationData() {
-    if (this.role === RegistrationRole.STUDENT) {
+    console.log(this.role);
+    if (this.role === RegistrationRole.STUDENT.toString()) {
       this.registrationService
         .getStudentRegistrationById$(this._userId)
         .subscribe(
@@ -184,7 +185,7 @@ export class RegistrationDetailsComponent implements OnInit {
       .subscribe(
         () => {
           let updatedRegistration = this._registration.value;
-          updatedRegistration.confirmed = confirm;
+          updatedRegistration.internDetails.internshipConfirmed = confirm;
           this._registration.next(updatedRegistration);
           this.toastr.showSuccess(
             this.translate.instant(
@@ -295,9 +296,9 @@ export class RegistrationDetailsComponent implements OnInit {
   async downloadQRCode(): Promise<void> {
     const data: QRCodeData = {
       id: this._userId,
-      firstName: `${this._registration.value.firstName}`,
-      lastName: `${this._registration.value.lastName}`,
-      dateOfBirth: `${this._registration.value.dateOfBirth}`
+      firstName: `${this._registration.value.userDetails.firstName}`,
+      lastName: `${this._registration.value.userDetails.firstName}`,
+      dateOfBirth: `${this._registration.value.userDetails.dateOfBirth}`
     };
   
     const qrCodeData = JSON.stringify(data);

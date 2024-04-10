@@ -15,7 +15,7 @@
           *ngIf="registration$ | async as registration; else standardTitle"
           >{{
             "REGISTRATIONS.DETAILS.TITLE"
-              | translate : { name: registration.firstName }
+              | translate : { name: registration.userDetails.firstName }
           }}</span
         >
         <small class="pl-2">{{
@@ -37,7 +37,7 @@
         {{ "REGISTRATIONS.DETAILS.DELETE" | translate }}
       </button>
       <button
-        *ngIf="!registration.confirmed"
+        *ngIf="!registration.internDetails.internshipConfirmed"
         class="btn btn-primary font-weight-bolder"
         [ngClass]="{
           'spinner spinner-left': confirming
@@ -47,7 +47,7 @@
         {{ "BUTTONS.CONFIRM" | translate }}
       </button>
       <button
-        *ngIf="registration.confirmed"
+        *ngIf="registration.internDetails.internshipConfirmed"
         class="btn btn-warning font-weight-bolder mr-2"
         [ngClass]="{
           'spinner spinner-left': confirming
@@ -57,7 +57,7 @@
         {{ "BUTTONS.DISCONFIRM" | translate }}
       </button>
       <button
-      *ngIf="registration.confirmed"
+      *ngIf="registration.internDetails.internshipConfirmed"
       class="btn btn-primary"
       (click)="downloadQRCode()"
       >
@@ -83,25 +83,25 @@
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.FIRST_NAME" | translate }}
                 </td>
-                <td>{{ registration.firstName }}</td>
+                <td>{{ registration.userDetails.firstName }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.MIDDLE_NAME" | translate }}
                 </td>
-                <td>{{ registration.middleName }}</td>
+                <td>{{ registration.userDetails.middleName }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.LAST_NAME" | translate }}
                 </td>
-                <td>{{ registration.lastName }}</td>
+                <td>{{ registration.userDetails.lastName }}</td>
               </tr>
               <tr>
                 <td>{{ "REGISTRATION.PERSONAL.GENERAL.EMAIL" | translate }}</td>
                 <td>
-                  <a href="mailto:{{ registration.email }}">{{
-                    registration.email
+                  <a href="mailto:{{ registration.userDetails.email }}">{{
+                    registration.userDetails.email
                   }}</a>
                 </td>
               </tr>
@@ -110,38 +110,38 @@
                   {{ "REGISTRATION.PERSONAL.GENERAL.SCHOOL_EMAIL" | translate }}
                 </td>
                 <td>
-                  <a href="mailto:{{ registration.schoolEmail }}">{{
-                    registration.schoolEmail
+                  <a href="mailto:{{ registration.userDetails.schoolEmail }}">{{
+                    registration.userDetails.schoolEmail
                   }}</a>
                 </td>
               </tr>
               <tr>
                 <td>{{ "REGISTRATION.PERSONAL.GENERAL.PHONE" | translate }}</td>
-                <td>{{ registration.phone }}</td>
+                <td>{{ registration.userDetails.phone }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.BIRTH_DATE" | translate }}
                 </td>
-                <td>{{ registration.dateOfBirth | date : "dd-MM-yyyy" }}</td>
+                <td>{{ registration.userDetails.dateOfBirth | date : "dd-MM-yyyy" }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.BIRTHPLACE" | translate }}
                 </td>
-                <td>{{ registration.birthplace }}</td>
+                <td>{{ registration.userDetails.birthplace }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.NATIONALITY" | translate }}
                 </td>
-                <td>{{ registration.nationality }}</td>
+                <td>{{ registration.userDetails.nationality }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.GENERAL.PASSPORT" | translate }}
                 </td>
-                <td>{{ registration.passportNumber }}</td>
+                <td>{{ registration.userDetails.passportNumber }}</td>
               </tr>
             </tbody>
           </table>
@@ -156,37 +156,37 @@
                 <td>
                   {{ "REGISTRATION.PERSONAL.ADDRESS.STREET" | translate }}
                 </td>
-                <td>{{ registration.street }}</td>
+                <td>{{ registration.address.street }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.ADDRESS.NUMBER" | translate }}
                 </td>
-                <td>{{ registration.houseNumber }}</td>
+                <td>{{ registration.address.houseNumber }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.ADDRESS.MAILBOX" | translate }}
                 </td>
-                <td>{{ registration.mailbox }}</td>
+                <td>{{ registration.address.mailbox }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.ADDRESS.POSTAL_CODE" | translate }}
                 </td>
-                <td>{{ registration.postalCode }}</td>
+                <td>{{ registration.address.postalCode }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.ADDRESS.TOWNSHIP" | translate }}
                 </td>
-                <td>{{ registration.township }}</td>
+                <td>{{ registration.address.city }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.ADDRESS.COUNTRY" | translate }}
                 </td>
-                <td>{{ registration.country }}</td>
+                <td>{{ registration.address.country }}</td>
               </tr>
             </tbody>
           </table>
@@ -204,7 +204,7 @@
                       | translate
                   }}
                 </td>
-                <td>{{ registration.firstNameContact }}</td>
+                <td>{{ registration.emergencyPerson.firstName }}</td>
               </tr>
               <tr>
                 <td>
@@ -213,7 +213,7 @@
                       | translate
                   }}
                 </td>
-                <td>{{ registration.middleNameContact }}</td>
+                <td>{{ registration.emergencyPerson.middleName }}</td>
               </tr>
               <tr>
                 <td>
@@ -221,7 +221,7 @@
                     "REGISTRATION.PERSONAL.CONTACT_PERSON.LAST_NAME" | translate
                   }}
                 </td>
-                <td>{{ registration.lastNameContact }}</td>
+                <td>{{ registration.emergencyPerson.lastName }}</td>
               </tr>
               <tr>
                 <td>
@@ -229,14 +229,14 @@
                     "REGISTRATION.PERSONAL.CONTACT_PERSON.RELATION" | translate
                   }}
                 </td>
-                <td>{{ registration.relation }}</td>
+                <td>{{ registration.emergencyPerson.relation }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.CONTACT_PERSON.EMAIL" | translate }}
                 </td>
                 <td>
-                  <a href="mailto:{{ registration.emailContact }}">{{
+                  <a href="mailto:{{ registration.emergencyPerson.emailContact }}">{{
                     registration.emailContact
                   }}</a>
                 </td>
@@ -245,7 +245,7 @@
                 <td>
                   {{ "REGISTRATION.PERSONAL.CONTACT_PERSON.PHONE" | translate }}
                 </td>
-                <td>{{ registration.phoneContact }}</td>
+                <td>{{ registration.emergencyPerson.phone }}</td>
               </tr>
             </tbody>
           </table>
@@ -260,13 +260,13 @@
                 <td>
                   {{ "REGISTRATION.PERSONAL.MEDICAL.ALLERGIES" | translate }}
                 </td>
-                <td>{{ registration.allergies }}</td>
+                <td>{{ registration.medicalDetails.allergies }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.PERSONAL.MEDICAL.CONDITIONS" | translate }}
                 </td>
-                <td>{{ registration.medicalConditions }}</td>
+                <td>{{ registration.medicalDetails.medicalConditions }}</td>
               </tr>
             </tbody>
           </table>
@@ -308,7 +308,7 @@
                       ) | translate
                     }}
                   </td>
-                  <td *ngIf="!isEditingStartDateInternship">{{ registration.startDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingStartDateInternship">{{ registration.internDetails.startOfInternship | date : "dd-MM-yyyy" }}</td>
                   <td *ngIf="isEditingStartDateInternship">
                     <input
                       class="form-control form-control-solid"
@@ -341,7 +341,7 @@
                       ) | translate
                     }}
                   </td>
-                  <td *ngIf="!isEditingEndDateInternship">{{ registration.endDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingEndDateInternship">{{ registration.internDetails.endOfInternship | date : "dd-MM-yyyy" }}</td>
                   <td *ngIf="isEditingEndDateInternship">
                     <input
                       class="form-control form-control-solid"
@@ -372,7 +372,7 @@
                         | translate
                     }}
                   </td>
-                  <td *ngIf="!isEditingStartDateStay">{{ registration.leaveStartDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingStartDateStay">{{ registration.internDetails.startOfPeriodOfAccomodation | date : "dd-MM-yyyy" }}</td>
                   <td *ngIf="isEditingStartDateStay">
                     <input
                       class="form-control form-control-solid"
@@ -402,7 +402,7 @@
                       "REGISTRATION.ORGANIZATIONAL.DATES.LEAVE_END" | translate
                     }}
                   </td>
-                  <td *ngIf="!isEditingEndDateStay">{{ registration.leaveEndDate | date : "dd-MM-yyyy" }}</td>
+                  <td *ngIf="!isEditingEndDateStay">{{ registration.internDetails.endOfPeriodOfAccomodation | date : "dd-MM-yyyy" }}</td>
                   <td *ngIf="isEditingEndDateStay">
                     <input
                       class="form-control form-control-solid"
@@ -464,7 +464,7 @@
                     "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.NUMBER" | translate
                   }}
                 </td>
-                <td>{{ registration.flightNumber }}</td>
+                <td>{{ registration.internDetails.flightNumber }}</td>
               </tr>
               <tr>
                 <td>
@@ -472,7 +472,7 @@
                     "REGISTRATION.ORGANIZATIONAL.FLIGHT_INFORMATION.DATE_ARRIVAL" | translate
                   }}
                 </td>
-                <td>{{ registration.flightDateArrival | date: "dd-MM-yyyy" }}</td>
+                <td>{{ registration.internDetails.flightDateArrival | date: "dd-MM-yyyy" }}</td>
               </tr>
             </tbody>
           </table>
@@ -487,7 +487,7 @@
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.LEVEL" | translate }}
                 </td>
-                <td>{{ registration.level }}</td>
+                <td>{{ registration.internDetails.spanishLessons.spanishLevel }}</td>
               </tr>
               <tr>
                 <td>
@@ -496,13 +496,13 @@
                       | translate
                   }}
                 </td>
-                <td>{{ registration.weeksOnline }}</td>
+                <td>{{ registration.internDetails.spanishLessons.spanishLessonWeeksOnline }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.SPANISH.WEEKS" | translate }}
                 </td>
-                <td>{{ registration.weeks }}</td>
+                <td>{{ registration.internDetails.spanishLessons.spanishLessonWeeks }}</td>
               </tr>
             </tbody>
           </table>
@@ -522,8 +522,8 @@
                     (click)="
                       downloadFile(
                         file,
-                        registration.firstName,
-                        registration.lastName,
+                        registration.userDetails.firstName,
+                        registration.userDetails.lastName,
                         i
                       )
                     "
@@ -544,8 +544,8 @@
                     (click)="
                       downloadFile(
                         file,
-                        registration.firstName,
-                        registration.lastName,
+                        registration.userDetails.firstName,
+                        registration.userDetails.lastName,
                         i
                       )
                     "
@@ -563,8 +563,8 @@
                     (click)="
                       downloadFile(
                         file,
-                        registration.firstName,
-                        registration.lastName,
+                        registration.userDetails.firstName,
+                        registration.userDetails.lastName,
                         i
                       )
                     "
@@ -577,7 +577,7 @@
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.PAYMENTS.PAYMENT_DESCRIPTION" | translate }}
                 </td>
-                <td>{{ registration.paymentDescription }}</td>
+                <td>{{ registration.internDetails.paymentDescription }}</td>
               </tr>
             </tbody>
           </table>
@@ -592,7 +592,7 @@
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.MOTIVATION_LETTER.MOTIVATION" | translate }}
                 </td>
-                <td>{{ registration.motivationLetter }}</td>
+                <td>{{ registration.internDetails.motivationLetter }}</td>
               </tr>
             </tbody>
           </table>
@@ -612,13 +612,13 @@
                     ) | translate
                   }}
                 </td>
-                <td>{{ registration.occupation }}</td>
+                <td>{{ registration.internDetails.professionOrEducation }}</td>
               </tr>
               <tr *ngIf="role === 'Student'">
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.INFO.DEGREE" | translate }}
                 </td>
-                <td>{{ registration.degree }}</td>
+                <td>{{ registration.internDetails.educationDegree }}</td>
               </tr>
               <tr *ngIf="role === 'Student'">
                 <td>
@@ -627,7 +627,7 @@
                       | translate
                   }}
                 </td>
-                <td [ngSwitch]="registration.internshipContext">
+                <td [ngSwitch]="registration.internDetails.internshipContext">
                   <span *ngSwitchCase="1">{{
                     "REGISTRATION.ORGANIZATIONAL.INFO.INTERNSHIP_CONTEXT.PROJECT"
                       | translate
@@ -647,7 +647,7 @@
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.INFO.TASKS" | translate }}
                 </td>
-                <td>{{ registration.tasks }}</td>
+                <td>{{ registration.internDetails.internshipTasks }}</td>
               </tr>
               <tr>
                 <td>
@@ -655,13 +655,13 @@
                     "REGISTRATION.ORGANIZATIONAL.INFO.EXPECTATIONS" | translate
                   }}
                 </td>
-                <td>{{ registration.expectations }}</td>
+                <td>{{ registration.internDetails.internshipExpectations }}</td>
               </tr>
               <tr>
                 <td>
                   {{ "REGISTRATION.ORGANIZATIONAL.INFO.PROPOSALS" | translate }}
                 </td>
-                <td>{{ registration.proposals }}</td>
+                <td>{{ registration.internDetails.internshipProposals }}</td>
               </tr>
             </tbody>
           </table>
@@ -683,8 +683,8 @@
                   (click)="
                     downloadFile(
                       file,
-                      registration.firstName,
-                      registration.lastName,
+                        registration.userDetails.firstName,
+                        registration.userDetails.lastName,
                       i
                     )
                   "
@@ -706,8 +706,8 @@
                   (click)="
                     downloadFile(
                       file,
-                      registration.firstName,
-                      registration.lastName,
+                        registration.userDetails.firstName,
+                        registration.userDetails.lastName,
                       i
                     )
                   "
@@ -726,8 +726,8 @@
                   (click)="
                     downloadFile(
                       file,
-                      registration.firstName,
-                      registration.lastName,
+                        registration.userDetails.firstName,
+                        registration.userDetails.lastName,
                       i
                     )
                   "
@@ -746,8 +746,8 @@
                   (click)="
                     downloadFile(
                       file,
-                      registration.firstName,
-                      registration.lastName,
+                        registration.userDetails.firstName,
+                        registration.userDetails.lastName,
                       i
                     )
                   "
@@ -771,7 +771,7 @@
               <td>
                 {{ "REGISTRATION.QUESTIONS.EXTRA.EXPERIENCE" | translate }}
               </td>
-              <td>{{ registration.experience }}</td>
+              <td>{{ registration.internDetails.experience }}</td>
             </tr>
             <tr>
               <td>
@@ -782,7 +782,7 @@
                   ) | translate
                 }}
               </td>
-              <td>{{ registration.whyAnanau }}</td>
+              <td>{{ registration.internDetails.whyAnanau }}</td>
             </tr>
             <tr>
               <td>
@@ -790,7 +790,7 @@
                   "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.TITLE" | translate
                 }}
               </td>
-              <td [ngSwitch]="registration.firstHeard">
+              <td [ngSwitch]="registration.internDetails.whereFirstHeard">
                 <span *ngSwitchCase="1">{{
                   "REGISTRATION.QUESTIONS.EXTRA.FIRST_HEARD.WEBSITE" | translate
                 }}</span>
