@@ -29,9 +29,9 @@ import { OverlayService } from './modules/overlay/_service/overlay.service'
 
 function appInitializer(authService: AuthService) {
   return () => {
-    return new Promise((resolve) => {
-      authService.getUserByToken().subscribe().add(resolve);
-    });
+    // return new Promise((resolve) => {
+    //   authService.getUserByToken().subscribe().add(resolve);
+    // });
   };
 }
 

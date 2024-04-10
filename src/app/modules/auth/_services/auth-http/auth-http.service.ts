@@ -38,7 +38,7 @@ export class AuthHTTPService {
     return this.http.post(`${API_USERS_URL}/reset-password`, dto);
   }
 
-  getUserByToken(auth): Observable<UserModel> {
+  getUserByToken(auth: AuthModel): Observable<UserModel> {
     return this.http.get<UserModel>(`${API_USERS_URL}/${auth.user.id}`);
   }
 }

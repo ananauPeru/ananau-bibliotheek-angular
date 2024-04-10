@@ -70,6 +70,7 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(user?: UserModel): Observable<UserModel> {
     const auth = this.getAuthFromLocalStorage();
+    console.log(auth);
     if (!auth || !auth.token) {
       return of(undefined);
     }

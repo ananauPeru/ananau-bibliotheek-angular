@@ -1,16 +1,16 @@
 import { RegistrationDTO } from "./registration-dto";
 
 export class RegistrationStudentDTO extends RegistrationDTO {
-  // PERSONAL INFORMATION
-  // General
-  schoolEmail: string;
+  
+  userDetails: {
+    schoolEmail: string;
+  } & RegistrationDTO['userDetails'];
 
-  // ORGANIZATIONAL INFORMATION
-  // Dates
-  leaveStartDate: Date;
-  leaveEndDate: Date;
+  internDetails: {
+    startOfPeriodOfAccomodation: Date;
+    endOfPeriodOfAccomodation: Date;
+    educationDegree: string;
+    internshipContext: string;
+  } & RegistrationDTO['internDetails'];
 
-  // Info
-  degree: string;
-  internshipContext: string;
 }

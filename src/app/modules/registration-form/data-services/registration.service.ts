@@ -42,6 +42,7 @@ export class RegistrationService {
         }),
         map(
           (dto: any): RegistrationDTO => {
+            console.log(dto);
             return dto;
           }
         )
@@ -67,7 +68,7 @@ export class RegistrationService {
         }),
         map(
           (dto: any): RegistrationStudentDTO => {
-            return dto;
+            return dto.details;
           }
         )
       );
