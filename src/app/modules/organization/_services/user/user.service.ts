@@ -40,19 +40,22 @@ export class UserService {
     );
   }
 
-  filter(filter: string) {
+  filter(filter: string, checkRoles = true, checkEmail = true) {
     let filterText = filter.toLowerCase();
-
+  
     this.users = this._users.pipe(
-      map((users : UserRoleModel[]) =>
+      map((users: UserRoleModel[]) =>
         users.filter((user: UserRoleModel) => {
-          const matchesRole = user.roles.some((role: RoleModel) => role.name.toLowerCase().includes(filterText));
-          return (
-            user.email?.toLowerCase().includes(filterText) ||
-            user.firstName?.toLowerCase().includes(filterText) ||
-            user.lastName?.toLowerCase().includes(filterText) ||
-            matchesRole
+          const matchesRole = checkRoles && user.roles.some((role: RoleModel) =>
+            role.name.toLowerCase().includes(filterText)
           );
+  
+          const matchesEmail = checkEmail && user.email?.toLowerCase().includes(filterText);
+  
+          const matchesFirstName = user.firstName?.toLowerCase().includes(filterText);
+          const matchesLastName = user.lastName?.toLowerCase().includes(filterText);
+  
+          return matchesEmail || matchesFirstName || matchesLastName || matchesRole;
         })
       )
     );
