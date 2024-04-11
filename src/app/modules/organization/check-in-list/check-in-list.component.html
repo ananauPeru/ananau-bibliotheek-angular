@@ -31,7 +31,7 @@
           </div>
 
           <input
-            (keyup)="registrationService.filter($event.target.value)"
+            (keyup)="userService.filter($event.target.value, false, false)"
             type="email"
             class="form-control form-control-lg form-control-solid force-pl-5"
             placeholder="{{ 'REGISTRATIONS.OVERVIEW.FILTER' | translate }}"
@@ -59,13 +59,13 @@
         <tbody>
           <tr
             *ngFor="
-              let registration of registrationService.registrations | async | checkInSort | async
+              let user of userService.users | async | checkInSort | async
             "
           >
-            <td>{{ registration.firstName }}</td>
-            <td>{{ registration.lastName }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
             <td>
-              <span class="label label-lg label-light-primary label-inline" *ngIf="checkInService.isCheckedIn(registration.userId) | async; else checkedOut">
+              <span class="label label-lg label-light-primary label-inline" *ngIf="checkInService.isCheckedIn(user.id) | async; else checkedOut">
                 {{ "CHECK_IN.CHECKED_IN" | translate }}
               </span>
               <ng-template #checkedOut>
@@ -76,7 +76,7 @@
             </td>
             <td class="text-right">
               <button 
-              routerLink="/organization/check-in/{{ registration.userId }}"
+              routerLink="/organization/check-in/{{ user.id }}"
               type="button" 
               class="btn btn-primary mr-2" 
               placement="top" 

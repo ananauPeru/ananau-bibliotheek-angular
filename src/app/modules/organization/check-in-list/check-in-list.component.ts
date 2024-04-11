@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CheckInService } from "../_services/check-in/check-in.service";
-import { RegistrationService } from "../_services/registration/registration.service";
 import { Observable } from "rxjs";
+import { UserService } from "../_services/user/user.service";
 
 @Component({
   selector: "app-check-in-list",
@@ -11,9 +11,9 @@ import { Observable } from "rxjs";
 export class CheckInListComponent implements OnInit {
   constructor(
     public checkInService: CheckInService,
-    public registrationService: RegistrationService
+    public userService: UserService
   ) {
-    this.registrationService.loadInitialData();
+    this.userService.loadInitialData();
   }
 
   ngOnInit() {}
