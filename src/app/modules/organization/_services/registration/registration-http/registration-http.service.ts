@@ -66,7 +66,7 @@ export class RegistrationHttpService {
   confirmRegistration$(userId: number, confirm: boolean) {
     return this.http
       .patch(
-        `${API_REGISTRATIONS_URL}/${userId}/confirm`,
+        `${API_REGISTRATIONS_URL}/${userId}/confirmation`,
         {
           "internshipConfirmed": confirm
         }
