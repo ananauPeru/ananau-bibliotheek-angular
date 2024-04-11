@@ -43,8 +43,6 @@ export class UserService {
   filter(filter: string) {
     let filterText = filter.toLowerCase();
 
-    console.log("Filtering Users: ", filterText)
-
     this.users = this._users.pipe(
       map((users : UserRoleModel[]) =>
         users.filter((user: UserRoleModel) => {
