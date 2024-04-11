@@ -140,7 +140,11 @@ export class GeneralInformationHTTPService {
           return throwError(error);
         }),
         map((response: any): HolidayModel[] => {
-          return response.holidays;
+          return response.holidays.map((holiday: any) => ({
+            id: holiday.id,
+            name: holiday.name,
+            date: holiday.date
+          }));
         })
       );
   }
@@ -176,9 +180,11 @@ export class GeneralInformationHTTPService {
           return throwError(error);
         }),
         map((response: any): HolidayModel => {
-          return response.holiday;
-        }
-      ));
+          return response.holidays.map((holiday: any) => ({
+            name: holiday.name,
+            date: holiday.date
+        }));
+      }));
   }
 
   // putHolidayInformation$(
