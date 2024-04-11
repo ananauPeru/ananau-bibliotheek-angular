@@ -80,8 +80,12 @@ export class GeneralInformationHTTPService {
           }
           return throwError(error);
         }),
-        map((vaccinations: any): VaccinationModel[] => {
-          return vaccinations;
+        map((response: any): VaccinationModel[] => {
+          return response.vaccinations.map((vaccination: any) => ({
+            id: vaccination.id,
+            name: vaccination.name,
+            required: vaccination.required
+          }));
         })
       );
   }
