@@ -15,38 +15,37 @@ export class CheckInHttpService {
   getIsCheckedIn$(userId: number): Observable<boolean> {
     const url = `${API_GENERAL_INFORMATION_URL}/${userId}`;
 
-    return this.http
-        .get<boolean>(url)
-        .pipe(
-            catchError((error) => {
-                if(error.status === 401) {
-                    console.error("Login please...");
-                } else {
-                    console.error(error);
-                }
-                return throwError(error);
-            })
-        );
+    return this.http.get<boolean>(url).pipe(
+      catchError((error) => {
+        if (error.status === 401) {
+          console.error("Login please...");
+        } else {
+          console.error(error);
+        }
+        return throwError(error);
+      }),
+      map((response: any): boolean => {
+        return response.isCheckedIn;
+      })
+    );
   }
 
   postCheckIn$(userId: number): Observable<CheckInHistory> {
     const url = `${API_GENERAL_INFORMATION_URL}/${userId}`;
 
-    return this.http
-        .post<CheckInHistory>(url, null)
-        .pipe(
-            catchError((error) => {
-                if(error.status === 401) {
-                    console.error("Login please...");
-                } else {
-                    console.error(error);
-                }
-                return throwError(error);
-            }),
-            map((checkInHistoryResponse: any): CheckInHistory => {
-                return checkInHistoryResponse.checkInOutRecord;
-            })
-        );
+    return this.http.post<CheckInHistory>(url, null).pipe(
+      catchError((error) => {
+        if (error.status === 401) {
+          console.error("Login please...");
+        } else {
+          console.error(error);
+        }
+        return throwError(error);
+      }),
+      map((checkInHistoryResponse: any): CheckInHistory => {
+        return checkInHistoryResponse.checkInOutRecord;
+      })
+    );
   }
 
   getAllCheckInHistoryOfUser$(
@@ -55,10 +54,15 @@ export class CheckInHttpService {
     endDate: Date | null
   ): Observable<CheckInHistory[]> {
     const url = `${API_GENERAL_INFORMATION_URL}/history/${userId}`;
-    const params = {
-      startDate: startDate ? startDate.toISOString() : null,
-      endDate: endDate ? endDate.toISOString() : null,
-    };
+    const params = {};
+
+    if(startDate) {
+      params['StartDate'] = startDate?.toISOString();
+    }
+
+    if(endDate) {
+      params['EndDate'] = endDate?.toISOString();
+    }
     return this.http.get<any>(url, { params }).pipe(
       catchError((error) => {
         if (error.status === 401) {
@@ -80,7 +84,7 @@ export class CheckInHttpService {
       })
     );
   }
-  
+
   getAllCheckInHistory$(): Observable<CheckInHistory[]> {
     const url = `${API_GENERAL_INFORMATION_URL}/history`;
     return this.http.get<any>(url).pipe(
