@@ -18,8 +18,9 @@ import { v4 as uuidv4 } from "uuid";
 import { BlobNamePrefix } from "../models/blob-name-prefix";
 import { HttpClient } from "@angular/common/http";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
-import { Observable } from "rxjs";
-
+import { BehaviorSubject, Observable } from "rxjs";
+import * as FileSaver from "file-saver";
+import { RegistrationModel } from "../../organization/_models/registration.model";
 
 @Component({
   selector: "app-organizational-information",
@@ -55,6 +56,13 @@ export class OrganizationalInformationComponent implements OnInit {
   private previewImageForNonImageFiles: File;
 
   public isTimeExceedingLimit = false;
+
+  private _registration: BehaviorSubject<RegistrationModel> =
+    new BehaviorSubject(null);
+  public registration$: Observable<RegistrationModel> =
+    this._registration.asObservable();
+  
+  public errorMessage: string;
 
   constructor(
     private fb: FormBuilder,
@@ -505,7 +513,24 @@ export class OrganizationalInformationComponent implements OnInit {
       return file as ScansFile;
     });
   }
+
+  downloadFile(file: File) {
+    let fileName 
+    if (file.name.startsWith(BlobNamePrefix.TermsAndConditions)) {
+      fileName =
+        this.translate.instant(
+          "REGISTRATIONS.DETAILS.FILE_NAMES.TERMS_AND_CONDITIONS"
+        );
+      FileSaver.saveAs(file, fileName);
+    } 
+    
+     else {
+      this.toastr.showError(
+        this.translate.instant("REGISTRATIONS.TOASTS.DELETE_ERROR"),
+        this.translate.instant("REGISTRATIONS.TOASTS.DOWNLOAD_ERROR")
+      );
+    }
   
 }
 
-
+}
