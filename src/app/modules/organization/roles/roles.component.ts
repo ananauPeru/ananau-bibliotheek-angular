@@ -31,8 +31,9 @@ export class RolesComponent implements OnInit {
     this.userService.filter(this.filter);
   }
 
-  changeRoles(e, user: UserRoleModel, role: RoleModel) {
+  changeRoles(e: any, user: UserRoleModel, role: RoleModel) {
     if (e.target.checked) {
+      //Checked
       if (this.hasRole(user, role)) {
         this.toastrUtil.showInfo(
           "User already has specified role.",
@@ -43,16 +44,14 @@ export class RolesComponent implements OnInit {
         this.changeRoleService(user.email, user.id, user.roles);
       }
     } else {
-      if (!user.roles.includes(role)) {
+      //Unchecked
+      if (!this.hasRole(user, role)) {
         this.toastrUtil.showInfo(
           "User didn't have specified role.",
           "No Changes"
         );
       } else {
-        const index = user.roles.indexOf(role);
-        if (index > -1) {
-          user.roles.splice(index, 1);
-        }
+        user.roles = user.roles.filter((userRole) => userRole.id !== role.id);
         this.changeRoleService(user.email, user.id, user.roles);
       }
     }
