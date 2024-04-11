@@ -8,6 +8,7 @@ import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { RegisterDTO } from "../_dto/register-dto";
 import { ResetPasswordDTO } from "../_dto/reset-password-dto";
+import { RoleModel } from "../../organization/_models/role.model";
 
 @Injectable({
   providedIn: "root",
@@ -150,9 +151,11 @@ export class AuthService implements OnDestroy {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 
-  public setRolesToLocalStorage(roles: string[]) {
+  public setRolesToLocalStorage(roles: RoleModel[]) {
     let authData = this.getAuthFromLocalStorage();
-    authData.roles = roles;
+    authData.roles = roles.map((role) => {
+      return role.name;
+    });
     this.setAuthFromLocalStorage(authData);
   }
 }

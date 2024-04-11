@@ -5,6 +5,8 @@ import { AuthService } from "../../auth";
 import { RoleHTTPService } from "../_services/role/role-http/role-http.service";
 import { RoleService } from "../_services/role/role.service";
 import { UserService } from "../_services/user/user.service";
+import { UserRoleModel } from "../_models/user-role.model";
+import { RoleModel } from "../_models/role.model";
 
 @Component({
   selector: "app-roles",
@@ -29,16 +31,16 @@ export class RolesComponent implements OnInit {
     this.userService.filter(this.filter);
   }
 
-  changeRoles(e, user, role) {
+  changeRoles(e, user: UserRoleModel, role: RoleModel) {
     if (e.target.checked) {
-      if (user.roles.includes("role")) {
+      if (this.hasRole(user, role)) {
         this.toastrUtil.showInfo(
           "User already has specified role.",
           "No Changes"
         );
-      } else if (!user.roles.includes("role")) {
+      } else if (!this.hasRole(user, role)) {
         user.roles.push(role);
-        this.changeRoleService(user.user.userName, user.user.id, user.roles);
+        this.changeRoleService(user.email, user.id, user.roles);
       }
     } else {
       if (!user.roles.includes(role)) {
@@ -51,19 +53,19 @@ export class RolesComponent implements OnInit {
         if (index > -1) {
           user.roles.splice(index, 1);
         }
-        this.changeRoleService(user.user.userName, user.user.id, user.roles);
+        this.changeRoleService(user.email, user.id, user.roles);
       }
     }
   }
 
-  changeRoleService(email: string, id: number, roles: string[]) {
+  private changeRoleService(email: string, userId: number, roles: RoleModel[]) {
     this.working = true;
     this.toastrUtil.showInfo(
       "Making Changes...",
       "Please wait for the changes to complete."
     );
     this.userService
-      .changeRoles(id, roles)
+      .changeRoles(userId, roles)
       .pipe(
         tap(
           // Log the result or error
@@ -79,13 +81,16 @@ export class RolesComponent implements OnInit {
           }
         )
       )
-      .subscribe((res) => {
-        if (id == this.authService.getAuthFromLocalStorage().user.id) {
-          this.authService.setRolesToLocalStorage(res);
+      .subscribe((response) => {
+        if (userId == this.authService.getAuthFromLocalStorage().user.id) {
+          this.authService.setRolesToLocalStorage(response.roles);
         }
         this.userService.loadInitialData();
-        res as string[];
         this.working = false;
       });
+  }
+
+  hasRole(user: UserRoleModel, role: RoleModel): boolean {
+    return user.roles.some(userRole => userRole.id === role.id);
   }
 }

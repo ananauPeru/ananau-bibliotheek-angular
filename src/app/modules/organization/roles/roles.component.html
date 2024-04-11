@@ -62,16 +62,16 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let user of userService.users | async">
-                                <td>{{user.user.userDetail.firstName}}</td>
-                                <td>{{user.user.userDetail.lastName}}</td>
-                                <td>{{user.user.userName}}</td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td>{{user.email}}</td>
                                 <td class="text-center" *ngFor="let role of roleService.roles | async">
                                     <input
                                         type="checkbox"
                                         class="custom-checkbox mr-3"
                                         id="flexCheckChecked"
-                                        [checked]="user.roles.includes(role.name)"
-                                        (change)="changeRoles($event, user, role.name)"
+                                        [checked]="hasRole(user, role)"
+                                        (change)="changeRoles($event, user, role)"
                                     />
                                 </td>
                             </tr>
