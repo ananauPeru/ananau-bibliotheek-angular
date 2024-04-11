@@ -185,6 +185,7 @@ export class GeneralInformationHTTPService {
         }),
         map((response: any): HolidayModel => {
           return response.holidays.map((holiday: any) => ({
+            id: holiday.id,
             name: holiday.name,
             date: holiday.date
         }));
