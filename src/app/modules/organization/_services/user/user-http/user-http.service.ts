@@ -14,7 +14,7 @@ const API_USERS_URL = `${environment.apiUrl}/users`;
 export class UserHTTPService {
   constructor(private http: HttpClient) {}
 
-  getAllUsersWithDetails$(): Observable<UserRoleModel[]> {
+  getAllUsers$(): Observable<UserRoleModel[]> {
     return this.http
       .get(`${API_USERS_URL}`, {
         responseType: "json",
@@ -48,29 +48,9 @@ export class UserHTTPService {
       );
   }
 
-  getAllUsers$(): Observable<UserModel[]> {
-    return this.http
-      .get(`${API_USERS_URL}`, {
-        responseType: "json",
-      })
-      .pipe(
-        catchError((error) => {
-          if (error.status == 401) {
-            console.error("Login please...");
-          }
-          return throwError(error);
-        }),
-        map((users: any): UserModel[] => {
-          return users;
-        })
-      );
-  }
-
   changeRoles(userId: number, rolesIds: number[]): Observable<UserRoleModel> {
     return this.http
-      .post<string[]>(`${API_USERS_URL}/roles/change/${userId}`, {
-        rolesIds: rolesIds,
-      })
+      .post<string[]>(`${API_USERS_URL}/roles/change/${userId}`, { rolesIds: rolesIds })
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -80,11 +60,11 @@ export class UserHTTPService {
         }),
         map((response: any): UserRoleModel => {
           return {
-            id: response.id,
-            firstName: response.firstName,
-            lastName: response.lastName,
-            email: response.email,
-            roles: response.roles.map((role: any) => {
+            id: response.user.id,
+            firstName: response.user.firstName,
+            lastName: response.user.lastName,
+            email: response.user.email,
+            roles: response.user.roles.map((role: any) => {
               return {
                 id: role.id,
                 name: role.name,

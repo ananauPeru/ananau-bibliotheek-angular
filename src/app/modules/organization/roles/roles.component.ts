@@ -85,6 +85,8 @@ export class RolesComponent implements OnInit {
         if (userId == this.authService.getAuthFromLocalStorage().user.id) {
           this.authService.setRolesToLocalStorage(response.roles);
         }
+
+        console.log(response);
         this.userService.loadInitialData();
         this.working = false;
       });

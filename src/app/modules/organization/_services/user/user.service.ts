@@ -32,7 +32,7 @@ export class UserService {
   }
 
   loadInitialData() {
-    this.userHttpService.getAllUsersWithDetails$().subscribe(
+    this.userHttpService.getAllUsers$().subscribe(
       (res) => {
         this._users.next(res);
       },
@@ -40,21 +40,20 @@ export class UserService {
     );
   }
 
-  filter(filter: any) {
-    let f = filter.toLowerCase();
-    let category = undefined;
+  filter(filter: string) {
+    let filterText = filter.toLowerCase();
+
+    console.log("Filtering Users: ", filterText)
 
     this.users = this._users.pipe(
-      map((users) =>
-        users.filter((user) => {
-          let r = false;
-          user.roles.forEach((role) =>
-            role.name.toLowerCase().includes(f) ? (r = true) : ""
-          );
+      map((users : UserRoleModel[]) =>
+        users.filter((user: UserRoleModel) => {
+          const matchesRole = user.roles.some((role: RoleModel) => role.name.toLowerCase().includes(filterText));
           return (
-            user.firstName.toLowerCase().includes(f) ||
-            user.lastName.toLowerCase().includes(f) ||
-            r
+            user.email?.toLowerCase().includes(filterText) ||
+            user.firstName?.toLowerCase().includes(filterText) ||
+            user.lastName?.toLowerCase().includes(filterText) ||
+            matchesRole
           );
         })
       )
