@@ -1,16 +1,16 @@
 import { RegistrationModel } from "./registration.model";
 
 export class RegistrationStudentModel extends RegistrationModel {
-  // PERSONAL INFORMATION
-  // General
-  schoolEmail: string;
+ 
+  userDetails: {
+    schoolEmail: string;
+  } & RegistrationModel['userDetails'];
 
-  // ORGANIZATIONAL INFORMATION
-  // Dates
-  leaveStartDate: Date;
-  leaveEndDate: Date;
+  internDetails: {
+    startOfPeriodOfAccomodation: Date;
+    endOfPeriodOfAccomodation: Date;
+    educationDegree: string;
+    internshipContext: string;
+  } & RegistrationModel['internDetails'];
 
-  // Info
-  degree: string;
-  internshipContext: string;
 }
