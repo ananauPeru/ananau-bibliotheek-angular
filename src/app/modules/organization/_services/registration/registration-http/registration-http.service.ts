@@ -92,11 +92,21 @@ export class RegistrationHttpService {
     );
   }
 
-  updateRegistrationDates$(userId: number, dates: any) {
+  updateRegistrationDates$(userId: number, isStudent: boolean, dates: any) {
+
+    const url = isStudent ? `${API_REGISTRATIONS_URL}/students` : `${API_REGISTRATIONS_URL}/volunteers`;
+    
+    const filteredDates = Object.entries(dates)
+    .filter(([_, value]) => value !== null)
+    .reduce((obj, [key, value]) => {
+      obj[key] = value;
+      return obj;
+    }, {});
+
     return this.http
     .put(
-      `${API_REGISTRATIONS_URL}/students/${userId}`,
-      dates
+      `${url}/${userId}`,
+      filteredDates
     )
     .pipe(
       catchError((error) => {

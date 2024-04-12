@@ -75,7 +75,8 @@ export class RegistrationService {
     return this.registartionHttpService.deleteRegistration$(userId);
   }
 
-  updateRegistrationDates$(userId: number, dates: any) {
-    return this.registartionHttpService.updateRegistrationDates$(userId, dates);
+  updateRegistrationDates$(userId: number, isStudent: boolean, dates: any) {
+    console.log(isStudent);
+    return this.registartionHttpService.updateRegistrationDates$(userId, isStudent, dates);
   }
 }
