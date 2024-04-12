@@ -363,7 +363,7 @@ export class RegistrationDetailsComponent implements OnInit {
 
   onSubmitDateChange() {
     this.registrationService
-      .updateRegistrationDates$(this._userId, this.dateForm.value)
+      .updateRegistrationDates$(this._userId, (this.role == RegistrationRole.STUDENT), this.dateForm.value)
       .subscribe(
         () => {
           this.setEditingFalse();
