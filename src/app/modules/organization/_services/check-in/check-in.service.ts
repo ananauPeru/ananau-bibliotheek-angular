@@ -37,8 +37,7 @@ export class CheckInService {
         if (userCheckIns.length === 0) {
           return false;
         }
-        const latestCheckIn = userCheckIns[userCheckIns.length - 1];
-        return latestCheckIn.checkOutTime === null || latestCheckIn.checkOutTime === undefined;
+        return userCheckIns.some((checkIn) => checkIn.checkOut === null);
       })
     );
   }

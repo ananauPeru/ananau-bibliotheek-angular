@@ -15,6 +15,8 @@ export class CheckInHttpService {
   getIsCheckedIn$(userId: number): Observable<boolean> {
     const url = `${API_GENERAL_INFORMATION_URL}/${userId}`;
 
+    console.log(url);
+
     return this.http.get<boolean>(url).pipe(
       catchError((error) => {
         if (error.status === 401) {
@@ -77,8 +79,8 @@ export class CheckInHttpService {
           return {
             id: history.id,
             userId: history.userId,
-            checkInTime: history.checkIn,
-            checkOutTime: history.checkOut,
+            checkIn: history.checkIn,
+            checkOut: history.checkOut,
           };
         });
       })
@@ -103,8 +105,8 @@ export class CheckInHttpService {
             checkInHistories.push({
               id: history.id,
               userId: history.userId,
-              checkInTime: history.checkIn,
-              checkOutTime: history.checkOut,
+              checkIn: history.checkIn,
+              checkOut: history.checkOut,
             });
           });
         });

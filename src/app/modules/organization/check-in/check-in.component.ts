@@ -49,26 +49,36 @@ export class CheckInComponent implements OnInit {
   }
 
   onCodeResult(resultString: any) {
+
+    // {"id":"72","firstName":"Bindo","lastName":"Thorpe","dateOfBirth":"2024-03-22T00:00:00"}
+
+    //Get the result from the scanner
+    let result = resultString[0].value;
+
+    try {
+      result = JSON.parse(result);
+    } catch (error) {
+      this.toastr.error("Invalid QR Code");
+      return;
+    }
+
     //Stop the scanner
     this.scanner.stop();
 
     //Sets loading to true
     this.isLoading = true;
 
-    //Get the result from the scanner
-    const result = resultString[0].value;
-
     //Set the result to the qrCodeResult
     this.qrCodeResult = result;
 
     //Parse the result to a JSON object
-    this.qrCodeReusltJson = JSON.parse(result);
+    this.qrCodeReusltJson = result;
 
     //Checks in/out the user based on the qr code result
     this.onSubmitCheckin(this.qrCodeReusltJson.id);
 
     //Reset the scanner after 5 seconds
-    setTimeout(() => this.resetScanner(), 5000);
+    setTimeout(() => this.resetScanner(), 4000);
   }
 
   resetScanner() {
@@ -90,9 +100,9 @@ export class CheckInComponent implements OnInit {
         let totalCheckInTime = 0;
 
         result.forEach((entry) => {
-          const checkInTime = new Date(entry.checkInTime).getTime();
-          const checkOutTime = entry.checkOutTime
-            ? new Date(entry.checkOutTime).getTime()
+          const checkInTime = new Date(entry.checkIn).getTime();
+          const checkOutTime = entry.checkOut
+            ? new Date(entry.checkOut).getTime()
             : Date.now();
 
           const duration = checkOutTime - checkInTime;
@@ -118,7 +128,10 @@ export class CheckInComponent implements OnInit {
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
 
-    return `${hours}:${minutes}`;
+    const minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const secondsString = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+    return `${hours}:${minutesString}:${secondsString}`;
   }
 
   /**
@@ -127,58 +140,77 @@ export class CheckInComponent implements OnInit {
    */
   private onSubmitCheckin(userId: number) {
     userId = parseInt(userId.toString());
-    const checkSubscription = this.checkInService
-      .isCheckedIn(userId)
-      .subscribe((result) => {
-        if (result === true) {
-          const checkOutSubscription = this.checkInService
-            .checkIn(userId)
-            .subscribe((res: CheckInHistory) => {
-              this.isLoading = false;
-
-              this.showSuccessMessage(`
-            <h3>Goodbye ${this.qrCodeReusltJson.firstName}</h3>
-            <h3>Checked out successfully at <strong>${this.getLocalTime(
-              new Date(res.checkOutTime)
-            )}.</strong></h3>
-            `);
-              this.cdr.detectChanges();
-            });
-
-          this.subscriptions.push(checkOutSubscription);
-        } else {
-          const checkInSubscription = this.checkInService
-            .checkIn(userId)
-            .subscribe((res: CheckInHistory) => {
-              this.isLoading = false;
-
-              const dateOfBirth = new Date(this.qrCodeReusltJson.dateOfBirth);
-              const today = new Date();
-
-              if (
-                dateOfBirth.getDate() === today.getDate() &&
-                dateOfBirth.getMonth() === today.getMonth()
-              ) {
-                this.showBirthdayMessage(
-                  this.getLocalTime(new Date(res.checkInTime))
-                );
-              } else {
-                this.showSuccessMessage(`
+    this.checkInService
+      .checkIn(userId)
+      .subscribe((response: CheckInHistory) => {
+        if (response.checkOut === null) {
+          this.showSuccessMessage(`
           <h3>Welcome ${this.qrCodeReusltJson.firstName}</h3>
-          <h3>Checked in successfully at <strong>${this.getLocalTime(
-            new Date(res.checkInTime)
+          <h3>Checked in successfully at <strong>
+            ${this.getLocalTime(new Date(response.checkIn))}</strong></h3>
+          `);
+        } else {
+          this.showSuccessMessage(`
+          <h3>Goodbye ${this.qrCodeReusltJson.firstName}</h3>
+          <h3>Checked out successfully at <strong>${this.getLocalTime(
+            new Date(response.checkOut)
           )}</strong></h3>
           `);
-              }
-
-              this.cdr.detectChanges();
-            });
-
-          this.subscriptions.push(checkInSubscription);
         }
       });
 
-    this.subscriptions.push(checkSubscription);
+    // const checkSubscription = this.checkInService
+    //   .isCheckedIn(userId)
+    //   .subscribe((result) => {
+    //     if (result === true) {
+    //       const checkOutSubscription = this.checkInService
+    //         .checkIn(userId)
+    //         .subscribe((res: CheckInHistory) => {
+    //           this.isLoading = false;
+
+    //           this.showSuccessMessage(`
+    //         <h3>Goodbye ${this.qrCodeReusltJson.firstName}</h3>
+    //         <h3>Checked out successfully at <strong>${this.getLocalTime(
+    //           new Date(res.checkOutTime)
+    //         )}.</strong></h3>
+    //         `);
+    //           this.cdr.detectChanges();
+    //         });
+
+    //       this.subscriptions.push(checkOutSubscription);
+    //     } else {
+    //       const checkInSubscription = this.checkInService
+    //         .checkIn(userId)
+    //         .subscribe((res: CheckInHistory) => {
+    //           this.isLoading = false;
+
+    //           const dateOfBirth = new Date(this.qrCodeReusltJson.dateOfBirth);
+    //           const today = new Date();
+
+    //           if (
+    //             dateOfBirth.getDate() === today.getDate() &&
+    //             dateOfBirth.getMonth() === today.getMonth()
+    //           ) {
+    //             this.showBirthdayMessage(
+    //               this.getLocalTime(new Date(res.checkInTime))
+    //             );
+    //           } else {
+    //             this.showSuccessMessage(`
+    //       <h3>Welcome ${this.qrCodeReusltJson.firstName}</h3>
+    //       <h3>Checked in successfully at <strong>${this.getLocalTime(
+    //         new Date(res.checkInTime)
+    //       )}</strong></h3>
+    //       `);
+    //           }
+
+    //           this.cdr.detectChanges();
+    //         });
+
+    //       this.subscriptions.push(checkInSubscription);
+    //     }
+    //   });
+
+    // this.subscriptions.push(checkSubscription);
   }
 
   private showSuccessMessage(message: string) {

@@ -75,27 +75,30 @@ export class CheckInDetailsComponent implements OnInit {
   }
 
   calculateTotalCheckedInTime(checkInHistory: CheckInHistory[], startDate: Date, endDate: Date): number {
-    if(!checkInHistory) return 0;
+    if (!checkInHistory) return 0;
     let totalTime = 0;
 
-    if(typeof startDate === 'string') startDate = new Date(startDate);
-    if(typeof endDate === 'string') endDate = new Date(endDate);
-
+    if (typeof startDate === 'string') startDate = new Date(startDate);
+    if (typeof endDate === 'string') endDate = new Date(endDate);
 
     startDate = startDate || new Date(-8640000000000000); // Minimum date value
     endDate = endDate || new Date(8640000000000000); // Maximum date value
-    
+
     for (const entry of checkInHistory) {
-      const checkInTime = new Date(entry.checkInTime);
-      const checkOutTime = entry.checkOutTime ? new Date(entry.checkOutTime) : new Date();
-  
+      const checkInTime = new Date(entry.checkIn + 'Z');
+      const checkOutTime = entry.checkOut ? new Date(entry.checkOut + 'Z') : new Date();
+
       if (checkInTime >= startDate && checkOutTime <= endDate) {
         const duration = checkOutTime.getTime() - checkInTime.getTime();
         totalTime += duration;
       }
     }
-  
+
     return totalTime;
+  }
+
+  convertToLocalTime(utcDate: Date): Date {
+    return new Date(utcDate.getTime() - utcDate.getTimezoneOffset() * 60000);
   }
 
   calculateTotalCheckedInTimeToday(checkInHistory: CheckInHistory[]): number {
@@ -103,7 +106,7 @@ export class CheckInDetailsComponent implements OnInit {
     today.setHours(0, 0, 0, 0);
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-  
+
     return this.calculateTotalCheckedInTime(checkInHistory, today, tomorrow);
   }
 
