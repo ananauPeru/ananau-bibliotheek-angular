@@ -27,7 +27,7 @@ export class EditGeneralInformationComponent implements OnInit {
   vaccinationForm: FormGroup;
   holidayForm: FormGroup;
 
-  @ViewChild('confirmationModal') confirmationModal: TemplateRef<any>;
+  @ViewChild("confirmationModal") confirmationModal: TemplateRef<any>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -84,7 +84,6 @@ export class EditGeneralInformationComponent implements OnInit {
     this.visaInformation$ = this.generalInformationService.getVisaInformation();
   }
 
-
   /**
    * Gets an error message for a specific error.
    * @param errors The error that requests an error message.
@@ -105,26 +104,25 @@ export class EditGeneralInformationComponent implements OnInit {
     const vaccination: VaccinationModel = this.vaccinationForm.value;
     vaccination.required = vaccination.required ?? false; //when unchecking the checkbox, it sets it to null instead of false. Therefore we override it here
 
-    this.generalInformationService.createVaccination(vaccination)
-      .subscribe(
-        (addedVaccination) => {
-          this.generalInformationService.refreshVaccinationInformation();
-          this.vaccinationForm.reset();
+    this.generalInformationService.createVaccination(vaccination).subscribe(
+      (addedVaccination) => {
+        this.generalInformationService.refreshVaccinationInformation();
+        this.vaccinationForm.reset();
 
-          this.toastr.showSuccess(
-            this.t_translate("VACCINATION.CREATE_SUCCESS"),
-            this.t_translate("SUCCESS")
-          );
-        },
-        (error) => {
-          console.error("Error adding vaccination:", error);
+        this.toastr.showSuccess(
+          this.t_translate("VACCINATION.CREATE_SUCCESS"),
+          this.t_translate("SUCCESS")
+        );
+      },
+      (error) => {
+        console.error("Error adding vaccination:", error);
 
-          this.toastr.showError(
-            this.t_translate("VACCINATION.CREATE_ERROR"),
-            this.t_translate("ERROR")
-          );
-        }
-      );
+        this.toastr.showError(
+          this.t_translate("VACCINATION.CREATE_ERROR"),
+          this.t_translate("ERROR")
+        );
+      }
+    );
   }
 
   /**
@@ -132,24 +130,22 @@ export class EditGeneralInformationComponent implements OnInit {
    * @param vaccination The vaccination to be removed.
    */
   removeVaccination(vaccination: VaccinationModel) {
-    this.generalInformationService
-      .removeVaccination(vaccination.id)
-      .subscribe(
-        () => {
-          this.generalInformationService.refreshVaccinationInformation();
-          this.toastr.showSuccess(
-            this.t_translate("VACCINATION.DELETE_SUCCESS"),
-            this.t_translate("SUCCESS")
-          );
-        },
-        (error) => {
-          console.error("Error removing vaccination:", error);
-          this.toastr.showError(
-            this.t_translate("VACCINATION.DELETE_ERROR"),
-            this.t_translate("ERROR")
-          );
-        }
-      );
+    this.generalInformationService.removeVaccination(vaccination.id).subscribe(
+      () => {
+        this.generalInformationService.refreshVaccinationInformation();
+        this.toastr.showSuccess(
+          this.t_translate("VACCINATION.DELETE_SUCCESS"),
+          this.t_translate("SUCCESS")
+        );
+      },
+      (error) => {
+        console.error("Error removing vaccination:", error);
+        this.toastr.showError(
+          this.t_translate("VACCINATION.DELETE_ERROR"),
+          this.t_translate("ERROR")
+        );
+      }
+    );
   }
 
   /**
@@ -171,7 +167,6 @@ export class EditGeneralInformationComponent implements OnInit {
         );
       },
       (error) => {
-        console.error("Error adding holiday:", error);
         this.toastr.showError(
           this.t_translate("HOLIDAY.CREATE_ERROR"),
           this.t_translate("ERROR")
@@ -185,47 +180,43 @@ export class EditGeneralInformationComponent implements OnInit {
    * @param holiday The holiday to be removed.
    */
   removeHoliday(holiday: HolidayModel) {
-    this.generalInformationService
-      .removeHoliday(holiday.id)
-      .subscribe(
-        () => {
-          this.generalInformationService.refreshHolidayInformation();
+    this.generalInformationService.removeHoliday(holiday.id).subscribe(
+      () => {
+        this.generalInformationService.refreshHolidayInformation();
 
-          this.toastr.showSuccess(
-            this.t_translate("HOLIDAY.DELETE_SUCCESS"),
-            this.t_translate("SUCCESS")
-          );
-        },
-        (error) => {
-          console.error("Error removing holiday:", error);
-          this.toastr.showError(
-            this.t_translate("HOLIDAY.DELETE_ERROR"),
-            this.t_translate("ERROR")
-          );
-        }
-      );
+        this.toastr.showSuccess(
+          this.t_translate("HOLIDAY.DELETE_SUCCESS"),
+          this.t_translate("SUCCESS")
+        );
+      },
+      (error) => {
+        console.error("Error removing holiday:", error);
+        this.toastr.showError(
+          this.t_translate("HOLIDAY.DELETE_ERROR"),
+          this.t_translate("ERROR")
+        );
+      }
+    );
   }
 
   removeHolidays() {
-    this.generalInformationService
-      .removeHolidays()
-      .subscribe(
-        () => {
-          this.generalInformationService.refreshHolidayInformation();
+    this.generalInformationService.removeHolidays().subscribe(
+      () => {
+        this.generalInformationService.refreshHolidayInformation();
 
-          this.toastr.showSuccess(
-            this.t_translate("HOLIDAY.DELETE_ALL_SUCCESS"),
-            this.t_translate("SUCCESS")
-          );
-        },
-        (error) => {
-          console.error("Error removing holidays:", error);
-          this.toastr.showError(
-            this.t_translate("HOLIDAY.DELETE_ERROR"),
-            this.t_translate("ERROR")
-          );
-        }
-      );
+        this.toastr.showSuccess(
+          this.t_translate("HOLIDAY.DELETE_ALL_SUCCESS"),
+          this.t_translate("SUCCESS")
+        );
+      },
+      (error) => {
+        console.error("Error removing holidays:", error);
+        this.toastr.showError(
+          this.t_translate("HOLIDAY.DELETE_ERROR"),
+          this.t_translate("ERROR")
+        );
+      }
+    );
   }
 
   openConfirmationModal() {
@@ -257,8 +248,6 @@ export class EditGeneralInformationComponent implements OnInit {
       }
     );
   }
-
-  
 
   /**
    * Translates the identifier.
