@@ -84,7 +84,7 @@ export class GeneralInformationHTTPService {
           return response.vaccinations.map((vaccination: any) => ({
             id: vaccination.id,
             name: vaccination.name,
-            required: vaccination.required
+            required: vaccination.required,
           }));
         })
       );
@@ -128,7 +128,6 @@ export class GeneralInformationHTTPService {
 
   // Holiday requests
 
-
   getAllHolidayInformation$(): Observable<HolidayModel[]> {
     return this.http
       .get(`${API_GENERAL_INFORMATION_URL}/holidays`, {
@@ -147,33 +146,21 @@ export class GeneralInformationHTTPService {
           return response.holidays.map((holiday: any) => ({
             id: holiday.id,
             name: holiday.name,
-            date: holiday.date
+            date: holiday.date,
           }));
         })
       );
   }
 
-  // getHolidayInformationById$(holidayId: number): Observable<HolidayModel> {
-  //   return this.http
-  //     .get(`${API_GENERAL_INFORMATION_URL}/holidays/${holidayId}`, {
-  //       responseType: "json",
-  //     })
-  //     .pipe(
-  //       catchError((error) => {
-  //         if (error.status == 401) {
-  //           console.error("Login please...");
-  //         }
-  //         return throwError(error);
-  //       }),
-  //       map((response: any): HolidayModel => {
-  //         return response.holiday;
-  //       })
-  //     );
-  // }
-
-  postHolidayInformation$(name: string, date: string): Observable<HolidayModel> {
+  postHolidayInformation$(
+    name: string,
+    date: string
+  ): Observable<HolidayModel> {
     return this.http
-      .post<HolidayModel>(`${API_GENERAL_INFORMATION_URL}/holidays`, {name, date})
+      .post<HolidayModel>(`${API_GENERAL_INFORMATION_URL}/holidays`, {
+        name,
+        date,
+      })
       .pipe(
         catchError((error) => {
           if (error.status === 401) {
@@ -184,39 +171,15 @@ export class GeneralInformationHTTPService {
           return throwError(error);
         }),
         map((response: any): HolidayModel => {
-          return response.holidays.map((holiday: any) => ({
-            id: holiday.id,
-            name: holiday.name,
-            date: holiday.date
-        }));
-      }));
+          return response.holiday;
+        })
+      );
   }
-
-  // putHolidayInformation$(
-  //   holidayId: number,
-  //   updatedHoliday: HolidayModel
-  // ): Observable<HolidayModel> {
-  //   return this.http
-  //     .put<HolidayModel>(
-  //       `${API_GENERAL_INFORMATION_URL}/holidays/${holidayId}`,
-  //       updatedHoliday
-  //     )
-  //     .pipe(
-  //       catchError((error) => {
-  //         if (error.status === 401) {
-  //           console.error("Login please...");
-  //         } else {
-  //           console.error(error);
-  //         }
-  //         return throwError(error);
-  //       })
-  //     );
-  // }
 
   deleteHolidayInformation$(holidayId: number): Observable<any> {
     return this.http
       .delete(`${API_GENERAL_INFORMATION_URL}/holidays/${holidayId}`, {
-        responseType: 'json'
+        responseType: "json",
       })
       .pipe(
         catchError((error) => {
@@ -230,22 +193,20 @@ export class GeneralInformationHTTPService {
       );
   }
 
-  //TODO: Delete all holidays
-
-  // deleteAllHolidayInformation$(): Observable<any> {
-  //   return this.http
-  //     .delete(`${API_GENERAL_INFORMATION_URL}/holidays`, {
-  //       responseType: 'text'
-  //     })
-  //     .pipe(
-  //       catchError((error) => {
-  //         if (error.status === 401) {
-  //           console.error("Login please...");
-  //         } else {
-  //           console.error(error);
-  //         }
-  //         return throwError(error);
-  //       })
-  //     );
-  // }
+  deleteHolidaysInformation$(): Observable<any> {
+    return this.http
+      .delete(`${API_GENERAL_INFORMATION_URL}/holidays`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status === 401) {
+            console.error("Login please...");
+          } else {
+            console.error(error);
+          }
+          return throwError(error);
+        })
+      );
+  }
 }
