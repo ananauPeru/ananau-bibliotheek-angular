@@ -71,7 +71,6 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(user?: UserModel): Observable<UserModel> {
     const auth = this.getAuthFromLocalStorage();
-    console.log(auth);
     if (!auth || !auth.token) {
       return of(undefined);
     }
@@ -145,6 +144,14 @@ export class AuthService implements OnDestroy {
     } catch (error) {
       return undefined;
     }
+  }
+
+  public getRolesFromLocalStorage(): RoleModel[] {
+    let authData = this.getAuthFromLocalStorage();
+    
+    console.log(authData);
+
+    return [];
   }
 
   ngOnDestroy() {
