@@ -22,19 +22,9 @@ export class GeneralInformationHTTPService {
 
   // Visa requests
 
-  getVisaInformation$(): Observable<{
-    visaId: number;
-    description: string;
-    createdAt: string;
-    updatedAt: string;
-  }> {
+  getVisaInformation$(): Observable<string> {
     return this.http
-      .get<{
-        visaId: number;
-        description: string;
-        createdAt: string;
-        updatedAt: string;
-      }>(`${API_GENERAL_INFORMATION_URL}/visa`)
+      .get(`${API_GENERAL_INFORMATION_URL}/visa`)
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -43,8 +33,11 @@ export class GeneralInformationHTTPService {
             console.error(error);
           }
           return throwError(error);
-        })
-      );
+        }),
+        map((response: any): string => {
+          return response.description;
+        }
+      ));
   }
 
   putVisaInformation$(visaDescription: {
