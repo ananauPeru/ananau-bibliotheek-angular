@@ -3,8 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, of, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { catchError, delay, map } from "rxjs/operators";
+import { CheckInUser } from "../../../_models/check-in-user.model";
 
-const API_GENERAL_INFORMATION_URL = `${environment.apiUrl}/checkin`;
+const API_CHECKIN_URL = `${environment.apiUrl}/checkin`;
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +14,7 @@ export class CheckInHttpService {
   constructor(private http: HttpClient) {}
 
   getIsCheckedIn$(userId: number): Observable<boolean> {
-    const url = `${API_GENERAL_INFORMATION_URL}/${userId}`;
+    const url = `${API_CHECKIN_URL}/${userId}`;
 
     console.log(url);
 
@@ -33,7 +34,7 @@ export class CheckInHttpService {
   }
 
   postCheckIn$(userId: number): Observable<CheckInHistory> {
-    const url = `${API_GENERAL_INFORMATION_URL}/${userId}`;
+    const url = `${API_CHECKIN_URL}/${userId}`;
 
     return this.http.post<CheckInHistory>(url, null).pipe(
       catchError((error) => {
@@ -55,7 +56,7 @@ export class CheckInHttpService {
     startDate: Date | null,
     endDate: Date | null
   ): Observable<CheckInHistory[]> {
-    const url = `${API_GENERAL_INFORMATION_URL}/history/${userId}`;
+    const url = `${API_CHECKIN_URL}/history/${userId}`;
     const params = {};
 
     if(startDate) {
@@ -88,7 +89,7 @@ export class CheckInHttpService {
   }
 
   getAllCheckInHistory$(): Observable<CheckInHistory[]> {
-    const url = `${API_GENERAL_INFORMATION_URL}/history`;
+    const url = `${API_CHECKIN_URL}/history`;
     return this.http.get<any>(url).pipe(
       catchError((error) => {
         if (error.status === 401) {
@@ -111,6 +112,36 @@ export class CheckInHttpService {
           });
         });
         return checkInHistories;
+      })
+    );
+  }
+
+  getCheckInList$(): Observable<CheckInUser[]> {
+    const url = `${API_CHECKIN_URL}/list`;
+    return this.http.get(url).pipe(
+      // (response: any) => {
+      //   if(response.success) {
+      //     return throwError(response.error);
+      //   }
+      // },
+      catchError((error) => {
+        if (error.status === 401) {
+          console.error("Login please...");
+        } else {
+          console.error(error);
+        }
+        return throwError(error);
+      }),
+      
+      map((response: any): CheckInUser[] => {
+        return response.users.map((user: any): CheckInUser => {
+          return {
+            userId: user.userId,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            isCheckedIn: user.isCheckedIn,
+          };
+        });
       })
     );
   }

@@ -122,14 +122,14 @@ export class CheckInDetailsComponent implements OnInit {
     const currentDate = new Date();
     const day = currentDate.getDay();
     const diff = currentDate.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(currentDate.setDate(diff));
+    return new Date(currentDate.getFullYear(), currentDate.getMonth(), diff);
   }
-
+  
   getLastDayOfWeek(): Date {
     const currentDate = new Date();
     const day = currentDate.getDay();
     const diff = currentDate.getDate() - day + (day === 0 ? 0 : 7);
-    return new Date(currentDate.setDate(diff));
+    return new Date(currentDate.getFullYear(), currentDate.getMonth(), diff);
   }
 
   getFirstDayOfSelectedWeek(): Date {

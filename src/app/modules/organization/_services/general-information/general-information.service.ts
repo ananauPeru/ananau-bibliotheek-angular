@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from "rxjs/operators";
 import { VaccinationModel } from '../../_models/vaccination.model';
@@ -8,7 +8,7 @@ import { GeneralInformationHTTPService } from './general-information-http/genera
 @Injectable({
   providedIn: 'root'
 })
-export class GeneralInformationService {
+export class GeneralInformationService implements OnDestroy {
 
   private visaInformation: BehaviorSubject<string> = new BehaviorSubject<string>("");
   private vaccinationInformation: BehaviorSubject<VaccinationModel[]> = new BehaviorSubject<VaccinationModel[]>([]);
@@ -18,6 +18,12 @@ export class GeneralInformationService {
     private generalInformationHttpService: GeneralInformationHTTPService
   ) {
     this.loadInitialData();
+  }
+
+  ngOnDestroy(): void {
+    this.visaInformation.complete();
+    this.vaccinationInformation.complete();
+    this.holidayInformation.complete();
   }
 
   /**
@@ -35,7 +41,8 @@ export class GeneralInformationService {
   public refreshVisaInformation() {
     this.generalInformationHttpService.getVisaInformation$().subscribe(
       (res) => {
-        this.visaInformation.next(res.description);
+        console.log(res);
+        this.visaInformation.next(res);
       },
       (err) => console.error("Error refreshing visa information", err)
     );
@@ -70,7 +77,7 @@ export class GeneralInformationService {
    * @returns Visa information
    */
   public getVisaInformation(): Observable<string> {
-    return this.visaInformation.asObservable();
+    return this.generalInformationHttpService.getVisaInformation$();
   }
 
   /**
@@ -80,7 +87,7 @@ export class GeneralInformationService {
   public updateVisaInformation(visaData: string): Observable<any> {
 
     //TODO: Change post to put
-    return this.generalInformationHttpService.postVisaInformation$({description: visaData});
+    return this.generalInformationHttpService.putVisaInformation$({description: visaData});
   }
 
   /**
