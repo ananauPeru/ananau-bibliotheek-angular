@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CheckInService } from "../_services/check-in/check-in.service";
 import { Observable } from "rxjs";
 import { UserService } from "../_services/user/user.service";
@@ -8,7 +8,7 @@ import { UserService } from "../_services/user/user.service";
   templateUrl: "./check-in-list.component.html",
   styleUrls: ["./check-in-list.component.scss"],
 })
-export class CheckInListComponent implements OnInit {
+export class CheckInListComponent implements OnInit, OnDestroy {
 
   constructor(
     public checkInService: CheckInService,
@@ -16,5 +16,9 @@ export class CheckInListComponent implements OnInit {
 
   ngOnInit() {
     this.checkInService.refreshData();
+  }
+
+  ngOnDestroy(): void {
+    this.checkInService.filter("");
   }
 }
