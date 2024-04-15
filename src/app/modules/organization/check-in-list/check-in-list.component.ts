@@ -9,16 +9,12 @@ import { UserService } from "../_services/user/user.service";
   styleUrls: ["./check-in-list.component.scss"],
 })
 export class CheckInListComponent implements OnInit {
+
   constructor(
     public checkInService: CheckInService,
-    public userService: UserService
-  ) {
-    this.userService.loadInitialData();
-  }
+  ) {}
 
-  ngOnInit() {}
-
-  isChckedIn(userId: number): Observable<boolean> {
-    return this.checkInService.isCheckedIn(userId);
+  ngOnInit() {
+    this.checkInService.refreshData();
   }
 }
