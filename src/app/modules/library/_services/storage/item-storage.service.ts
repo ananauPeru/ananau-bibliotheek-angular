@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BlobServiceClient, ContainerClient } from '@azure/storage-blob'
-import { take } from 'rxjs/operators'
+import { catchError, first, take } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 import { ScansFile } from '../../_models/scans-file'
-import { Subject } from 'rxjs'
+import { Subject, throwError } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -72,12 +72,34 @@ export class ItemStorageService {
     ).getContainerClient(this._containerName)
   }
 
-  private getContainerToken$(): Promise<string> {
+  /* private getContainerToken$(): Promise<string> {
     return this.http
-      .get(`${environment.apiUrl}/files/public-images/token`, {
+      .get(`${environment.apiUrl}/blob/public-images/token`, {
         responseType: 'text',
       })
       .pipe(take(1))
       .toPromise()
+  } */
+
+
+  private getContainerToken$(): Promise<any> {
+    return this.http
+      .get(`${environment.apiUrl}/blob/public-images/token`, {
+        responseType: 'text',
+      })
+      .pipe(
+        first(), // Take the first emission and complete
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      )
+      .toPromise()
+      .then((url: string) => ({
+        success: true,
+        error: "",
+        url: url
+      }));
   }
+
 }

@@ -6,6 +6,8 @@ import { environment } from "src/environments/environment";
 import { AuthService } from "../../auth";
 import { ScansFile } from "../models/scans-file";
 import { Subject } from "rxjs";
+import { catchError, first } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: "root",
@@ -82,14 +84,42 @@ export class UserStorageService {
     ).getContainerClient(this._containerName);
   }
 
-  private getContainerToken$(): Promise<string> {
+  /* private getContainerToken$(): Promise<string> {
     return this.http
       .get(`${environment.apiUrl}/blob/users/current/token`, {
         responseType: "text",
       })
       .pipe(take(1))
       .toPromise();
+  } */
+
+  
+
+  private getContainerToken$(): Promise<any> {
+    return this.http
+      .get(`${environment.apiUrl}/blob/users/current/token`, {
+        responseType: "text",
+      })
+      .pipe(
+        first(), // Take the first emission and complete
+        catchError((error) => {
+          console.error(error);
+          return throwError(error);
+        })
+      )
+      .toPromise()
+      .then((url: string) => ({
+        success: true,
+        error: "",
+        url: url
+      }))
+      .catch((error) => ({
+        success: false,
+        error: error.message,
+        url: ""
+      }));
   }
+
 
   private getContainerTokenByUserId$(id: string): Promise<string> {
     return this.http
