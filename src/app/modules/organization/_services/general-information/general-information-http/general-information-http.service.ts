@@ -47,11 +47,11 @@ export class GeneralInformationHTTPService {
       );
   }
 
-  postVisaInformation$(visaDescription: {
+  putVisaInformation$(visaDescription: {
     description: string;
   }): Observable<any> {
     return this.http
-      .post(`${API_GENERAL_INFORMATION_URL}/visa`, visaDescription)
+      .put(`${API_GENERAL_INFORMATION_URL}/visa`, visaDescription)
       .pipe(
         catchError((error) => {
           if (error.status === 401) {

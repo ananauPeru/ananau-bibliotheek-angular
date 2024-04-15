@@ -80,7 +80,7 @@ export class GeneralInformationService {
   public updateVisaInformation(visaData: string): Observable<any> {
 
     //TODO: Change post to put
-    return this.generalInformationHttpService.postVisaInformation$({description: visaData});
+    return this.generalInformationHttpService.putVisaInformation$({description: visaData});
   }
 
   /**
