@@ -112,10 +112,6 @@ export class ContainerComponent implements OnInit {
             return EMPTY;
           })
         );
-        this.initialData$.subscribe((res) => {
-          console.log("HYPE")
-          console.log(res);
-        })
     } else {
       this.initialData$ = this.registrationService
         .getVolunteerRegistration$()

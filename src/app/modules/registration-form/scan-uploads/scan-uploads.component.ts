@@ -90,7 +90,7 @@ export class ScanUploadsComponent implements OnInit {
       },
       (error) => console.error(error),
       () =>
-        {console.log("FETCHING IMAGES")
+        {
       // Ask the storage service to begin fetching blob images from Azure
       this.userStorageService.fetchImages$()}
     );

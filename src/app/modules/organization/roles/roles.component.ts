@@ -7,6 +7,7 @@ import { RoleService } from "../_services/role/role.service";
 import { UserService } from "../_services/user/user.service";
 import { UserRoleModel } from "../_models/user-role.model";
 import { RoleModel } from "../_models/role.model";
+import { Roles } from "src/app/_utils/auth_util";
 
 @Component({
   selector: "app-roles",
@@ -91,6 +92,39 @@ export class RolesComponent implements OnInit {
   }
 
   hasRole(user: UserRoleModel, role: RoleModel): boolean {
-    return user.roles.some(userRole => userRole.id === role.id);
+    return user.roles.some((userRole) => userRole.id === role.id);
+  }
+
+  /**
+   * Checks if the role should be disabled based on the user's roles
+   * @param user The user for who we are checking if the role should be disabled
+   * @param role The role that we are checking if it should be disabled
+   * @returns true or false if the role should be disabled
+   */
+  shouldDisable(user: UserRoleModel, role: RoleModel): boolean {
+    const isStudent =
+      role.name.toLowerCase() === Roles.Student.toString().toLowerCase();
+    const isVolunteer =
+      role.name.toLowerCase() === Roles.Volunteer.toString().toLowerCase();
+    const hasVolunteerRole = this.hasRoleByString(
+      user,
+      Roles.Volunteer.toString().toLowerCase()
+    );
+    const hasStudentRole = this.hasRoleByString(
+      user,
+      Roles.Student.toString().toLowerCase()
+    );
+
+    const shouldDisable =
+      (isStudent && hasVolunteerRole) || (isVolunteer && hasStudentRole);
+
+    return shouldDisable;
+  }
+
+  private hasRoleByString(user: UserRoleModel, role: string): boolean {
+    return user.roles.some(
+      (userRole) =>
+        userRole.name.toLocaleLowerCase() === role.toLocaleLowerCase()
+    );
   }
 }

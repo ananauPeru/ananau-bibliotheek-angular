@@ -41,7 +41,6 @@ export class GeneralInformationService implements OnDestroy {
   public refreshVisaInformation() {
     this.generalInformationHttpService.getVisaInformation$().subscribe(
       (res) => {
-        console.log(res);
         this.visaInformation.next(res);
       },
       (err) => console.error("Error refreshing visa information", err)
