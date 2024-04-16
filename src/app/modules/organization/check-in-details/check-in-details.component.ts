@@ -54,24 +54,12 @@ export class CheckInDetailsComponent implements OnInit {
           return of(null);
         }
         return this.checkInService.getCheckInUser(this.id);
-        // return this.registrationService.getVolunteerRegistrationById$(this.id).pipe(
-        //   catchError(error => {
-        //     console.error('Error fetching volunteer registration:', error);
-        //     return this.registrationService.getStudentRegistrationById$(this.id);
-        //   }),
-        //   catchError(error => {
-        //     console.error('Error fetching student registration:', error);
-        //     return of(null);
-        //   })
-        // );
       })
     ).subscribe(checkInUser => {
       if (checkInUser) {
-        console.log('Matching CheckInUser:', checkInUser);
         this.checkInUser = checkInUser;
       } else {
-        console.log('No matching CheckInUser found');
-        //SHOW ERROR PAGE
+        console.error('No matching CheckInUser found');
       }
       this.isLoading = false;
       this.cdr.detectChanges();
