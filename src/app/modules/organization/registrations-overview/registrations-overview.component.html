@@ -96,6 +96,7 @@
               placement="top" 
               ngbTooltip="{{'REGISTRATIONS.OVERVIEW.DETAILS' | translate}}" 
               routerLink={{getDetailUrl(registration)}}
+              [disabled]="registration.startDate === null && registration.endDate === null"
               >
                 <i class="fas fa-sign-in-alt pr-0"></i>
               </button>

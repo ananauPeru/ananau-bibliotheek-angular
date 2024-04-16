@@ -82,7 +82,10 @@ export class RegistrationDetailsComponent implements OnInit {
       this.registrationService
         .getStudentRegistrationById$(this._userId)
         .subscribe(
-          (registration) => this._registration.next(registration),
+          (registration) => {
+            console.log(registration);
+            return this._registration.next(registration)
+          },
           (err) => {
             console.error(err);
             this.errorMessage = err;
