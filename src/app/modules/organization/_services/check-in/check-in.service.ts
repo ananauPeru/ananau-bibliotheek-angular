@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { CheckInHttpService } from "./check-in-http/check-in-http.service";
-import { filter, map } from "rxjs/operators";
+import { filter, find, first, map } from "rxjs/operators";
 import { CheckInUser } from "../../_models/check-in-user.model";
 
 @Injectable({
@@ -71,6 +71,12 @@ export class CheckInService {
 
   checkIn(userId: number): Observable<CheckInHistory> {
     return this.checkInHttpService.postCheckIn$(userId);
+  }
+
+  getCheckInUser(userId: number): Observable<CheckInUser> {
+    return this._checkInList.pipe(
+      map(checkInList => checkInList.find(checkInUser => checkInUser.userId === userId))
+    );
   }
 
   getCheckInHistory(

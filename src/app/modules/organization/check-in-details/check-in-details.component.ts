@@ -2,9 +2,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CheckInService } from '../_services/check-in/check-in.service';
 import { Observable, of } from 'rxjs';
-import { RegistrationService } from '../_services/registration/registration.service';
-import { RegistrationModel } from '../_models/registration.model';
 import { switchMap, catchError } from 'rxjs/operators';
+import { CheckInUser } from '../_models/check-in-user.model';
 
 @Component({
   selector: 'app-check-in-details',
@@ -15,7 +14,7 @@ export class CheckInDetailsComponent implements OnInit {
   isLoading: boolean = true;
 
   id: number;
-  registration: RegistrationModel;
+  checkInUser: CheckInUser;
   startDate: Date;
   endDate: Date;
   checkInHistory$: Observable<CheckInHistory[]>;
@@ -26,11 +25,9 @@ export class CheckInDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private checkInService: CheckInService,
-    private registrationService: RegistrationService,
     private cdr: ChangeDetectorRef
   ) {
     checkInService.loadInitialData();
-    registrationService.loadInitialData();
   }
 
   ngOnInit() {
@@ -56,19 +53,26 @@ export class CheckInDetailsComponent implements OnInit {
           console.error('Invalid ID');
           return of(null);
         }
-        return this.registrationService.getVolunteerRegistrationById$(this.id).pipe(
-          catchError(error => {
-            console.error('Error fetching volunteer registration:', error);
-            return this.registrationService.getStudentRegistrationById$(this.id);
-          }),
-          catchError(error => {
-            console.error('Error fetching student registration:', error);
-            return of(null);
-          })
-        );
+        return this.checkInService.getCheckInUser(this.id);
+        // return this.registrationService.getVolunteerRegistrationById$(this.id).pipe(
+        //   catchError(error => {
+        //     console.error('Error fetching volunteer registration:', error);
+        //     return this.registrationService.getStudentRegistrationById$(this.id);
+        //   }),
+        //   catchError(error => {
+        //     console.error('Error fetching student registration:', error);
+        //     return of(null);
+        //   })
+        // );
       })
-    ).subscribe(registration => {
-      this.registration = registration;
+    ).subscribe(checkInUser => {
+      if (checkInUser) {
+        console.log('Matching CheckInUser:', checkInUser);
+        this.checkInUser = checkInUser;
+      } else {
+        console.log('No matching CheckInUser found');
+        //SHOW ERROR PAGE
+      }
       this.isLoading = false;
       this.cdr.detectChanges();
     });
