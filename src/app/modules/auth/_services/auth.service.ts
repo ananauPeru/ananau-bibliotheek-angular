@@ -148,9 +148,6 @@ export class AuthService implements OnDestroy {
 
   public getRolesFromLocalStorage(): RoleModel[] {
     let authData = this.getAuthFromLocalStorage();
-    
-    console.log(authData);
-
     return [];
   }
 

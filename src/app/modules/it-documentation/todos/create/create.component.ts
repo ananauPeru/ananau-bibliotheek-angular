@@ -150,7 +150,6 @@ export class CreateComponent implements OnInit {
   assign() {
     if (this.assignedUserId == undefined && !this.todo) {
       this.assignedUserId = this.authUtil.getAuthFromLocalStorage().user.id
-      console.log(this.assignedUserId)
     } else if (this.todo.assignedUserId) {
       this.assignedUserId = undefined
     } else {

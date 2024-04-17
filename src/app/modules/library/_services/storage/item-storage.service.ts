@@ -46,10 +46,6 @@ export class ItemStorageService {
     await blob.uploadData(file, {
       blobHTTPHeaders: { blobContentType: file.type },
     })
-    console.log(
-      `https://${this._accountName}.blob.core.windows.net/public-images/` +
-        blob.name,
-    )
     return (
       `https://${this._accountName}.blob.core.windows.net/public-images/` +
       blob.name

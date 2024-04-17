@@ -16,8 +16,6 @@ export class CheckInHttpService {
   getIsCheckedIn$(userId: number): Observable<boolean> {
     const url = `${API_CHECKIN_URL}/${userId}`;
 
-    console.log(url);
-
     return this.http.get<boolean>(url).pipe(
       catchError((error) => {
         if (error.status === 401) {
