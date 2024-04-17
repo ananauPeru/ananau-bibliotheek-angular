@@ -171,6 +171,9 @@ export class ContainerComponent implements OnInit {
     const personalForm = this.formContainer.get("personalForm") as FormGroup;
 
     const general = personalForm.get("general") as FormGroup;
+    console.log(general);
+    console.log(general.get("firstName"));
+    console.log(dto.userDetails);
     dto.userDetails.firstName = general.get("firstName").value;
     dto.userDetails.lastName = general.get("lastName").value;
     dto.userDetails.middleName = general.get("middleName").value;
@@ -240,10 +243,13 @@ export class ContainerComponent implements OnInit {
       let studentDto = dto as RegistrationStudentDTO;
 
       studentDto.userDetails.schoolEmail = general.get("schoolEmail").value;
-      studentDto.internDetails.startOfPeriodOfAccomodation = new Date(dates.get("leaveStartDate").value);
-      studentDto.internDetails.endOfPeriodOfAccomodation = new Date(dates.get("leaveEndDate").value);
+
+
+      studentDto.internDetails.startOfPeriodOfAccommodation = new Date(dates.get("leaveStartDate").value);
+      studentDto.internDetails.endOfPeriodOfAccommodation = new Date(dates.get("leaveEndDate").value);
       studentDto.internDetails.educationDegree = info.get("degree").value;
       studentDto.internDetails.internshipContext = info.get("internshipContext").value;
+      
 
       this.registrationService
         .postStudentRegistration$(studentDto, submit)

@@ -1,5 +1,4 @@
 export class RegistrationDTO {
-
   userDetails: {
     firstName: string;
     middleName: string;
@@ -10,7 +9,17 @@ export class RegistrationDTO {
     birthplace: string;
     nationality: string;
     passportNumber: string;
-  }
+  } = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    dateOfBirth: null,
+    birthplace: '',
+    nationality: '',
+    passportNumber: ''
+  };
 
   address: {
     street: string;
@@ -19,7 +28,14 @@ export class RegistrationDTO {
     postalCode: string;
     city: string;
     country: string;
-  }
+  } = {
+    street: '',
+    houseNumber: '',
+    mailbox: '',
+    postalCode: '',
+    city: '',
+    country: ''
+  };
 
   emergencyPerson: {
     firstName: string;
@@ -28,12 +44,22 @@ export class RegistrationDTO {
     relation: string;
     email: string;
     phone: string;
-  }
+  } = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    relation: '',
+    email: '',
+    phone: ''
+  };
 
   medicalDetails: {
     allergies: string;
     medicalConditions: string;
-  }
+  } = {
+    allergies: '',
+    medicalConditions: ''
+  };
 
   internDetails: {
     startOfInternship: Date;
@@ -43,12 +69,12 @@ export class RegistrationDTO {
       spanishLessonWeeksOnline: number;
       spanishLessonOnlineStart: Date;
       spanishLessonOnlineEnd: Date;
-      datesOfSpanishOnlineIsConfirmed: boolean,
+      datesOfSpanishOnlineIsConfirmed: boolean;
       spanishLessonWeeks: number;
       spanishLessonStart: Date;
       spanishLessonEnd: Date;
       datesOfSpanishIsConfirmed: boolean;
-    },
+    };
     professionOrEducation: string;
     internshipTasks: string;
     internshipExpectations: string;
@@ -64,5 +90,34 @@ export class RegistrationDTO {
     registrationSubmitted: boolean;
     internshipConfirmed: boolean;
     internshipOnline: boolean;
-  }
+  } = {
+    startOfInternship: null,
+    endOfInternship: null,
+    spanishLessons: {
+      spanishLevel: '',
+      spanishLessonWeeksOnline: 0,
+      spanishLessonOnlineStart: null,
+      spanishLessonOnlineEnd: null,
+      datesOfSpanishOnlineIsConfirmed: false,
+      spanishLessonWeeks: 0,
+      spanishLessonStart: null,
+      spanishLessonEnd: null,
+      datesOfSpanishIsConfirmed: false
+    },
+    professionOrEducation: '',
+    internshipTasks: '',
+    internshipExpectations: '',
+    internshipProposals: '',
+    otherQuestions: '',
+    experience: '',
+    whyAnanau: '',
+    whereFirstHeard: '',
+    motivationLetter: '',
+    paymentDescription: '',
+    flightNumber: '',
+    flightDateArrival: null,
+    registrationSubmitted: false,
+    internshipConfirmed: false,
+    internshipOnline: false
+  };
 }
