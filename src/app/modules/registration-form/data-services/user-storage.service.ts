@@ -1,13 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
-import { take } from "rxjs/operators";
+import { catchError, map, take } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { AuthService } from "../../auth";
 import { ScansFile } from "../models/scans-file";
-import { Subject } from "rxjs";
-import { catchError, first } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Subject, throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -23,22 +21,8 @@ export class UserStorageService {
   }
 
   public async fetchImages$() {
+    console.log("fetching images")
     const containerClient = await this.getContainerClient$();
-    let blobItems = containerClient.listBlobsFlat();
-
-    for await (const blobItem of blobItems) {
-      const blobClient = containerClient.getBlobClient(blobItem.name);
-      blobClient.download().then((resp) => {
-        resp.blobBody.then((blob) => {
-          const file = this.createOldScansFile(blob, blobItem.name);
-          this._newFileSubject.next(file);
-        });
-      });
-    }
-  }
-
-  public async fetchImagesByUserId$(id: string) {
-    const containerClient = await this.getContainerClientByUserId$(id);
     let blobItems = containerClient.listBlobsFlat();
 
     for await (const blobItem of blobItems) {
@@ -77,51 +61,23 @@ export class UserStorageService {
     ).getContainerClient(this._containerName);
   }
 
-  private async getContainerClientByUserId$(id: string): Promise<ContainerClient> {
-    const token = await this.getContainerTokenByUserId$(id);
-    return new BlobServiceClient(
-      `https://${this._accountName}.blob.core.windows.net?${token}`
-    ).getContainerClient(this._containerName);
-  }
-
-  /* private getContainerToken$(): Promise<string> {
+  private getContainerToken$(): Promise<string> {
     return this.http
       .get(`${environment.apiUrl}/blob/users/current/token`, {
-        responseType: "text",
-      })
-      .pipe(take(1))
-      .toPromise();
-  } */
-
-  
-
-  private getContainerToken$(): Promise<any> {
-    return this.http
-      .get(`${environment.apiUrl}/blob/users/current/token`, {
-        responseType: "text",
+        responseType: "json",
       })
       .pipe(
-        first(), // Take the first emission and complete
-        catchError((error) => {
-          console.error(error);
-          return throwError(error);
+        map((response: any) => {
+          if (response.success) {
+            return response.url; // Return the URL if the request is successful
+          } else {
+            throw new Error(response.error); // Throw an error if the request was not successful
+          }
+        }),
+        catchError((error: any) => {
+          return throwError(error); // Propagate any errors that occurred during the request
         })
       )
-      .toPromise()
-      .then((url: string) => ({
-        success: true,
-        error: "",
-        url: url
-      }));
-  }
-
-
-  private getContainerTokenByUserId$(id: string): Promise<string> {
-    return this.http
-      .get(`${environment.apiUrl}/files/${id}/current/token`, {
-        responseType: "text",
-      })
-      .pipe(take(1))
       .toPromise();
   }
 

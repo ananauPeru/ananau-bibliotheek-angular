@@ -182,19 +182,6 @@ export class OrganizationalInformationComponent implements OnInit {
       }
     });
 
-    // Fetch the preview image from assets (will be shown when file is no image)
-    this.http.get("/assets/images/pdf.png", { responseType: "blob" }).subscribe(
-      (image) => {
-        this.previewImageForNonImageFiles = new File([image], "pdf.png", {
-          type: "image/png",
-        });
-      },
-      (error) => console.error(error),
-      () =>
-        // Ask the storage service to begin fetching blob images from Azure
-        this.userStorageService.fetchImages$()
-    );
-
     // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards
     this.upload.subscribe((submit) => {
       if (submit) this.sending.emit(true);
@@ -357,7 +344,7 @@ export class OrganizationalInformationComponent implements OnInit {
   }
 
   private updatePaymentApartment(markAsTouched: boolean) {
-      const paymentApartment = this.organizationalForm.get('paymentApartment');
+      const paymentApartment = this.organizationalForm.get('payments.paymentApartment');
       if (this.paymentApartmentFiles.length > 0) {
         paymentApartment.setValue(true);
       } else {
@@ -367,7 +354,7 @@ export class OrganizationalInformationComponent implements OnInit {
     }
 
   private updatePaymentGuarantee(markAsTouched: boolean) {
-    const paymentGuarantee = this.organizationalForm.get('paymentGuarantee');
+    const paymentGuarantee = this.organizationalForm.get('payments.paymentGuarantee');
     if (this.paymentGuaranteeFiles.length > 0) {
       paymentGuarantee.setValue(true);
     } else {
@@ -377,7 +364,7 @@ export class OrganizationalInformationComponent implements OnInit {
   }
 
   private updatePaymentSpanish(markAsTouched: boolean) {
-    const paymentSpanish = this.organizationalForm.get('paymentSpanish');
+    const paymentSpanish = this.organizationalForm.get('payments.paymentSpanish');
     if (this.paymentSpanishFiles.length > 0) {
       paymentSpanish.setValue(true);
     } else {
