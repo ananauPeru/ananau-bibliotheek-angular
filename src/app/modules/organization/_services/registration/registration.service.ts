@@ -3,13 +3,13 @@ import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { RegistrationStudentModel } from "../../_models/registration-student.model";
-import { RegistrationModel } from "../../_models/registration.model";
 import {
   SmallRegistrationModel,
   SmallRegistrationModelRole,
 } from "../../_models/small-registration.model";
 import { RegistrationHttpService } from "./registration-http/registration-http.service";
+import { RegistrationStudentModel } from "src/app/shared/models/registration/registration-student.model";
+import { RegistrationVolunteerModel } from "src/app/shared/models/registration/registration-volunteer.model";
 
 @Injectable({
   providedIn: "root",
@@ -63,7 +63,7 @@ export class RegistrationService {
     return this.registartionHttpService.getStudentRegistrationById$(userId);
   }
 
-  getVolunteerRegistrationById$(userId: number): Observable<RegistrationModel> {
+  getVolunteerRegistrationById$(userId: number): Observable<RegistrationVolunteerModel> {
     return this.registartionHttpService.getVolunteerRegistrationById$(userId);
   }
 
@@ -76,7 +76,6 @@ export class RegistrationService {
   }
 
   updateRegistrationDates$(userId: number, isStudent: boolean, dates: any) {
-    console.log(isStudent);
     return this.registartionHttpService.updateRegistrationDates$(userId, isStudent, dates);
   }
 }

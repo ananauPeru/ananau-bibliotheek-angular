@@ -16,9 +16,10 @@ import { AuthUtil } from "src/app/_utils/auth_util";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationService } from "../data-services/registration.service";
 import { FormRole } from "../models/form-role";
-import { RegistrationDTO } from "../_dto/registration-dto";
-import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
-
+import { RegistrationModel as RegistrationDTO } from "src/app/shared/models/registration/registration.model";
+import { RegistrationStudentModel as RegistrationStudentDTO } from "src/app/shared/models/registration/registration-student.model";
+import { RegistrationVolunteerModel as RegistrationVolunteerDTO } from "src/app/shared/models/registration/registration-volunteer.model";
+ 
 @Component({
   selector: "app-container",
   templateUrl: "./container.component.html",
@@ -107,7 +108,7 @@ export class ContainerComponent implements OnInit {
         .getStudentRegistration$()
         .pipe(
           catchError((error) => {
-            console.log("An error occured when loading initial data.");
+            console.error("An error occured when loading initial data.");
             this.errorMessage = error;
             return EMPTY;
           })
@@ -166,14 +167,18 @@ export class ContainerComponent implements OnInit {
     this.saveScanFiles.next(submit);
     this.savePaymentFiles.next(submit);
 
-    let dto = new RegistrationDTO();
+    let dto;
+
+    if (this.role === FormRole.STUDENT) { 
+      dto = new RegistrationStudentDTO();
+    } else if(this.role === FormRole.VOLUNTEER) {
+      dto = new RegistrationVolunteerDTO();
+    }
+
 
     const personalForm = this.formContainer.get("personalForm") as FormGroup;
 
     const general = personalForm.get("general") as FormGroup;
-    console.log(general);
-    console.log(general.get("firstName"));
-    console.log(dto.userDetails);
     dto.userDetails.firstName = general.get("firstName").value;
     dto.userDetails.lastName = general.get("lastName").value;
     dto.userDetails.middleName = general.get("middleName").value;

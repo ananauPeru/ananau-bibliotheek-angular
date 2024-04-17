@@ -3,9 +3,9 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { RegistrationStudentModel } from "../../../_models/registration-student.model";
-import { RegistrationModel } from "../../../_models/registration.model";
 import { SmallRegistrationModel } from "../../../_models/small-registration.model";
+import { RegistrationStudentModel } from "src/app/shared/models/registration/registration-student.model";
+import { RegistrationVolunteerModel } from "src/app/shared/models/registration/registration-volunteer.model";
 
 const API_REGISTRATIONS_URL = `${environment.apiUrl}/registrations`;
 
@@ -47,7 +47,7 @@ export class RegistrationHttpService {
       );
   }
 
-  getVolunteerRegistrationById$(userId: number): Observable<RegistrationModel> {
+  getVolunteerRegistrationById$(userId: number): Observable<RegistrationVolunteerModel> {
     return this.http
       .get(`${API_REGISTRATIONS_URL}/volunteers/${userId}`, {
         responseType: "json",
@@ -59,7 +59,7 @@ export class RegistrationHttpService {
           }
           return throwError(error);
         }),
-        map((response: any): RegistrationModel => response.details)
+        map((response: any): RegistrationVolunteerModel => response.details)
       );
   }
 

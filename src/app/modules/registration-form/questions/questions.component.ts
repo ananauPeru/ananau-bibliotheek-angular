@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ValidationErrors } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
-import { RegistrationDTO } from "../_dto/registration-dto";
+import { RegistrationDTO } from "src/app/shared/models/registration/registration.model";
 
 @Component({
   selector: "app-questions",

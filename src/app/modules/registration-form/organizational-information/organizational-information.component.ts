@@ -10,8 +10,6 @@ import { TranslateService } from "@ngx-translate/core";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
-import { RegistrationDTO } from "../_dto/registration-dto";
-import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
 import { ScansFile } from "../models/scans-file";
 import { v4 as uuidv4 } from "uuid";
 import { BlobNamePrefix } from "../models/blob-name-prefix";
@@ -19,6 +17,8 @@ import { HttpClient } from "@angular/common/http";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { Observable } from "rxjs";
 import { UserStorageService } from "src/app/shared/services/user-storage/user-storage.service";
+import { RegistrationModel as RegistrationDTO } from "src/app/shared/models/registration/registration.model";
+import { RegistrationStudentModel as RegistrationStudentDTO } from "src/app/shared/models/registration/registration-student.model";
 
 
 @Component({
@@ -159,7 +159,25 @@ export class OrganizationalInformationComponent implements OnInit {
           Validators.required
         )
       );
-    }
+    } else if(this.role === FormRole.VOLUNTEER) {
+      // Add controls only targeted to volunteers
+      /*
+      const dates = this.organizationalForm.get("dates") as FormGroup;
+      dates.addControl(
+        "leaveStartDate",
+        this.fb.control(
+          (this.initialData as RegistrationVolunteerDTO).internDetails.startOfPeriodOfAccommodation
+            ? this.datePipe.transform(
+                new Date(
+                  (this.initialData as RegistrationVolunteerDTO).internDetails.startOfPeriodOfAccommodation
+                ),
+                "yyyy-MM-dd"
+              )
+            : ""  
+          )
+        );
+      */
+      }
 
     this.emitForm();
 

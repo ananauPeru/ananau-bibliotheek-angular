@@ -13,12 +13,12 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { BlobNamePrefix } from "../_models/blob-name-prefix";
 import { RegistrationRole } from "../_models/registration-role";
-import { RegistrationModel } from "../_models/registration.model";
 import { RegistrationService } from "../_services/registration/registration.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as QRCode from "qrcode";
 import { QRCodeData } from "../_models/qr-code-data";
 import { UserStorageService } from "src/app/shared/services/user-storage/user-storage.service";
+import { RegistrationModel } from "src/app/shared/models/registration/registration.model";
 
 @Component({
   selector: "app-registration-details",
@@ -77,13 +77,11 @@ export class RegistrationDetailsComponent implements OnInit {
   }
 
   private fetchRegistrationData() {
-    console.log(this.role);
     if (this.role === RegistrationRole.STUDENT.toString()) {
       this.registrationService
         .getStudentRegistrationById$(this._userId)
         .subscribe(
           (registration) => {
-            console.log(registration);
             return this._registration.next(registration)
           },
           (err) => {
