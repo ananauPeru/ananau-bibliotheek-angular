@@ -2,9 +2,9 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
 import { Subject, of, throwError } from "rxjs";
-import { take } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { catchError, first } from 'rxjs/operators';
+import { catchError, first } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -35,7 +35,7 @@ export class UserStorageService {
   }
 
   private async getContainerClient$(userId: number): Promise<ContainerClient> {
-    const token = await this.getContainerToken$(userId);
+    const token = await this.getContainerTokenByUserId$(userId);
     return new BlobServiceClient(
       `https://${this._accountName}.blob.core.windows.net?${token}`
     ).getContainerClient(`user-${userId}`);
@@ -52,27 +52,23 @@ export class UserStorageService {
 }
  */
 
-
-
-  private getContainerToken$(userId: number): Promise<any> {
+  private getContainerTokenByUserId$(userId: number): Promise<string> {
     return this.http
       .get(`${environment.apiUrl}/blob/users/${userId}/token`, {
-        responseType: "text",
+        responseType: "json",
       })
       .pipe(
-        first(), // Take the first emission and complete
-        catchError((error) => {
-          console.error(error);
-          return throwError(error);
+        map((response: any) => {
+          if (response.success) {
+            return response.url; // Return the URL if the request is successful
+          } else {
+            throw new Error(response.error); // Throw an error if the request was not successful
+          }
+        }),
+        catchError((error: any) => {
+          return throwError(error); // Propagate any errors that occurred during the request
         })
       )
-      .toPromise()
-      .then((url: string) => ({
-        success: true,
-        error: "",
-        url: url
-      }));
+      .toPromise();
   }
-
 }
-
