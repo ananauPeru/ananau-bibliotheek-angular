@@ -109,7 +109,7 @@ export class OrganizationalInformationComponent implements OnInit {
       info: this.fb.group({
         occupation: [this.initialData.internDetails.professionOrEducation, Validators.required],
         tasks: [this.initialData.internDetails.internshipTasks, Validators.required],
-        expectations: [this.initialData.internDetails.experience],
+        expectations: [this.initialData.internDetails.internshipExpectations],
         proposals: [this.initialData.internDetails.internshipProposals],
       }),
     });
@@ -120,10 +120,10 @@ export class OrganizationalInformationComponent implements OnInit {
       dates.addControl(
         "leaveStartDate",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccomodation
+          (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccommodation
             ? this.datePipe.transform(
                 new Date(
-                  (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccomodation
+                  (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccommodation
                 ),
                 "yyyy-MM-dd"
               )
@@ -133,10 +133,10 @@ export class OrganizationalInformationComponent implements OnInit {
       dates.addControl(
         "leaveEndDate",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccomodation
+          (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccommodation
             ? this.datePipe.transform(
                 new Date(
-                  (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccomodation
+                  (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccommodation
                 ),
                 "yyyy-MM-dd"
               )
