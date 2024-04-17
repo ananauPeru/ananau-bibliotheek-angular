@@ -112,11 +112,6 @@ export class UserStorageService {
         success: true,
         error: "",
         url: url
-      }))
-      .catch((error) => ({
-        success: false,
-        error: error.message,
-        url: ""
       }));
   }
 

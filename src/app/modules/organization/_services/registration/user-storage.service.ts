@@ -63,7 +63,7 @@ export class UserStorageService {
         first(), // Take the first emission and complete
         catchError((error) => {
           console.error(error);
-          throw error; // Rethrow the error
+          return throwError(error);
         })
       )
       .toPromise()
