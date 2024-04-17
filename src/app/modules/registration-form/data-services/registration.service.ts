@@ -43,7 +43,7 @@ export class RegistrationService {
         map(
           (dto: any): RegistrationDTO => {
             console.log(dto);
-            return dto;
+            return dto.details;
           }
         )
       );
