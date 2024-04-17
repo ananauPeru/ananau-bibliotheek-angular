@@ -9,12 +9,12 @@ import { TranslateService } from "@ngx-translate/core";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { Observable } from "rxjs";
 import { ContainerComponent } from "../container/container.component";
-import { UserStorageService } from "../data-services/user-storage.service";
 import { BlobNamePrefix } from "../models/blob-name-prefix";
 import { ScansFile } from "../models/scans-file";
 import { v4 as uuidv4 } from "uuid";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { HttpClient } from "@angular/common/http";
+import { UserStorageService } from "src/app/shared/services/user-storage/user-storage.service";
 
 @Component({
   selector: "app-scan-uploads",
@@ -62,7 +62,7 @@ export class ScanUploadsComponent implements OnInit {
     this.scansForm.valueChanges.subscribe(() => this.emitForm());
 
     // Everytime a new Azure blob image comes in, update the form
-    this.userStorageService.getNewFile$.subscribe((file) => {
+    this.userStorageService.getNewFile$.subscribe((file: ScansFile) => {
       if (file.name.startsWith(BlobNamePrefix.InternationalPassport)) {
         this.internationalPassportFiles.push(file);
         this.updateInternationalPassport(false);

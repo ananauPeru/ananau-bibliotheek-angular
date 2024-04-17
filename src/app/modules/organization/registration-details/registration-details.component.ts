@@ -15,10 +15,10 @@ import { BlobNamePrefix } from "../_models/blob-name-prefix";
 import { RegistrationRole } from "../_models/registration-role";
 import { RegistrationModel } from "../_models/registration.model";
 import { RegistrationService } from "../_services/registration/registration.service";
-import { UserStorageService } from "../_services/registration/user-storage.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as QRCode from "qrcode";
 import { QRCodeData } from "../_models/qr-code-data";
+import { UserStorageService } from "src/app/shared/services/user-storage/user-storage.service";
 
 @Component({
   selector: "app-registration-details",

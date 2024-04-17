@@ -1,19 +1,20 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
-import { catchError, map, take } from "rxjs/operators";
-import { environment } from "src/environments/environment";
-import { AuthService } from "../../auth";
-import { ScansFile } from "../models/scans-file";
 import { Subject, throwError } from "rxjs";
+import { map } from "rxjs/operators";
+import { environment } from "src/environments/environment";
+import { catchError } from "rxjs/operators";
+import { ScansFile } from "src/app/modules/registration-form/models/scans-file";
+import { AuthService } from "src/app/modules/auth";
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class UserStorageService {
   private _accountName = "ananaustorage";
   private _containerName: string;
-  private _newFileSubject = new Subject<ScansFile>();
+  private _newFileSubject = new Subject<File>();
   public getNewFile$ = this._newFileSubject.asObservable();
 
   constructor(private http: HttpClient, authService: AuthService) {
@@ -33,6 +34,31 @@ export class UserStorageService {
         });
       });
     }
+  }
+
+  public async fetchFiles$(userId: number) {
+    const containerClient = await this.getContainerClientByUserId$(userId);
+    let blobItems = containerClient.listBlobsFlat();
+
+    for await (const blobItem of blobItems) {
+      const blobClient = containerClient.getBlobClient(blobItem.name);
+      blobClient.download().then((resp) => {
+        resp.blobBody.then((blob) => {
+          this._newFileSubject.next(
+            new File([blob], blobItem.name, {
+              type: blobItem.properties.contentType,
+            })
+          );
+        });
+      });
+    }
+  }
+
+  private async getContainerClientByUserId$(userId: number): Promise<ContainerClient> {
+    const token = await this.getContainerTokenByUserId$(userId);
+    return new BlobServiceClient(
+      `https://${this._accountName}.blob.core.windows.net?${token}`
+    ).getContainerClient(`user-${userId}`);
   }
 
   public async storeImages$(files: ScansFile[]) {
@@ -80,6 +106,26 @@ export class UserStorageService {
       .toPromise();
   }
 
+  private getContainerTokenByUserId$(userId: number): Promise<string> {
+    return this.http
+      .get(`${environment.apiUrl}/blob/users/${userId}/token`, {
+        responseType: "json",
+      })
+      .pipe(
+        map((response: any) => {
+          if (response.success) {
+            return response.url; // Return the URL if the request is successful
+          } else {
+            throw new Error(response.error); // Throw an error if the request was not successful
+          }
+        }),
+        catchError((error: any) => {
+          return throwError(error); // Propagate any errors that occurred during the request
+        })
+      )
+      .toPromise();
+  }
+
   private createOldScansFile(blob: Blob, fileName: string): ScansFile {
     let b: any = blob;
     b.lastModifiedDate = new Date();
@@ -88,4 +134,5 @@ export class UserStorageService {
     b.isNew = false;
     return blob as ScansFile;
   }
+
 }

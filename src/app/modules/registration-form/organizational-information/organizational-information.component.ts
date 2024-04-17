@@ -12,13 +12,13 @@ import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
 import { RegistrationDTO } from "../_dto/registration-dto";
 import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
-import { UserStorageService } from "../data-services/user-storage.service";
 import { ScansFile } from "../models/scans-file";
 import { v4 as uuidv4 } from "uuid";
 import { BlobNamePrefix } from "../models/blob-name-prefix";
 import { HttpClient } from "@angular/common/http";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { Observable } from "rxjs";
+import { UserStorageService } from "src/app/shared/services/user-storage/user-storage.service";
 
 
 @Component({
@@ -167,7 +167,7 @@ export class OrganizationalInformationComponent implements OnInit {
     this.organizationalForm.valueChanges.subscribe(() => this.emitForm());
 
     // Everytime a new Azure blob image comes in, update the form
-    this.userStorageService.getNewFile$.subscribe((file) => {
+    this.userStorageService.getNewFile$.subscribe((file: ScansFile) => {
       if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
         this.paymentApartmentFiles.push(file);
         this.updatePaymentApartment(false);
