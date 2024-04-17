@@ -21,7 +21,6 @@ export class UserStorageService {
   }
 
   public async fetchImages$() {
-    console.log("fetching images")
     const containerClient = await this.getContainerClient$();
     let blobItems = containerClient.listBlobsFlat();
 
