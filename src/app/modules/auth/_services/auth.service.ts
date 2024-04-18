@@ -91,6 +91,11 @@ export class AuthService implements OnDestroy {
         }
         return user;
       }),
+      catchError((error) => {
+        console.error('Error in getUserByToken:', error);
+        this.logout();
+        return of(undefined);
+      }),
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
