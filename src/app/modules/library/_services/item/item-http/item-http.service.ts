@@ -6,7 +6,7 @@ import { catchError, finalize, map } from "rxjs/operators";
 import { ItemModel } from "../../../_models/item.model";
 import { ItemDTO } from "../../../_dto/item-dto";
 
-const API_ITEMS_URL = `${environment.apiUrl}/item`;
+const API_ITEMS_URL = `${environment.apiUrl}/items`;
 
 @Injectable({
   providedIn: "root",
@@ -16,7 +16,7 @@ export class ItemHTTPService {
 
   getAllItems$(): Observable<ItemModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}/getall`, {
+      .get(`${API_ITEMS_URL}`, {
         responseType: "json",
       })
       .pipe(
@@ -26,8 +26,13 @@ export class ItemHTTPService {
           }
           return throwError(error);
         }),
-        map((items: any): ItemModel[] => {
-          return items;
+        map((response: any): ItemModel[] => {
+          if (response.success) {
+            return response.items;
+          } else {
+            throwError(response.error);
+            return [];
+          }
         })
       );
   }
@@ -42,11 +47,14 @@ export class ItemHTTPService {
         }
         return throwError(error);
       }),
-      map(
-        (item: any): ItemModel => {
-          return item;
+      map((response: any): ItemModel => {
+        if (response.success) {
+          return response.item;
+        } else {
+          throwError(response.error);
+          return null;
         }
-      )
+      })
     );
   }
 
@@ -58,17 +66,20 @@ export class ItemHTTPService {
         }
         return throwError(error);
       }),
-      map(
-        (item: any): ItemModel => {
-          return item;
+      map((response: any): ItemModel => {
+        if (response.success) {
+          return response.item;
+        } else {
+          throwError(response.error);
+          return null;
         }
-      )
+      })
     );
   }
 
   getItemById(id: number): Observable<ItemModel> {
     return this.http
-      .get(`${API_ITEMS_URL}/getById/${id}`, {
+      .get(`${API_ITEMS_URL}/${id}`, {
         responseType: "json",
       })
       .pipe(
@@ -78,15 +89,18 @@ export class ItemHTTPService {
           }
           return throwError(error);
         }),
-        map(
-          (item: any): ItemModel => {
-            return item;
+        map((response: any): ItemModel => {
+          if (response.success) {
+            return response.item;
+          } else {
+            throwError(response.error);
+            return null;
           }
-        )
+        })
       );
   }
 
-  delete(id: number): Observable<ItemModel> {
+  delete(id: number): Observable<any> {
     return this.http
       .delete(`${API_ITEMS_URL}/${id}`, {
         responseType: "json",
@@ -98,11 +112,14 @@ export class ItemHTTPService {
           }
           return throwError(error);
         }),
-        map(
-          (res: any): ItemModel => {
-            return res;
+        map((response: any): any => {
+          if (response.success) {
+            return response;
+          } else {
+            throwError(response.error);
+            return null;
           }
-        )
+        })
       );
   }
 }
