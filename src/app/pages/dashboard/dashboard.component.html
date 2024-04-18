@@ -12,32 +12,12 @@
     else noRoles
   "
 >
-<div class="col-lg-3 menu-card one-big-child" *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])">
-  <div>
-    <!--begin::Card-->
-    <div class="card card-custom h-100">
-      <!--begin::Body-->
-      <div class="card-body text-white d-flex align-items-center">
-        <div class="w-100">
-          <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
-            {{ "MENU.ORGANIZATION.CHECK_IN" | translate }}
-          </h3>
-          <button routerLink="/organization/check-in" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
-            <span>{{ "CHECK_IN.SCAN_QR_CODE" | translate }}</span>
-            <i class="fas fa-qrcode text-dark"></i>
-          </button>
-        </div>
-      </div>
-      <!--end::Body-->
-    </div>
-    <!--end::Card-->
-  </div>
-</div>
-
   <!--LIBRARY-->
   <div
     class="col-lg-3 menu-card one-big-child"
-    *ngIf="AuthUtil.permitted([AuthUtil.roles.Librarian, AuthUtil.roles.SuperAdmin])"
+    *ngIf="
+      AuthUtil.permitted([AuthUtil.roles.Librarian, AuthUtil.roles.SuperAdmin])
+    "
   >
     <div>
       <!--begin::Card-->
@@ -97,7 +77,13 @@
   <!--STUDENT & VOLUNTEER-->
   <div
     class="col-lg-3 menu-card"
-    *ngIf="AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.Volunteer, AuthUtil.roles.SuperAdmin])"
+    *ngIf="
+      AuthUtil.permitted([
+        AuthUtil.roles.Student,
+        AuthUtil.roles.Volunteer,
+        AuthUtil.roles.SuperAdmin
+      ])
+    "
     [ngClass]="
       AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.SuperAdmin]) &&
       AuthUtil.permitted([AuthUtil.roles.Volunteer, AuthUtil.roles.SuperAdmin])
@@ -105,7 +91,11 @@
         : 'one-small-child'
     "
   >
-    <div *ngIf="AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.SuperAdmin])">
+    <div
+      *ngIf="
+        AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.SuperAdmin])
+      "
+    >
       <!--begin::Card-->
       <div class="card card-custom h-100">
         <!--begin::Body-->
@@ -125,7 +115,14 @@
       </div>
       <!--end::Card-->
     </div>
-    <div *ngIf="AuthUtil.permitted([AuthUtil.roles.Volunteer, AuthUtil.roles.SuperAdmin])">
+    <div
+      *ngIf="
+        AuthUtil.permitted([
+          AuthUtil.roles.Volunteer,
+          AuthUtil.roles.SuperAdmin
+        ])
+      "
+    >
       <!--begin::Card-->
       <div class="card card-custom h-100">
         <!--begin::Body-->
@@ -149,15 +146,30 @@
 
   <div
     class="col-lg-3 menu-card"
-    *ngIf="AuthUtil.permitted([AuthUtil.roles.Student, AuthUtil.roles.Volunteer, AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin])"
+    *ngIf="
+      AuthUtil.permitted([
+        AuthUtil.roles.Student,
+        AuthUtil.roles.Volunteer,
+        AuthUtil.roles.Admin,
+        AuthUtil.roles.SuperAdmin
+      ])
+    "
     [ngClass]="
       AuthUtil.permitted([AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin]) &&
-      AuthUtil.permitted([AuthUtil.roles.Volunteer, AuthUtil.roles.Student, AuthUtil.roles.SuperAdmin])
+      AuthUtil.permitted([
+        AuthUtil.roles.Volunteer,
+        AuthUtil.roles.Student,
+        AuthUtil.roles.SuperAdmin
+      ])
         ? 'two-small-children'
         : 'one-small-child'
     "
   >
-    <div *ngIf="AuthUtil.permitted([AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin])">
+    <div
+      *ngIf="
+        AuthUtil.permitted([AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin])
+      "
+    >
       <!--begin::Card-->
       <div class="card card-custom h-100">
         <!--begin::Body-->
@@ -286,6 +298,34 @@
       <!--end::Card-->
     </div>
   </div>
+
+  <div
+      class="col-lg-3 menu-card one-small-child"
+      *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])"
+    >
+      <div>
+        <!--begin::Card-->
+        <div class="card card-custom h-100">
+          <!--begin::Body-->
+          <div class="card-body text-white d-flex align-items-center">
+            <div class="w-100">
+              <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
+                {{ "MENU.ORGANIZATION.CHECK_IN" | translate }}
+              </h3>
+              <button
+                routerLink="/organization/check-in/scan"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+              >
+                <span>{{ "CHECK_IN.SCAN_QR_CODE" | translate }}</span>
+                <i class="fas fa-qrcode text-dark"></i>
+              </button>
+            </div>
+          </div>
+          <!--end::Body-->
+        </div>
+        <!--end::Card-->
+      </div>
+    </div>
 </div>
 
 <ng-template #noRoles>

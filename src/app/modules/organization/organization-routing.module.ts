@@ -75,15 +75,17 @@ const routes: Routes = [
         path: "check-in",
         children: [
           {
-            path: "",
+            path: "scan",
             component: CheckInComponent,
+            canActivate: [AuthGuard],
             data: {
-              permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.QRCodeReader],
+              permittedRoles: [Roles.QRCodeReader],
             },
           },
           {
             path: "list",
             component: CheckInListComponent,
+            canActivate: [AuthGuard],
             data: {
               permittedRoles: [Roles.Admin, Roles.SuperAdmin],
             },
@@ -91,9 +93,20 @@ const routes: Routes = [
           {
             path: ":id",
             component: CheckInDetailsComponent,
+            canActivate: [AuthGuard],
             data: {
               permittedRoles: [Roles.Admin, Roles.SuperAdmin],
             },
+          },
+          {
+            path: "",
+            redirectTo: "list",
+            pathMatch: "full",
+          },
+          {
+            path: "**",
+            redirectTo: "list",
+            pathMatch: "full",
           },
         ],
       },
