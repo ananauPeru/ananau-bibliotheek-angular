@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ValidationErrors } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
-import { RegistrationDTO } from "src/app/shared/models/registration/registration.model";
+import { RegistrationModel } from "src/app/shared/models/registration/registration.model";
 
 @Component({
   selector: "app-questions",
@@ -19,7 +19,7 @@ export class QuestionsComponent implements OnInit {
     requiredAndValid: number;
   }>();
   @Input() public role: FormRole;
-  @Input() public initialData: RegistrationDTO;
+  @Input() public initialData: RegistrationModel;
 
   constructor(private fb: FormBuilder, private translate: TranslateService) {}
 
