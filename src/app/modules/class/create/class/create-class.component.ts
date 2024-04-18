@@ -194,7 +194,7 @@ export class CreateClassComponent implements OnInit {
         this.class.translate = null
         this.class.translatedPdf = null
       }
-      this.create(this.class)
+      this.create(this.class.getDto())
     }
   }
 
