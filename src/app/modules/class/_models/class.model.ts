@@ -1,3 +1,5 @@
+import { ClassDTO } from "../_dto/class-dto"
+
 export class ClassModel {
   classID: number
   title: string
@@ -14,4 +16,16 @@ export class ClassModel {
   constructor() {}
 
  
+  getDto(): ClassDTO {
+    const dto = new ClassDTO()
+    dto.title = this.title
+    dto.author = this.author
+    dto.description = this.description
+    dto.creationDate = this.creationDate
+    dto.public = this.public
+    dto.language = this.language
+    dto.subjects = this.subjects
+    dto.pdfUrl = this.pdfUrl
+    return dto
+  }
 }
