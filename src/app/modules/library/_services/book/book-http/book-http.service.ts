@@ -8,7 +8,7 @@ import { ItemDTO } from "../../../_dto/item-dto";
 import { BookModel } from "../../../_models/book.model";
 import { BookDTO } from "../../../_dto/book-dto";
 
-const API_ITEMS_URL = `${environment.apiUrl}/book`;
+const API_ITEMS_URL = `${environment.apiUrl}/books`;
 
 @Injectable({
   providedIn: "root",
@@ -18,7 +18,7 @@ export class BookHTTPService {
 
   getAllBooks$(): Observable<BookModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}/getall`, {
+      .get(`${API_ITEMS_URL}`, {
         responseType: "json",
       })
       .pipe(
@@ -28,8 +28,23 @@ export class BookHTTPService {
           }
           return throwError(error);
         }),
-        map((items: any): BookModel[] => {
-          return items;
+        map((response: any): BookModel[] => {
+          console.log(response.books);
+          return response.books.map((book: any) => ({
+            bookId: book.id,
+            name:book.title,
+            category: book.category,
+            genre: book.genre,
+            author: book.author,
+            description: book.description,
+            state: book.state,
+            purchasedAt: book.purchasedAt,
+            loanedPieces: null,
+            quantity: book.quantity,
+            photoUrl: book.photoUrl,
+            createdAt: book.createdAt,
+            updatedAt: book.updatedAt,
+          }));
         })
       );
   }
