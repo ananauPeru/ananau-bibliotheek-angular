@@ -29,7 +29,6 @@ export class BookHTTPService {
           return throwError(error);
         }),
         map((response: any): BookModel[] => {
-          console.log(response.books);
           return response.books.map((book: any) => ({
             bookId: book.id,
             name:book.title,
@@ -60,10 +59,31 @@ export class BookHTTPService {
         return throwError(error);
       }),
       map(
-        (book: any): BookModel => {
-          return book;
+        (response: any): BookModel => {
+          if (response.success) {
+            return {
+              bookId: null,
+              name: response.book.title,
+              category: response.book.category,
+              genre: response.book.genre,
+              author: response.book.author,
+              description: response.book.description,
+              state: response.book.state,
+              purchasedAt: response.book.purchasedAt,
+              loanedPieces: null,
+              quantity: response.book.quantity,
+              photoUrl: response.book.photoUrl,
+              createdAt: response.book.createdAt,
+              updatedAt: response.book.updatedAt,
+              user:null,
+              archived: response.book.archived,
+              deleted: response.book.deleted,
+            };
+        } else {
+          throwError(response.error);
+          return null;
         }
-      )
+      })
     );
   }
 
