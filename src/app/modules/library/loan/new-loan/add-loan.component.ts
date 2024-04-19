@@ -218,7 +218,7 @@ export class AddLoanComponent implements OnInit {
     }
 
     lp.loaningUserId = formValues.loaningUser
-    lp.itemId = this.loanedPiece.item ? this.loanedPiece.item.itemId : null
+    lp.itemId = this.loanedPiece.item ? this.loanedPiece.item.id : null
     lp.bookId = this.loanedPiece.book ? this.loanedPiece.book.bookId : null
     lp.loanDate = new Date(
       Date.UTC(
