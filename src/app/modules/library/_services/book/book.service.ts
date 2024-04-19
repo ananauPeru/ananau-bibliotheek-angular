@@ -62,7 +62,7 @@ export class BookService {
         map((books) =>
           books.filter((book) => {
             let b =
-              book.name.toLowerCase().includes(f) ||
+              book.title.toLowerCase().includes(f) ||
               (book.description
                 ? book.description.toLowerCase().includes(f)
                 : false) ||

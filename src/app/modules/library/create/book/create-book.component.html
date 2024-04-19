@@ -44,33 +44,33 @@
             class="form-control form-control-lg form-control-solid"
             autocomplete="off"
             placeholder="{{ 'LIBRARY.CREATE.BOOK.TITLE.TITLE' | translate }}"
-            name="name"
-            [class.is-invalid]="isControlInvalid('name')"
-            [class.is-valid]="isControlValid('name')"
-            formControlName="name"
+            name="title"
+            [class.is-invalid]="isControlInvalid('title')"
+            [class.is-valid]="isControlValid('title')"
+            formControlName="title"
             required
           />
-          <div class="feedback" *ngIf="!isControlTouched('name')">
+          <div class="feedback" *ngIf="!isControlTouched('title')">
             {{ "LIBRARY.CREATE.BOOK.TITLE.F1" | translate }}
           </div>
-          <div class="valid-feedback" *ngIf="isControlValid('name')">
+          <div class="valid-feedback" *ngIf="isControlValid('title')">
             <!-- Name was entered correct -->
           </div>
           <div
             class="invalid-feedback"
-            *ngIf="controlHasError('required', 'name')"
+            *ngIf="controlHasError('required', 'title')"
           >
             {{ "LIBRARY.CREATE.BOOK.TITLE.F2" | translate }}
           </div>
           <div
             class="invalid-feedback"
-            *ngIf="controlHasError('minlength', 'name')"
+            *ngIf="controlHasError('minlength', 'title')"
           >
             {{ "LIBRARY.CREATE.BOOK.TITLE.F3" | translate }}
           </div>
           <div
             class="invalid-feedback"
-            *ngIf="controlHasError('maxLength', 'name')"
+            *ngIf="controlHasError('maxLength', 'title')"
           >
             {{ "LIBRARY.CREATE.BOOK.TITLE.F4" | translate }}
           </div>

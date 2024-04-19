@@ -3,8 +3,6 @@ import { Observable, of, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../../../../environments/environment";
 import { catchError, finalize, map } from "rxjs/operators";
-import { ItemModel } from "../../../_models/item.model";
-import { ItemDTO } from "../../../_dto/item-dto";
 import { BookModel } from "../../../_models/book.model";
 import { BookDTO } from "../../../_dto/book-dto";
 
@@ -18,7 +16,7 @@ export class BookHTTPService {
 
   getAllBooks$(): Observable<BookModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}`, {
+      .get(`${API_ITEMS_URL}?PageSize=1000`, {
         responseType: "json",
       })
       .pipe(
@@ -29,24 +27,16 @@ export class BookHTTPService {
           return throwError(error);
         }),
         map((response: any): BookModel[] => {
-          return response.books.map((book: any) => ({
-            bookId: book.id,
-            name:book.title,
-            category: book.category,
-            genre: book.genre,
-            author: book.author,
-            description: book.description,
-            state: book.state,
-            purchasedAt: book.purchasedAt,
-            loanedPieces: null,
-            quantity: book.quantity,
-            photoUrl: book.photoUrl,
-            createdAt: book.createdAt,
-            updatedAt: book.updatedAt,
-          }));
+          if (response.success) {
+            return response.books;
+          } else {
+            throwError(response.error);
+            return [];
+          }
         })
       );
   }
+  
 
   // CREATE
   // server should return the object with ID
@@ -58,27 +48,9 @@ export class BookHTTPService {
         }
         return throwError(error);
       }),
-      map(
-        (response: any): BookModel => {
-          if (response.success) {
-            return {
-              bookId: null,
-              name: response.book.title,
-              category: response.book.category,
-              genre: response.book.genre,
-              author: response.book.author,
-              description: response.book.description,
-              state: response.book.state,
-              purchasedAt: response.book.purchasedAt,
-              loanedPieces: null,
-              quantity: response.book.quantity,
-              photoUrl: response.book.photoUrl,
-              createdAt: response.book.createdAt,
-              updatedAt: response.book.updatedAt,
-              user:null,
-              archived: response.book.archived,
-              deleted: response.book.deleted,
-            };
+      map((response: any): BookModel => {
+        if (response.success) {
+          return response.book;
         } else {
           throwError(response.error);
           return null;
