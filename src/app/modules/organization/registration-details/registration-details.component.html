@@ -316,6 +316,7 @@
                       type="date"
                       formControlName="startDate"
                       placeholder="yyyy-mm-dd"
+                      [value]="registration.internDetails.startOfInternship | date : 'yyyy-MM-dd'"
                     />
                   </td>
                   <td class="text-right">
@@ -349,6 +350,7 @@
                       type="date"
                       formControlName="endDate"
                       placeholder="yyyy-mm-dd"
+                      [value]="registration.internDetails.endOfInternship | date : 'yyyy-MM-dd'"
                     />
                   </td>
                   <td class="text-right">
@@ -380,7 +382,7 @@
                       type="date"
                       formControlName="leaveStartDate"
                       placeholder="yyyy-mm-dd"
-                      ngbTooltip="{{ (isEditingStartDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                      [value]="registration.internDetails.startOfPeriodOfAccomodation | date : 'yyyy-MM-dd'"
                     />
                   </td>
                   <td class="text-right">
@@ -389,6 +391,7 @@
                       type="button" 
                       class="btn btn-primary mr-2" 
                       placement="top" 
+                      ngbTooltip="{{ (isEditingStartDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
                     >
                     <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingStartDateStay, 'fa-times': isEditingStartDateStay}"></i>
                     </button>
@@ -410,7 +413,7 @@
                       type="date"
                       formControlName="leaveEndDate"
                       placeholder="yyyy-mm-dd"
-                      ngbTooltip="{{ (isEditingEndDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
+                      [value]="registration.internDetails.endOfPeriodOfAccomodation | date : 'yyyy-MM-dd'"
                     />
                   </td>
                   <td class="text-right">
@@ -419,6 +422,7 @@
                       type="button" 
                       class="btn btn-primary mr-2" 
                       placement="top" 
+                      ngbTooltip="{{ (isEditingEndDateStay ? 'BUTTONS.CANCEL' : 'EDIT') | translate }}"
                     >
                     <i class="fas pr-0" [ngClass]="{'fa-pen': !isEditingEndDateStay, 'fa-times': isEditingEndDateStay}"></i>
                     </button>

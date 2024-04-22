@@ -6,8 +6,8 @@ export class RegistrationStudentModel extends RegistrationModel {
   } & RegistrationModel['userDetails'];
 
   internDetails: {
-    startOfPeriodOfAccommodation: Date;
-    endOfPeriodOfAccommodation: Date;
+    startOfPeriodOfAccomodation: Date;
+    endOfPeriodOfAccomodation: Date;
     educationDegree: string;
     internshipContext: string;
   } & RegistrationModel['internDetails'];
@@ -22,8 +22,8 @@ export class RegistrationStudentModel extends RegistrationModel {
 
     this.internDetails = {
       ...this.internDetails,
-      startOfPeriodOfAccommodation: data?.internDetails?.startOfPeriodOfAccommodation || null,
-      endOfPeriodOfAccommodation: data?.internDetails?.endOfPeriodOfAccommodation || null,
+      startOfPeriodOfAccomodation: data?.internDetails?.startOfPeriodOfAccomodation || null,
+      endOfPeriodOfAccomodation: data?.internDetails?.endOfPeriodOfAccomodation || null,
       educationDegree: data?.internDetails?.educationDegree || '',
       internshipContext: data?.internDetails?.internshipContext || '',
     };
