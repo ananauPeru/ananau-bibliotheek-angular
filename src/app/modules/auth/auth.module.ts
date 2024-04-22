@@ -35,7 +35,7 @@ import { RecaptchaModule } from 'ng-recaptcha'
     HttpClientModule,
     LayoutModule,    
     NgbModule,  
-    // RecaptchaModule,
+    RecaptchaModule,
   ],
 })
 export class AuthModule {}
