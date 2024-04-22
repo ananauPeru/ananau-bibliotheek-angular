@@ -80,7 +80,7 @@ export class BookHTTPService {
 
   getItemById(id: number): Observable<BookModel> {
     return this.http
-      .get(`${API_ITEMS_URL}/getById/${id}`, {
+      .get(`${API_ITEMS_URL}/${id}`, {
         responseType: "json",
       })
       .pipe(
@@ -90,11 +90,14 @@ export class BookHTTPService {
           }
           return throwError(error);
         }),
-        map(
-          (book: any): BookModel => {
-            return book;
+        map((response: any): BookModel => {
+          if (response.success) {
+            return response.book;
+          } else {
+            throwError(response.error);
+            return null;
           }
-        )
+        })
       );
   }
 }
