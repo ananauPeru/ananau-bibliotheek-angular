@@ -41,6 +41,8 @@ export const locale = {
       KAL: "Calendario",
       APPS: "Aplicaciones",
       DASHBOARD: "Tablero",
+      TEAM: "Equipo",
+      LEARNING: "Aprendizaje",
       ZOEK: "Buscar",
       NO_ROLES:
         "Todavía no tienes acceso a ningún módulo. Por favor contáctenos para solicitar acceso.",

@@ -41,6 +41,8 @@ export const locale = {
       FEATURES: "Features",
       APPS: "Apps",
       DASHBOARD: "Dashboard",
+      TEAM: "Team",
+      LEARNING: "Learning",
       ZOEK: "Search",
       KAL: "Calendar",
       NO_ROLES:

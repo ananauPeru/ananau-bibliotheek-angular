@@ -35,6 +35,8 @@ export const locale = {
       APPS: "Apps",
       KAL: "Kalender",
       DASHBOARD: "Dashboard",
+      TEAM: "Team",
+      LEARNING: "Leren",
       ZOEK: "Zoeken",
       NO_ROLES:
         "Je hebt nog geen toegang tot een van de modules. Neem contact op om toegang te vragen.",
