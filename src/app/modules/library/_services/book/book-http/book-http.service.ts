@@ -67,11 +67,14 @@ export class BookHTTPService {
         }
         return throwError(error);
       }),
-      map(
-        (book: any): BookModel => {
-          return book;
+      map((response: any): BookModel => {
+        if (response.success) {
+          return response.book;
+        } else {
+          throwError(response.error);
+          return null;
         }
-      )
+      })
     );
   }
 
