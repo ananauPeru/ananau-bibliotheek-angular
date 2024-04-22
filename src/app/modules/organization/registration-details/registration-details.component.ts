@@ -19,6 +19,8 @@ import * as QRCode from "qrcode";
 import { QRCodeData } from "../_models/qr-code-data";
 import { UserStorageService } from "src/app/shared/services/user-storage/user-storage.service";
 import { RegistrationModel } from "src/app/shared/models/registration/registration.model";
+import { RegistrationStudentModel } from "src/app/shared/models/registration/registration-student.model";
+import { RegistrationVolunteerModel } from "src/app/shared/models/registration/registration-volunteer.model";
 
 @Component({
   selector: "app-registration-details",
@@ -43,17 +45,12 @@ export class RegistrationDetailsComponent implements OnInit {
   public paymentGuaranteeFiles = new Array<File>();
   public paymentSpanishFiles = new Array<File>();
 
+  public dateForm: FormGroup;
+
   public isEditingStartDateInternship = false;
   public isEditingEndDateInternship = false;
   public isEditingStartDateStay = false;
   public isEditingEndDateStay = false;
-
-  dateForm = new FormGroup({
-    startDate: new FormControl(),
-    endDate: new FormControl(),
-    leaveStartDate: new FormControl(),
-    leaveEndDate: new FormControl(),
-  });
 
   @ViewChild("confirmationModal") confirmationModal: TemplateRef<any>;
 
@@ -74,6 +71,13 @@ export class RegistrationDetailsComponent implements OnInit {
     this.route.params.subscribe((params) => (this._userId = params["id"]));
 
     this.fetchRegistrationData();
+
+    this.dateForm = new FormGroup({
+      startDate: new FormControl(),
+      endDate: new FormControl(),
+      leaveStartDate: new FormControl(),
+      leaveEndDate: new FormControl(),
+    });
   }
 
   private fetchRegistrationData() {
@@ -82,7 +86,7 @@ export class RegistrationDetailsComponent implements OnInit {
         .getStudentRegistrationById$(this._userId)
         .subscribe(
           (registration) => {
-            return this._registration.next(registration)
+            return this._registration.next(registration);
           },
           (err) => {
             console.error(err);
@@ -279,8 +283,7 @@ export class RegistrationDetailsComponent implements OnInit {
           "REGISTRATIONS.DETAILS.FILE_NAMES.PAYMENT_GUARANTEE"
         ) + ` - ${fileName}`;
       FileSaver.saveAs(file, fileName);
-    } 
-    else if (file.name.startsWith(BlobNamePrefix.PaymentSpanish)) {
+    } else if (file.name.startsWith(BlobNamePrefix.PaymentSpanish)) {
       fileName =
         this.translate.instant(
           "REGISTRATIONS.DETAILS.FILE_NAMES.PAYMENT_SPANISH"
@@ -299,11 +302,11 @@ export class RegistrationDetailsComponent implements OnInit {
       id: this._userId,
       firstName: `${this._registration.value.userDetails.firstName}`,
       lastName: `${this._registration.value.userDetails.firstName}`,
-      dateOfBirth: `${this._registration.value.userDetails.dateOfBirth}`
+      dateOfBirth: `${this._registration.value.userDetails.dateOfBirth}`,
     };
-  
+
     const qrCodeData = JSON.stringify(data);
-  
+
     const qrCodeOptions = {
       errorCorrectionLevel: "M",
       type: "png",
@@ -311,36 +314,38 @@ export class RegistrationDetailsComponent implements OnInit {
       color: {
         dark: "#008037",
         light: "#F7EBDA",
-      }
+      },
     };
-  
+
     try {
-      const canvas = document.createElement('canvas');
+      const canvas = document.createElement("canvas");
       await QRCode.toCanvas(canvas, qrCodeData, qrCodeOptions);
-  
+
       // Load the image
-      const image = await this.loadImage('../../../../../assets/images/ananau-logo-color.png');
-  
+      const image = await this.loadImage(
+        "../../../../../assets/images/ananau-logo-color.png"
+      );
+
       // Calculate the position to place the image at the center
       const imageSize = 128; // Adjust the size of the image as needed
       const imageX = (canvas.width - imageSize) / 2;
       const imageY = (canvas.height - imageSize) / 2;
-  
+
       // Draw the image on the QR code canvas
-      const context = canvas.getContext('2d');
+      const context = canvas.getContext("2d");
       context.drawImage(image, imageX, imageY, imageSize, imageSize);
-  
+
       // Convert the canvas to a data URL
       const qrCodeDataUrl = canvas.toDataURL();
-  
+
       // Convert the data URL to a Blob and save it
       const blob = this.dataURLtoBlob(qrCodeDataUrl);
       saveAs(blob, `${data.firstName}_${data.lastName}_qr_code.png`);
     } catch (error) {
-      console.error('Error generating QR code:', error);
+      console.error("Error generating QR code:", error);
     }
   }
-  
+
   private async loadImage(url: string): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const image = new Image();
@@ -351,7 +356,7 @@ export class RegistrationDetailsComponent implements OnInit {
   }
 
   private dataURLtoBlob(dataUrl: string): Blob {
-    const arr = dataUrl.split(',');
+    const arr = dataUrl.split(",");
     const mime = arr[0].match(/:(.*?);/)[1];
     const bstr = atob(arr[1]);
     let n = bstr.length;
@@ -364,7 +369,11 @@ export class RegistrationDetailsComponent implements OnInit {
 
   onSubmitDateChange() {
     this.registrationService
-      .updateRegistrationDates$(this._userId, (this.role == RegistrationRole.STUDENT), this.dateForm.value)
+      .updateRegistrationDates$(
+        this._userId,
+        this.role == RegistrationRole.STUDENT,
+        this.dateForm.value
+      )
       .subscribe(
         () => {
           this.setEditingFalse();

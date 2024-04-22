@@ -120,10 +120,10 @@ export class OrganizationalInformationComponent implements OnInit {
       dates.addControl(
         "leaveStartDate",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccommodation
+          (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccomodation
             ? this.datePipe.transform(
                 new Date(
-                  (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccommodation
+                  (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccomodation
                 ),
                 "yyyy-MM-dd"
               )
@@ -133,10 +133,10 @@ export class OrganizationalInformationComponent implements OnInit {
       dates.addControl(
         "leaveEndDate",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccommodation
+          (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccomodation
             ? this.datePipe.transform(
                 new Date(
-                  (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccommodation
+                  (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccomodation
                 ),
                 "yyyy-MM-dd"
               )

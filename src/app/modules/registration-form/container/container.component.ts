@@ -250,8 +250,8 @@ export class ContainerComponent implements OnInit {
       studentDto.userDetails.schoolEmail = general.get("schoolEmail").value;
 
 
-      studentDto.internDetails.startOfPeriodOfAccommodation = new Date(dates.get("leaveStartDate").value);
-      studentDto.internDetails.endOfPeriodOfAccommodation = new Date(dates.get("leaveEndDate").value);
+      studentDto.internDetails.startOfPeriodOfAccomodation = new Date(dates.get("leaveStartDate").value);
+      studentDto.internDetails.endOfPeriodOfAccomodation = new Date(dates.get("leaveEndDate").value);
       studentDto.internDetails.educationDegree = info.get("degree").value;
       studentDto.internDetails.internshipContext = info.get("internshipContext").value;
       
