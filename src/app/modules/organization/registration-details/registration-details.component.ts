@@ -73,8 +73,8 @@ export class RegistrationDetailsComponent implements OnInit {
     this.fetchRegistrationData();
 
     this.dateForm = new FormGroup({
-      startDate: new FormControl(),
-      endDate: new FormControl(),
+      startDateOfInternship: new FormControl(),
+      endDateOfInternship: new FormControl(),
       leaveStartDate: new FormControl(),
       leaveEndDate: new FormControl(),
     });
