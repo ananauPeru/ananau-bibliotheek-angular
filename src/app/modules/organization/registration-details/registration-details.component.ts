@@ -301,7 +301,7 @@ export class RegistrationDetailsComponent implements OnInit {
     const data: QRCodeData = {
       id: this._userId,
       firstName: `${this._registration.value.userDetails.firstName}`,
-      lastName: `${this._registration.value.userDetails.firstName}`,
+      lastName: `${this._registration.value.userDetails.lastName}`,
       dateOfBirth: `${this._registration.value.userDetails.dateOfBirth}`,
     };
 
