@@ -116,7 +116,7 @@ export class ClassHTTPService {
         }),
         map((response: any): any => {
           if(response.success) {
-            return undefined;
+            return response.success;
           } else {
             throwError(response.error);
             return undefined;

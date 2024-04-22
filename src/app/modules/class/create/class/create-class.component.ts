@@ -194,7 +194,19 @@ export class CreateClassComponent implements OnInit {
         this.class.translate = null
         this.class.translatedPdf = null
       }
-      this.create(this.class.getDto())
+
+      const classDto = new ClassDTO();
+      classDto.title = this.class.title;
+      classDto.author = this.class.author;
+      classDto.description = this.class.description;
+      classDto.creationDate = this.class.creationDate;
+      classDto.public = this.class.public;
+      classDto.language = this.class.language;
+      classDto.subjects = this.class.subjects;
+      classDto.pdfUrl = this.class.pdfUrl;
+      classDto.translate = this.class.translate;
+      classDto.translatedPdf = this.class.translatedPdf;
+      this.create(classDto);
     }
   }
 
@@ -336,7 +348,7 @@ export class CreateClassComponent implements OnInit {
       )
     } else {
       const idelete = this.classService
-        .delete(this.class.classID)
+        .delete(this.routeId)
         .pipe(
           tap(
             (res) => {
