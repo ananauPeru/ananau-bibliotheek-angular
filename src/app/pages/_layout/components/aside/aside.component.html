@@ -81,7 +81,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <h4 class="menu-text" *ngIf="">{{ "MENU.LIBRARY.TITLE" | translate }}</h4>
@@ -101,7 +101,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -192,7 +192,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -281,7 +281,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -378,7 +378,7 @@
         class="menu-item"
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted([''])"
+        *ngIf="AuthUtil.permitted(['']) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)"
       >
         <a class="menu-link" routerLink="/scan-item" routerLinkActive="active">
           <span
@@ -399,7 +399,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <h4 class="menu-text">{{ "MENU.LIBRARY.LES" | translate }}</h4>
@@ -416,7 +416,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -443,7 +443,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -470,7 +470,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -495,7 +495,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.Librarian,
             AuthUtil.roles.SuperAdmin
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -521,7 +521,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.SuperAdmin,
             AuthUtil.roles.Student
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <h4 class="menu-text">
@@ -539,7 +539,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.SuperAdmin,
             AuthUtil.roles.Student
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -567,7 +567,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.SuperAdmin,
             AuthUtil.roles.Volunteer
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <h4 class="menu-text">
@@ -585,7 +585,7 @@
           AuthUtil.permitted([
             AuthUtil.roles.SuperAdmin,
             AuthUtil.roles.Volunteer
-          ])
+          ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -610,7 +610,7 @@
       <li
         class="menu-section"
         *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
+          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <h4 class="menu-text">{{ "MENU.ORGANIZATION.TITLE" | translate }}</h4>
@@ -623,7 +623,7 @@
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
         *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
+          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -648,7 +648,7 @@
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
         *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
+          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -659,7 +659,7 @@
             AuthUtil.permitted([
               AuthUtil.roles.SuperAdmin,
               AuthUtil.roles.Admin
-            ])
+            ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
           "
         >
           <span
@@ -678,13 +678,13 @@
         class="menu-item"
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])"
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)"
       >
         <a
           class="menu-link"
           routerLink="/organization/check-in/scan"
           routerLinkActive="active"
-          *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])"
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)"
         >
           <span
             [inlineSVG]="'./assets/media/svg/icons/General/Thunder.svg'"
@@ -703,7 +703,7 @@
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
         *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
+          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -714,7 +714,7 @@
             AuthUtil.permitted([
               AuthUtil.roles.SuperAdmin,
               AuthUtil.roles.Admin
-            ])
+            ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
           "
         >
           <span
@@ -734,7 +734,7 @@
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
         *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
+          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -745,7 +745,7 @@
             AuthUtil.permitted([
               AuthUtil.roles.SuperAdmin,
               AuthUtil.roles.Admin
-            ])
+            ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
           "
         >
           <span
@@ -765,7 +765,7 @@
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
         *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
+          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
         "
       >
         <a
@@ -776,7 +776,7 @@
             AuthUtil.permitted([
               AuthUtil.roles.SuperAdmin,
               AuthUtil.roles.Admin
-            ])
+            ]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)
           "
         >
           <span
@@ -793,7 +793,7 @@
       <!-- begin::section -->
       <li
         class="menu-section"
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)"
       >
         <h4 class="menu-text">{{ "MENU.DOCUMENTATION.TITLE" | translate }}</h4>
         <i class="menu-icon flaticon-more-v2"></i>
@@ -805,7 +805,7 @@
         aria-haspopup="true"
         data-menu-toggle="hover"
         routerLinkActive="menu-item-open"
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)"
       >
         <a
           class="menu-link menu-toggle"
@@ -973,7 +973,7 @@
         class="menu-item"
         aria-haspopup="true"
         routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin]) && DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)"
       >
         <a
           class="menu-link"
