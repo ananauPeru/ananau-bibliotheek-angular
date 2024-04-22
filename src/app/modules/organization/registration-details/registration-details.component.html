@@ -27,6 +27,7 @@
       </h3>
     </div>
     <div *ngIf="registration$ | async as registration" class="card-toolbar">
+      
       <button
         class="btn btn-danger font-weight-bolder mr-2"
         [ngClass]="{
@@ -236,9 +237,7 @@
                   {{ "REGISTRATION.PERSONAL.CONTACT_PERSON.EMAIL" | translate }}
                 </td>
                 <td>
-                  <a href="mailto:{{ registration.emergencyPerson.emailContact }}">{{
-                    registration.emailContact
-                  }}</a>
+                  <a href="mailto:{{ registration.emergencyPerson.email }}">{{registration.emergencyPerson.email}}</a>
                 </td>
               </tr>
               <tr>
