@@ -3,22 +3,29 @@ import { UserModel } from '../../auth'
 import { LoanedPieceModel } from './loaned-piece.model'
 
 export class BookModel {
-  bookId: number
-  user: UserModel
+  id: number
+  title: string
   category: string
   genre: string
-  name: string
   author: string
   description: string
   state: string
-  archived: boolean
-  deleted: boolean
-  loanedPieces: LoanedPieceModel[]
-  photoUrl: string
-  quantity: number
   purchasedAt: Date
+  createdBy: {
+    id: number;
+    firstName: string;
+    lastName: string;
+  };
+  quantity: number
+  photoUrl: string
   createdAt: Date
   updatedAt: Date
+
+
+  /*user: UserModel
+  archived: boolean
+  deleted: boolean
+  loanedPieces: LoanedPieceModel[]*/
 
   constructor() {}
 

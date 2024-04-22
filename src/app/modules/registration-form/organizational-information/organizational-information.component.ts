@@ -10,15 +10,15 @@ import { TranslateService } from "@ngx-translate/core";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
-import { RegistrationDTO } from "../_dto/registration-dto";
-import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
-import { UserStorageService } from "../data-services/user-storage.service";
 import { ScansFile } from "../models/scans-file";
 import { v4 as uuidv4 } from "uuid";
 import { BlobNamePrefix } from "../models/blob-name-prefix";
 import { HttpClient } from "@angular/common/http";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { Observable } from "rxjs";
+import { UserStorageService } from "src/app/shared/services/user-storage/user-storage.service";
+import { RegistrationModel as RegistrationDTO } from "src/app/shared/models/registration/registration.model";
+import { RegistrationStudentModel as RegistrationStudentDTO } from "src/app/shared/models/registration/registration-student.model";
 
 
 @Component({
@@ -61,20 +61,20 @@ export class OrganizationalInformationComponent implements OnInit {
   ngOnInit() {
     this.organizationalForm = this.fb.group({
       dates: this.fb.group({
-        internshipOnline: [this.initialData.internshipOnline],
+        internshipOnline: [this.initialData.internDetails.internshipOnline],
         startDate: [
-          this.initialData.startDate
+          this.initialData.internDetails.startOfInternship
             ? this.datePipe.transform(
-                new Date(this.initialData.startDate),
+                new Date(this.initialData.internDetails.startOfInternship),
                 "yyyy-MM-dd"
               )
             : "",
           Validators.required,
         ],
         endDate: [
-          this.initialData.endDate
+          this.initialData.internDetails.endOfInternship
             ? this.datePipe.transform(
-                new Date(this.initialData.endDate),
+                new Date(this.initialData.internDetails.endOfInternship),
                 "yyyy-MM-dd"
               )
             : "",
@@ -82,35 +82,35 @@ export class OrganizationalInformationComponent implements OnInit {
         ],
       }),
       flightInformation: this.fb.group({
-        flightNumber: [this.initialData.flightNumber],
+        flightNumber: [this.initialData.internDetails.flightNumber],
         flightDateArrival: [
-          this.initialData.flightDateArrival
+          this.initialData.internDetails.flightDateArrival
             ? this.datePipe.transform(
-                new Date(this.initialData.flightDateArrival),
+                new Date(this.initialData.internDetails.flightDateArrival),
                 "yyyy-MM-dd"
               )
             : "",
         ],
       }),
       spanish: this.fb.group({
-        level: [this.initialData.level, Validators.required],
-        weeksOnline: [this.initialData.weeksOnline],
-        weeks: [this.initialData.weeks],
+        level: [this.initialData.internDetails.spanishLessons.spanishLevel, Validators.required],
+        weeksOnline: [this.initialData.internDetails.spanishLessons.spanishLessonWeeksOnline],
+        weeks: [this.initialData.internDetails.spanishLessons.spanishLessonWeeks],
       }),
       payments: this.fb.group({
         paymentApartment: [false],
         paymentGuarantee: [false],
         paymentSpanish: [false],
-        paymentDescription: [this.initialData.paymentDescription],
+        paymentDescription: [this.initialData.internDetails.paymentDescription],
       }),
       motivationLetter: this.fb.group({
-        motivationLetter: [this.initialData.motivationLetter, Validators.required],
+        motivationLetter: [this.initialData.internDetails.motivationLetter, Validators.required],
       }),
       info: this.fb.group({
-        occupation: [this.initialData.occupation, Validators.required],
-        tasks: [this.initialData.tasks, Validators.required],
-        expectations: [this.initialData.expectations],
-        proposals: [this.initialData.proposals],
+        occupation: [this.initialData.internDetails.professionOrEducation, Validators.required],
+        tasks: [this.initialData.internDetails.internshipTasks, Validators.required],
+        expectations: [this.initialData.internDetails.internshipExpectations],
+        proposals: [this.initialData.internDetails.internshipProposals],
       }),
     });
 
@@ -120,10 +120,10 @@ export class OrganizationalInformationComponent implements OnInit {
       dates.addControl(
         "leaveStartDate",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).leaveStartDate
+          (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccomodation
             ? this.datePipe.transform(
                 new Date(
-                  (this.initialData as RegistrationStudentDTO).leaveStartDate
+                  (this.initialData as RegistrationStudentDTO).internDetails.startOfPeriodOfAccomodation
                 ),
                 "yyyy-MM-dd"
               )
@@ -133,10 +133,10 @@ export class OrganizationalInformationComponent implements OnInit {
       dates.addControl(
         "leaveEndDate",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).leaveEndDate
+          (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccomodation
             ? this.datePipe.transform(
                 new Date(
-                  (this.initialData as RegistrationStudentDTO).leaveEndDate
+                  (this.initialData as RegistrationStudentDTO).internDetails.endOfPeriodOfAccomodation
                 ),
                 "yyyy-MM-dd"
               )
@@ -148,18 +148,36 @@ export class OrganizationalInformationComponent implements OnInit {
       info.addControl(
         "degree",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).degree,
+          (this.initialData as RegistrationStudentDTO).internDetails.educationDegree,
           Validators.required
         )
       );
       info.addControl(
         "internshipContext",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).internshipContext,
+          (this.initialData as RegistrationStudentDTO).internDetails.internshipContext,
           Validators.required
         )
       );
-    }
+    } else if(this.role === FormRole.VOLUNTEER) {
+      // Add controls only targeted to volunteers
+      /*
+      const dates = this.organizationalForm.get("dates") as FormGroup;
+      dates.addControl(
+        "leaveStartDate",
+        this.fb.control(
+          (this.initialData as RegistrationVolunteerDTO).internDetails.startOfPeriodOfAccommodation
+            ? this.datePipe.transform(
+                new Date(
+                  (this.initialData as RegistrationVolunteerDTO).internDetails.startOfPeriodOfAccommodation
+                ),
+                "yyyy-MM-dd"
+              )
+            : ""  
+          )
+        );
+      */
+      }
 
     this.emitForm();
 
@@ -167,7 +185,7 @@ export class OrganizationalInformationComponent implements OnInit {
     this.organizationalForm.valueChanges.subscribe(() => this.emitForm());
 
     // Everytime a new Azure blob image comes in, update the form
-    this.userStorageService.getNewFile$.subscribe((file) => {
+    this.userStorageService.getNewFile$.subscribe((file: ScansFile) => {
       if (file.name.startsWith(BlobNamePrefix.PaymentApartment)) {
         this.paymentApartmentFiles.push(file);
         this.updatePaymentApartment(false);
@@ -181,19 +199,6 @@ export class OrganizationalInformationComponent implements OnInit {
         this.updatePaymentSpanish(false);  
       }
     });
-
-    // Fetch the preview image from assets (will be shown when file is no image)
-    this.http.get("/assets/images/pdf.png", { responseType: "blob" }).subscribe(
-      (image) => {
-        this.previewImageForNonImageFiles = new File([image], "pdf.png", {
-          type: "image/png",
-        });
-      },
-      (error) => console.error(error),
-      () =>
-        // Ask the storage service to begin fetching blob images from Azure
-        this.userStorageService.fetchImages$()
-    );
 
     // Everytime 'upload' is triggered, upload the newly imported images to Azure and mark them as 'old' afterwards
     this.upload.subscribe((submit) => {
@@ -357,7 +362,7 @@ export class OrganizationalInformationComponent implements OnInit {
   }
 
   private updatePaymentApartment(markAsTouched: boolean) {
-      const paymentApartment = this.organizationalForm.get('paymentApartment');
+      const paymentApartment = this.organizationalForm.get('payments.paymentApartment');
       if (this.paymentApartmentFiles.length > 0) {
         paymentApartment.setValue(true);
       } else {
@@ -367,7 +372,7 @@ export class OrganizationalInformationComponent implements OnInit {
     }
 
   private updatePaymentGuarantee(markAsTouched: boolean) {
-    const paymentGuarantee = this.organizationalForm.get('paymentGuarantee');
+    const paymentGuarantee = this.organizationalForm.get('payments.paymentGuarantee');
     if (this.paymentGuaranteeFiles.length > 0) {
       paymentGuarantee.setValue(true);
     } else {
@@ -377,7 +382,7 @@ export class OrganizationalInformationComponent implements OnInit {
   }
 
   private updatePaymentSpanish(markAsTouched: boolean) {
-    const paymentSpanish = this.organizationalForm.get('paymentSpanish');
+    const paymentSpanish = this.organizationalForm.get('payments.paymentSpanish');
     if (this.paymentSpanishFiles.length > 0) {
       paymentSpanish.setValue(true);
     } else {

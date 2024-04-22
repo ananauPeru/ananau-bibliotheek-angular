@@ -7,8 +7,8 @@ import { catchError, map } from "rxjs/operators";
 // import { AccountService } from "src/app/account/data-services/account.service";
 import { environment } from "src/environments/environment";
 import { AuthModel } from "../../auth/_models/auth.model";
-import { RegistrationDTO } from "../_dto/registration-dto";
-import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
+import { RegistrationVolunteerModel as RegistrationVolunteerDTO } from "src/app/shared/models/registration/registration-volunteer.model";
+import { RegistrationStudentModel as RegistrationStudentDTO } from "src/app/shared/models/registration/registration-student.model";
 
 @Injectable({
   providedIn: "root",
@@ -23,7 +23,7 @@ export class RegistrationService {
     public translate: TranslateService
   ) {}
 
-  getVolunteerRegistration$(): Observable<RegistrationDTO> {
+  getVolunteerRegistration$(): Observable<RegistrationVolunteerDTO> {
     return this.http
       .get(`${environment.apiUrl}/registrations/volunteers/current`, {
         responseType: "json",
@@ -41,8 +41,8 @@ export class RegistrationService {
           return throwError(error);
         }),
         map(
-          (dto: any): RegistrationDTO => {
-            return dto;
+          (dto: any): RegistrationVolunteerDTO => {
+            return dto.details;
           }
         )
       );
@@ -67,21 +67,19 @@ export class RegistrationService {
         }),
         map(
           (dto: any): RegistrationStudentDTO => {
-            return dto;
+            return dto.details;
           }
         )
       );
   }
 
   postVolunteerRegistration$(
-    registration: RegistrationDTO,
+    registration: RegistrationVolunteerDTO,
     submit: boolean
-  ): Observable<RegistrationDTO> {
+  ): Observable<RegistrationVolunteerDTO> {
     return this.http
       .post(
-        `${environment.apiUrl}/registrations/volunteers/current${
-          submit ? "/submit" : ""
-        }`,
+        `${environment.apiUrl}/registrations/volunteers/current`,
         registration,
         {
           responseType: "json",
@@ -100,7 +98,7 @@ export class RegistrationService {
           return throwError(error);
         }),
         map(
-          (dto: any): RegistrationDTO => {
+          (dto: any): RegistrationVolunteerDTO => {
             return dto;
           }
         )
@@ -113,9 +111,7 @@ export class RegistrationService {
   ): Observable<RegistrationStudentDTO> {
     return this.http
       .post(
-        `${environment.apiUrl}/registrations/students/current${
-          submit ? "/submit" : ""
-        }`,
+        `${environment.apiUrl}/registrations/students/current`,
         registration,
         {
           responseType: "json",

@@ -54,7 +54,7 @@ export class CreateItemComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.fb.group({
       name: [
-        this.item && this.item.name ? this.item.name : '',
+        this.item && this.item.title ? this.item.title : '',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -145,7 +145,7 @@ export class CreateItemComponent implements OnInit {
 
     if (!this.item) {
       let item = new ItemDTO()
-      item.name = formValues.name
+      item.title = formValues.name
       item.brand = formValues.brand
       item.category = 'EDUCATIONAL ITEM'
       item.course = formValues.course.toUpperCase()
@@ -164,7 +164,7 @@ export class CreateItemComponent implements OnInit {
       item.photoUrl = 'harry4'
       this.create(item)
     } else {
-      this.item.name = formValues.name
+      this.item.title = formValues.name
       this.item.brand = formValues.brand
       this.item.category = 'EDUCATIONAL ITEM'
       this.item.course = formValues.course.toUpperCase()
@@ -288,7 +288,7 @@ export class CreateItemComponent implements OnInit {
       )
     } else {
       const idelete = this.itemHTTPService
-        .delete(this.item.itemId)
+        .delete(this.item.id)
         .pipe(
           tap(
             (res) => {

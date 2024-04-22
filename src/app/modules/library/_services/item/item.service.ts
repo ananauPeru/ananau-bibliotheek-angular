@@ -30,6 +30,7 @@ export class ItemService {
   }
 
   loadInitialData() {
+    this._items.next([]);
     this.itemHttpService.getAllItems$().subscribe(
       (res) => {
         // let items = (<Object[]>res.json()).map((todo: any) =>
@@ -61,7 +62,7 @@ export class ItemService {
       this.items = this._items.pipe(
         map((items) =>
           items.filter((item) => {
-            return item.name.toLowerCase().includes(f);
+            return item.title.toLowerCase().includes(f);
           })
         )
       );

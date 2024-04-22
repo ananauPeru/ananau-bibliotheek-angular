@@ -1,16 +1,21 @@
 import { RegistrationDTO } from "./registration-dto";
 
 export class RegistrationStudentDTO extends RegistrationDTO {
-  // PERSONAL INFORMATION
-  // General
-  schoolEmail: string;
+  userDetails: {
+    schoolEmail: string;
+  } & RegistrationDTO['userDetails'] = Object.assign({}, this.userDetails, {
+    schoolEmail: ''
+  });
 
-  // ORGANIZATIONAL INFORMATION
-  // Dates
-  leaveStartDate: Date;
-  leaveEndDate: Date;
-
-  // Info
-  degree: string;
-  internshipContext: string;
+  internDetails: {
+    startOfPeriodOfAccommodation: Date;
+    endOfPeriodOfAccommodation: Date;
+    educationDegree: string;
+    internshipContext: string;
+  } & RegistrationDTO['internDetails'] = Object.assign({}, this.internDetails, {
+    startOfPeriodOfAccommodation: null,
+    endOfPeriodOfAccommodation: null,
+    educationDegree: '',
+    internshipContext: ''
+  });
 }

@@ -47,8 +47,8 @@ export class CreateBookComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      name: [
-        this.book && this.book.name ? this.book.name : '',
+      title: [
+        this.book && this.book.title ? this.book.title : '',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -123,7 +123,7 @@ export class CreateBookComponent implements OnInit {
 
     if (!this.book) {
       let item = new BookDTO()
-      item.name = formValues.name
+      item.title = formValues.title
       item.author = formValues.author
       item.category = 'BOOK'
       item.genre = formValues.genre.toUpperCase()
@@ -140,7 +140,7 @@ export class CreateBookComponent implements OnInit {
       item.quantity = formValues.quantity
       this.create(item)
     } else {
-      this.book.name = formValues.name
+      this.book.title = formValues.title
       this.book.author = formValues.author
       this.book.category = 'BOOK'
       this.book.genre = formValues.genre.toUpperCase()

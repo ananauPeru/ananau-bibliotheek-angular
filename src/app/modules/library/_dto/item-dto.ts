@@ -1,13 +1,14 @@
 export class ItemDTO {
+  title: string;
+  brand: string;
+  purchasedAt: Date;
+  purpose: string;
+  course: string;
+  code: string;
+  quantity: number;
+  pieces: string;
+  photoUrl: string;
+  description: string;
   category: string
-  brand: string
-  name: string
-  course: string
-  code: string
-  description: string
-  purchasedAt: Date
-  quantity: number
-  pieces: string
-  purpose: string
-  photoUrl:string
 }
+

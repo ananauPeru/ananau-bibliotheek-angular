@@ -1,5 +1,5 @@
 export class BookDTO {
-  name: string
+  title: string
   category: string
   genre: string
   author: string

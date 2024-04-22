@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BlobServiceClient, ContainerClient } from '@azure/storage-blob'
-import { take } from 'rxjs/operators'
+import { catchError, first, map, take } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 import { ScansFile } from '../../_models/scans-file'
-import { Subject } from 'rxjs'
+import { Subject, throwError } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -46,10 +46,6 @@ export class ItemStorageService {
     await blob.uploadData(file, {
       blobHTTPHeaders: { blobContentType: file.type },
     })
-    console.log(
-      `https://${this._accountName}.blob.core.windows.net/public-images/` +
-        blob.name,
-    )
     return (
       `https://${this._accountName}.blob.core.windows.net/public-images/` +
       blob.name
@@ -72,12 +68,34 @@ export class ItemStorageService {
     ).getContainerClient(this._containerName)
   }
 
-  private getContainerToken$(): Promise<string> {
+  /* private getContainerToken$(): Promise<string> {
     return this.http
-      .get(`${environment.apiUrl}/files/public-images/token`, {
+      .get(`${environment.apiUrl}/blob/public-images/token`, {
         responseType: 'text',
       })
       .pipe(take(1))
       .toPromise()
+  } */
+
+
+  private getContainerToken$(): Promise<string> {
+    return this.http
+      .get(`${environment.apiUrl}/blob/public-images/token`, {
+        responseType: "json",
+      })
+      .pipe(
+        map((response: any) => {
+          if (response.success) {
+            return response.url; // Return the URL if the request is successful
+          } else {
+            throw new Error(response.error); // Throw an error if the request was not successful
+          }
+        }),
+        catchError((error: any) => {
+          return throwError(error); // Propagate any errors that occurred during the request
+        })
+      )
+      .toPromise();
   }
+
 }

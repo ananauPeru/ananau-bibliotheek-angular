@@ -1,19 +1,25 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { CheckInHttpService } from './check-in-http/check-in-http.service';
-import { filter, map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { CheckInHttpService } from "./check-in-http/check-in-http.service";
+import { filter, find, first, map } from "rxjs/operators";
+import { CheckInUser } from "../../_models/check-in-user.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CheckInService {
+  private _checkInHistory: BehaviorSubject<CheckInHistory[]> =
+    new BehaviorSubject([]);
 
-  private _checkInHistory: BehaviorSubject<CheckInHistory[]> = new BehaviorSubject([]);
+  private _checkInList: BehaviorSubject<CheckInUser[]> = new BehaviorSubject(
+    []
+  );
+  public checkInList: Observable<CheckInUser[]> =
+    this._checkInList.asObservable();
 
   constructor(private checkInHttpService: CheckInHttpService) {
-    this.loadInitialData();
-   }
-
+    this.refreshData();
+  }
 
   loadInitialData() {
     this.refreshData();
@@ -26,12 +32,28 @@ export class CheckInService {
       },
       (err) => console.error(err)
     );
+
+    this.checkInHttpService.getCheckInList$().subscribe(
+      (checkInList) => {
+        this._checkInList.next(checkInList);
+      },
+      (err) => console.error(err)
+    );
   }
 
-  // isCheckedIn(userId: number): Observable<boolean> {
-  //   console.log("Fetching...")
-  //   return this.checkInHttpService.getIsCheckedIn$(userId);
-  // }
+  filter(filterValue: string) {
+    const f = filterValue.toLowerCase();
+    this.checkInList = this._checkInList.pipe(
+      map((users: CheckInUser[]) =>
+        users.filter((user: CheckInUser) => {
+          return (
+            user.firstName?.toLowerCase().includes(f) ||
+            user.lastName?.toLowerCase().includes(f)
+          );
+        })
+      )
+    );
+  }
 
   isCheckedIn(userId: number): Observable<boolean> {
     return this._checkInHistory.pipe(
@@ -42,8 +64,7 @@ export class CheckInService {
         if (userCheckIns.length === 0) {
           return false;
         }
-        const latestCheckIn = userCheckIns[userCheckIns.length - 1];
-        return latestCheckIn.checkOutTime === null || latestCheckIn.checkOutTime === undefined;
+        return userCheckIns.some((checkIn) => checkIn.checkOut === null);
       })
     );
   }
@@ -52,11 +73,25 @@ export class CheckInService {
     return this.checkInHttpService.postCheckIn$(userId);
   }
 
-  checkOut(userId: number): Observable<CheckInHistory> {
-    return this.checkInHttpService.putCheckOut$(userId);
+  getCheckInUser(userId: number): Observable<CheckInUser> {
+    return this._checkInList.pipe(
+      map(checkInList => checkInList.find(checkInUser => checkInUser.userId === userId))
+    );
   }
 
-  getCheckInHistory(userId: number, startDate: Date | null, endDate: Date | null): Observable<CheckInHistory[]> {
-    return this.checkInHttpService.getAllCheckInHistoryOfUser$(userId, startDate, endDate);
+  getCheckInHistory(
+    userId: number,
+    startDate: Date | null,
+    endDate: Date | null
+  ): Observable<CheckInHistory[]> {
+    return this.checkInHttpService.getAllCheckInHistoryOfUser$(
+      userId,
+      startDate,
+      endDate
+    );
+  }
+
+  getCheckInList(): Observable<CheckInUser[]> {
+    return this.checkInHttpService.getCheckInList$();
   }
 }

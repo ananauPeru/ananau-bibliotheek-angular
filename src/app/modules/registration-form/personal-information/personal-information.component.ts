@@ -9,8 +9,8 @@ import {
 import { TranslateService } from "@ngx-translate/core";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
-import { RegistrationDTO } from "../_dto/registration-dto";
-import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
+import { RegistrationModel as RegistrationDTO } from "src/app/shared/models/registration/registration.model";
+import { RegistrationStudentModel as RegistrationStudentDTO } from "src/app/shared/models/registration/registration-student.model";
 
 @Component({
   selector: "app-personal-information",
@@ -37,59 +37,97 @@ export class PersonalInformationComponent implements OnInit {
   ngOnInit() {
     this.personalForm = this.fb.group({
       general: this.fb.group({
-        firstName: [this.initialData.firstName, [Validators.required]],
-        middleName: [this.initialData.middleName],
-        lastName: [this.initialData.lastName, [Validators.required]],
-        email: [{ value: this.initialData.email, disabled: true }], // read-only
-        phone: [this.initialData.phone, [Validators.required]],
+        firstName: [
+          this.initialData.userDetails.firstName,
+          [Validators.required],
+        ],
+        middleName: [this.initialData.userDetails.middleName],
+        lastName: [
+          this.initialData.userDetails.lastName,
+          [Validators.required],
+        ],
+        email: [{ value: this.initialData.userDetails.email, disabled: true }], // read-only
+        phone: [this.initialData.userDetails.phone, [Validators.required]],
         dateOfBirth: [
-          this.initialData.dateOfBirth
+          this.initialData.userDetails.dateOfBirth
             ? this.datePipe.transform(
-                new Date(this.initialData.dateOfBirth),
+                new Date(this.initialData.userDetails.dateOfBirth),
                 "yyyy-MM-dd"
               )
             : "",
           Validators.required,
         ],
-        birthplace: [this.initialData.birthplace, Validators.required],
-        nationality: [this.initialData.nationality, Validators.required],
-        passportNumber: [this.initialData.passportNumber, Validators.required],
+        birthplace: [
+          this.initialData.userDetails.birthplace,
+          Validators.required,
+        ],
+        nationality: [
+          this.initialData.userDetails.nationality,
+          Validators.required,
+        ],
+        passportNumber: [
+          this.initialData.userDetails.passportNumber,
+          Validators.required,
+        ],
       }),
       address: this.fb.group({
-        street: [this.initialData.street, Validators.required],
-        houseNumber: [this.initialData.houseNumber, Validators.required],
-        mailbox: [this.initialData.mailbox],
-        postalCode: [this.initialData.postalCode, Validators.required],
-        township: [this.initialData.township, Validators.required],
-        country: [this.initialData.country, Validators.required],
+        street: [this.initialData.address.street, Validators.required],
+        houseNumber: [
+          this.initialData.address.houseNumber,
+          Validators.required,
+        ],
+        mailbox: [this.initialData.address.mailbox],
+        postalCode: [this.initialData.address.postalCode, Validators.required],
+        township: [this.initialData.address.city, Validators.required],
+        country: [this.initialData.address.country, Validators.required],
       }),
       contactPerson: this.fb.group({
-        firstName: [this.initialData.firstNameContact, Validators.required],
-        middleName: [this.initialData.middleNameContact],
-        lastName: [this.initialData.lastNameContact, Validators.required],
-        relation: [this.initialData.relation, Validators.required],
+        firstName: [
+          this.initialData.emergencyPerson.firstName,
+          Validators.required,
+        ],
+        middleName: [this.initialData.emergencyPerson.middleName],
+        lastName: [
+          this.initialData.emergencyPerson.lastName,
+          Validators.required,
+        ],
+        relation: [
+          this.initialData.emergencyPerson.relation,
+          Validators.required,
+        ],
         email: [
-          this.initialData.emailContact,
+          this.initialData.emergencyPerson.email,
           [Validators.required, Validators.email],
         ],
-        phone: [this.initialData.phoneContact, Validators.required],
+        phone: [this.initialData.emergencyPerson.phone, Validators.required],
       }),
       medical: this.fb.group({
-        allergies: [this.initialData.allergies],
-        medicalConditions: [this.initialData.medicalConditions],
+        allergies: [this.initialData.medicalDetails.allergies],
+        medicalConditions: [this.initialData.medicalDetails.medicalConditions],
       }),
     });
 
-    // Add controls only targeted to students
     if (this.role === FormRole.STUDENT) {
+      // Add controls only targeted to students
       const general = this.personalForm.get("general") as FormGroup;
       general.addControl(
         "schoolEmail",
         this.fb.control(
-          (this.initialData as RegistrationStudentDTO).schoolEmail,
+          (this.initialData as RegistrationStudentDTO).userDetails.schoolEmail,
           [Validators.required, Validators.email]
         )
       );
+    } else if (this.role === FormRole.VOLUNTEER) {
+      // Add controls only targeted to volunteers
+
+      // const general = this.personalForm.get("general") as FormGroup;
+      // general.addControl(
+      //   "volunteerEmail",
+      //   this.fb.control(
+      //     (this.initialData as RegistrationVolunteerDTO).userDetails.schoolEmail,
+      //     [Validators.required, Validators.email]
+      //   )
+      // );
     }
 
     this.emitForm();

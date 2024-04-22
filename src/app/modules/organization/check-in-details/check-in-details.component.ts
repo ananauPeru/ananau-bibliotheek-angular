@@ -2,9 +2,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CheckInService } from '../_services/check-in/check-in.service';
 import { Observable, of } from 'rxjs';
-import { RegistrationService } from '../_services/registration/registration.service';
-import { RegistrationModel } from '../_models/registration.model';
 import { switchMap, catchError } from 'rxjs/operators';
+import { CheckInUser } from '../_models/check-in-user.model';
 
 @Component({
   selector: 'app-check-in-details',
@@ -15,7 +14,7 @@ export class CheckInDetailsComponent implements OnInit {
   isLoading: boolean = true;
 
   id: number;
-  registration: RegistrationModel;
+  checkInUser: CheckInUser;
   startDate: Date;
   endDate: Date;
   checkInHistory$: Observable<CheckInHistory[]>;
@@ -26,11 +25,9 @@ export class CheckInDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private checkInService: CheckInService,
-    private registrationService: RegistrationService,
     private cdr: ChangeDetectorRef
   ) {
     checkInService.loadInitialData();
-    registrationService.loadInitialData();
   }
 
   ngOnInit() {
@@ -56,46 +53,44 @@ export class CheckInDetailsComponent implements OnInit {
           console.error('Invalid ID');
           return of(null);
         }
-        return this.registrationService.getVolunteerRegistrationById$(this.id).pipe(
-          catchError(error => {
-            console.error('Error fetching volunteer registration:', error);
-            return this.registrationService.getStudentRegistrationById$(this.id);
-          }),
-          catchError(error => {
-            console.error('Error fetching student registration:', error);
-            return of(null);
-          })
-        );
+        return this.checkInService.getCheckInUser(this.id);
       })
-    ).subscribe(registration => {
-      this.registration = registration;
+    ).subscribe(checkInUser => {
+      if (checkInUser) {
+        this.checkInUser = checkInUser;
+      } else {
+        console.error('No matching CheckInUser found');
+      }
       this.isLoading = false;
       this.cdr.detectChanges();
     });
   }
 
   calculateTotalCheckedInTime(checkInHistory: CheckInHistory[], startDate: Date, endDate: Date): number {
-    if(!checkInHistory) return 0;
+    if (!checkInHistory) return 0;
     let totalTime = 0;
 
-    if(typeof startDate === 'string') startDate = new Date(startDate);
-    if(typeof endDate === 'string') endDate = new Date(endDate);
-
+    if (typeof startDate === 'string') startDate = new Date(startDate);
+    if (typeof endDate === 'string') endDate = new Date(endDate);
 
     startDate = startDate || new Date(-8640000000000000); // Minimum date value
     endDate = endDate || new Date(8640000000000000); // Maximum date value
-    
+
     for (const entry of checkInHistory) {
-      const checkInTime = new Date(entry.checkInTime);
-      const checkOutTime = entry.checkOutTime ? new Date(entry.checkOutTime) : new Date();
-  
+      const checkInTime = new Date(entry.checkIn + 'Z');
+      const checkOutTime = entry.checkOut ? new Date(entry.checkOut + 'Z') : new Date();
+
       if (checkInTime >= startDate && checkOutTime <= endDate) {
         const duration = checkOutTime.getTime() - checkInTime.getTime();
         totalTime += duration;
       }
     }
-  
+
     return totalTime;
+  }
+
+  convertToLocalTime(utcDate: Date): Date {
+    return new Date(utcDate.getTime() - utcDate.getTimezoneOffset() * 60000);
   }
 
   calculateTotalCheckedInTimeToday(checkInHistory: CheckInHistory[]): number {
@@ -103,7 +98,7 @@ export class CheckInDetailsComponent implements OnInit {
     today.setHours(0, 0, 0, 0);
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-  
+
     return this.calculateTotalCheckedInTime(checkInHistory, today, tomorrow);
   }
 
@@ -119,14 +114,14 @@ export class CheckInDetailsComponent implements OnInit {
     const currentDate = new Date();
     const day = currentDate.getDay();
     const diff = currentDate.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(currentDate.setDate(diff));
+    return new Date(currentDate.getFullYear(), currentDate.getMonth(), diff);
   }
-
+  
   getLastDayOfWeek(): Date {
     const currentDate = new Date();
     const day = currentDate.getDay();
     const diff = currentDate.getDate() - day + (day === 0 ? 0 : 7);
-    return new Date(currentDate.setDate(diff));
+    return new Date(currentDate.getFullYear(), currentDate.getMonth(), diff);
   }
 
   getFirstDayOfSelectedWeek(): Date {

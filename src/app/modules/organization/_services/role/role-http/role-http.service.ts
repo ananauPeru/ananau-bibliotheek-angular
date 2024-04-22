@@ -5,7 +5,7 @@ import { environment } from "../../../../../../environments/environment";
 import { catchError, finalize, map } from "rxjs/operators";
 import { RoleModel } from "../../../_models/role.model";
 
-const API_ITEMS_URL = `${environment.apiUrl}/user`;
+const API_ITEMS_URL = `${environment.apiUrl}/users`;
 
 @Injectable({
   providedIn: "root",
@@ -15,7 +15,7 @@ export class RoleHTTPService {
 
   getAllRoles$(): Observable<RoleModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}/getAllRoles`, {
+      .get(`${API_ITEMS_URL}/roles`, {
         responseType: "json",
       })
       .pipe(
@@ -25,8 +25,14 @@ export class RoleHTTPService {
           }
           return throwError(error);
         }),
-        map((items: any): RoleModel[] => {
-          return items;
+        map((response: any): RoleModel[] => {
+          return response.roles.map((item: any) => {
+            return {
+              id: item.id,
+              name: item.name,
+              normalizedName: item.normalizedName,
+            };
+          });
         })
       );
   }
@@ -43,11 +49,9 @@ export class RoleHTTPService {
           }
           return throwError(error);
         }),
-        map(
-          (item: any): RoleModel => {
-            return item;
-          }
-        )
+        map((item: any): RoleModel => {
+          return item;
+        })
       );
   }
 }

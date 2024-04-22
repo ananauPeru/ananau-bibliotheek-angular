@@ -3,12 +3,10 @@ import { Observable, of, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../../../../environments/environment";
 import { catchError, finalize, map } from "rxjs/operators";
-import { ItemModel } from "../../../_models/item.model";
-import { ItemDTO } from "../../../_dto/item-dto";
 import { BookModel } from "../../../_models/book.model";
 import { BookDTO } from "../../../_dto/book-dto";
 
-const API_ITEMS_URL = `${environment.apiUrl}/book`;
+const API_ITEMS_URL = `${environment.apiUrl}/books`;
 
 @Injectable({
   providedIn: "root",
@@ -18,7 +16,7 @@ export class BookHTTPService {
 
   getAllBooks$(): Observable<BookModel[]> {
     return this.http
-      .get(`${API_ITEMS_URL}/getall`, {
+      .get(`${API_ITEMS_URL}?PageSize=1000`, {
         responseType: "json",
       })
       .pipe(
@@ -28,11 +26,17 @@ export class BookHTTPService {
           }
           return throwError(error);
         }),
-        map((items: any): BookModel[] => {
-          return items;
+        map((response: any): BookModel[] => {
+          if (response.success) {
+            return response.books;
+          } else {
+            throwError(response.error);
+            return [];
+          }
         })
       );
   }
+  
 
   // CREATE
   // server should return the object with ID
@@ -44,11 +48,14 @@ export class BookHTTPService {
         }
         return throwError(error);
       }),
-      map(
-        (book: any): BookModel => {
-          return book;
+      map((response: any): BookModel => {
+        if (response.success) {
+          return response.book;
+        } else {
+          throwError(response.error);
+          return null;
         }
-      )
+      })
     );
   }
 
@@ -60,17 +67,20 @@ export class BookHTTPService {
         }
         return throwError(error);
       }),
-      map(
-        (book: any): BookModel => {
-          return book;
+      map((response: any): BookModel => {
+        if (response.success) {
+          return response.book;
+        } else {
+          throwError(response.error);
+          return null;
         }
-      )
+      })
     );
   }
 
   getItemById(id: number): Observable<BookModel> {
     return this.http
-      .get(`${API_ITEMS_URL}/getById/${id}`, {
+      .get(`${API_ITEMS_URL}/${id}`, {
         responseType: "json",
       })
       .pipe(
@@ -80,11 +90,14 @@ export class BookHTTPService {
           }
           return throwError(error);
         }),
-        map(
-          (book: any): BookModel => {
-            return book;
+        map((response: any): BookModel => {
+          if (response.success) {
+            return response.book;
+          } else {
+            throwError(response.error);
+            return null;
           }
-        )
+        })
       );
   }
 }

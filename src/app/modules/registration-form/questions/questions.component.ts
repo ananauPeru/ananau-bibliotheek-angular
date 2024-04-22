@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ValidationErrors } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { ContainerComponent } from "../container/container.component";
 import { FormRole } from "../models/form-role";
-import { RegistrationDTO } from "../_dto/registration-dto";
+import { RegistrationModel } from "src/app/shared/models/registration/registration.model";
 
 @Component({
   selector: "app-questions",
@@ -19,16 +19,16 @@ export class QuestionsComponent implements OnInit {
     requiredAndValid: number;
   }>();
   @Input() public role: FormRole;
-  @Input() public initialData: RegistrationDTO;
+  @Input() public initialData: RegistrationModel;
 
   constructor(private fb: FormBuilder, private translate: TranslateService) {}
 
   ngOnInit() {
     this.questionsForm = this.fb.group({
-      otherQuestions: [this.initialData.otherQuestions],
-      experience: [this.initialData.experience],
-      whyAnanau: [this.initialData.whyAnanau],
-      firstHeard: [this.initialData.firstHeard],
+      otherQuestions: [this.initialData.internDetails.otherQuestions],
+      experience: [this.initialData.internDetails.experience],
+      whyAnanau: [this.initialData.internDetails.whyAnanau],
+      firstHeard: [this.initialData.internDetails.whereFirstHeard],
     });
 
     this.emitForm();

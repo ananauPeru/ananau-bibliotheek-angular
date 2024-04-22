@@ -15,7 +15,6 @@ export class OverviewComponent implements OnInit {
   public filteredActiveTodosEmpty: Observable<Boolean>
 
   constructor(public todoService: TodoService) {
-    console.log(todoService.todos)
   }
 
   ngOnInit(): void {}
@@ -48,7 +47,7 @@ export class OverviewComponent implements OnInit {
 
   listEmpty(l: any): boolean {
     let b = l.pipe(
-      map((count) => count > 0),
+      map((count: number) => count > 0),
       defaultIfEmpty(true),
     )
     return b

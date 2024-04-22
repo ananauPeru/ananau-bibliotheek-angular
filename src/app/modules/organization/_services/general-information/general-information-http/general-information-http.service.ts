@@ -22,19 +22,9 @@ export class GeneralInformationHTTPService {
 
   // Visa requests
 
-  getVisaInformation$(): Observable<{
-    visaId: number;
-    description: string;
-    createdAt: string;
-    updatedAt: string;
-  }> {
+  getVisaInformation$(): Observable<string> {
     return this.http
-      .get<{
-        visaId: number;
-        description: string;
-        createdAt: string;
-        updatedAt: string;
-      }>(`${API_GENERAL_INFORMATION_URL}/visa`)
+      .get(`${API_GENERAL_INFORMATION_URL}/visa`)
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -43,15 +33,18 @@ export class GeneralInformationHTTPService {
             console.error(error);
           }
           return throwError(error);
-        })
-      );
+        }),
+        map((response: any): string => {
+          return response.description;
+        }
+      ));
   }
 
-  postVisaInformation$(visaDescription: {
+  putVisaInformation$(visaDescription: {
     description: string;
   }): Observable<any> {
     return this.http
-      .post(`${API_GENERAL_INFORMATION_URL}/visa`, visaDescription)
+      .put(`${API_GENERAL_INFORMATION_URL}/visa`, visaDescription)
       .pipe(
         catchError((error) => {
           if (error.status === 401) {
@@ -80,8 +73,12 @@ export class GeneralInformationHTTPService {
           }
           return throwError(error);
         }),
-        map((vaccinations: any): VaccinationModel[] => {
-          return vaccinations;
+        map((response: any): VaccinationModel[] => {
+          return response.vaccinations.map((vaccination: any) => ({
+            id: vaccination.id,
+            name: vaccination.name,
+            required: vaccination.required,
+          }));
         })
       );
   }
@@ -125,77 +122,58 @@ export class GeneralInformationHTTPService {
   // Holiday requests
 
   getAllHolidayInformation$(): Observable<HolidayModel[]> {
-    return of(this.fakeHolidays);
-  }
-
-  // getAllHolidayInformation$(): Observable<HolidayModel[]> {
-  //   return this.http
-  //     .get(`${API_GENERAL_INFORMATION_URL}/holidays`, {
-  //       responseType: "json",
-  //     })
-  //     .pipe(
-  //       catchError((error) => {
-  //         if (error.status == 401) {
-  //           console.error("Login please...");
-  //         } else {
-  //           console.error(error);
-  //         }
-  //         return throwError(error);
-  //       }),
-  //       map((holidays: any): HolidayModel[] => {
-  //         return holidays;
-  //       })
-  //     );
-  // }
-
-  getHolidayInformationById$(holidayId: number): Observable<HolidayModel> {
     return this.http
-      .get(`${API_GENERAL_INFORMATION_URL}/holidays/${holidayId}`, {
+      .get(`${API_GENERAL_INFORMATION_URL}/holidays`, {
         responseType: "json",
       })
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
             console.error("Login please...");
+          } else {
+            console.error(error);
           }
           return throwError(error);
         }),
-        map((holiday: any): HolidayModel => {
-          return holiday;
+        map((response: any): HolidayModel[] => {
+          return response.holidays.map((holiday: any) => ({
+            id: holiday.id,
+            name: holiday.name,
+            date: holiday.date,
+          }));
         })
       );
   }
 
-  postHolidayInformation$(holiday: HolidayModel): Observable<HolidayModel> {
-    const newHoliday = { ...holiday, id: this.fakeHolidays.length + 1 };
-    this.fakeHolidays.push(newHoliday);
-    return of(newHoliday);
-  }
-
-  // postHolidayInformation$(holiday: HolidayModel): Observable<HolidayModel> {
-  //   return this.http
-  //     .post<HolidayModel>(`${API_GENERAL_INFORMATION_URL}/holidays`, holiday)
-  //     .pipe(
-  //       catchError((error) => {
-  //         if (error.status === 401) {
-  //           console.error("Login please...");
-  //         } else {
-  //           console.error(error);
-  //         }
-  //         return throwError(error);
-  //       })
-  //     );
-  // }
-
-  putHolidayInformation$(
-    holidayId: number,
-    updatedHoliday: HolidayModel
+  postHolidayInformation$(
+    name: string,
+    date: string
   ): Observable<HolidayModel> {
     return this.http
-      .put<HolidayModel>(
-        `${API_GENERAL_INFORMATION_URL}/holidays/${holidayId}`,
-        updatedHoliday
-      )
+      .post<HolidayModel>(`${API_GENERAL_INFORMATION_URL}/holidays`, {
+        name,
+        date,
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status === 401) {
+            console.error("Login please...");
+          } else {
+            console.error(error);
+          }
+          return throwError(error);
+        }),
+        map((response: any): HolidayModel => {
+          return response.holiday;
+        })
+      );
+  }
+
+  deleteHolidayInformation$(holidayId: number): Observable<any> {
+    return this.http
+      .delete(`${API_GENERAL_INFORMATION_URL}/holidays/${holidayId}`, {
+        responseType: "json",
+      })
       .pipe(
         catchError((error) => {
           if (error.status === 401) {
@@ -208,52 +186,20 @@ export class GeneralInformationHTTPService {
       );
   }
 
-  deleteHolidayInformation$(holidayId: number): Observable<any> {
-    const index = this.fakeHolidays.findIndex((h) => h.id === holidayId);
-    if (index !== -1) {
-      this.fakeHolidays.splice(index, 1);
-      return of("Holiday deleted successfully");
-    } else {
-      return throwError("Holiday not found");
-    }
+  deleteHolidaysInformation$(): Observable<any> {
+    return this.http
+      .delete(`${API_GENERAL_INFORMATION_URL}/holidays`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status === 401) {
+            console.error("Login please...");
+          } else {
+            console.error(error);
+          }
+          return throwError(error);
+        })
+      );
   }
-
-  // deleteHolidayInformation$(holidayId: number): Observable<any> {
-  //   return this.http
-  //     .delete(`${API_GENERAL_INFORMATION_URL}/holidays/${holidayId}`, {
-  //       responseType: 'text'
-  //     })
-  //     .pipe(
-  //       catchError((error) => {
-  //         if (error.status === 401) {
-  //           console.error("Login please...");
-  //         } else {
-  //           console.error(error);
-  //         }
-  //         return throwError(error);
-  //       })
-  //     );
-  // }
-
-  deleteAllHolidayInformation$(): Observable<any> {
-    this.fakeHolidays = [];
-    return of("All holidays deleted successfully");
-  }
-
-  // deleteAllHolidayInformation$(): Observable<any> {
-  //   return this.http
-  //     .delete(`${API_GENERAL_INFORMATION_URL}/holidays`, {
-  //       responseType: 'text'
-  //     })
-  //     .pipe(
-  //       catchError((error) => {
-  //         if (error.status === 401) {
-  //           console.error("Login please...");
-  //         } else {
-  //           console.error(error);
-  //         }
-  //         return throwError(error);
-  //       })
-  //     );
-  // }
 }

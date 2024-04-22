@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { UserModel } from "src/app/modules/auth/_models/user.model";
 import { UserHTTPService } from "./user-http/user-http.service";
+import { UserRoleModel } from "../../_models/user-role.model";
+import { RoleModel } from "../../_models/role.model";
 
 @Injectable({
   providedIn: "root",
@@ -11,8 +13,8 @@ import { UserHTTPService } from "./user-http/user-http.service";
 export class UserService {
   private filterString = "";
 
-  private _users: BehaviorSubject<UserModel[]> = new BehaviorSubject([]);
-  public users: Observable<UserModel[]> = this._users
+  private _users: BehaviorSubject<UserRoleModel[]> = new BehaviorSubject([]);
+  public users: Observable<UserRoleModel[]> = this._users
     // .pipe(
     //   map((items) => items.filter((item) => item.name == this.filterString)),
     // )
@@ -30,7 +32,7 @@ export class UserService {
   }
 
   loadInitialData() {
-    this.userHttpService.getAllUsersWithDetails$().subscribe(
+    this.userHttpService.getAllUsers$().subscribe(
       (res) => {
         this._users.next(res);
       },
@@ -38,29 +40,28 @@ export class UserService {
     );
   }
 
-  filter(filter: any) {
-    let f = filter.toLowerCase();
-    let category = undefined;
-
+  filter(filter: string, checkRoles = true, checkEmail = true) {
+    let filterText = filter.toLowerCase();
+  
     this.users = this._users.pipe(
-      map((users) =>
-        users.filter((user) => {
-          let r = false;
-          user.roles.forEach((role) =>
-            role.toLowerCase().includes(f) ? (r = true) : ""
+      map((users: UserRoleModel[]) =>
+        users.filter((user: UserRoleModel) => {
+          const matchesRole = checkRoles && user.roles.some((role: RoleModel) =>
+            role.name.toLowerCase().includes(filterText)
           );
-          return (
-            user.user.userName.toLowerCase().includes(f) ||
-            user.user.userDetail.firstName.toLowerCase().includes(f) ||
-            user.user.userDetail.lastName.toLowerCase().includes(f) ||
-            r
-          );
+  
+          const matchesEmail = checkEmail && user.email?.toLowerCase().includes(filterText);
+  
+          const matchesFirstName = user.firstName?.toLowerCase().includes(filterText);
+          const matchesLastName = user.lastName?.toLowerCase().includes(filterText);
+  
+          return matchesEmail || matchesFirstName || matchesLastName || matchesRole;
         })
       )
     );
   }
 
-  changeRoles(userId: number, roles: string[]): Observable<string[]> {
-    return this.userHttpService.changeRoles(userId, roles);
+  changeRoles(userId: number, roles: RoleModel[]): Observable<UserRoleModel> {
+    return this.userHttpService.changeRoles(userId, roles.map((r) => r.id));
   }
 }

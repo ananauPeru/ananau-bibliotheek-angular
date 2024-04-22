@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthUtil } from "src/app/_utils/auth_util";
+import { DomainUtil, Subdomain } from "src/app/_utils/domain_util";
 
 @Component({
   selector: "app-dashboard",
@@ -9,5 +10,7 @@ import { AuthUtil } from "src/app/_utils/auth_util";
 export class DashboardComponent implements OnInit {
   constructor(public AuthUtil: AuthUtil) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log("Subdomain:", DomainUtil.getSubdomain());
+  }
 }

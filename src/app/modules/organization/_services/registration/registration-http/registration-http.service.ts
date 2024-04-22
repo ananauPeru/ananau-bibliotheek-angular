@@ -3,9 +3,9 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { RegistrationStudentModel } from "../../../_models/registration-student.model";
-import { RegistrationModel } from "../../../_models/registration.model";
 import { SmallRegistrationModel } from "../../../_models/small-registration.model";
+import { RegistrationStudentModel } from "src/app/shared/models/registration/registration-student.model";
+import { RegistrationVolunteerModel } from "src/app/shared/models/registration/registration-volunteer.model";
 
 const API_REGISTRATIONS_URL = `${environment.apiUrl}/registrations`;
 
@@ -25,7 +25,7 @@ export class RegistrationHttpService {
           }
           return throwError(error);
         }),
-        map((registrations: any): SmallRegistrationModel[] => registrations)
+        map((response: any): SmallRegistrationModel[] => response.registrations)
       );
   }
 
@@ -43,11 +43,11 @@ export class RegistrationHttpService {
           }
           return throwError(error);
         }),
-        map((registration: any): RegistrationStudentModel => registration)
+        map((response: any): RegistrationStudentModel => response.details)
       );
   }
 
-  getVolunteerRegistrationById$(userId: number): Observable<RegistrationModel> {
+  getVolunteerRegistrationById$(userId: number): Observable<RegistrationVolunteerModel> {
     return this.http
       .get(`${API_REGISTRATIONS_URL}/volunteers/${userId}`, {
         responseType: "json",
@@ -59,17 +59,17 @@ export class RegistrationHttpService {
           }
           return throwError(error);
         }),
-        map((registration: any): RegistrationModel => registration)
+        map((response: any): RegistrationVolunteerModel => response.details)
       );
   }
 
   confirmRegistration$(userId: number, confirm: boolean) {
     return this.http
       .patch(
-        `${API_REGISTRATIONS_URL}/${userId}/${
-          confirm ? "confirm" : "disconfirm"
-        }`,
-        null
+        `${API_REGISTRATIONS_URL}/${userId}/confirmation`,
+        {
+          "internshipConfirmed": confirm
+        }
       )
       .pipe(
         catchError((error) => {
@@ -92,11 +92,21 @@ export class RegistrationHttpService {
     );
   }
 
-  updateRegistrationDates$(userId: number, dates: any) {
+  updateRegistrationDates$(userId: number, isStudent: boolean, dates: any) {
+
+    const url = isStudent ? `${API_REGISTRATIONS_URL}/students` : `${API_REGISTRATIONS_URL}/volunteers`;
+    
+    const filteredDates = Object.entries(dates)
+    .filter(([_, value]) => value !== null)
+    .reduce((obj, [key, value]) => {
+      obj[key] = value;
+      return obj;
+    }, {});
+
     return this.http
     .put(
-      `${API_REGISTRATIONS_URL}/students/${userId}`,
-      dates
+      `${url}/${userId}`,
+      filteredDates
     )
     .pipe(
       catchError((error) => {

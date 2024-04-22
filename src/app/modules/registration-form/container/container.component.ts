@@ -16,9 +16,10 @@ import { AuthUtil } from "src/app/_utils/auth_util";
 import { ToastrUtil } from "src/app/_utils/toastr_util";
 import { RegistrationService } from "../data-services/registration.service";
 import { FormRole } from "../models/form-role";
-import { RegistrationDTO } from "../_dto/registration-dto";
-import { RegistrationStudentDTO } from "../_dto/registration-student-dto";
-
+import { RegistrationModel as RegistrationDTO } from "src/app/shared/models/registration/registration.model";
+import { RegistrationStudentModel as RegistrationStudentDTO } from "src/app/shared/models/registration/registration-student.model";
+import { RegistrationVolunteerModel as RegistrationVolunteerDTO } from "src/app/shared/models/registration/registration-volunteer.model";
+ 
 @Component({
   selector: "app-container",
   templateUrl: "./container.component.html",
@@ -107,6 +108,7 @@ export class ContainerComponent implements OnInit {
         .getStudentRegistration$()
         .pipe(
           catchError((error) => {
+            console.error("An error occured when loading initial data.");
             this.errorMessage = error;
             return EMPTY;
           })
@@ -165,84 +167,94 @@ export class ContainerComponent implements OnInit {
     this.saveScanFiles.next(submit);
     this.savePaymentFiles.next(submit);
 
-    let dto = new RegistrationDTO();
+    let dto;
+
+    if (this.role === FormRole.STUDENT) { 
+      dto = new RegistrationStudentDTO();
+    } else if(this.role === FormRole.VOLUNTEER) {
+      dto = new RegistrationVolunteerDTO();
+    }
+
 
     const personalForm = this.formContainer.get("personalForm") as FormGroup;
 
     const general = personalForm.get("general") as FormGroup;
-    dto.firstName = general.get("firstName").value;
-    dto.lastName = general.get("lastName").value;
-    dto.middleName = general.get("middleName").value;
-    dto.phone = general.get("phone").value;
-    dto.dateOfBirth = new Date(general.get("dateOfBirth").value);
-    dto.birthplace = general.get("birthplace").value;
-    dto.nationality = general.get("nationality").value;
-    dto.passportNumber = general.get("passportNumber").value;
+    dto.userDetails.firstName = general.get("firstName").value;
+    dto.userDetails.lastName = general.get("lastName").value;
+    dto.userDetails.middleName = general.get("middleName").value;
+    dto.userDetails.phone = general.get("phone").value;
+    dto.userDetails.dateOfBirth = new Date(general.get("dateOfBirth").value);
+    dto.userDetails.birthplace = general.get("birthplace").value;
+    dto.userDetails.nationality = general.get("nationality").value;
+    dto.userDetails.passportNumber = general.get("passportNumber").value;
 
     const address = personalForm.get("address") as FormGroup;
-    dto.street = address.get("street").value;
-    dto.houseNumber = address.get("houseNumber").value;
-    dto.mailbox = address.get("mailbox").value;
-    dto.postalCode = address.get("postalCode").value;
-    dto.township = address.get("township").value;
-    dto.country = address.get("country").value;
+    dto.address.street = address.get("street").value;
+    dto.address.houseNumber = address.get("houseNumber").value;
+    dto.address.mailbox = address.get("mailbox").value;
+    dto.address.postalCode = address.get("postalCode").value;
+    dto.address.city = address.get("township").value;
+    dto.address.country = address.get("country").value;
 
     const contactPerson = personalForm.get("contactPerson") as FormGroup;
-    dto.firstNameContact = contactPerson.get("firstName").value;
-    dto.middleNameContact = contactPerson.get("middleName").value;
-    dto.lastNameContact = contactPerson.get("lastName").value;
-    dto.relation = contactPerson.get("relation").value;
-    dto.emailContact = contactPerson.get("email").value;
-    dto.phoneContact = contactPerson.get("phone").value;
+    dto.emergencyPerson.firstName = contactPerson.get("firstName").value;
+    dto.emergencyPerson.middleName = contactPerson.get("middleName").value;
+    dto.emergencyPerson.lastName = contactPerson.get("lastName").value;
+    dto.emergencyPerson.relation = contactPerson.get("relation").value;
+    dto.emergencyPerson.email = contactPerson.get("email").value;
+    dto.emergencyPerson.phone = contactPerson.get("phone").value;
 
     const medical = personalForm.get("medical") as FormGroup;
-    dto.allergies = medical.get("allergies").value;
-    dto.medicalConditions = medical.get("medicalConditions").value;
+    dto.medicalDetails.allergies = medical.get("allergies").value;
+    dto.medicalDetails.medicalConditions = medical.get("medicalConditions").value;
 
     const organizationalForm = this.formContainer.get(
       "organizationalForm"
     ) as FormGroup;
 
     const dates = organizationalForm.get("dates") as FormGroup;
-    dto.internshipOnline = Boolean(dates.get("internshipOnline").value);
-    dto.startDate = new Date(dates.get("startDate").value);
-    dto.endDate = new Date(dates.get("endDate").value);
+    dto.internDetails.internshipOnline = Boolean(dates.get("internshipOnline").value);
+    dto.internDetails.startOfInternship = new Date(dates.get("startDate").value);
+    dto.internDetails.endOfInternship = new Date(dates.get("endDate").value);
 
     const flightInformation = organizationalForm.get("flightInformation") as FormGroup;
-    dto.flightNumber = flightInformation.get("flightNumber").value;  
-    dto.flightDateArrival = new Date(flightInformation.get("flightDateArrival").value);
+    dto.internDetails.flightNumber = flightInformation.get("flightNumber").value;  
+    dto.internDetails.flightDateArrival = new Date(flightInformation.get("flightDateArrival").value);
 
     const spanish = organizationalForm.get("spanish") as FormGroup;
-    dto.level = spanish.get("level").value;
-    dto.weeksOnline = Number(spanish.get("weeksOnline").value);
-    dto.weeks = Number(spanish.get("weeks").value);
+    dto.internDetails.spanishLessons.spanishLevel = spanish.get("level").value;
+    dto.internDetails.spanishLessons.spanishLessonWeeksOnline = Number(spanish.get("weeksOnline").value);
+    dto.internDetails.spanishLessons.spanishLessonWeeks = Number(spanish.get("weeks").value);
 
     const payments = organizationalForm.get("payments") as FormGroup;
-    dto.paymentDescription = payments.get("paymentDescription").value;
+    dto.internDetails.paymentDescription = payments.get("paymentDescription").value;
 
     const motivationLetter = organizationalForm.get("motivationLetter") as FormGroup;
-    dto.motivationLetter = motivationLetter.get("motivationLetter").value;
+    dto.internDetails.motivationLetter = motivationLetter.get("motivationLetter").value;
 
     const info = organizationalForm.get("info") as FormGroup;
-    dto.occupation = info.get("occupation").value;
-    dto.tasks = info.get("tasks").value;
-    dto.expectations = info.get("expectations").value;
-    dto.proposals = info.get("proposals").value;
+    dto.internDetails.professionOrEducation = info.get("occupation").value;
+    dto.internDetails.internshipTasks = info.get("tasks").value;
+    dto.internDetails.internshipExpectations = info.get("expectations").value;
+    dto.internDetails.internshipProposals = info.get("proposals").value;
 
     const questionsForm = this.formContainer.get("questionsForm") as FormGroup;
-    dto.otherQuestions = questionsForm.get("otherQuestions").value;
-    dto.experience = questionsForm.get("experience").value;
-    dto.whyAnanau = questionsForm.get("whyAnanau").value;
-    dto.firstHeard = questionsForm.get("firstHeard").value;
+    dto.internDetails.otherQuestions = questionsForm.get("otherQuestions").value;
+    dto.internDetails.experience = questionsForm.get("experience").value;
+    dto.internDetails.whyAnanau = questionsForm.get("whyAnanau").value;
+    dto.internDetails.whereFirstHeard = questionsForm.get("firstHeard").value;
 
     if (this.role === FormRole.STUDENT) {
       let studentDto = dto as RegistrationStudentDTO;
 
-      studentDto.schoolEmail = general.get("schoolEmail").value;
-      studentDto.leaveStartDate = new Date(dates.get("leaveStartDate").value);
-      studentDto.leaveEndDate = new Date(dates.get("leaveEndDate").value);
-      studentDto.degree = info.get("degree").value;
-      studentDto.internshipContext = info.get("internshipContext").value;
+      studentDto.userDetails.schoolEmail = general.get("schoolEmail").value;
+
+
+      studentDto.internDetails.startOfPeriodOfAccomodation = new Date(dates.get("leaveStartDate").value);
+      studentDto.internDetails.endOfPeriodOfAccomodation = new Date(dates.get("leaveEndDate").value);
+      studentDto.internDetails.educationDegree = info.get("degree").value;
+      studentDto.internDetails.internshipContext = info.get("internshipContext").value;
+      
 
       this.registrationService
         .postStudentRegistration$(studentDto, submit)

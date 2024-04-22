@@ -14,7 +14,95 @@ const API_ITEMS_URL = `${environment.apiUrl}/class`;
 export class ClassHTTPService {
 
 
-  delete(id: number): Observable<ClassModel> {
+  
+  constructor(private http: HttpClient) {}
+
+  getAllClasses$(): Observable<ClassModel[]> {
+    return this.http
+      .get(`${API_ITEMS_URL}`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): ClassModel[] => {
+          if(response.success) {
+            return response.classes;
+          } else {
+            throwError(response.error);
+            return []
+          }
+        })
+      );
+  }
+
+  // CREATE
+  // server should return the object with ID
+  create(classDto: ClassDTO): Observable<ClassModel> {
+    return this.http.post<ClassModel>(`${API_ITEMS_URL}`, classDto.getRequestModel()).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): ClassModel => {
+        if(response.success) {
+          return response.class;
+        } else {
+          throwError(response.error);
+          return undefined;
+        }
+      })
+    );
+  }
+  edit(id: number, classDto: ClassDTO): Observable<ClassModel> {
+    return this.http.put<ClassModel>(`${API_ITEMS_URL}/${id}`, classDto.getRequestModel()).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): ClassModel => {
+        if(response.success) {
+          return response.class;
+        } else {
+          throwError(response.error);
+          return undefined;
+        }
+      })
+    );
+  }
+
+  getItemById(id: number): Observable<ClassModel> {
+    return this.http
+      .get(`${API_ITEMS_URL}/${id}`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): ClassModel => {
+          if(response.success) {
+            return response.class;
+          } else {
+            throwError(response.error);
+            return undefined;
+          }
+        })
+      );
+  }
+
+  delete(id: number): Observable<any> {
     return this.http
       .delete(`${API_ITEMS_URL}/${id}`, {
         responseType: "json",
@@ -26,83 +114,14 @@ export class ClassHTTPService {
           }
           return throwError(error);
         }),
-        map(
-          (res: any): ClassModel => {
-            return res;
+        map((response: any): any => {
+          if(response.success) {
+            return response.success;
+          } else {
+            throwError(response.error);
+            return undefined;
           }
-        )
-      );
-  }
-  constructor(private http: HttpClient) {}
-
-  getAllClasses$(): Observable<ClassModel[]> {
-    return this.http
-      .get(`${API_ITEMS_URL}/getall`, {
-        responseType: "json",
-      })
-      .pipe(
-        catchError((error) => {
-          if (error.status == 401) {
-            console.error("Login please...");
-          }
-          return throwError(error);
-        }),
-        map((items: any): ClassModel[] => {
-          return items;
         })
-      );
-  }
-
-  // CREATE
-  // server should return the object with ID
-  create(c: ClassDTO): Observable<ClassModel> {
-    return this.http.post<ClassModel>(`${API_ITEMS_URL}`, c).pipe(
-      catchError((error) => {
-        if (error.status == 401) {
-          console.error("Login please...");
-        }
-        return throwError(error);
-      }),
-      map(
-        (c: any): ClassModel => {
-          return c;
-        }
-      )
-    );
-  }
-  edit(id: number, c: ClassDTO): Observable<ClassModel> {
-    return this.http.put<ClassModel>(`${API_ITEMS_URL}/${id}`, c).pipe(
-      catchError((error) => {
-        if (error.status == 401) {
-          console.error("Login please...");
-        }
-        return throwError(error);
-      }),
-      map(
-        (c: any): ClassModel => {
-          return c;
-        }
-      )
-    );
-  }
-
-  getItemById(id: number): Observable<ClassModel> {
-    return this.http
-      .get(`${API_ITEMS_URL}/getById/${id}`, {
-        responseType: "json",
-      })
-      .pipe(
-        catchError((error) => {
-          if (error.status == 401) {
-            console.error("Login please...");
-          }
-          return throwError(error);
-        }),
-        map(
-          (c: any): ClassModel => {
-            return c;
-          }
-        )
       );
   }
 }

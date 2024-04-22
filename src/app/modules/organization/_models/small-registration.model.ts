@@ -1,14 +1,15 @@
 export class SmallRegistrationModel {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
   startDate: Date;
   endDate: Date;
-  role: SmallRegistrationModelRole;
+  role: string;
   confirmed: boolean;
 }
 
 export enum SmallRegistrationModelRole {
-  VOLUNTEER,
-  STUDENT,
+  VOLUNTEER="Volunteer",
+  STUDENT="Student",
 }
