@@ -44,4 +44,6 @@ export enum Roles {
   Student = "Student",
   Volunteer = "Volunteer",
   QRCodeReader = "QRCodeReader",
+  Teacher = "Teacher",
+  SpanishStudent = "SpanishStudent",
 }
