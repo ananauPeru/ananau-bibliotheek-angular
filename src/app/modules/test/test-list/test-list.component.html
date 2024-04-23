@@ -1,3 +1,88 @@
-<p>
-  test-list works!
-</p>
+<div class="card card-custom">
+  <!-- Header -->
+  <div class="row">
+    <div class="col-12">
+      <div
+        class="card-header border-0 text-white"
+        style="background-color: white; padding: 2rem 2.25rem"
+      >
+        <div class="row">
+          <div class="col-12 col-md-8 w-100">
+            <h3 class="card-title font-weight-bolder text-dark">
+              {{ "MENU.LEARNING_PLATFORM.TEST_LIST" | translate }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="card-body pt-2">
+    <!--begin::Form Group-->
+    <div class="form-group row mb-10">
+      <div class="col-12 col-md-12">
+        <div class="input-group input-group-lg input-group-solid mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+
+          <input
+            type="text"
+            class="form-control form-control-lg form-control-solid force-pl-5"
+            placeholder="{{ 'ORGANIZATION.ROLES.OVERVIEW.FILTER' | translate }}"
+            style="padding-left: 10px"
+            (input)="onSearchTermChange($event.target.value)"
+          />
+        </div>
+        <div class="feedback ml-2">Search for title or author</div>
+      </div>
+    </div>
+    <!--end::Form Group-->
+
+    <!--begin: Item-->
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex flex-wrap align-items-center mb-10 table-responsive">
+          <table class="table table-fit">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Creation Date</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let test of tests$ | async">
+                <td>{{ test.title }}</td>
+                <td>null</td>
+                <td>{{ test.createdAt | date : "dd-MM-yyyy" }}</td>
+                <td class="text-right">
+                  <button
+                    type="button"
+                    class="btn btn-primary mr-2"
+                    placement="top"
+                    ngbTooltip="Share"
+                  >
+                  <i class="fas fa-share-alt pr-1"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    placement="top"
+                    ngbTooltip="Edit"
+                  >
+                    <i class="fas fa-sign-in-alt pr-0"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
