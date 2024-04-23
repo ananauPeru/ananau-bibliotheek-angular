@@ -76,6 +76,13 @@ export const locale = {
         REGISTRATIONS: "Inscripciones",
         GENERAL_INFORMATION: "Información General",
       },
+      LEARNING_PLATFORM: {
+        TESTS: "Pruebas",
+        TEST: "Prueba",
+        TEST_LIST: "Lista de pruebas",
+        CREATE_TEST: "Crear prueba",
+        MY_STUDENTS: "Mis estudiantes",
+      }
     },
 
     // AUTH PAGES

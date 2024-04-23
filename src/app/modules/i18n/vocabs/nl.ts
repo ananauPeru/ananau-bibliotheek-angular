@@ -72,6 +72,13 @@ export const locale = {
         S2_BEST_PRACTICES: "2 - Best practices",
         S3_DEPLOYMENT_AND_AZURE: "3 - Deployment - Azure",
       },
+      LEARNING_PLATFORM: {
+        TESTS: "Testen",
+        TEST: "Test",
+        TEST_LIST: "Testen",
+        CREATE_TEST: "Test aanmaken",
+        MY_STUDENTS: "Mijn studenten",
+      }
       // We dont translate documentation (IT) to different languages
     },
     AUTH: {

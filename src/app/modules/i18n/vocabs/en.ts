@@ -87,6 +87,13 @@ export const locale = {
         S3_DEPLOYMENT_AND_AZURE: "3 - Deployment - Azure",
         TODOS: "ToDo's",
       },
+      LEARNING_PLATFORM: {
+        TESTS: "Tests",
+        TEST: "Test",
+        TEST_LIST: "Test list",
+        CREATE_TEST: "Create test",
+        MY_STUDENTS: "My students",
+      }
     },
 
     // AUTH PAGES
