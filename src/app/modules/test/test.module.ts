@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { TestListComponent } from './test-list/test-list.component';
 import { TestRoutingModule } from './test-routing.module';
+import { CreateTestComponent } from './create-test/create-test.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { TestRoutingModule } from './test-routing.module';
     NgbModule,
     NgxDropzoneModule,
   ],
-  declarations: [TestComponent, TestListComponent],
+  declarations: [TestComponent, TestListComponent, CreateTestComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }

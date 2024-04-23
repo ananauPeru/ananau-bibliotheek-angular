@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { TestModel } from "../_models/test.model";
+import { TestModel } from "../../_models/test/test.model";
 import { TestHttpService } from "./test-http/test-http.service";
-import { TestDTO } from "../_dto/test-dto";
-import { ShortTestModel } from "../_models/short-test.model";
+import { TestDTO } from "../../_dto/test-dto";
+import { ShortTestModel } from "../../_models/test/short-test.model";
 
 @Injectable({
   providedIn: "root",

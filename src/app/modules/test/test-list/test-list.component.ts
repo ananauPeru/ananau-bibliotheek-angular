@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { TestService } from "../_services/test.service";
-import { ShortTestModel } from "../_models/short-test.model";
+import { TestService } from "../_services/test/test.service";
+import { ShortTestModel } from "../_models/test/short-test.model";
 import { Observable, Subject } from "rxjs";
 import { debounceTime, startWith, switchMap } from "rxjs/operators";
 

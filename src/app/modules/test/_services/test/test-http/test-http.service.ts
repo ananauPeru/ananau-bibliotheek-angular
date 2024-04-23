@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { TestModel } from "../../_models/test.model";
+import { TestModel } from "../../../_models/test/test.model";
 import { Observable, throwError } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { catchError, map } from "rxjs/operators";
-import { TestDTO } from "../../_dto/test-dto";
-import { QuestionModel } from "../../_models/question.model";
-import { SectionModel } from "../../_models/section.model";
+import { TestDTO } from "../../../_dto/test-dto";
+import { QuestionModel } from "../../../_models/test/question.model";
+import { SectionModel } from "../../../_models/test/section.model";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/test`;
 
