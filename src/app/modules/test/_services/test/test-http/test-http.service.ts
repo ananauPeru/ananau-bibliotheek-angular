@@ -60,8 +60,8 @@ export class TestHttpService {
           return {
             id: test.id,
             title: test.title,
-            amountOfQuestions: test.amountOfQuestions,
-            amountOfSections: test.amountOfSections,
+            totalAmountOfQuestions: test.totalAmountOfQuestions,
+            totalAmountOfSections: test.totalAmountOfSections,
             timeLimitMinutes: test.timeLimitMinutes,
             accessCode: {
               code: test.accessCode.code,
@@ -116,8 +116,8 @@ export class TestHttpService {
             return {
               id: test.id,
               title: test.title,
-              amountOfQuestions: test.amountOfQuestions,
-              amountOfSections: test.amountOfSections,
+              totalAmountOfQuestions: test.totalAmountOfQuestions,
+              totalAmountOfSections: test.totalAmountOfSections,
               timeLimitMinutes: test.timeLimitMinutes,
               accessCode: {
                 code: test.accessCode.code,
@@ -166,8 +166,8 @@ export class TestHttpService {
           return {
             id: test.id,
             title: test.title,
-            amountOfQuestions: test.amountOfQuestions,
-            amountOfSections: test.amountOfSections,
+            totalAmountOfQuestions: test.totalAmountOfQuestions,
+            totalAmountOfSections: test.totalAmountOfSections,
             timeLimitMinutes: test.timeLimitMinutes,
             accessCode: {
               code: test.accessCode.code,

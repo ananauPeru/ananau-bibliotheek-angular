@@ -1,7 +1,7 @@
 export class ShortTestModel {
   id: string;
-  amountOfSections: number;
-  amountOfQuestions: number;
+  totalAmountOfSections: number;
+  totalAmountOfQuestions: number;
   timeLimitMinutes: number;
   accessCode: {
     code: string;

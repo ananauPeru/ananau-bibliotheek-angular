@@ -1,7 +1,13 @@
 import { SectionDTO } from "./section-dto";
 
 export class TestDTO {
-  title: string;
-  timeLimitMinutes: number;
-  sections: SectionDTO[];
+  constructor(
+    public title?: string,
+    public timeLimitMinutes?: number,
+    public sections?: SectionDTO[]
+  ) {
+    this.title = title || '';
+    this.timeLimitMinutes = timeLimitMinutes || 0;
+    this.sections = sections || [];
+  }
 }
