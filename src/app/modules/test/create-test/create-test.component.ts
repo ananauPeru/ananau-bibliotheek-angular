@@ -1,12 +1,13 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { TestDTO } from "../_dto/test-dto";
-import { SectionDTO } from "../_dto/section-dto";
-import { QuestionDTO } from "../_dto/question-dto";
 import { QuestionTypeService } from "../_services/question-type/question-type.service";
 import { Observable } from "rxjs";
 import { QuestionTypeModel } from "../_models/question-type/question-type.model";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TestService } from "../_services/test/test.service";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-create-test",
@@ -17,12 +18,16 @@ export class CreateTestComponent implements OnInit {
   @ViewChild("settingsModal") settingsModal: TemplateRef<any>;
 
   public testForm: FormGroup;
+  public settingsForm: FormGroup;
   public questionTypes$: Observable<QuestionTypeModel[]>;
 
   constructor(
     private formBuilder: FormBuilder,
     private questionTypeService: QuestionTypeService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private testService: TestService,
+    private toast: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -33,21 +38,63 @@ export class CreateTestComponent implements OnInit {
   private initializeForm() {
     this.testForm = this.formBuilder.group({
       title: "",
-      timeLimitMinutes: 60,
       sections: this.formBuilder.array([]),
+    });
+
+    this.settingsForm = this.formBuilder.group({
+      timeLimitMinutes: 60,
     });
 
     this.addSection();
   }
 
+  /**
+   * Initialize the question types
+   */
   private initializeQuestionTypes() {
     this.questionTypes$ = this.questionTypeService.getQuestionTypes$();
   }
 
+  /**
+   * Get the sections FormArray
+   */
   get sections(): FormArray {
     return this.testForm.get("sections") as FormArray;
   }
 
+  /**
+   * Handle form submission
+   */
+  onSubmit() {
+    const testDto = this.testForm.value as TestDTO;
+
+    // Map the setting values to the DTO
+    const timeLimitMinutes = this.settingsForm.get('timeLimitMinutes').value;
+    testDto.timeLimitMinutes = timeLimitMinutes;
+
+    console.log(testDto);
+
+    // // Make a post request to the backend
+    // this.testService.createTest$(testDto).subscribe(
+    //   () => {
+    //     // Handle success
+    //     console.log("Test created successfully!");
+    //     this.toast.success("Test created successfully!");
+
+    //     // Navigate to the list page
+    //     this.router.navigate(["/test/list"]);
+    //   },
+    //   // Handle error
+    //   (error) => {
+    //     console.error("Error creating test: ", error);
+    //     this.toast.error("Error creating test: ", error);
+    //   }
+    // );
+  }
+
+  /**
+   * Add a new section to the form
+   */
   addSection() {
     const sectionGroup = this.formBuilder.group({
       title: "",
@@ -57,6 +104,10 @@ export class CreateTestComponent implements OnInit {
     this.addQuestion(sectionGroup);
   }
 
+  /**
+   * Add a new question to the form
+   * @param sectionGroup the FormGroup representing the section to which the question will be added
+   */
   addQuestion(sectionGroup: FormGroup) {
     const questionsArray = sectionGroup.get("questions") as FormArray;
     const questionGroup = this.formBuilder.group({
@@ -64,23 +115,73 @@ export class CreateTestComponent implements OnInit {
       type: new FormControl(null),
       answers: this.formBuilder.array([]),
     });
+
+    // Subscribe to changes in the question type
+    questionGroup
+      .get("type")
+      .valueChanges.subscribe((selectedType: QuestionTypeModel) => {
+        const answersArray = questionGroup.get("answers") as FormArray;
+
+        // Clear existing answers
+        while (answersArray.length !== 0) {
+          answersArray.removeAt(0);
+        }
+
+        // Add one blank answer based on the selected question type
+        if (selectedType) {
+          if (selectedType.name === "Multiple Choice") {
+            answersArray.push(
+              this.formBuilder.group({
+                answerText: "",
+                isCorrect: false,
+              })
+            );
+          } else if (selectedType.name === "Fill in the Blank") {
+            answersArray.push(
+              this.formBuilder.group({
+                answerText: "",
+                isCorrect: true,
+              })
+            );
+          }
+        }
+      });
+
     questionsArray.push(questionGroup);
   }
 
+  /**
+   * Remove a section from the form
+   * @param index the index of the section to be removed
+   */
   removeSection(index: number) {
     this.sections.removeAt(index);
   }
 
+  /**
+   * Remove a question from the form
+   * @param sectionGroup the FormGroup representing the section from which the question will be removed
+   * @param questionIndex the index of the question to be removed
+   */
   removeQuestion(sectionGroup: FormGroup, questionIndex: number) {
     const questionsArray = sectionGroup.get("questions") as FormArray;
     questionsArray.removeAt(questionIndex);
   }
 
+  /**
+   * Remove an option from the form for a multiple choice question
+   * @param questionGroup the FormGroup representing the question to which the option will be added
+   * @param optionIndex the index of the option to be removed
+   */
   removeOption(questionGroup: FormGroup, optionIndex: number) {
     const optionsArray = questionGroup.get("answers") as FormArray;
     optionsArray.removeAt(optionIndex);
   }
 
+  /**
+   * Add an option to the form for a multiple choice question
+   * @param questionGroup the FormGroup representing the question to which the option will be added
+   */
   addOption(questionGroup: FormGroup) {
     const optionsArray = questionGroup.get("answers") as FormArray;
     optionsArray.push(
@@ -91,27 +192,43 @@ export class CreateTestComponent implements OnInit {
     );
   }
 
+  /**
+   * Add a blank to the form for a fill in the blank question
+   * @param questionGroup the FormGroup representing the question to which the blank will be added
+   */
   addBlank(questionGroup: FormGroup) {
     const answersArray = questionGroup.get("answers") as FormArray;
     answersArray.push(
       this.formBuilder.group({
         answerText: "",
+        isCorrect: true,
       })
     );
   }
 
+  /**
+   * Remove a blank from the form for a fill in the blank question
+   * @param questionGroup the FormGroup representing the question from which the blank will be removed
+   * @param blankIndex the index of the blank to be removed
+   */
   removeBlank(questionGroup: FormGroup, blankIndex: number) {
     const answersArray = questionGroup.get("answers") as FormArray;
     answersArray.removeAt(blankIndex);
   }
 
-  onSubmit() {
-    const testDto = this.testForm.value as TestDTO;
-    console.log(testDto);
-  }
-
+  /**
+   * Open the settings modal
+   */
   openSettingsModal() {
     this.modalService.open(this.settingsModal, { centered: true });
   }
 
+  /**
+   * Save the settings from the modal
+   */
+  saveSettings() {
+    const timeLimitMinutes = this.settingsForm.get('timeLimitMinutes').value;
+    this.testForm.patchValue({ timeLimitMinutes });
+    this.modalService.dismissAll();
+  }
 }

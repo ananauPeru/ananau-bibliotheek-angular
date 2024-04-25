@@ -157,7 +157,7 @@
                     <input
                       type="text"
                       class="form-control form-control-solid"
-                      placeholder="Enter question"
+                      placeholder="Enter question eg. 'Yo (trabajar) _______ en la oficina.'"
                       formControlName="questionText"
                       required
                     />
@@ -173,7 +173,7 @@
                       <div class="row align-items-center">
                         <div class="col-12 mb-2">
                           <label class="font-weight-bold mb-4 h3"
-                            >Options</label
+                            >Choices</label
                           >
                         </div>
                         <div class="col-12">
@@ -187,12 +187,12 @@
                               "
                               [formGroupName]="k"
                             >
-                              <h4 class="col-2">Option {{ k + 1 }}</h4>
+                              <h4 class="col-2">Choice {{ k + 1 }}</h4>
                               <div class="col-10 d-flex align-items-center">
                                 <input
                                   type="text"
                                   class="form-control form-control-solid flex-grow-1"
-                                  placeholder="Enter option"
+                                  placeholder="Enter answer option"
                                   formControlName="answerText"
                                   required
                                 />
@@ -235,11 +235,6 @@
                   >
                   <div class="mb-12">
                       <div class="row align-items-center">
-                        <div class="col-12 mb-2">
-                          <label class="font-weight-bold mb-4 h3"
-                            >Blank Answers</label
-                          >
-                        </div>
                         <div class="col-12">
                           <div formArrayName="answers">
                             <div
@@ -251,7 +246,7 @@
                               "
                               [formGroupName]="k"
                             >
-                              <h4 class="col-2">Blank {{ k + 1 }}</h4>
+                              <h4 class="col-2">Answer</h4>
                               <div class="col-10 d-flex align-items-center">
                                 <input
                                   type="text"
@@ -260,25 +255,9 @@
                                   formControlName="answerText"
                                   required
                                 />
-                                <div class="d-flex justify-content-end ml-4">
-                                  <button
-                                    class="btn btn-icon btn-secondary btn-sm"
-                                    (click)="removeBlank(questionGroup, k)"
-                                    ngbTooltip="Remove Blank"
-                                  >
-                                    <i class="fas fa-trash-alt"></i>
-                                  </button>
-                                </div>
                               </div>
                             </div>
                           </div>
-                          <button
-                            class="btn btn-icon btn-secondary btn-sm"
-                            (click)="addBlank(questionGroup)"
-                            ngbTooltip="Add Blank"
-                          >
-                            <i class="fas fa-plus"></i>
-                          </button>
                         </div>
                       </div>
                     </div>
@@ -319,26 +298,19 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="form-group row align-items-center">
-      <label class="col-12 col-md-5 font-weight-bold mb-2 mb-md-0"
-        >Time limit (in minutes)</label
-      >
-      <div class="col-12 col-md-7">
-        <input
-          type="number"
-          class="form-control form-control-solid"
-          placeholder="0"
-          formControlName="timeLimit"
-          required
-        />
+    <form [formGroup]="settingsForm">
+      <div class="form-group row align-items-center">
+        <label class="col-12 col-md-5 font-weight-bold mb-2 mb-md-0">Time limit (in minutes)</label>
+        <div class="col-12 col-md-7">
+          <input type="number" class="form-control form-control-solid" placeholder="0" formControlName="timeLimitMinutes" required />
+        </div>
       </div>
-    </div>
+    </form>
   </div>
   <div class="modal-footer d-flex">
     <button type="button" class="btn btn-danger" (click)="modal.dismiss()">{{ "BUTTONS.REMOVE" | translate }}</button>
     <button type="button" class="btn btn-secondary ml-auto" (click)="modal.dismiss()">{{ "BUTTONS.CANCEL" | translate }}</button>
-    <button type="button" class="btn btn-primary">{{ "BUTTONS.SAVE" | translate }}</button>
-
+    <button type="button" class="btn btn-primary" (click)="saveSettings()">{{ "BUTTONS.SAVE" | translate }}</button>
   </div>
 </ng-template>
 

@@ -5,6 +5,7 @@ import { Roles } from "../../_utils/auth_util";
 import { TestComponent } from "./test.component";
 import { TestListComponent } from "./test-list/test-list.component";
 import { CreateTestComponent } from "./create-test/create-test.component";
+import { OverviewTestComponent } from "./overview-test/overview-test.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,13 @@ const routes: Routes = [
       {
         path: "create",
         component: CreateTestComponent,
+        data: {
+          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+        }
+      },
+      {
+        path: "overview/:id",
+        component: OverviewTestComponent,
         data: {
           permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
         }
