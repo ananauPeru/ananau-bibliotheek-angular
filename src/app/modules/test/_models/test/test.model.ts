@@ -1,9 +1,17 @@
 import { SectionModel } from "./section.model";
-import { ShortTestModel } from "./short-test.model";
 
-export class TestModel extends ShortTestModel {
+export class TestModel {
 
+  id: number;
   title: string;
+  versionNumber: number;
+  totalAmountOfQuestions: number;
+  totalAmountOfSections: number;
+  timeLimitMinutes: number;
+  createdAt: Date;
+  accessCode: {
+    code: string;
+  };
   sections: SectionModel[];
 
 }

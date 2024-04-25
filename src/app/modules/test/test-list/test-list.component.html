@@ -52,14 +52,18 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Creation Date</th>
+                <th>Version</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let test of tests$ | async">
-                <td>{{ test.title }}</td>
+                <td>{{ test.latestVersion.title }}</td>
                 <td>null</td>
-                <td>{{ test.createdAt | date : "dd-MM-yyyy" }}</td>
+                <td>
+                  {{ test.latestVersion.createdAt | date : "dd-MM-yyyy" }}
+                </td>
+                <td>{{test.latestVersion.versionNumber}}</td>
                 <td class="text-right">
                   <button
                     type="button"
@@ -67,13 +71,13 @@
                     placement="top"
                     ngbTooltip="Share"
                   >
-                  <i class="fas fa-share-alt pr-1"></i>
+                    <i class="fas fa-share-alt pr-1"></i>
                   </button>
                   <button
                     type="button"
                     class="btn btn-primary"
                     placement="top"
-                    ngbTooltip="Edit"
+                    ngbTooltip="Details"
                   >
                     <i class="fas fa-sign-in-alt pr-0"></i>
                   </button>

@@ -19,8 +19,8 @@ export class TestService {
     return this.testHttpService.getTests$(searchTerm, page, pageSize);
   }
 
-  getTestById$(id: number): Observable<TestModel> {
-    return this.testHttpService.getTestById$(id);
+  getTestById$(id: number, versionNumber: number): Observable<TestModel> {
+    return this.testHttpService.getTestById$(id, versionNumber);
   }
 
   getTestExaminationById$(

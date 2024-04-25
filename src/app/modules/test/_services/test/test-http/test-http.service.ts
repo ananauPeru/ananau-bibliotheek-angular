@@ -7,6 +7,7 @@ import { catchError, map } from "rxjs/operators";
 import { TestDTO } from "../../../_dto/test-dto";
 import { QuestionModel } from "../../../_models/test/question.model";
 import { SectionModel } from "../../../_models/test/section.model";
+import { ShortTestModel } from "../../../_models/test/short-test.model";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/test`;
 
@@ -20,9 +21,9 @@ export class TestHttpService {
     searchTerm: string,
     page: number,
     pageSize: number
-  ): Observable<TestModel[]> {
+  ): Observable<ShortTestModel[]> {
     return this.http
-      .get<TestModel[]>(
+      .get<ShortTestModel[]>(
         `${API_URL}?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
         {
           responseType: "json",
@@ -35,9 +36,18 @@ export class TestHttpService {
           }
           return throwError(error);
         }),
-        map((response: any): TestModel[] => {
+        map((response: any): ShortTestModel[] => {
           if (response.success) {
-            return response.tests;
+            const tests: ShortTestModel[] = response.tests;
+            
+            // Calculate and set the latestVersionNumber for each ShortTestModel
+            tests.forEach(test => {
+              test.latestVersion = test.versions.reduce((prev, current) =>
+                prev.versionNumber > current.versionNumber ? prev : current
+              );
+            });
+            
+            return tests;
           } else {
             throwError(response.error);
             return [];
@@ -46,8 +56,8 @@ export class TestHttpService {
       );
   }
 
-  getTestById$(id: number): Observable<TestModel> {
-    return this.http.get<TestModel>(`${API_URL}/${id}`).pipe(
+  getTestById$(id: number, versionNumber: number): Observable<TestModel> {
+    return this.http.get<TestModel>(`${API_URL}/${id}/version/${versionNumber}`).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.error("Login please...");
@@ -60,6 +70,7 @@ export class TestHttpService {
           return {
             id: test.id,
             title: test.title,
+            versionNumber: test.versionNumber,
             totalAmountOfQuestions: test.totalAmountOfQuestions,
             totalAmountOfSections: test.totalAmountOfSections,
             timeLimitMinutes: test.timeLimitMinutes,
@@ -116,6 +127,7 @@ export class TestHttpService {
             return {
               id: test.id,
               title: test.title,
+              versionNumber: test.versionNumber,
               totalAmountOfQuestions: test.totalAmountOfQuestions,
               totalAmountOfSections: test.totalAmountOfSections,
               timeLimitMinutes: test.timeLimitMinutes,
@@ -166,6 +178,7 @@ export class TestHttpService {
           return {
             id: test.id,
             title: test.title,
+            versionNumber: test.versionNumber,
             totalAmountOfQuestions: test.totalAmountOfQuestions,
             totalAmountOfSections: test.totalAmountOfSections,
             timeLimitMinutes: test.timeLimitMinutes,

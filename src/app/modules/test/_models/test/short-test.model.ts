@@ -1,11 +1,25 @@
 export class ShortTestModel {
-  id: string;
-  totalAmountOfSections: number;
-  totalAmountOfQuestions: number;
-  timeLimitMinutes: number;
+  id: number;
   accessCode: {
     code: string;
   };
 
-  createdAt: Date;
+  versions: [
+    {
+      title: string;
+      versionNumber: number;
+      totalAmountOfSections: number;
+      totalAmountOfQuestions: number;
+      timeLimitMinutes: number;
+      createdAt: Date;
+    }
+  ];
+  latestVersion: {
+    title: string;
+    versionNumber: number;
+    totalAmountOfSections: number;
+    totalAmountOfQuestions: number;
+    timeLimitMinutes: number;
+    createdAt: Date;
+  };
 }
