@@ -25,6 +25,7 @@ export const locale = {
       CONFIRM: "Bevestigen",
       DISCONFIRM: "Bevestiging intrekken",
       BACK: "Terug",
+      SHARE: "Delen",
     },
     MENU: {
       NEW: "nieuw",

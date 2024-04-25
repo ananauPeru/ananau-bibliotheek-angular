@@ -29,6 +29,7 @@ export const locale = {
       CONFIRM: "Confirmar",
       DISCONFIRM: "Desconfirmar",
       BACK: "Espalda",
+      SHARE: "Compartir",
     },
 
     // MENU
