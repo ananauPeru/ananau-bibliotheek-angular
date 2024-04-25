@@ -51,11 +51,11 @@ import { RegistrationDetailsComponent } from './registration-details/registratio
 import { CalendarComponent } from './calendar/calendar.component';
 import { EditGeneralInformationComponent } from "./edit-general-information/edit-general-information.component";
 import { CheckInComponent } from "./check-in/check-in.component";
-import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
 import { QRCodeModule } from 'angularx-qrcode';
 import { CheckInListComponent } from "./check-in-list/check-in-list.component";
 import { CheckInSortPipe } from "./_pipe/check-in-sort.pipe";
 import { CheckInDetailsComponent } from "./check-in-details/check-in-details.component";
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 // LOAD_WASM().subscribe();
 
@@ -123,7 +123,7 @@ import { CheckInDetailsComponent } from "./check-in-details/check-in-details.com
     NgbModule,
     NgxDropzoneModule,
 
-    NgxScannerQrcodeModule,
+    ZXingScannerModule,
     QRCodeModule,
   ],
   providers: [DatePipe, AsyncPipe],

@@ -6,6 +6,7 @@ import { ChangeDetectorRef } from "@angular/core";
 import { QRCodeData } from "../_models/qr-code-data";
 import { Subscription } from "rxjs";
 import { OverlayService } from "../../overlay/_service/overlay.service";
+import { ZXingScannerComponent } from "@zxing/ngx-scanner";
 
 @Component({
   selector: "app-check-in",
@@ -13,7 +14,10 @@ import { OverlayService } from "../../overlay/_service/overlay.service";
   styleUrls: ["./check-in.component.scss"],
 })
 export class CheckInComponent implements OnInit {
-  @ViewChild("scanner") scanner: NgxScannerQrcodeComponent;
+  @ViewChild("scanner", { static: false })
+  scanner: ZXingScannerComponent;
+
+  scannerEnabled: boolean = false;
 
   isLoading: boolean = false;
 
@@ -40,45 +44,48 @@ export class CheckInComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.scanner.start();
+    // this.scanner.start();
+    this.scannerEnabled = true;
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-    this.scanner.stop();
+    // this.scanner.stop();
+    this.scannerEnabled = false;
   }
 
   onCodeResult(resultString: any) {
-
-    console.log(resultString);
-
-    //Get the result from the scanner
-    let result = resultString[0].value;
+    if (resultString === null || resultString === undefined) {
+      console.error("Invalid QR Code", "Undefined");
+      return;
+    }
 
     try {
-      result = JSON.parse(result);
+      resultString = JSON.parse(resultString);
     } catch (error) {
       this.toastr.error("Invalid QR Code");
+      console.error(error);
       return;
     }
-
-    console.log(result);
-    if(!result.id || !result.firstName || !result.lastName || !result.dateOfBirth) {
+    if (
+      !resultString.id ||
+      !resultString.firstName ||
+      !resultString.lastName ||
+      !resultString.dateOfBirth
+    ) {
+      console.error("Invalid QR Code");
       this.toastr.error("Invalid QR Code");
       return;
     }
-
-    //Stop the scanner
-    this.scanner.stop();
 
     //Sets loading to true
     this.isLoading = true;
 
     //Set the result to the qrCodeResult
-    this.qrCodeResult = result;
+    this.qrCodeResult = resultString;
 
     //Parse the result to a JSON object
-    this.qrCodeReusltJson = result;
+    this.qrCodeReusltJson = resultString;
 
     //Checks in/out the user based on the qr code result
     this.onSubmitCheckin(this.qrCodeReusltJson.id);
@@ -92,7 +99,6 @@ export class CheckInComponent implements OnInit {
     this.qrCodeReusltJson = null;
     this.checkIn = null;
     this.cdr.detectChanges();
-    if (this.scanner) this.scanner.start();
   }
 
   onSearch() {

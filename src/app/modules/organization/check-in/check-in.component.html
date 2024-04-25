@@ -7,16 +7,22 @@
         <div class="card text-center" *ngIf="!qrCodeResult">
           <div class="card-body">
             <div class="font-weight-bold pb-4">
-              {{"CHECK_IN.SCAN.TITLE" | translate}}
+              {{ "CHECK_IN.SCAN.TITLE" | translate }}
             </div>
-            <ngx-scanner-qrcode
-              class="mb-4"
-              #scanner="scanner"
-              (event)="onCodeResult($event)"
-            ></ngx-scanner-qrcode>
+            <zxing-scanner
+              #scanner
+              (scanSuccess)="onCodeResult($event)"
+            ></zxing-scanner>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- (camerasFound)="camerasFoundHandler($event)"
+(camerasNotFound)="camerasNotFoundHandler($event)"
+(scanSuccess)="scanSuccessHandler($event)"
+(scanError)="scanErrorHandler($event)"
+(scanFailure)="scanFailureHandler($event)"
+(scanComplete)="scanCompleteHandler($event)" -->
