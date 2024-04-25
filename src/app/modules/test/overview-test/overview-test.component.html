@@ -2,21 +2,44 @@
   <!-- Header -->
   <div class="row pb-0 pb-md-2">
     <div class="col-12">
-      <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem">
+      <div
+        class="card-header border-0 text-white"
+        style="background-color: white; padding: 2rem 2.25rem"
+      >
         <div class="row">
-          <div class="col-12 w-100 d-flex justify-content-between align-items-center">
-            <h3 class="card-title font-weight-bolder text-dark mb-0">
-              {{ "MENU.LEARNING_PLATFORM.TEST_OVERVIEW" | translate }}
-            </h3>
-            <div>
-              <button class="btn btn-secondary mr-2 pr-1 pr-md-3" routerLink="/test/list">
+          <div class="col-12 w-100">
+            <div
+              class="d-flex align-items-center d-flex justify-content-between mb-8"
+            >
+              <button
+                class="btn btn-secondary mr-2 pr-1 pr-md-3"
+                routerLink="/test/list"
+              >
                 <i class="fas fa-arrow-left"></i>
                 <span class="d-none d-md-inline ml-1">Back</span>
               </button>
-              <button class="btn btn-primary pr-1 pr-md-3" routerLink="/test/edit/{{ test.id }}">
-                <i class="fas fa-edit"></i>
-                <span class="d-none d-md-inline ml-1">Edit</span>
-              </button>
+
+              <div>
+                <button
+                  class="btn btn-secondary pr-1 pr-md-3 mr-2" (click)="openShareModal(test)"
+                >
+                  <i class="fas fa-share-alt"></i>
+                  <span class="d-none d-md-inline ml-1">Share</span>
+                </button>
+                <button
+                  class="btn btn-primary pr-1 pr-md-3"
+                  routerLink="/test/edit/{{ test.id }}"
+                >
+                  <i class="fas fa-edit"></i>
+                  <span class="d-none d-md-inline ml-1">Edit</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="card-title font-weight-bolder text-dark mb-0">
+                {{ "MENU.LEARNING_PLATFORM.TEST_OVERVIEW" | translate }}
+              </h3>
             </div>
           </div>
         </div>
@@ -34,7 +57,9 @@
         </div>
         <div class="form-group">
           <label class="font-weight-bold mb-2 h3">Time Limit</label>
-          <p class="form-control-plaintext">{{ test.timeLimitMinutes }} minutes</p>
+          <p class="form-control-plaintext">
+            {{ test.timeLimitMinutes }} minutes
+          </p>
         </div>
         <div class="form-group">
           <label class="font-weight-bold mb-2 h3">Number of Sections</label>
@@ -48,11 +73,15 @@
         </div>
         <div class="form-group">
           <label class="font-weight-bold mb-2 h3">Created At</label>
-          <p class="form-control-plaintext">{{ test.createdAt | date: 'medium' }}</p>
+          <p class="form-control-plaintext">
+            {{ test.createdAt | date : "medium" }}
+          </p>
         </div>
         <div class="form-group">
           <label class="font-weight-bold mb-2 h3">Last Updated</label>
-          <p class="form-control-plaintext">{{ test.createdAt | date: 'medium' }}</p>
+          <p class="form-control-plaintext">
+            {{ test.createdAt | date : "medium" }}
+          </p>
         </div>
       </div>
     </div>
@@ -60,14 +89,25 @@
 </div>
 
 <!-- Sections -->
-<div class="card card-custom mt-8" *ngFor="let section of test.sections; let i = index">
+<div
+  class="card card-custom mt-8"
+  *ngFor="let section of test.sections; let i = index"
+>
   <!-- Header -->
   <div class="row pb-0 pb-md-2">
     <div class="col-12">
-      <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem">
+      <div
+        class="card-header border-0 text-white"
+        style="background-color: white; padding: 2rem 2.25rem"
+      >
         <div class="row">
-          <div class="col-12 w-100 d-flex align-items-center mb-0 mb-md-2 justify-content-between">
-            <h3 class="card-title font-weight-bolder text-dark mr-3" style="white-space: nowrap">
+          <div
+            class="col-12 w-100 d-flex align-items-center mb-0 mb-md-2 justify-content-between"
+          >
+            <h3
+              class="card-title font-weight-bolder text-dark mr-3"
+              style="white-space: nowrap"
+            >
               Section {{ i + 1 }}: {{ section.title }}
             </h3>
           </div>
@@ -81,15 +121,22 @@
     <div class="row mb-12">
       <div class="col-12">
         <!-- Questions -->
-        <div class="form-group mb-4" *ngFor="let question of section.questions; let j = index">
+        <div
+          class="form-group mb-4"
+          *ngFor="let question of section.questions; let j = index"
+        >
           <div class="row align-items-center mb-8">
             <!-- Question Title -->
             <div class="col-6 col-md-2 mb-2 mb-md-0">
-              <label class="font-weight-bold mb-0 h3">Question {{ j + 1 }}</label>
+              <label class="font-weight-bold mb-0 h3"
+                >Question {{ j + 1 }}</label
+              >
             </div>
             <!-- Question Type -->
             <div class="col-4 col-md-2 mb-2 mb-md-0">
-              <span class="font-weight-bold">{{ question.type.name | translate }}</span>
+              <span class="font-weight-bold">{{
+                question.type.name | translate
+              }}</span>
             </div>
             <!-- Question Text -->
             <div class="col-12 col-md-8">
@@ -99,10 +146,19 @@
           <!-- Answers -->
           <div class="row" *ngIf="question.type.name === 'Multiple Choice'">
             <div class="col-12">
-              <div class="form-group row align-items-center" *ngFor="let answer of question.answers; let k = index">
+              <div
+                class="form-group row align-items-center"
+                *ngFor="let answer of question.answers; let k = index"
+              >
                 <h4 class="col-2">Choice {{ k + 1 }}</h4>
                 <div class="col-10">
-                  <p class="form-control-plaintext" [ngClass]="{'text-success': answer.isCorrect, 'text-danger': !answer.isCorrect}">
+                  <p
+                    class="form-control-plaintext"
+                    [ngClass]="{
+                      'text-success': answer.isCorrect,
+                      'text-danger': !answer.isCorrect
+                    }"
+                  >
                     {{ answer.answerText }}
                   </p>
                 </div>
@@ -111,10 +167,15 @@
           </div>
           <div class="row" *ngIf="question.type.name === 'Fill in the Blank'">
             <div class="col-12">
-              <div class="form-group row align-items-center" *ngFor="let answer of question.answers; let k = index">
+              <div
+                class="form-group row align-items-center"
+                *ngFor="let answer of question.answers; let k = index"
+              >
                 <h4 class="col-2">Answer</h4>
                 <div class="col-10">
-                  <p class="form-control-plaintext text-success">{{ answer.answerText }}</p>
+                  <p class="form-control-plaintext text-success">
+                    {{ answer.answerText }}
+                  </p>
                 </div>
               </div>
             </div>
