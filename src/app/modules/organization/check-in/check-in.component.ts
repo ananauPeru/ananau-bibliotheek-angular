@@ -6,6 +6,7 @@ import { ChangeDetectorRef } from "@angular/core";
 import { QRCodeData } from "../_models/qr-code-data";
 import { Subscription } from "rxjs";
 import { OverlayService } from "../../overlay/_service/overlay.service";
+import { ZXingScannerComponent } from "@zxing/ngx-scanner";
 
 @Component({
   selector: "app-check-in",
@@ -13,7 +14,10 @@ import { OverlayService } from "../../overlay/_service/overlay.service";
   styleUrls: ["./check-in.component.scss"],
 })
 export class CheckInComponent implements OnInit {
-  @ViewChild("scanner") scanner: NgxScannerQrcodeComponent;
+  @ViewChild("scanner", { static: false })
+  scanner: ZXingScannerComponent;
+
+  scannerEnabled: boolean = false;
 
   isLoading: boolean = false;
 
@@ -40,39 +44,48 @@ export class CheckInComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.scanner.start();
+    // this.scanner.start();
+    this.scannerEnabled = true;
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-    this.scanner.stop();
+    // this.scanner.stop();
+    this.scannerEnabled = false;
   }
 
   onCodeResult(resultString: any) {
-
-    // {"id":"72","firstName":"Bindo","lastName":"Thorpe","dateOfBirth":"2024-03-22T00:00:00"}
-
-    //Get the result from the scanner
-    let result = resultString[0].value;
-
-    try {
-      result = JSON.parse(result);
-    } catch (error) {
-      this.toastr.error("Invalid QR Code");
+    if (resultString === null || resultString === undefined) {
+      console.error("Invalid QR Code", "Undefined");
       return;
     }
 
-    //Stop the scanner
-    this.scanner.stop();
+    try {
+      resultString = JSON.parse(resultString);
+    } catch (error) {
+      this.toastr.error("Invalid QR Code");
+      console.error(error);
+      return;
+    }
+    if (
+      !resultString.id ||
+      !resultString.firstName ||
+      !resultString.lastName ||
+      !resultString.dateOfBirth
+    ) {
+      console.error("Invalid QR Code");
+      this.toastr.error("Invalid QR Code");
+      return;
+    }
 
     //Sets loading to true
     this.isLoading = true;
 
     //Set the result to the qrCodeResult
-    this.qrCodeResult = result;
+    this.qrCodeResult = resultString;
 
     //Parse the result to a JSON object
-    this.qrCodeReusltJson = result;
+    this.qrCodeReusltJson = resultString;
 
     //Checks in/out the user based on the qr code result
     this.onSubmitCheckin(this.qrCodeReusltJson.id);
@@ -86,11 +99,10 @@ export class CheckInComponent implements OnInit {
     this.qrCodeReusltJson = null;
     this.checkIn = null;
     this.cdr.detectChanges();
-    if (this.scanner) this.scanner.start();
   }
 
   onSearch() {
-    this.checkInService
+    const subscription = this.checkInService
       .getCheckInHistory(
         this.searchUserId,
         this.searchStartDate,
@@ -116,6 +128,8 @@ export class CheckInComponent implements OnInit {
         this.searchResult = `Total Check-In Time: ${totalHours} hours, ${totalMinutes} minutes, ${totalSeconds} seconds`;
         this.cdr.detectChanges();
       });
+
+    this.subscriptions.push(subscription);
   }
 
   /**
@@ -140,7 +154,7 @@ export class CheckInComponent implements OnInit {
    */
   private onSubmitCheckin(userId: number) {
     userId = parseInt(userId.toString());
-    this.checkInService
+    const subscription = this.checkInService
       .checkIn(userId)
       .subscribe((response: CheckInHistory) => {
         if (response.checkOut === null) {
@@ -159,58 +173,7 @@ export class CheckInComponent implements OnInit {
         }
       });
 
-    // const checkSubscription = this.checkInService
-    //   .isCheckedIn(userId)
-    //   .subscribe((result) => {
-    //     if (result === true) {
-    //       const checkOutSubscription = this.checkInService
-    //         .checkIn(userId)
-    //         .subscribe((res: CheckInHistory) => {
-    //           this.isLoading = false;
-
-    //           this.showSuccessMessage(`
-    //         <h3>Goodbye ${this.qrCodeReusltJson.firstName}</h3>
-    //         <h3>Checked out successfully at <strong>${this.getLocalTime(
-    //           new Date(res.checkOutTime)
-    //         )}.</strong></h3>
-    //         `);
-    //           this.cdr.detectChanges();
-    //         });
-
-    //       this.subscriptions.push(checkOutSubscription);
-    //     } else {
-    //       const checkInSubscription = this.checkInService
-    //         .checkIn(userId)
-    //         .subscribe((res: CheckInHistory) => {
-    //           this.isLoading = false;
-
-    //           const dateOfBirth = new Date(this.qrCodeReusltJson.dateOfBirth);
-    //           const today = new Date();
-
-    //           if (
-    //             dateOfBirth.getDate() === today.getDate() &&
-    //             dateOfBirth.getMonth() === today.getMonth()
-    //           ) {
-    //             this.showBirthdayMessage(
-    //               this.getLocalTime(new Date(res.checkInTime))
-    //             );
-    //           } else {
-    //             this.showSuccessMessage(`
-    //       <h3>Welcome ${this.qrCodeReusltJson.firstName}</h3>
-    //       <h3>Checked in successfully at <strong>${this.getLocalTime(
-    //         new Date(res.checkInTime)
-    //       )}</strong></h3>
-    //       `);
-    //           }
-
-    //           this.cdr.detectChanges();
-    //         });
-
-    //       this.subscriptions.push(checkInSubscription);
-    //     }
-    //   });
-
-    // this.subscriptions.push(checkSubscription);
+    this.subscriptions.push(subscription);
   }
 
   private showSuccessMessage(message: string) {
