@@ -234,4 +234,56 @@ export class TestHttpService {
       })
     );
   }
+
+  putTest$(id: number, testDto: TestDTO): Observable<TestModel> {
+    return this.http.put<any>(`${API_URL}/${id}`, testDto).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): TestModel => {
+        if (response.success) {
+          const test = response.test;
+          return {
+            id: test.id,
+            title: test.title,
+            versionNumber: test.versionNumber,
+            totalAmountOfQuestions: test.totalAmountOfQuestions,
+            totalAmountOfSections: test.totalAmountOfSections,
+            timeLimitMinutes: test.timeLimitMinutes,
+            accessCode: {
+              code: test.accessCode.code,
+            },
+            createdAt: new Date(test.createdAt),
+
+            sections: test.sections.map((section: SectionModel) => ({
+              id: section.id,
+              title: section.title,
+              amountOfQuestions: section.questions.length,
+
+              questions: section.questions.map((question: QuestionModel) => ({
+                id: question.id,
+                questionText: question.questionText,
+                type: {
+                  id: question.type.id,
+                  name: question.type.name,
+                },
+                amountOfAnswers: question.answers.length,
+                answers: question.answers.map((answer) => ({
+                  id: answer.id,
+                  answerText: answer.answerText,
+                  isCorrect: answer.isCorrect,
+                })),
+              })),
+            })),
+          };
+        } else {
+          throwError(response.error);
+          return null;
+        }
+      })
+    );
+  }
 }

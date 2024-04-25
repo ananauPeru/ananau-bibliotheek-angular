@@ -82,6 +82,7 @@ export const locale = {
         TEST_LIST: "Lista de pruebas",
         CREATE_TEST: "Crear prueba",
         MY_STUDENTS: "Mis estudiantes",
+        TEST_OVERVIEW: "Resumen de la prueba",
       }
     },
 

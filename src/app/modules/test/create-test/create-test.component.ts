@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 import { TestDTO } from "../_dto/test-dto";
 import { QuestionTypeService } from "../_services/question-type/question-type.service";
 import { Observable } from "rxjs";
@@ -7,7 +8,7 @@ import { QuestionTypeModel } from "../_models/question-type/question-type.model"
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TestService } from "../_services/test/test.service";
 import { ToastrService } from "ngx-toastr";
-import { Router } from "@angular/router";
+import { TestModel } from "../_models/test/test.model";
 
 @Component({
   selector: "app-create-test",
@@ -20,6 +21,8 @@ export class CreateTestComponent implements OnInit {
   public testForm: FormGroup;
   public settingsForm: FormGroup;
   public questionTypes$: Observable<QuestionTypeModel[]>;
+  public isEditMode = false;
+  public testId: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,12 +30,14 @@ export class CreateTestComponent implements OnInit {
     private modalService: NgbModal,
     private testService: TestService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.initializeQuestionTypes();
     this.initializeForm();
+    this.checkEditMode();
   }
 
   private initializeForm() {
@@ -45,7 +50,85 @@ export class CreateTestComponent implements OnInit {
       timeLimitMinutes: 60,
     });
 
-    this.addSection();
+    if (!this.isEditMode) {
+      this.addSection();
+    }
+  }
+
+  private checkEditMode() {
+    this.route.params.subscribe((params) => {
+      if (params.id) {
+        this.isEditMode = true;
+        this.testId = +params.id;
+        this.loadTestData();
+      }
+    });
+  }
+
+  private loadTestData() {
+    this.testService.getTestById$(this.testId, 1).subscribe(
+      (test: TestModel) => {
+        this.patchFormValues(test);
+      },
+      (error) => {
+        console.error("Error fetching test data: ", error);
+        this.toast.error("Error fetching test data");
+      }
+    );
+  }
+
+  private patchFormValues(test: TestModel) {
+    this.testForm.patchValue({
+      title: test.title,
+    });
+
+    this.settingsForm.patchValue({
+      timeLimitMinutes: test.timeLimitMinutes,
+    });
+
+    this.patchSectionsFormArray(test.sections);
+  }
+
+  private patchSectionsFormArray(sections: any[]) {
+    const sectionsFormArray = this.sections;
+    sectionsFormArray.clear();
+
+    sections.forEach((section) => {
+      const sectionGroup = this.formBuilder.group({
+        title: section.title,
+        questions: this.formBuilder.array([]),
+      });
+      this.patchQuestionsFormArray(sectionGroup, section.questions);
+      sectionsFormArray.push(sectionGroup);
+    });
+  }
+
+  private patchQuestionsFormArray(sectionGroup: FormGroup, questions: any[]) {
+    const questionsFormArray = sectionGroup.get("questions") as FormArray;
+    questionsFormArray.clear();
+
+    questions.forEach((question) => {
+      const questionGroup = this.formBuilder.group({
+        questionText: question.questionText,
+        type: question.type,
+        answers: this.formBuilder.array([]),
+      });
+      this.patchAnswersFormArray(questionGroup, question.answers);
+      questionsFormArray.push(questionGroup);
+    });
+  }
+
+  private patchAnswersFormArray(questionGroup: FormGroup, answers: any[]) {
+    const answersFormArray = questionGroup.get("answers") as FormArray;
+    answersFormArray.clear();
+
+    answers.forEach((answer) => {
+      const answerGroup = this.formBuilder.group({
+        answerText: answer.answerText,
+        isCorrect: answer.isCorrect,
+      });
+      answersFormArray.push(answerGroup);
+    });
   }
 
   /**
@@ -72,24 +155,33 @@ export class CreateTestComponent implements OnInit {
     const timeLimitMinutes = this.settingsForm.get('timeLimitMinutes').value;
     testDto.timeLimitMinutes = timeLimitMinutes;
 
-    console.log(testDto);
-
-    // // Make a post request to the backend
-    // this.testService.createTest$(testDto).subscribe(
-    //   () => {
-    //     // Handle success
-    //     console.log("Test created successfully!");
-    //     this.toast.success("Test created successfully!");
-
-    //     // Navigate to the list page
-    //     this.router.navigate(["/test/list"]);
-    //   },
-    //   // Handle error
-    //   (error) => {
-    //     console.error("Error creating test: ", error);
-    //     this.toast.error("Error creating test: ", error);
-    //   }
-    // );
+    if (this.isEditMode) {
+      // Update test
+      this.testService.updateTest$(this.testId, testDto).subscribe(
+        () => {
+          console.log("Test updated successfully!");
+          this.toast.success("Test updated successfully!");
+          this.router.navigate(["/test/list"]);
+        },
+        (error) => {
+          console.error("Error updating test: ", error);
+          this.toast.error("Error updating test");
+        }
+      );
+    } else {
+      // Create test
+      this.testService.createTest$(testDto).subscribe(
+        () => {
+          console.log("Test created successfully!");
+          this.toast.success("Test created successfully!");
+          this.router.navigate(["/test/list"]);
+        },
+        (error) => {
+          console.error("Error creating test: ", error);
+          this.toast.error("Error creating test");
+        }
+      );
+    }
   }
 
   /**

@@ -10,6 +10,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { TestListComponent } from './test-list/test-list.component';
 import { TestRoutingModule } from './test-routing.module';
 import { CreateTestComponent } from './create-test/create-test.component';
+import { OverviewTestComponent } from './overview-test/overview-test.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { CreateTestComponent } from './create-test/create-test.component';
     NgbModule,
     NgxDropzoneModule,
   ],
-  declarations: [TestComponent, TestListComponent, CreateTestComponent],
+  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }

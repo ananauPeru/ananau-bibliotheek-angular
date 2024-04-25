@@ -21,24 +21,39 @@ const routes: Routes = [
         component: TestListComponent,
         data: {
           permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
-        }
+        },
       },
       {
         path: "create",
         component: CreateTestComponent,
         data: {
           permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
-        }
+        },
+      },
+      {
+        path: "edit/:id",
+        component: CreateTestComponent,
+        data: {
+          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+        },
       },
       {
         path: "overview/:id",
         component: OverviewTestComponent,
         data: {
           permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
-        }
+        },
       },
-      { path: "", redirectTo: "", pathMatch: "full" },
-      { path: "**", redirectTo: "", pathMatch: "full" },
+      {
+        path: "",
+        redirectTo: "",
+        pathMatch: "full",
+      },
+      {
+        path: "**",
+        redirectTo: "",
+        pathMatch: "full",
+      },
     ],
   },
 ];

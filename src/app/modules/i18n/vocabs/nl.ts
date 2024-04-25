@@ -78,6 +78,7 @@ export const locale = {
         TEST_LIST: "Testen",
         CREATE_TEST: "Test aanmaken",
         MY_STUDENTS: "Mijn studenten",
+        TEST_OVERVIEW: "Test overzicht",
       }
       // We dont translate documentation (IT) to different languages
     },

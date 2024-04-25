@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TestService } from '../_services/test/test.service';
+import { TestModel } from '../_models/test/test.model';
 
 @Component({
   selector: "app-overview-test",
@@ -7,15 +9,35 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./overview-test.component.scss"],
 })
 export class OverviewTestComponent implements OnInit {
+  test: TestModel;
 
-  public testId: number;
-
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private testService: TestService
+  ) { }
 
   ngOnInit() {
+    this.getTestDetails();
+  }
 
-    // Get the test ID from the route
-    this.route.params.subscribe((params) => (this.testId = params["id"]));
+  getTestDetails() {
+    const testId = this.route.snapshot.params['id'];
+    this.testService.getTestById$(testId, 1).subscribe(
+      (test: TestModel) => {
+        this.test = test;
+      },
+      error => {
+        console.error('Error fetching test details:', error);
+      }
+    );
+  }
 
+  getTotalQuestions(): number {
+    let totalQuestions = 0;
+    this.test.sections.forEach(section => {
+      totalQuestions += section.questions.length;
+    });
+    return totalQuestions;
   }
 }

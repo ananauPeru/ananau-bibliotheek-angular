@@ -37,4 +37,8 @@ export class TestService {
   deleteTest$(id: number): Observable<any> {
     return this.testHttpService.deleteTest$(id);
   }
+
+  updateTest$(id: number, testDto: TestDTO): Observable<TestModel> {
+    return this.testHttpService.putTest$(id, testDto);
+  }
 }
