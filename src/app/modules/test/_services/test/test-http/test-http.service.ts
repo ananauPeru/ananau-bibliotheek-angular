@@ -70,6 +70,7 @@ export class TestHttpService {
           return {
             id: test.id,
             title: test.title,
+            description: test.description,
             versionNumber: test.versionNumber,
             totalAmountOfQuestions: test.totalAmountOfQuestions,
             totalAmountOfSections: test.totalAmountOfSections,
@@ -82,6 +83,7 @@ export class TestHttpService {
             sections: test.sections.map((section: SectionModel) => ({
               id: section.id,
               title: section.title,
+              description: test.description,
               amountOfQuestions: section.amountOfQuestions,
 
               questions: section.questions.map((question: QuestionModel) => ({
@@ -127,6 +129,7 @@ export class TestHttpService {
             return {
               id: test.id,
               title: test.title,
+              description: test.description,
               versionNumber: test.versionNumber,
               totalAmountOfQuestions: test.totalAmountOfQuestions,
               totalAmountOfSections: test.totalAmountOfSections,
@@ -139,6 +142,7 @@ export class TestHttpService {
               sections: test.sections.map((section: SectionModel) => ({
                 id: section.id,
                 title: section.title,
+                description: test.description,
                 amountOfQuestions: section.questions.length,
 
                 questions: section.questions.map((question: QuestionModel) => ({
@@ -178,6 +182,7 @@ export class TestHttpService {
           return {
             id: test.id,
             title: test.title,
+            description: test.description,
             versionNumber: test.versionNumber,
             totalAmountOfQuestions: test.totalAmountOfQuestions,
             totalAmountOfSections: test.totalAmountOfSections,
@@ -190,6 +195,7 @@ export class TestHttpService {
             sections: test.sections.map((section: SectionModel) => ({
               id: section.id,
               title: section.title,
+              description: test.description,
               amountOfQuestions: section.questions.length,
 
               questions: section.questions.map((question: QuestionModel) => ({
@@ -249,6 +255,7 @@ export class TestHttpService {
           return {
             id: test.id,
             title: test.title,
+            description: test.description,
             versionNumber: test.versionNumber,
             totalAmountOfQuestions: test.totalAmountOfQuestions,
             totalAmountOfSections: test.totalAmountOfSections,
@@ -261,6 +268,7 @@ export class TestHttpService {
             sections: test.sections.map((section: SectionModel) => ({
               id: section.id,
               title: section.title,
+              description: section.description,
               amountOfQuestions: section.questions.length,
 
               questions: section.questions.map((question: QuestionModel) => ({

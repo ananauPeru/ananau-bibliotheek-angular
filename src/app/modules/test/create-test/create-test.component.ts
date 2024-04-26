@@ -43,6 +43,7 @@ export class CreateTestComponent implements OnInit {
   private initializeForm() {
     this.testForm = this.formBuilder.group({
       title: "",
+      description: '',
       sections: this.formBuilder.array([]),
     });
 
@@ -80,6 +81,7 @@ export class CreateTestComponent implements OnInit {
   private patchFormValues(test: TestModel) {
     this.testForm.patchValue({
       title: test.title,
+      description: test.description,
     });
 
     this.settingsForm.patchValue({
@@ -92,10 +94,11 @@ export class CreateTestComponent implements OnInit {
   private patchSectionsFormArray(sections: any[]) {
     const sectionsFormArray = this.sections;
     sectionsFormArray.clear();
-
+  
     sections.forEach((section) => {
       const sectionGroup = this.formBuilder.group({
         title: section.title,
+        description: section.description,
         questions: this.formBuilder.array([]),
       });
       this.patchQuestionsFormArray(sectionGroup, section.questions);
@@ -190,6 +193,7 @@ export class CreateTestComponent implements OnInit {
   addSection() {
     const sectionGroup = this.formBuilder.group({
       title: "",
+      description: '',
       questions: this.formBuilder.array([]),
     });
     this.sections.push(sectionGroup);
