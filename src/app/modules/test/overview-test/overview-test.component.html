@@ -21,7 +21,8 @@
 
               <div>
                 <button
-                  class="btn btn-secondary pr-1 pr-md-3 mr-2" (click)="openShareModal(test)"
+                  class="btn btn-secondary pr-1 pr-md-3 mr-2"
+                  (click)="openShareModal(test)"
                 >
                   <i class="fas fa-share-alt"></i>
                   <span class="d-none d-md-inline ml-1">Share</span>
@@ -54,6 +55,18 @@
         <div class="form-group">
           <label class="font-weight-bold mb-2 h3">Title</label>
           <p class="form-control-plaintext">{{ test.title }}</p>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold mb-2 h3">Description</label>
+          <p
+            class="form-control-plaintext"
+            *ngIf="test.description; else noTestDescription"
+          >
+            {{ test.description }}
+          </p>
+          <ng-template #noTestDescription>
+            <p class="form-control-plaintext"><em>No description</em></p>
+          </ng-template>
         </div>
         <div class="form-group">
           <label class="font-weight-bold mb-2 h3">Time Limit</label>
@@ -90,7 +103,7 @@
 
 <!-- Sections -->
 <div
-  class="card card-custom mt-8"
+  class="card card-custom my-12"
   *ngFor="let section of test.sections; let i = index"
 >
   <!-- Header -->
@@ -118,6 +131,14 @@
 
   <!-- Body -->
   <div class="card-body pt-2">
+    <div class="row mb-12" *ngIf="section.description">
+      <div class="col-12">
+        <div class="form-group">
+          <label class="font-weight-bold mb-2 h3">Description</label>
+          <p class="form-control-plaintext">{{ section.description }}</p>
+        </div>
+      </div>
+    </div>
     <div class="row mb-12">
       <div class="col-12">
         <!-- Questions -->
@@ -140,7 +161,9 @@
             </div>
             <!-- Question Text -->
             <div class="col-12 col-md-8">
-              <p class="form-control-plaintext">{{ question.questionText }}</p>
+              <p class="form-control-plaintext">
+                {{ question.questionText }}
+              </p>
             </div>
           </div>
           <!-- Answers -->
