@@ -135,17 +135,15 @@ export class TestHttpService {
               totalAmountOfSections: test.totalAmountOfSections,
               timeLimitMinutes: test.timeLimitMinutes,
               accessCode: {
-                code: test.accessCode.code,
+                code: null,
               },
               createdAt: new Date(test.createdAt),
-
-              sections: test.sections.map((section: SectionModel) => ({
+              sections: test.sections && test.sections.map((section: SectionModel) => ({
                 id: section.id,
                 title: section.title,
                 description: test.description,
-                amountOfQuestions: section.questions.length,
-
-                questions: section.questions.map((question: QuestionModel) => ({
+                amountOfQuestions: section.questions ? section.questions.length : 0,
+                questions: section.questions && section.questions.map((question: QuestionModel) => ({
                   id: question.id,
                   questionText: question.questionText,
                   type: {
@@ -153,7 +151,7 @@ export class TestHttpService {
                     name: question.type.name,
                   },
                   amountOfAnswers: question.amountOfAnswers,
-                  answers: question.answers.map((answer) => ({
+                  answers: question.answers && question.answers.map((answer) => ({
                     id: answer.id,
                     answerText: answer.answerText,
                   })),

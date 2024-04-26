@@ -4,6 +4,7 @@ import { TestService } from "../_services/test/test.service";
 import { TestModel } from "../_models/test/test.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-fill-in-test",
@@ -12,11 +13,15 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 })
 export class FillInTestComponent implements OnInit {
   @ViewChild("confirmSubmitModal") confirmSubmitModal: TemplateRef<any>;
-  test: TestModel;
+
+  test$: Observable<TestModel>;
   testForm: FormGroup;
   currentSectionIndex = 0;
   timeLeft: number;
   timerInterval: any;
+  isTestSubmitted = false;
+  score = 0;
+  totalQuestions = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,29 +44,25 @@ export class FillInTestComponent implements OnInit {
       return;
     }
 
-    this.testService.getTestExaminationById$(testId, accessCode).subscribe(
-      (test: TestModel) => {
-        this.test = test;
-        console.log(test);
-        this.initializeForm();
-      },
-      (error) => {
-        console.error("Error fetching test details:", error);
-      }
-    );
+    console.log("Fetching test details...");
+    this.test$ = this.testService.getTestExaminationById$(testId, accessCode);
   }
 
-  initializeForm() {
+  initializeForm(test: TestModel) {
     this.testForm = this.formBuilder.group({});
 
-    this.test.sections.forEach((section) => {
+    test.sections.forEach((section) => {
       const sectionGroup = this.formBuilder.group({});
 
       section.questions.forEach((question) => {
-        const questionControl = this.formBuilder.control(
-          "",
-          Validators.required
-        );
+        let questionControl;
+
+        if (question.type.name === "Multiple Choice") {
+          questionControl = this.formBuilder.control("", Validators.required);
+        } else if (question.type.name === "Fill in the Blank") {
+          questionControl = this.formBuilder.control("", Validators.required);
+        }
+
         sectionGroup.addControl(question.id.toString(), questionControl);
       });
 
@@ -69,8 +70,9 @@ export class FillInTestComponent implements OnInit {
     });
   }
 
-  startTest() {
-    this.timeLeft = this.test.timeLimitMinutes * 60;
+  startTest(test: TestModel) {
+    this.initializeForm(test);
+    this.timeLeft = test.timeLimitMinutes * 60;
     this.startTimer();
   }
 
@@ -85,12 +87,11 @@ export class FillInTestComponent implements OnInit {
 
   endTest() {
     clearInterval(this.timerInterval);
-    // TODO: Submit the test answers
-    this.router.navigate(["/test/result"]);
+    this.timerInterval = null;
   }
 
-  nextSection() {
-    if (this.currentSectionIndex < this.test.sections.length - 1) {
+  nextSection(test: TestModel) {
+    if (this.currentSectionIndex < test.sections.length - 1) {
       this.currentSectionIndex++;
     }
   }
@@ -101,39 +102,52 @@ export class FillInTestComponent implements OnInit {
     }
   }
 
-  submitTest() {
+  submitTest(test: TestModel) {
     if (this.testForm.invalid) {
       this.modalService.open(this.confirmSubmitModal, { centered: true });
     } else {
-      this.endTest();
+      this.gradeTest(test);
     }
   }
 
-  reviewTest() {
-    this.markEmptyFields();
-    this.currentSectionIndex = this.getFirstInvalidSectionIndex();
-  }
+  gradeTest(test: TestModel) {
+    this.score = 0;
+    this.totalQuestions = 0;
 
-  markEmptyFields() {
-    Object.keys(this.testForm.controls).forEach((sectionId) => {
-      const sectionGroup = this.testForm.get(sectionId) as FormGroup;
-      Object.keys(sectionGroup.controls).forEach((questionId) => {
-        const questionControl = sectionGroup.get(questionId);
-        if (questionControl.invalid) {
-          questionControl.markAsDirty();
+    test.sections.forEach((section, sectionIndex) => {
+      section.questions.forEach((question) => {
+        this.totalQuestions++;
+
+        const selectedAnswerId = this.testForm.get(section.id.toString()).get(question.id.toString()).value;
+        const selectedAnswer = question.answers.find((answer) => answer.id === selectedAnswerId);
+
+        if (selectedAnswer && selectedAnswer.isCorrect) {
+          this.score++;
         }
       });
     });
+
+    this.isTestSubmitted = true;
+    this.endTest();
   }
 
-  getFirstInvalidSectionIndex() {
-    for (let i = 0; i < this.test.sections.length; i++) {
-      const sectionId = this.test.sections[i].id.toString();
-      const sectionGroup = this.testForm.get(sectionId) as FormGroup;
-      if (sectionGroup.invalid) {
-        return i;
-      }
-    }
-    return 0;
+  isAnswerSelected(test: TestModel, sectionIndex: number, questionId: number, answerId: number): boolean {
+    const selectedAnswerId = this.testForm.get(test.sections[sectionIndex].id.toString()).get(questionId.toString()).value;
+    return selectedAnswerId === answerId;
+  }
+
+  retryTest(test: TestModel) {
+    this.resetTest();
+    this.startTest(test);
+  }
+
+  resetTest() {
+    this.isTestSubmitted = false;
+    this.score = 0;
+    this.totalQuestions = 0;
+    this.currentSectionIndex = 0;
+    this.timeLeft = 0;
+    clearInterval(this.timerInterval);
+    this.timerInterval = null;
   }
 }
