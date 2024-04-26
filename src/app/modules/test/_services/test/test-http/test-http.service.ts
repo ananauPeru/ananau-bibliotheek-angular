@@ -141,7 +141,7 @@ export class TestHttpService {
               sections: test.sections && test.sections.map((section: SectionModel) => ({
                 id: section.id,
                 title: section.title,
-                description: test.description,
+                description: section.description,
                 amountOfQuestions: section.questions ? section.questions.length : 0,
                 questions: section.questions && section.questions.map((question: QuestionModel) => ({
                   id: question.id,

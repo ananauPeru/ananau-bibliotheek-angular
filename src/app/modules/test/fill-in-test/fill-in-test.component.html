@@ -1,87 +1,206 @@
-<div class="container">
+<div class="container card card-custom">
   <ng-container *ngIf="test$ | async as test; else loading">
-    <div class="row">
-      <div class="col-12">
-        <h2>{{ test.title }}</h2>
-        <p>{{ test.description }}</p>
-        <p>Time Limit: {{ test.timeLimitMinutes }} minutes</p>
-        <button class="btn btn-primary" (click)="startTest(test)" *ngIf="!timerInterval && !isTestSubmitted">
-          Start Test
-        </button>
-      </div>
-    </div>
-
-    <div class="row" *ngIf="timerInterval && !isTestSubmitted">
-      <div class="col-12">
-        <div class="progress">
-          <div class="progress-bar" [style.width]="((currentSectionIndex + 1) / test.sections.length) * 100 + '%'"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row" *ngIf="timerInterval && !isTestSubmitted">
-      <div class="col-12">
-        <h3>
-          Section {{ currentSectionIndex + 1 }}: {{ test.sections[currentSectionIndex]?.title }}
-        </h3>
-        <p>{{ test.sections[currentSectionIndex]?.description }}</p>
-      </div>
-    </div>
-
-    <form [formGroup]="testForm" *ngIf="timerInterval && !isTestSubmitted">
+    <ng-container>
+      <!-- Header -->
       <div class="row">
         <div class="col-12">
-          <div formGroupName="{{ test.sections[currentSectionIndex].id }}">
-            <div class="form-group" *ngFor="let question of test.sections[currentSectionIndex].questions; let i = index">
-              <label>{{ question.questionText }}</label>
-
-              <!-- Multiple Choice Question -->
-              <div *ngIf="question.type.name === 'Multiple Choice'">
-                <div class="form-check" *ngFor="let answer of question.answers; let j = index">
-                  <input class="form-check-input" type="radio" [formControlName]="question.id" [value]="answer.id"
-                    [id]="'question-' + question.id + '-answer-' + j" [ngClass]="{ 'is-invalid':
-                        testForm.get(test.sections[currentSectionIndex].id.toString()).get(question.id.toString()).invalid &&
-                        testForm.get(test.sections[currentSectionIndex].id.toString()).get(question.id.toString()).dirty
-                    }" />
-                  <label class="form-check-label" [for]="'question-' + question.id + '-answer-' + j">{{ answer.answerText }}</label>
-                </div>
+          <div
+            class="card-header border-0 text-white"
+            style="background-color: white; padding: 2rem 2.25rem"
+          >
+            <div class="row">
+              <div class="col-12 col-md-8 w-100">
+                <h3 class="card-title font-weight-bolder text-dark">
+                  {{ test.title }}
+                </h3>
               </div>
-
-              <!-- Fill in the Blank Question -->
-              <div *ngIf="question.type.name === 'Fill in the Blank'">
-                <input type="text" class="form-control" [formControlName]="question.id" [ngClass]="{ 'is-invalid':
-                      testForm.get(test.sections[currentSectionIndex].id.toString()).get(question.id.toString()).invalid &&
-                      testForm.get(test.sections[currentSectionIndex].id.toString()).get(question.id.toString()).dirty
-                  }" />
+            </div>
+            <div class="row" *ngIf="!timerInterval && !isTestSubmitted">
+              <div class="text-dark col-12 col-md-8 w-100">
+                <span
+                  >Time Limit:
+                  <strong>{{ test.timeLimitMinutes }}</strong> minutes</span
+                >
               </div>
-
-              <div class="invalid-feedback">This field is required.</div>
+            </div>
+            <div class="row" *ngIf="!timerInterval && !isTestSubmitted">
+              <div class="text-dark col-12 col-md-8 w-100">
+                <p *ngIf="test.description">{{ test.description }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-12">
-          <button class="btn btn-secondary mr-2" (click)="previousSection()" *ngIf="currentSectionIndex > 0">
-            Previous
-          </button>
-          <button class="btn btn-primary" (click)="nextSection(test)" *ngIf="currentSectionIndex < test.sections.length - 1">
-            Next
-          </button>
-          <button class="btn btn-success" (click)="submitTest(test)" *ngIf="currentSectionIndex === test.sections.length - 1">
-            Submit
-          </button>
-        </div>
-      </div>
-    </form>
+      <!-- Body -->
+      <div class="card-body pt-2">
+        <ng-container *ngIf="!timerInterval && !isTestSubmitted">
+          <!--begin: Item-->
+          <div class="row">
+            <div class="col-12">
+              <button
+                class="btn btn-primary"
+                (click)="startTest(test)"
+                *ngIf="!timerInterval && !isTestSubmitted"
+              >
+                Start Test
+              </button>
+            </div>
+          </div>
+        </ng-container>
 
-    <div class="row" *ngIf="timerInterval && !isTestSubmitted">
-      <div class="col-12">
-        <p>Time Left: {{ timeLeft }} seconds</p>
-      </div>
-    </div>
+        <ng-container *ngIf="timerInterval && !isTestSubmitted">
+          <!-- Progress bar::start -->
+          <div class="row mb-12">
+            <div class="col-12">
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  [style.width]="
+                    ((currentSectionIndex) / test.sections.length) * 100 +
+                    '%'
+                  "
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- Progress bar::end -->
 
+          <!-- Section title::start -->
+          <div class="row">
+            <div class="col-12">
+              <h3>
+                Section {{ currentSectionIndex + 1 }}:
+                {{ test.sections[currentSectionIndex]?.title }}
+              </h3>
+              <p>{{ test.sections[currentSectionIndex]?.description }}</p>
+            </div>
+          </div>
+          <!-- Section title::end -->
+
+          <!-- Test form::start -->
+          <form [formGroup]="testForm">
+            <div class="row">
+              <div class="col-12">
+                <div
+                  formGroupName="{{ test.sections[currentSectionIndex].id }}"
+                >
+                  <div
+                    class="form-group"
+                    *ngFor="
+                      let question of test.sections[currentSectionIndex]
+                        .questions;
+                      let i = index
+                    "
+                  >
+                    <label>{{ question.questionText }}</label>
+
+                    <!-- Multiple Choice Question -->
+                    <div *ngIf="question.type.name === 'Multiple Choice'">
+                      <div
+                        class="form-check"
+                        *ngFor="let answer of question.answers; let j = index"
+                      >
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          [formControlName]="question.id"
+                          [value]="answer.id"
+                          [id]="'question-' + question.id + '-answer-' + j"
+                          [ngClass]="{
+                            'is-invalid':
+                              testForm
+                                .get(
+                                  test.sections[
+                                    currentSectionIndex
+                                  ].id.toString()
+                                )
+                                .get(question.id.toString()).invalid &&
+                              testForm
+                                .get(
+                                  test.sections[
+                                    currentSectionIndex
+                                  ].id.toString()
+                                )
+                                .get(question.id.toString()).dirty
+                          }"
+                        />
+                        <label
+                          class="form-check-label"
+                          [for]="'question-' + question.id + '-answer-' + j"
+                          >{{ answer.answerText }}</label
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Fill in the Blank Question -->
+                    <div *ngIf="question.type.name === 'Fill in the Blank'">
+                      <input
+                        type="text"
+                        class="form-control"
+                        [formControlName]="question.id"
+                        [ngClass]="{
+                          'is-invalid':
+                            testForm
+                              .get(
+                                test.sections[currentSectionIndex].id.toString()
+                              )
+                              .get(question.id.toString()).invalid &&
+                            testForm
+                              .get(
+                                test.sections[currentSectionIndex].id.toString()
+                              )
+                              .get(question.id.toString()).dirty
+                        }"
+                      />
+                    </div>
+
+                    <div class="invalid-feedback">This field is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <button
+                  class="btn btn-secondary mr-2"
+                  (click)="previousSection()"
+                  *ngIf="currentSectionIndex > 0"
+                >
+                  Previous
+                </button>
+                <button
+                  class="btn btn-primary"
+                  (click)="nextSection(test)"
+                  *ngIf="currentSectionIndex < test.sections.length - 1"
+                >
+                  Next
+                </button>
+                <button
+                  class="btn btn-success"
+                  (click)="submitTest(test)"
+                  *ngIf="currentSectionIndex === test.sections.length - 1"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+          <!-- Test form::end -->
+
+          <!-- Timer::start -->
+          <div class="row">
+            <div class="col-12">
+              <p>Time Left: {{ timeLeft }} seconds</p>
+            </div>
+          </div>
+          <!-- Timer::end -->
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <!-- Test result::start -->
     <div class="container" *ngIf="!timerInterval && isTestSubmitted">
       <div class="row">
         <div class="col-12">
@@ -90,21 +209,49 @@
         </div>
       </div>
 
-      <div class="row" *ngFor="let section of test.sections; let sectionIndex = index">
+      <div
+        class="row"
+        *ngFor="let section of test.sections; let sectionIndex = index"
+      >
         <div class="col-12">
           <h3>Section {{ sectionIndex + 1 }}: {{ section.title }}</h3>
-          <div *ngFor="let question of section.questions; let questionIndex = index">
+          <div
+            *ngFor="
+              let question of section.questions;
+              let questionIndex = index
+            "
+          >
             <p>{{ question.questionText }}</p>
             <ul>
               <li *ngFor="let answer of question.answers">
-                <span [ngClass]="{
+                <span
+                  [ngClass]="{
                     'text-success': answer.isCorrect,
-                    'text-danger': !answer.isCorrect && isAnswerSelected(test, sectionIndex, question.id, answer.id)
-                  }">
+                    'text-danger':
+                      !answer.isCorrect &&
+                      isAnswerSelected(
+                        test,
+                        sectionIndex,
+                        question.id,
+                        answer.id
+                      )
+                  }"
+                >
                   {{ answer.answerText }}
                   <span *ngIf="answer.isCorrect"> (Correct)</span>
-                  <span *ngIf="!answer.isCorrect && isAnswerSelected(test, sectionIndex, question.id, answer.id)">
-                    (Your Answer)</span>
+                  <span
+                    *ngIf="
+                      !answer.isCorrect &&
+                      isAnswerSelected(
+                        test,
+                        sectionIndex,
+                        question.id,
+                        answer.id
+                      )
+                    "
+                  >
+                    (Your Answer)</span
+                  >
                 </span>
               </li>
             </ul>
@@ -120,6 +267,7 @@
         </div>
       </div>
     </div>
+    <!-- Test result::end -->
   </ng-container>
 
   <ng-template #loading>
@@ -133,7 +281,12 @@
 <ng-template #confirmSubmitModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title">Confirm Submission</h5>
-    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
