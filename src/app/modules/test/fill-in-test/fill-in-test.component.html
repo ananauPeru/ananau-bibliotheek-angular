@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>{{ test.title }}</h2>
+      <p>{{ test.description }}</p>
+      <p>Time Limit: {{ test.timeLimitMinutes }} minutes</p>
+      <button class="btn btn-primary" (click)="startTest()" *ngIf="!timerInterval">Start Test</button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="timerInterval">
+    <div class="col-12">
+      <div class="progress">
+        <div class="progress-bar" [style.width]="(currentSectionIndex + 1) / test.sections.length * 100 + '%'"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="timerInterval">
+    <div class="col-12">
+      <h3>Section {{ currentSectionIndex + 1 }}: {{ test.sections[currentSectionIndex].title }}</h3>
+      <p>{{ test.sections[currentSectionIndex].description }}</p>
+    </div>
+  </div>
+
+  <form [formGroup]="testForm" *ngIf="timerInterval">
+    <div class="row">
+      <div class="col-12">
+        <div formGroupName="{{ test.sections[currentSectionIndex].id }}">
+          <div class="form-group" *ngFor="let question of test.sections[currentSectionIndex].questions; let i = index">
+            <label>{{ question.questionText }}</label>
+            <input type="text" class="form-control" [formControlName]="question.id" [ngClass]="{ 'is-invalid': testForm.get(test.sections[currentSectionIndex].id.toString()).get(question.id.toString()).invalid && testForm.get(test.sections[currentSectionIndex].id.toString()).get(question.id.toString()).dirty }">
+            <div class="invalid-feedback">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-secondary mr-2" (click)="previousSection()" *ngIf="currentSectionIndex > 0">Previous</button>
+        <button class="btn btn-primary" (click)="nextSection()" *ngIf="currentSectionIndex < test.sections.length - 1">Next</button>
+        <button class="btn btn-success" (click)="submitTest()" *ngIf="currentSectionIndex === test.sections.length - 1">Submit</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row" *ngIf="timerInterval">
+    <div class="col-12">
+      <p>Time Left: {{ timeLeft }} seconds</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #confirmSubmitModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Confirm Submission</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Not all fields are filled in. Are you sure you want to submit?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Review</button>
+    <button type="button" class="btn btn-primary" (click)="endTest()">Submit</button>
+  </div>
+</ng-template>

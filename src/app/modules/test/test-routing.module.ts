@@ -6,6 +6,7 @@ import { TestComponent } from "./test.component";
 import { TestListComponent } from "./test-list/test-list.component";
 import { CreateTestComponent } from "./create-test/create-test.component";
 import { OverviewTestComponent } from "./overview-test/overview-test.component";
+import { FillInTestComponent } from "./fill-in-test/fill-in-test.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,13 @@ const routes: Routes = [
         data: {
           permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
         },
+      },
+      {
+        path: "examination/:id",
+        component: FillInTestComponent,
+        data: {
+          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher]
+        }
       },
       {
         path: "overview/:id",

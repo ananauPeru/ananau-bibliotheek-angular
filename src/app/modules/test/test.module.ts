@@ -12,6 +12,7 @@ import { TestRoutingModule } from './test-routing.module';
 import { CreateTestComponent } from './create-test/create-test.component';
 import { OverviewTestComponent } from './overview-test/overview-test.component';
 import { ShareModalComponent } from './components/share-modal/share-modal.component';
+import { FillInTestComponent } from './fill-in-test/fill-in-test.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { ShareModalComponent } from './components/share-modal/share-modal.compon
     NgbModule,
     NgxDropzoneModule,
   ],
-  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent],
+  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }

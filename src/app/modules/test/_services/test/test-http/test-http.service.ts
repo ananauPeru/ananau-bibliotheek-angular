@@ -115,7 +115,7 @@ export class TestHttpService {
     accessCode: string
   ): Observable<TestModel> {
     return this.http
-      .get<TestModel>(`${API_URL}/examination/${id}?accessCode=${accessCode}`)
+      .get<TestModel>(`${API_URL}/examenation/${id}?AccessCode=${accessCode}`)
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
