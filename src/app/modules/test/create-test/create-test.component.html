@@ -15,7 +15,10 @@
                 {{ "MENU.LEARNING_PLATFORM.CREATE_TEST" | translate }}
               </h3>
               <div>
-                <button class="btn btn-secondary mr-2 pr-1 pr-md-3" (click)="openSettingsModal()">
+                <button
+                  class="btn btn-secondary mr-2 pr-1 pr-md-3"
+                  (click)="openSettingsModal()"
+                >
                   <i class="fas fa-cog"></i>
                   <span class="d-none d-md-inline ml-1">Settings</span>
                 </button>
@@ -52,9 +55,16 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0">Description</label>
+        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
+          >Description</label
+        >
         <div class="col-12 col-md-10">
-          <textarea class="form-control form-control-solid" placeholder="Enter description (optional)" formControlName="description" rows="3"></textarea>
+          <textarea
+            class="form-control form-control-solid"
+            placeholder="Enter description (optional)"
+            formControlName="description"
+            rows="3"
+          ></textarea>
         </div>
       </div>
     </div>
@@ -114,9 +124,16 @@
           </div>
         </div>
         <div class="form-group row mb-12">
-          <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0">Section description</label>
+          <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
+            >Section description</label
+          >
           <div class="col-12 col-md-10">
-            <textarea class="form-control form-control-solid" placeholder="Enter section description (optional)" formControlName="description" rows="3"></textarea>
+            <textarea
+              class="form-control form-control-solid"
+              placeholder="Enter section description (optional)"
+              formControlName="description"
+              rows="3"
+            ></textarea>
           </div>
         </div>
         <div class="row mb-12">
@@ -143,6 +160,7 @@
                     <select
                       class="form-control form-control-solid"
                       formControlName="type"
+                      [compareWith]="compareQuestionTypes"
                     >
                       <option [ngValue]="null">Select Type</option>
                       <option
@@ -246,7 +264,7 @@
                   <ng-container
                     *ngIf="selectedType.name === 'Fill in the Blank'"
                   >
-                  <div class="mb-12">
+                    <div class="mb-12">
                       <div class="row align-items-center">
                         <div class="col-12">
                           <div formArrayName="answers">
@@ -306,25 +324,46 @@
 <ng-template #settingsModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title">Test settings</h5>
-    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <form [formGroup]="settingsForm">
       <div class="form-group row align-items-center">
-        <label class="col-12 col-md-5 font-weight-bold mb-2 mb-md-0">Time limit (in minutes)</label>
+        <label class="col-12 col-md-5 font-weight-bold mb-2 mb-md-0"
+          >Time limit (in minutes)</label
+        >
         <div class="col-12 col-md-7">
-          <input type="number" class="form-control form-control-solid" placeholder="0" formControlName="timeLimitMinutes" required />
+          <input
+            type="number"
+            class="form-control form-control-solid"
+            placeholder="0"
+            formControlName="timeLimitMinutes"
+            required
+          />
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer d-flex">
-    <button type="button" class="btn btn-danger" (click)="modal.dismiss()">{{ "BUTTONS.REMOVE" | translate }}</button>
-    <button type="button" class="btn btn-secondary ml-auto" (click)="modal.dismiss()">{{ "BUTTONS.CANCEL" | translate }}</button>
-    <button type="button" class="btn btn-primary" (click)="saveSettings()">{{ "BUTTONS.SAVE" | translate }}</button>
+    <button type="button" class="btn btn-danger" (click)="modal.dismiss()">
+      {{ "BUTTONS.REMOVE" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary ml-auto"
+      (click)="modal.dismiss()"
+    >
+      {{ "BUTTONS.CANCEL" | translate }}
+    </button>
+    <button type="button" class="btn btn-primary" (click)="saveSettings()">
+      {{ "BUTTONS.SAVE" | translate }}
+    </button>
   </div>
 </ng-template>
-
-

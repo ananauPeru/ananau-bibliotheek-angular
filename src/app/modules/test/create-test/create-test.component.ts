@@ -9,6 +9,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TestService } from "../_services/test/test.service";
 import { ToastrService } from "ngx-toastr";
 import { TestModel } from "../_models/test/test.model";
+import { QuestionModel } from "../_models/test/question.model";
 
 @Component({
   selector: "app-create-test",
@@ -106,19 +107,23 @@ export class CreateTestComponent implements OnInit {
     });
   }
 
-  private patchQuestionsFormArray(sectionGroup: FormGroup, questions: any[]) {
+  private patchQuestionsFormArray(sectionGroup: FormGroup, questions: QuestionModel[]) {
     const questionsFormArray = sectionGroup.get("questions") as FormArray;
     questionsFormArray.clear();
-
+  
     questions.forEach((question) => {
       const questionGroup = this.formBuilder.group({
         questionText: question.questionText,
-        type: question.type,
+        type: question.type, // Set the type to the value from the question data
         answers: this.formBuilder.array([]),
       });
       this.patchAnswersFormArray(questionGroup, question.answers);
       questionsFormArray.push(questionGroup);
     });
+  }
+
+  compareQuestionTypes(type1: QuestionTypeModel, type2: QuestionTypeModel): boolean {
+    return type1 && type2 ? type1.id === type2.id : type1 === type2;
   }
 
   private patchAnswersFormArray(questionGroup: FormGroup, answers: any[]) {
@@ -206,23 +211,30 @@ export class CreateTestComponent implements OnInit {
    */
   addQuestion(sectionGroup: FormGroup) {
     const questionsArray = sectionGroup.get("questions") as FormArray;
+    
+    // Get the last question in the section
+    const lastQuestion = questionsArray.length > 0 ? questionsArray.at(questionsArray.length - 1) : null;
+    
+    // Get the type of the last question, or set it to null if there are no questions
+    const lastQuestionType = lastQuestion ? lastQuestion.get('type').value : null;
+  
     const questionGroup = this.formBuilder.group({
       questionText: "",
-      type: new FormControl(null),
+      type: new FormControl(lastQuestionType),
       answers: this.formBuilder.array([]),
     });
-
+  
     // Subscribe to changes in the question type
     questionGroup
       .get("type")
       .valueChanges.subscribe((selectedType: QuestionTypeModel) => {
         const answersArray = questionGroup.get("answers") as FormArray;
-
+  
         // Clear existing answers
         while (answersArray.length !== 0) {
           answersArray.removeAt(0);
         }
-
+  
         // Add one blank answer based on the selected question type
         if (selectedType) {
           if (selectedType.name === "Multiple Choice") {
@@ -242,7 +254,7 @@ export class CreateTestComponent implements OnInit {
           }
         }
       });
-
+  
     questionsArray.push(questionGroup);
   }
 
