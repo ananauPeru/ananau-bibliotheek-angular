@@ -39,18 +39,37 @@
     <!-- Body -->
     <div class="card-body">
       <!--begin: Item-->
-      <div class="form-group row align-items-center">
+      <div class="form-group row align-items-start">
         <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
           >Title</label
         >
         <div class="col-12 col-md-10">
-          <input
-            type="text"
-            class="form-control form-control-solid"
-            placeholder="Enter title"
-            formControlName="title"
-            required
-          />
+          <div class="row">
+            <div class="col-12">
+              <input
+                type="text"
+                class="form-control form-control-solid"
+                [class.is-invalid]="
+                  testForm.get('title').invalid &&
+                  (testForm.get('title').dirty || testForm.get('title').touched)
+                "
+                placeholder="Enter title"
+                formControlName="title"
+                required
+              />
+            </div>
+            <div class="col-12">
+              <small
+                class="text-danger"
+                *ngIf="
+                  testForm.get('title').invalid &&
+                  (testForm.get('title').dirty || testForm.get('title').touched)
+                "
+              >
+                Title is required.
+              </small>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -109,18 +128,39 @@
 
       <!-- Body -->
       <div class="card-body pt-2">
-        <div class="form-group row align-items-center mb-12">
+        <div class="form-group row align-items-start mb-12">
           <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
             >Section title</label
           >
           <div class="col-12 col-md-10">
-            <input
-              type="text"
-              class="form-control form-control-solid"
-              placeholder="Enter section title"
-              formControlName="title"
-              required
-            />
+            <div class="row">
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="form-control form-control-solid"
+                  [class.is-invalid]="
+                    sectionGroup.get('title').invalid &&
+                    (sectionGroup.get('title').dirty ||
+                      sectionGroup.get('title').touched)
+                  "
+                  placeholder="Enter section title"
+                  formControlName="title"
+                  required
+                />
+              </div>
+              <div class="col-12">
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    sectionGroup.get('title').invalid &&
+                    (sectionGroup.get('title').dirty ||
+                      sectionGroup.get('title').touched)
+                  "
+                >
+                  Section title is required.
+                </small>
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group row mb-12">
@@ -148,7 +188,7 @@
                 "
                 [formGroupName]="j"
               >
-                <div class="row align-items-center mb-8">
+                <div class="row align-items-start mb-8">
                   <!-- Question Title -->
                   <div class="col-6 col-md-2 mb-2 mb-md-0 order-1">
                     <label class="font-weight-bold mb-0 h3"
@@ -185,13 +225,34 @@
                   </div>
                   <!-- Question text -->
                   <div class="col-12 col-md-7 order-4 order-md-2">
-                    <input
-                      type="text"
-                      class="form-control form-control-solid"
-                      placeholder="Enter question eg. 'Yo (trabajar) _______ en la oficina.'"
-                      formControlName="questionText"
-                      required
-                    />
+                    <div class="row">
+                      <div class="col-12">
+                        <input
+                          type="text"
+                          class="form-control form-control-solid"
+                          [class.is-invalid]="
+                            questionGroup.get('questionText').invalid &&
+                            (questionGroup.get('questionText').dirty ||
+                              questionGroup.get('questionText').touched)
+                          "
+                          placeholder="Enter question eg. 'Yo (trabajar) _______ en la oficina.'"
+                          formControlName="questionText"
+                          required
+                        />
+                      </div>
+                      <div class="col-12">
+                        <small
+                          class="text-danger"
+                          *ngIf="
+                            questionGroup.get('questionText').invalid &&
+                            (questionGroup.get('questionText').dirty ||
+                              questionGroup.get('questionText').touched)
+                          "
+                        >
+                          Question text is required.
+                        </small>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <ng-container
@@ -219,14 +280,43 @@
                               [formGroupName]="k"
                             >
                               <h4 class="col-2">Choice {{ k + 1 }}</h4>
-                              <div class="col-10 d-flex align-items-center">
-                                <input
-                                  type="text"
-                                  class="form-control form-control-solid flex-grow-1"
-                                  placeholder="Enter answer option"
-                                  formControlName="answerText"
-                                  required
-                                />
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        [class.is-invalid]="
+                                          optionGroup.get('answerText')
+                                            .invalid &&
+                                          (optionGroup.get('answerText')
+                                            .dirty ||
+                                            optionGroup.get('answerText')
+                                              .touched)
+                                        "
+                                        placeholder="Enter answer option"
+                                        formControlName="answerText"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          optionGroup.get('answerText')
+                                            .invalid &&
+                                          (optionGroup.get('answerText')
+                                            .dirty ||
+                                            optionGroup.get('answerText')
+                                              .touched)
+                                        "
+                                      >
+                                        Answer option is required.
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
                                 <div class="ml-4">
                                   <select
                                     class="form-control form-control-solid"
@@ -278,14 +368,41 @@
                               [formGroupName]="k"
                             >
                               <h4 class="col-2">Answer</h4>
-                              <div class="col-10 d-flex align-items-center">
-                                <input
-                                  type="text"
-                                  class="form-control form-control-solid flex-grow-1"
-                                  placeholder="Enter correct answer"
-                                  formControlName="answerText"
-                                  required
-                                />
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        [class.is-invalid]="
+                                          blankGroup.get('answerText')
+                                            .invalid &&
+                                          (blankGroup.get('answerText').dirty ||
+                                            blankGroup.get('answerText')
+                                              .touched)
+                                        "
+                                        placeholder="Enter correct answer"
+                                        formControlName="answerText"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          blankGroup.get('answerText')
+                                            .invalid &&
+                                          (blankGroup.get('answerText').dirty ||
+                                            blankGroup.get('answerText')
+                                              .touched)
+                                        "
+                                      >
+                                        Answer is required.
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>

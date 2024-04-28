@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TestDTO } from "../_dto/test-dto";
 import { QuestionTypeService } from "../_services/question-type/question-type.service";
@@ -43,13 +43,13 @@ export class CreateTestComponent implements OnInit {
 
   private initializeForm() {
     this.testForm = this.formBuilder.group({
-      title: "",
+      title: ['', Validators.required],
       description: '',
-      sections: this.formBuilder.array([]),
+      sections: this.formBuilder.array([], Validators.required),
     });
 
     this.settingsForm = this.formBuilder.group({
-      timeLimitMinutes: 60,
+      timeLimitMinutes: [60, Validators.required],
     });
 
     if (!this.isEditMode) {
@@ -98,12 +98,22 @@ export class CreateTestComponent implements OnInit {
   
     sections.forEach((section) => {
       const sectionGroup = this.formBuilder.group({
-        title: section.title,
+        title: [section.title, Validators.required],
         description: section.description,
-        questions: this.formBuilder.array([]),
+        questions: this.formBuilder.array([], Validators.required),
       });
       this.patchQuestionsFormArray(sectionGroup, section.questions);
       sectionsFormArray.push(sectionGroup);
+    });
+  }
+
+  private markAllAsTouched(form: FormGroup | FormArray) {
+    Object.values(form.controls).forEach(control => {
+      control.markAsTouched();
+  
+      if (control instanceof FormGroup || control instanceof FormArray) {
+        this.markAllAsTouched(control);
+      }
     });
   }
 
@@ -113,9 +123,9 @@ export class CreateTestComponent implements OnInit {
   
     questions.forEach((question) => {
       const questionGroup = this.formBuilder.group({
-        questionText: question.questionText,
-        type: question.type, // Set the type to the value from the question data
-        answers: this.formBuilder.array([]),
+        questionText: [question.questionText, Validators.required],
+        type: [question.type, Validators.required],
+        answers: this.formBuilder.array([], Validators.required),
       });
       this.patchAnswersFormArray(questionGroup, question.answers);
       questionsFormArray.push(questionGroup);
@@ -132,7 +142,7 @@ export class CreateTestComponent implements OnInit {
 
     answers.forEach((answer) => {
       const answerGroup = this.formBuilder.group({
-        answerText: answer.answerText,
+        answerText: [answer.answerText, Validators.required],
         isCorrect: answer.isCorrect,
       });
       answersFormArray.push(answerGroup);
@@ -157,6 +167,13 @@ export class CreateTestComponent implements OnInit {
    * Handle form submission
    */
   onSubmit() {
+    this.markAllAsTouched(this.testForm);
+
+  if (!this.isAllFieldsFilled()) {
+    this.toast.error('Please fill in all required fields.');
+    return;
+  }
+
     const testDto = this.testForm.value as TestDTO;
 
     // Map the setting values to the DTO
@@ -192,14 +209,42 @@ export class CreateTestComponent implements OnInit {
     }
   }
 
+  isAllFieldsFilled(): boolean {
+    if (this.testForm.invalid) {
+      return false;
+    }
+
+    const sections = this.sections.controls;
+    for (const section of sections) {
+      if (section.get('title').invalid || section.get('questions').invalid) {
+        return false;
+      }
+
+      const questions = section.get('questions').value;
+      for (const question of questions) {
+        if (question.questionText.trim() === '' || question.type === null || question.answers.length === 0) {
+          return false;
+        }
+
+        for (const answer of question.answers) {
+          if (answer.answerText.trim() === '') {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
+  }
+
   /**
    * Add a new section to the form
    */
   addSection() {
     const sectionGroup = this.formBuilder.group({
-      title: "",
+      title: ['', Validators.required],
       description: '',
-      questions: this.formBuilder.array([]),
+      questions: this.formBuilder.array([], Validators.required),
     });
     this.sections.push(sectionGroup);
     this.addQuestion(sectionGroup);
@@ -215,9 +260,9 @@ export class CreateTestComponent implements OnInit {
     const lastQuestionType = lastQuestion ? lastQuestion.get('type').value : null;
   
     const questionGroup = this.formBuilder.group({
-      questionText: "",
-      type: new FormControl(lastQuestionType),
-      answers: this.formBuilder.array([]),
+      questionText: ['', Validators.required],
+      type: new FormControl(lastQuestionType, Validators.required),
+      answers: this.formBuilder.array([], Validators.required),
     });
   
     // Add one blank answer based on the last question type
@@ -226,14 +271,14 @@ export class CreateTestComponent implements OnInit {
       if (lastQuestionType.name === "Multiple Choice") {
         answersArray.push(
           this.formBuilder.group({
-            answerText: "",
+            answerText: ['', Validators.required],
             isCorrect: false,
           })
         );
       } else if (lastQuestionType.name === "Fill in the Blank") {
         answersArray.push(
           this.formBuilder.group({
-            answerText: "",
+            answerText: ['', Validators.required],
             isCorrect: true,
           })
         );
@@ -256,14 +301,14 @@ export class CreateTestComponent implements OnInit {
           if (selectedType.name === "Multiple Choice") {
             answersArray.push(
               this.formBuilder.group({
-                answerText: "",
+                answerText: ['', Validators.required],
                 isCorrect: false,
               })
             );
           } else if (selectedType.name === "Fill in the Blank") {
             answersArray.push(
               this.formBuilder.group({
-                answerText: "",
+                answerText: ['', Validators.required],
                 isCorrect: true,
               })
             );
@@ -310,7 +355,7 @@ export class CreateTestComponent implements OnInit {
     const optionsArray = questionGroup.get("answers") as FormArray;
     optionsArray.push(
       this.formBuilder.group({
-        answerText: "",
+        answerText: ['', Validators.required],
         isCorrect: false,
       })
     );
@@ -324,7 +369,7 @@ export class CreateTestComponent implements OnInit {
     const answersArray = questionGroup.get("answers") as FormArray;
     answersArray.push(
       this.formBuilder.group({
-        answerText: "",
+        answerText: ['', Validators.required],
         isCorrect: true,
       })
     );
