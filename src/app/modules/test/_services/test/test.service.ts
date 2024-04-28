@@ -30,6 +30,10 @@ export class TestService {
     return this.testHttpService.getTestExaminationById$(id, accessCode);
   }
 
+  getLatestTestVersionById$(id: number): Observable<TestModel> {
+    return this.testHttpService.getLatestTestVersionById$(id);
+  }
+
   createTest$(testDto: TestDTO): Observable<TestModel> {
     return this.testHttpService.postTest$(testDto);
   }

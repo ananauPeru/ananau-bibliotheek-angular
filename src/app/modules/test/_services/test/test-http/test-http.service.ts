@@ -110,12 +110,65 @@ export class TestHttpService {
     );
   }
 
+  getLatestTestVersionById$(id: number): Observable<TestModel> {
+    return this.http.get<TestModel>(`${API_URL}/${id}`).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): TestModel => {
+        if (response.success) {
+          const test = response.test;
+          const latestVersion = test.versions[test.versions.length - 1];
+          return {
+            id: test.id,
+            title: latestVersion.title,
+            description: latestVersion.description,
+            versionNumber: latestVersion.versionNumber,
+            totalAmountOfQuestions: latestVersion.totalAmountOfQuestions,
+            totalAmountOfSections: latestVersion.totalAmountOfSections,
+            timeLimitMinutes: latestVersion.timeLimitMinutes,
+            accessCode: {
+              code: test.accessCode.code,
+            },
+            createdAt: new Date(latestVersion.createdAt),
+            sections: latestVersion.sections.map((section: SectionModel) => ({
+              id: section.id,
+              title: section.title,
+              description: section.description,
+              amountOfQuestions: section.amountOfQuestions,
+              questions: section.questions.map((question: QuestionModel) => ({
+                id: question.id,
+                questionText: question.questionText,
+                type: {
+                  id: question.type.id,
+                  name: question.type.name,
+                },
+                amountOfAnswers: question.amountOfAnswers,
+                answers: question.answers.map((answer) => ({
+                  id: answer.id,
+                  answerText: answer.answerText,
+                  isCorrect: answer.isCorrect,
+                })),
+              })),
+            })),
+          };
+        } else {
+          throwError(response.error);
+          return null;
+        }
+      })
+    );
+  }
+
   getTestExaminationById$(
     id: number,
     accessCode: string
   ): Observable<TestModel> {
     return this.http
-      .get<TestModel>(`${API_URL}/examenation/${id}?AccessCode=${accessCode}`)
+      .get<TestModel>(`${API_URL}/examination/${id}?AccessCode=${accessCode}`)
       .pipe(
         catchError((error) => {
           if (error.status == 401) {

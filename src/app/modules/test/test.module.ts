@@ -13,11 +13,11 @@ import { CreateTestComponent } from './create-test/create-test.component';
 import { OverviewTestComponent } from './overview-test/overview-test.component';
 import { ShareModalComponent } from './components/share-modal/share-modal.component';
 import { FillInTestComponent } from './fill-in-test/fill-in-test.component';
+import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 
 @NgModule({
   imports: [
     CommonModule,
-
     FormsModule,
     ReactiveFormsModule,
     TranslationModule,
@@ -27,7 +27,7 @@ import { FillInTestComponent } from './fill-in-test/fill-in-test.component';
     NgbModule,
     NgxDropzoneModule,
   ],
-  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent],
+  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }
