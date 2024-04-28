@@ -205,10 +205,6 @@ export class CreateTestComponent implements OnInit {
     this.addQuestion(sectionGroup);
   }
 
-  /**
-   * Add a new question to the form
-   * @param sectionGroup the FormGroup representing the section to which the question will be added
-   */
   addQuestion(sectionGroup: FormGroup) {
     const questionsArray = sectionGroup.get("questions") as FormArray;
     
@@ -223,6 +219,26 @@ export class CreateTestComponent implements OnInit {
       type: new FormControl(lastQuestionType),
       answers: this.formBuilder.array([]),
     });
+  
+    // Add one blank answer based on the last question type
+    if (lastQuestionType) {
+      const answersArray = questionGroup.get("answers") as FormArray;
+      if (lastQuestionType.name === "Multiple Choice") {
+        answersArray.push(
+          this.formBuilder.group({
+            answerText: "",
+            isCorrect: false,
+          })
+        );
+      } else if (lastQuestionType.name === "Fill in the Blank") {
+        answersArray.push(
+          this.formBuilder.group({
+            answerText: "",
+            isCorrect: true,
+          })
+        );
+      }
+    }
   
     // Subscribe to changes in the question type
     questionGroup
