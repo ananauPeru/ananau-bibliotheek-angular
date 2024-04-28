@@ -68,7 +68,7 @@ export class CreateTestComponent implements OnInit {
   }
 
   private loadTestData() {
-    this.testService.getTestById$(this.testId, 1).subscribe(
+    this.testService.getLatestTestVersionById$(this.testId).subscribe(
       (test: TestModel) => {
         this.patchFormValues(test);
       },
