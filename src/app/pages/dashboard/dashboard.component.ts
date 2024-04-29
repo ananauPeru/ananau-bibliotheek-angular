@@ -11,6 +11,5 @@ export class DashboardComponent implements OnInit {
   constructor(public AuthUtil: AuthUtil, public DomainUtil: DomainUtil) {}
 
   ngOnInit(): void {
-    console.log("Subdomain:", this.DomainUtil.getSubdomain());
   }
 }
