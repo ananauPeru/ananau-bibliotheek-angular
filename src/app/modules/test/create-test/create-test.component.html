@@ -275,7 +275,8 @@
                               *ngFor="
                                 let optionGroup of questionGroup.get('answers')
                                   ?.controls;
-                                let k = index
+                                let k = index;
+                                let last = last
                               "
                               [formGroupName]="k"
                             >
@@ -313,6 +314,19 @@
                                         "
                                       >
                                         Answer option is required.
+                                      </small>
+                                    </div>
+                                    <div class="col-12" *ngIf="last">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          questionGroup
+                                            .get('answers')
+                                            .hasError('requireOneCorrectAnswer')
+                                        "
+                                      >
+                                        At least one answer must be marked as
+                                        correct.
                                       </small>
                                     </div>
                                   </div>
