@@ -56,6 +56,7 @@ export class CreateTestComponent implements OnInit {
     this.checkEditMode();
   }
 
+  // Form Initialization
   private initializeForm() {
     this.testForm = this.formBuilder.group({
       title: ["", Validators.required],
@@ -72,6 +73,7 @@ export class CreateTestComponent implements OnInit {
     }
   }
 
+  // Edit Mode
   private checkEditMode() {
     this.route.params.subscribe((params) => {
       if (params.id) {
@@ -122,16 +124,6 @@ export class CreateTestComponent implements OnInit {
     });
   }
 
-  private markAllAsTouched(form: FormGroup | FormArray) {
-    Object.values(form.controls).forEach((control) => {
-      control.markAsTouched();
-
-      if (control instanceof FormGroup || control instanceof FormArray) {
-        this.markAllAsTouched(control);
-      }
-    });
-  }
-
   private patchQuestionsFormArray(
     sectionGroup: FormGroup,
     questions: QuestionModel[]
@@ -148,13 +140,6 @@ export class CreateTestComponent implements OnInit {
       this.patchAnswersFormArray(questionGroup, question.answers);
       questionsFormArray.push(questionGroup);
     });
-  }
-
-  compareQuestionTypes(
-    type1: QuestionTypeModel,
-    type2: QuestionTypeModel
-  ): boolean {
-    return type1 && type2 ? type1.id === type2.id : type1 === type2;
   }
 
   private patchAnswersFormArray(questionGroup: FormGroup, answers: any[]) {
@@ -177,23 +162,19 @@ export class CreateTestComponent implements OnInit {
     answersFormArray.updateValueAndValidity();
   }
 
-  /**
-   * Initialize the question types
-   */
+  // Question Types
   private initializeQuestionTypes() {
     this.questionTypes$ = this.questionTypeService.getQuestionTypes$();
   }
 
-  /**
-   * Get the sections FormArray
-   */
-  get sections(): FormArray {
-    return this.testForm.get("sections") as FormArray;
+  compareQuestionTypes(
+    type1: QuestionTypeModel,
+    type2: QuestionTypeModel
+  ): boolean {
+    return type1 && type2 ? type1.id === type2.id : type1 === type2;
   }
 
-  /**
-   * Handle form submission
-   */
+  // Form Submission
   onSubmit() {
     this.markAllAsTouched(this.testForm);
 
@@ -237,6 +218,9 @@ export class CreateTestComponent implements OnInit {
     }
   }
 
+  /**
+   * Check if all required fields are filled
+   */
   isAllFieldsFilled(): boolean {
     if (this.testForm.invalid) {
       return false;
@@ -270,8 +254,24 @@ export class CreateTestComponent implements OnInit {
   }
 
   /**
-   * Add a new section to the form
+   * Mark all form controls as touched
+   * @param form The form to mark as touched
    */
+  private markAllAsTouched(form: FormGroup | FormArray) {
+    Object.values(form.controls).forEach((control) => {
+      control.markAsTouched();
+
+      if (control instanceof FormGroup || control instanceof FormArray) {
+        this.markAllAsTouched(control);
+      }
+    });
+  }
+
+  // Sections
+  get sections(): FormArray {
+    return this.testForm.get("sections") as FormArray;
+  }
+
   addSection() {
     const sectionGroup = this.formBuilder.group({
       title: ["", Validators.required],
@@ -282,6 +282,11 @@ export class CreateTestComponent implements OnInit {
     this.addQuestion(sectionGroup);
   }
 
+  removeSection(index: number) {
+    this.sections.removeAt(index);
+  }
+
+  // Questions
   addQuestion(sectionGroup: FormGroup) {
     const questionsArray = sectionGroup.get("questions") as FormArray;
 
@@ -359,39 +364,12 @@ export class CreateTestComponent implements OnInit {
     questionsArray.push(questionGroup);
   }
 
-  /**
-   * Remove a section from the form
-   * @param index the index of the section to be removed
-   */
-  removeSection(index: number) {
-    this.sections.removeAt(index);
-  }
-
-  /**
-   * Remove a question from the form
-   * @param sectionGroup the FormGroup representing the section from which the question will be removed
-   * @param questionIndex the index of the question to be removed
-   */
   removeQuestion(sectionGroup: FormGroup, questionIndex: number) {
     const questionsArray = sectionGroup.get("questions") as FormArray;
     questionsArray.removeAt(questionIndex);
   }
 
-  /**
-   * Remove an option from the form for a multiple choice question
-   * @param questionGroup the FormGroup representing the question to which the option will be added
-   * @param optionIndex the index of the option to be removed
-   */
-  removeOption(questionGroup: FormGroup, optionIndex: number) {
-    const optionsArray = questionGroup.get("answers") as FormArray;
-    optionsArray.removeAt(optionIndex);
-    optionsArray.updateValueAndValidity();
-  }
-
-  /**
-   * Add an option to the form for a multiple choice question
-   * @param questionGroup the FormGroup representing the question to which the option will be added
-   */
+  // Options (Multiple Choice)
   addOption(questionGroup: FormGroup) {
     const optionsArray = questionGroup.get("answers") as FormArray;
     optionsArray.push(
@@ -403,10 +381,13 @@ export class CreateTestComponent implements OnInit {
     optionsArray.updateValueAndValidity();
   }
 
-  /**
-   * Add a blank to the form for a fill in the blank question
-   * @param questionGroup the FormGroup representing the question to which the blank will be added
-   */
+  removeOption(questionGroup: FormGroup, optionIndex: number) {
+    const optionsArray = questionGroup.get("answers") as FormArray;
+    optionsArray.removeAt(optionIndex);
+    optionsArray.updateValueAndValidity();
+  }
+
+  // Blanks (Fill in the Blank)
   addBlank(questionGroup: FormGroup) {
     const answersArray = questionGroup.get("answers") as FormArray;
     answersArray.push(
@@ -417,26 +398,16 @@ export class CreateTestComponent implements OnInit {
     );
   }
 
-  /**
-   * Remove a blank from the form for a fill in the blank question
-   * @param questionGroup the FormGroup representing the question from which the blank will be removed
-   * @param blankIndex the index of the blank to be removed
-   */
   removeBlank(questionGroup: FormGroup, blankIndex: number) {
     const answersArray = questionGroup.get("answers") as FormArray;
     answersArray.removeAt(blankIndex);
   }
 
-  /**
-   * Open the settings modal
-   */
+  // Settings Modal
   openSettingsModal() {
     this.modalService.open(this.settingsModal, { centered: true });
   }
 
-  /**
-   * Save the settings from the modal
-   */
   saveSettings() {
     const timeLimitMinutes = this.settingsForm.get("timeLimitMinutes").value;
     this.testForm.patchValue({ timeLimitMinutes });
