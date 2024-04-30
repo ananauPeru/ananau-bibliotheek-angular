@@ -108,8 +108,8 @@
           </ng-container>
 
           <div class="row">
-            <div class="col-12">
-              <button class="btn btn-success" (click)="submitTest(test)">
+            <div class="col-12 text-right">
+              <button class="btn btn-primary" (click)="submitTest(test)">
                 Submit
               </button>
             </div>
@@ -146,7 +146,10 @@
           <div class="col-12">
             <h3>Section {{ sectionIndex + 1 }}: {{ section.title }}</h3>
             <div
-              *ngFor="let question of section.questions; let questionIndex = index"
+              *ngFor="
+                let question of section.questions;
+                let questionIndex = index
+              "
             >
               <p>{{ question.questionText }}</p>
 
@@ -188,12 +191,14 @@
                 <p>
                   Your Answer:
                   {{
-                    testForm.get(section.id.toString()).get(question.id.toString())
-                      .value
+                    testForm
+                      .get(section.id.toString())
+                      .get(question.id.toString()).value
                   }}
                 </p>
                 <p>
-                  Correct Answer: {{ getCorrectAnswer(section.id, question.id) }}
+                  Correct Answer:
+                  {{ getCorrectAnswer(section.id, question.id) }}
                 </p>
               </div>
             </div>
@@ -210,6 +215,42 @@
         <!-- Test result::end -->
       </ng-container>
     </div>
+
+    <!-- Confirmation Modal -->
+    <ng-template #confirmationModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Test is not complete
+        </h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You have not filled in all fields, are you sure you want to submit your test?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="modal.dismiss()"
+        >
+          {{ "BUTTONS.CANCEL" | translate }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="submitTest(test, true); modal.close()"
+        >
+          {{ "BUTTONS.CONFIRM" | translate }}
+        </button>
+      </div>
+    </ng-template>
   </ng-container>
 
   <ng-template #loading>

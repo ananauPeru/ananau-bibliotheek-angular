@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { TestService } from "../_services/test/test.service";
 import { TestModel } from "../_models/test/test.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Observable } from "rxjs";
+import { Observable, timer } from "rxjs";
+import { map } from "rxjs/operators";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 export enum TestState {
   NotStarted,
@@ -19,10 +21,11 @@ export enum TestState {
   styleUrls: ["./fill-in-test.component.scss"],
 })
 export class FillInTestComponent implements OnInit {
+  @ViewChild("confirmationModal") confirmationModal: TemplateRef<any>;
+
   test$: Observable<TestModel>;
   testForm: FormGroup;
   timeLeft: number;
-  timerInterval: any;
   score = 0;
   totalQuestions = 0;
   currentState: TestState = TestState.NotStarted;
@@ -32,7 +35,8 @@ export class FillInTestComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private testService: TestService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -87,26 +91,33 @@ export class FillInTestComponent implements OnInit {
   }
 
   startTimer() {
-    this.timerInterval = setInterval(() => {
-      this.timeLeft--;
-      if (this.timeLeft <= 0) {
-        this.endTest();
-      }
-    }, 1000);
+    timer(0, 1000)
+      .pipe(
+        map(() => {
+          if (this.timeLeft > 0) {
+            this.timeLeft--;
+          } else {
+            this.endTest();
+          }
+        })
+      )
+      .subscribe();
   }
 
   endTest() {
-    clearInterval(this.timerInterval);
-    this.timerInterval = null;
+    this.currentState = TestState.Submitted;
   }
 
-  submitTest(test: TestModel) {
-    if (this.testForm.invalid) {
-      // Handle invalid form
-    } else {
+  submitTest(test: TestModel, force: boolean = false) {
+
+    if(force || !this.testForm.invalid) {
       this.currentState = TestState.Grading;
-      this.gradeTest(test);
+      this.gradeTest(test); 
+      return;
+    
     }
+
+    this.modalService.open(this.confirmationModal, { centered: true });
   }
 
   gradeTest(test: TestModel) {
@@ -163,7 +174,6 @@ export class FillInTestComponent implements OnInit {
 
       console.log(this.currentState);
       this.currentState = TestState.Graded;
-      this.endTest();
     });
   }
 
@@ -242,8 +252,6 @@ export class FillInTestComponent implements OnInit {
     this.score = 0;
     this.totalQuestions = 0;
     this.timeLeft = 0;
-    clearInterval(this.timerInterval);
-    this.timerInterval = null;
     this.currentState = TestState.NotStarted;
   }
 }
