@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import { RegisterDTO } from "../_dto/register-dto";
 import { ResetPasswordDTO } from "../_dto/reset-password-dto";
 import { RoleModel } from "../../organization/_models/role.model";
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: "root",
@@ -64,9 +65,22 @@ export class AuthService implements OnDestroy {
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
+    this.currentUserValue = undefined;
     this.router.navigate(["/auth/login"], {
       queryParams: {},
     });
+  }
+
+  logoutIfTokenExpired() {
+    let auth = this.getAuthFromLocalStorage();
+    if (auth && auth.token) {
+      let exp = jwtDecode(auth.token).exp;
+      if (exp < Date.now() / 1000) {
+        this.logout();
+      }
+    } else {
+      this.logout();
+    }
   }
 
   getUserByToken(user?: UserModel): Observable<UserModel> {
