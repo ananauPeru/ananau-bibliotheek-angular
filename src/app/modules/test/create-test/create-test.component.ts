@@ -403,6 +403,16 @@ export class CreateTestComponent implements OnInit {
     answersArray.removeAt(blankIndex);
   }
 
+  adjustTextareaHeight(event: any) {
+    const textarea = event.target;
+    const initialHeight = textarea.offsetHeight;
+    
+    textarea.style.height = 'auto';
+    
+    const newHeight = textarea.scrollHeight + 2;
+    textarea.style.height = (newHeight > initialHeight ? newHeight : initialHeight) + 'px';
+  } 
+
   // Settings Modal
   openSettingsModal() {
     this.modalService.open(this.settingsModal, { centered: true });

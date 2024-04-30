@@ -1,17 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  QueryList,
-  TemplateRef,
-  ViewChild,
-  ViewChildren,
-} from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TestService } from "../_services/test/test.service";
 import { TestModel } from "../_models/test/test.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Observable } from "rxjs";
 
 export enum TestState {
@@ -28,25 +19,20 @@ export enum TestState {
   styleUrls: ["./fill-in-test.component.scss"],
 })
 export class FillInTestComponent implements OnInit {
-  @ViewChild("confirmSubmitModal") confirmSubmitModal: TemplateRef<any>;
-  @ViewChildren("cardSelectable") cardSelectableElements: QueryList<ElementRef>;
-
   test$: Observable<TestModel>;
   testForm: FormGroup;
-  currentSectionIndex = 0;
   timeLeft: number;
   timerInterval: any;
   score = 0;
   totalQuestions = 0;
   currentState: TestState = TestState.NotStarted;
-  testState = TestState; // Add this line to access TestState enum in the HTML template
+  testState = TestState;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private testService: TestService,
-    private formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -114,21 +100,9 @@ export class FillInTestComponent implements OnInit {
     this.timerInterval = null;
   }
 
-  nextSection(test: TestModel) {
-    if (this.currentSectionIndex < test.sections.length - 1) {
-      this.currentSectionIndex++;
-    }
-  }
-
-  previousSection() {
-    if (this.currentSectionIndex > 0) {
-      this.currentSectionIndex--;
-    }
-  }
-
   submitTest(test: TestModel) {
     if (this.testForm.invalid) {
-      this.modalService.open(this.confirmSubmitModal, { centered: true });
+      // Handle invalid form
     } else {
       this.currentState = TestState.Grading;
       this.gradeTest(test);
@@ -141,9 +115,8 @@ export class FillInTestComponent implements OnInit {
     const correctTest$: Observable<TestModel> = this.getCorrectTest();
 
     correctTest$.subscribe((correctTest) => {
-      console.log(correctTest)
+      console.log(correctTest);
       if (correctTest === null) return;
-
 
       test.sections.forEach((section) => {
         const correctSection = correctTest.sections.find(
@@ -268,7 +241,6 @@ export class FillInTestComponent implements OnInit {
   resetTest() {
     this.score = 0;
     this.totalQuestions = 0;
-    this.currentSectionIndex = 0;
     this.timeLeft = 0;
     clearInterval(this.timerInterval);
     this.timerInterval = null;
