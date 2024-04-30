@@ -78,12 +78,19 @@ export const locale = {
         GENERAL_INFORMATION: "Información General",
       },
       LEARNING_PLATFORM: {
+        SPANISH: "Español",
         TESTS: "Pruebas",
         TEST: "Prueba",
         TEST_LIST: "Lista de pruebas",
         CREATE_TEST: "Crear prueba",
-        MY_STUDENTS: "Mis estudiantes",
         TEST_OVERVIEW: "Resumen de la prueba",
+        EXERCISES: "Ejercicios",
+        EXERCISE: "Ejercicio",
+        EXERCISE_LIST: "Lista de ejercicios",
+        CREATE_EXERCISE: "Crear ejercicio",
+        EXERCISE_OVERVIEW: "Resumen del ejercicio",
+        SUBMITIONS: "Envíos",
+        MY_STUDENTS: "Mis estudiantes",
       }
     },
 

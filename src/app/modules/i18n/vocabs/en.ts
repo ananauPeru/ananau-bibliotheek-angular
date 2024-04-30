@@ -89,12 +89,19 @@ export const locale = {
         TODOS: "ToDo's",
       },
       LEARNING_PLATFORM: {
+        SPANISH: "Spanish",
         TESTS: "Tests",
         TEST: "Test",
         TEST_LIST: "Test list",
         CREATE_TEST: "Create test",
-        MY_STUDENTS: "My students",
         TEST_OVERVIEW: "Test overview",
+        EXERCISES: "Exercises",
+        EXERCISE: "Exercise",
+        EXERCISE_LIST: "Exercise list",
+        CREATE_EXERCISE: "Create exercise",
+        EXERCISE_OVERVIEW: "Exercise overview",
+        SUBMITIONS: "Submitions",
+        MY_STUDENTS: "My students",
       }
     },
 
