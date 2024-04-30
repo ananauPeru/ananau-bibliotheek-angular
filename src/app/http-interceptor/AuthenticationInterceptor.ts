@@ -5,24 +5,25 @@ import {
   HttpHandler,
   HttpEvent,
   HttpHeaders,
-  HttpErrorResponse,
 } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 import { AuthModel } from "../modules/auth/_models/auth.model";
 import { environment } from "src/environments/environment";
+import { jwtDecode } from "jwt-decode";
+import { Router } from "@angular/router";
+import { AuthService } from "../modules/auth";
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    this.authService.logoutIfTokenExpired();
     if (this.getAuthFromLocalStorage()) {
       const httpHeaders = new HttpHeaders({
         Authorization: `Bearer ${this.getAuthFromLocalStorage().token}`,
@@ -30,18 +31,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
       const clonedRequest = req.clone({
         headers: httpHeaders,
       });
-      return next.handle(clonedRequest).pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 401) {
-            // Token has expired or is invalid
-            // Clear token and user data from storage
-            localStorage.removeItem(this.authLocalStorageToken);
-            // Redirect to the login page
-            this.router.navigate(["/auth/login"]);
-          }
-          return throwError(error);
-        })
-      );
+      return next.handle(clonedRequest);
     }
     return next.handle(req);
   }
