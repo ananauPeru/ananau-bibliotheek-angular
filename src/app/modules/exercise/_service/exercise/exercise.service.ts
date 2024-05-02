@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ExerciseHttpService } from './exercise-http/exercise-http.service';
 import { Observable } from 'rxjs';
-import { ExerciseModel } from '../_model/exercise.model';
-import { ExerciseDto } from '../_dto/exercise-dto';
+import { ExerciseModel } from '../../_model/exercise.model';
+import { ExerciseDto } from '../../_dto/exercise-dto';
 
 @Injectable({
   providedIn: 'root'

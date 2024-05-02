@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ExerciseDto } from "../_dto/exercise-dto";
 import { ToastrService } from "ngx-toastr";
-import { ExerciseService } from "../_service/exercise.service";
+import { ExerciseService } from "../_service/exercise/exercise.service";
 import { UserService } from "../../organization/_services/user/user.service";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";

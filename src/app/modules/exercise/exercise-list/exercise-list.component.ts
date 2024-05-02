@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExerciseService } from '../_service/exercise.service';
+import { ExerciseService } from '../_service/exercise/exercise.service';
 import { Observable, Subject } from 'rxjs';
 import { ExerciseModel } from '../_model/exercise.model';
 import { debounceTime, startWith, switchMap } from 'rxjs/operators';
