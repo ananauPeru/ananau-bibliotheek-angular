@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ExerciseModel } from "../../_model/exercise.model";
 import { Observable, of } from "rxjs";
+import { ExerciseDto } from "../../_dto/exercise-dto";
 
 @Injectable({
   providedIn: "root",
@@ -35,5 +36,17 @@ export class ExerciseHttpService {
 
   getExerciseById$(id: number): Observable<ExerciseModel> {
     return of(this.MOCK_DATA.find((exercise) => exercise.id === id));
+  }
+
+  createExercise$(exerciseDto: ExerciseDto): Observable<ExerciseModel> {
+    const newExercise: ExerciseModel = {
+      id: this.MOCK_DATA.length + 1,
+      title: exerciseDto.title,
+      author: exerciseDto.author,
+      description: exerciseDto.description,
+      fileUrls: exerciseDto.fileUrls,
+    };
+    this.MOCK_DATA.push(newExercise);
+    return of(newExercise);
   }
 }
