@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute } from "@angular/router";
 import { ExerciseModel } from "../_model/exercise.model";
@@ -26,6 +26,7 @@ export class OverviewExerciseComponent implements OnInit {
   ];
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
+  isLoading = false;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -77,6 +78,8 @@ export class OverviewExerciseComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true; // Set isLoading to true before submitting
+
     try {
       const fileUrls: string[] = [];
       for (const file of this.submissionFiles) {
@@ -99,16 +102,19 @@ export class OverviewExerciseComponent implements OnInit {
           this.getSubmissions();
           this.submissionForm.reset();
           this.submissionFiles = [];
-          this.getSubmissions();
+          this.submissionForm.get('files').setValue([]);
+          this.isLoading = false; // Set isLoading back to false after successful submission
         },
         (error) => {
           console.error("Error creating submission: ", error);
           this.toast.error("Error creating submission");
+          this.isLoading = false; // Set isLoading back to false in case of error
         }
       );
     } catch (error) {
       console.error("Error uploading files: ", error);
       this.toast.error("Error uploading files");
+      this.isLoading = false; // Set isLoading back to false in case of error
     }
   }
 
