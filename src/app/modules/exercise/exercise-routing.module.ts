@@ -6,6 +6,8 @@ import { ExerciseListComponent } from "./exercise-list/exercise-list.component";
 import { ExerciseComponent } from "./exercise.component";
 import { CreateExerciseComponent } from "./create-exercise/create-exercise.component";
 import { OverviewExerciseComponent } from "./overview-exercise/overview-exercise.component";
+import { SubmissionListComponent } from "./submission-list/submission-list.component";
+import { OverviewSubmissionComponent } from "./overview-submission/overview-submission.component";
 
 const routes: Routes = [
   {
@@ -40,6 +42,20 @@ const routes: Routes = [
       {
         path: "overview/:id",
         component: OverviewExerciseComponent,
+        data: {
+          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+        },
+      },
+      {
+        path: "submission/list",
+        component: SubmissionListComponent,
+        data: {
+          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+        },
+      },
+      {
+        path: "submission/overview/:id",
+        component: OverviewSubmissionComponent,
         data: {
           permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
         },

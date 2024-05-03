@@ -51,7 +51,7 @@ export class OverviewExerciseComponent implements OnInit {
   getSubmissions() {
     const exerciseId: number = this.route.snapshot.params["id"];
     const userId: number = 1; // TODO: Get the current user's ID
-    this.submissions$ = this.submissionService.getSubmissions$(exerciseId, userId);
+    this.submissions$ = this.submissionService.getSubmissions$("searchterm");
   }
 
   initializeSubmissionForm() {

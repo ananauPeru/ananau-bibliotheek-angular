@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { SubmissionListComponent } from './submission-list/submission-list.component';
+import { OverviewSubmissionComponent } from './overview-submission/overview-submission.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     NgbModule,
     NgxDropzoneModule,
   ],
-  declarations: [ExerciseComponent, ExerciseListComponent, CreateExerciseComponent, OverviewExerciseComponent],
+  declarations: [ExerciseComponent, ExerciseListComponent, CreateExerciseComponent, OverviewExerciseComponent, SubmissionListComponent, OverviewSubmissionComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class ExerciseModule { }
