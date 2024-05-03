@@ -132,7 +132,7 @@
             <div class="form-group">
               <textarea class="form-control" rows="3" placeholder="Add a comment" formControlName="comment"></textarea>
             </div>
-            <button class="btn btn-primary" (click)="submitExercise()" [disabled]="submissionForm.invalid || isLoading">
+            <button class="btn btn-primary" (click)="submitExercise(exercise)" [disabled]="submissionForm.invalid || isLoading">
               Submit
             </button>
           </form>

@@ -44,7 +44,8 @@
                 class="form-control form-control-solid"
                 [class.is-invalid]="
                   exerciseForm.get('title').invalid &&
-                  (exerciseForm.get('title').dirty || exerciseForm.get('title').touched)
+                  (exerciseForm.get('title').dirty ||
+                    exerciseForm.get('title').touched)
                 "
                 placeholder="Enter title"
                 formControlName="title"
@@ -56,7 +57,8 @@
                 class="text-danger"
                 *ngIf="
                   exerciseForm.get('title').invalid &&
-                  (exerciseForm.get('title').dirty || exerciseForm.get('title').touched)
+                  (exerciseForm.get('title').dirty ||
+                    exerciseForm.get('title').touched)
                 "
               >
                 Title is required.
@@ -79,18 +81,73 @@
           ></textarea>
         </div>
       </div>
+      <div class="form-group row">
+        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
+          >Max Grade</label
+        >
+        <div class="col-12 col-md-10">
+          <input
+            type="number"
+            class="form-control form-control-solid"
+            [class.is-invalid]="
+              exerciseForm.get('maxGrade').invalid &&
+              (exerciseForm.get('maxGrade').dirty ||
+                exerciseForm.get('maxGrade').touched)
+            "
+            placeholder="Enter maximum grade"
+            formControlName="maxGrade"
+            required
+          />
+          <small
+            class="text-danger"
+            *ngIf="
+              exerciseForm.get('maxGrade').invalid &&
+              (exerciseForm.get('maxGrade').dirty ||
+                exerciseForm.get('maxGrade').touched)
+            "
+          >
+            Max grade is required.
+          </small>
+        </div>
+      </div>
 
       <div class="form-group row">
-        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0">Files</label>
+        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
+          >Files</label
+        >
         <div class="col-12 col-md-10">
-          <div class="custom-dropzone form-control form-control-solid border" ngx-dropzone [accept]="'image/*,.pdf'" (change)="onSelectFiles($event)" [class.is-invalid]="exerciseForm.get('files').invalid && (exerciseForm.get('files').dirty || exerciseForm.get('files').touched)">
+          <div
+            class="custom-dropzone form-control form-control-solid border"
+            ngx-dropzone
+            (change)="onSelectFiles($event)"
+            [class.is-invalid]="
+              exerciseForm.get('files').invalid &&
+              (exerciseForm.get('files').dirty ||
+                exerciseForm.get('files').touched)
+            "
+          >
             <ngx-dropzone-label>
-              <p class="form-text text-muted">{{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}</p>
+              <p class="form-text text-muted">
+                {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
+              </p>
             </ngx-dropzone-label>
-            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemoveFile(f)">
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of files"
+              [file]="f"
+              [removable]="true"
+              (removed)="onRemoveFile(f)"
+            >
             </ngx-dropzone-image-preview>
           </div>
-          <small class="text-danger" *ngIf="exerciseForm.get('files').invalid && (exerciseForm.get('files').dirty || exerciseForm.get('files').touched)">
+          <small
+            class="text-danger"
+            *ngIf="
+              exerciseForm.get('files').invalid &&
+              (exerciseForm.get('files').dirty ||
+                exerciseForm.get('files').touched)
+            "
+          >
             At least one file is required.
           </small>
         </div>

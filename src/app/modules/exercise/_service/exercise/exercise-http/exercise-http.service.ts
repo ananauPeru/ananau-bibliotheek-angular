@@ -15,6 +15,7 @@ export class ExerciseHttpService {
         title: "Exercise 1",
         description: "Description 1",
         fileUrls: ["url1", "url2"],
+        maxGrade: 10,
       },
       {
         id: 2,
@@ -22,6 +23,7 @@ export class ExerciseHttpService {
         title: "Exercise 2",
         description: "Description 2",
         fileUrls: ["url1", "url2"],
+        maxGrade: 20,
       },
     ];
   }
@@ -47,6 +49,7 @@ export class ExerciseHttpService {
       author: exerciseDto.author,
       description: exerciseDto.description,
       fileUrls: exerciseDto.fileUrls,
+      maxGrade: exerciseDto.maxGrade,
     };
     this.MOCK_DATA.push(newExercise);
     return of(newExercise);

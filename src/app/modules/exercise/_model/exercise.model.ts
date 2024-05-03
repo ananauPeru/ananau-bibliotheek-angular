@@ -4,4 +4,5 @@ export class ExerciseModel {
     title: string;
     description?: string;
     fileUrls: string[];
+    maxGrade: number;
 }

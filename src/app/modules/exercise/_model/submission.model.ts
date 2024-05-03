@@ -9,5 +9,6 @@ export class SubmissionModel {
     submissionDate: Date;
     gradeDate?: Date;
     grade?: number;
-    totalGrade?: number;
+    maxGrade?: number;
+    feedback?: string;
 }

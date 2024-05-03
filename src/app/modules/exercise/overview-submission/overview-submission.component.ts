@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubmissionService } from '../_service/submission/submission.service';
-import { SubmissionModel } from 'src/app/shared/models/submission/submission.model';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { SubmissionModel } from '../_model/submission.model';
 
 @Component({
   selector: 'app-overview-submission',
@@ -12,9 +12,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./overview-submission.component.scss']
 })
 export class OverviewSubmissionComponent implements OnInit {
+
+  //The grading part of this page, should only be visable to the teacher
+
   submission$: Observable<SubmissionModel>;
   gradeForm: FormGroup;
   isEditingGrade = false;
+  isTeacher = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +30,13 @@ export class OverviewSubmissionComponent implements OnInit {
   ngOnInit() {
     this.getSubmissionDetails();
     this.initializeGradeForm();
+    this.getUserDetails();
+  }
+
+  getUserDetails() {
+    // Implement the logic to check if the user is a teacher
+    console.log("Checking if user is a teacher...");
+    this.isTeacher = true;
   }
 
   getSubmissionDetails() {
@@ -36,13 +47,12 @@ export class OverviewSubmissionComponent implements OnInit {
   initializeGradeForm() {
     this.gradeForm = this.formBuilder.group({
       grade: ['', Validators.required],
-      totalGrade: ['', Validators.required]
+      feedback: ['']
     });
 
     this.submission$.subscribe((submission: SubmissionModel) => {
       this.gradeForm.patchValue({
-        grade: submission.grade,
-        totalGrade: submission.totalGrade
+        grade: submission.grade
       });
     });
   }
@@ -60,14 +70,15 @@ export class OverviewSubmissionComponent implements OnInit {
 
     const submissionId: number = this.route.snapshot.params["id"];
     const grade: number = this.gradeForm.get('grade').value;
-    const totalGrade: number = this.gradeForm.get('totalGrade').value;
+    const feedback: string = this.gradeForm.get('feedback').value;
 
-    this.submissionService.gradeSubmission$(submissionId, grade, totalGrade).subscribe(
-      () => {
+    this.submissionService.gradeSubmission$(submissionId, grade, feedback).subscribe(
+      (submission: SubmissionModel) => {
         console.log("Submission graded successfully!");
         this.toast.success("Submission graded successfully!");
         this.getSubmissionDetails();
         this.isEditingGrade = false;
+        console.log(submission);
       },
       (error) => {
         console.error("Error grading submission: ", error);

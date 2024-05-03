@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ExerciseModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
 import { SubmissionService } from "../_service/submission/submission.service";
-import { SubmissionModel } from "src/app/shared/models/submission/submission.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ToastrService } from "ngx-toastr";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
 import { SubmissionDto } from "../_dto/submission-dto";
+import { SubmissionModel } from "../_model/submission.model";
 
 @Component({
   selector: "app-overview-exercise",
@@ -34,7 +34,8 @@ export class OverviewExerciseComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
-    private itemStorageService: ItemStorageService
+    private itemStorageService: ItemStorageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class OverviewExerciseComponent implements OnInit {
   getSubmissions() {
     const exerciseId: number = this.route.snapshot.params["id"];
     const userId: number = 1; // TODO: Get the current user's ID
-    this.submissions$ = this.submissionService.getSubmissions$("searchterm");
+    this.submissions$ = this.submissionService.getSubmissionsByUserIdAndExerciseId$(userId, exerciseId);
   }
 
   initializeSubmissionForm() {
@@ -70,7 +71,7 @@ export class OverviewExerciseComponent implements OnInit {
     // Implement the logic to download all files
   }
 
-  async submitExercise() {
+  async submitExercise(exercise: ExerciseModel) {
     this.submissionForm.markAllAsTouched();
 
     if (this.submissionForm.invalid) {
@@ -88,15 +89,17 @@ export class OverviewExerciseComponent implements OnInit {
       }
 
       const submission: SubmissionDto = {
-        exerciseId: this.route.snapshot.params["id"],
+        exerciseId: exercise.id,
+        exerciseName: exercise.title,
         userId: 1, // TODO: Get the current user's ID
         fileUrls: fileUrls,
         comment: this.submissionForm.get("comment").value,
         submissionDate: new Date(),
+        maxGrade: exercise.maxGrade,
       };
 
       this.submissionService.createSubmission$(submission).subscribe(
-        () => {
+        (submissionModel: SubmissionModel) => {
           console.log("Submission created successfully!");
           this.toast.success("Submission created successfully!");
           this.getSubmissions();
@@ -104,6 +107,7 @@ export class OverviewExerciseComponent implements OnInit {
           this.submissionFiles = [];
           this.submissionForm.get('files').setValue([]);
           this.isLoading = false; // Set isLoading back to false after successful submission
+          this.router.navigate([`/exercise/submission/overview/${submissionModel.id}`]);
         },
         (error) => {
           console.error("Error creating submission: ", error);

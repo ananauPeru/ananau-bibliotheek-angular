@@ -8,7 +8,8 @@ export class SubmissionDto {
         public submissionDate?: Date,
         public gradeDate?: Date,
         public grade?: number,
-        public totalGrade?: number,
+        public maxGrade?: number,
+        public feedback?: string
     ) {
         this.userId = userId || 0;
         this.exerciseId = exerciseId || 0;
@@ -18,7 +19,8 @@ export class SubmissionDto {
         this.submissionDate = submissionDate || new Date();
         this.gradeDate = gradeDate || new Date();
         this.grade = grade || 0;
-        this.totalGrade = totalGrade || 0;
+        this.maxGrade = maxGrade || 0;
+        this.feedback = feedback || '';
     }
     
 }

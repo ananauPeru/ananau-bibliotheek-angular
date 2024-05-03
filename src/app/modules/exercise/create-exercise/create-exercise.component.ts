@@ -35,6 +35,7 @@ export class CreateExerciseComponent implements OnInit {
     this.exerciseForm = this.formBuilder.group({
       title: ["", Validators.required],
       description: "",
+      maxGrade: ["", Validators.required],
       files: [[], Validators.required],
     });
   }

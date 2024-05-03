@@ -3,14 +3,20 @@
     <!-- Header -->
     <div class="row">
       <div class="col-12">
-        <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem">
+        <div
+          class="card-header border-0 text-white"
+          style="background-color: white; padding: 2rem 2.25rem"
+        >
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
               <h3 class="card-title font-weight-bolder text-dark">
                 Submission Details
               </h3>
               <div>
-                <button class="btn btn-secondary" routerLink="/exercise/submission/list">
+                <button
+                  class="btn btn-secondary"
+                  routerLink="/exercise/submission/list"
+                >
                   Back to List
                 </button>
               </div>
@@ -24,10 +30,30 @@
     <div class="card-body pt-2">
       <div class="row">
         <div class="col-12">
-          <p class="mb-4"><strong>Exercise:</strong> {{ submission.exerciseName }}</p>
+          <p class="mb-4">
+            <strong>Exercise:</strong> {{ submission.exerciseName }}
+          </p>
           <p class="mb-4"><strong>User:</strong> {{ submission.userName }}</p>
-          <p class="mb-4"><strong>Submission Date:</strong> {{ submission.submissionDate | date }}</p>
+          <p class="mb-4">
+            <strong>Submission Date:</strong>
+            {{ submission.submissionDate | date }}
+          </p>
           <p class="mb-4"><strong>Comment:</strong> {{ submission.comment }}</p>
+          <ng-container *ngIf="submission.grade; else notGradedDetail">
+            <p class="mb-4">
+              <strong>Grade:</strong> {{ submission.grade }} /
+              {{ submission.maxGrade }}
+            </p>
+            <p *ngIf="submission.feedback; else noFeedback">
+              <strong>Feedback:</strong> {{ submission.feedback }}
+            </p>
+            <ng-template #noFeedback>
+              <p><strong>Feedback:</strong> No feedback given</p>
+            </ng-template>
+          </ng-container>
+          <ng-template #notGradedDetail>
+            <p><strong>Grade:</strong> Not graded yet</p>
+          </ng-template>
         </div>
       </div>
 
@@ -35,7 +61,10 @@
         <div class="col-12">
           <h4>Submitted Files</h4>
           <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let fileUrl of submission.fileUrls">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let fileUrl of submission.fileUrls"
+            >
               {{ fileUrl }}
               <button class="btn btn-primary" (click)="downloadFile(fileUrl)">
                 Download
@@ -45,30 +74,67 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" *ngIf="isTeacher">
         <div class="col-12">
-          <h4>Grade</h4>
+          <h4>Edit Grade</h4>
           <ng-container *ngIf="!isEditingGrade; else editGradeTemplate">
             <p *ngIf="submission.grade; else notGradedTemplate">
-              <strong>Grade:</strong> {{ submission.grade }} / {{ submission.totalGrade }}
+              <strong>Current Grade:</strong> {{ submission.grade }} /
+              {{ submission.maxGrade }}
             </p>
             <ng-template #notGradedTemplate>
               <p>Not graded yet</p>
             </ng-template>
-            <button class="btn btn-primary" (click)="isEditingGrade = true">Edit Grade</button>
+            <button class="btn btn-primary" (click)="isEditingGrade = true">
+              Edit Grade
+            </button>
           </ng-container>
           <ng-template #editGradeTemplate>
             <form [formGroup]="gradeForm" (ngSubmit)="submitGrade()">
               <div class="form-group">
                 <label for="grade">Grade:</label>
-                <input type="number" class="form-control" id="grade" formControlName="grade" required>
+                <div class="input-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="grade"
+                    formControlName="grade"
+                    min="0"
+                    [max]="submission.maxGrade"
+                    required
+                  />
+                  <div class="input-group-append">
+                    <span class="input-group-text"
+                      >/ {{ submission.maxGrade }}</span
+                    >
+                  </div>
+                </div>
               </div>
               <div class="form-group">
-                <label for="totalGrade">Total Grade:</label>
-                <input type="number" class="form-control" id="totalGrade" formControlName="totalGrade" required>
+                <label for="feedback">Feedback:</label>
+                <textarea
+                  class="form-control"
+                  id="feedback"
+                  formControlName="feedback"
+                ></textarea>
               </div>
-              <button type="submit" class="btn btn-primary" [disabled]="gradeForm.invalid">Submit Grade</button>
-              <button type="button" class="btn btn-secondary ml-2" (click)="isEditingGrade = false">Cancel</button>
+
+              <div class="form-group">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="gradeForm.invalid"
+                >
+                  Submit Grade
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary ml-2"
+                  (click)="isEditingGrade = false"
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           </ng-template>
         </div>
@@ -78,7 +144,10 @@
 </ng-container>
 
 <ng-template #loading>
-  <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+  <div
+    class="d-flex justify-content-center align-items-center"
+    style="height: 100vh"
+  >
     <div class="spinner-border text-primary" role="status">
       <span class="sr-only">Loading...</span>
     </div>
