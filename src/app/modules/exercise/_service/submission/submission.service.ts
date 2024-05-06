@@ -13,12 +13,12 @@ export class SubmissionService {
   constructor(private submissionHttpService: SubmissionHttpService, private AuthUtil: AuthUtil) {}
 
   getSubmissions$(searchTerm: string): Observable<SubmissionModel[]> {
-    const isTeacher = this.AuthUtil.permitted([this.AuthUtil.roles.SpanishTeacher]);
+    const isTeacher = this.AuthUtil.permitted([Roles.SpanishTeacher, Roles.SuperAdmin]);
     return this.submissionHttpService.getSubmissions$(searchTerm, isTeacher ? Roles.SpanishTeacher : Roles.SpanishLearner);
   }
 
   getSubmissionsByExerciseId$(exerciseId: number): Observable<SubmissionModel[]> {
-    const isTeacher = this.AuthUtil.permitted([this.AuthUtil.roles.SpanishTeacher]);
+    const isTeacher = this.AuthUtil.permitted([Roles.SpanishTeacher, Roles.SuperAdmin]);
     return this.submissionHttpService.getSubmissionsByExerciseId$(exerciseId, isTeacher ? Roles.SpanishTeacher : Roles.SpanishLearner);
   }
 

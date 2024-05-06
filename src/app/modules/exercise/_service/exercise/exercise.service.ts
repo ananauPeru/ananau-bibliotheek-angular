@@ -14,7 +14,7 @@ export class ExerciseService {
 constructor(private exerciseHttpService: ExerciseHttpService, private AuthUtil: AuthUtil) { }
 
   getExercises$(searchTerm: string, page: number, pageSize: number): Observable<ShortExerciseModel[]> {
-    const isTeacher = this.AuthUtil.permitted([this.AuthUtil.roles.SpanishTeacher]);
+    const isTeacher = this.AuthUtil.permitted([Roles.SpanishTeacher, Roles.SuperAdmin]);
     return this.exerciseHttpService.getExercises$(searchTerm, page, pageSize, isTeacher ? Roles.SpanishTeacher : Roles.SpanishLearner);
   }
 
