@@ -3,6 +3,7 @@ import { Observable, of } from "rxjs";
 import { SubmissionModel } from "../../../_model/submission.model";
 import { CreateSubmissionDto } from "../../../_dto/create-submission-dto";
 import { GradeSubmissionDto } from "../../../_dto/grade-submission-dto";
+import { Roles } from "src/app/_utils/auth_util";
 
 @Injectable({
   providedIn: "root",
@@ -87,16 +88,20 @@ export class SubmissionHttpService {
     }
   ];
 
-  getSubmissions$(searchTerm: string): Observable<SubmissionModel[]> {
-    return of(this.MOCK_DATA);
+  getSubmissions$(searchTerm: string, role: Roles): Observable<SubmissionModel[]> {
+    if(role === Roles.SpanishTeacher) {
+      return of(this.MOCK_DATA);
+    } else {
+      return of(this.MOCK_DATA.filter((submission: SubmissionModel) => submission.submittedBy.id === 1));
+    }
   }
 
-  getAllSubmissions$(): Observable<SubmissionModel[]> {
-    return of(this.MOCK_DATA);
-  }
-
-  getSubmissionsByExerciseId$(exerciseId: number): Observable<SubmissionModel[]> {
-    return of(this.MOCK_DATA.filter((submission: SubmissionModel) => submission.exercise.id === exerciseId));
+  getSubmissionsByExerciseId$(exerciseId: number, role: Roles): Observable<SubmissionModel[]> {
+    if(role === Roles.SpanishTeacher) {
+      return of(this.MOCK_DATA.filter((submission) => submission.exercise.id === exerciseId));
+    } else {
+      return of(this.MOCK_DATA.filter((submission) => submission.exercise.id === exerciseId && submission.submittedBy.id === 1));
+    }
   }
 
   getSubmissionById$(submissionId: number): Observable<SubmissionModel> {

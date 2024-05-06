@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { ShortExerciseModel } from "../../../_model/short-exercise.model";
 import { catchError, map } from "rxjs/operators";
 import { CreateExerciseDto } from "../../../_dto/create-exercise-dto";
+import { Roles } from "src/app/_utils/auth_util";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/exercise`;
 
@@ -18,31 +19,36 @@ export class ExerciseHttpService {
   getExercises$(
     searchTerm: string,
     page: number,
-    pageSize: number
+    pageSize: number,
+    role: Roles
   ): Observable<ShortExerciseModel[]> {
-    return this.http
-      .get<ShortExerciseModel[]>(
-        `${API_URL}?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
-        {
-          responseType: "json",
-        }
-      )
-      .pipe(
-        catchError((error) => {
-          if (error.status == 401) {
-            console.error("Login please...");
+    if (role == Roles.SpanishTeacher) {
+      return this.http
+        .get<ShortExerciseModel[]>(
+          `${API_URL}?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
+          {
+            responseType: "json",
           }
-          return throwError(error);
-        }),
-        map((response: any): ShortExerciseModel[] => {
-          if (response.success) {
-            return response.exercises;
-          } else {
-            throwError(response.error);
-            return [];
-          }
-        })
-      );
+        )
+        .pipe(
+          catchError((error) => {
+            if (error.status == 401) {
+              console.error("Login please...");
+            }
+            return throwError(error);
+          }),
+          map((response: any): ShortExerciseModel[] => {
+            if (response.success) {
+              return response.exercises;
+            } else {
+              throwError(response.error);
+              return [];
+            }
+          })
+        );
+    } else {
+      //Make the request as a student
+    }
   }
 
   getExerciseById$(id: number): Observable<ExerciseModel> {

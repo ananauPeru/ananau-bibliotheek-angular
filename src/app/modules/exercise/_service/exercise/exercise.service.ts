@@ -4,16 +4,18 @@ import { Observable } from 'rxjs';
 import { ExerciseModel } from '../../_model/exercise.model';
 import { ShortExerciseModel } from '../../_model/short-exercise.model';
 import { CreateExerciseDto } from '../../_dto/create-exercise-dto';
+import { AuthUtil, Roles } from 'src/app/_utils/auth_util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseService {
 
-constructor(private exerciseHttpService: ExerciseHttpService) { }
+constructor(private exerciseHttpService: ExerciseHttpService, private AuthUtil: AuthUtil) { }
 
   getExercises$(searchTerm: string, page: number, pageSize: number): Observable<ShortExerciseModel[]> {
-    return this.exerciseHttpService.getExercises$(searchTerm, page, pageSize);
+    const isTeacher = this.AuthUtil.permitted([this.AuthUtil.roles.SpanishTeacher]);
+    return this.exerciseHttpService.getExercises$(searchTerm, page, pageSize, isTeacher ? Roles.SpanishTeacher : Roles.SpanishLearner);
   }
 
   getExerciseById$(id: number): Observable<ExerciseModel> {

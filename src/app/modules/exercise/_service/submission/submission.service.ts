@@ -4,27 +4,26 @@ import { Observable } from "rxjs";
 import { SubmissionModel } from "../../_model/submission.model";
 import { CreateSubmissionDto } from "../../_dto/create-submission-dto";
 import { GradeSubmissionDto } from "../../_dto/grade-submission-dto";
+import { AuthUtil, Roles } from "src/app/_utils/auth_util";
 
 @Injectable({
   providedIn: "root",
 })
 export class SubmissionService {
-  constructor(private submissionHttpService: SubmissionHttpService) {}
+  constructor(private submissionHttpService: SubmissionHttpService, private AuthUtil: AuthUtil) {}
 
   getSubmissions$(searchTerm: string): Observable<SubmissionModel[]> {
-    return this.submissionHttpService.getSubmissions$(searchTerm);
+    const isTeacher = this.AuthUtil.permitted([this.AuthUtil.roles.SpanishTeacher]);
+    return this.submissionHttpService.getSubmissions$(searchTerm, isTeacher ? Roles.SpanishTeacher : Roles.SpanishLearner);
   }
 
   getSubmissionsByExerciseId$(exerciseId: number): Observable<SubmissionModel[]> {
-    return this.submissionHttpService.getSubmissionsByExerciseId$(exerciseId);
+    const isTeacher = this.AuthUtil.permitted([this.AuthUtil.roles.SpanishTeacher]);
+    return this.submissionHttpService.getSubmissionsByExerciseId$(exerciseId, isTeacher ? Roles.SpanishTeacher : Roles.SpanishLearner);
   }
 
   getSubmissionById$(submissionId: number): Observable<SubmissionModel> {
     return this.submissionHttpService.getSubmissionById$(submissionId);
-  }
-
-  getSubmissionsByUserIdAndExerciseId$(userId: number, exerciseId: number): Observable<SubmissionModel[]> {
-    return this.submissionHttpService.getSubmissionsByUserIdAndExerciseId$(userId, exerciseId);
   }
 
   gradeSubmission$(submissionId: number, gradeSubmissionDto: GradeSubmissionDto): Observable<SubmissionModel> {
