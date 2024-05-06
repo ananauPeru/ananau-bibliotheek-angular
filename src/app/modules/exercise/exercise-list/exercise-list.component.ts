@@ -3,6 +3,7 @@ import { ExerciseService } from '../_service/exercise/exercise.service';
 import { Observable, Subject } from 'rxjs';
 import { ExerciseModel } from '../_model/exercise.model';
 import { debounceTime, startWith, switchMap } from 'rxjs/operators';
+import { ShortExerciseModel } from '../_model/short-exercise.model';
 
 @Component({
   selector: 'app-exercise-list',
@@ -10,7 +11,7 @@ import { debounceTime, startWith, switchMap } from 'rxjs/operators';
   styleUrls: ['./exercise-list.component.scss']
 })
 export class ExerciseListComponent implements OnInit {
-  public exercises$: Observable<ExerciseModel[]>;
+  public exercises$: Observable<ShortExerciseModel[]>;
   public searchTerm$ = new Subject<string>();
 
   constructor(public exerciseService: ExerciseService) { }

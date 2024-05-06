@@ -1,12 +1,11 @@
-export class ExerciseModel {
+export class ShortExerciseModel {
     id: number;
     title: string;
     description?: string;
-    maxGrade: number;
+    deadline: Date;
     author: {
         id: number;
         firstName: string;
         lastName: string;
-    };
-    fileUrls: string[];
+    }
 }

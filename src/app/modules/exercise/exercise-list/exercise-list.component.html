@@ -9,10 +9,10 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
             <h3 class="card-title font-weight-bolder text-dark">
-              {{ "MENU.LEARNING_PLATFORM.TEST_LIST" | translate }}
+             Exercise List
             </h3>
             <button class="btn btn-primary" routerLink="/exercise/create">
-              Create Test
+              Create Exercise
             </button>
           </div>
         </div>
@@ -61,7 +61,7 @@
             <tbody>
               <tr *ngFor="let exercise of exercises$ | async">
                 <td>{{ exercise.title }}</td>
-                <td>{{ exercise.author }}</td>
+                <td>{{ exercise.author.firstName }} {{exercise.author.lastName}}</td>
                 <td>{{ exercise.description }}</td>
                 <td class="text-right">
                   <button

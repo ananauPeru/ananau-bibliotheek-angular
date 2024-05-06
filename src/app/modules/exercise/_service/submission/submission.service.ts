@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { SubmissionHttpService } from "./submission-http/submission-http.service";
 import { Observable } from "rxjs";
-import { SubmissionDto } from "../../_dto/submission-dto";
 import { SubmissionModel } from "../../_model/submission.model";
+import { CreateSubmissionDto } from "../../_dto/create-submission-dto";
+import { GradeSubmissionDto } from "../../_dto/grade-submission-dto";
 
 @Injectable({
   providedIn: "root",
@@ -26,11 +27,11 @@ export class SubmissionService {
     return this.submissionHttpService.getSubmissionsByUserIdAndExerciseId$(userId, exerciseId);
   }
 
-  gradeSubmission$(submissionId: number, grade: number, feedback: string): Observable<SubmissionModel> {
-    return this.submissionHttpService.gradeSubmission$(submissionId, grade, feedback);
+  gradeSubmission$(submissionId: number, gradeSubmissionDto: GradeSubmissionDto): Observable<SubmissionModel> {
+    return this.submissionHttpService.gradeSubmission$(submissionId, gradeSubmissionDto);
   }
 
-  createSubmission$(submissionDto: SubmissionDto): Observable<SubmissionModel> {
-    return this.submissionHttpService.createSubmission$(submissionDto);
+  createSubmission$(createSubmissionDto: CreateSubmissionDto): Observable<SubmissionModel> {
+    return this.submissionHttpService.createSubmission$(createSubmissionDto);
   }
 }

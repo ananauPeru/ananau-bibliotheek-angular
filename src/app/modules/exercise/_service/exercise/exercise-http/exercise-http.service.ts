@@ -1,57 +1,93 @@
 import { Injectable } from "@angular/core";
 import { ExerciseModel } from "../../../_model/exercise.model";
-import { Observable, of } from "rxjs";
-import { ExerciseDto } from "../../../_dto/exercise-dto";
+import { Observable, of, throwError } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { ShortExerciseModel } from "../../../_model/short-exercise.model";
+import { catchError, map } from "rxjs/operators";
+import { CreateExerciseDto } from "../../../_dto/create-exercise-dto";
+
+const API_URL = `${environment.apiUrl}/spanish_platform/exercise`;
 
 @Injectable({
   providedIn: "root",
 })
 export class ExerciseHttpService {
-  constructor() {
-    this.MOCK_DATA = [
-      {
-        id: 1,
-        author: "Author 1",
-        title: "Exercise 1",
-        description: "Description 1",
-        fileUrls: ["url1", "url2"],
-        maxGrade: 10,
-      },
-      {
-        id: 2,
-        author: "Author 2",
-        title: "Exercise 2",
-        description: "Description 2",
-        fileUrls: ["url1", "url2"],
-        maxGrade: 20,
-      },
-    ];
-  }
-
-  private MOCK_DATA: ExerciseModel[];
+  constructor(private http: HttpClient) {}
 
   getExercises$(
     searchTerm: string,
     page: number,
     pageSize: number
-  ): Observable<ExerciseModel[]> {
-    return of(this.MOCK_DATA);
+  ): Observable<ShortExerciseModel[]> {
+    return this.http
+      .get<ShortExerciseModel[]>(
+        `${API_URL}?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
+        {
+          responseType: "json",
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): ShortExerciseModel[] => {
+          if (response.success) {
+            return response.exercises;
+          } else {
+            throwError(response.error);
+            return [];
+          }
+        })
+      );
   }
 
   getExerciseById$(id: number): Observable<ExerciseModel> {
-    return of(this.MOCK_DATA[id - 1]);
+    return this.http
+      .get<ExerciseModel>(`${API_URL}/${id}`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): ExerciseModel => {
+          if (response.success) {
+            return response.exercise;
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
   }
 
-  createExercise$(exerciseDto: ExerciseDto): Observable<ExerciseModel> {
-    const newExercise: ExerciseModel = {
-      id: this.MOCK_DATA.length + 1,
-      title: exerciseDto.title,
-      author: exerciseDto.author,
-      description: exerciseDto.description,
-      fileUrls: exerciseDto.fileUrls,
-      maxGrade: exerciseDto.maxGrade,
-    };
-    this.MOCK_DATA.push(newExercise);
-    return of(newExercise);
+  createExercise$(exerciseDto: CreateExerciseDto): Observable<ExerciseModel> {
+    return this.http
+      .post<ExerciseModel>(API_URL, exerciseDto, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): ExerciseModel => {
+          if (response.success) {
+            return response.exercise;
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
   }
 }

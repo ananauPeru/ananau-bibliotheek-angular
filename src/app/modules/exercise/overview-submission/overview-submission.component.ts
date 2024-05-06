@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SubmissionService } from '../_service/submission/submission.service';
-import { Observable } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
-import { SubmissionModel } from '../_model/submission.model';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SubmissionService } from "../_service/submission/submission.service";
+import { Observable } from "rxjs";
+import { ToastrService } from "ngx-toastr";
+import { SubmissionModel } from "../_model/submission.model";
+import { GradeSubmissionDto } from "../_dto/grade-submission-dto";
 
 @Component({
-  selector: 'app-overview-submission',
-  templateUrl: './overview-submission.component.html',
-  styleUrls: ['./overview-submission.component.scss']
+  selector: "app-overview-submission",
+  templateUrl: "./overview-submission.component.html",
+  styleUrls: ["./overview-submission.component.scss"],
 })
 export class OverviewSubmissionComponent implements OnInit {
-
   //The grading part of this page, should only be visable to the teacher
 
   submission$: Observable<SubmissionModel>;
@@ -25,7 +25,7 @@ export class OverviewSubmissionComponent implements OnInit {
     private submissionService: SubmissionService,
     private formBuilder: FormBuilder,
     private toast: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getSubmissionDetails();
@@ -46,13 +46,13 @@ export class OverviewSubmissionComponent implements OnInit {
 
   initializeGradeForm() {
     this.gradeForm = this.formBuilder.group({
-      grade: ['', Validators.required],
-      feedback: ['']
+      grade: ["", Validators.required],
+      feedback: [""],
     });
 
     this.submission$.subscribe((submission: SubmissionModel) => {
       this.gradeForm.patchValue({
-        grade: submission.grade
+        grade: submission.grade,
       });
     });
   }
@@ -69,21 +69,28 @@ export class OverviewSubmissionComponent implements OnInit {
     }
 
     const submissionId: number = this.route.snapshot.params["id"];
-    const grade: number = this.gradeForm.get('grade').value;
-    const feedback: string = this.gradeForm.get('feedback').value;
+    const grade: number = this.gradeForm.get("grade").value;
+    const feedback: string = this.gradeForm.get("feedback").value;
 
-    this.submissionService.gradeSubmission$(submissionId, grade, feedback).subscribe(
-      (submission: SubmissionModel) => {
-        console.log("Submission graded successfully!");
-        this.toast.success("Submission graded successfully!");
-        this.getSubmissionDetails();
-        this.isEditingGrade = false;
-        console.log(submission);
-      },
-      (error) => {
-        console.error("Error grading submission: ", error);
-        this.toast.error("Error grading submission");
-      }
-    );
+    const gradeSubmissionDto: GradeSubmissionDto = {
+      grade: grade,
+      feedback: feedback,
+    };
+
+    this.submissionService
+      .gradeSubmission$(submissionId, gradeSubmissionDto)
+      .subscribe(
+        (submission: SubmissionModel) => {
+          console.log("Submission graded successfully!");
+          this.toast.success("Submission graded successfully!");
+          this.getSubmissionDetails();
+          this.isEditingGrade = false;
+          console.log(submission);
+        },
+        (error) => {
+          console.error("Error grading submission: ", error);
+          this.toast.error("Error grading submission");
+        }
+      );
   }
 }

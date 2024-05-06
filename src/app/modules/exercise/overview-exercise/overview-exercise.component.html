@@ -40,16 +40,16 @@
           <div class="col-12">
             <div class="d-flex justify-content-between">
               <h4>Files</h4>
-              <button class="btn btn-primary mb-2" (click)="downloadAllFiles()">
+              <button class="btn btn-primary mb-2" (click)="downloadAllFiles(exercise.fileUrls)">
                 Download All Files
               </button>
             </div>
             <ul class="list-group">
               <li
                 class="list-group-item d-flex justify-content-between align-items-center"
-                *ngFor="let file of files"
+                *ngFor="let file of exercise.fileUrls; let i = index"
               >
-                {{ file.name }}
+                File {{ i + 1 }}
                 <button class="btn btn-primary" (click)="downloadFile(file)">
                   Download
                 </button>
