@@ -16,9 +16,6 @@
                 <button class="btn btn-secondary" routerLink="/exercise/list">
                   Back to List
                 </button>
-                <button class="btn btn-primary ml-2" *ngIf="isTeacherView">
-                  Edit Exercise
-                </button>
               </div>
             </div>
           </div>
@@ -28,117 +25,160 @@
 
     <!-- Body -->
     <div class="card-body pt-2">
-      <div *ngIf="!isTeacherView">
-        <!-- Student View -->
-        <div class="row">
-          <div class="col-12">
-            <p class="mb-4">{{ exercise.description || "No description" }}</p>
-          </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="mb-4">{{ exercise.description || "No description" }}</p>
         </div>
-
-        <div class="row mb-4">
-          <div class="col-12">
-            <div class="d-flex justify-content-between">
-              <h4>Files</h4>
-              <button class="btn btn-primary mb-2" (click)="downloadAllFiles(exercise.fileUrls)">
-                Download All Files
-              </button>
-            </div>
-            <ul class="list-group">
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center"
-                *ngFor="let file of exercise.fileUrls; let i = index"
-              >
-                File {{ i + 1 }}
-                <button class="btn btn-primary" (click)="downloadFile(file)">
-                  Download
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row mt-4" *ngIf="submissions$ | async as submissions; else loadingSubmissions">
-          <div class="col-12">
-            <h4>Submissions</h4>
-            <ng-container *ngIf="submissions.length > 0; else noSubmissions">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>File</th>
-                      <th>Comment</th>
-                      <th>Date</th>
-                      <th>Details</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let submission of submissions">
-                      <td>{{ submission.fileUrls[0] }}</td>
-                      <td>{{ submission.comment }}</td>
-                      <td>{{ submission.submissionDate }}</td>
-                      <td>
-                        <button class="btn btn-primary" routerLink="/submission/overview/{{ submission.id }}">
-                          Details
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </ng-container>
-            <ng-template #noSubmissions>
-              <p>No submissions yet</p>
-            </ng-template>
-          </div>
-        </div>
-
-        <ng-template #loadingSubmissions>
-          <div
-            class="d-flex justify-content-center align-items-center"
-          >
-            <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-        </ng-template>
-
       </div>
 
-      <div class="row">
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="d-flex justify-content-between">
+            <h4>Files</h4>
+            <button
+              class="btn btn-primary mb-2"
+              (click)="downloadAllFiles(exercise.fileUrls)"
+            >
+              Download All Files
+            </button>
+          </div>
+          <ul class="list-group">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let file of exercise.fileUrls; let i = index"
+            >
+              File {{ i + 1 }}
+              <button class="btn btn-primary" (click)="downloadFile(file)">
+                Download
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="row mt-4"
+        *ngIf="submissions$ | async as submissions; else loadingSubmissions"
+      >
+        <div class="col-12">
+          <h4>Submissions</h4>
+          <ng-container *ngIf="submissions.length > 0; else noSubmissions">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>File</th>
+                    <th>Comment</th>
+                    <th>Date</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let submission of submissions">
+                    <td>{{ submission.fileUrls[0] }}</td>
+                    <td>{{ submission.comment }}</td>
+                    <td>{{ submission.submissionDate }}</td>
+                    <td>
+                      <button
+                        class="btn btn-primary"
+                        routerLink="/submission/overview/{{ submission.id }}"
+                      >
+                        Details
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+          <ng-template #noSubmissions>
+            <p>No submissions yet</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <ng-template #loadingSubmissions>
+        <h4>Submissions</h4>
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
+
+
+      <!-- Learner -->
+      <div *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishLearner])" class="row">
         <div class="col-12">
           <h4>Submit Exercise</h4>
           <form [formGroup]="submissionForm">
             <div class="form-group" *ngIf="!isLoading; else loadingDropzone">
-              <div #dropzone class="custom-dropzone form-control form-control-solid border" ngx-dropzone (change)="onSelectFiles($event)" [class.is-invalid]="submissionForm.get('files').invalid && (submissionForm.get('files').dirty || submissionForm.get('files').touched)">
+              <div
+                #dropzone
+                class="custom-dropzone form-control form-control-solid border"
+                ngx-dropzone
+                (change)="onSelectFiles($event)"
+                [class.is-invalid]="
+                  submissionForm.get('files').invalid &&
+                  (submissionForm.get('files').dirty ||
+                    submissionForm.get('files').touched)
+                "
+              >
                 <ngx-dropzone-label>
-                  <p class="form-text text-muted">{{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}</p>
+                  <p class="form-text text-muted">
+                    {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
+                  </p>
                 </ngx-dropzone-label>
-                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of submissionFiles" [file]="f" [removable]="true" (removed)="onRemoveFile(f)">
+                <ngx-dropzone-image-preview
+                  ngProjectAs="ngx-dropzone-preview"
+                  *ngFor="let f of submissionFiles"
+                  [file]="f"
+                  [removable]="true"
+                  (removed)="onRemoveFile(f)"
+                >
                 </ngx-dropzone-image-preview>
               </div>
-              <small class="text-danger" *ngIf="submissionForm.get('files').invalid && (submissionForm.get('files').dirty || submissionForm.get('files').touched)">
+              <small
+                class="text-danger"
+                *ngIf="
+                  submissionForm.get('files').invalid &&
+                  (submissionForm.get('files').dirty ||
+                    submissionForm.get('files').touched)
+                "
+              >
                 At least one file is required.
               </small>
             </div>
             <ng-template #loadingDropzone>
-              <div class="d-flex justify-content-center align-items-center" style="height: 200px">
+              <div
+                class="d-flex justify-content-center align-items-center"
+                style="height: 200px"
+              >
                 <div class="spinner-border text-primary" role="status">
                   <span class="sr-only">Loading...</span>
                 </div>
               </div>
             </ng-template>
             <div class="form-group">
-              <textarea class="form-control" rows="3" placeholder="Add a comment" formControlName="comment"></textarea>
+              <textarea
+                class="form-control"
+                rows="3"
+                placeholder="Add a comment"
+                formControlName="comment"
+              ></textarea>
             </div>
-            <button class="btn btn-primary" (click)="submitExercise(exercise)" [disabled]="submissionForm.invalid || isLoading">
+            <button
+              class="btn btn-primary"
+              (click)="submitExercise(exercise)"
+              [disabled]="submissionForm.invalid || isLoading"
+            >
               Submit
             </button>
           </form>
         </div>
       </div>
 
-      <div *ngIf="isTeacherView">
+      <div *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin])">
         <!-- Teacher View -->
         <!-- Implement the teacher view here -->
       </div>

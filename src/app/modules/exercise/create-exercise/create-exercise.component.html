@@ -1,4 +1,4 @@
-<form [formGroup]="exerciseForm">
+<form [formGroup]="exerciseForm" *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else noAccess">
   <div class="card card-custom mb-4">
     <!-- Header -->
     <div class="row pb-0 pb-md-2">
@@ -155,3 +155,6 @@
     </div>
   </div>
 </form>
+<ng-template #noAccess>
+  You have no access to this page.
+</ng-template>

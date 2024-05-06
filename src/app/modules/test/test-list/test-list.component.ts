@@ -12,6 +12,7 @@ import {
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { NgbModal, NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { ShareModalComponent } from "../components/share-modal/share-modal.component";
+import { AuthUtil } from "src/app/_utils/auth_util";
 
 @Component({
   selector: "app-test-list",
@@ -31,7 +32,8 @@ export class TestListComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    public testService: TestService
+    public testService: TestService,
+    public AuthUtil: AuthUtil
   ) {}
 
   ngOnInit() {

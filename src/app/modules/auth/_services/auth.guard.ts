@@ -34,6 +34,7 @@ export class AuthGuard extends AuthUtil implements CanActivate {
             "You are not authorized to do that... Contact the organization.",
             "Unauthorized"
           );
+          this.router.navigate(["/"]);
           return false;
         }
       }

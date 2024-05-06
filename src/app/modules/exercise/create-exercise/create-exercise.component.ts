@@ -7,6 +7,7 @@ import { UserService } from "../../organization/_services/user/user.service";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
 import { CreateExerciseDto } from "../_dto/create-exercise-dto";
+import { AuthUtil } from "src/app/_utils/auth_util";
 
 @Component({
   selector: "app-create-exercise",
@@ -23,7 +24,8 @@ export class CreateExerciseComponent implements OnInit {
     private userService: UserService,
     private itemStorageService: ItemStorageService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+    public AuthUtil: AuthUtil
   ) {}
 
   ngOnInit() {

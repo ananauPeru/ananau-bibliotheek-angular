@@ -14,42 +14,47 @@ const routes: Routes = [
     component: TestComponent,
     canActivate: [AuthGuard],
     data: {
-      permittedRoles: [Roles.Admin, Roles.SuperAdmin],
+      permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
     },
     children: [
       {
         path: "list",
         component: TestListComponent,
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          canActivate: [AuthGuard],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
         },
       },
       {
         path: "create",
         component: CreateTestComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
         },
       },
       {
         path: "edit/:id",
         component: CreateTestComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
         },
       },
       {
         path: "examination/:id",
         component: FillInTestComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher]
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
         }
       },
       {
         path: "overview/:id",
         component: OverviewTestComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
         },
       },
       {

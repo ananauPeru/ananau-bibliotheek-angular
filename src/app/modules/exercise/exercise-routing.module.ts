@@ -15,49 +15,55 @@ const routes: Routes = [
     component: ExerciseComponent,
     canActivate: [AuthGuard],
     data: {
-      permittedRoles: [Roles.Admin, Roles.SuperAdmin],
+      permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
     },
     children: [
       {
         path: "list",
         component: ExerciseListComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
         },
       },
       {
         path: "create",
         component: CreateExerciseComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
         },
       },
       {
         path: "edit/:id",
         component: CreateExerciseComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
         },
       },
       {
         path: "overview/:id",
         component: OverviewExerciseComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
         },
       },
       {
         path: "submission/list",
         component: SubmissionListComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
         },
       },
       {
         path: "submission/overview/:id",
         component: OverviewSubmissionComponent,
+        canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.Admin, Roles.SuperAdmin, Roles.Teacher],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
         },
       },
       {

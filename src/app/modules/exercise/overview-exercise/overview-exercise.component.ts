@@ -10,6 +10,7 @@ import { ToastrService } from "ngx-toastr";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
 import { SubmissionModel } from "../_model/submission.model";
 import { CreateSubmissionDto } from "../_dto/create-submission-dto";
+import { AuthUtil } from "src/app/_utils/auth_util";
 
 @Component({
   selector: "app-overview-exercise",
@@ -17,7 +18,6 @@ import { CreateSubmissionDto } from "../_dto/create-submission-dto";
   styleUrls: ["./overview-exercise.component.scss"],
 })
 export class OverviewExerciseComponent implements OnInit {
-  isTeacherView = false; // Flag to determine the view (student or teacher)
   exercise$: Observable<ExerciseModel>;
   submissions$: Observable<SubmissionModel[]>;
   submissionForm: FormGroup;
@@ -31,7 +31,8 @@ export class OverviewExerciseComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toast: ToastrService,
     private itemStorageService: ItemStorageService,
-    private router: Router
+    private router: Router,
+    public AuthUtil: AuthUtil
   ) {}
 
   ngOnInit() {
