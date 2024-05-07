@@ -48,42 +48,93 @@
           <table class="table table-fit">
             <thead>
               <tr>
-                <th>User</th>
                 <th>Exercise</th>
+                <th
+                  *ngIf="
+                    AuthUtil.permitted([
+                      AuthUtil.roles.SuperAdmin,
+                      AuthUtil.roles.SpanishTeacher
+                    ])
+                  "
+                >
+                  Submitted By
+                </th>
                 <th>Submission Date</th>
                 <th>Grade</th>
                 <th>Grade Date</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let submission of submissions$ | async">
-                <td>{{ submission.userName }}</td>
-                <td>{{ submission.exerciseName }}</td>
-                <td>{{ submission.submissionDate | date }}</td>
-                <td>
-                  {{
-                    submission.grade
-                      ? submission.grade + "/" + submission.maxGrade
-                      : "Not graded"
-                  }}
-                </td>
-                <td>
-                  {{ submission.grade ? (submission.gradeDate | date) : "-"}}
-                </td>
-                <td class="text-right">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    placement="top"
-                    ngbTooltip="Overview"
-                    routerLink="/exercise/submission/overview/{{ submission.id }}"
-                  >
-                    <i class="fas fa-sign-in-alt pr-0"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+            <ng-container
+              *ngIf="
+                AuthUtil.permitted([
+                  AuthUtil.roles.SuperAdmin,
+                  AuthUtil.roles.SpanishTeacher
+                ]);
+                else student_t_body
+              "
+            >
+              <tbody>
+                <tr *ngFor="let submission of submissions$ | async">
+                  <td>{{ submission.exercise.title }}</td>
+                  <td>
+                    {{ submission.submittedBy.firstName }}
+                    {{ submission.submittedBy.lastName }}
+                  </td>
+                  <td>{{ submission.submittedAt | date }}</td>
+                  <td>
+                    {{ getGradeText(submission) }}
+                  </td>
+                  <td>
+                    {{ submission.grade ? (submission.gradeDate | date) : "-" }}
+                  </td>
+                  <td class="text-right">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      placement="top"
+                      ngbTooltip="Overview"
+                      routerLink="/exercise/submission/overview/{{
+                        submission.id
+                      }}"
+                    >
+                      <i class="fas fa-sign-in-alt pr-0"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-container>
+            <ng-template #student_t_body>
+              <tbody>
+                <tr *ngFor="let submission of submissions$ | async">
+                  <td>{{ submission.userName }}</td>
+                  <td>{{ submission.exerciseName }}</td>
+                  <td>{{ submission.submissionDate | date }}</td>
+                  <td>
+                    {{
+                      submission.grade
+                        ? submission.grade + "/" + submission.maxGrade
+                        : "Not graded"
+                    }}
+                  </td>
+                  <td>
+                    {{ submission.grade ? (submission.gradeDate | date) : "-" }}
+                  </td>
+                  <td class="text-right">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      placement="top"
+                      ngbTooltip="Overview"
+                      routerLink="/exercise/submission/overview/{{
+                        submission.id
+                      }}"
+                    >
+                      <i class="fas fa-sign-in-alt pr-0"></i>
+                    </button>
+                  </td>
+                </tr></tbody
+            ></ng-template>
           </table>
         </div>
       </div>

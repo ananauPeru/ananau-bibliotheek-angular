@@ -50,6 +50,7 @@
             <thead>
               <tr>
                 <th>Title</th>
+                <th *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">Assigned To</th>
                 <th>Description</th>
                 <th>Deadline</th>
                 <th>Status</th>
@@ -58,27 +59,54 @@
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let exercise of exercises$ | async">
-                <td>{{ exercise.title }}</td>
-                <td>{{ exercise.description }}</td>
-                <th>{{exercise.deadline}}</th>
-                <th>{{getStatusFromGrade(exercise)}}</th>
-                <th>{{getGradeText(exercise)}}</th>
-                <th>{{getGradedByText(exercise)}}</th>
-                <td class="text-right">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    placement="top"
-                    ngbTooltip="Overview"
-                    routerLink="/exercise/overview/{{ exercise.id }}"
-                  >
-                    <i class="fas fa-sign-in-alt pr-0"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+            <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher]); else student_t_body">
+              <tbody>
+                <tr *ngFor="let exercise of exercises$ | async">
+                  <td>{{ exercise.title }}</td>
+                  <td>{{exercise.assignedTo.firstName}} {{exercise.assignedTo.lastName}}</td>
+                  <td>{{ exercise.description }}</td>
+                  <th>{{exercise.deadline}}</th>
+                  <th>{{getStatus(exercise)}}</th>
+                  <th>{{getGradeText(exercise)}}</th>
+                  <th>{{getGradedByText(exercise)}}</th>
+                  <td class="text-right">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      placement="top"
+                      ngbTooltip="Overview"
+                      routerLink="/exercise/overview/{{ exercise.id }}"
+                    >
+                      <i class="fas fa-sign-in-alt pr-0"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-container>
+            <ng-template #student_t_body>
+              <tbody>
+                <tr *ngFor="let exercise of exercises$ | async">
+                  <td>{{ exercise.title }}</td>
+                  <td>{{ exercise.description }}</td>
+                  <th>{{exercise.deadline}}</th>
+                  <th>{{getStatus(exercise)}}</th>
+                  <th>{{getGradeText(exercise)}}</th>
+                  <th>{{getGradedByText(exercise)}}</th>
+                  <td class="text-right">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      placement="top"
+                      ngbTooltip="Overview"
+                      routerLink="/exercise/overview/{{ exercise.id }}"
+                    >
+                      <i class="fas fa-sign-in-alt pr-0"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+            
           </table>
         </div>
       </div>

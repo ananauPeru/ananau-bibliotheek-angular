@@ -43,3 +43,14 @@ export class StudentShortExerciseModel extends BaseExerciseModel {
   maxGrade?: number;
   gradedBy?: UserModel;
 }
+
+/**
+ * GET exercise/assigned
+ */
+export class AssignedExerciseModel  extends BaseExerciseModel {
+  deadline?: Date;
+  grade?: number;
+  maxGrade?: number;
+  gradedBy?: UserModel;
+  assignedTo?: UserModel;
+}

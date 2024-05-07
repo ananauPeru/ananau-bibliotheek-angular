@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ExerciseService } from '../_service/exercise/exercise.service';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, startWith, switchMap } from 'rxjs/operators';
-import { ShortExerciseModel } from '../_model/short-exercise.model';
 import { AuthUtil } from 'src/app/_utils/auth_util';
-import { ShortSharedExerciseModel } from '../_model/short-shared-exercise.model';
+import { AssignedExerciseModel, StudentShortExerciseModel } from '../_model/exercise.model';
 
 @Component({
   selector: 'app-shared-exercises-list',
@@ -12,7 +11,7 @@ import { ShortSharedExerciseModel } from '../_model/short-shared-exercise.model'
   styleUrls: ['./shared-exercises-list.component.scss']
 })
 export class SharedExercisesListComponent implements OnInit {
-  public exercises$: Observable<ShortSharedExerciseModel[]>;
+  public exercises$: Observable<StudentShortExerciseModel[] | AssignedExerciseModel[]>;
   public searchTerm$ = new Subject<string>();
 
   public ExerciseStatus = ExerciseStatus;
@@ -23,7 +22,7 @@ export class SharedExercisesListComponent implements OnInit {
     this.exercises$ = this.searchTerm$.pipe(
       startWith(''),
       debounceTime(1000),
-      switchMap((searchTerm) => this.exerciseService.getExercisesSharedWithUser$(searchTerm, 1, 1000))
+      switchMap((searchTerm) => this.exerciseService.getAssignedExercises$(searchTerm, 1, 1000))
     );
   }
 
@@ -32,36 +31,30 @@ export class SharedExercisesListComponent implements OnInit {
   }
 
 
-  getStatusFromGrade(exercise: ShortSharedExerciseModel): ExerciseStatus {
-    if(exercise.submission != null && exercise.submission.grade != null) {
-      return ExerciseStatus.Graded;
-    } else if(exercise.submission != null) {
-      return ExerciseStatus.Submitted;
-    }
-    return ExerciseStatus.Shared;
-  }
-  getGradeText(exercise: ShortSharedExerciseModel): string {
-    if(exercise.submission != null && exercise.submission.grade != null) {
-      return `${exercise.submission.grade} / ${exercise.maxGrade}`;
-    } else if(exercise.submission != null) {
-      return "Not graded yet"
-    }
-    return "Not submitted yet"
+  getStatus(exercise: StudentShortExerciseModel | AssignedExerciseModel): ExerciseStatus {
+    return ExerciseStatus.Assigned
   }
 
-  getGradedByText(exercise: ShortSharedExerciseModel): string {
-    if(exercise.submission != null && exercise.submission.grade != null) {
-      return exercise.submission.gradedBy.firstName + " " + exercise.submission.gradedBy.lastName;
-    } else if(exercise.submission != null) {
+  getGradeText(exercise: StudentShortExerciseModel | AssignedExerciseModel): string {
+    if(exercise.grade != null) {
+      return exercise.grade + "/" + exercise.maxGrade;
+    } else {
       return "Not graded yet"
     }
-    return "Not submitted yet"
+  }
+
+  getGradedByText(exercise: StudentShortExerciseModel | AssignedExerciseModel): string {
+    if(exercise.grade != null) {
+      return exercise.gradedBy.firstName + " " + exercise.gradedBy.lastName;
+    } else {
+      return "Not graded yet"
+    }
   }
 
 }
 
 export enum ExerciseStatus {
-  Shared = 'Shared',
+  Assigned = 'Assigned',
   Submitted = 'Submitted',
   Graded = 'Graded',
 }

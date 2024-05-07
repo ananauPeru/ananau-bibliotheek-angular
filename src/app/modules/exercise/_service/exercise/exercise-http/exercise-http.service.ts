@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import {
+  AssignedExerciseModel,
   ExerciseModel,
   StudentShortExerciseModel,
   TeacherShortExerciseModel,
@@ -50,6 +51,27 @@ export class ExerciseHttpService {
           return throwError(error);
         }),
         map((response: any): StudentShortExerciseModel[] => {
+          if (response.success) {
+            return response.exercises;
+          } else {
+            throwError(response.error);
+            return [];
+          }
+        })
+      );
+  }
+
+  getAssignedExercises$(searchTerm: string, page: number, pageSize: number): Observable<AssignedExerciseModel[]> {
+    return this.http
+      .get<AssignedExerciseModel[]>(`${API_URL}/assigned?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`)
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): AssignedExerciseModel[] => {
           if (response.success) {
             return response.exercises;
           } else {
