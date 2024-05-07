@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { SubmissionHttpService } from "./submission-http/submission-http.service";
 import { Observable } from "rxjs";
-import { SubmissionModel } from "../../_model/submission.model";
+import { StudentShortSubmissionModel, StudentSubmissionModel, SubmissionResultModel, TeacherShortSubmissionModel, TeacherSubmissionModel } from "../../_model/submission.model";
 import { CreateSubmissionDto } from "../../_dto/create-submission-dto";
-import { GradeSubmissionDto } from "../../_dto/grade-submission-dto";
 import { AuthUtil, Roles } from "src/app/_utils/auth_util";
+import { GradeSubmissionDto } from "../../_dto/grade-submission-dto";
 
 @Injectable({
   providedIn: "root",
@@ -12,25 +12,27 @@ import { AuthUtil, Roles } from "src/app/_utils/auth_util";
 export class SubmissionService {
   constructor(private submissionHttpService: SubmissionHttpService, private AuthUtil: AuthUtil) {}
 
-  getSubmissions$(searchTerm: string): Observable<SubmissionModel[]> {
-    const isTeacher = this.AuthUtil.permitted([Roles.SpanishTeacher, Roles.SuperAdmin]);
-    return this.submissionHttpService.getSubmissions$(searchTerm, isTeacher ? Roles.SpanishTeacher : Roles.SpanishLearner);
+  
+  getSubmissions$(searchTerm: string, page: number, pageSize: number): Observable<StudentShortSubmissionModel[] | TeacherShortSubmissionModel[]> {
+    if (this.AuthUtil.permitted(Roles.SpanishTeacher)) {
+      return this.submissionHttpService.getTeacherSubmissions$(searchTerm, page, pageSize);
+    }
+    return this.submissionHttpService.getStudentSubmissions$(searchTerm, page, pageSize);
   }
 
-  getSubmissionsByExerciseId$(exerciseId: number): Observable<SubmissionModel[]> {
-    const isTeacher = this.AuthUtil.permitted([Roles.SpanishTeacher, Roles.SuperAdmin]);
-    return this.submissionHttpService.getSubmissionsByExerciseId$(exerciseId, isTeacher ? Roles.SpanishTeacher : Roles.SpanishLearner);
+  getSubmissionById$(id: number): Observable<StudentSubmissionModel | TeacherSubmissionModel> { 
+    if (this.AuthUtil.permitted(Roles.SpanishTeacher)) {
+      return this.submissionHttpService.getTeacherSubmissionById$(id);
+    }
+    return this.submissionHttpService.getStudentSubmissionById$(id);
   }
 
-  getSubmissionById$(submissionId: number): Observable<SubmissionModel> {
-    return this.submissionHttpService.getSubmissionById$(submissionId);
+  createSubmission$(id: number, createSubmissionDto: CreateSubmissionDto): Observable<SubmissionResultModel> {
+    return this.submissionHttpService.createSubmission$(id, createSubmissionDto);
   }
 
-  gradeSubmission$(submissionId: number, gradeSubmissionDto: GradeSubmissionDto): Observable<SubmissionModel> {
-    return this.submissionHttpService.gradeSubmission$(submissionId, gradeSubmissionDto);
+  gradeSubmission$(id: number, gradeSubmissionDto: GradeSubmissionDto): Observable<void> {
+    return this.submissionHttpService.gradeSubmission$(id, gradeSubmissionDto);
   }
 
-  createSubmission$(createSubmissionDto: CreateSubmissionDto): Observable<SubmissionModel> {
-    return this.submissionHttpService.createSubmission$(createSubmissionDto);
-  }
 }

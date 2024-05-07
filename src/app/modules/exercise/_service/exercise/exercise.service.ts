@@ -5,6 +5,7 @@ import { ExerciseModel } from '../../_model/exercise.model';
 import { ShortExerciseModel } from '../../_model/short-exercise.model';
 import { CreateExerciseDto } from '../../_dto/create-exercise-dto';
 import { AuthUtil, Roles } from 'src/app/_utils/auth_util';
+import { ShortSharedExerciseModel } from '../../_model/short-shared-exercise.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ constructor(private exerciseHttpService: ExerciseHttpService, private AuthUtil: 
 
   createExercise$(exerciseDto: CreateExerciseDto): Observable<ExerciseModel> {
     return this.exerciseHttpService.createExercise$(exerciseDto);
+  }
+
+  getExercisesSharedWithUser$(searchTerm: string, page: number, pageSize: number): Observable<ShortSharedExerciseModel[]> {
+    return this.exerciseHttpService.getExercisesSharedWithUser$(searchTerm, page, pageSize);
   }
 }

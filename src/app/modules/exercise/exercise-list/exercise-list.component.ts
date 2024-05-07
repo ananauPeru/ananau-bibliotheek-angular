@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExerciseService } from '../_service/exercise/exercise.service';
 import { Observable, Subject } from 'rxjs';
-import { ExerciseModel } from '../_model/exercise.model';
 import { debounceTime, startWith, switchMap } from 'rxjs/operators';
 import { ShortExerciseModel } from '../_model/short-exercise.model';
 import { AuthUtil } from 'src/app/_utils/auth_util';

@@ -7,6 +7,7 @@ import { ShortExerciseModel } from "../../../_model/short-exercise.model";
 import { catchError, map } from "rxjs/operators";
 import { CreateExerciseDto } from "../../../_dto/create-exercise-dto";
 import { Roles } from "src/app/_utils/auth_util";
+import { ShortSharedExerciseModel } from "../../../_model/short-shared-exercise.model";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/exercise`;
 
@@ -95,5 +96,9 @@ export class ExerciseHttpService {
           }
         })
       );
+  }
+
+  getExercisesSharedWithUser$(searchTerm, page, pageSize): Observable<ShortSharedExerciseModel[]> {
+    return of([]);
   }
 }

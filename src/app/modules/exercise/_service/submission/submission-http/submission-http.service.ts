@@ -1,142 +1,180 @@
-import { Injectable, OnInit } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { SubmissionModel } from "../../../_model/submission.model";
+import { Injectable } from "@angular/core";
+import {
+  StudentShortSubmissionModel,
+  StudentSubmissionModel,
+  SubmissionResultModel,
+  TeacherShortSubmissionModel,
+} from "../../../_model/submission.model";
+import { Observable, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { catchError, map } from "rxjs/operators";
 import { CreateSubmissionDto } from "../../../_dto/create-submission-dto";
 import { GradeSubmissionDto } from "../../../_dto/grade-submission-dto";
-import { Roles } from "src/app/_utils/auth_util";
+
+const API_URL = `${environment.apiUrl}/spanish_platform/submission`;
 
 @Injectable({
   providedIn: "root",
 })
 export class SubmissionHttpService {
-  constructor() {
-    
+  constructor(private http: HttpClient) {}
+
+  getTeacherSubmissions$(
+    searchTerm: string,
+    page: number,
+    pageSize: number
+  ): Observable<TeacherShortSubmissionModel[]> {
+    return this.http
+      .get<TeacherShortSubmissionModel[]>(
+        `${API_URL}/teacher?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
+        {
+          responseType: "json",
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): TeacherShortSubmissionModel[] => {
+          if (response.success) {
+            return response.submissions;
+          } else {
+            throwError(response.error);
+            return [];
+          }
+        })
+      );
   }
 
-  MOCK_DATA: SubmissionModel[] = [
-    {
-      id: 1,
-      exercise: {
-        id: 1,
-        title: "Mock Exercise 1",
-        maxGrade: 10,
-      },
-      submittedAt: new Date(),
-      submittedBy: {
-        id: 1,
-        firstName: "Mock",
-        lastName: "User",
-      },
-      fileUrls: ["https://www.mock.com/file1", "https://www.mock.com/file2"],
-      comment: "Mock Comment",
-      gradedBy: {
-        id: 1,
-        firstName: "Mock",
-        lastName: "Teacher",
-      },
-      grade: 7,
-      gradedAt: new Date(),
-      feedback: "Mock Feedback",
-    },
-    {
-      id: 2,
-      exercise: {
-        id: 2,
-        title: "Mock Exercise 2",
-        maxGrade: 10,
-      },
-      submittedAt: new Date(),
-      submittedBy: {
-        id: 2,
-        firstName: "Mock",
-        lastName: "User",
-      },
-      fileUrls: ["https://www.mock.com/file1", "https://www.mock.com/file2"],
-      comment: "Mock Comment",
-      gradedBy: {
-        id: 1,
-        firstName: "Mock",
-        lastName: "Teacher",
-      },
-      grade: 8,
-      gradedAt: new Date(),
-      feedback: "Mock Feedback",
-    },
-    {
-      id: 3,
-      exercise: {
-        id: 3,
-        title: "Mock Exercise 3",
-        maxGrade: 10,
-      },
-      submittedAt: new Date(),
-      submittedBy: {
-        id: 3,
-        firstName: "Mock",
-        lastName: "User",
-      },
-      fileUrls: ["https://www.mock.com/file1", "https://www.mock.com/file2"],
-      comment: "Mock Comment",
-      gradedBy: {
-        id: 1,
-        firstName: "Mock",
-        lastName: "Teacher",
-      },
-      grade: 9,
-      gradedAt: new Date(),
-      feedback: "Mock Feedback",
-    }
-  ];
-
-  getSubmissions$(searchTerm: string, role: Roles): Observable<SubmissionModel[]> {
-    if(role === Roles.SpanishTeacher) {
-      return of(this.MOCK_DATA);
-    } else {
-      return of(this.MOCK_DATA.filter((submission: SubmissionModel) => submission.submittedBy.id === 1));
-    }
+  getStudentSubmissions$(
+    searchTerm: string,
+    page: number,
+    pageSize: number
+  ): Observable<StudentShortSubmissionModel[]> {
+    return this.http
+      .get<StudentShortSubmissionModel[]>(
+        `${API_URL}/student?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
+        {
+          responseType: "json",
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): any => {
+          if (response.success) {
+            return response.submissions;
+          } else {
+            throwError(response.error);
+            return [];
+          }
+        })
+      );
   }
 
-  getSubmissionsByExerciseId$(exerciseId: number, role: Roles): Observable<SubmissionModel[]> {
-    if(role === Roles.SpanishTeacher) {
-      return of(this.MOCK_DATA.filter((submission) => submission.exercise.id === exerciseId));
-    } else {
-      return of(this.MOCK_DATA.filter((submission) => submission.exercise.id === exerciseId && submission.submittedBy.id === 1));
-    }
+  getStudentSubmissionById$(id: number): Observable<StudentSubmissionModel> {
+    return this.http
+      .get<StudentSubmissionModel>(`${API_URL}/${id}/student`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): StudentSubmissionModel => {
+          if (response.success) {
+            return response.submission;
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
   }
 
-  getSubmissionById$(submissionId: number): Observable<SubmissionModel> {
-    return of(this.MOCK_DATA[submissionId - 1]);
+  getTeacherSubmissionById$(id: number): Observable<StudentSubmissionModel> {
+    return this.http
+      .get<StudentSubmissionModel>(`${API_URL}/${id}/teacher`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): StudentSubmissionModel => {
+          if (response.success) {
+            return response.submission;
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
   }
 
-  gradeSubmission$(submissionId: number, gradeSubmissionDto: GradeSubmissionDto): Observable<SubmissionModel> {
-    const submission: SubmissionModel = this.MOCK_DATA[submissionId - 1];
-    submission.grade = gradeSubmissionDto.grade;
-    submission.feedback = gradeSubmissionDto.feedback;
-    return of(submission);
+  createSubmission$(
+    id: number,
+    createSubmissionDto: CreateSubmissionDto
+  ): Observable<SubmissionResultModel> {
+    return this.http
+      .post<any>(`${API_URL}/${id}/submit`, createSubmissionDto, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): any => {
+          if (response.success) {
+            return response.result;
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
   }
 
-  getSubmissionsByUserIdAndExerciseId$(userId: number, exerciseId: number): Observable<SubmissionModel[]> {
-    // return of(this.MOCK_DATA.filter((submission) => submission.userId === userId && submission.exerciseId === exerciseId));
-    return of(null);
-  }
-
-  createSubmission$(submissionDto: CreateSubmissionDto): Observable<SubmissionModel> {
-    // const submission: SubmissionModel = {
-    //   id: this.MOCK_DATA.length + 1,
-    //   userId: submissionDto.userId,
-    //   userName: "Mock User",
-    //   exerciseId: submissionDto.exerciseId,
-    //   exerciseName: submissionDto.exerciseName,
-    //   fileUrls: submissionDto.fileUrls,
-    //   comment: submissionDto.comment,
-    //   submissionDate: submissionDto.submissionDate,
-    //   gradeDate: submissionDto.gradeDate,
-    //   grade: submissionDto.grade,
-    //   maxGrade: submissionDto.maxGrade,
-    //   feedback: submissionDto.feedback,
-    // };
-    // this.MOCK_DATA.push(submission);
-    // return of(submission);
-    return of(null);
+  gradeSubmission$(
+    id: number,
+    gradeSubmissionDto: GradeSubmissionDto
+  ): Observable<void> {
+    return this.http
+      .post<any>(`${API_URL}/${id}/grade`, gradeSubmissionDto, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): void => {
+          if (response.success) {
+            return;
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
   }
 }

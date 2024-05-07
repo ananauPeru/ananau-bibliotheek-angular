@@ -1223,6 +1223,28 @@
               >
                 <a
                   class="menu-link menu-toggle"
+                  routerLink="/exercise/shared"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/svg/icons/Files/Selected-file.svg'
+                    "
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">Shared Exercises</span>
+                </a>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
                   routerLink="/exercise/list"
                   routerLinkActive="active"
                 >
@@ -1273,7 +1295,7 @@
           >
             <a
               class="menu-link menu-toggle"
-              routerLink="/exercise/list"
+              routerLink="/exercise/shared"
               routerLinkActive="active"
             >
               <span
@@ -1281,9 +1303,7 @@
                 cacheSVG="true"
                 class="svg-icon menu-icon"
               ></span>
-              <span class="menu-text">{{
-                "MENU.LEARNING_PLATFORM.EXERCISE_LIST" | translate
-              }}</span>
+              <span class="menu-text">My Exercises</span>
             </a>
           </li>
         </ng-template>

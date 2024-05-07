@@ -8,6 +8,7 @@ import { CreateExerciseComponent } from "./create-exercise/create-exercise.compo
 import { OverviewExerciseComponent } from "./overview-exercise/overview-exercise.component";
 import { SubmissionListComponent } from "./submission-list/submission-list.component";
 import { OverviewSubmissionComponent } from "./overview-submission/overview-submission.component";
+import { SharedExercisesListComponent } from "./shared-exercises-list/shared-exercises-list.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,14 @@ const routes: Routes = [
       {
         path: "list",
         component: ExerciseListComponent,
+        canActivate: [AuthGuard],
+        data: {
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
+        },
+      },
+      {
+        path: "shared",
+        component: SharedExercisesListComponent,
         canActivate: [AuthGuard],
         data: {
           permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],

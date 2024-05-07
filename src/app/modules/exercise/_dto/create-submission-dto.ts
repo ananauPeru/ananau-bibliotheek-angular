@@ -1,3 +1,6 @@
+/**
+ * POST submission/{id}/submit
+ */
 export class CreateSubmissionDto {
     constructor(
         public fileUrls?: string[],
