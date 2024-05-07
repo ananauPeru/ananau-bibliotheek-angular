@@ -24,7 +24,7 @@ const routes: Routes = [
         component: ExerciseListComponent,
         canActivate: [AuthGuard],
         data: {
-          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
         },
       },
       {

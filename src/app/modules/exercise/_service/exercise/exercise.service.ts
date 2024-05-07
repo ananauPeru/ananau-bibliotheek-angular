@@ -3,6 +3,7 @@ import { ExerciseHttpService } from './exercise-http/exercise-http.service';
 import { Observable } from 'rxjs';
 import { ExerciseModel, StudentShortExerciseModel, TeacherShortExerciseModel } from '../../_model/exercise.model';
 import { AuthUtil, Roles } from 'src/app/_utils/auth_util';
+import { CreateExerciseDto } from '../../_dto/create-exercise-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class ExerciseService {
 
 constructor(private exerciseHttpService: ExerciseHttpService, private AuthUtil: AuthUtil) { }
 
-  getExercises$(): Observable<TeacherShortExerciseModel[] | StudentShortExerciseModel[]> {
+  getExercises$(searchTerm: string, page: number, pageSize: number): Observable<TeacherShortExerciseModel[] | StudentShortExerciseModel[]> {
     if (this.AuthUtil.permitted(Roles.SpanishTeacher)) {
-      return this.exerciseHttpService.getTeacherExercises$();
+      return this.exerciseHttpService.getTeacherExercises$(searchTerm, page, pageSize);
     } else {
-      return this.exerciseHttpService.getStudentExercises$();
+      return this.exerciseHttpService.getStudentExercises$(searchTerm, page, pageSize);
     }
   }
 
@@ -27,8 +28,8 @@ constructor(private exerciseHttpService: ExerciseHttpService, private AuthUtil: 
     }
   }
 
-  createExercise$(exercise: ExerciseModel): Observable<ExerciseModel> {
-    return this.exerciseHttpService.createExercise$(exercise);
+  createExercise$(createExerciseDto: CreateExerciseDto): Observable<ExerciseModel> {
+    return this.exerciseHttpService.createExercise$(createExerciseDto);
   }
 
 }

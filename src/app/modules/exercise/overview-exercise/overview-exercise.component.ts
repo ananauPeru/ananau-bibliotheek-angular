@@ -8,9 +8,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ToastrService } from "ngx-toastr";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
-import { SubmissionModel } from "../_model/submission.model";
 import { CreateSubmissionDto } from "../_dto/create-submission-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
+import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
 
 @Component({
   selector: "app-overview-exercise",
@@ -19,7 +19,6 @@ import { AuthUtil } from "src/app/_utils/auth_util";
 })
 export class OverviewExerciseComponent implements OnInit {
   exercise$: Observable<ExerciseModel>;
-  submissions$: Observable<SubmissionModel[]>;
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
   isLoading = false;
@@ -37,18 +36,12 @@ export class OverviewExerciseComponent implements OnInit {
 
   ngOnInit() {
     this.getExerciseDetails();
-    this.getSubmissions();
     this.initializeSubmissionForm();
   }
 
   getExerciseDetails() {
     const exerciseId: number = this.route.snapshot.params["id"];
     this.exercise$ = this.exerciseService.getExerciseById$(exerciseId);
-  }
-
-  getSubmissions() {
-    const exerciseId: number = this.route.snapshot.params["id"];
-    this.submissions$ = this.submissionService.getSubmissionsByExerciseId$(exerciseId);
   }
 
   initializeSubmissionForm() {
@@ -90,17 +83,16 @@ export class OverviewExerciseComponent implements OnInit {
         comment: this.submissionForm.get("comment").value
       };
 
-      this.submissionService.createSubmission$(submission).subscribe(
-        (submissionModel: SubmissionModel) => {
+      this.submissionService.createSubmission$(exercise.id, submission).subscribe(
+        (submissionResultModel: SubmissionResultModel) => {
           console.log("Submission created successfully!");
           this.toast.success("Submission created successfully!");
-          this.getSubmissions();
           this.submissionForm.reset();
           this.submissionFiles = [];
           this.submissionForm.get("files").setValue([]);
           this.isLoading = false; // Set isLoading back to false after successful submission
           this.router.navigate([
-            `/exercise/submission/overview/${submissionModel.id}`,
+            `/exercise/submission/overview/${submissionResultModel.id}`,
           ]);
         },
         (error) => {
@@ -126,6 +118,22 @@ export class OverviewExerciseComponent implements OnInit {
     if (index !== -1) {
       this.submissionFiles.splice(index, 1);
       this.submissionForm.get("files").setValue(this.submissionFiles);
+    }
+  }
+
+  getGradeText(exercise: ExerciseModel, submission: ExerciseSubmissionModel): string {
+    if (submission.grade === null) {
+      return "Not graded";
+    } else {
+      return `${submission.grade} / ${exercise.maxGrade}`;
+    }
+  }
+
+  getGradedDateText(submission: ExerciseSubmissionModel): string {
+    if (submission.gradedAt) {
+      return submission.gradedAt.toLocaleString();
+    } else {
+      return "Not graded yet";
     }
   }
 }

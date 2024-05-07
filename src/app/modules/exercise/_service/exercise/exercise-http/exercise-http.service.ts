@@ -18,9 +18,9 @@ const API_URL = `${environment.apiUrl}/spanish_platform/exercise`;
 export class ExerciseHttpService {
   constructor(private http: HttpClient) {}
 
-  getTeacherExercises$(): Observable<TeacherShortExerciseModel[]> {
+  getTeacherExercises$(searchTerm: string, page: number, pageSize: number): Observable<TeacherShortExerciseModel[]> {
     return this.http
-      .get<TeacherShortExerciseModel[]>(`${API_URL}/teacher`)
+      .get<TeacherShortExerciseModel[]>(`${API_URL}/teacher?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`)
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -39,9 +39,9 @@ export class ExerciseHttpService {
       );
   }
 
-  getStudentExercises$(): Observable<StudentShortExerciseModel[]> {
+  getStudentExercises$(searchTerm: string, page: number, pageSize: number): Observable<StudentShortExerciseModel[]> {
     return this.http
-      .get<StudentShortExerciseModel[]>(`${API_URL}/student`)
+      .get<StudentShortExerciseModel[]>(`${API_URL}/student?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`)
       .pipe(
         catchError((error) => {
           if (error.status == 401) {

@@ -33,7 +33,7 @@
           <p class="mb-4">
             <strong>Exercise:</strong> {{ submission.exerciseName }}
           </p>
-          <p class="mb-4"><strong>User:</strong> {{ submission.userName }}</p>
+          <p class="mb-4" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"><strong>Submitted By:</strong> {{ submission.submittedBy.firstName }} {{ submission.submittedBy.lastName }}</p>
           <p class="mb-4">
             <strong>Submission Date:</strong>
             {{ submission.submissionDate | date }}
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="isTeacher">
+      <div class="row" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">
         <div class="col-12">
           <h4>Edit Grade</h4>
           <ng-container *ngIf="!isEditingGrade; else editGradeTemplate">

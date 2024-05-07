@@ -4,8 +4,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { SubmissionService } from "../_service/submission/submission.service";
 import { Observable } from "rxjs";
 import { ToastrService } from "ngx-toastr";
-import { SubmissionModel } from "../_model/submission.model";
 import { GradeSubmissionDto } from "../_dto/grade-submission-dto";
+import { StudentSubmissionModel, TeacherSubmissionModel } from "../_model/submission.model";
+import { AuthUtil } from "src/app/_utils/auth_util";
 
 @Component({
   selector: "app-overview-submission",
@@ -15,28 +16,21 @@ import { GradeSubmissionDto } from "../_dto/grade-submission-dto";
 export class OverviewSubmissionComponent implements OnInit {
   //The grading part of this page, should only be visable to the teacher
 
-  submission$: Observable<SubmissionModel>;
+  submission$: Observable<TeacherSubmissionModel | StudentSubmissionModel>;
   gradeForm: FormGroup;
   isEditingGrade = false;
-  isTeacher = false;
 
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
     private formBuilder: FormBuilder,
-    private toast: ToastrService
+    private toast: ToastrService,
+    public AuthUtil: AuthUtil
   ) {}
 
   ngOnInit() {
     this.getSubmissionDetails();
     this.initializeGradeForm();
-    this.getUserDetails();
-  }
-
-  getUserDetails() {
-    // Implement the logic to check if the user is a teacher
-    console.log("Checking if user is a teacher...");
-    this.isTeacher = true;
   }
 
   getSubmissionDetails() {
@@ -50,7 +44,7 @@ export class OverviewSubmissionComponent implements OnInit {
       feedback: [""],
     });
 
-    this.submission$.subscribe((submission: SubmissionModel) => {
+    this.submission$.subscribe((submission: TeacherSubmissionModel | StudentSubmissionModel) => {
       this.gradeForm.patchValue({
         grade: submission.grade,
       });
@@ -58,8 +52,7 @@ export class OverviewSubmissionComponent implements OnInit {
   }
 
   downloadFile(fileUrl: string) {
-    // Implement the logic to download the file
-    console.log("Downloading file:", fileUrl);
+    window.open(fileUrl, "_blank");
   }
 
   submitGrade() {
@@ -80,12 +73,11 @@ export class OverviewSubmissionComponent implements OnInit {
     this.submissionService
       .gradeSubmission$(submissionId, gradeSubmissionDto)
       .subscribe(
-        (submission: SubmissionModel) => {
+        () => {
           console.log("Submission graded successfully!");
           this.toast.success("Submission graded successfully!");
           this.getSubmissionDetails();
           this.isEditingGrade = false;
-          console.log(submission);
         },
         (error) => {
           console.error("Error grading submission: ", error);

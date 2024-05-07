@@ -11,7 +11,7 @@
             <h3 class="card-title font-weight-bolder text-dark">
              Exercise List
             </h3>
-            <button class="btn btn-primary" routerLink="/exercise/create" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">
+            <button class="btn btn-primary" routerLink="/exercise/create">
               Create Exercise
             </button>
           </div>
@@ -55,6 +55,7 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Description</th>
+                <th>Type</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
@@ -63,6 +64,7 @@
                 <td>{{ exercise.title }}</td>
                 <td>{{ exercise.author.firstName }} {{exercise.author.lastName}}</td>
                 <td>{{ exercise.description }}</td>
+                <td>{{ exercise.type.name }}</td>
                 <td class="text-right">
                   <button
                     type="button"

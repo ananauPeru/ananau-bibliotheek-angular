@@ -56,28 +56,49 @@
         </div>
       </div>
 
-      <div
-        class="row mt-4"
-        *ngIf="submissions$ | async as submissions; else loadingSubmissions"
-      >
+      <div class="row mt-4" *ngIf="exercise.submissions as submissions">
         <div class="col-12">
           <h4>Submissions</h4>
           <ng-container *ngIf="submissions.length > 0; else noSubmissions">
             <div class="table-responsive">
               <table class="table">
+                >
                 <thead>
                   <tr>
-                    <th>File</th>
-                    <th>Comment</th>
-                    <th>Date</th>
+                    <th
+                      *ngIf="
+                        AuthUtil.permitted([
+                          AuthUtil.roles.SuperAdmin,
+                          AuthUtil.roles.SpanishTeacher
+                        ])
+                      "
+                    >
+                      Submitted By
+                    </th>
+                    <th>Submission Date</th>
+                    <th>Grade</th>
+                    <th>Graded By</th>
+                    <th>Grading Date</th>
                     <th>Details</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let submission of submissions">
-                    <td>{{ submission.fileUrls[0] }}</td>
-                    <td>{{ submission.comment }}</td>
+                    <td
+                      *ngIf="
+                        AuthUtil.permitted([
+                          AuthUtil.roles.SuperAdmin,
+                          AuthUtil.roles.SpanishTeacher
+                        ])
+                      "
+                    >
+                      {{ submission.submittedBy.firstName }}
+                      {{ submission.submittedBy.lastName }}
+                    </td>
+                    <td>{{ submission.submittedAt }}</td>
                     <td>{{ submission.submissionDate }}</td>
+                    <td>{{ getGradeText(exercise, submission) }}</td>
+                    <td>{{ getGradedDateText(submission) }}</td>
                     <td>
                       <button
                         class="btn btn-primary"
@@ -106,9 +127,11 @@
         </div>
       </ng-template>
 
-
       <!-- Learner -->
-      <div *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishLearner])" class="row">
+      <div
+        *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishLearner])"
+        class="row"
+      >
         <div class="col-12">
           <h4>Submit Exercise</h4>
           <form [formGroup]="submissionForm">
@@ -178,7 +201,14 @@
         </div>
       </div>
 
-      <div *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin])">
+      <div
+        *ngIf="
+          AuthUtil.permitted([
+            AuthUtil.roles.SpanishTeacher,
+            AuthUtil.roles.SuperAdmin
+          ])
+        "
+      >
         <!-- Teacher View -->
         <!-- Implement the teacher view here -->
       </div>

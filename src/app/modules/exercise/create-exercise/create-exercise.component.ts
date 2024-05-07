@@ -8,6 +8,7 @@ import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
 import { CreateExerciseDto } from "../_dto/create-exercise-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
+import { ExerciseModel } from "../_model/exercise.model";
 
 @Component({
   selector: "app-create-exercise",
@@ -62,7 +63,7 @@ export class CreateExerciseComponent implements OnInit {
       exerciseDto.fileUrls = fileUrls;
 
       this.exerciseService.createExercise$(exerciseDto).subscribe(
-        () => {
+        (exercise: ExerciseModel) => {
           console.log("Exercise created successfully!");
           this.toast.success("Exercise created successfully!");
           this.router.navigate(["/exercise/list"]);
