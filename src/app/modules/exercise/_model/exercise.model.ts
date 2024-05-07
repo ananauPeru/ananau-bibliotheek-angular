@@ -32,12 +32,12 @@ export class ExerciseModel extends BaseExerciseModel {
 /**
  * GET exercise/teacher
  */
-export class ShortExerciseModel extends BaseExerciseModel {}
+export class TeacherShortExerciseModel extends BaseExerciseModel {}
 
 /**
  * GET exercise/student
  */
-export class ShortSharedExerciseModel extends BaseExerciseModel {
+export class StudentShortExerciseModel extends BaseExerciseModel {
   deadline?: Date;
   grade?: number;
   maxGrade?: number;
