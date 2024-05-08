@@ -62,7 +62,6 @@
           <ng-container *ngIf="submissions.length > 0; else noSubmissions">
             <div class="table-responsive">
               <table class="table">
-                >
                 <thead>
                   <tr>
                     <th
@@ -96,13 +95,13 @@
                       {{ submission.submittedBy.lastName }}
                     </td>
                     <td>{{ submission.submittedAt }}</td>
-                    <td>{{ submission.submissionDate }}</td>
                     <td>{{ getGradeText(exercise, submission) }}</td>
-                    <td>{{ getGradedDateText(submission) }}</td>
+                    <td>{{ getGradedByText(submission) }}</td>
+                    <td>{{ getGradedDateText(submission)}}</td>
                     <td>
                       <button
                         class="btn btn-primary"
-                        routerLink="/submission/overview/{{ submission.id }}"
+                        routerLink="/exercise/submission/overview/{{ submission.id }}"
                       >
                         Details
                       </button>

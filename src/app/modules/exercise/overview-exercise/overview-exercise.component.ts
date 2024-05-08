@@ -121,6 +121,14 @@ export class OverviewExerciseComponent implements OnInit {
     }
   }
 
+  getGradedByText(submission: ExerciseSubmissionModel): string {
+    if (submission.grade === null) {
+      return "Not graded yet";
+    } else {
+      return `${submission.gradedBy.firstName} ${submission.gradedBy.lastName}`;
+    }
+  }
+
   getGradeText(exercise: ExerciseModel, submission: ExerciseSubmissionModel): string {
     if (submission.grade === null) {
       return "Not graded";

@@ -31,12 +31,12 @@
       <div class="row">
         <div class="col-12">
           <p class="mb-4">
-            <strong>Exercise:</strong> {{ submission.exerciseName }}
+            <strong>Exercise:</strong> {{ submission.exercise.title }}
           </p>
           <p class="mb-4" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"><strong>Submitted By:</strong> {{ submission.submittedBy.firstName }} {{ submission.submittedBy.lastName }}</p>
           <p class="mb-4">
             <strong>Submission Date:</strong>
-            {{ submission.submissionDate | date }}
+            {{ submission.submittedAt | date }}
           </p>
           <p class="mb-4"><strong>Comment:</strong> {{ submission.comment }}</p>
           <ng-container *ngIf="submission.grade; else notGradedDetail">
@@ -80,7 +80,7 @@
           <ng-container *ngIf="!isEditingGrade; else editGradeTemplate">
             <p *ngIf="submission.grade; else notGradedTemplate">
               <strong>Current Grade:</strong> {{ submission.grade }} /
-              {{ submission.maxGrade }}
+              {{ submission.exercise.maxGrade }}
             </p>
             <ng-template #notGradedTemplate>
               <p>Not graded yet</p>
@@ -105,7 +105,7 @@
                   />
                   <div class="input-group-append">
                     <span class="input-group-text"
-                      >/ {{ submission.maxGrade }}</span
+                      >/ {{ submission.exercise.maxGrade }}</span
                     >
                   </div>
                 </div>
