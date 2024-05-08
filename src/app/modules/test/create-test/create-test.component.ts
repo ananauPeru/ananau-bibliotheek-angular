@@ -422,16 +422,16 @@ export class CreateTestComponent implements OnInit {
 
 
   // Open Question
-  addOpenAnswer(questionGroup: FormGroup) {
+  addOpenQuestion(questionGroup: FormGroup) {
     const answersArray = questionGroup.get('answers') as FormArray;
     answersArray.push(
       this.formBuilder.group({
-        answerText: ['', Validators.required],
+        answerText: [''],
       })
     );
   }
 
-  removeOpenAnswer(questionGroup: FormGroup, answerIndex: number) {
+  removeOpenQuestion(questionGroup: FormGroup, answerIndex: number) {
     const answersArray = questionGroup.get('answers') as FormArray;
     answersArray.removeAt(answerIndex);
   }

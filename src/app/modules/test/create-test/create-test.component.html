@@ -440,7 +440,7 @@
                           <div formArrayName="answers">
                             <div
                               class="form-group row align-items-center"
-                              *ngFor="let openAnswerGroup of questionGroup.get('answers')?.controls; let k = index"
+                              *ngFor="let openQuestionGroup of questionGroup.get('answers')?.controls; let k = index"
                               [formGroupName]="k"
                             >
                               <h4 class="col-2">Answer</h4>
@@ -453,11 +453,10 @@
                                         class="form-control form-control-solid flex-grow-1"
                                         formControlName="answerText"
                                         placeholder="Enter answer"
-                                        required
                                       />
                                     </div>
                                     <div class="col-12">
-                                      <small class="text-danger" *ngIf="openAnswerGroup.get('answerText').invalid && (openAnswerGroup.get('answerText').dirty || openAnswerGroup.get('answerText').touched)">
+                                      <small class="text-danger" *ngIf="openQuestionGroup.get('answerText').invalid && (openQuestionGroup.get('answerText').dirty || openQuestionGroup.get('answerText').touched)">
                                         Answer is required.
                                       </small>
                                     </div>
@@ -467,7 +466,7 @@
                               <div class="ml-4">
                                 <button
                                   class="btn btn-icon btn-secondary btn-sm"
-                                  (click)="removeOpenAnswer(questionGroup, k)"
+                                  (click)="removeOpenQuestion(questionGroup, k)"
                                   ngbTooltip="Remove Answer"
                                 >
                                   <i class="fas fa-trash-alt"></i>
@@ -479,6 +478,7 @@
                       </div>
                     </div>
                   </ng-container>
+
 
 
 
