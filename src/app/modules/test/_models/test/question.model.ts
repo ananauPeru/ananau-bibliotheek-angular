@@ -8,7 +8,7 @@ export class QuestionModel {
     amountOfAnswers: number;
     answers: {
         id: number;
-        answerText: string;
+        answerText?: string;
         isCorrect: boolean;
     }[];
 }

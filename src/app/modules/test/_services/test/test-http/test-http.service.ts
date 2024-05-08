@@ -39,14 +39,14 @@ export class TestHttpService {
         map((response: any): ShortTestModel[] => {
           if (response.success) {
             const tests: ShortTestModel[] = response.tests;
-            
+
             // Calculate and set the latestVersionNumber for each ShortTestModel
             tests.forEach(test => {
               test.latestVersion = test.versions.reduce((prev, current) =>
                 prev.versionNumber > current.versionNumber ? prev : current
               );
             });
-            
+
             return tests;
           } else {
             throwError(response.error);
@@ -96,7 +96,7 @@ export class TestHttpService {
                 amountOfAnswers: question.answers.length,
                 answers: question.answers.map((answer) => ({
                   id: answer.id,
-                  answerText: answer.answerText,
+                  answerText: answer.answerText || '',
                   isCorrect: answer.isCorrect,
                 })),
               })),
@@ -149,7 +149,7 @@ export class TestHttpService {
                 amountOfAnswers: question.amountOfAnswers,
                 answers: question.answers.map((answer) => ({
                   id: answer.id,
-                  answerText: answer.answerText,
+                  answerText: answer.answerText || '',
                   isCorrect: answer.isCorrect,
                 })),
               })),
@@ -206,7 +206,7 @@ export class TestHttpService {
                   amountOfAnswers: question.amountOfAnswers,
                   answers: question.answers && question.answers.map((answer) => ({
                     id: answer.id,
-                    answerText: answer.answerText,
+                    answerText: answer.answerText || '',
                   })),
                 })),
               })),
@@ -259,7 +259,7 @@ export class TestHttpService {
                 amountOfAnswers: question.answers.length,
                 answers: question.answers.map((answer) => ({
                   id: answer.id,
-                  answerText: answer.answerText,
+                  answerText: answer.answerText || '',
                   isCorrect: answer.isCorrect,
                 })),
               })),
@@ -332,7 +332,7 @@ export class TestHttpService {
                 amountOfAnswers: question.answers.length,
                 answers: question.answers.map((answer) => ({
                   id: answer.id,
-                  answerText: answer.answerText,
+                  answerText: answer.answerText || '',
                   isCorrect: answer.isCorrect,
                 })),
               })),
