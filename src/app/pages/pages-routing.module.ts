@@ -1,72 +1,82 @@
-import { NgModule } from '@angular/core'
-import { Routes, RouterModule } from '@angular/router'
-import { AuthGuard } from '../modules/auth/_services/auth.guard'
-import { LayoutComponent } from './_layout/layout.component'
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { AuthGuard } from "../modules/auth/_services/auth.guard";
+import { LayoutComponent } from "./_layout/layout.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: LayoutComponent,
     children: [
       {
-        path: 'dashboard',
+        path: "dashboard",
         loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+          import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
       },
       {
-        path: 'library',
+        path: "library",
         loadChildren: () =>
-          import('../modules/library/library.module').then(
-            (m) => m.LibraryModule,
+          import("../modules/library/library.module").then(
+            (m) => m.LibraryModule
           ),
       },
       {
-        path: 'class',
+        path: "class",
         loadChildren: () =>
-          import('../modules/class/class.module').then(
-            (m) => m.ClassModule,
+          import("../modules/class/class.module").then((m) => m.ClassModule),
+      },
+      {
+        path: "organization",
+        loadChildren: () =>
+          import("../modules/organization/organization.module").then(
+            (m) => m.OrganizationModule
           ),
       },
       {
-        path: 'organization',
+        path: "registration-form",
         loadChildren: () =>
-          import('../modules/organization/organization.module').then(
-            (m) => m.OrganizationModule,
+          import("../modules/registration-form/registration-form.module").then(
+            (m) => m.RegistrationFormModule
           ),
       },
       {
-        path: 'registration-form',
+        path: "documentation",
         loadChildren: () =>
-          import('../modules/registration-form/registration-form.module').then(
-            (m) => m.RegistrationFormModule,
+          import("../modules/it-documentation/it-documentation.module").then(
+            (m) => m.ITDocumentationModule
           ),
       },
       {
-        path: 'documentation',
+        path: "user-profile",
         loadChildren: () =>
-          import('../modules/it-documentation/it-documentation.module').then(
-            (m) => m.ITDocumentationModule,
+          import("../modules/user-profile/user-profile.module").then(
+            (m) => m.UserProfileModule
           ),
       },
       {
-        path: 'user-profile',
+        path: "test",
         loadChildren: () =>
-          import('../modules/user-profile/user-profile.module').then(
-            (m) => m.UserProfileModule,
+          import("../modules/test/test.module").then((m) => m.TestModule),
+      },
+      {
+        path: "exercise",
+        loadChildren: () =>
+          import("../modules/exercise/exercise.module").then(
+            (m) => m.ExerciseModule
           ),
       },
       {
-        path: '',
-        redirectTo: '/dashboard',
-        pathMatch: 'full',
+        path: "",
+        redirectTo: "/dashboard",
+        pathMatch: "full",
       },
       {
-        path: '**',
-        redirectTo: 'error/404',
+        path: "**",
+        redirectTo: "error/404",
       },
     ],
   },
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -25,7 +25,7 @@ export class AuthGuard extends AuthUtil implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authService.currentUserValue;
     if (currentUser) {
-      let roles = route.data["permittedRoles"] as Array<string>;
+      let roles: string[] = route.data["permittedRoles"] as Array<string>;
       if (roles) {
         if (this.permitted(roles)) {
           return true;
@@ -34,6 +34,7 @@ export class AuthGuard extends AuthUtil implements CanActivate {
             "You are not authorized to do that... Contact the organization.",
             "Unauthorized"
           );
+          this.router.navigate(["/"]);
           return false;
         }
       }

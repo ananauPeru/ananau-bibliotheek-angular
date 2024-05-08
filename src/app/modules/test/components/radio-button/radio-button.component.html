@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-6 mb-4" *ngFor="let answer of answers; let j = index">
+    <label class="card card-selectable" [for]="'question-' + questionId + '-answer-' + j">
+      <div class="card-body">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            [id]="'question-' + questionId + '-answer-' + j"
+            [checked]="selectedAnswerId === answer.id"
+            (change)="selectAnswer(answer.id)"
+            [disabled]="showResults"
+          />
+          <label class="form-check-label" [ngClass]="{
+            'text-success': showResults && answer.isCorrect,
+            'text-danger': showResults && !answer.isCorrect && selectedAnswerId === answer.id
+          }">
+            {{ answer.answerText }}
+            <span *ngIf="showResults && answer.isCorrect"> (Correct)</span>
+            <span *ngIf="showResults && !answer.isCorrect && selectedAnswerId === answer.id"> (Your Answer)</span>
+          </label>
+        </div>
+      </div>
+    </label>
+  </div>
+</div>

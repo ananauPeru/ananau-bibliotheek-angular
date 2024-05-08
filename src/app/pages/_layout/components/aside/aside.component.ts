@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthUtil } from 'src/app/_utils/auth_util';
 import { LayoutService } from '../../../../_metronic/core';
+import { DomainUtil } from 'src/app/_utils/domain_util';
 
 @Component({
   selector: 'app-aside',
@@ -21,7 +22,7 @@ export class AsideComponent implements OnInit {
   asideMenuScroll = 1;
   asideSelfMinimizeToggle = false;
 
-  constructor(private layout: LayoutService, private loc: Location, public AuthUtil:AuthUtil) { 
+  constructor(private layout: LayoutService, private loc: Location, public AuthUtil:AuthUtil, public DomainUtil:DomainUtil) { 
 
   }
 

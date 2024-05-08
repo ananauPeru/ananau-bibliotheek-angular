@@ -28,6 +28,7 @@ export const locale = {
       CONFIRM: "Confirm",
       DISCONFIRM: "Disconfirm",
       BACK: "Back",
+      SHARE: "Share",
     },
     NEDERLANDS: "Dutch",
     ENGELS: "English",
@@ -41,6 +42,8 @@ export const locale = {
       FEATURES: "Features",
       APPS: "Apps",
       DASHBOARD: "Dashboard",
+      TEAM: "Team",
+      LEARNING: "Learning",
       ZOEK: "Search",
       KAL: "Calendar",
       NO_ROLES:
@@ -85,6 +88,21 @@ export const locale = {
         S3_DEPLOYMENT_AND_AZURE: "3 - Deployment - Azure",
         TODOS: "ToDo's",
       },
+      LEARNING_PLATFORM: {
+        SPANISH: "Spanish",
+        TESTS: "Tests",
+        TEST: "Test",
+        TEST_LIST: "Test list",
+        CREATE_TEST: "Create test",
+        TEST_OVERVIEW: "Test overview",
+        EXERCISES: "Exercises",
+        EXERCISE: "Exercise",
+        EXERCISE_LIST: "Exercise list",
+        CREATE_EXERCISE: "Create exercise",
+        EXERCISE_OVERVIEW: "Exercise overview",
+        SUBMITIONS: "Submitions",
+        MY_STUDENTS: "My students",
+      }
     },
 
     // AUTH PAGES

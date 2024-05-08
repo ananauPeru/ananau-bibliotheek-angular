@@ -1,0 +1,262 @@
+<div class="container card card-custom">
+  <ng-container *ngIf="test$ | async as test; else loading">
+    <!-- Header -->
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="card-header border-0 text-white"
+          style="background-color: white; padding: 2rem 2.25rem"
+        >
+          <div class="row">
+            <div class="col-12 col-md-8 w-100">
+              <h3 class="card-title font-weight-bolder text-dark">
+                {{ test.title }}
+              </h3>
+            </div>
+          </div>
+          <div class="row" *ngIf="currentState === testState.NotStarted">
+            <div class="text-dark col-12 col-md-8 w-100">
+              <span
+                >Time Limit:
+                <strong>{{ test.timeLimitMinutes }}</strong> minutes</span
+              >
+            </div>
+          </div>
+          <div class="row" *ngIf="currentState === testState.NotStarted">
+            <div class="text-dark col-12 col-md-8 w-100">
+              <p *ngIf="test.description">{{ test.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body pt-2">
+      <ng-container *ngIf="currentState === testState.NotStarted">
+        <!--begin: Item-->
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary" (click)="startTest(test)">
+              Start Test
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentState === testState.InProgress">
+        <!-- Test form::start -->
+        <form [formGroup]="testForm">
+          <ng-container *ngFor="let section of test.sections">
+            <div class="row">
+              <div class="col-12">
+                <h3>Section: {{ section.title }}</h3>
+                <p>{{ section.description }}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div formGroupName="{{ section.id }}">
+                  <div
+                    class="form-group"
+                    *ngFor="let question of section.questions; let i = index"
+                  >
+                    <label>{{ question.questionText }}</label>
+
+                    <!-- Multiple Choice Question -->
+                    <div *ngIf="question.type.name === 'Multiple Choice'">
+                      <app-radio-button
+                        [answers]="question.answers"
+                        [questionId]="question.id"
+                        [formControlName]="question.id"
+                        [ngClass]="{
+                          'is-invalid':
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).invalid &&
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).dirty
+                        }"
+                      ></app-radio-button>
+                    </div>
+
+                    <!-- Fill in the Blank Question -->
+                    <div *ngIf="question.type.name === 'Fill in the Blank'">
+                      <input
+                        type="text"
+                        class="form-control"
+                        [formControlName]="question.id"
+                        [ngClass]="{
+                          'is-invalid':
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).invalid &&
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).dirty
+                        }"
+                      />
+                    </div>
+
+                    <div class="invalid-feedback">This field is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <div class="row">
+            <div class="col-12 text-right">
+              <button class="btn btn-primary" (click)="submitTest(test)">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+        <!-- Test form::end -->
+
+        <!-- Timer::start -->
+        <div class="row">
+          <div class="col-12">
+            <p>Time Left: {{ timeLeft }} seconds</p>
+          </div>
+        </div>
+        <!-- Timer::end -->
+      </ng-container>
+
+      <ng-container *ngIf="currentState === testState.Grading">
+        Grading...
+      </ng-container>
+
+      <ng-container *ngIf="currentState === testState.Graded">
+        <!-- Test result::start -->
+        <div class="row">
+          <div class="col-12">
+            <h2>Test Results</h2>
+            <p>Score: {{ score }} / {{ totalQuestions }}</p>
+          </div>
+        </div>
+
+        <div
+          class="row"
+          *ngFor="let section of test.sections; let sectionIndex = index"
+        >
+          <div class="col-12">
+            <h3>Section {{ sectionIndex + 1 }}: {{ section.title }}</h3>
+            <div
+              *ngFor="
+                let question of section.questions;
+                let questionIndex = index
+              "
+            >
+              <p>{{ question.questionText }}</p>
+
+              <!-- Display Multiple Choice answers -->
+              <div *ngIf="question.type.name === 'Multiple Choice'">
+                <ul>
+                  <li *ngFor="let answer of question.answers">
+                    <span
+                      [ngClass]="{
+                        'text-success': isAnswerCorrect(
+                          answer,
+                          section.id,
+                          question.id
+                        ),
+                        'text-danger':
+                          !isAnswerCorrect(answer, section.id, question.id) &&
+                          isAnswerSelected(section.id, question.id, answer.id)
+                      }"
+                    >
+                      {{ answer.answerText }}
+                      <span
+                        *ngIf="isAnswerCorrect(answer, section.id, question.id)"
+                        >(Correct)</span
+                      >
+                      <span
+                        *ngIf="
+                          !isAnswerCorrect(answer, section.id, question.id) &&
+                          isAnswerSelected(section.id, question.id, answer.id)
+                        "
+                        >(Your Answer)</span
+                      >
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Display Fill in the Blank answers -->
+              <div *ngIf="question.type.name === 'Fill in the Blank'">
+                <p>
+                  Your Answer:
+                  {{
+                    testForm
+                      .get(section.id.toString())
+                      .get(question.id.toString()).value
+                  }}
+                </p>
+                <p>
+                  Correct Answer:
+                  {{ getCorrectAnswer(section.id, question.id) }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary" (click)="retryTest(test)">
+              Retry Test
+            </button>
+          </div>
+        </div>
+        <!-- Test result::end -->
+      </ng-container>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <ng-template #confirmationModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Test is not complete
+        </h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You have not filled in all fields, are you sure you want to submit your test?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="modal.dismiss()"
+        >
+          {{ "BUTTONS.CANCEL" | translate }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="submitTest(test, true); modal.close()"
+        >
+          {{ "BUTTONS.CONFIRM" | translate }}
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="text-center">
+      <i class="fas fa-spinner fa-spin fa-3x"></i>
+      <p>Loading...</p>
+    </div>
+  </ng-template>
+</div>

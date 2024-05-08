@@ -29,6 +29,7 @@ export const locale = {
       CONFIRM: "Confirmar",
       DISCONFIRM: "Desconfirmar",
       BACK: "Espalda",
+      SHARE: "Compartir",
     },
 
     // MENU
@@ -41,6 +42,8 @@ export const locale = {
       KAL: "Calendario",
       APPS: "Aplicaciones",
       DASHBOARD: "Tablero",
+      TEAM: "Equipo",
+      LEARNING: "Aprendizaje",
       ZOEK: "Buscar",
       NO_ROLES:
         "Todavía no tienes acceso a ningún módulo. Por favor contáctenos para solicitar acceso.",
@@ -74,6 +77,21 @@ export const locale = {
         REGISTRATIONS: "Inscripciones",
         GENERAL_INFORMATION: "Información General",
       },
+      LEARNING_PLATFORM: {
+        SPANISH: "Español",
+        TESTS: "Pruebas",
+        TEST: "Prueba",
+        TEST_LIST: "Lista de pruebas",
+        CREATE_TEST: "Crear prueba",
+        TEST_OVERVIEW: "Resumen de la prueba",
+        EXERCISES: "Ejercicios",
+        EXERCISE: "Ejercicio",
+        EXERCISE_LIST: "Lista de ejercicios",
+        CREATE_EXERCISE: "Crear ejercicio",
+        EXERCISE_OVERVIEW: "Resumen del ejercicio",
+        SUBMITIONS: "Envíos",
+        MY_STUDENTS: "Mis estudiantes",
+      }
     },
 
     // AUTH PAGES

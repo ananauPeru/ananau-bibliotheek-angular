@@ -25,6 +25,7 @@ export const locale = {
       CONFIRM: "Bevestigen",
       DISCONFIRM: "Bevestiging intrekken",
       BACK: "Terug",
+      SHARE: "Delen",
     },
     MENU: {
       NEW: "nieuw",
@@ -35,6 +36,8 @@ export const locale = {
       APPS: "Apps",
       KAL: "Kalender",
       DASHBOARD: "Dashboard",
+      TEAM: "Team",
+      LEARNING: "Leren",
       ZOEK: "Zoeken",
       NO_ROLES:
         "Je hebt nog geen toegang tot een van de modules. Neem contact op om toegang te vragen.",
@@ -70,6 +73,21 @@ export const locale = {
         S2_BEST_PRACTICES: "2 - Best practices",
         S3_DEPLOYMENT_AND_AZURE: "3 - Deployment - Azure",
       },
+      LEARNING_PLATFORM: {
+        SPANISH: "Spaans",
+        TESTS: "Toetsen",
+        TEST: "Toets",
+        TEST_LIST: "Toetsenlijst",
+        CREATE_TEST: "Toets aanmaken",
+        TEST_OVERVIEW: "Toets overzicht",
+        EXERCISES: "Oefeningen",
+        EXERCISE: "Oefening",
+        EXERCISE_LIST: "Oefeningenlijst",
+        CREATE_EXERCISE: "Oefening aanmaken",
+        EXERCISE_OVERVIEW: "Oefening overzicht",
+        SUBMITIONS: "Inzendingen",
+        MY_STUDENTS: "Mijn studenten",
+      }
       // We dont translate documentation (IT) to different languages
     },
     AUTH: {

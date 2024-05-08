@@ -22,7 +22,7 @@ export class AuthUtil {
     }
   }
 
-  permitted(allowedRoles): boolean {
+  permitted(allowedRoles: Roles[] | string[]): boolean {
     var payLoad = this.getAuthFromLocalStorage().roles;
     var b = false;
     payLoad = payLoad.map((r) => r.toLowerCase());
@@ -44,4 +44,6 @@ export enum Roles {
   Student = "Student",
   Volunteer = "Volunteer",
   QRCodeReader = "QRCodeReader",
+  SpanishTeacher = "SpanishTeacher",
+  SpanishLearner = "SpanishLearner",
 }

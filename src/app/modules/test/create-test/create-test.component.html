@@ -1,0 +1,502 @@
+<form [formGroup]="testForm">
+  <div class="card card-custom mb-4">
+    <!-- Header -->
+    <div class="row pb-0 pb-md-2">
+      <div class="col-12">
+        <div
+          class="card-header border-0 text-white"
+          style="background-color: white; padding: 2rem 2.25rem"
+        >
+          <div class="row">
+            <div
+              class="col-12 w-100 d-flex justify-content-between align-items-center"
+            >
+              <h3 class="card-title font-weight-bolder text-dark mb-0">
+                {{ "MENU.LEARNING_PLATFORM.CREATE_TEST" | translate }}
+              </h3>
+              <div>
+                <button
+                  class="btn btn-secondary mr-2 pr-1 pr-md-3"
+                  (click)="openSettingsModal()"
+                >
+                  <i class="fas fa-cog"></i>
+                  <span class="d-none d-md-inline ml-1">Settings</span>
+                </button>
+                <button
+                  class="btn btn-primary pr-1 pr-md-3"
+                  (click)="onSubmit()"
+                >
+                  <i class="fas fa-save"></i>
+                  <span class="d-none d-md-inline ml-1">Save</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+      <!--begin: Item-->
+      <div class="form-group row align-items-start">
+        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
+          >Title</label
+        >
+        <div class="col-12 col-md-10">
+          <div class="row">
+            <div class="col-12">
+              <input
+                type="text"
+                class="form-control form-control-solid"
+                [class.is-invalid]="
+                  testForm.get('title').invalid &&
+                  (testForm.get('title').dirty || testForm.get('title').touched)
+                "
+                placeholder="Enter title"
+                formControlName="title"
+                required
+              />
+            </div>
+            <div class="col-12">
+              <small
+                class="text-danger"
+                *ngIf="
+                  testForm.get('title').invalid &&
+                  (testForm.get('title').dirty || testForm.get('title').touched)
+                "
+              >
+                Title is required.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
+          >Description</label
+        >
+        <div class="col-12 col-md-10">
+          <textarea
+            class="form-control form-control-solid"
+            placeholder="Enter description (optional)"
+            formControlName="description"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sections::Start -->
+  <div formArrayName="sections">
+    <div
+      class="card card-custom mb-4"
+      *ngFor="let sectionGroup of sections.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <!-- Header -->
+      <div class="row pb-0 pb-md-2">
+        <div class="col-12">
+          <div
+            class="card-header border-0 text-white"
+            style="background-color: white; padding: 2rem 2.25rem"
+          >
+            <div class="row">
+              <div
+                class="col-12 w-100 d-flex align-items-center mb-0 mb-md-2 justify-content-between"
+              >
+                <h3
+                  class="card-title font-weight-bolder text-dark mr-3"
+                  style="white-space: nowrap"
+                >
+                  Section {{ i + 1 }}
+                </h3>
+                <button
+                  class="btn btn-icon btn-secondary btn-sm"
+                  (click)="removeSection(i)"
+                  ngbTooltip="Remove Section"
+                >
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="card-body pt-2">
+        <div class="form-group row align-items-start mb-12">
+          <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
+            >Section title</label
+          >
+          <div class="col-12 col-md-10">
+            <div class="row">
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="form-control form-control-solid"
+                  [class.is-invalid]="
+                    sectionGroup.get('title').invalid &&
+                    (sectionGroup.get('title').dirty ||
+                      sectionGroup.get('title').touched)
+                  "
+                  placeholder="Enter section title"
+                  formControlName="title"
+                  required
+                />
+              </div>
+              <div class="col-12">
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    sectionGroup.get('title').invalid &&
+                    (sectionGroup.get('title').dirty ||
+                      sectionGroup.get('title').touched)
+                  "
+                >
+                  Section title is required.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row mb-12">
+          <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
+            >Section description</label
+          >
+          <div class="col-12 col-md-10">
+            <textarea
+              class="form-control form-control-solid"
+              placeholder="Enter section description (optional)"
+              formControlName="description"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row mb-12">
+          <div class="col-12">
+            <!-- Questions::Start -->
+            <div formArrayName="questions">
+              <div
+                class="form-group mb-4"
+                *ngFor="
+                  let questionGroup of sectionGroup.get('questions')?.controls;
+                  let j = index
+                "
+                [formGroupName]="j"
+              >
+                <div class="row align-items-start mb-8">
+                  <!-- Question Title -->
+                  <div class="col-6 col-md-2 mb-2 mb-md-0 order-1">
+                    <label class="font-weight-bold mb-0 h3"
+                      >Question {{ j + 1 }}</label
+                    >
+                  </div>
+                  <!-- Question Type -->
+                  <div class="col-4 col-md-2 mb-2 mb-md-0 order-2 order-md-3">
+                    <select
+                      class="form-control form-control-solid"
+                      formControlName="type"
+                      [compareWith]="compareQuestionTypes"
+                    >
+                      <option [ngValue]="null">Select Type</option>
+                      <option
+                        *ngFor="let type of questionTypes$ | async"
+                        [ngValue]="type"
+                      >
+                        {{ type.name | translate }}
+                      </option>
+                    </select>
+                  </div>
+                  <!-- Remove Question -->
+                  <div
+                    class="col-2 col-md-1 mb-2 mb-md-0 order-3 order-md-4 d-flex justify-content-end"
+                  >
+                    <button
+                      class="btn btn-icon btn-secondary btn-sm"
+                      (click)="removeQuestion(sectionGroup, j)"
+                      ngbTooltip="Remove Question"
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                  <!-- Question text -->
+                  <div class="col-12 col-md-7 order-4 order-md-2">
+                    <div class="row">
+                      <div class="col-12">
+                        <textarea
+                          type="text"
+                          class="form-control form-control-solid"
+                          [class.is-invalid]="
+                            questionGroup.get('questionText').invalid &&
+                            (questionGroup.get('questionText').dirty ||
+                              questionGroup.get('questionText').touched)
+                          "
+                          placeholder="Enter question eg. 'Yo (trabajar) _______ en la oficina.'"
+                          formControlName="questionText"
+                          required
+                          rows="1"
+                          (input)="adjustTextareaHeight($event)"
+                        ></textarea>
+                      </div>
+                      <div class="col-12">
+                        <small
+                          class="text-danger"
+                          *ngIf="
+                            questionGroup.get('questionText').invalid &&
+                            (questionGroup.get('questionText').dirty ||
+                              questionGroup.get('questionText').touched)
+                          "
+                        >
+                          Question text is required.
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-container
+                  *ngIf="questionGroup.get('type')?.value as selectedType"
+                >
+                  <!-- Display data about the question type selected -->
+                  <!-- Multiple Choice -->
+                  <ng-container *ngIf="selectedType.name === 'Multiple Choice'">
+                    <div class="mb-12">
+                      <div class="row align-items-center">
+                        <div class="col-12 mb-2">
+                          <label class="font-weight-bold mb-4 h3"
+                            >Choices</label
+                          >
+                        </div>
+                        <div class="col-12">
+                          <div formArrayName="answers">
+                            <div
+                              class="form-group row align-items-center"
+                              *ngFor="
+                                let optionGroup of questionGroup.get('answers')
+                                  ?.controls;
+                                let k = index;
+                                let last = last
+                              "
+                              [formGroupName]="k"
+                            >
+                              <h4 class="col-2">Choice {{ k + 1 }}</h4>
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        [class.is-invalid]="
+                                          optionGroup.get('answerText')
+                                            .invalid &&
+                                          (optionGroup.get('answerText')
+                                            .dirty ||
+                                            optionGroup.get('answerText')
+                                              .touched)
+                                        "
+                                        placeholder="Enter answer option"
+                                        formControlName="answerText"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          optionGroup.get('answerText')
+                                            .invalid &&
+                                          (optionGroup.get('answerText')
+                                            .dirty ||
+                                            optionGroup.get('answerText')
+                                              .touched)
+                                        "
+                                      >
+                                        Answer option is required.
+                                      </small>
+                                    </div>
+                                    <div class="col-12" *ngIf="last">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          questionGroup
+                                            .get('answers')
+                                            .hasError('requireOneCorrectAnswer')
+                                        "
+                                      >
+                                        At least one answer must be marked as
+                                        correct.
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="ml-4">
+                                  <select
+                                    class="form-control form-control-solid"
+                                    formControlName="isCorrect"
+                                  >
+                                    <option [ngValue]="true">Correct</option>
+                                    <option [ngValue]="false">Incorrect</option>
+                                  </select>
+                                </div>
+                                <div class="d-flex justify-content-end ml-4">
+                                  <button
+                                    class="btn btn-icon btn-secondary btn-sm"
+                                    (click)="removeOption(questionGroup, k)"
+                                    ngbTooltip="Remove Option"
+                                  >
+                                    <i class="fas fa-trash-alt"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            class="btn btn-icon btn-secondary btn-sm"
+                            (click)="addOption(questionGroup)"
+                            ngbTooltip="Add Option"
+                          >
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <!-- Fill in the Blank -->
+                  <ng-container
+                    *ngIf="selectedType.name === 'Fill in the Blank'"
+                  >
+                    <div class="mb-12">
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <div formArrayName="answers">
+                            <div
+                              class="form-group row align-items-center"
+                              *ngFor="
+                                let blankGroup of questionGroup.get('answers')
+                                  ?.controls;
+                                let k = index
+                              "
+                              [formGroupName]="k"
+                            >
+                              <h4 class="col-2">Answer</h4>
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        [class.is-invalid]="
+                                          blankGroup.get('answerText')
+                                            .invalid &&
+                                          (blankGroup.get('answerText').dirty ||
+                                            blankGroup.get('answerText')
+                                              .touched)
+                                        "
+                                        placeholder="Enter correct answer"
+                                        formControlName="answerText"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          blankGroup.get('answerText')
+                                            .invalid &&
+                                          (blankGroup.get('answerText').dirty ||
+                                            blankGroup.get('answerText')
+                                              .touched)
+                                        "
+                                      >
+                                        Answer is required.
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+            <!-- Questions::End -->
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <button
+            class="btn btn-secondary px-12"
+            (click)="addQuestion(sectionGroup)"
+          >
+            <i class="fas fa-plus"></i> Add Question
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Sections::End -->
+
+  <div class="d-flex justify-content-center mb-24">
+    <button class="btn btn-secondary px-12" (click)="addSection()">
+      <i class="fas fa-plus"></i> Add Section
+    </button>
+  </div>
+</form>
+
+<!-- Confirmation Modal -->
+<ng-template #settingsModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Test settings</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="settingsForm">
+      <div class="form-group row align-items-center">
+        <label class="col-12 col-md-5 font-weight-bold mb-2 mb-md-0"
+          >Time limit (in minutes)</label
+        >
+        <div class="col-12 col-md-7">
+          <input
+            type="number"
+            class="form-control form-control-solid"
+            placeholder="0"
+            formControlName="timeLimitMinutes"
+            required
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer d-flex">
+    <button type="button" class="btn btn-danger" (click)="modal.dismiss()">
+      {{ "BUTTONS.REMOVE" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary ml-auto"
+      (click)="modal.dismiss()"
+    >
+      {{ "BUTTONS.CANCEL" | translate }}
+    </button>
+    <button type="button" class="btn btn-primary" (click)="saveSettings()">
+      {{ "BUTTONS.SAVE" | translate }}
+    </button>
+  </div>
+</ng-template>

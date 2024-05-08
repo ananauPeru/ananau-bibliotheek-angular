@@ -57,588 +57,616 @@
         </a>
       </li>
 
-      <!-- LIBRARY -->
-      <!-- begin::section -->
-      <li
-        class="menu-section"
+      <ng-container
         *ngIf="
           AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
+            AuthUtil.roles.SpanishTeacher,
+            AuthUtil.roles.SpanishLearner,
             AuthUtil.roles.SuperAdmin
           ])
         "
       >
-        <h4 class="menu-text">{{ "MENU.LIBRARY.TITLE" | translate }}</h4>
-        <i class="menu-icon flaticon-more-v2"></i>
-      </li>
-      <!-- end:: section -->
-
-      <!-- begin::1 Level -->
-      <!-- begin::1 Level -->
-
-      <li
-        class="menu-item menu-item-submenu"
-        aria-haspopup="true"
-        data-menu-toggle="hover"
-        routerLinkActive="menu-item-open"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
-            AuthUtil.roles.SuperAdmin
-          ])
-        "
-      >
-        <a
-          class="menu-link menu-toggle"
-          routerLinkActive="active"
-          href="/library/books"
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            DomainUtil.isSubdomain(DomainUtil.Subdomain.Team);
+            else notTeam
+          "
         >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"> {{ "MENU.LIBRARY.BOOKS" | translate }}</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-              <span class="menu-link">
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.BOOKS" | translate
-                }}</span>
-              </span>
-            </li>
-
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/library/books/overview"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.OVERVIEW" | translate
-                }}</span>
-              </a>
-            </li>
-
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/library/books/add-book"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.ADD_BOOK" | translate
-                }}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level -->
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item menu-item-submenu"
-        aria-haspopup="true"
-        data-menu-toggle="hover"
-        routerLinkActive="menu-item-open"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
-            AuthUtil.roles.SuperAdmin
-          ])
-        "
-      >
-        <a
-          class="menu-link menu-toggle"
-          routerLinkActive="active"
-          href="/library/items"
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Shopping/Box3.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"> {{ "MENU.LIBRARY.ITEMS" | translate }}</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-              <span class="menu-link">
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.ITEMS" | translate
-                }}</span>
-              </span>
-            </li>
-
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/library/items/overview"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Shopping/Box3.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.OVERVIEW" | translate
-                }}</span>
-              </a>
-            </li>
-
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/library/items/add-item"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.ADD_ITEM" | translate
-                }}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item menu-item-submenu"
-        aria-haspopup="true"
-        data-menu-toggle="hover"
-        routerLinkActive="menu-item-open"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
-            AuthUtil.roles.SuperAdmin
-          ])
-        "
-      >
-        <a
-          class="menu-link menu-toggle"
-          routerLinkActive="active"
-          href="/library/loans"
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text">
-            {{ "MENU.LIBRARY.LOANING" | translate }}</span
+          <a
+            class="menu-link"
+            [href]="DomainUtil.getDomainUrl(DomainUtil.Subdomain.Learning)"
+            routerLinkActive="active"
           >
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-              <span class="menu-link">
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.ITEMS" | translate
-                }}</span>
-              </span>
-            </li>
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Text/Toggle-Right.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text" translate="MENU.LEARNING"></span>
+          </a>
+        </li>
 
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
+        <ng-template #notTeam>
+          <li
+            class="menu-item"
+            aria-haspopup="true"
+            routerLinkActive="menu-item-active"
+          >
+            <a
+              class="menu-link"
+              [href]="DomainUtil.getDomainUrl(DomainUtil.Subdomain.Team)"
+              routerLinkActive="active"
             >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/library/loans/overview"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.OVERVIEW" | translate
-                }}</span>
-              </a>
-            </li>
+              <span
+                [inlineSVG]="
+                  './assets/media/svg/icons/Communication/Adress-book2.svg'
+                "
+                cacheSVG="true"
+                class="svg-icon menu-icon"
+              ></span>
+              <span class="menu-text" translate="MENU.TEAM"></span>
+            </a>
+          </li>
+        </ng-template>
+      </ng-container>
 
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
+      <ng-container
+        *ngIf="
+          DomainUtil.isSubdomain(DomainUtil.Subdomain.Team);
+          else learningContent
+        "
+      >
+        <!-- LIBRARY -->
+        <!-- begin::section -->
+        <li
+          class="menu-section"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
+        >
+          <h4 class="menu-text" *ngIf="">
+            {{ "MENU.LIBRARY.TITLE" | translate }}
+          </h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+        <!-- end:: section -->
+
+        <!-- begin::1 Level -->
+        <!-- begin::1 Level -->
+
+        <li
+          class="menu-item menu-item-submenu"
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+          routerLinkActive="menu-item-open"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
+        >
+          <a
+            class="menu-link menu-toggle"
+            routerLinkActive="active"
+            href="/library/books"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">
+              {{ "MENU.LIBRARY.BOOKS" | translate }}</span
             >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/library/loans/new-loan"
-                routerLinkActive="active"
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.BOOKS" | translate
+                  }}</span>
+                </span>
+              </li>
+
+              <!-- Form Controls -->
+              <!-- begin::2 Level -->
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
               >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LIBRARY.NEW_LOAN" | translate
-                }}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <!-- end::1 Level -->
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/library/books/overview"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.OVERVIEW" | translate
+                  }}</span>
+                </a>
+              </li>
 
-      <!-- Material-UI -->
-      <!-- begin::1 Level -->
-      <!-- <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-        <a class="menu-link" routerLink="/library" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
-            class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{"MENU.LIBRARY.OVERVIEW" | translate }}</span>
-        </a>
-      </li> -->
-      <!-- end::1 Level -->
+              <!-- Form Controls -->
+              <!-- begin::2 Level -->
 
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted([''])"
-      >
-        <a class="menu-link" routerLink="/scan-item" routerLinkActive="active">
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Shopping/Barcode-read.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text">Scan Item</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/library/books/add-book"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.ADD_BOOK" | translate
+                  }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- end::1 Level -->
 
-      <!-- LIBRARY -->
-      <!-- begin::section -->
-      <li
-        class="menu-section"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
-            AuthUtil.roles.SuperAdmin
-          ])
-        "
-      >
-        <h4 class="menu-text">{{ "MENU.LIBRARY.LES" | translate }}</h4>
-        <i class="menu-icon flaticon-more-v2"></i>
-      </li>
-      <!-- end:: section -->
-
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
-            AuthUtil.roles.SuperAdmin
-          ])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/class/files"
-          routerLinkActive="active"
+        <!-- begin::1 Level -->
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item menu-item-submenu"
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+          routerLinkActive="menu-item-open"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
         >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Files/Folder-check.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"
-            >{{ "MENU.LIBRARY.OVERVIEW" | translate }}
-          </span>
-        </a>
-      </li>
+          <a
+            class="menu-link menu-toggle"
+            routerLinkActive="active"
+            href="/library/items"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Shopping/Box3.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">
+              {{ "MENU.LIBRARY.ITEMS" | translate }}</span
+            >
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.ITEMS" | translate
+                  }}</span>
+                </span>
+              </li>
 
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
-            AuthUtil.roles.SuperAdmin
-          ])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/class/add-class"
-          routerLinkActive="active"
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"
-            >{{ "MENU.LIBRARY.ADD_LES" | translate }}
-          </span>
-        </a>
-      </li>
+              <!-- Form Controls -->
+              <!-- begin::2 Level -->
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/library/items/overview"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Shopping/Box3.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.OVERVIEW" | translate
+                  }}</span>
+                </a>
+              </li>
 
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
-            AuthUtil.roles.SuperAdmin
-          ])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/class/overview"
-          routerLinkActive="active"
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text">{{ "MENU.ZOEK" | translate }} </span>
-        </a>
-      </li>
+              <!-- Form Controls -->
+              <!-- begin::2 Level -->
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/library/items/add-item"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.ADD_ITEM" | translate
+                  }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- end::1 Level -->
 
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.Librarian,
-            AuthUtil.roles.SuperAdmin
-          ])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/class/documentation"
-          routerLinkActive="active"
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item menu-item-submenu"
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+          routerLinkActive="menu-item-open"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
         >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Code/Question-circle.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text">{{ "LIBRARY.CLASS.HELP" | translate }} </span>
-        </a>
-      </li>
-      <!-- begin::1 Level -->
+          <a
+            class="menu-link menu-toggle"
+            routerLinkActive="active"
+            href="/library/loans"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">
+              {{ "MENU.LIBRARY.LOANING" | translate }}</span
+            >
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.ITEMS" | translate
+                  }}</span>
+                </span>
+              </li>
 
-      <!-- STUDENT -->
-      <!-- begin::section -->
-      <li
-        class="menu-section"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.SuperAdmin,
-            AuthUtil.roles.Student
-          ])
-        "
-      >
-        <h4 class="menu-text">
-          {{ "REGISTRATION.GENERAL.STUDENT" | translate }}
-        </h4>
-        <i class="menu-icon flaticon-more-v2"></i>
-      </li>
-      <!-- end:: section -->
-      <!-- begin::1 Level - Student registration form -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.SuperAdmin,
-            AuthUtil.roles.Student
-          ])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/registration-form/student"
-          routerLinkActive="active"
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text">{{
-            "MENU.MANAGEMENT.REGISTRATION" | translate
-          }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
+              <!-- Form Controls -->
+              <!-- begin::2 Level -->
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/library/loans/overview"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.OVERVIEW" | translate
+                  }}</span>
+                </a>
+              </li>
 
-      <!-- VOLUNTEER -->
-      <!-- begin::section -->
-      <li
-        class="menu-section"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.SuperAdmin,
-            AuthUtil.roles.Volunteer
-          ])
-        "
-      >
-        <h4 class="menu-text">
-          {{ "REGISTRATION.GENERAL.VOLUNTEER" | translate }}
-        </h4>
-        <i class="menu-icon flaticon-more-v2"></i>
-      </li>
-      <!-- end:: section -->
-      <!-- begin::1 Level - Student registration form -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.SuperAdmin,
-            AuthUtil.roles.Volunteer
-          ])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/registration-form/volunteer"
-          routerLinkActive="active"
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text">{{
-            "MENU.MANAGEMENT.REGISTRATION" | translate
-          }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
+              <!-- Form Controls -->
+              <!-- begin::2 Level -->
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/library/loans/new-loan"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LIBRARY.NEW_LOAN" | translate
+                  }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- end::1 Level -->
 
-      <!-- ORGANIZATION -->
-      <!-- begin::section -->
-      <li
-        class="menu-section"
-        *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
-        "
-      >
-        <h4 class="menu-text">{{ "MENU.ORGANIZATION.TITLE" | translate }}</h4>
-        <i class="menu-icon flaticon-more-v2"></i>
-      </li>
-      <!-- end:: section -->
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/organization/roles"
-          routerLinkActive="active"
+        <!-- Material-UI -->
+        <!-- begin::1 Level -->
+        <!-- <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+      <a class="menu-link" routerLink="/library" routerLinkActive="active">
+        <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true"
+          class="svg-icon menu-icon"></span>
+        <span class="menu-text">{{"MENU.LIBRARY.OVERVIEW" | translate }}</span>
+      </a>
+    </li> -->
+        <!-- end::1 Level -->
+
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="AuthUtil.permitted([''])"
         >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Home/Door-open.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"
-            >{{ "MENU.ORGANIZATION.ROLES" | translate }}
-          </span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/organization/registrations"
-          routerLinkActive="active"
+          <a
+            class="menu-link"
+            routerLink="/scan-item"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Shopping/Barcode-read.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">Scan Item</span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+
+        <!-- LIBRARY -->
+        <!-- begin::section -->
+        <li
+          class="menu-section"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
+        >
+          <h4 class="menu-text">{{ "MENU.LIBRARY.LES" | translate }}</h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+        <!-- end:: section -->
+
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/class/files"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Files/Folder-check.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.LIBRARY.OVERVIEW" | translate }}
+            </span>
+          </a>
+        </li>
+
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/class/add-class"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.LIBRARY.ADD_LES" | translate }}
+            </span>
+          </a>
+        </li>
+
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/class/overview"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/General/Search.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">{{ "MENU.ZOEK" | translate }} </span>
+          </a>
+        </li>
+
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/class/documentation"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Code/Question-circle.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "LIBRARY.CLASS.HELP" | translate }}
+            </span>
+          </a>
+        </li>
+        <!-- begin::1 Level -->
+
+        <!-- STUDENT -->
+        <!-- begin::section -->
+        <li
+          class="menu-section"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Student
+            ])
+          "
+        >
+          <h4 class="menu-text">
+            {{ "REGISTRATION.GENERAL.STUDENT" | translate }}
+          </h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+        <!-- end:: section -->
+        <!-- begin::1 Level - Student registration form -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Student
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/registration-form/student"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">{{
+              "MENU.MANAGEMENT.REGISTRATION" | translate
+            }}</span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+
+        <!-- VOLUNTEER -->
+        <!-- begin::section -->
+        <li
+          class="menu-section"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Volunteer
+            ])
+          "
+        >
+          <h4 class="menu-text">
+            {{ "REGISTRATION.GENERAL.VOLUNTEER" | translate }}
+          </h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+        <!-- end:: section -->
+        <!-- begin::1 Level - Student registration form -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Volunteer
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/registration-form/volunteer"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">{{
+              "MENU.MANAGEMENT.REGISTRATION" | translate
+            }}</span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+
+        <!-- ORGANIZATION -->
+        <!-- begin::section -->
+        <li
+          class="menu-section"
           *ngIf="
             AuthUtil.permitted([
               AuthUtil.roles.SuperAdmin,
@@ -646,335 +674,669 @@
             ])
           "
         >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Communication/Mail-box.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"
-            >{{ "MENU.ORGANIZATION.REGISTRATIONS" | translate }}
-          </span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])"
-      >
-        <a
-          class="menu-link"
-          routerLink="/organization/check-in/scan"
-          routerLinkActive="active"
+          <h4 class="menu-text">{{ "MENU.ORGANIZATION.TITLE" | translate }}</h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+        <!-- end:: section -->
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Admin
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/organization/roles"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Home/Door-open.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.ORGANIZATION.ROLES" | translate }}
+            </span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Admin
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/organization/registrations"
+            routerLinkActive="active"
+            *ngIf="
+              AuthUtil.permitted([
+                AuthUtil.roles.SuperAdmin,
+                AuthUtil.roles.Admin
+              ])
+            "
+          >
+            <span
+              [inlineSVG]="
+                './assets/media/svg/icons/Communication/Mail-box.svg'
+              "
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.ORGANIZATION.REGISTRATIONS" | translate }}
+            </span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
           *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])"
         >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/General/Thunder.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"
-            >{{ "MENU.ORGANIZATION.CHECK_IN" | translate }}
-          </span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/organization/check-in/list"
-          routerLinkActive="active"
-          *ngIf="
-            AuthUtil.permitted([
-              AuthUtil.roles.SuperAdmin,
-              AuthUtil.roles.Admin
-            ])
-          "
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/General/Thunder-move.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"
-            >{{ "MENU.ORGANIZATION.CHECK_IN_LIST" | translate }}
-          </span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/organization/general-information"
-          routerLinkActive="active"
-          *ngIf="
-            AuthUtil.permitted([
-              AuthUtil.roles.SuperAdmin,
-              AuthUtil.roles.Admin
-            ])
-          "
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Code/Info-circle.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"
-            >{{ "MENU.ORGANIZATION.GENERAL_INFORMATION" | translate }}
-          </span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="
-          AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.Admin])
-        "
-      >
-        <a
-          class="menu-link"
-          routerLink="/organization/calendar"
-          routerLinkActive="active"
-          *ngIf="
-            AuthUtil.permitted([
-              AuthUtil.roles.SuperAdmin,
-              AuthUtil.roles.Admin
-            ])
-          "
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Code/Time-schedule.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text">{{ "MENU.KAL" | translate }} </span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- USER MANAGEMENT -->
-      <!-- begin::section -->
-      <li
-        class="menu-section"
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
-      >
-        <h4 class="menu-text">{{ "MENU.DOCUMENTATION.TITLE" | translate }}</h4>
-        <i class="menu-icon flaticon-more-v2"></i>
-      </li>
-      <!-- end:: section -->
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item menu-item-submenu"
-        aria-haspopup="true"
-        data-menu-toggle="hover"
-        routerLinkActive="menu-item-open"
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
-      >
-        <a
-          class="menu-link menu-toggle"
-          routerLinkActive="active"
-          href="/documentation"
-        >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Home/Book.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text">
-            {{ "MENU.DOCUMENTATION.GETTING_STARTED" | translate }}</span
+          <a
+            class="menu-link"
+            routerLink="/organization/check-in/scan"
+            routerLinkActive="active"
+            *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])"
           >
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="menu-submenu">
-          <i class="menu-arrow"></i>
-          <ul class="menu-subnav">
-            <li class="menu-item menu-item-parent" aria-haspopup="true">
-              <span class="menu-link">
-                <span class="menu-text">{{
-                  "MENU.DOCUMENTATION.GETTING_STARTED" | translate
-                }}</span>
-              </span>
-            </li>
-
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/documentation/getting-started/0-preparations"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.DOCUMENTATION.S0_PREPARATIONS" | translate
-                }}</span>
-              </a>
-            </li>
-
-            <!-- Form Controls -->
-            <!-- begin::2 Level -->
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/documentation/getting-started/1-setting-up"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.DOCUMENTATION.S1_SETTING_UP" | translate
-                }}</span>
-              </a>
-            </li>
-
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                href="/documentation/getting-started/2-best-practices"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.DOCUMENTATION.S2_BEST_PRACTICES.TITLE" | translate
-                }}</span>
-                <i class="menu-arrow"></i>
-              </a>
-              <div class="menu-submenu">
-                <i class="menu-arrow"></i>
-                <ul class="menu-subnav">
-                  <!-- begin::3 Level -->
-                  <li
-                    class="menu-item"
-                    aria-haspopup="true"
-                    routerLinkActive="menu-item-active"
-                  >
-                    <a
-                      class="menu-link"
-                      routerLink="/documentation/getting-started/2-best-practices/models-and-tables"
-                      routerLinkActive="active"
-                    >
-                      <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                      </i>
-                      <span class="menu-text">{{
-                        "MENU.DOCUMENTATION.S2_BEST_PRACTICES.MODELS_AND_TABLES"
-                          | translate
-                      }}</span>
-                    </a>
-                  </li>
-                  <!-- end::3 Level -->
-                  <!-- begin::3 Level 
-                  <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
-                    <a class="menu-link" routerLink="/documentation/getting-started/2-best-practices/github"
-                      routerLinkActive="active">
-                      <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                      </i>
-                      <span class="menu-text">{{
-                        "MENU.DOCUMENTATION.S2_BEST_PRACTICES.GITHUB" | translate
-                        }}</span>
-                    </a>
-                  </li>-->
-                </ul>
-              </div>
-            </li>
-
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/documentation/getting-started/3-deployment-azure"
-                routerLinkActive="active"
-              >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.DOCUMENTATION.S3_DEPLOYMENT_AND_AZURE" | translate
-                }}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level -->
-      <li
-        class="menu-item"
-        aria-haspopup="true"
-        routerLinkActive="menu-item-active"
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
-      >
-        <a
-          class="menu-link"
-          routerLink="/documentation/todos"
-          routerLinkActive="active"
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/General/Thunder.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.ORGANIZATION.CHECK_IN" | translate }}
+            </span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Admin
+            ])
+          "
         >
-          <span
-            [inlineSVG]="'./assets/media/svg/icons/Tools/Roller.svg'"
-            cacheSVG="true"
-            class="svg-icon menu-icon"
-          ></span>
-          <span class="menu-text"
-            >{{ "MENU.DOCUMENTATION.TODOS" | translate }}
-          </span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
+          <a
+            class="menu-link"
+            routerLink="/organization/check-in/list"
+            routerLinkActive="active"
+            *ngIf="
+              AuthUtil.permitted([
+                AuthUtil.roles.SuperAdmin,
+                AuthUtil.roles.Admin
+              ])
+            "
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/General/Thunder-move.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.ORGANIZATION.CHECK_IN_LIST" | translate }}
+            </span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Admin
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/organization/general-information"
+            routerLinkActive="active"
+            *ngIf="
+              AuthUtil.permitted([
+                AuthUtil.roles.SuperAdmin,
+                AuthUtil.roles.Admin
+              ])
+            "
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Code/Info-circle.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.ORGANIZATION.GENERAL_INFORMATION" | translate }}
+            </span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Admin
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/organization/calendar"
+            routerLinkActive="active"
+            *ngIf="
+              AuthUtil.permitted([
+                AuthUtil.roles.SuperAdmin,
+                AuthUtil.roles.Admin
+              ])
+            "
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Code/Time-schedule.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">{{ "MENU.KAL" | translate }} </span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+
+        <!-- USER MANAGEMENT -->
+        <!-- begin::section -->
+        <li
+          class="menu-section"
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
+        >
+          <h4 class="menu-text">
+            {{ "MENU.DOCUMENTATION.TITLE" | translate }}
+          </h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+        <!-- end:: section -->
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item menu-item-submenu"
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+          routerLinkActive="menu-item-open"
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
+        >
+          <a
+            class="menu-link menu-toggle"
+            routerLinkActive="active"
+            href="/documentation"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Home/Book.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">
+              {{ "MENU.DOCUMENTATION.GETTING_STARTED" | translate }}</span
+            >
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">{{
+                    "MENU.DOCUMENTATION.GETTING_STARTED" | translate
+                  }}</span>
+                </span>
+              </li>
+
+              <!-- Form Controls -->
+              <!-- begin::2 Level -->
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/documentation/getting-started/0-preparations"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.DOCUMENTATION.S0_PREPARATIONS" | translate
+                  }}</span>
+                </a>
+              </li>
+
+              <!-- Form Controls -->
+              <!-- begin::2 Level -->
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/documentation/getting-started/1-setting-up"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.DOCUMENTATION.S1_SETTING_UP" | translate
+                  }}</span>
+                </a>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  href="/documentation/getting-started/2-best-practices"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.DOCUMENTATION.S2_BEST_PRACTICES.TITLE" | translate
+                  }}</span>
+                  <i class="menu-arrow"></i>
+                </a>
+                <div class="menu-submenu">
+                  <i class="menu-arrow"></i>
+                  <ul class="menu-subnav">
+                    <!-- begin::3 Level -->
+                    <li
+                      class="menu-item"
+                      aria-haspopup="true"
+                      routerLinkActive="menu-item-active"
+                    >
+                      <a
+                        class="menu-link"
+                        routerLink="/documentation/getting-started/2-best-practices/models-and-tables"
+                        routerLinkActive="active"
+                      >
+                        <i class="menu-bullet menu-bullet-dot">
+                          <span></span>
+                        </i>
+                        <span class="menu-text">{{
+                          "MENU.DOCUMENTATION.S2_BEST_PRACTICES.MODELS_AND_TABLES"
+                            | translate
+                        }}</span>
+                      </a>
+                    </li>
+                    <!-- end::3 Level -->
+                    <!-- begin::3 Level 
+                <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+                  <a class="menu-link" routerLink="/documentation/getting-started/2-best-practices/github"
+                    routerLinkActive="active">
+                    <i class="menu-bullet menu-bullet-dot">
+                      <span></span>
+                    </i>
+                    <span class="menu-text">{{
+                      "MENU.DOCUMENTATION.S2_BEST_PRACTICES.GITHUB" | translate
+                      }}</span>
+                  </a>
+                </li>-->
+                  </ul>
+                </div>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/documentation/getting-started/3-deployment-azure"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Home/Book-open.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.DOCUMENTATION.S3_DEPLOYMENT_AND_AZURE" | translate
+                  }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- end::1 Level -->
+
+        <!-- begin::1 Level -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
+        >
+          <a
+            class="menu-link"
+            routerLink="/documentation/todos"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Tools/Roller.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.DOCUMENTATION.TODOS" | translate }}
+            </span>
+          </a>
+        </li>
+        <!-- end::1 Level -->
+      </ng-container>
+
+      <ng-template #learningContent>
+        <li
+          class="menu-section"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.Admin
+            ])
+          "
+        >
+          <h4 class="menu-text">
+            {{ "MENU.LEARNING_PLATFORM.SPANISH" | translate }}
+          </h4>
+          <i class="menu-icon flaticon-more-v2"></i>
+        </li>
+
+        <!-- List item with dropdown and childeren -->
+        <li
+          class="menu-item menu-item-submenu"
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+          routerLinkActive="menu-item-open"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.Librarian,
+              AuthUtil.roles.SuperAdmin
+            ])
+          "
+        >
+          <a
+            class="menu-link menu-toggle"
+            routerLinkActive="active"
+            href="/test/list"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Files/Folder-solid.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">
+              {{ "MENU.LEARNING_PLATFORM.TEST" | translate }}</span
+            >
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.TESTS" | translate
+                  }}</span>
+                </span>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/test/list"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/svg/icons/Files/Selected-file.svg'
+                    "
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.TEST_LIST" | translate
+                  }}</span>
+                </a>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/test/create"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.CREATE_TEST" | translate
+                  }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        
+
+        <!-- List item with dropdown and childeren -->
+        <li
+          class="menu-item menu-item-submenu"
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+          routerLinkActive="menu-item-open"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SpanishTeacher,
+              AuthUtil.roles.SuperAdmin
+            ]);
+            else exerciseStudentContent
+          "
+        >
+          <a class="menu-link menu-toggle" routerLinkActive="active">
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Files/Folder-solid.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text">
+              {{ "MENU.LEARNING_PLATFORM.EXERCISE" | translate }}</span
+            >
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="menu-submenu">
+            <i class="menu-arrow"></i>
+            <ul class="menu-subnav">
+              <li class="menu-item menu-item-parent" aria-haspopup="true">
+                <span class="menu-link">
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.EXERCISE" | translate
+                  }}</span>
+                </span>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/exercise/shared"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/svg/icons/Files/Selected-file.svg'
+                    "
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">Shared Exercises</span>
+                </a>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/exercise/list"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/svg/icons/Files/Selected-file.svg'
+                    "
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.EXERCISE_LIST" | translate
+                  }}</span>
+                </a>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/exercise/create"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.CREATE_EXERCISE" | translate
+                  }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <ng-template #exerciseStudentContent>
+          <li
+            class="menu-item"
+            aria-haspopup="true"
+            routerLinkActive="menu-item-active"
+            *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishLearner])"
+          >
+            <a
+              class="menu-link menu-toggle"
+              routerLink="/exercise/shared"
+              routerLinkActive="active"
+            >
+              <span
+                [inlineSVG]="'./assets/media/svg/icons/Files/Selected-file.svg'"
+                cacheSVG="true"
+                class="svg-icon menu-icon"
+              ></span>
+              <span class="menu-text">My Exercises</span>
+            </a>
+          </li>
+        </ng-template>
+
+        <!-- Submitions -->
+        <li
+          class="menu-item"
+          aria-haspopup="true"
+          routerLinkActive="menu-item-active"
+          *ngIf="
+            AuthUtil.permitted([
+              AuthUtil.roles.SuperAdmin,
+              AuthUtil.roles.SpanishLearner,
+              AuthUtil.roles.SpanishTeacher
+            ])
+          "
+        >
+          <a
+            class="menu-link"
+            routerLink="/exercise/submission/list"
+            routerLinkActive="active"
+          >
+            <span
+              [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
+              cacheSVG="true"
+              class="svg-icon menu-icon"
+            ></span>
+            <span class="menu-text"
+              >{{ "MENU.LEARNING_PLATFORM.SUBMITIONS" | translate }}
+            </span>
+          </a>
+        </li>
+      </ng-template>
 
       <!-- /////////////////////////////////////////////////////////////////// THEME FROM HERE BELOW -->
     </ul>
