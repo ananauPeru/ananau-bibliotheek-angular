@@ -366,9 +366,9 @@
                     </div>
                   </ng-container>
 
-                  <!-- Fill in the Blank -->
+                  <!-- Fill In The Blank -->
                   <ng-container
-                    *ngIf="selectedType.name === 'Fill in the Blank'"
+                    *ngIf="selectedType.name === 'Fill In The Blank'"
                   >
                     <div class="mb-12">
                       <div class="row align-items-center">
@@ -432,8 +432,8 @@
 
 
 
-                  <!-- Open Answer -->
-                  <ng-container *ngIf="selectedType.name === 'Open Answer'">
+                  <!-- Open Question -->
+                  <ng-container *ngIf="selectedType.name === 'Open Question'">
                     <div class="mb-12">
                       <div class="row align-items-center">
                         <div class="col-12">
@@ -476,13 +476,6 @@
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="row mb-2">
-                      <div class="col-12">
-                        <button class="btn btn-icon btn-secondary btn-sm" (click)="addOpenAnswer(questionGroup)" ngbTooltip="Add Answer">
-                          <i class="fas fa-plus"></i> Add Answer
-                        </button>
                       </div>
                     </div>
                   </ng-container>

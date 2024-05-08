@@ -320,7 +320,7 @@ export class CreateTestComponent implements OnInit {
             isCorrect: false,
           })
         );
-      } else if (lastQuestionType.name === "Fill in the Blank") {
+      } else if (lastQuestionType.name === "Fill In The Blank") {
         answersArray.push(
           this.formBuilder.group({
             answerText: ["", Validators.required],
@@ -350,7 +350,7 @@ export class CreateTestComponent implements OnInit {
                 isCorrect: false,
               })
             );
-          } else if (selectedType.name === "Fill in the Blank") {
+          } else if (selectedType.name === "Fill In The Blank") {
             answersArray.push(
               this.formBuilder.group({
                 answerText: ["", Validators.required],
@@ -387,7 +387,7 @@ export class CreateTestComponent implements OnInit {
     optionsArray.updateValueAndValidity();
   }
 
-  // Blanks (Fill in the Blank)
+  // Blanks (Fill In The Blank)
   addBlank(questionGroup: FormGroup) {
     const answersArray = questionGroup.get("answers") as FormArray;
     answersArray.push(
@@ -421,7 +421,7 @@ export class CreateTestComponent implements OnInit {
 
 
 
-  // Open Answer
+  // Open Question
   addOpenAnswer(questionGroup: FormGroup) {
     const answersArray = questionGroup.get('answers') as FormArray;
     answersArray.push(

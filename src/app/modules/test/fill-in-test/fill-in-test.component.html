@@ -82,8 +82,8 @@
                       ></app-radio-button>
                     </div>
 
-                    <!-- Fill in the Blank Question -->
-                    <div *ngIf="question.type.name === 'Fill in the Blank'">
+                    <!-- Fill In The Blank Question -->
+                    <div *ngIf="question.type.name === 'Fill In The Blank'">
                       <input
                         type="text"
                         class="form-control"
@@ -100,8 +100,8 @@
                       />
                     </div>
 
-                    <!-- Open Answer Question -->
-                    <div *ngIf="question.type.name === 'Open Answer'">
+                    <!-- Open Question -->
+                    <div *ngIf="question.type.name === 'Open Question'">
                       <input
                         type="text"
                         class="form-control"
@@ -204,8 +204,8 @@
                 </ul>
               </div>
 
-              <!-- Display Fill in the Blank answers -->
-              <div *ngIf="question.type.name === 'Fill in the Blank'">
+              <!-- Display Fill In The Blank answers -->
+              <div *ngIf="question.type.name === 'Fill In The Blank'">
                 <p>
                   Your Answer:
                   {{
@@ -223,8 +223,8 @@
 
 
 
-              <!-- Display Open Answer -->
-              <div *ngIf="question.type.name === 'Open Answer'">
+              <!-- Display Open Question -->
+              <div *ngIf="question.type.name === 'Open Question'">
                 <p>Your Answer:
                   {{
                     testForm

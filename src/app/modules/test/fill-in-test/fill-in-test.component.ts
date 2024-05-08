@@ -72,9 +72,9 @@ export class FillInTestComponent implements OnInit {
 
         if (question.type.name === "Multiple Choice") {
           questionControl = this.formBuilder.control("", Validators.required);
-        } else if (question.type.name === "Fill in the Blank") {
+        } else if (question.type.name === "Fill In The Blank") {
           questionControl = this.formBuilder.control("", Validators.required);
-        } else if (question.type.name === "Open Answer") {
+        } else if (question.type.name === "Open Question") {
           questionControl = this.formBuilder.control("", Validators.required);
         }
 
@@ -161,15 +161,15 @@ export class FillInTestComponent implements OnInit {
                 ) {
                   this.score++;
                 }
-              } else if (question.type.name === "Fill in the Blank") {
+              } else if (question.type.name === "Fill In The Blank") {
                 const userAnswer = selectedAnswerId;
                 const correctAnswer = correctQuestion.answers[0].answerText;
 
                 if (userAnswer === correctAnswer) {
                   this.score++;
                 }
-              } else if (question.type.name === "Open Answer") {
-                // For Open Answer questions, do not automatically grade, as correctness is checked manually by the teacher
+              } else if (question.type.name === "Open Question") {
+                // For Open Question questions, do not automatically grade, as correctness is checked manually by the teacher
               }
             }
           });
