@@ -25,7 +25,7 @@ export class AuthGuard extends AuthUtil implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authService.currentUserValue;
     if (currentUser) {
-      let roles = route.data["permittedRoles"] as Array<string>;
+      let roles: string[] = route.data["permittedRoles"] as Array<string>;
       if (roles) {
         if (this.permitted(roles)) {
           return true;

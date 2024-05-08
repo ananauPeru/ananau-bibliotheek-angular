@@ -124,7 +124,7 @@ export class ExerciseHttpService {
     createExerciseDto: CreateExerciseDto
   ): Observable<ExerciseModel> {
     return this.http
-      .post<ExerciseModel>(`${API_URL}/teacher`, createExerciseDto)
+      .post<ExerciseModel>(`${API_URL}`, createExerciseDto)
       .pipe(
         catchError((error) => {
           if (error.status == 401) {

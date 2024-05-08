@@ -53,6 +53,7 @@ export class CreateExerciseComponent implements OnInit {
     }
 
     const exerciseDto: CreateExerciseDto = this.exerciseForm.value as CreateExerciseDto;
+    exerciseDto.typeId = 1;
 
     try {
       const fileUrls: string[] = [];

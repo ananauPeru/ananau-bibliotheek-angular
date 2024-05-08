@@ -20,6 +20,7 @@ export class ExerciseListComponent implements OnInit {
   constructor(public exerciseService: ExerciseService, public AuthUtil: AuthUtil) { }
 
   ngOnInit() {
+    console.log("Fetching exercises")
     this.exercises$ = this.searchTerm$.pipe(
       startWith(''),
       debounceTime(1000),

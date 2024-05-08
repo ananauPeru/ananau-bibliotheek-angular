@@ -14,14 +14,14 @@ export class SubmissionService {
 
   
   getSubmissions$(searchTerm: string, page: number, pageSize: number): Observable<StudentShortSubmissionModel[] | TeacherShortSubmissionModel[]> {
-    if (this.AuthUtil.permitted(Roles.SpanishTeacher)) {
+    if (this.AuthUtil.permitted([Roles.SuperAdmin, Roles.SpanishTeacher])) {
       return this.submissionHttpService.getTeacherSubmissions$(searchTerm, page, pageSize);
     }
     return this.submissionHttpService.getStudentSubmissions$(searchTerm, page, pageSize);
   }
 
   getSubmissionById$(id: number): Observable<StudentSubmissionModel | TeacherSubmissionModel> { 
-    if (this.AuthUtil.permitted(Roles.SpanishTeacher)) {
+    if (this.AuthUtil.permitted([Roles.SuperAdmin, Roles.SpanishTeacher])) {
       return this.submissionHttpService.getTeacherSubmissionById$(id);
     }
     return this.submissionHttpService.getStudentSubmissionById$(id);

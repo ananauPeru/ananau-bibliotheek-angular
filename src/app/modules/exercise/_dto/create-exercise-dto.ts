@@ -10,6 +10,6 @@ export class CreateExerciseDto {
         this.description = description || '';
         this.fileUrls = fileUrls || [];
         this.maxGrade = maxGrade || 0;
-        this.typeId = typeId || 0;
+        this.typeId = typeId || 1; //This is the id of homework. Change this in the future to be set by a dropdown.
     }
 }
