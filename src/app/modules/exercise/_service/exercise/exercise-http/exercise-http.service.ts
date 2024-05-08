@@ -12,6 +12,7 @@ import { catchError, map } from "rxjs/operators";
 import { CreateExerciseDto } from "../../../_dto/create-exercise-dto";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/exercise`;
+const TEMP_API_URL = `${environment.apiUrl}/spanish_platform/submission`;
 
 @Injectable({
   providedIn: "root",
@@ -63,7 +64,7 @@ export class ExerciseHttpService {
 
   getAssignedExercises$(searchTerm: string, page: number, pageSize: number): Observable<AssignedExerciseModel[]> {
     return this.http
-      .get<AssignedExerciseModel[]>(`${API_URL}/assigned?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`)
+      .get<AssignedExerciseModel[]>(`${TEMP_API_URL}/assigns?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`)
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -73,7 +74,7 @@ export class ExerciseHttpService {
         }),
         map((response: any): AssignedExerciseModel[] => {
           if (response.success) {
-            return response.exercises;
+            return response.assigns;
           } else {
             throwError(response.error);
             return [];

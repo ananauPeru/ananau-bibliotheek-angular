@@ -5,7 +5,7 @@ import {
   SubmissionResultModel,
   TeacherShortSubmissionModel,
 } from "../../../_model/submission.model";
-import { Observable, throwError } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { catchError, map } from "rxjs/operators";
@@ -155,9 +155,9 @@ export class SubmissionHttpService {
   gradeSubmission$(
     id: number,
     gradeSubmissionDto: GradeSubmissionDto
-  ): Observable<void> {
+  ): Observable<boolean> {
     return this.http
-      .post<any>(`${API_URL}/${id}/grade`, gradeSubmissionDto, {
+      .put<boolean>(`${API_URL}/${id}/grade`, gradeSubmissionDto, {
         responseType: "json",
       })
       .pipe(
@@ -167,12 +167,12 @@ export class SubmissionHttpService {
           }
           return throwError(error);
         }),
-        map((response: any): void => {
+        map((response: any): boolean => {
           if (response.success) {
-            return;
+            return response.success;
           } else {
             throwError(response.error);
-            return null;
+            return response.success;
           }
         })
       );

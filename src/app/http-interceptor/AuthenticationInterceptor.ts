@@ -9,8 +9,6 @@ import {
 import { Observable } from "rxjs";
 import { AuthModel } from "../modules/auth/_models/auth.model";
 import { environment } from "src/environments/environment";
-import { jwtDecode } from "jwt-decode";
-import { Router } from "@angular/router";
 import { AuthService } from "../modules/auth";
 
 @Injectable()

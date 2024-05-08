@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { SubmissionService } from "../_service/submission/submission.service";
 import { Observable } from "rxjs";
@@ -7,6 +7,7 @@ import { ToastrService } from "ngx-toastr";
 import { GradeSubmissionDto } from "../_dto/grade-submission-dto";
 import { StudentSubmissionModel, TeacherSubmissionModel } from "../_model/submission.model";
 import { AuthUtil } from "src/app/_utils/auth_util";
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: "app-overview-submission",
@@ -22,10 +23,12 @@ export class OverviewSubmissionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private submissionService: SubmissionService,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
-    public AuthUtil: AuthUtil
+    public AuthUtil: AuthUtil,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -47,6 +50,7 @@ export class OverviewSubmissionComponent implements OnInit {
     this.submission$.subscribe((submission: TeacherSubmissionModel | StudentSubmissionModel) => {
       this.gradeForm.patchValue({
         grade: submission.grade,
+        feedback: submission.feedback
       });
     });
   }
@@ -60,24 +64,28 @@ export class OverviewSubmissionComponent implements OnInit {
       this.toast.error("Please provide a grade and total grade.");
       return;
     }
-
+  
     const submissionId: number = this.route.snapshot.params["id"];
     const grade: number = this.gradeForm.get("grade").value;
     const feedback: string = this.gradeForm.get("feedback").value;
-
+  
     const gradeSubmissionDto: GradeSubmissionDto = {
       grade: grade,
       feedback: feedback,
     };
-
+  
     this.submissionService
       .gradeSubmission$(submissionId, gradeSubmissionDto)
       .subscribe(
-        () => {
-          console.log("Submission graded successfully!");
-          this.toast.success("Submission graded successfully!");
-          this.getSubmissionDetails();
-          this.isEditingGrade = false;
+        (success) => {
+          if (success) {
+            this.toast.success("Submission graded successfully!");
+            this.getSubmissionDetails();
+            this.isEditingGrade = false;
+            this.cdr.detectChanges(); // Trigger change detection
+          } else {
+            this.toast.error("Failed to grade submission");
+          }
         },
         (error) => {
           console.error("Error grading submission: ", error);

@@ -12,7 +12,6 @@ export class DashboardComponent implements OnInit {
   constructor(public AuthUtil: AuthUtil, private authService: AuthService) {}
 
   ngOnInit(): void {
-    console.log("Subdomain:", DomainUtil.getSubdomain());
     this.authService.logoutIfTokenExpired();
   }
 }

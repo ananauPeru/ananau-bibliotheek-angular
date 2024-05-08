@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
             <h3 class="card-title font-weight-bolder text-dark">
-             Shared Exercises
+              Shared Exercises
             </h3>
           </div>
         </div>
@@ -50,7 +50,16 @@
             <thead>
               <tr>
                 <th>Title</th>
-                <th *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">Assigned To</th>
+                <th
+                  *ngIf="
+                    AuthUtil.permitted([
+                      AuthUtil.roles.SuperAdmin,
+                      AuthUtil.roles.SpanishTeacher
+                    ])
+                  "
+                >
+                  Assigned To
+                </th>
                 <th>Description</th>
                 <th>Deadline</th>
                 <th>Status</th>
@@ -59,16 +68,27 @@
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
-            <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher]); else student_t_body">
+            <ng-container
+              *ngIf="
+                AuthUtil.permitted([
+                  AuthUtil.roles.SuperAdmin,
+                  AuthUtil.roles.SpanishTeacher
+                ]);
+                else student_t_body
+              "
+            >
               <tbody>
                 <tr *ngFor="let exercise of exercises$ | async">
                   <td>{{ exercise.title }}</td>
-                  <td>{{exercise.assignedTo.firstName}} {{exercise.assignedTo.lastName}}</td>
+                  <td>
+                    {{ exercise.assignedTo.firstName }}
+                    {{ exercise.assignedTo.lastName }}
+                  </td>
                   <td>{{ exercise.description }}</td>
-                  <th>{{exercise.deadline}}</th>
-                  <th>{{getStatus(exercise)}}</th>
-                  <th>{{getGradeText(exercise)}}</th>
-                  <th>{{getGradedByText(exercise)}}</th>
+                  <td>{{ exercise.deadLine | date }}</td>
+                  <td>{{ getStatus(exercise) }}</td>
+                  <td>{{ getGradeText(exercise) }}</td>
+                  <td>{{ getGradedByText(exercise) }}</td>
                   <td class="text-right">
                     <button
                       type="button"
@@ -88,10 +108,10 @@
                 <tr *ngFor="let exercise of exercises$ | async">
                   <td>{{ exercise.title }}</td>
                   <td>{{ exercise.description }}</td>
-                  <th>{{exercise.deadline}}</th>
-                  <th>{{getStatus(exercise)}}</th>
-                  <th>{{getGradeText(exercise)}}</th>
-                  <th>{{getGradedByText(exercise)}}</th>
+                  <th>{{ exercise.deadline }}</th>
+                  <th>{{ getStatus(exercise) }}</th>
+                  <th>{{ getGradeText(exercise) }}</th>
+                  <th>{{ getGradedByText(exercise) }}</th>
                   <td class="text-right">
                     <button
                       type="button"
@@ -106,7 +126,6 @@
                 </tr>
               </tbody>
             </ng-template>
-            
           </table>
         </div>
       </div>

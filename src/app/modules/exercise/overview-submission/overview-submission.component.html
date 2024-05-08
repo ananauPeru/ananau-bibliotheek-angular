@@ -42,7 +42,7 @@
           <ng-container *ngIf="submission.grade; else notGradedDetail">
             <p class="mb-4">
               <strong>Grade:</strong> {{ submission.grade }} /
-              {{ submission.maxGrade }}
+              {{ submission.exercise.maxGrade }}
             </p>
             <p *ngIf="submission.feedback; else noFeedback">
               <strong>Feedback:</strong> {{ submission.feedback }}
