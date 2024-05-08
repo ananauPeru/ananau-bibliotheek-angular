@@ -74,6 +74,8 @@ export class FillInTestComponent implements OnInit {
           questionControl = this.formBuilder.control("", Validators.required);
         } else if (question.type.name === "Fill in the Blank") {
           questionControl = this.formBuilder.control("", Validators.required);
+        } else if (question.type.name === "Open Answer") {
+          questionControl = this.formBuilder.control("", Validators.required);
         }
 
         sectionGroup.addControl(question.id.toString(), questionControl);
@@ -112,9 +114,9 @@ export class FillInTestComponent implements OnInit {
 
     if(force || !this.testForm.invalid) {
       this.currentState = TestState.Grading;
-      this.gradeTest(test); 
+      this.gradeTest(test);
       return;
-    
+
     }
 
     this.modalService.open(this.confirmationModal, { centered: true });
@@ -166,6 +168,8 @@ export class FillInTestComponent implements OnInit {
                 if (userAnswer === correctAnswer) {
                   this.score++;
                 }
+              } else if (question.type.name === "Open Answer") {
+                // For Open Answer questions, do not automatically grade, as correctness is checked manually by the teacher
               }
             }
           });

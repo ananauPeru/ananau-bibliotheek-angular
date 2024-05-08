@@ -204,6 +204,30 @@
                 </div>
               </div>
             </div>
+
+
+
+
+            <div class="row" *ngIf="question.type.name === 'Open Answer'">
+              <div class="col-12">
+                <div
+                  class="form-group row align-items-center"
+                  *ngFor="let answer of question.answers; let k = index"
+                >
+                  <h4 class="col-2">Your Answer</h4>
+                  <div class="col-10">
+                    <p class="form-control-plaintext text-primary">
+                      {{ answer.submittedAnswer }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
           </div>
         </div>
       </div>

@@ -426,6 +426,76 @@
                       </div>
                     </div>
                   </ng-container>
+
+
+
+
+
+
+                  <!-- Open Answer -->
+                  <ng-container *ngIf="selectedType.name === 'Open Answer'">
+                    <div class="mb-12">
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <div formArrayName="answers">
+                            <div
+                              class="form-group row align-items-center"
+                              *ngFor="let openAnswerGroup of questionGroup.get('answers')?.controls; let k = index"
+                              [formGroupName]="k"
+                            >
+                              <h4 class="col-2">Answer</h4>
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        formControlName="answerText"
+                                        placeholder="Enter answer"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small class="text-danger" *ngIf="openAnswerGroup.get('answerText').invalid && (openAnswerGroup.get('answerText').dirty || openAnswerGroup.get('answerText').touched)">
+                                        Answer is required.
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="ml-4">
+                                <button
+                                  class="btn btn-icon btn-secondary btn-sm"
+                                  (click)="removeOpenAnswer(questionGroup, k)"
+                                  ngbTooltip="Remove Answer"
+                                >
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-12">
+                        <button class="btn btn-icon btn-secondary btn-sm" (click)="addOpenAnswer(questionGroup)" ngbTooltip="Add Answer">
+                          <i class="fas fa-plus"></i> Add Answer
+                        </button>
+                      </div>
+                    </div>
+                  </ng-container>
+
+
+
+
+
+
+
+
+
+
                 </ng-container>
               </div>
             </div>

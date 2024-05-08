@@ -406,12 +406,43 @@ export class CreateTestComponent implements OnInit {
   adjustTextareaHeight(event: any) {
     const textarea = event.target;
     const initialHeight = textarea.offsetHeight;
-    
+
     textarea.style.height = 'auto';
-    
+
     const newHeight = textarea.scrollHeight + 2;
     textarea.style.height = (newHeight > initialHeight ? newHeight : initialHeight) + 'px';
-  } 
+  }
+
+
+
+
+
+
+
+
+
+  // Open Answer
+  addOpenAnswer(questionGroup: FormGroup) {
+    const answersArray = questionGroup.get('answers') as FormArray;
+    answersArray.push(
+      this.formBuilder.group({
+        answerText: ['', Validators.required],
+      })
+    );
+  }
+
+  removeOpenAnswer(questionGroup: FormGroup, answerIndex: number) {
+    const answersArray = questionGroup.get('answers') as FormArray;
+    answersArray.removeAt(answerIndex);
+  }
+
+
+
+
+
+
+
+
 
   // Settings Modal
   openSettingsModal() {

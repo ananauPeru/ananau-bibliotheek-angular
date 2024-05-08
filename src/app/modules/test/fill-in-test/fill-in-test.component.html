@@ -65,7 +65,7 @@
                     <label>{{ question.questionText }}</label>
 
                     <!-- Multiple Choice Question -->
-                    <div *ngIf="question.type.name === 'Multiple Choice'">
+                    <div *ngIf="question.type.name === ''">
                       <app-radio-button
                         [answers]="question.answers"
                         [questionId]="question.id"
@@ -84,6 +84,24 @@
 
                     <!-- Fill in the Blank Question -->
                     <div *ngIf="question.type.name === 'Fill in the Blank'">
+                      <input
+                        type="text"
+                        class="form-control"
+                        [formControlName]="question.id"
+                        [ngClass]="{
+                          'is-invalid':
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).invalid &&
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).dirty
+                        }"
+                      />
+                    </div>
+
+                    <!-- Open Answer Question -->
+                    <div *ngIf="question.type.name === 'Open Answer'">
                       <input
                         type="text"
                         class="form-control"
@@ -201,7 +219,26 @@
                   {{ getCorrectAnswer(section.id, question.id) }}
                 </p>
               </div>
+
+
+
+
+              <!-- Display Open Answer -->
+              <div *ngIf="question.type.name === 'Open Answer'">
+                <p>Your Answer:
+                  {{
+                    testForm
+                      .get(section.id.toString())
+                      .get(question.id.toString()).value }}
+                </p>
+              </div>
             </div>
+
+
+
+
+
+
           </div>
         </div>
 
