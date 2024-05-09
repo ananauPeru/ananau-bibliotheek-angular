@@ -432,7 +432,7 @@
 
 
 
-                  <!-- Open Question -->
+                  <!-- Open Question
                   <ng-container *ngIf="selectedType.name === 'Open Question'">
                     <div class="mb-12">
                       <div class="row align-items-center">
@@ -478,6 +478,24 @@
                       </div>
                     </div>
                   </ng-container>
+
+-->
+
+                  <ng-container *ngIf="selectedType.name === 'Open Question'">
+                    <div class="mb-12">
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <!-- Image upload field -->
+                          <div class="form-group">
+                            <label for="imageUpload" class="font-weight-bold">Add Image (Optional)</label>
+                            <input type="file" id="imageUpload" (change)="onImageUpload($event)" accept="image/*">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+
 
 
 

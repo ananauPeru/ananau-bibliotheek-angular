@@ -16,6 +16,7 @@ import { TestService } from "../_services/test/test.service";
 import { ToastrService } from "ngx-toastr";
 import { TestModel } from "../_models/test/test.model";
 import { QuestionModel } from "../_models/test/question.model";
+import { ImagesFile } from "../_models/test/images-file.model";
 
 function requireOneCorrectAnswer(
   answersArray: FormArray
@@ -39,6 +40,7 @@ export class CreateTestComponent implements OnInit {
   public questionTypes$: Observable<QuestionTypeModel[]>;
   public isEditMode = false;
   public testId: number;
+  public imageFiles = new Array<ImagesFile>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -419,7 +421,7 @@ export class CreateTestComponent implements OnInit {
 
 
 
-
+/*
 
   // Open Question
   addOpenQuestion(questionGroup: FormGroup) {
@@ -437,10 +439,30 @@ export class CreateTestComponent implements OnInit {
   }
 
 
+ */
 
 
 
 
+  // Function to handle image upload for Open Question
+  onImageUpload(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      if (!file.type.startsWith('image')) {
+        console.log('Invalid file type. Please upload an image.');
+        return;
+      }
+    }
+
+    const fileSize = file.size; 
+    const maxSize = 5 * 1024 * 1024; // 5 MB
+    if (fileSize > maxSize) {
+      console.log('File size exceeds 5MB. Please upload a smaller image.');
+      return;
+    }
+
+  }
 
 
 
