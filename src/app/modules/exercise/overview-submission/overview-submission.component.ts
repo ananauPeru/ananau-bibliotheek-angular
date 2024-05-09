@@ -46,32 +46,37 @@ export class OverviewSubmissionComponent implements OnInit {
 
   initializeGradeForm() {
     this.gradeForm = this.formBuilder.group({
-      grade: ['', [Validators.required, Validators.min(0)]],
-      feedback: [''],
+      grade: ["", [Validators.required, Validators.min(0)]],
+      feedback: [""],
     });
-  
+
     this.submission$.subscribe(
       (submission: TeacherSubmissionModel | StudentSubmissionModel) => {
         this.gradeForm.patchValue({
           grade: submission.grade,
           feedback: submission.feedback,
         });
-  
+
         // Update the max validator based on the maxGrade value
-        this.gradeForm.get('grade').setValidators([
-          Validators.required,
-          Validators.min(0),
-          Validators.max(submission.exercise.maxGrade),
-        ]);
-        this.gradeForm.get('grade').updateValueAndValidity();
+        this.gradeForm
+          .get("grade")
+          .setValidators([
+            Validators.required,
+            Validators.min(0),
+            Validators.max(submission.exercise.maxGrade),
+          ]);
+        this.gradeForm.get("grade").updateValueAndValidity();
       }
     );
   }
 
   fileUrlToName(fileUrl: string): string {
     if (!fileUrl) return "";
+    if (fileUrl.includes("uniqueprefix-"))
+      return fileUrl.split("uniqueprefix-").pop();
     if (fileUrl.includes("blob:")) return "File";
     if (fileUrl.includes("http")) return fileUrl.split("/").pop();
+
     return fileUrl;
   }
 
