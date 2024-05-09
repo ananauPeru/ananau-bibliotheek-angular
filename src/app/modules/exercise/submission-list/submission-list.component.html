@@ -86,7 +86,7 @@
                     {{ getGradeText(submission) }}
                   </td>
                   <td>
-                    {{ submission.grade ? (submission.gradeDate | date) : "-" }}
+                    {{ submission.gradedAt ? (submission.gradedAt | date) : "-" }}
                   </td>
                   <td class="text-right">
                     <button
@@ -107,18 +107,13 @@
             <ng-template #student_t_body>
               <tbody>
                 <tr *ngFor="let submission of submissions$ | async">
-                  <td>{{ submission.userName }}</td>
-                  <td>{{ submission.exerciseName }}</td>
-                  <td>{{ submission.submissionDate | date }}</td>
+                  <td>{{ submission.exercise.title }}</td>
+                  <td>{{ submission.submittedAt | date }}</td>
                   <td>
-                    {{
-                      submission.grade
-                        ? submission.grade + "/" + submission.maxGrade
-                        : "Not graded"
-                    }}
+                    {{ getGradeText(submission) }}
                   </td>
                   <td>
-                    {{ submission.grade ? (submission.gradeDate | date) : "-" }}
+                    {{ submission.grade ? (submission.gradedAt | date) : "-" }}
                   </td>
                   <td class="text-right">
                     <button

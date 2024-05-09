@@ -61,7 +61,7 @@ export class SubmissionHttpService {
   ): Observable<StudentShortSubmissionModel[]> {
     return this.http
       .get<StudentShortSubmissionModel[]>(
-        `${API_URL}/student?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
+        `${API_URL}/learner?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
         {
           responseType: "json",
         }
@@ -90,7 +90,7 @@ export class SubmissionHttpService {
 
   getStudentSubmissionById$(id: number): Observable<StudentSubmissionModel> {
     return this.http
-      .get<StudentSubmissionModel>(`${API_URL}/${id}/student`, {
+      .get<StudentSubmissionModel>(`${API_URL}/${id}/learner`, {
         responseType: "json",
       })
       .pipe(
