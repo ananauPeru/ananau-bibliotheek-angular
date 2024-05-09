@@ -14,10 +14,9 @@ class UserModel {
   author: UserModel;
 }
 
-class TypeModel {
+export class TypeModel {
   id: number;
   name: string;
-  author: UserModel;
 }
 
 /**

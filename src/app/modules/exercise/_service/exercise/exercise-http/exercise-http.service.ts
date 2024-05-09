@@ -4,6 +4,7 @@ import {
   ExerciseModel,
   StudentShortExerciseModel,
   TeacherShortExerciseModel,
+  TypeModel,
 } from "../../../_model/exercise.model";
 import { Observable, of, throwError } from "rxjs";
 import { HttpClient } from "@angular/common/http";
@@ -197,6 +198,25 @@ export class ExerciseHttpService {
         } else {
           throwError(response.error);
           return null;
+        }
+      })
+    );
+  }
+
+  getExerciseTypes$(): Observable<TypeModel[]> {
+    return this.http.get<TypeModel[]>(`${API_URL}/exercise_types`).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): TypeModel[] => {
+        if (response.success) {
+          return response.types;
+        } else {
+          throwError(response.error);
+          return [];
         }
       })
     );

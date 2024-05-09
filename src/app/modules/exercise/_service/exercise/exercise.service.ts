@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ExerciseHttpService } from './exercise-http/exercise-http.service';
 import { Observable } from 'rxjs';
-import { AssignedExerciseModel, ExerciseModel, StudentShortExerciseModel, TeacherShortExerciseModel } from '../../_model/exercise.model';
+import { AssignedExerciseModel, ExerciseModel, StudentShortExerciseModel, TeacherShortExerciseModel, TypeModel } from '../../_model/exercise.model';
 import { AuthUtil, Roles } from 'src/app/_utils/auth_util';
 import { CreateExerciseDto } from '../../_dto/create-exercise-dto';
 
@@ -38,6 +38,10 @@ constructor(private exerciseHttpService: ExerciseHttpService, private AuthUtil: 
 
   createExercise$(createExerciseDto: CreateExerciseDto): Observable<ExerciseModel> {
     return this.exerciseHttpService.createExercise$(createExerciseDto);
+  }
+
+  getExerciseTypes$(): Observable<TypeModel[]> {
+    return this.exerciseHttpService.getExerciseTypes$();
   }
 
 }

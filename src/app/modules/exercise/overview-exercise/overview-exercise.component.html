@@ -25,7 +25,9 @@
 
     <!-- Body -->
     <div class="card-body pt-2">
-      <div class="row">
+      <div class="row"><div class="col-12">
+        <p class="mb-4"><strong>Type:</strong> {{ exercise.type.name}}</p>
+      </div>
         <div class="col-12">
           <p class="mb-4">{{ exercise.description || "No description" }}</p>
         </div>
@@ -56,149 +58,151 @@
         </div>
       </div>
 
-      <div class="row mt-4" *ngIf="exercise.submissions as submissions">
-        <div class="col-12">
-          <h4>Submissions</h4>
-          <ng-container *ngIf="submissions.length > 0; else noSubmissions">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th
-                      *ngIf="
-                        AuthUtil.permitted([
-                          AuthUtil.roles.SuperAdmin,
-                          AuthUtil.roles.SpanishTeacher
-                        ])
-                      "
-                    >
-                      Submitted By
-                    </th>
-                    <th>Submission Date</th>
-                    <th>Grade</th>
-                    <th>Graded By</th>
-                    <th>Grading Date</th>
-                    <th>Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let submission of submissions">
-                    <td
-                      *ngIf="
-                        AuthUtil.permitted([
-                          AuthUtil.roles.SuperAdmin,
-                          AuthUtil.roles.SpanishTeacher
-                        ])
-                      "
-                    >
-                      {{ submission.submittedBy.firstName }}
-                      {{ submission.submittedBy.lastName }}
-                    </td>
-                    <td>{{ submission.submittedAt | date:'medium' }}</td>
-                    <td>{{ getGradeText(exercise, submission) }}</td>
-                    <td>{{ getGradedByText(submission) }}</td>
-                    <td>{{ submission.gradedAt ? (submission.gradedAt | date:'medium') : "Not graded yet" }}</td>
-                    <td>
-                      <button
-                        class="btn btn-primary"
-                        routerLink="/exercise/submission/overview/{{ submission.id }}"
+      <ng-container *ngIf="exercise.type.id != 2">
+        <div class="row mt-4" *ngIf="exercise.submissions as submissions">
+          <div class="col-12">
+            <h4>Submissions</h4>
+            <ng-container *ngIf="submissions.length > 0; else noSubmissions">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th
+                        *ngIf="
+                          AuthUtil.permitted([
+                            AuthUtil.roles.SuperAdmin,
+                            AuthUtil.roles.SpanishTeacher
+                          ])
+                        "
                       >
-                        Details
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </ng-container>
-          <ng-template #noSubmissions>
-            <p>No submissions yet</p>
-          </ng-template>
-        </div>
-      </div>
-
-      <ng-template #loadingSubmissions>
-        <h4>Submissions</h4>
-        <div class="d-flex justify-content-center align-items-center">
-          <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
+                        Submitted By
+                      </th>
+                      <th>Submission Date</th>
+                      <th>Grade</th>
+                      <th>Graded By</th>
+                      <th>Grading Date</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let submission of submissions">
+                      <td
+                        *ngIf="
+                          AuthUtil.permitted([
+                            AuthUtil.roles.SuperAdmin,
+                            AuthUtil.roles.SpanishTeacher
+                          ])
+                        "
+                      >
+                        {{ submission.submittedBy.firstName }}
+                        {{ submission.submittedBy.lastName }}
+                      </td>
+                      <td>{{ submission.submittedAt | date:'medium' }}</td>
+                      <td>{{ getGradeText(exercise, submission) }}</td>
+                      <td>{{ getGradedByText(submission) }}</td>
+                      <td>{{ submission.gradedAt ? (submission.gradedAt | date:'medium') : "Not graded yet" }}</td>
+                      <td>
+                        <button
+                          class="btn btn-primary"
+                          routerLink="/exercise/submission/overview/{{ submission.id }}"
+                        >
+                          Details
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ng-container>
+            <ng-template #noSubmissions>
+              <p>No submissions yet</p>
+            </ng-template>
           </div>
         </div>
-      </ng-template>
-
-      <!-- Learner -->
-      <div
-        *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishLearner])"
-        class="row"
-      >
-        <div class="col-12">
-          <h4>Submit Exercise</h4>
-          <form [formGroup]="submissionForm">
-            <div class="form-group" *ngIf="!isLoading; else loadingDropzone">
-              <div
-                #dropzone
-                class="custom-dropzone form-control form-control-solid border"
-                ngx-dropzone
-                (change)="onSelectFiles($event)"
-                [class.is-invalid]="
-                  submissionForm.get('files').invalid &&
-                  (submissionForm.get('files').dirty ||
-                    submissionForm.get('files').touched)
-                "
-              >
-                <ngx-dropzone-label>
-                  <p class="form-text text-muted">
-                    {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
-                  </p>
-                </ngx-dropzone-label>
-                <ngx-dropzone-image-preview
-                  ngProjectAs="ngx-dropzone-preview"
-                  *ngFor="let f of submissionFiles"
-                  [file]="f"
-                  [removable]="true"
-                  (removed)="onRemoveFile(f)"
+  
+        <ng-template #loadingSubmissions>
+          <h4>Submissions</h4>
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
+  
+        <!-- Learner -->
+        <div
+          *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishLearner])"
+          class="row"
+        >
+          <div class="col-12">
+            <h4>Submit Exercise</h4>
+            <form [formGroup]="submissionForm">
+              <div class="form-group" *ngIf="!isLoading; else loadingDropzone">
+                <div
+                  #dropzone
+                  class="custom-dropzone form-control form-control-solid border"
+                  ngx-dropzone
+                  (change)="onSelectFiles($event)"
+                  [class.is-invalid]="
+                    submissionForm.get('files').invalid &&
+                    (submissionForm.get('files').dirty ||
+                      submissionForm.get('files').touched)
+                  "
                 >
-                </ngx-dropzone-image-preview>
-              </div>
-              <small
-                class="text-danger"
-                *ngIf="
-                  submissionForm.get('files').invalid &&
-                  (submissionForm.get('files').dirty ||
-                    submissionForm.get('files').touched)
-                "
-              >
-                At least one file is required.
-              </small>
-            </div>
-            <ng-template #loadingDropzone>
-              <div
-                class="d-flex justify-content-center align-items-center"
-                style="height: 200px"
-              >
-                <div class="spinner-border text-primary" role="status">
-                  <span class="sr-only">Loading...</span>
+                  <ngx-dropzone-label>
+                    <p class="form-text text-muted">
+                      {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
+                    </p>
+                  </ngx-dropzone-label>
+                  <ngx-dropzone-image-preview
+                    ngProjectAs="ngx-dropzone-preview"
+                    *ngFor="let f of submissionFiles"
+                    [file]="f"
+                    [removable]="true"
+                    (removed)="onRemoveFile(f)"
+                  >
+                  </ngx-dropzone-image-preview>
                 </div>
+                <small
+                  class="text-danger"
+                  *ngIf="
+                    submissionForm.get('files').invalid &&
+                    (submissionForm.get('files').dirty ||
+                      submissionForm.get('files').touched)
+                  "
+                >
+                  At least one file is required.
+                </small>
               </div>
-            </ng-template>
-            <div class="form-group">
-              <textarea
-                class="form-control"
-                rows="3"
-                placeholder="Add a comment"
-                formControlName="comment"
-              ></textarea>
-            </div>
-            <button
-              class="btn btn-primary"
-              (click)="submitExercise(exercise)"
-              [disabled]="submissionForm.invalid || isLoading"
-            >
-              Submit
-            </button>
-          </form>
+              <ng-template #loadingDropzone>
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  style="height: 200px"
+                >
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </ng-template>
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Add a comment"
+                  formControlName="comment"
+                ></textarea>
+              </div>
+              <button
+                class="btn btn-primary"
+                (click)="submitExercise(exercise)"
+                [disabled]="submissionForm.invalid || isLoading"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      </ng-container>
 
       <div
         *ngIf="
