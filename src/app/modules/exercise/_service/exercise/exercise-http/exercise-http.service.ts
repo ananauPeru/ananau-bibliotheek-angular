@@ -10,6 +10,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { catchError, map } from "rxjs/operators";
 import { CreateExerciseDto } from "../../../_dto/create-exercise-dto";
+import { DateUtil } from "src/app/_utils/date_util";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/exercise`;
 const TEMP_API_URL = `${environment.apiUrl}/spanish_platform/submission`;
@@ -18,7 +19,7 @@ const TEMP_API_URL = `${environment.apiUrl}/spanish_platform/submission`;
   providedIn: "root",
 })
 export class ExerciseHttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private DateUtil: DateUtil) {}
 
   getTeacherExercises$(searchTerm: string, page: number, pageSize: number): Observable<TeacherShortExerciseModel[]> {
     return this.http
@@ -53,7 +54,11 @@ export class ExerciseHttpService {
         }),
         map((response: any): StudentShortExerciseModel[] => {
           if (response.success) {
-            return response.exercises;
+            return response.exercises.map((exercise: StudentShortExerciseModel) => {
+              exercise.deadline = this.DateUtil.utcToPeruvianDate(exercise.deadline);
+              return exercise;
+            }
+            );
           } else {
             throwError(response.error);
             return [];
@@ -74,7 +79,10 @@ export class ExerciseHttpService {
         }),
         map((response: any): AssignedExerciseModel[] => {
           if (response.success) {
-            return response.assigns;
+            return response.assigns.map((assign: AssignedExerciseModel) => {
+              assign.deadline = this.DateUtil.utcToPeruvianDate(assign.deadline);
+              return assign;
+            });
           } else {
             throwError(response.error);
             return [];

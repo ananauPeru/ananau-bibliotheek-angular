@@ -94,10 +94,10 @@
                       {{ submission.submittedBy.firstName }}
                       {{ submission.submittedBy.lastName }}
                     </td>
-                    <td>{{ submission.submittedAt }}</td>
+                    <td>{{ submission.submittedAt | date:'medium' }}</td>
                     <td>{{ getGradeText(exercise, submission) }}</td>
                     <td>{{ getGradedByText(submission) }}</td>
-                    <td>{{ getGradedDateText(submission)}}</td>
+                    <td>{{ submission.gradedAt ? (submission.gradedAt | date:'medium') : "Not graded yet" }}</td>
                     <td>
                       <button
                         class="btn btn-primary"

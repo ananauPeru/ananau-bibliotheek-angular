@@ -11,6 +11,7 @@ import { HttpClient } from "@angular/common/http";
 import { catchError, map } from "rxjs/operators";
 import { CreateSubmissionDto } from "../../../_dto/create-submission-dto";
 import { GradeSubmissionDto } from "../../../_dto/grade-submission-dto";
+import { DateUtil } from "src/app/_utils/date_util";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/submission`;
 
@@ -18,7 +19,7 @@ const API_URL = `${environment.apiUrl}/spanish_platform/submission`;
   providedIn: "root",
 })
 export class SubmissionHttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private DateUtil: DateUtil) {}
 
   getTeacherSubmissions$(
     searchTerm: string,
@@ -41,7 +42,10 @@ export class SubmissionHttpService {
         }),
         map((response: any): TeacherShortSubmissionModel[] => {
           if (response.success) {
-            return response.submissions;
+            return response.submissions.map((submission: TeacherShortSubmissionModel) => {
+              submission.gradedAt = this.DateUtil.utcToPeruvianDate(submission.gradedAt);
+              return submission;
+            });
           } else {
             throwError(response.error);
             return [];
@@ -71,7 +75,11 @@ export class SubmissionHttpService {
         }),
         map((response: any): any => {
           if (response.success) {
-            return response.submissions;
+            return response.submissions.map((submission: StudentShortSubmissionModel) => {
+              submission.gradedAt = this.DateUtil.utcToPeruvianDate(submission.gradedAt);
+              return submission;
+            }
+            );
           } else {
             throwError(response.error);
             return [];
@@ -94,7 +102,9 @@ export class SubmissionHttpService {
         }),
         map((response: any): StudentSubmissionModel => {
           if (response.success) {
-            return response.submission;
+            const submission = response.submission;
+            submission.gradedAt = this.DateUtil.utcToPeruvianDate(submission.gradedAt);
+            return submission;
           } else {
             throwError(response.error);
             return null;
@@ -117,7 +127,9 @@ export class SubmissionHttpService {
         }),
         map((response: any): StudentSubmissionModel => {
           if (response.success) {
-            return response.submission;
+            const submission = response.submission;
+            submission.gradedAt = this.DateUtil.utcToPeruvianDate(submission.gradedAt);
+            return submission;
           } else {
             throwError(response.error);
             return null;

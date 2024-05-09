@@ -137,11 +137,4 @@ export class OverviewExerciseComponent implements OnInit {
     }
   }
 
-  getGradedDateText(submission: ExerciseSubmissionModel): string {
-    if (submission.gradedAt) {
-      return submission.gradedAt.toLocaleString();
-    } else {
-      return "Not graded yet";
-    }
-  }
 }
