@@ -108,10 +108,10 @@
                 <tr *ngFor="let exercise of exercises$ | async">
                   <td>{{ exercise.title }}</td>
                   <td>{{ exercise.description }}</td>
-                  <th>{{ exercise.deadline }}</th>
-                  <th>{{ getStatus(exercise) }}</th>
-                  <th>{{ getGradeText(exercise) }}</th>
-                  <th>{{ getGradedByText(exercise) }}</th>
+                  <td>{{ exercise.deadline }}</td>
+                  <td>{{ getStatus(exercise) }}</td>
+                  <td>{{ getGradeText(exercise) }}</td>
+                  <td>{{ getGradedByText(exercise) }}</td>
                   <td class="text-right">
                     <button
                       type="button"

@@ -11,6 +11,7 @@ import { environment } from "src/environments/environment";
 import { catchError, map } from "rxjs/operators";
 import { CreateExerciseDto } from "../../../_dto/create-exercise-dto";
 import { DateUtil } from "src/app/_utils/date_util";
+import { ExerciseSubmissionModel } from "../../../_model/submission.model";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/exercise`;
 const TEMP_API_URL = `${environment.apiUrl}/spanish_platform/submission`;
@@ -21,9 +22,15 @@ const TEMP_API_URL = `${environment.apiUrl}/spanish_platform/submission`;
 export class ExerciseHttpService {
   constructor(private http: HttpClient, private DateUtil: DateUtil) {}
 
-  getTeacherExercises$(searchTerm: string, page: number, pageSize: number): Observable<TeacherShortExerciseModel[]> {
+  getTeacherExercises$(
+    searchTerm: string,
+    page: number,
+    pageSize: number
+  ): Observable<TeacherShortExerciseModel[]> {
     return this.http
-      .get<TeacherShortExerciseModel[]>(`${API_URL}/teacher?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`)
+      .get<TeacherShortExerciseModel[]>(
+        `${API_URL}/teacher?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`
+      )
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -42,9 +49,15 @@ export class ExerciseHttpService {
       );
   }
 
-  getStudentExercises$(searchTerm: string, page: number, pageSize: number): Observable<StudentShortExerciseModel[]> {
+  getStudentExercises$(
+    searchTerm: string,
+    page: number,
+    pageSize: number
+  ): Observable<StudentShortExerciseModel[]> {
     return this.http
-      .get<StudentShortExerciseModel[]>(`${API_URL}/student?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`)
+      .get<StudentShortExerciseModel[]>(
+        `${API_URL}/learner?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`
+      )
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -54,10 +67,13 @@ export class ExerciseHttpService {
         }),
         map((response: any): StudentShortExerciseModel[] => {
           if (response.success) {
-            return response.exercises.map((exercise: StudentShortExerciseModel) => {
-              exercise.deadline = this.DateUtil.utcToPeruvianDate(exercise.deadline);
-              return exercise;
-            }
+            return response.exercises.map(
+              (exercise: StudentShortExerciseModel) => {
+                exercise.deadline = this.DateUtil.utcToPeruvianDate(
+                  exercise.deadline
+                );
+                return exercise;
+              }
             );
           } else {
             throwError(response.error);
@@ -67,9 +83,15 @@ export class ExerciseHttpService {
       );
   }
 
-  getAssignedExercises$(searchTerm: string, page: number, pageSize: number): Observable<AssignedExerciseModel[]> {
+  getAssignedExercises$(
+    searchTerm: string,
+    page: number,
+    pageSize: number
+  ): Observable<AssignedExerciseModel[]> {
     return this.http
-      .get<AssignedExerciseModel[]>(`${TEMP_API_URL}/assigns?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`)
+      .get<AssignedExerciseModel[]>(
+        `${TEMP_API_URL}/assigns?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`
+      )
       .pipe(
         catchError((error) => {
           if (error.status == 401) {
@@ -80,7 +102,9 @@ export class ExerciseHttpService {
         map((response: any): AssignedExerciseModel[] => {
           if (response.success) {
             return response.assigns.map((assign: AssignedExerciseModel) => {
-              assign.deadline = this.DateUtil.utcToPeruvianDate(assign.deadline);
+              assign.deadline = this.DateUtil.utcToPeruvianDate(
+                assign.deadline
+              );
               return assign;
             });
           } else {
@@ -101,7 +125,21 @@ export class ExerciseHttpService {
       }),
       map((response: any): ExerciseModel => {
         if (response.success) {
-          return response.exercise;
+          const exercise = response.exercise;
+          
+          exercise.submissions = exercise.submissions.map(
+            (submission: ExerciseSubmissionModel): ExerciseSubmissionModel => {
+              submission.submittedAt = this.DateUtil.utcToPeruvianDate(
+                submission.submittedAt
+              );
+              submission.gradedAt = this.DateUtil.utcToPeruvianDate(
+                submission.gradedAt
+              );
+              return submission;
+            }
+          );
+
+          return exercise;
         } else {
           throwError(response.error);
           return null;
@@ -111,7 +149,42 @@ export class ExerciseHttpService {
   }
 
   getStudentExerciseById$(id: number): Observable<ExerciseModel> {
-    return this.http.get<ExerciseModel>(`${API_URL}/${id}/student`).pipe(
+    return this.http.get<ExerciseModel>(`${API_URL}/${id}/learner`).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): ExerciseModel => {
+        if (response.success) {
+          const exercise = response.exercise;
+
+          exercise.submissions = exercise.submissions.map(
+            (submission: ExerciseSubmissionModel): ExerciseSubmissionModel => {
+              submission.submittedAt = this.DateUtil.utcToPeruvianDate(
+                submission.submittedAt
+              );
+              submission.gradedAt = this.DateUtil.utcToPeruvianDate(
+                submission.gradedAt
+              );
+              return submission;
+            }
+          );
+
+          return exercise;
+        } else {
+          throwError(response.error);
+          return null;
+        }
+      })
+    );
+  }
+
+  createExercise$(
+    createExerciseDto: CreateExerciseDto
+  ): Observable<ExerciseModel> {
+    return this.http.post<ExerciseModel>(`${API_URL}`, createExerciseDto).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.error("Login please...");
@@ -127,28 +200,5 @@ export class ExerciseHttpService {
         }
       })
     );
-  }
-
-  createExercise$(
-    createExerciseDto: CreateExerciseDto
-  ): Observable<ExerciseModel> {
-    return this.http
-      .post<ExerciseModel>(`${API_URL}`, createExerciseDto)
-      .pipe(
-        catchError((error) => {
-          if (error.status == 401) {
-            console.error("Login please...");
-          }
-          return throwError(error);
-        }),
-        map((response: any): ExerciseModel => {
-          if (response.success) {
-            return response.exercise;
-          } else {
-            throwError(response.error);
-            return null;
-          }
-        })
-      );
   }
 }
