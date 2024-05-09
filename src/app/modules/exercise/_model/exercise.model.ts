@@ -30,6 +30,10 @@ export class ExerciseModel extends BaseExerciseModel {
   author: UserModel;
 }
 
+export class StudentExerciseModel extends ExerciseModel {
+  deadline: Date;
+}
+
 /**
  * GET exercise/teacher
  */

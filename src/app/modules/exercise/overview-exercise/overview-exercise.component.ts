@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ExerciseModel } from "../_model/exercise.model";
+import { ExerciseModel, StudentExerciseModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
 import { SubmissionService } from "../_service/submission/submission.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -18,7 +18,7 @@ import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submis
   styleUrls: ["./overview-exercise.component.scss"],
 })
 export class OverviewExerciseComponent implements OnInit {
-  exercise$: Observable<ExerciseModel>;
+  exercise$: Observable<ExerciseModel | StudentExerciseModel>;
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
   isLoading = false;
@@ -43,6 +43,12 @@ export class OverviewExerciseComponent implements OnInit {
   getExerciseDetails() {
     const exerciseId: number = this.route.snapshot.params["id"];
     this.exercise$ = this.exerciseService.getExerciseById$(exerciseId);
+  }
+  fileUrlToName(fileUrl: string): string {
+    if (!fileUrl) return "";
+    if (fileUrl.includes("blob:")) return "File";
+    if (fileUrl.includes("http")) return fileUrl.split("/").pop();
+    return fileUrl;
   }
 
   initializeSubmissionForm() {
@@ -111,6 +117,10 @@ export class OverviewExerciseComponent implements OnInit {
   onSelectFiles(event: NgxDropzoneChangeEvent) {
     this.submissionFiles.push(...event.addedFiles);
     this.submissionForm.get("files").setValue(this.submissionFiles);
+  }
+
+  isPassedSubmissionDate(exercise: StudentExerciseModel): boolean {
+    return new Date(exercise.deadline) < new Date();
   }
 
   onRemoveFile(file: File) {

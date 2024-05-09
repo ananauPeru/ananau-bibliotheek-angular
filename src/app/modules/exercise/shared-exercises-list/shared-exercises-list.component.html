@@ -60,7 +60,6 @@
                 >
                   Assigned To
                 </th>
-                <th>Description</th>
                 <th>Deadline</th>
                 <th>Status</th>
                 <th>Grade</th>
@@ -84,8 +83,7 @@
                     {{ exercise.assignedTo.firstName }}
                     {{ exercise.assignedTo.lastName }}
                   </td>
-                  <td>{{ exercise.description }}</td>
-                  <td>{{ exercise.deadLine | date }}</td>
+                  <td>{{ exercise.deadLine | date:'medium' }}</td>
                   <td>{{ getStatus(exercise) }}</td>
                   <td>{{ getGradeText(exercise) }}</td>
                   <td>{{ getGradedByText(exercise) }}</td>
@@ -107,8 +105,7 @@
               <tbody>
                 <tr *ngFor="let exercise of exercises$ | async">
                   <td>{{ exercise.title }}</td>
-                  <td>{{ exercise.description }}</td>
-                  <td>{{ exercise.deadline }}</td>
+                  <td>{{ exercise.deadline | date:'medium' }}</td>
                   <td>{{ getStatus(exercise) }}</td>
                   <td>{{ getGradeText(exercise) }}</td>
                   <td>{{ getGradedByText(exercise) }}</td>

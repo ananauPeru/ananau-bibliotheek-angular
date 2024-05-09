@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import {
   AssignedExerciseModel,
   ExerciseModel,
+  StudentExerciseModel,
   StudentShortExerciseModel,
   TeacherShortExerciseModel,
   TypeModel,
@@ -149,17 +150,24 @@ export class ExerciseHttpService {
     );
   }
 
-  getStudentExerciseById$(id: number): Observable<ExerciseModel> {
-    return this.http.get<ExerciseModel>(`${API_URL}/${id}/learner`).pipe(
+  getStudentExerciseById$(id: number): Observable<StudentExerciseModel> {
+    return this.http.get<StudentExerciseModel>(`${API_URL}/${id}/learner`).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.error("Login please...");
         }
         return throwError(error);
       }),
-      map((response: any): ExerciseModel => {
+      map((response: any): StudentExerciseModel => {
         if (response.success) {
           const exercise = response.exercise;
+
+          //TODO: Remove this when the backend is fixed
+          if(exercise.deadline) {
+            exercise.deadline = this.DateUtil.utcToPeruvianDate(exercise.deadline);
+          } else {
+            exercise.deadline = new Date();
+          }
 
           exercise.submissions = exercise.submissions.map(
             (submission: ExerciseSubmissionModel): ExerciseSubmissionModel => {

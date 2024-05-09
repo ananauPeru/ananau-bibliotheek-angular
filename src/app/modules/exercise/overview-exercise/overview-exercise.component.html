@@ -25,9 +25,10 @@
 
     <!-- Body -->
     <div class="card-body pt-2">
-      <div class="row"><div class="col-12">
-        <p class="mb-4"><strong>Type:</strong> {{ exercise.type.name}}</p>
-      </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="mb-4"><strong>Type:</strong> {{ exercise.type.name }}</p>
+        </div>
         <div class="col-12">
           <p class="mb-4">{{ exercise.description || "No description" }}</p>
         </div>
@@ -49,7 +50,7 @@
               class="list-group-item d-flex justify-content-between align-items-center"
               *ngFor="let file of exercise.fileUrls; let i = index"
             >
-              File {{ i + 1 }}
+              {{ fileUrlToName(file) }}
               <button class="btn btn-primary" (click)="downloadFile(file)">
                 Download
               </button>
@@ -97,14 +98,22 @@
                         {{ submission.submittedBy.firstName }}
                         {{ submission.submittedBy.lastName }}
                       </td>
-                      <td>{{ submission.submittedAt | date:'medium' }}</td>
+                      <td>{{ submission.submittedAt | date : "medium" }}</td>
                       <td>{{ getGradeText(exercise, submission) }}</td>
                       <td>{{ getGradedByText(submission) }}</td>
-                      <td>{{ submission.gradedAt ? (submission.gradedAt | date:'medium') : "Not graded yet" }}</td>
+                      <td>
+                        {{
+                          submission.gradedAt
+                            ? (submission.gradedAt | date : "medium")
+                            : "Not graded yet"
+                        }}
+                      </td>
                       <td>
                         <button
                           class="btn btn-primary"
-                          routerLink="/exercise/submission/overview/{{ submission.id }}"
+                          routerLink="/exercise/submission/overview/{{
+                            submission.id
+                          }}"
                         >
                           Details
                         </button>
@@ -119,7 +128,7 @@
             </ng-template>
           </div>
         </div>
-  
+
         <ng-template #loadingSubmissions>
           <h4>Submissions</h4>
           <div class="d-flex justify-content-center align-items-center">
@@ -128,7 +137,7 @@
             </div>
           </div>
         </ng-template>
-  
+
         <!-- Learner -->
         <div
           *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishLearner])"
@@ -136,70 +145,82 @@
         >
           <div class="col-12">
             <h4>Submit Exercise</h4>
-            <form [formGroup]="submissionForm">
-              <div class="form-group" *ngIf="!isLoading; else loadingDropzone">
+            <ng-container
+              *ngIf="!isPassedSubmissionDate(exercise); else pastSubmissionDate"
+            >
+              <form [formGroup]="submissionForm">
                 <div
-                  #dropzone
-                  class="custom-dropzone form-control form-control-solid border"
-                  ngx-dropzone
-                  (change)="onSelectFiles($event)"
-                  [class.is-invalid]="
-                    submissionForm.get('files').invalid &&
-                    (submissionForm.get('files').dirty ||
-                      submissionForm.get('files').touched)
-                  "
+                  class="form-group"
+                  *ngIf="!isLoading; else loadingDropzone"
                 >
-                  <ngx-dropzone-label>
-                    <p class="form-text text-muted">
-                      {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
-                    </p>
-                  </ngx-dropzone-label>
-                  <ngx-dropzone-image-preview
-                    ngProjectAs="ngx-dropzone-preview"
-                    *ngFor="let f of submissionFiles"
-                    [file]="f"
-                    [removable]="true"
-                    (removed)="onRemoveFile(f)"
+                  <div
+                    #dropzone
+                    class="custom-dropzone form-control form-control-solid border"
+                    ngx-dropzone
+                    (change)="onSelectFiles($event)"
+                    [class.is-invalid]="
+                      submissionForm.get('files').invalid &&
+                      (submissionForm.get('files').dirty ||
+                        submissionForm.get('files').touched)
+                    "
                   >
-                  </ngx-dropzone-image-preview>
-                </div>
-                <small
-                  class="text-danger"
-                  *ngIf="
-                    submissionForm.get('files').invalid &&
-                    (submissionForm.get('files').dirty ||
-                      submissionForm.get('files').touched)
-                  "
-                >
-                  At least one file is required.
-                </small>
-              </div>
-              <ng-template #loadingDropzone>
-                <div
-                  class="d-flex justify-content-center align-items-center"
-                  style="height: 200px"
-                >
-                  <div class="spinner-border text-primary" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <ngx-dropzone-label>
+                      <p class="form-text text-muted">
+                        {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
+                      </p>
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-image-preview
+                      ngProjectAs="ngx-dropzone-preview"
+                      *ngFor="let f of submissionFiles"
+                      [file]="f"
+                      [removable]="true"
+                      (removed)="onRemoveFile(f)"
+                    >
+                    </ngx-dropzone-image-preview>
                   </div>
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      submissionForm.get('files').invalid &&
+                      (submissionForm.get('files').dirty ||
+                        submissionForm.get('files').touched)
+                    "
+                  >
+                    At least one file is required.
+                  </small>
                 </div>
-              </ng-template>
-              <div class="form-group">
-                <textarea
-                  class="form-control"
-                  rows="3"
-                  placeholder="Add a comment"
-                  formControlName="comment"
-                ></textarea>
-              </div>
-              <button
-                class="btn btn-primary"
-                (click)="submitExercise(exercise)"
-                [disabled]="submissionForm.invalid || isLoading"
-              >
-                Submit
-              </button>
-            </form>
+                <ng-template #loadingDropzone>
+                  <div
+                    class="d-flex justify-content-center align-items-center"
+                    style="height: 200px"
+                  >
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+                </ng-template>
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    placeholder="Add a comment"
+                    formControlName="comment"
+                  ></textarea>
+                </div>
+                <button
+                  class="btn btn-primary"
+                  (click)="submitExercise(exercise)"
+                  [disabled]="submissionForm.invalid || isLoading"
+                >
+                  Submit
+                </button>
+              </form>
+            </ng-container>
+            <ng-template #pastSubmissionDate>
+              <p class="text-danger">
+                The deadline for this exercise has passed
+              </p>
+            </ng-template>
           </div>
         </div>
       </ng-container>
