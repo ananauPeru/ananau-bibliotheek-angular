@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ExerciseModel } from "../_model/exercise.model";
@@ -31,7 +31,8 @@ export class OverviewExerciseComponent implements OnInit {
     private toast: ToastrService,
     private itemStorageService: ItemStorageService,
     private router: Router,
-    public AuthUtil: AuthUtil
+    public AuthUtil: AuthUtil,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -91,9 +92,8 @@ export class OverviewExerciseComponent implements OnInit {
           this.submissionFiles = [];
           this.submissionForm.get("files").setValue([]);
           this.isLoading = false; // Set isLoading back to false after successful submission
-          this.router.navigate([
-            `/exercise/submission/overview/${submissionResultModel.id}`,
-          ]);
+          this.getExerciseDetails(); // Refresh the exercise details
+          this.cdr.detectChanges();
         },
         (error) => {
           console.error("Error creating submission: ", error);
