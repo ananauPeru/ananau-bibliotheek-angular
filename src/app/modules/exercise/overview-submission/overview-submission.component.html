@@ -65,7 +65,7 @@
               class="list-group-item d-flex justify-content-between align-items-center"
               *ngFor="let fileUrl of submission.fileUrls"
             >
-              {{ fileUrl }}
+              {{ fileUrlToName(fileUrl) }}
               <button class="btn btn-primary" (click)="downloadFile(fileUrl)">
                 Download
               </button>
@@ -100,7 +100,7 @@
                     id="grade"
                     formControlName="grade"
                     min="0"
-                    [max]="submission.maxGrade"
+                    [max]="submission.exercise.maxGrade"
                     required
                   />
                   <div class="input-group-append">
@@ -108,6 +108,17 @@
                       >/ {{ submission.exercise.maxGrade }}</span
                     >
                   </div>
+                </div>
+                <div *ngIf="gradeForm.get('grade').invalid && gradeForm.get('grade').touched">
+                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.required">
+                    Grade is required.
+                  </small>
+                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.min">
+                    Grade must be greater than or equal to 0.
+                  </small>
+                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.max">
+                    Grade must be less than or equal to {{ submission.exercise.maxGrade }}.
+                  </small>
                 </div>
               </div>
               <div class="form-group">

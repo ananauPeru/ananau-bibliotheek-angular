@@ -5,9 +5,12 @@ import { SubmissionService } from "../_service/submission/submission.service";
 import { Observable } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { GradeSubmissionDto } from "../_dto/grade-submission-dto";
-import { StudentSubmissionModel, TeacherSubmissionModel } from "../_model/submission.model";
+import {
+  StudentSubmissionModel,
+  TeacherSubmissionModel,
+} from "../_model/submission.model";
 import { AuthUtil } from "src/app/_utils/auth_util";
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
   selector: "app-overview-submission",
@@ -28,7 +31,7 @@ export class OverviewSubmissionComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toast: ToastrService,
     public AuthUtil: AuthUtil,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -43,16 +46,33 @@ export class OverviewSubmissionComponent implements OnInit {
 
   initializeGradeForm() {
     this.gradeForm = this.formBuilder.group({
-      grade: ["", Validators.required],
-      feedback: [""],
+      grade: ['', [Validators.required, Validators.min(0)]],
+      feedback: [''],
     });
+  
+    this.submission$.subscribe(
+      (submission: TeacherSubmissionModel | StudentSubmissionModel) => {
+        this.gradeForm.patchValue({
+          grade: submission.grade,
+          feedback: submission.feedback,
+        });
+  
+        // Update the max validator based on the maxGrade value
+        this.gradeForm.get('grade').setValidators([
+          Validators.required,
+          Validators.min(0),
+          Validators.max(submission.exercise.maxGrade),
+        ]);
+        this.gradeForm.get('grade').updateValueAndValidity();
+      }
+    );
+  }
 
-    this.submission$.subscribe((submission: TeacherSubmissionModel | StudentSubmissionModel) => {
-      this.gradeForm.patchValue({
-        grade: submission.grade,
-        feedback: submission.feedback
-      });
-    });
+  fileUrlToName(fileUrl: string): string {
+    if (!fileUrl) return "";
+    if (fileUrl.includes("blob:")) return "File";
+    if (fileUrl.includes("http")) return fileUrl.split("/").pop();
+    return fileUrl;
   }
 
   downloadFile(fileUrl: string) {
@@ -64,16 +84,16 @@ export class OverviewSubmissionComponent implements OnInit {
       this.toast.error("Please provide a grade and total grade.");
       return;
     }
-  
+
     const submissionId: number = this.route.snapshot.params["id"];
     const grade: number = this.gradeForm.get("grade").value;
     const feedback: string = this.gradeForm.get("feedback").value;
-  
+
     const gradeSubmissionDto: GradeSubmissionDto = {
       grade: grade,
       feedback: feedback,
     };
-  
+
     this.submissionService
       .gradeSubmission$(submissionId, gradeSubmissionDto)
       .subscribe(
