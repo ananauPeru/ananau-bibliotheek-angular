@@ -50,6 +50,7 @@ export class StudentShortExerciseModel extends BaseExerciseModel {
   maxGrade?: number;
   gradedBy?: UserModel;
   author: UserModel;
+  status: string;
 }
 
 /**

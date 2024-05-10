@@ -83,8 +83,13 @@
                     {{ exercise.assignedTo.firstName }}
                     {{ exercise.assignedTo.lastName }}
                   </td>
-                  <td>{{ exercise.deadLine | date:'medium' }}</td>
-                  <td>{{ getStatus(exercise) }}</td>
+                  <td *ngIf="exercise.deadline; else noDeadline">
+                    {{ exercise.deadline | date : "medium" }}
+                  </td>
+                  <ng-template #noDeadline>
+                    <td>No deadline</td>
+                  </ng-template>
+                  <td>{{ exercise.status }}</td>
                   <td>{{ getGradeText(exercise) }}</td>
                   <td>{{ getGradedByText(exercise) }}</td>
                   <td class="text-right">
@@ -105,8 +110,13 @@
               <tbody>
                 <tr *ngFor="let exercise of exercises$ | async">
                   <td>{{ exercise.title }}</td>
-                  <td>{{ exercise.deadline | date:'medium' }}</td>
-                  <td>{{ getStatus(exercise) }}</td>
+                  <td *ngIf="exercise.deadline; else noDeadline">
+                    {{ exercise.deadline | date : "medium" }}
+                  </td>
+                  <ng-template #noDeadline>
+                    <td>No deadline</td>
+                  </ng-template>
+                  <td>{{ exercise.status }}</td>
                   <td>{{ getGradeText(exercise) }}</td>
                   <td>{{ getGradedByText(exercise) }}</td>
                   <td class="text-right">

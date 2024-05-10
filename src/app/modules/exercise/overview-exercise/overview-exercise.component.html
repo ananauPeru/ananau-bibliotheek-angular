@@ -13,9 +13,14 @@
                 {{ exercise.title }}
               </h3>
               <div>
-                <button class="btn btn-secondary" routerLink="/exercise/list">
+                <button *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher]); else student_back_nav" class="btn btn-secondary" routerLink="/exercise/list">
                   Back to List
                 </button>
+                <ng-template #student_back_nav>
+                  <button class="btn btn-secondary" routerLink="/exercise/shared">
+                    Back to List
+                  </button>
+                </ng-template>
               </div>
             </div>
           </div>

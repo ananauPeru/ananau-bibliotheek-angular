@@ -167,6 +167,7 @@ export class ExerciseHttpService {
             exercise.deadline = this.DateUtil.utcToPeruvianDate(exercise.deadline);
           } else {
             exercise.deadline = new Date();
+            exercise.deadline = exercise.deadline.setDate(exercise.deadline.getDate() + 1);
           }
 
           exercise.submissions = exercise.submissions.map(
