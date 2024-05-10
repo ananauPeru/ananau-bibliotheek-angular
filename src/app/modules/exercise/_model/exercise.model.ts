@@ -5,6 +5,7 @@ class BaseExerciseModel {
   title: string;
   description?: string;
   type: TypeModel;
+  deadline?: Date;
 }
 
 class UserModel {

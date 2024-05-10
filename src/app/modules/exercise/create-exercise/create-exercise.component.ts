@@ -9,6 +9,7 @@ import { CreateExerciseDto } from "../_dto/create-exercise-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
 import { ExerciseModel, TypeModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-create-exercise",
@@ -20,6 +21,7 @@ export class CreateExerciseComponent implements OnInit {
   public files: File[] = [];
   public exerciseTypes$: Observable<TypeModel[]>;
   public isLoading: boolean = false;
+  public settingsForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +29,8 @@ export class CreateExerciseComponent implements OnInit {
     public AuthUtil: AuthUtil,
     private itemStorageService: ItemStorageService,
     private router: Router,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private modalService: NgbModal,
   ) {}
 
   ngOnInit() {
@@ -43,8 +46,12 @@ export class CreateExerciseComponent implements OnInit {
       maxGrade: ['', [Validators.required, Validators.min(1)]],
       files: [[], Validators.required]
     });
+
+    this.settingsForm = this.formBuilder.group({
+      deadline: [0, Validators.required],
+    });
   }
-  
+
   onExerciseTypeChange() {
     if (this.shouldHideMaxGrade()) {
       this.exerciseForm.get('maxGrade').setValue(null);
@@ -120,5 +127,10 @@ export class CreateExerciseComponent implements OnInit {
       this.files.splice(index, 1);
       this.exerciseForm.get("files").setValue(this.files);
     }
+  }
+  saveSettings() {
+    const timeLimitMinutes = this.settingsForm.get("timeLimitMinutes").value;
+    this.exerciseForm.patchValue({ timeLimitMinutes });
+    this.modalService.dismissAll();
   }
 }
