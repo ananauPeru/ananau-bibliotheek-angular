@@ -41,6 +41,10 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   private initializeForm() {
+
+    const oneWeekFromNow = new Date();
+    oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+
     this.exerciseForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: '',
@@ -50,7 +54,7 @@ export class CreateExerciseComponent implements OnInit {
     });
 
     this.settingsForm = this.formBuilder.group({
-      deadline: [0, Validators.required],
+      deadline: [oneWeekFromNow, Validators.required],
     });
   }
 
