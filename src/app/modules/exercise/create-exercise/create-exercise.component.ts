@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -17,6 +17,8 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./create-exercise.component.scss"],
 })
 export class CreateExerciseComponent implements OnInit {
+  @ViewChild("settingsModal") settingsModal: TemplateRef<any>;
+
   public exerciseForm: FormGroup;
   public files: File[] = [];
   public exerciseTypes$: Observable<TypeModel[]>;
@@ -128,9 +130,15 @@ export class CreateExerciseComponent implements OnInit {
       this.exerciseForm.get("files").setValue(this.files);
     }
   }
+
+  // Settings Modal
+  openSettingsModal() {
+    this.modalService.open(this.settingsModal, { centered: true });
+  }
+
   saveSettings() {
-    const timeLimitMinutes = this.settingsForm.get("timeLimitMinutes").value;
-    this.exerciseForm.patchValue({ timeLimitMinutes });
+    const deadline = this.settingsForm.get("deadline").value;
+    this.exerciseForm.patchValue({ deadline });
     this.modalService.dismissAll();
   }
 }
