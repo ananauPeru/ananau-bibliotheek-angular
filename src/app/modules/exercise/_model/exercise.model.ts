@@ -64,3 +64,9 @@ export class AssignedExerciseModel extends BaseExerciseModel {
   gradedBy?: UserModel;
   assignedTo: UserModel;
 }
+
+export class LearnersModel extends UserModel {
+  /* id: number;
+  firstName: string;
+  lastName: string; */
+}

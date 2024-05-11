@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ExerciseModel, StudentExerciseModel } from "../_model/exercise.model";
+import { ExerciseModel, LearnersModel, StudentExerciseModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
 import { SubmissionService } from "../_service/submission/submission.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -22,11 +22,11 @@ export class OverviewExerciseComponent implements OnInit {
   @ViewChild("assignModal") assignModal: TemplateRef<any>;
 
   exercise$: Observable<ExerciseModel | StudentExerciseModel>;
-  assignedExercise$: Observable<AssignedExerciseModel>;
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
   isLoading = false;
   assignForm: FormGroup;
+  learners$: Observable<LearnersModel[]>;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -44,12 +44,19 @@ export class OverviewExerciseComponent implements OnInit {
   ngOnInit() {
     this.getExerciseDetails();
     this.initializeSubmissionForm();
+    this.initializeAssignForm();
+    this.getLearners();
   }
 
   getExerciseDetails() {
     const exerciseId: number = this.route.snapshot.params["id"];
     this.exercise$ = this.exerciseService.getExerciseById$(exerciseId);
   }
+
+  getLearners() {
+    this.learners$ = this.exerciseService.getLearners$();
+  }
+
   fileUrlToName(fileUrl: string): string {
     if (!fileUrl) return "";
     if (fileUrl.includes("blob:")) return "File";
@@ -61,6 +68,13 @@ export class OverviewExerciseComponent implements OnInit {
     this.submissionForm = this.formBuilder.group({
       files: [[], Validators.required],
       comment: [""],
+    });
+  }
+
+  initializeAssignForm() {
+    this.assignForm = this.formBuilder.group({
+      deadline: ['', Validators.required],
+      assignTo: [null, Validators.required]
     });
   }
 
@@ -153,13 +167,6 @@ export class OverviewExerciseComponent implements OnInit {
     }
   }
 
-  compareStudents(
-    type1: AssignedExerciseModel,
-    type2: AssignedExerciseModel
-  ): boolean {
-    return type1 && type2 ? type1.learnerId === type2.learnerId : type1 === type2;
-  }
-
   // Assign Modal
   openAssignModal() {
     this.modalService.open(this.assignModal, { centered: true });
@@ -167,7 +174,8 @@ export class OverviewExerciseComponent implements OnInit {
 
   saveAssign() {
     const deadline = this.assignForm.get("deadline").value;
-    this.assignForm.patchValue({ deadline });
+    const assignedTo = this.assignForm.get("assignTo").value;
+    this.assignForm.patchValue({ deadline, assignedTo });
     this.modalService.dismissAll();
   }
 
