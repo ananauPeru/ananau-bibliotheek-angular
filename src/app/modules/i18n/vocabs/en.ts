@@ -29,6 +29,7 @@ export const locale = {
       DISCONFIRM: "Disconfirm",
       BACK: "Back",
       SHARE: "Share",
+      ASSIGN: "Assign",
     },
     NEDERLANDS: "Dutch",
     ENGELS: "English",

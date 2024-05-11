@@ -30,6 +30,7 @@ export const locale = {
       DISCONFIRM: "Desconfirmar",
       BACK: "Espalda",
       SHARE: "Compartir",
+      ASSIGN: "Asignar",
     },
 
     // MENU

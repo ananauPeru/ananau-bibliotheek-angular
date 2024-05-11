@@ -26,6 +26,7 @@ export const locale = {
       DISCONFIRM: "Bevestiging intrekken",
       BACK: "Terug",
       SHARE: "Delen",
+      ASSIGN: "Toewijzen",
     },
     MENU: {
       NEW: "nieuw",
@@ -897,7 +898,7 @@ export const locale = {
         SECONDS: "Seconden",
       },
       LIST: {
-        PAGE_TITLE: "Check-in Lijst", 
+        PAGE_TITLE: "Check-in Lijst",
         FIRST_NAME: "Voornaam",
         LAST_NAME: "Familienaam",
         CHECK_IN_STATUS: "Check-in status",
