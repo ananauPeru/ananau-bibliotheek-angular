@@ -3,21 +3,37 @@
     <!-- Header -->
     <div class="row">
       <div class="col-12">
-        <div
-          class="card-header border-0 text-white"
-          style="background-color: white; padding: 2rem 2.25rem"
-        >
+        <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem">
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
               <h3 class="card-title font-weight-bolder text-dark">
                 {{ exercise.title }}
               </h3>
-              <div>
-                <button *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher]); else student_back_nav" class="btn btn-secondary" routerLink="/exercise/list">
+              <div class="d-flex align-items-center">
+
+
+
+
+                <button
+                  *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"
+                  class="btn btn-secondary order-1 order-md-2 mr-2"
+                  (click)="openAssignModal()"
+                >
+                  <span class="d-none d-md-inline ml-1">Create assign</span>
+                </button>
+
+
+
+
+
+
+
+
+                <button *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])" class="btn btn-secondary order-1 order-md-2 mr-2" routerLink="/exercise/list">
                   Back to List
                 </button>
                 <ng-template #student_back_nav>
-                  <button class="btn btn-secondary" routerLink="/exercise/shared">
+                  <button class="btn btn-secondary order-1 order-md-2 mr-2" routerLink="/exercise/shared">
                     Back to List
                   </button>
                 </ng-template>
@@ -253,5 +269,48 @@
     <div class="spinner-border text-primary" role="status">
       <span class="sr-only">Loading...</span>
     </div>
+  </div>
+</ng-template>
+
+<!-- Assign Modal -->
+<ng-template #assignModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Create Assignment</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="assignForm">
+      <div class="form-group row align-items-center">
+        <label class="col-12 col-md-5 font-weight-bold mb-2 mb-md-0"
+          >Deadline Date</label>
+        <div class="col-12 col-md-7">
+          <input
+            type="date"
+            class="form-control form-control-solid"
+            formControlName="deadline"
+            required
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer d-flex">
+    <button
+      type="button"
+      class="btn btn-secondary ml-auto"
+      (click)="modal.dismiss()"
+    >
+      {{ "BUTTONS.CANCEL" | translate }}
+    </button>
+    <button type="button" class="btn btn-primary" (click)="saveAssign()">
+      {{ "BUTTONS.SAVE" | translate }}
+    </button>
   </div>
 </ng-template>

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ExerciseModel, StudentExerciseModel } from "../_model/exercise.model";
@@ -10,7 +10,8 @@ import { ToastrService } from "ngx-toastr";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
 import { CreateSubmissionDto } from "../_dto/create-submission-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
-import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
+import { AssignedExerciseModel, ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-overview-exercise",
@@ -18,10 +19,14 @@ import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submis
   styleUrls: ["./overview-exercise.component.scss"],
 })
 export class OverviewExerciseComponent implements OnInit {
+  @ViewChild("assignModal") assignModal: TemplateRef<any>;
+
   exercise$: Observable<ExerciseModel | StudentExerciseModel>;
+  assignedExercise$: Observable<AssignedExerciseModel>;
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
   isLoading = false;
+  assignForm: FormGroup;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -30,6 +35,7 @@ export class OverviewExerciseComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toast: ToastrService,
     private itemStorageService: ItemStorageService,
+    private modalService: NgbModal,
     private router: Router,
     public AuthUtil: AuthUtil,
     private cdr: ChangeDetectorRef
@@ -145,6 +151,24 @@ export class OverviewExerciseComponent implements OnInit {
     } else {
       return `${submission.grade} / ${exercise.maxGrade}`;
     }
+  }
+
+  compareStudents(
+    type1: AssignedExerciseModel,
+    type2: AssignedExerciseModel
+  ): boolean {
+    return type1 && type2 ? type1.learnerId === type2.learnerId : type1 === type2;
+  }
+
+  // Assign Modal
+  openAssignModal() {
+    this.modalService.open(this.assignModal, { centered: true });
+  }
+
+  saveAssign() {
+    const deadline = this.assignForm.get("deadline").value;
+    this.assignForm.patchValue({ deadline });
+    this.modalService.dismissAll();
   }
 
 }
