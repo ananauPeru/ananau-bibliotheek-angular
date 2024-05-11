@@ -70,3 +70,9 @@ export class LearnersModel extends UserModel {
   firstName: string;
   lastName: string; */
 }
+
+ export class AssignedExerciseRequest {
+  learnerId: number;
+  exerciseId: number;
+  deadline: Date;
+} 

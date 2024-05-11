@@ -10,10 +10,6 @@
                 {{ exercise.title }}
               </h3>
               <div class="d-flex align-items-center">
-
-
-
-
                 <button
                   *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"
                   class="btn btn-secondary order-1 order-md-2 mr-2"
@@ -21,14 +17,6 @@
                 >
                   <span class="d-none d-md-inline ml-1">Create assign</span>
                 </button>
-
-
-
-
-
-
-
-
                 <button *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])" class="btn btn-secondary order-1 order-md-2 mr-2" routerLink="/exercise/list">
                   Back to List
                 </button>
@@ -299,15 +287,14 @@
           />
         </div>
       </div>
-
-
       <div class="form-group row align-items-center">
         <label class="col-12 col-md-5 font-weight-bold mb-2 mb-md-0">Assign to</label>
         <div class="col-12 col-md-7">
           <select
            class="form-control form-control-solid"
+           formControlName="assignedTo"
           >
-            <option [ngValue]="null">Select Spanish Learner</option>
+            <option [ngValue]="null" disabled selected>Select Spanish Learner</option>
             <option
              *ngFor="let learner of learners$ | async"
              [ngValue]="learner.id"
@@ -317,9 +304,6 @@
           </select>
         </div>
       </div>
-
-
-
     </form>
   </div>
   <div class="modal-footer d-flex">
@@ -330,7 +314,9 @@
     >
       {{ "BUTTONS.CANCEL" | translate }}
     </button>
-    <button type="button" class="btn btn-primary" (click)="saveAssign()">
+    <button type="button" class="btn btn-primary"
+      (click)="saveAssign()"
+    >
       {{ "BUTTONS.ASSIGN" | translate }}
     </button>
   </div>

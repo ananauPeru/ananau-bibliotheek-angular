@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ExerciseModel, LearnersModel, StudentExerciseModel } from "../_model/exercise.model";
+import { AssignedExerciseRequest, ExerciseModel, LearnersModel, StudentExerciseModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
 import { SubmissionService } from "../_service/submission/submission.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -10,7 +10,7 @@ import { ToastrService } from "ngx-toastr";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
 import { CreateSubmissionDto } from "../_dto/create-submission-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
-import { AssignedExerciseModel, ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
+import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -74,7 +74,7 @@ export class OverviewExerciseComponent implements OnInit {
   initializeAssignForm() {
     this.assignForm = this.formBuilder.group({
       deadline: ['', Validators.required],
-      assignTo: [null, Validators.required]
+      assignedTo: [null, Validators.required]
     });
   }
 
@@ -173,10 +173,29 @@ export class OverviewExerciseComponent implements OnInit {
   }
 
   saveAssign() {
-    const deadline = this.assignForm.get("deadline").value;
-    const assignedTo = this.assignForm.get("assignTo").value;
-    this.assignForm.patchValue({ deadline, assignedTo });
-    this.modalService.dismissAll();
-  }
+    if (this.assignForm.valid) {
+      const deadline = this.assignForm.get("deadline").value;
+      const assignedTo = this.assignForm.get("assignedTo").value;
+      const exerciseId: number = this.route.snapshot.params["id"];
 
+      const assignedExercise: AssignedExerciseRequest = {
+        learnerId: assignedTo,
+        exerciseId: exerciseId,
+        deadline: deadline,
+      };
+
+      this.exerciseService.assignExercise$(assignedExercise).subscribe(
+        () => {
+          this.toast.success("Exercise assigned successfully!");
+          this.assignForm.reset();
+          this.modalService.dismissAll();
+          this.router.navigateByUrl("/exercise/shared");
+        },
+        (error) => {
+          console.error('Error assigning exercise:', error);
+          this.toast.error("Error assigning exercise");
+        }
+      );
+    }
+  }
 }

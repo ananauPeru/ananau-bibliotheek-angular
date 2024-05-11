@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import {
   AssignedExerciseModel,
+  AssignedExerciseRequest,
   ExerciseModel,
   LearnersModel,
   StudentExerciseModel,
@@ -250,4 +251,23 @@ export class ExerciseHttpService {
       })
     );
   }
+
+  assignExercise$(assignedExercise: AssignedExerciseRequest): Observable<AssignedExerciseRequest> {
+    return this.http.post<any>(`${TEMP_API_URL}/assign`, assignedExercise).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): AssignedExerciseRequest => {
+        if (response.success) {
+          return response;
+        } else {
+          throwError(response.error);
+        }
+      })
+    );
+  }
+
 }

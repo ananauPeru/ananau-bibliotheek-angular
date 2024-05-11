@@ -79,8 +79,8 @@ export class TeacherShortSubmissionModel extends BaseSubmissionModel {
 }
 
 
-export class AssignedExerciseModel {
+/* export class AssignedExerciseModel {
   learnerId: number;
   exerciseId: number;
   deadline: Date;
-}
+} */
