@@ -6,6 +6,7 @@ import { UserModel } from "../_models/user.model";
 import { AuthService } from "../_services/auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { LayoutService } from "../../../_metronic/core";
+import { DomainUtil } from "src/app/_utils/domain_util";
 
 @Component({
   selector: "app-login",
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public DomainUtil: DomainUtil
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in

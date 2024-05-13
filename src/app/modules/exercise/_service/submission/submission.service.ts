@@ -31,7 +31,7 @@ export class SubmissionService {
     return this.submissionHttpService.createSubmission$(id, createSubmissionDto);
   }
 
-  gradeSubmission$(id: number, gradeSubmissionDto: GradeSubmissionDto): Observable<void> {
+  gradeSubmission$(id: number, gradeSubmissionDto: GradeSubmissionDto): Observable<boolean> {
     return this.submissionHttpService.gradeSubmission$(id, gradeSubmissionDto);
   }
 

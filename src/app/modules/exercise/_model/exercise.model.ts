@@ -5,7 +5,6 @@ class BaseExerciseModel {
   title: string;
   description?: string;
   type: TypeModel;
-  author: UserModel;
 }
 
 class UserModel {
@@ -14,7 +13,7 @@ class UserModel {
   lastName: string;
 }
 
-class TypeModel {
+export class TypeModel {
   id: number;
   name: string;
 }
@@ -27,12 +26,19 @@ export class ExerciseModel extends BaseExerciseModel {
   maxGrade?: number; //this is optional for the practice. it should be required for the homework
   fileUrls: string[];
   submissions?: ExerciseSubmissionModel[];
+  author: UserModel;
+}
+
+export class StudentExerciseModel extends ExerciseModel {
+  deadline: Date;
 }
 
 /**
  * GET exercise/teacher
  */
-export class TeacherShortExerciseModel extends BaseExerciseModel {}
+export class TeacherShortExerciseModel extends BaseExerciseModel {
+  author: UserModel;
+}
 
 /**
  * GET exercise/student
@@ -42,15 +48,32 @@ export class StudentShortExerciseModel extends BaseExerciseModel {
   grade?: number;
   maxGrade?: number;
   gradedBy?: UserModel;
+  author: UserModel;
+  status: string;
 }
 
 /**
- * GET exercise/assigned
+ * GET exercise/assigns
  */
-export class AssignedExerciseModel  extends BaseExerciseModel {
+export class AssignedExerciseModel extends BaseExerciseModel {
+  exerciseId?: number;
   deadline?: Date;
   grade?: number;
-  maxGrade?: number;
+  maxGrade: number;
   gradedBy?: UserModel;
-  assignedTo?: UserModel;
+  assignedTo: UserModel;
+}
+
+/**
+ * GET exercise/learners
+ */
+export class LearnerModel extends UserModel {}
+
+/**
+ * POST exercise/assign
+ */
+export class AssignExerciseRequest {
+  learnerId: number;
+  exerciseId: number;
+  deadline: Date;
 }

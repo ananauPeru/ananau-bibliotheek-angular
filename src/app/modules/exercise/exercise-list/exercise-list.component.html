@@ -9,10 +9,10 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
             <h3 class="card-title font-weight-bolder text-dark">
-             Exercise List
+              {{ "EXERCISE.LIST.LIST" | translate }}
             </h3>
             <button class="btn btn-primary" routerLink="/exercise/create">
-              Create Exercise
+              {{ "EXERCISE.LIST.CREATE_EXERCISE" | translate }}
             </button>
           </div>
         </div>
@@ -40,7 +40,9 @@
             (input)="onSearchTermChange($event.target.value)"
           />
         </div>
-        <div class="feedback ml-2">Search for title or author</div>
+        <div class="feedback ml-2">
+          {{ "EXERCISE.LIST.SEARCH_TITLE_AUTHOR" | translate }}
+        </div>
       </div>
     </div>
     <!--end::Form Group-->
@@ -52,11 +54,11 @@
           <table class="table table-fit">
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th class="text-right">Actions</th>
+                <th>{{ "EXERCISE.LIST.TITLE" | translate }}</th>
+                <th>{{ "EXERCISE.LIST.AUTHOR" | translate }}</th>
+                <th>{{ "EXERCISE.LIST.DESCRIPTION" | translate }}</th>
+                <th>{{ "EXERCISE.LIST.TYPE" | translate }}</th>
+                <th class="text-right">{{ "EXERCISE.LIST.ACTIONS" | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -66,6 +68,16 @@
                 <td>{{ exercise.description }}</td>
                 <td>{{ exercise.type.name }}</td>
                 <td class="text-right">
+                  <button
+                  *ngIf="learners$ | async as learners"
+                    type="button"
+                    class="btn btn-outline-secondary mr-2"
+                    placement="top"
+                    ngbTooltip="Assign"
+                    (click)="openAssignModal(exercise.id, learners)"
+                  >
+                    <i class="fas fa-share-alt pr-0"></i>
+                  </button>
                   <button
                     type="button"
                     class="btn btn-primary"

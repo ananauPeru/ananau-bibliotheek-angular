@@ -31,11 +31,10 @@ export class SharedExercisesListComponent implements OnInit {
   }
 
 
-  getStatus(exercise: StudentShortExerciseModel | AssignedExerciseModel): ExerciseStatus {
-    return ExerciseStatus.Assigned
-  }
-
   getGradeText(exercise: StudentShortExerciseModel | AssignedExerciseModel): string {
+    if(exercise.type.id === 2) {
+      return "Not available"
+    }
     if(exercise.grade != null) {
       return exercise.grade + "/" + exercise.maxGrade;
     } else {
@@ -44,6 +43,9 @@ export class SharedExercisesListComponent implements OnInit {
   }
 
   getGradedByText(exercise: StudentShortExerciseModel | AssignedExerciseModel): string {
+    if(exercise.type.id === 2) {
+      return "Not available"
+    }
     if(exercise.grade != null) {
       return exercise.gradedBy.firstName + " " + exercise.gradedBy.lastName;
     } else {
@@ -57,4 +59,5 @@ export enum ExerciseStatus {
   Assigned = 'Assigned',
   Submitted = 'Submitted',
   Graded = 'Graded',
+  NotAvailable = 'Not available'
 }

@@ -1,0 +1,99 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ "EXERCISE.ASSIGN.TITLE" | translate }}
+  </h5>
+  <button type="button" class="close" (click)="activeModal.dismiss()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="assignForm">
+    <div class="form-group row align-items-center">
+      <label class="col-12 col-md-3 font-weight-bold mb-2 h3 mb-md-0">
+        {{ "EXERCISE.ASSIGN.DEADLINE" | translate }}
+      </label>
+      <div class="col-12 col-md-9">
+        <div class="row">
+          <div class="col-12">
+            <input
+              type="date"
+              class="form-control form-control-solid"
+              [class.is-invalid]="
+                assignForm.get('deadline').invalid &&
+                (assignForm.get('deadline').dirty || assignForm.get('deadline').touched)
+              "
+              formControlName="deadline"
+              required
+            />
+          </div>
+          <div class="col-12">
+            <small
+              class="text-danger"
+              *ngIf="
+                assignForm.get('deadline').invalid &&
+                (assignForm.get('deadline').dirty || assignForm.get('deadline').touched)
+              "
+            >
+              <span *ngIf="assignForm.get('deadline').errors?.required" class="d-block">
+                {{ "EXERCISE.ASSIGN.DEADLINE_REQUIRED" | translate }}
+              </span>
+              <span *ngIf="assignForm.get('deadline').errors?.pastDate">
+                {{ "EXERCISE.ASSIGN.DEADLINE_FUTURE" | translate }}
+              </span>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row align-items-center">
+      <label class="col-12 col-md-3 font-weight-bold mb-2 h3 mb-md-0">
+        {{ "EXERCISE.ASSIGN.ASSIGN_TO" | translate }}
+      </label>
+      <div class="col-12 col-md-9">
+        <div class="row">
+          <div class="col-12">
+            <select
+              class="form-control form-control-solid"
+              [class.is-invalid]="
+                assignForm.get('learner').invalid &&
+                (assignForm.get('learner').dirty || assignForm.get('learner').touched)
+              "
+              formControlName="learner"
+            >
+              <option [ngValue]="null" disabled selected>
+                {{ "EXERCISE.ASSIGN.SELECT_LEARNER" | translate }}
+              </option>
+              <option *ngFor="let learner of learners" [ngValue]="learner.id">
+                {{ learner.firstName }} {{ learner.lastName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12">
+            <small
+              class="text-danger"
+              *ngIf="
+                assignForm.get('learner').invalid &&
+                (assignForm.get('learner').dirty || assignForm.get('learner').touched)
+              "
+            >
+              {{ "EXERCISE.ASSIGN.LEARNER_REQUIRED" | translate }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer d-flex">
+  <button type="button" class="btn btn-secondary ml-auto" (click)="activeModal.dismiss()">
+    {{ "BUTTONS.CANCEL" | translate }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="assignForm.invalid"
+    (click)="onAssign()"
+  >
+    {{ "BUTTONS.ASSIGN" | translate }}
+  </button>
+</div>

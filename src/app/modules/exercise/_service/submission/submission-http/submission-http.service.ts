@@ -5,12 +5,13 @@ import {
   SubmissionResultModel,
   TeacherShortSubmissionModel,
 } from "../../../_model/submission.model";
-import { Observable, throwError } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { catchError, map } from "rxjs/operators";
 import { CreateSubmissionDto } from "../../../_dto/create-submission-dto";
 import { GradeSubmissionDto } from "../../../_dto/grade-submission-dto";
+import { DateUtil } from "src/app/_utils/date_util";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/submission`;
 
@@ -18,7 +19,7 @@ const API_URL = `${environment.apiUrl}/spanish_platform/submission`;
   providedIn: "root",
 })
 export class SubmissionHttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private DateUtil: DateUtil) {}
 
   getTeacherSubmissions$(
     searchTerm: string,
@@ -41,7 +42,10 @@ export class SubmissionHttpService {
         }),
         map((response: any): TeacherShortSubmissionModel[] => {
           if (response.success) {
-            return response.submissions;
+            return response.submissions.map((submission: TeacherShortSubmissionModel) => {
+              submission.gradedAt = this.DateUtil.utcToPeruvianDate(submission.gradedAt);
+              return submission;
+            });
           } else {
             throwError(response.error);
             return [];
@@ -57,7 +61,7 @@ export class SubmissionHttpService {
   ): Observable<StudentShortSubmissionModel[]> {
     return this.http
       .get<StudentShortSubmissionModel[]>(
-        `${API_URL}/student?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
+        `${API_URL}/learner?searchTerm=${searchTerm}&page=${page}&pageSize=${pageSize}`,
         {
           responseType: "json",
         }
@@ -71,7 +75,11 @@ export class SubmissionHttpService {
         }),
         map((response: any): any => {
           if (response.success) {
-            return response.submissions;
+            return response.submissions.map((submission: StudentShortSubmissionModel) => {
+              submission.gradedAt = this.DateUtil.utcToPeruvianDate(submission.gradedAt);
+              return submission;
+            }
+            );
           } else {
             throwError(response.error);
             return [];
@@ -82,7 +90,7 @@ export class SubmissionHttpService {
 
   getStudentSubmissionById$(id: number): Observable<StudentSubmissionModel> {
     return this.http
-      .get<StudentSubmissionModel>(`${API_URL}/${id}/student`, {
+      .get<StudentSubmissionModel>(`${API_URL}/${id}/learner`, {
         responseType: "json",
       })
       .pipe(
@@ -94,7 +102,9 @@ export class SubmissionHttpService {
         }),
         map((response: any): StudentSubmissionModel => {
           if (response.success) {
-            return response.submission;
+            const submission = response.submission;
+            submission.gradedAt = this.DateUtil.utcToPeruvianDate(submission.gradedAt);
+            return submission;
           } else {
             throwError(response.error);
             return null;
@@ -117,7 +127,9 @@ export class SubmissionHttpService {
         }),
         map((response: any): StudentSubmissionModel => {
           if (response.success) {
-            return response.submission;
+            const submission = response.submission;
+            submission.gradedAt = this.DateUtil.utcToPeruvianDate(submission.gradedAt);
+            return submission;
           } else {
             throwError(response.error);
             return null;
@@ -155,9 +167,9 @@ export class SubmissionHttpService {
   gradeSubmission$(
     id: number,
     gradeSubmissionDto: GradeSubmissionDto
-  ): Observable<void> {
+  ): Observable<boolean> {
     return this.http
-      .post<any>(`${API_URL}/${id}/grade`, gradeSubmissionDto, {
+      .put<boolean>(`${API_URL}/${id}/grade`, gradeSubmissionDto, {
         responseType: "json",
       })
       .pipe(
@@ -167,12 +179,12 @@ export class SubmissionHttpService {
           }
           return throwError(error);
         }),
-        map((response: any): void => {
+        map((response: any): boolean => {
           if (response.success) {
-            return;
+            return response.success;
           } else {
             throwError(response.error);
-            return null;
+            return response.success;
           }
         })
       );

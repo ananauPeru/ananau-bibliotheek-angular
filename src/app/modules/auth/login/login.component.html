@@ -166,7 +166,9 @@
     
       <!--begin::Form group-->
       <div class="form-group">
-        <re-captcha (resolved)="resolved($event)"  siteKey="6LekQMMcAAAAAJwZNIRKPgWqjMMY0qMZdp0nRAkK" ></re-captcha>
+        <ng-container *ngIf="DomainUtil.isSubdomain(DomainUtil.Subdomain.Team)">
+          <re-captcha (resolved)="resolved($event)"  siteKey="6LekQMMcAAAAAJwZNIRKPgWqjMMY0qMZdp0nRAkK" ></re-captcha>
+        </ng-container>
          <!--captcha code voor online site: 6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU -->
       </div>
       <!--end::Form group-->

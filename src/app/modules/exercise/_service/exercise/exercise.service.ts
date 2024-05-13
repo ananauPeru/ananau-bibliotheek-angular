@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ExerciseHttpService } from './exercise-http/exercise-http.service';
 import { Observable } from 'rxjs';
-import { AssignedExerciseModel, ExerciseModel, StudentShortExerciseModel, TeacherShortExerciseModel } from '../../_model/exercise.model';
+import { AssignExerciseRequest, AssignedExerciseModel, ExerciseModel, LearnerModel, StudentExerciseModel, StudentShortExerciseModel, TeacherShortExerciseModel, TypeModel } from '../../_model/exercise.model';
 import { AuthUtil, Roles } from 'src/app/_utils/auth_util';
 import { CreateExerciseDto } from '../../_dto/create-exercise-dto';
 
@@ -28,7 +28,7 @@ constructor(private exerciseHttpService: ExerciseHttpService, private AuthUtil: 
     }
   }
 
-  getExerciseById$(id: number): Observable<ExerciseModel> {
+  getExerciseById$(id: number): Observable<ExerciseModel | StudentExerciseModel> {
     if (this.AuthUtil.permitted([Roles.SuperAdmin, Roles.SpanishTeacher])) {
       return this.exerciseHttpService.getTeacherExerciseById$(id);
     } else {
@@ -40,4 +40,15 @@ constructor(private exerciseHttpService: ExerciseHttpService, private AuthUtil: 
     return this.exerciseHttpService.createExercise$(createExerciseDto);
   }
 
+  assignExercise$(assignedExercise: AssignExerciseRequest): Observable<AssignExerciseRequest> {
+    return this.exerciseHttpService.assignExercise$(assignedExercise);
+  }
+
+  getExerciseTypes$(): Observable<TypeModel[]> {
+    return this.exerciseHttpService.getExerciseTypes$();
+  }
+
+  getLearners$(): Observable<LearnerModel[]> {
+    return this.exerciseHttpService.getLearners$();
+  }
 }

@@ -10,14 +10,14 @@
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
               <h3 class="card-title font-weight-bolder text-dark">
-                Submission Details
+                {{ "EXERCISE.SUBMISSION.SUBMISSION_DETAILS" | translate }}
               </h3>
               <div>
                 <button
                   class="btn btn-secondary"
                   routerLink="/exercise/submission/list"
                 >
-                  Back to List
+                  {{ "BUTTONS.BACK_TO_LIST" | translate }}
                 </button>
               </div>
             </div>
@@ -31,43 +31,61 @@
       <div class="row">
         <div class="col-12">
           <p class="mb-4">
-            <strong>Exercise:</strong> {{ submission.exerciseName }}
+            <strong>
+              {{ "EXERCISE.SUBMISSION.EXERCISE" | translate }}
+            </strong> {{ submission.exercise.title }}
           </p>
-          <p class="mb-4" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"><strong>Submitted By:</strong> {{ submission.submittedBy.firstName }} {{ submission.submittedBy.lastName }}</p>
+          <p class="mb-4" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"><strong>
+            {{ "EXERCISE.SUBMISSION.SUBMITTED_BY" | translate }}
+          </strong> {{ submission.submittedBy.firstName }} {{ submission.submittedBy.lastName }}</p>
           <p class="mb-4">
-            <strong>Submission Date:</strong>
-            {{ submission.submissionDate | date }}
+            <strong>
+              {{ "EXERCISE.SUBMISSION.SUBMISSION_DATE" | translate }}
+            </strong>
+            {{ submission.submittedAt | date }}
           </p>
-          <p class="mb-4"><strong>Comment:</strong> {{ submission.comment }}</p>
+          <p class="mb-4"><strong>
+            {{ "EXERCISE.SUBMISSION.COMMENT" | translate }}
+          </strong> {{ submission.comment }}</p>
           <ng-container *ngIf="submission.grade; else notGradedDetail">
             <p class="mb-4">
-              <strong>Grade:</strong> {{ submission.grade }} /
-              {{ submission.maxGrade }}
+              <strong>
+                {{ "EXERCISE.SUBMISSION.GRADE" | translate }}
+              </strong> {{ submission.grade }} /
+              {{ submission.exercise.maxGrade }}
             </p>
             <p *ngIf="submission.feedback; else noFeedback">
-              <strong>Feedback:</strong> {{ submission.feedback }}
+              <strong>
+                {{ "EXERCISE.SUBMISSION.FEEDBACK" | translate }}
+              </strong> {{ submission.feedback }}
             </p>
             <ng-template #noFeedback>
-              <p><strong>Feedback:</strong> No feedback given</p>
+              <p><strong>
+                {{ "EXERCISE.SUBMISSION.FEEDBACK" | translate }}
+              </strong> {{ "EXERCISE.SUBMISSION.NO_FEEDBACK" | translate }} </p>
             </ng-template>
           </ng-container>
           <ng-template #notGradedDetail>
-            <p><strong>Grade:</strong> Not graded yet</p>
+            <p><strong>
+              {{ "EXERCISE.SUBMISSION.GRADE" | translate }}
+            </strong> {{ "EXERCISE.SUBMISSION.NO_GRADE" | translate }} </p>
           </ng-template>
         </div>
       </div>
 
       <div class="row mb-4">
         <div class="col-12">
-          <h4>Submitted Files</h4>
+          <h4>
+            {{ "EXERCISE.SUBMISSION.FILES" | translate }}
+          </h4>
           <ul class="list-group">
             <li
               class="list-group-item d-flex justify-content-between align-items-center"
               *ngFor="let fileUrl of submission.fileUrls"
             >
-              {{ fileUrl }}
+              {{ fileUrlToName(fileUrl) }}
               <button class="btn btn-primary" (click)="downloadFile(fileUrl)">
-                Download
+                {{ "BUTTONS.DOWNLOAD" | translate }}
               </button>
             </li>
           </ul>
@@ -76,23 +94,31 @@
 
       <div class="row" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">
         <div class="col-12">
-          <h4>Edit Grade</h4>
+          <h4>
+            {{ "EXERCISE.SUBMISSION.EDIT_GRADE" | translate }}
+          </h4>
           <ng-container *ngIf="!isEditingGrade; else editGradeTemplate">
             <p *ngIf="submission.grade; else notGradedTemplate">
-              <strong>Current Grade:</strong> {{ submission.grade }} /
-              {{ submission.maxGrade }}
+              <strong>
+                {{ "EXERCISE.SUBMISSION.CURRENT_GRADE" | translate }}
+              </strong> {{ submission.grade }} /
+              {{ submission.exercise.maxGrade }}
             </p>
             <ng-template #notGradedTemplate>
-              <p>Not graded yet</p>
+              <p>
+                {{ "EXERCISE.SUBMISSION.NO_GRADE" | translate }}
+              </p>
             </ng-template>
             <button class="btn btn-primary" (click)="isEditingGrade = true">
-              Edit Grade
+              {{ "EXERCISE.SUBMISSION.EDIT_GRADE" | translate }}
             </button>
           </ng-container>
           <ng-template #editGradeTemplate>
             <form [formGroup]="gradeForm" (ngSubmit)="submitGrade()">
               <div class="form-group">
-                <label for="grade">Grade:</label>
+                <label for="grade">
+                  {{ "EXERCISE.SUBMISSION.GRADE" | translate }}
+                </label>
                 <div class="input-group">
                   <input
                     type="number"
@@ -100,18 +126,31 @@
                     id="grade"
                     formControlName="grade"
                     min="0"
-                    [max]="submission.maxGrade"
+                    [max]="submission.exercise.maxGrade"
                     required
                   />
                   <div class="input-group-append">
                     <span class="input-group-text"
-                      >/ {{ submission.maxGrade }}</span
+                      >/ {{ submission.exercise.maxGrade }}</span
                     >
                   </div>
                 </div>
+                <div *ngIf="gradeForm.get('grade').invalid && gradeForm.get('grade').touched">
+                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.required">
+                    {{ "EXERCISE.SUBMISSION.GRADE_REQUIRED" | translate }}
+                  </small>
+                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.min">
+                    {{ "EXERCISE.SUBMISSION.GRADE_POSITIVE" | translate }}
+                  </small>
+                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.max">
+                    {{ "EXERCISE.SUBMISSION.GRADE_LESS_THAN" | translate }} {{ submission.exercise.maxGrade }}.
+                  </small>
+                </div>
               </div>
               <div class="form-group">
-                <label for="feedback">Feedback:</label>
+                <label for="feedback">
+                  {{ "EXERCISE.SUBMISSION.FEEDBACK" | translate }}
+                </label>
                 <textarea
                   class="form-control"
                   id="feedback"
@@ -125,14 +164,14 @@
                   class="btn btn-primary"
                   [disabled]="gradeForm.invalid"
                 >
-                  Submit Grade
+                  {{ "EXERCISE.SUBMISSION.GRADE_SUBMIT" | translate }}
                 </button>
                 <button
                   type="button"
                   class="btn btn-secondary ml-2"
                   (click)="isEditingGrade = false"
                 >
-                  Cancel
+                 {{ "BUTTONS.CANCEL" | translate }}
                 </button>
               </div>
             </form>
@@ -149,7 +188,7 @@
     style="height: 100vh"
   >
     <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
     </div>
   </div>
 </ng-template>
