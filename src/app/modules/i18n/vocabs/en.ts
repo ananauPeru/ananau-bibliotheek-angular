@@ -1046,6 +1046,7 @@ export const locale = {
       SUBMISSION: {
         SUBMISSION_DETAILS: "Submission Details",
         EXERCISE: "Exercise:",
+        SUBMITTED_BY: "Submitted By:",
         SUBMISSION_DATE: "Submission Date:",
         COMMENT: "Comment:",
         GRADE: "Grade:",
@@ -1062,7 +1063,7 @@ export const locale = {
         LIST:"Submission List",
         SEARCH_USER_EXERCISE: "Search for user or exercise",
         EXERCISE_TABLE: "Exercise",
-        SUBMITTED_BY: "Submitted By",
+        SUBMITTED_BY_TABLE: "Submitted By",
         SUBMISSION_DATE_TABLE: "Submission Date",
         GRADE_TABLE: "Grade",
         GRADE_DATE_TABLE: "Grade Date",

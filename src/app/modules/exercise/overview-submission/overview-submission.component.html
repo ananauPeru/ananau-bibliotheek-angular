@@ -35,7 +35,9 @@
               {{ "EXERCISE.SUBMISSION.EXERCISE" | translate }}
             </strong> {{ submission.exercise.title }}
           </p>
-          <p class="mb-4" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"><strong>Submitted By:</strong> {{ submission.submittedBy.firstName }} {{ submission.submittedBy.lastName }}</p>
+          <p class="mb-4" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"><strong>
+            {{ "EXERCISE.SUBMISSION.SUBMITTED_BY" | translate }}
+          </strong> {{ submission.submittedBy.firstName }} {{ submission.submittedBy.lastName }}</p>
           <p class="mb-4">
             <strong>
               {{ "EXERCISE.SUBMISSION.SUBMISSION_DATE" | translate }}
