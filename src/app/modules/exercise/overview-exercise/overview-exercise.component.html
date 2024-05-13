@@ -15,14 +15,16 @@
                   class="btn btn-secondary order-1 order-md-2 mr-2"
                   (click)="openAssignModal()"
                 >
-                  <span class="d-none d-md-inline ml-1">Create assign</span>
+                  <span class="d-none d-md-inline ml-1">
+                    {{ "BUTTONS.CREATE_ASSIGN" | translate }}
+                  </span>
                 </button>
                 <button *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])" class="btn btn-secondary order-1 order-md-2 mr-2" routerLink="/exercise/list">
-                  Back to List
+                  {{ "BUTTONS.BACK_TO_LIST" | translate }}
                 </button>
                 <ng-template #student_back_nav>
                   <button class="btn btn-secondary order-1 order-md-2 mr-2" routerLink="/exercise/shared">
-                    Back to List
+                    {{ "BUTTONS.BACK_TO_LIST" | translate }}
                   </button>
                 </ng-template>
               </div>
@@ -55,7 +57,7 @@
               class="btn btn-primary mb-2"
               (click)="downloadAllFiles(exercise.fileUrls)"
             >
-              Download All Files
+              {{ "BUTTONS.DOWNLOAD_ALL_FILES" | translate }}
             </button>
           </div>
           <ul class="list-group">
@@ -130,7 +132,7 @@
                             submission.id
                           }}"
                         >
-                          Details
+                          {{ "BUTTONS.DETAILS" | translate }}
                         </button>
                       </td>
                     </tr>
@@ -139,7 +141,7 @@
               </div>
             </ng-container>
             <ng-template #noSubmissions>
-              <p>{{ "EXERCISE.OVERVIEW.NO_SUBMISSIONS" | translate }}No submissions yet</p>
+              <p>{{ "EXERCISE.OVERVIEW.NO_SUBMISSIONS" | translate }}</p>
             </ng-template>
           </div>
         </div>
@@ -231,7 +233,7 @@
                   (click)="submitExercise(exercise)"
                   [disabled]="submissionForm.invalid || isLoading"
                 >
-                  Submit
+                  {{ "BUTTONS.SUBMIT" | translate }}
                 </button>
               </form>
             </ng-container>

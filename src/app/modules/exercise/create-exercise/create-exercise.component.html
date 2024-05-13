@@ -33,7 +33,7 @@
                   <span
                     *ngIf="!isLoading; else loadingSpan"
                     class="d-none d-md-inline ml-1"
-                    >Create</span
+                    >{{ "BUTTONS.CREATE" | translate }}</span
                   >
                   <ng-template #loadingSpan>
                     <span class="d-none d-md-inline ml-1">Loading...</span>
@@ -202,4 +202,4 @@
     </div>
   </div>
 </form>
-<ng-template #noAccess> You have no access to this page. </ng-template>
+<ng-template #noAccess> {{ "MENU.NO_ACCESS" | translate }} </ng-template>
