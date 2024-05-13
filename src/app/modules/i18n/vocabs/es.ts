@@ -88,6 +88,7 @@ export const locale = {
         EXERCISE: "Ejercicio",
         EXERCISE_LIST: "Lista de ejercicios",
         CREATE_EXERCISE: "Crear ejercicio",
+        ASSIGNED_EXERCISES: "Ejercicios asignados",
         EXERCISE_OVERVIEW: "Resumen del ejercicio",
         SUBMITIONS: "Envíos",
         MY_STUDENTS: "Mis estudiantes",

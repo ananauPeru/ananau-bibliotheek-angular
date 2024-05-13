@@ -84,6 +84,7 @@ export const locale = {
         EXERCISE: "Oefening",
         EXERCISE_LIST: "Oefeningenlijst",
         CREATE_EXERCISE: "Oefening aanmaken",
+        ASSIGNED_EXERCISES: "Toegewezen oefeningen",
         EXERCISE_OVERVIEW: "Oefening overzicht",
         SUBMITIONS: "Inzendingen",
         MY_STUDENTS: "Mijn studenten",

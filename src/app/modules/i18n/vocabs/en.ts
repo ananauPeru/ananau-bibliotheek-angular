@@ -99,6 +99,7 @@ export const locale = {
         EXERCISE: "Exercise",
         EXERCISE_LIST: "Exercise list",
         CREATE_EXERCISE: "Create exercise",
+        ASSIGNED_EXERCISES: "Assigned exercises",
         EXERCISE_OVERVIEW: "Exercise overview",
         SUBMITIONS: "Submitions",
         MY_STUDENTS: "My students",
