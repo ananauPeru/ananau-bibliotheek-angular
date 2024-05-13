@@ -63,7 +63,7 @@
             <strong>
               {{ "EXERCISE.OVERVIEW.TYPE" | translate }}
             </strong>
-            {{ exercise.type.name }}
+            {{ exercise.type.name | translate }}
           </p>
         </div>
         <div class="col-12">
@@ -180,7 +180,7 @@
           </h4>
           <div class="d-flex justify-content-center align-items-center">
             <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
+              <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
             </div>
           </div>
         </ng-template>
@@ -244,7 +244,7 @@
                     style="height: 200px"
                   >
                     <div class="spinner-border text-primary" role="status">
-                      <span class="sr-only">Loading...</span>
+                      <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
                     </div>
                   </div>
                 </ng-template>
@@ -295,7 +295,7 @@
     style="height: 100vh"
   >
     <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
     </div>
   </div>
 </ng-template>

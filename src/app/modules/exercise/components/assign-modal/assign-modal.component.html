@@ -1,5 +1,7 @@
 <div class="modal-header">
-  <h5 class="modal-title">Assign Exercise</h5>
+  <h5 class="modal-title">
+    {{ "EXERCISE.ASSIGN.TITLE" | translate }}
+  </h5>
   <button type="button" class="close" (click)="activeModal.dismiss()" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -7,7 +9,9 @@
 <div class="modal-body">
   <form [formGroup]="assignForm">
     <div class="form-group row align-items-center">
-      <label class="col-12 col-md-3 font-weight-bold mb-2 h3 mb-md-0">Deadline</label>
+      <label class="col-12 col-md-3 font-weight-bold mb-2 h3 mb-md-0">
+        {{ "EXERCISE.ASSIGN.DEADLINE" | translate }}
+      </label>
       <div class="col-12 col-md-9">
         <div class="row">
           <div class="col-12">
@@ -31,10 +35,10 @@
               "
             >
               <span *ngIf="assignForm.get('deadline').errors?.required" class="d-block">
-                Deadline is required
+                {{ "EXERCISE.ASSIGN.DEADLINE_REQUIRED" | translate }}
               </span>
               <span *ngIf="assignForm.get('deadline').errors?.pastDate">
-                Deadline must be in the future
+                {{ "EXERCISE.ASSIGN.DEADLINE_FUTURE" | translate }}
               </span>
             </small>
           </div>
@@ -72,7 +76,7 @@
                 (assignForm.get('learner').dirty || assignForm.get('learner').touched)
               "
             >
-              Learner is required
+              {{ "EXERCISE.ASSIGN.LEARNER_REQUIRED" | translate }}
             </small>
           </div>
         </div>

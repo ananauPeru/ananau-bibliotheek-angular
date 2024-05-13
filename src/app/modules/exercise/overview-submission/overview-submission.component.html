@@ -10,14 +10,14 @@
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
               <h3 class="card-title font-weight-bolder text-dark">
-                Submission Details
+                {{ "EXERCISE.SUBMISSION.SUBMISSION_DETAILS" | translate }}
               </h3>
               <div>
                 <button
                   class="btn btn-secondary"
                   routerLink="/exercise/submission/list"
                 >
-                  Back to List
+                  {{ "BUTTONS.BACK_TO_LIST" | translate }}
                 </button>
               </div>
             </div>
@@ -31,11 +31,15 @@
       <div class="row">
         <div class="col-12">
           <p class="mb-4">
-            <strong>Exercise:</strong> {{ submission.exercise.title }}
+            <strong>
+              {{ "EXERCISE.SUBMISSION.EXERCISE" | translate }}
+            </strong> {{ submission.exercise.title }}
           </p>
           <p class="mb-4" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"><strong>Submitted By:</strong> {{ submission.submittedBy.firstName }} {{ submission.submittedBy.lastName }}</p>
           <p class="mb-4">
-            <strong>Submission Date:</strong>
+            <strong>
+              {{ "EXERCISE.SUBMISSION.SUBMISSION_DATE" | translate }}
+            </strong>
             {{ submission.submittedAt | date }}
           </p>
           <p class="mb-4"><strong>Comment:</strong> {{ submission.comment }}</p>
@@ -160,7 +164,7 @@
     style="height: 100vh"
   >
     <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
     </div>
   </div>
 </ng-template>

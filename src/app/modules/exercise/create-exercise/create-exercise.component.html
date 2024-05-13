@@ -36,7 +36,7 @@
                     >{{ "BUTTONS.CREATE" | translate }}</span
                   >
                   <ng-template #loadingSpan>
-                    <span class="d-none d-md-inline ml-1">Loading...</span>
+                    <span class="d-none d-md-inline ml-1"> {{ "MENU.LOADING_DOTS" | translate }} </span>
                   </ng-template>
                 </button>
               </div>
@@ -117,7 +117,7 @@
               *ngFor="let type of exerciseTypes$ | async"
               [value]="type.id"
             >
-              {{ type.name }}
+              {{ type.name | translate }}
             </option>
           </select>
           <small
