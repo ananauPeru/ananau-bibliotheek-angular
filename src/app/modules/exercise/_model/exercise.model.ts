@@ -11,7 +11,6 @@ class UserModel {
   id: number;
   firstName: string;
   lastName: string;
-  author: UserModel;
 }
 
 export class TypeModel {
@@ -65,14 +64,16 @@ export class AssignedExerciseModel extends BaseExerciseModel {
   assignedTo: UserModel;
 }
 
-export class LearnersModel extends UserModel {
-  /* id: number;
-  firstName: string;
-  lastName: string; */
-}
+/**
+ * GET exercise/learners
+ */
+export class LearnerModel extends UserModel {}
 
- export class AssignedExerciseRequest {
+/**
+ * POST exercise/assign
+ */
+export class AssignExerciseRequest {
   learnerId: number;
   exerciseId: number;
   deadline: Date;
-} 
+}

@@ -69,6 +69,16 @@
                 <td>{{ exercise.type.name }}</td>
                 <td class="text-right">
                   <button
+                  *ngIf="learners$ | async as learners"
+                    type="button"
+                    class="btn btn-outline-secondary mr-2"
+                    placement="top"
+                    ngbTooltip="Assign"
+                    (click)="openAssignModal(exercise.id, learners)"
+                  >
+                    <i class="fas fa-share-alt pr-0"></i>
+                  </button>
+                  <button
                     type="button"
                     class="btn btn-primary"
                     placement="top"

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import {
+  AssignExerciseRequest,
   AssignedExerciseModel,
-  AssignedExerciseRequest,
   ExerciseModel,
-  LearnersModel,
+  LearnerModel,
   StudentExerciseModel,
   StudentShortExerciseModel,
   TeacherShortExerciseModel,
@@ -233,15 +233,15 @@ export class ExerciseHttpService {
     );
   }
 
-  getLearners$(): Observable<LearnersModel[]> {
-    return this.http.get<LearnersModel[]>(`${API_URL}/learners`).pipe(
+  getLearners$(): Observable<LearnerModel[]> {
+    return this.http.get<LearnerModel[]>(`${API_URL}/learners`).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.error("Login please...");
         }
         return throwError(error);
       }),
-      map((response: any): LearnersModel[] => {
+      map((response: any): LearnerModel[] => {
         if (response.success) {
           return response.learners;
         } else {
@@ -252,7 +252,7 @@ export class ExerciseHttpService {
     );
   }
 
-  assignExercise$(assignedExercise: AssignedExerciseRequest): Observable<AssignedExerciseRequest> {
+  assignExercise$(assignedExercise: AssignExerciseRequest): Observable<AssignExerciseRequest> {
     return this.http.post<any>(`${TEMP_API_URL}/assign`, assignedExercise).pipe(
       catchError((error) => {
         if (error.status == 401) {
@@ -260,7 +260,7 @@ export class ExerciseHttpService {
         }
         return throwError(error);
       }),
-      map((response: any): AssignedExerciseRequest => {
+      map((response: any): AssignExerciseRequest => {
         if (response.success) {
           return response;
         } else {

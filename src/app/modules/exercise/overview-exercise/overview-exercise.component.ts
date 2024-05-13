@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AssignedExerciseRequest, ExerciseModel, LearnersModel, StudentExerciseModel } from "../_model/exercise.model";
+import { AssignExerciseRequest, ExerciseModel, LearnerModel, StudentExerciseModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
 import { SubmissionService } from "../_service/submission/submission.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -12,6 +12,7 @@ import { CreateSubmissionDto } from "../_dto/create-submission-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
 import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AssignModalComponent } from "../components/assign-modal/assign-modal.component";
 
 @Component({
   selector: "app-overview-exercise",
@@ -19,14 +20,13 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./overview-exercise.component.scss"],
 })
 export class OverviewExerciseComponent implements OnInit {
-  @ViewChild("assignModal") assignModal: TemplateRef<any>;
 
   exercise$: Observable<ExerciseModel | StudentExerciseModel>;
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
   isLoading = false;
   assignForm: FormGroup;
-  learners$: Observable<LearnersModel[]>;
+  learners$: Observable<LearnerModel[]>;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -167,35 +167,13 @@ export class OverviewExerciseComponent implements OnInit {
     }
   }
 
-  // Assign Modal
-  openAssignModal() {
-    this.modalService.open(this.assignModal, { centered: true });
-  }
-
-  saveAssign() {
-    if (this.assignForm.valid) {
-      const deadline = this.assignForm.get("deadline").value;
-      const assignedTo = this.assignForm.get("assignedTo").value;
-      const exerciseId: number = this.route.snapshot.params["id"];
-
-      const assignedExercise: AssignedExerciseRequest = {
-        learnerId: assignedTo,
-        exerciseId: exerciseId,
-        deadline: deadline,
-      };
-
-      this.exerciseService.assignExercise$(assignedExercise).subscribe(
-        () => {
-          this.toast.success("Exercise assigned successfully!");
-          this.assignForm.reset();
-          this.modalService.dismissAll();
-          this.router.navigateByUrl("/exercise/shared");
-        },
-        (error) => {
-          console.error('Error assigning exercise:', error);
-          this.toast.error("Error assigning exercise");
-        }
-      );
-    }
+  openAssignModal(learners: LearnerModel[]) {
+    const modalRef = this.modalService.open(AssignModalComponent, {
+      centered: true,
+      backdrop: 'static',
+      keyboard: false
+    });
+    modalRef.componentInstance.learners = learners;
+    modalRef.componentInstance.exerciseId = this.route.snapshot.params["id"];
   }
 }
