@@ -31,13 +31,6 @@ export class SharedExercisesListComponent implements OnInit {
   }
 
 
-  getStatus(exercise: StudentShortExerciseModel | AssignedExerciseModel): ExerciseStatus {
-    if(exercise.type.id === 2) {
-      return ExerciseStatus.NotAvailable
-    }
-    return ExerciseStatus.Assigned
-  }
-
   getGradeText(exercise: StudentShortExerciseModel | AssignedExerciseModel): string {
     if(exercise.type.id === 2) {
       return "Not available"

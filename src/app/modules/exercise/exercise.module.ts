@@ -14,6 +14,7 @@ import { NgxDropzoneModule } from "ngx-dropzone";
 import { SubmissionListComponent } from "./submission-list/submission-list.component";
 import { OverviewSubmissionComponent } from "./overview-submission/overview-submission.component";
 import { SharedExercisesListComponent } from "./shared-exercises-list/shared-exercises-list.component";
+import { AssignModalComponent } from "./components/assign-modal/assign-modal.component";
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { SharedExercisesListComponent } from "./shared-exercises-list/shared-exe
     SubmissionListComponent,
     OverviewSubmissionComponent,
     SharedExercisesListComponent,
+    AssignModalComponent,
   ],
   providers: [DatePipe, AsyncPipe],
 })

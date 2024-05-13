@@ -11,7 +11,6 @@ class UserModel {
   id: number;
   firstName: string;
   lastName: string;
-  author: UserModel;
 }
 
 export class TypeModel {
@@ -50,6 +49,7 @@ export class StudentShortExerciseModel extends BaseExerciseModel {
   maxGrade?: number;
   gradedBy?: UserModel;
   author: UserModel;
+  status: string;
 }
 
 /**
@@ -62,4 +62,18 @@ export class AssignedExerciseModel extends BaseExerciseModel {
   maxGrade: number;
   gradedBy?: UserModel;
   assignedTo: UserModel;
+}
+
+/**
+ * GET exercise/learners
+ */
+export class LearnerModel extends UserModel {}
+
+/**
+ * POST exercise/assign
+ */
+export class AssignExerciseRequest {
+  learnerId: number;
+  exerciseId: number;
+  deadline: Date;
 }

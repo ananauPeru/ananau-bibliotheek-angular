@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ExerciseModel, StudentExerciseModel } from "../_model/exercise.model";
+import { AssignExerciseRequest, ExerciseModel, LearnerModel, StudentExerciseModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
 import { SubmissionService } from "../_service/submission/submission.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -13,6 +13,8 @@ import { AuthUtil } from "src/app/_utils/auth_util";
 import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
 import { HttpClient } from "@angular/common/http";
 import { ScansFile } from "../../library/_models/scans-file";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AssignModalComponent } from "../components/assign-modal/assign-modal.component";
 
 @Component({
   selector: "app-overview-exercise",
@@ -20,11 +22,14 @@ import { ScansFile } from "../../library/_models/scans-file";
   styleUrls: ["./overview-exercise.component.scss"],
 })
 export class OverviewExerciseComponent implements OnInit {
+
   exercise$: Observable<ExerciseModel | StudentExerciseModel>;
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
   isLoading = false;
   public previewImageForNonImageFiles: File;
+  assignForm: FormGroup;
+  learners$: Observable<LearnerModel[]>;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -33,6 +38,7 @@ export class OverviewExerciseComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toast: ToastrService,
     private itemStorageService: ItemStorageService,
+    private modalService: NgbModal,
     private router: Router,
     public AuthUtil: AuthUtil,
     private cdr: ChangeDetectorRef,
@@ -43,6 +49,8 @@ export class OverviewExerciseComponent implements OnInit {
     this.getExerciseDetails();
     this.initializeSubmissionForm();
     this.loadPdfIcon();
+    this.initializeAssignForm();
+    this.getLearners();
   }
 
   getExerciseDetails() {
@@ -72,6 +80,9 @@ export class OverviewExerciseComponent implements OnInit {
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
     return imageExtensions.includes(fileExtension);
   }
+  getLearners() {
+    this.learners$ = this.exerciseService.getLearners$();
+  }
 
   fileUrlToName(fileUrl: string): string {
     if (!fileUrl) return "";
@@ -84,6 +95,13 @@ export class OverviewExerciseComponent implements OnInit {
     this.submissionForm = this.formBuilder.group({
       files: [[], Validators.required],
       comment: [""],
+    });
+  }
+
+  initializeAssignForm() {
+    this.assignForm = this.formBuilder.group({
+      deadline: ['', Validators.required],
+      assignedTo: [null, Validators.required]
     });
   }
 
@@ -176,4 +194,13 @@ export class OverviewExerciseComponent implements OnInit {
     }
   }
 
+  openAssignModal(learners: LearnerModel[]) {
+    const modalRef = this.modalService.open(AssignModalComponent, {
+      centered: true,
+      backdrop: 'static',
+      keyboard: false
+    });
+    modalRef.componentInstance.learners = learners;
+    modalRef.componentInstance.exerciseId = this.route.snapshot.params["id"];
+  }
 }
