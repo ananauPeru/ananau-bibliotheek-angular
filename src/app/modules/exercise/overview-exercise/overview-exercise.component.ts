@@ -140,7 +140,6 @@ export class OverviewExerciseComponent implements OnInit {
 
       this.submissionService.createSubmission$(exercise.id, submission).subscribe(
         (submissionResultModel: SubmissionResultModel) => {
-          console.log("Submission created successfully!");
           this.toast.success("Submission created successfully!");
           this.submissionForm.reset();
           this.submissionFiles = [];

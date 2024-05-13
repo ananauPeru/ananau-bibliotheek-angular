@@ -157,32 +157,6 @@ export class CreateExerciseComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
-/*   public getPreviewImageURL(file: File): string {
-    console.log("File extension:", file.name.split('.').pop()?.toLowerCase());
-    if (this.isImageFile(file)) {
-      console.log("Image file:", file.name);
-      return URL.createObjectURL(file);
-    } else {
-      console.log("Non-image file:", file.name);
-      return this.pdfIconUrl;
-    }
-  } */
-
-
-
-
-
-
-
-
-
-
   // File handling
   onSelectFiles(event: NgxDropzoneChangeEvent) {
     this.files.push(...event.addedFiles);

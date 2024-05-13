@@ -39,7 +39,6 @@ export class AssignModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.learners);
     this.learners = this.learners || [];
   }
 
