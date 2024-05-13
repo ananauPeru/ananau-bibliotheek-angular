@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
             <h3 class="card-title font-weight-bolder text-dark">
-              Shared Exercises
+              {{ "EXERCISE.SHARED.SHARED_EXERCISES" | translate }}
             </h3>
           </div>
         </div>
@@ -37,7 +37,9 @@
             (input)="onSearchTermChange($event.target.value)"
           />
         </div>
-        <div class="feedback ml-2">Search for title or author</div>
+        <div class="feedback ml-2">
+          {{ "EXERCISE.LIST.SEARCH_TITLE_AUTHOR" | translate }}
+        </div>
       </div>
     </div>
     <!--end::Form Group-->
@@ -49,7 +51,7 @@
           <table class="table table-fit">
             <thead>
               <tr>
-                <th>Title</th>
+                <th>{{ "EXERCISE.CREATE.TITLE" | translate }}</th>
                 <th
                   *ngIf="
                     AuthUtil.permitted([
@@ -58,13 +60,13 @@
                     ])
                   "
                 >
-                  Assigned To
+                  {{ "EXERCISE.ASSIGN.ASSIGN_TO" | translate }}
                 </th>
-                <th>Deadline</th>
-                <th>Status</th>
-                <th>Grade</th>
-                <th>Graded By</th>
-                <th class="text-right">Actions</th>
+                <th>{{ "EXERCISE.SHARED.DEADLINE" | translate }}</th>
+                <th>{{ "EXERCISE.SHARED.STATUS" | translate }}</th>
+                <th>{{ "EXERCISE.OVERVIEW.GRADE" | translate }}</th>
+                <th>{{ "EXERCISE.OVERVIEW.GRADED_BY" | translate }}</th>
+                <th class="text-right">{{ "EXERCISE.LIST.ACTIONS" | translate }}</th>
               </tr>
             </thead>
             <ng-container
@@ -87,7 +89,7 @@
                     {{ exercise.deadline | date : "medium" }}
                   </td>
                   <ng-template #noDeadline>
-                    <td>No deadline</td>
+                    <td>No {{ "EXERCISE.SHARED.NO_DEADLINE" | translate }}</td>
                   </ng-template>
                   <td>{{ exercise.status }}</td>
                   <td>{{ getGradeText(exercise) }}</td>
@@ -114,7 +116,9 @@
                     {{ exercise.deadline | date : "medium" }}
                   </td>
                   <ng-template #noDeadline>
-                    <td>No deadline</td>
+                    <td>
+                      {{ "EXERCISE.SHARED.NO_DEADLINE" | translate }}
+                    </td>
                   </ng-template>
                   <td>{{ exercise.status }}</td>
                   <td>{{ getGradeText(exercise) }}</td>

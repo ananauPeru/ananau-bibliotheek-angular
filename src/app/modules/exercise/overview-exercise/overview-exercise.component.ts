@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { ExerciseService } from "../_service/exercise/exercise.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ExerciseModel, StudentExerciseModel } from "../_model/exercise.model";
+import { AssignExerciseRequest, ExerciseModel, LearnerModel, StudentExerciseModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
 import { SubmissionService } from "../_service/submission/submission.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -11,6 +11,8 @@ import { ItemStorageService } from "src/app/shared/services/file-storage/file-st
 import { CreateSubmissionDto } from "../_dto/create-submission-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
 import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AssignModalComponent } from "../components/assign-modal/assign-modal.component";
 
 @Component({
   selector: "app-overview-exercise",
@@ -18,10 +20,13 @@ import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submis
   styleUrls: ["./overview-exercise.component.scss"],
 })
 export class OverviewExerciseComponent implements OnInit {
+
   exercise$: Observable<ExerciseModel | StudentExerciseModel>;
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
   isLoading = false;
+  assignForm: FormGroup;
+  learners$: Observable<LearnerModel[]>;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -30,6 +35,7 @@ export class OverviewExerciseComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toast: ToastrService,
     private itemStorageService: ItemStorageService,
+    private modalService: NgbModal,
     private router: Router,
     public AuthUtil: AuthUtil,
     private cdr: ChangeDetectorRef
@@ -38,12 +44,19 @@ export class OverviewExerciseComponent implements OnInit {
   ngOnInit() {
     this.getExerciseDetails();
     this.initializeSubmissionForm();
+    this.initializeAssignForm();
+    this.getLearners();
   }
 
   getExerciseDetails() {
     const exerciseId: number = this.route.snapshot.params["id"];
     this.exercise$ = this.exerciseService.getExerciseById$(exerciseId);
   }
+
+  getLearners() {
+    this.learners$ = this.exerciseService.getLearners$();
+  }
+
   fileUrlToName(fileUrl: string): string {
     if (!fileUrl) return "";
     if (fileUrl.includes("blob:")) return "File";
@@ -55,6 +68,13 @@ export class OverviewExerciseComponent implements OnInit {
     this.submissionForm = this.formBuilder.group({
       files: [[], Validators.required],
       comment: [""],
+    });
+  }
+
+  initializeAssignForm() {
+    this.assignForm = this.formBuilder.group({
+      deadline: ['', Validators.required],
+      assignedTo: [null, Validators.required]
     });
   }
 
@@ -147,4 +167,13 @@ export class OverviewExerciseComponent implements OnInit {
     }
   }
 
+  openAssignModal(learners: LearnerModel[]) {
+    const modalRef = this.modalService.open(AssignModalComponent, {
+      centered: true,
+      backdrop: 'static',
+      keyboard: false
+    });
+    modalRef.componentInstance.learners = learners;
+    modalRef.componentInstance.exerciseId = this.route.snapshot.params["id"];
+  }
 }

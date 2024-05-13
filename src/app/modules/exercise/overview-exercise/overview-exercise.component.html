@@ -12,13 +12,40 @@
               <h3 class="card-title font-weight-bolder text-dark">
                 {{ exercise.title }}
               </h3>
-              <div>
-                <button *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher]); else student_back_nav" class="btn btn-secondary" routerLink="/exercise/list">
-                  Back to List
+              <div class="d-flex align-items-center">
+                <button
+                  *ngIf="
+                    AuthUtil.permitted([
+                      AuthUtil.roles.SuperAdmin,
+                      AuthUtil.roles.SpanishTeacher
+                    ]) && learners$ | async as learners
+                  "
+                  class="btn btn-secondary order-1 order-md-2 mr-2"
+                  (click)="openAssignModal(learners)"
+                >
+                  <i class="fas fa-share-alt pr-0"></i>
+                  <span class="d-none d-md-inline ml-1">
+                    {{ "BUTTONS.ASSIGN" | translate }}
+                  </span>
+                </button>
+                <button
+                  *ngIf="
+                    AuthUtil.permitted([
+                      AuthUtil.roles.SuperAdmin,
+                      AuthUtil.roles.SpanishTeacher
+                    ])
+                  "
+                  class="btn btn-secondary order-1 order-md-2 mr-2"
+                  routerLink="/exercise/list"
+                >
+                  {{ "BUTTONS.BACK_TO_LIST" | translate }}
                 </button>
                 <ng-template #student_back_nav>
-                  <button class="btn btn-secondary" routerLink="/exercise/shared">
-                    Back to List
+                  <button
+                    class="btn btn-secondary order-1 order-md-2 mr-2"
+                    routerLink="/exercise/shared"
+                  >
+                    {{ "BUTTONS.BACK_TO_LIST" | translate }}
                   </button>
                 </ng-template>
               </div>
@@ -32,7 +59,12 @@
     <div class="card-body pt-2">
       <div class="row">
         <div class="col-12">
-          <p class="mb-4"><strong>Type:</strong> {{ exercise.type.name }}</p>
+          <p class="mb-4">
+            <strong>
+              {{ "EXERCISE.OVERVIEW.TYPE" | translate }}
+            </strong>
+            {{ exercise.type.name | translate }}
+          </p>
         </div>
         <div class="col-12">
           <p class="mb-4">{{ exercise.description || "No description" }}</p>
@@ -42,12 +74,14 @@
       <div class="row mb-4">
         <div class="col-12">
           <div class="d-flex justify-content-between">
-            <h4>Files</h4>
+            <h4>
+              {{ "EXERCISE.OVERVIEW.FILES" | translate }}
+            </h4>
             <button
               class="btn btn-primary mb-2"
               (click)="downloadAllFiles(exercise.fileUrls)"
             >
-              Download All Files
+              {{ "BUTTONS.DOWNLOAD_ALL_FILES" | translate }}
             </button>
           </div>
           <ul class="list-group">
@@ -57,7 +91,7 @@
             >
               {{ fileUrlToName(file) }}
               <button class="btn btn-primary" (click)="downloadFile(file)">
-                Download
+                {{ "BUTTONS.DOWNLOAD" | translate }}
               </button>
             </li>
           </ul>
@@ -67,7 +101,9 @@
       <ng-container *ngIf="exercise.type.id != 2">
         <div class="row mt-4" *ngIf="exercise.submissions as submissions">
           <div class="col-12">
-            <h4>Submissions</h4>
+            <h4>
+              {{ "EXERCISE.OVERVIEW.SUBMISSIONS" | translate }}
+            </h4>
             <ng-container *ngIf="submissions.length > 0; else noSubmissions">
               <div class="table-responsive">
                 <table class="table">
@@ -81,13 +117,17 @@
                           ])
                         "
                       >
-                        Submitted By
+                        {{ "EXERCISE.OVERVIEW.SUBMITTED_BY" | translate }}
                       </th>
-                      <th>Submission Date</th>
-                      <th>Grade</th>
-                      <th>Graded By</th>
-                      <th>Grading Date</th>
-                      <th>Details</th>
+                      <th>
+                        {{ "EXERCISE.OVERVIEW.SUBMISSION_DATE" | translate }}
+                      </th>
+                      <th>{{ "EXERCISE.OVERVIEW.GRADE" | translate }}</th>
+                      <th>{{ "EXERCISE.OVERVIEW.GRADED_BY" | translate }}</th>
+                      <th>
+                        {{ "EXERCISE.OVERVIEW.GRADING_DATE" | translate }}
+                      </th>
+                      <th>{{ "EXERCISE.OVERVIEW.DETAILS" | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -120,7 +160,7 @@
                             submission.id
                           }}"
                         >
-                          Details
+                          {{ "BUTTONS.DETAILS" | translate }}
                         </button>
                       </td>
                     </tr>
@@ -129,16 +169,18 @@
               </div>
             </ng-container>
             <ng-template #noSubmissions>
-              <p>No submissions yet</p>
+              <p>{{ "EXERCISE.OVERVIEW.NO_SUBMISSIONS" | translate }}</p>
             </ng-template>
           </div>
         </div>
 
         <ng-template #loadingSubmissions>
-          <h4>Submissions</h4>
+          <h4>
+            {{ "EXERCISE.OVERVIEW.SUBMISSIONS" | translate }}
+          </h4>
           <div class="d-flex justify-content-center align-items-center">
             <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
+              <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
             </div>
           </div>
         </ng-template>
@@ -149,7 +191,9 @@
           class="row"
         >
           <div class="col-12">
-            <h4>Submit Exercise</h4>
+            <h4>
+              {{ "EXERCISE.OVERVIEW.SUBMIT_EXERCISE" | translate }}
+            </h4>
             <ng-container
               *ngIf="!isPassedSubmissionDate(exercise); else pastSubmissionDate"
             >
@@ -191,7 +235,7 @@
                         submissionForm.get('files').touched)
                     "
                   >
-                    At least one file is required.
+                    {{ "EXERCISE.CREATE.FILES_REQUIRED" | translate }}
                   </small>
                 </div>
                 <ng-template #loadingDropzone>
@@ -200,7 +244,7 @@
                     style="height: 200px"
                   >
                     <div class="spinner-border text-primary" role="status">
-                      <span class="sr-only">Loading...</span>
+                      <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
                     </div>
                   </div>
                 </ng-template>
@@ -217,13 +261,13 @@
                   (click)="submitExercise(exercise)"
                   [disabled]="submissionForm.invalid || isLoading"
                 >
-                  Submit
+                  {{ "BUTTONS.SUBMIT" | translate }}
                 </button>
               </form>
             </ng-container>
             <ng-template #pastSubmissionDate>
               <p class="text-danger">
-                The deadline for this exercise has passed
+                {{ "EXERCISE.OVERVIEW.DEADLINE_PASSED" | translate }}
               </p>
             </ng-template>
           </div>
@@ -251,7 +295,7 @@
     style="height: 100vh"
   >
     <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
     </div>
   </div>
 </ng-template>

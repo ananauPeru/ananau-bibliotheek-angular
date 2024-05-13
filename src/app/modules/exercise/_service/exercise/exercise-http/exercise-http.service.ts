@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import {
+  AssignExerciseRequest,
   AssignedExerciseModel,
   ExerciseModel,
+  LearnerModel,
   StudentExerciseModel,
   StudentShortExerciseModel,
   TeacherShortExerciseModel,
@@ -128,7 +130,7 @@ export class ExerciseHttpService {
       map((response: any): ExerciseModel => {
         if (response.success) {
           const exercise = response.exercise;
-          
+
           exercise.submissions = exercise.submissions.map(
             (submission: ExerciseSubmissionModel): ExerciseSubmissionModel => {
               submission.submittedAt = this.DateUtil.utcToPeruvianDate(
@@ -230,4 +232,42 @@ export class ExerciseHttpService {
       })
     );
   }
+
+  getLearners$(): Observable<LearnerModel[]> {
+    return this.http.get<LearnerModel[]>(`${API_URL}/learners`).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): LearnerModel[] => {
+        if (response.success) {
+          return response.learners;
+        } else {
+          throwError(response.error);
+          return [];
+        }
+      })
+    );
+  }
+
+  assignExercise$(assignedExercise: AssignExerciseRequest): Observable<AssignExerciseRequest> {
+    return this.http.post<any>(`${TEMP_API_URL}/assign`, assignedExercise).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }),
+      map((response: any): AssignExerciseRequest => {
+        if (response.success) {
+          return response;
+        } else {
+          throwError(response.error);
+        }
+      })
+    );
+  }
+
 }
