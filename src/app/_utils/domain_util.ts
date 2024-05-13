@@ -25,7 +25,7 @@ export class DomainUtil {
     if(window.location.hostname.includes("localhost")) {
       return `http://${subdomainString}localhost:4200`;
     } else {
-      return `https://${subdomainString}ananau.com`;
+      return `https://${subdomainString}ananau.org`;
     }
   }
 
