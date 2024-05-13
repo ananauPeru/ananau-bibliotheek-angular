@@ -86,6 +86,7 @@ export class OverviewExerciseComponent implements OnInit {
 
   fileUrlToName(fileUrl: string): string {
     if (!fileUrl) return "";
+    if(fileUrl.includes("uniqueprefix-")) return fileUrl.split("uniqueprefix-").pop();;
     if (fileUrl.includes("blob:")) return "File";
     if (fileUrl.includes("http")) return fileUrl.split("/").pop();
     return fileUrl;
