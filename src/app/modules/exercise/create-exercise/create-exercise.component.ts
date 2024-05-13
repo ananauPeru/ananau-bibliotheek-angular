@@ -10,6 +10,7 @@ import { AuthUtil } from "src/app/_utils/auth_util";
 import { ExerciseModel, TypeModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { ScansFile } from "src/app/shared/models/storage/scan-file.model";
 
 @Component({
   selector: "app-create-exercise",
@@ -21,8 +22,7 @@ export class CreateExerciseComponent implements OnInit {
   public files: File[] = [];
   public exerciseTypes$: Observable<TypeModel[]>;
   public isLoading: boolean = false;
-  //public previewImageForNonImageFiles: File;
-  private pdfIconUrl = "/assets/images/pdf.png";
+  public previewImageForNonImageFiles: File;
 
 
   constructor(
@@ -38,6 +38,7 @@ export class CreateExerciseComponent implements OnInit {
   ngOnInit() {
     this.initializeForm();
     this.getExerciseTypes();
+    this.loadPdfIcon();
   }
 
   private initializeForm() {
@@ -48,6 +49,22 @@ export class CreateExerciseComponent implements OnInit {
       maxGrade: ['', [Validators.required, Validators.min(1)]],
       files: [[], Validators.required]
     });
+  }
+
+  private loadPdfIcon() {
+    this.http.get("/assets/images/pdf.png", { responseType: "blob" }).subscribe(
+      (image) => {
+        this.previewImageForNonImageFiles = new File([image], "pdf.png", {
+          type: "image/png",
+        });
+      },
+      (error) => console.error(error)
+    );
+  }
+
+  public getPreviewImage(file: ScansFile): File {
+    if (this.isImageFile(file)) return file;
+    else return this.previewImageForNonImageFiles;
   }
 
   onExerciseTypeChange() {
@@ -111,14 +128,6 @@ export class CreateExerciseComponent implements OnInit {
       this.toast.error("Error uploading files");
       this.isLoading = false;
     }
-  }
-
-
-
-
-
-  public getPreviewImage(file: File): File {
-    return this.isImageFile(file) ? file : null;
   }
 
   public getNonImagePreview(file: File): File {

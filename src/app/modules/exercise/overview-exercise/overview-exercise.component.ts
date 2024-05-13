@@ -11,6 +11,8 @@ import { ItemStorageService } from "src/app/shared/services/file-storage/file-st
 import { CreateSubmissionDto } from "../_dto/create-submission-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
 import { ExerciseSubmissionModel, SubmissionResultModel } from "../_model/submission.model";
+import { HttpClient } from "@angular/common/http";
+import { ScansFile } from "../../library/_models/scans-file";
 
 @Component({
   selector: "app-overview-exercise",
@@ -22,6 +24,7 @@ export class OverviewExerciseComponent implements OnInit {
   submissionForm: FormGroup;
   submissionFiles: File[] = [];
   isLoading = false;
+  public previewImageForNonImageFiles: File;
 
   constructor(
     private exerciseService: ExerciseService,
@@ -32,18 +35,44 @@ export class OverviewExerciseComponent implements OnInit {
     private itemStorageService: ItemStorageService,
     private router: Router,
     public AuthUtil: AuthUtil,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     this.getExerciseDetails();
     this.initializeSubmissionForm();
+    this.loadPdfIcon();
   }
 
   getExerciseDetails() {
     const exerciseId: number = this.route.snapshot.params["id"];
     this.exercise$ = this.exerciseService.getExerciseById$(exerciseId);
   }
+
+  private loadPdfIcon() {
+    this.http.get("/assets/images/pdf.png", { responseType: "blob" }).subscribe(
+      (image) => {
+        this.previewImageForNonImageFiles = new File([image], "pdf.png", {
+          type: "image/png",
+        });
+      },
+      (error) => console.error(error)
+    );
+  }
+
+
+  public getPreviewImage(file: ScansFile): File {
+    if (this.isImageFile(file)) return file;
+    else return this.previewImageForNonImageFiles;
+  }
+
+  private isImageFile(file: File): boolean {
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+    const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    return imageExtensions.includes(fileExtension);
+  }
+
   fileUrlToName(fileUrl: string): string {
     if (!fileUrl) return "";
     if (fileUrl.includes("blob:")) return "File";
