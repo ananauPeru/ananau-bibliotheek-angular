@@ -9,6 +9,8 @@ import { CreateExerciseDto } from "../_dto/create-exercise-dto";
 import { AuthUtil } from "src/app/_utils/auth_util";
 import { ExerciseModel, TypeModel } from "../_model/exercise.model";
 import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { ScansFile } from "src/app/shared/models/storage/scan-file.model";
 
 @Component({
   selector: "app-create-exercise",
@@ -20,6 +22,8 @@ export class CreateExerciseComponent implements OnInit {
   public files: File[] = [];
   public exerciseTypes$: Observable<TypeModel[]>;
   public isLoading: boolean = false;
+  public previewImageForNonImageFiles: File;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,12 +31,14 @@ export class CreateExerciseComponent implements OnInit {
     public AuthUtil: AuthUtil,
     private itemStorageService: ItemStorageService,
     private router: Router,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     this.initializeForm();
     this.getExerciseTypes();
+    this.loadPdfIcon();
   }
 
   private initializeForm() {
@@ -44,7 +50,23 @@ export class CreateExerciseComponent implements OnInit {
       files: [[], Validators.required]
     });
   }
-  
+
+  private loadPdfIcon() {
+    this.http.get("/assets/images/pdf.png", { responseType: "blob" }).subscribe(
+      (image) => {
+        this.previewImageForNonImageFiles = new File([image], "pdf.png", {
+          type: "image/png",
+        });
+      },
+      (error) => console.error(error)
+    );
+  }
+
+  public getPreviewImage(file: ScansFile): File {
+    if (this.isImageFile(file)) return file;
+    else return this.previewImageForNonImageFiles;
+  }
+
   onExerciseTypeChange() {
     if (this.shouldHideMaxGrade()) {
       this.exerciseForm.get('maxGrade').setValue(null);
@@ -107,6 +129,59 @@ export class CreateExerciseComponent implements OnInit {
       this.isLoading = false;
     }
   }
+
+  public getNonImagePreview(file: File): File {
+    if (!this.isImageFile(file)) {
+      const pdfIconFile = new File(["/assets/images/pdf.png"], "pdf.png", { type: "image/png" });
+      return pdfIconFile;
+    } else {
+      return null;
+    }
+  }
+
+
+
+
+
+  public isImageFile(file: File): boolean {
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+    const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    return imageExtensions.includes(fileExtension);
+  }
+
+  public getFilePreviewURL(file: File): string {
+    if (this.isImageFile(file)) {
+      return URL.createObjectURL(file);
+    } else {
+      return null;
+    }
+  }
+
+
+
+
+
+
+
+/*   public getPreviewImageURL(file: File): string {
+    console.log("File extension:", file.name.split('.').pop()?.toLowerCase());
+    if (this.isImageFile(file)) {
+      console.log("Image file:", file.name);
+      return URL.createObjectURL(file);
+    } else {
+      console.log("Non-image file:", file.name);
+      return this.pdfIconUrl;
+    }
+  } */
+
+
+
+
+
+
+
+
+
 
   // File handling
   onSelectFiles(event: NgxDropzoneChangeEvent) {

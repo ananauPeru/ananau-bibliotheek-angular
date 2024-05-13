@@ -178,14 +178,42 @@
                 {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
               </p>
             </ngx-dropzone-label>
-            <ngx-dropzone-image-preview
-              ngProjectAs="ngx-dropzone-preview"
-              *ngFor="let f of files"
-              [file]="f"
-              [removable]="true"
-              (removed)="onRemoveFile(f)"
-            >
-            </ngx-dropzone-image-preview>
+
+
+
+
+
+
+
+            <div *ngFor="let f of files" class="d-flex align-items-center mb-2">
+              <ngx-dropzone-image-preview
+                ngProjectAs="ngx-dropzone-preview"
+                [file]="getPreviewImage(f)"
+                [removable]="true"
+                (removed)="onRemoveFile(f)"
+              >
+                <div *ngIf="isImageFile(f)">
+                  <img [src]="getFilePreviewURL(f)" class="img-fluid" alt="File Preview" />
+                </div>
+                <div *ngIf="!isImageFile(f)">
+                  <img [src]="getNonImagePreview(f)" class="img-fluid mr-2" alt="PDF Icon" />
+                  <span>{{ f.name }}</span>
+                </div>
+              </ngx-dropzone-image-preview>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
           <small
             class="text-danger"

@@ -221,7 +221,7 @@
                     <ngx-dropzone-image-preview
                       ngProjectAs="ngx-dropzone-preview"
                       *ngFor="let f of submissionFiles"
-                      [file]="f"
+                      [file]="getPreviewImage(f)"
                       [removable]="true"
                       (removed)="onRemoveFile(f)"
                     >
