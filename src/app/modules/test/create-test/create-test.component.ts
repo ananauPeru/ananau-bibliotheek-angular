@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { TestDTO } from "../_dto/test-dto";
 import { QuestionTypeService } from "../_services/question-type/question-type.service";
-import { Observable } from "rxjs";
+import { Observable, Subject, of } from "rxjs";
 import { QuestionTypeModel } from "../_models/question-type/question-type.model";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TestService } from "../_services/test/test.service";
@@ -19,6 +19,7 @@ import { QuestionModel } from "../_models/test/question.model";
 import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ScansFile } from "src/app/shared/models/storage/scan-file.model";
 import { HttpClient } from "@angular/common/http";
+import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
 
 function requireOneCorrectAnswer(
   answersArray: FormArray
@@ -43,6 +44,8 @@ export class CreateTestComponent implements OnInit {
   public isEditMode = false;
   public testId: number;
 
+  public isLoading$: Observable<boolean>;
+
   public audioPreviewFile: File;
 
   constructor(
@@ -54,6 +57,7 @@ export class CreateTestComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
+    private fileStorageService: ItemStorageService,
   ) {}
 
   ngOnInit() {
@@ -154,6 +158,7 @@ export class CreateTestComponent implements OnInit {
         questionText: [question.questionText, Validators.required],
         type: [question.type, Validators.required],
         answers: this.formBuilder.array([], Validators.required),
+        fileUrls: this.formBuilder.array(question.fileUrls || []),
       });
       this.patchAnswersFormArray(questionGroup, question.answers);
       questionsFormArray.push(questionGroup);
@@ -193,20 +198,43 @@ export class CreateTestComponent implements OnInit {
   }
 
   // Form Submission
-  onSubmit() {
+  async onSubmit() {
     this.markAllAsTouched(this.testForm);
-
+  
     if (!this.isAllFieldsFilled()) {
       this.toast.error("Please fill in all required fields.");
       return;
     }
-
+  
+    this.isLoading$ = of(true);
     const testDto = this.testForm.value as TestDTO;
-
+  
     // Map the setting values to the DTO
     const timeLimitMinutes = this.settingsForm.get("timeLimitMinutes").value;
     testDto.timeLimitMinutes = timeLimitMinutes;
-
+  
+    // Upload files and get their URLs
+    for (const section of testDto.sections) {
+      for (const question of section.questions) {
+        const files = question.fileUrls as File[];
+        const fileUrls: string[] = [];
+  
+        for (const file of files) {
+          try {
+            const url = await this.fileStorageService.storeFile$(file, 'test-files', 'file');
+            console.log(url);
+            fileUrls.push(url);
+          } catch (error) {
+            console.error('Error uploading file:', error);
+            this.toast.error('Error uploading file');
+            return;
+          }
+        }
+  
+        question.fileUrls = fileUrls;
+      }
+    }
+  
     if (this.isEditMode) {
       // Update test
       this.testService.updateTest$(this.testId, testDto).subscribe(
@@ -214,10 +242,12 @@ export class CreateTestComponent implements OnInit {
           console.log("Test updated successfully!");
           this.toast.success("Test updated successfully!");
           this.router.navigate(["/test/list"]);
+          this.isLoading$ = of(false);
         },
         (error) => {
           console.error("Error updating test: ", error);
           this.toast.error("Error updating test");
+          this.isLoading$ = of(false);
         }
       );
     } else {
@@ -227,10 +257,12 @@ export class CreateTestComponent implements OnInit {
           console.log("Test created successfully!");
           this.toast.success("Test created successfully!");
           this.router.navigate(["/test/list"]);
+          this.isLoading$ = of(false);
         },
         (error) => {
           console.error("Error creating test: ", error);
           this.toast.error("Error creating test");
+          this.isLoading$ = of(false);
         }
       );
     }
@@ -326,7 +358,7 @@ export class CreateTestComponent implements OnInit {
         [],
         [Validators.required, requireOneCorrectAnswer]
       ),
-      attachments: this.formBuilder.array([]),
+      fileUrls: this.formBuilder.array([]),
     });
 
     // Add one blank answer based on the last question type
@@ -433,14 +465,14 @@ export class CreateTestComponent implements OnInit {
   } 
 
   onAttachmentSelect(event: NgxDropzoneChangeEvent, questionGroup: FormGroup) {
-    const attachments = questionGroup.get('attachments') as FormArray;
+    const attachments = questionGroup.get('fileUrls') as FormArray;
     for (const file of event.addedFiles) {
       attachments.push(new FormControl(file));
     }
   }
 
   onAttachmentRemove(file: File, questionGroup: FormGroup) {
-    const attachments = questionGroup.get('attachments') as FormArray;
+    const attachments = questionGroup.get('fileUrls') as FormArray;
     const index = attachments.controls.findIndex(control => control.value === file);
     if (index !== -1) {
       attachments.removeAt(index);
@@ -448,7 +480,7 @@ export class CreateTestComponent implements OnInit {
   }
 
   getAttachments(questionGroup: FormGroup): File[] {
-    const attachments = questionGroup.get('attachments') as FormArray;
+    const attachments = questionGroup.get('fileUrls') as FormArray;
     return attachments ? attachments.controls.map(control => control.value) : [];
   }
 

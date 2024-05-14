@@ -1,13 +1,13 @@
-import { Component, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-audio-player',
-  templateUrl: './audio-player.component.html',
-  styleUrls: ['./audio-player.component.scss']
+  selector: "app-audio-player",
+  templateUrl: "./audio-player.component.html",
+  styleUrls: ["./audio-player.component.scss"],
 })
 export class AudioPlayerComponent {
   @Input() audioSource: string;
-  @ViewChild('audioPlayer') audioPlayer: ElementRef;
+  @ViewChild("audioPlayer") audioPlayer: ElementRef;
 
   isPlaying = false;
   progress = 0;
@@ -25,5 +25,12 @@ export class AudioPlayerComponent {
     const duration = this.audioPlayer.nativeElement.duration;
     const currentTime = this.audioPlayer.nativeElement.currentTime;
     this.progress = (currentTime / duration) * 100;
+    if (currentTime === duration) this.reset();
+  }
+
+  private reset() {
+    this.isPlaying = false;
+    this.audioPlayer.nativeElement.currentTime = 0;
+    this.audioPlayer.nativeElement.pause();
   }
 }

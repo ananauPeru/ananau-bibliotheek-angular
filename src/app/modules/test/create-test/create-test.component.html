@@ -25,6 +25,7 @@
                 <button
                   class="btn btn-primary pr-1 pr-md-3"
                   (click)="onSubmit()"
+                  [disabled]="isLoading$ | async"
                 >
                   <i class="fas fa-save"></i>
                   <span class="d-none d-md-inline ml-1">Save</span>
