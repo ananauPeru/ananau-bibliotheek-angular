@@ -16,6 +16,9 @@ import { TestService } from "../_services/test/test.service";
 import { ToastrService } from "ngx-toastr";
 import { TestModel } from "../_models/test/test.model";
 import { QuestionModel } from "../_models/test/question.model";
+import { NgxDropzoneChangeEvent } from "ngx-dropzone";
+import { ScansFile } from "src/app/shared/models/storage/scan-file.model";
+import { HttpClient } from "@angular/common/http";
 
 function requireOneCorrectAnswer(
   answersArray: FormArray
@@ -40,6 +43,8 @@ export class CreateTestComponent implements OnInit {
   public isEditMode = false;
   public testId: number;
 
+  public audioPreviewFile: File;
+
   constructor(
     private formBuilder: FormBuilder,
     private questionTypeService: QuestionTypeService,
@@ -47,13 +52,26 @@ export class CreateTestComponent implements OnInit {
     private testService: TestService,
     private toast: ToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient,
   ) {}
 
   ngOnInit() {
     this.initializeQuestionTypes();
     this.initializeForm();
     this.checkEditMode();
+    this.initializeAudioPreviewFile();
+  }
+
+  initializeAudioPreviewFile() {
+    this.http.get("/assets/images/audio.png", { responseType: "blob" }).subscribe(
+      (image) => {
+        this.audioPreviewFile = new File([image], "audio.png", {
+          type: "image/png",
+        });
+      },
+      (error) => console.error(error),
+    );
   }
 
   // Form Initialization
@@ -308,6 +326,7 @@ export class CreateTestComponent implements OnInit {
         [],
         [Validators.required, requireOneCorrectAnswer]
       ),
+      attachments: this.formBuilder.array([]),
     });
 
     // Add one blank answer based on the last question type
@@ -412,6 +431,36 @@ export class CreateTestComponent implements OnInit {
     const newHeight = textarea.scrollHeight + 2;
     textarea.style.height = (newHeight > initialHeight ? newHeight : initialHeight) + 'px';
   } 
+
+  onAttachmentSelect(event: NgxDropzoneChangeEvent, questionGroup: FormGroup) {
+    const attachments = questionGroup.get('attachments') as FormArray;
+    for (const file of event.addedFiles) {
+      attachments.push(new FormControl(file));
+    }
+  }
+
+  onAttachmentRemove(file: File, questionGroup: FormGroup) {
+    const attachments = questionGroup.get('attachments') as FormArray;
+    const index = attachments.controls.findIndex(control => control.value === file);
+    if (index !== -1) {
+      attachments.removeAt(index);
+    }
+  }
+
+  getAttachments(questionGroup: FormGroup): File[] {
+    const attachments = questionGroup.get('attachments') as FormArray;
+    return attachments ? attachments.controls.map(control => control.value) : [];
+  }
+
+  getPreviewFile(file: ScansFile): File {
+    if (file.type.startsWith('image/')) {
+      return file;
+    } else if (file.type.startsWith('audio/')) {
+      return this.audioPreviewFile;
+    } else {
+      return this.audioPreviewFile;
+    }
+  }
 
   // Settings Modal
   openSettingsModal() {
