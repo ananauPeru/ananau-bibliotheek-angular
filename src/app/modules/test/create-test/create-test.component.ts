@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { TestDTO } from "../_dto/test-dto";
 import { QuestionTypeService } from "../_services/question-type/question-type.service";
-import { Observable, Subject, of } from "rxjs";
+import { Observable, Subject, of, forkJoin } from "rxjs";
 import { QuestionTypeModel } from "../_models/question-type/question-type.model";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TestService } from "../_services/test/test.service";
@@ -20,6 +20,7 @@ import { NgxDropzoneChangeEvent } from "ngx-dropzone";
 import { ScansFile } from "src/app/shared/models/storage/scan-file.model";
 import { HttpClient } from "@angular/common/http";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
+import { FileUtil } from "src/app/_utils/file_util";
 
 function requireOneCorrectAnswer(
   answersArray: FormArray
@@ -58,6 +59,7 @@ export class CreateTestComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private fileStorageService: ItemStorageService,
+    private fileUtil: FileUtil
   ) {}
 
   ngOnInit() {
@@ -146,23 +148,29 @@ export class CreateTestComponent implements OnInit {
     });
   }
 
-  private patchQuestionsFormArray(
+  private async patchQuestionsFormArray(
     sectionGroup: FormGroup,
     questions: QuestionModel[]
   ) {
     const questionsFormArray = sectionGroup.get("questions") as FormArray;
     questionsFormArray.clear();
 
-    questions.forEach((question) => {
+    for (const question of questions) {
+      const fileUrls = question.fileUrls || [];
+      const fileObservables = fileUrls.map((fileUrl) =>
+        this.fileUtil.urlToFile(fileUrl)
+      );
+      const files = await forkJoin(fileObservables).toPromise();
+
       const questionGroup = this.formBuilder.group({
         questionText: [question.questionText, Validators.required],
         type: [question.type, Validators.required],
         answers: this.formBuilder.array([], Validators.required),
-        fileUrls: this.formBuilder.array(question.fileUrls || []),
+        fileUrls: this.formBuilder.array(files),
       });
       this.patchAnswersFormArray(questionGroup, question.answers);
       questionsFormArray.push(questionGroup);
-    });
+    }
   }
 
   private patchAnswersFormArray(questionGroup: FormGroup, answers: any[]) {
@@ -200,25 +208,25 @@ export class CreateTestComponent implements OnInit {
   // Form Submission
   async onSubmit() {
     this.markAllAsTouched(this.testForm);
-  
+
     if (!this.isAllFieldsFilled()) {
       this.toast.error("Please fill in all required fields.");
       return;
     }
-  
+
     this.isLoading$ = of(true);
     const testDto = this.testForm.value as TestDTO;
-  
+
     // Map the setting values to the DTO
     const timeLimitMinutes = this.settingsForm.get("timeLimitMinutes").value;
     testDto.timeLimitMinutes = timeLimitMinutes;
-  
+
     // Upload files and get their URLs
     for (const section of testDto.sections) {
       for (const question of section.questions) {
         const files = question.fileUrls as File[];
         const fileUrls: string[] = [];
-  
+
         for (const file of files) {
           try {
             const url = await this.fileStorageService.storeFile$(file, 'test-files', 'file');
@@ -230,11 +238,11 @@ export class CreateTestComponent implements OnInit {
             return;
           }
         }
-  
+
         question.fileUrls = fileUrls;
       }
     }
-  
+
     if (this.isEditMode) {
       // Update test
       this.testService.updateTest$(this.testId, testDto).subscribe(
