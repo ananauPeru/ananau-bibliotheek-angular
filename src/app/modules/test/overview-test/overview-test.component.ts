@@ -58,4 +58,32 @@ export class OverviewTestComponent implements OnInit {
       // Perform the sharing logic here
     });
   }
+
+  getSortedFiles(fileUrls: string[]): string[] {
+    return fileUrls.sort((a, b) => {
+      if (this.isAudio(a) && this.isImage(b)) {
+        return -1;
+      } else if (this.isImage(a) && this.isAudio(b)) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  getFileName(fileUrl: string): string {
+    return fileUrl.split("/").pop();
+  }
+
+  isAudio(fileUrl: string): boolean {
+    return fileUrl.endsWith(".mp3");
+  }
+
+  isImage(fileUrl: string): boolean {
+    return (
+      fileUrl.endsWith(".png") ||
+      fileUrl.endsWith(".jpg") ||
+      fileUrl.endsWith(".jpeg")
+    );
+  }
 }
