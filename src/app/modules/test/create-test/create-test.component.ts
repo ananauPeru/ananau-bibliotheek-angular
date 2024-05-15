@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import {
   FormArray,
   FormBuilder,
@@ -59,14 +59,40 @@ export class CreateTestComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private fileStorageService: ItemStorageService,
-    private fileUtil: FileUtil
+    private fileUtil: FileUtil,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.initializeQuestionTypes();
-    this.initializeForm();
-    this.checkEditMode();
     this.initializeAudioPreviewFile();
+    this.checkEditMode();
+  }
+  
+  // Edit Mode
+  private checkEditMode() {
+    this.route.params.subscribe((params) => {
+      if (params.id) {
+        this.isEditMode = true;
+        this.testId = +params.id;
+        this.loadTestData();
+      } else {
+        this.initializeForm();
+      }
+    });
+  }
+  
+  private loadTestData() {
+    this.testService.getLatestTestVersionById$(this.testId).subscribe(
+      (test: TestModel) => {
+        this.initializeForm(); 
+        this.patchFormValues(test);
+      },
+      (error) => {
+        console.error("Error fetching test data: ", error);
+        this.toast.error("Error fetching test data");
+      }
+    );
   }
 
   initializeAudioPreviewFile() {
@@ -95,29 +121,6 @@ export class CreateTestComponent implements OnInit {
     if (!this.isEditMode) {
       this.addSection();
     }
-  }
-
-  // Edit Mode
-  private checkEditMode() {
-    this.route.params.subscribe((params) => {
-      if (params.id) {
-        this.isEditMode = true;
-        this.testId = +params.id;
-        this.loadTestData();
-      }
-    });
-  }
-
-  private loadTestData() {
-    this.testService.getLatestTestVersionById$(this.testId).subscribe(
-      (test: TestModel) => {
-        this.patchFormValues(test);
-      },
-      (error) => {
-        console.error("Error fetching test data: ", error);
-        this.toast.error("Error fetching test data");
-      }
-    );
   }
 
   private patchFormValues(test: TestModel) {
@@ -154,14 +157,35 @@ export class CreateTestComponent implements OnInit {
   ) {
     const questionsFormArray = sectionGroup.get("questions") as FormArray;
     questionsFormArray.clear();
-
+  
     questions.forEach((question) => {
       const questionGroup = this.formBuilder.group({
         questionText: [question.questionText, Validators.required],
         type: [question.type, Validators.required],
         answers: this.formBuilder.array([], Validators.required),
+        fileUrls: this.formBuilder.array([]),
       });
-      this.patchAnswersFormArray(questionGroup, question.answers);
+  
+      const fileUrls = question.fileUrls || [];
+      const fileObservables = fileUrls.map((fileUrl) =>
+        this.fileUtil.urlToFile(fileUrl)
+      );
+  
+      forkJoin(fileObservables).subscribe(
+        (files: File[]) => {
+          const fileUrlsFormArray = questionGroup.get('fileUrls') as FormArray;
+          files.forEach((file) => {
+            fileUrlsFormArray.push(new FormControl(file));
+          });
+          this.patchAnswersFormArray(questionGroup, question.answers);
+          this.cdr.detectChanges();
+        },
+        (error) => {
+          console.error('Error loading attachments:', error);
+          this.cdr.detectChanges();
+        }
+      );
+  
       questionsFormArray.push(questionGroup);
     });
   }
@@ -223,7 +247,6 @@ export class CreateTestComponent implements OnInit {
         for (const file of files) {
           try {
             const url = await this.fileStorageService.storeFile$(file, 'test-files', 'file');
-            console.log(url);
             fileUrls.push(url);
           } catch (error) {
             console.error('Error uploading file:', error);
