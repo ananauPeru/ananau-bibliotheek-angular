@@ -77,10 +77,3 @@ export class TeacherShortSubmissionModel extends BaseSubmissionModel {
   submittedBy: UserModel;
   gradedBy?: UserModel;
 }
-
-
-/* export class AssignedExerciseModel {
-  learnerId: number;
-  exerciseId: number;
-  deadline: Date;
-} */
