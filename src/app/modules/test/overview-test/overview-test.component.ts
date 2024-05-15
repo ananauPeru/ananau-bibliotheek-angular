@@ -47,7 +47,6 @@ export class OverviewTestComponent implements OnInit {
   }
 
   openShareModal(testModel: TestModel) {
-    console.log(testModel);
     const shareUrl = `${window.location.origin}/test/examination/${testModel.id}?AccessCode=${testModel.accessCode.code}`;
     const modalRef = this.modalService.open(ShareModalComponent, {
       centered: true,
@@ -55,8 +54,6 @@ export class OverviewTestComponent implements OnInit {
     modalRef.componentInstance.shareUrl = shareUrl;
     modalRef.componentInstance.users = this.users;
     modalRef.componentInstance.share.subscribe((selectedUsers: any[]) => {
-      console.log("Selected users:", selectedUsers);
-      // Perform the sharing logic here
     });
   }
 
