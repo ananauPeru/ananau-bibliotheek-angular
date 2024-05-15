@@ -14,6 +14,7 @@ import { OverviewTestComponent } from './overview-test/overview-test.component';
 import { ShareModalComponent } from './components/share-modal/share-modal.component';
 import { FillInTestComponent } from './fill-in-test/fill-in-test.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { OverviewSubmissionTestComponent } from './overview-submission-test/overview-submission-test.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
     NgbModule,
     NgxDropzoneModule,
   ],
-  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent],
+  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, OverviewSubmissionTestComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }
