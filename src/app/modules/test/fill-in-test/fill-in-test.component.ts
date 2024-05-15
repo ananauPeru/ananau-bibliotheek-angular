@@ -1,11 +1,18 @@
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TestService } from "../_services/test/test.service";
 import { TestModel } from "../_models/test/test.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Observable, timer } from "rxjs";
+import { Observable, Subject, timer } from "rxjs";
 import { map } from "rxjs/operators";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { FileUtil } from "src/app/_utils/file_util";
 
 export enum TestState {
   NotStarted,
@@ -36,7 +43,9 @@ export class FillInTestComponent implements OnInit {
     private router: Router,
     private testService: TestService,
     private formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private fileUtil: FileUtil,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -46,6 +55,14 @@ export class FillInTestComponent implements OnInit {
   getCorrectTest(): Observable<TestModel> {
     const testId = this.route.snapshot.params["id"];
     return this.testService.getLatestTestVersionById$(testId);
+  }
+
+  getImageUrls(fileUrls: string[]): string[] {
+    return fileUrls.filter((url) => this.fileUtil.isImageFile(url));
+  }
+
+  getAudioUrls(fileUrls: string[]): string[] {
+    return fileUrls.filter((url) => this.fileUtil.isAudioFile(url));
   }
 
   getTestDetails() {
@@ -96,6 +113,7 @@ export class FillInTestComponent implements OnInit {
         map(() => {
           if (this.timeLeft > 0) {
             this.timeLeft--;
+            this.cdr.detectChanges();
           } else {
             this.endTest();
           }
@@ -108,13 +126,17 @@ export class FillInTestComponent implements OnInit {
     this.currentState = TestState.Submitted;
   }
 
-  submitTest(test: TestModel, force: boolean = false) {
+  formatTime(time: number): string {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+  }
 
-    if(force || !this.testForm.invalid) {
+  submitTest(test: TestModel, force: boolean = false) {
+    if (force || !this.testForm.invalid) {
       this.currentState = TestState.Grading;
-      this.gradeTest(test); 
+      this.gradeTest(test);
       return;
-    
     }
 
     this.modalService.open(this.confirmationModal, { centered: true });

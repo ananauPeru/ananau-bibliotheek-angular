@@ -64,6 +64,30 @@
                   >
                     <label>{{ question.questionText }}</label>
 
+                    <ng-container *ngIf="question.fileUrls.length > 0">
+                      <ng-container
+                        *ngIf="getImageUrls(question.fileUrls) as imageUrls"
+                      >
+                        <div *ngFor="let imageUrl of imageUrls" class="mb-4">
+                          <img
+                            [src]="imageUrl"
+                            alt="Question Image"
+                            class="img-fluid"
+                          />
+                        </div>
+                      </ng-container>
+
+                      <ng-container
+                        *ngIf="getAudioUrls(question.fileUrls) as audioUrls"
+                      >
+                        <div *ngFor="let audioUrl of audioUrls" class="mb-4">
+                          <app-audio-player
+                            [audioSource]="audioUrl"
+                          ></app-audio-player>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+
                     <!-- Multiple Choice Question -->
                     <div *ngIf="question.type.name === 'Multiple Choice'">
                       <app-radio-button
@@ -120,7 +144,7 @@
         <!-- Timer::start -->
         <div class="row">
           <div class="col-12">
-            <p>Time Left: {{ timeLeft }} seconds</p>
+            <p>Time Left: {{ formatTime(timeLeft) }}</p>
           </div>
         </div>
         <!-- Timer::end -->
@@ -219,9 +243,7 @@
     <!-- Confirmation Modal -->
     <ng-template #confirmationModal let-modal>
       <div class="modal-header">
-        <h5 class="modal-title">
-          Test is not complete
-        </h5>
+        <h5 class="modal-title">Test is not complete</h5>
         <button
           type="button"
           class="close"
@@ -232,7 +254,8 @@
         </button>
       </div>
       <div class="modal-body">
-        You have not filled in all fields, are you sure you want to submit your test?
+        You have not filled in all fields, are you sure you want to submit your
+        test?
       </div>
       <div class="modal-footer">
         <button
