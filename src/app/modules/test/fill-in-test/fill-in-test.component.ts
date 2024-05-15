@@ -13,6 +13,8 @@ import { Observable, Subject, timer } from "rxjs";
 import { map } from "rxjs/operators";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FileUtil } from "src/app/_utils/file_util";
+import { QuestionType } from "../_types/QuestionType";
+import { QuestionUtil } from "../_types/QuestionUtil";
 
 export enum TestState {
   NotStarted,
@@ -45,7 +47,8 @@ export class FillInTestComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private fileUtil: FileUtil,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public QuestionUtil: QuestionUtil
   ) {}
 
   ngOnInit() {
@@ -74,7 +77,6 @@ export class FillInTestComponent implements OnInit {
       return;
     }
 
-    console.log("Fetching test details...");
     this.test$ = this.testService.getTestExaminationById$(testId, accessCode);
   }
 
@@ -87,12 +89,11 @@ export class FillInTestComponent implements OnInit {
       section.questions.forEach((question) => {
         let questionControl;
 
-        if (question.type.name === "Multiple Choice") {
+        if(this.QuestionUtil.isQuestionType(question.type.name, QuestionType.FILL_IN_THE_BLANK)) {
           questionControl = this.formBuilder.control("", Validators.required);
-        } else if (question.type.name === "Fill in the Blank") {
+        } else if(this.QuestionUtil.isQuestionType(question.type.name, QuestionType.MULTIPLE_CHOICE)) {
           questionControl = this.formBuilder.control("", Validators.required);
         }
-
         sectionGroup.addControl(question.id.toString(), questionControl);
       });
 
@@ -148,7 +149,6 @@ export class FillInTestComponent implements OnInit {
     const correctTest$: Observable<TestModel> = this.getCorrectTest();
 
     correctTest$.subscribe((correctTest) => {
-      console.log(correctTest);
       if (correctTest === null) return;
 
       test.sections.forEach((section) => {
@@ -194,7 +194,6 @@ export class FillInTestComponent implements OnInit {
         }
       });
 
-      console.log(this.currentState);
       this.currentState = TestState.Graded;
     });
   }

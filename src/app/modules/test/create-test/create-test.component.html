@@ -298,7 +298,7 @@
                     <!-- Display data about the question type selected -->
                     <!-- Multiple Choice -->
                     <ng-container
-                      *ngIf="selectedType.name === 'Multiple Choice'"
+                      *ngIf="QuestionUtil.isQuestionType(selectedType.name, QuestionUtil.types.MULTIPLE_CHOICE)"
                     >
                       <div class="mb-12">
                         <div class="row align-items-center">
@@ -410,7 +410,7 @@
 
                     <!-- Fill in the Blank -->
                     <ng-container
-                      *ngIf="selectedType.name === 'Fill In The Blank'"
+                      *ngIf="QuestionUtil.isQuestionType(selectedType.name, QuestionUtil.types.FILL_IN_THE_BLANK)"
                     >
                       <div class="mb-12">
                         <div class="row align-items-center">

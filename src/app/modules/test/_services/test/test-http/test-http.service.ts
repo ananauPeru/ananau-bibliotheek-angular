@@ -8,6 +8,7 @@ import { TestDTO } from "../../../_dto/test-dto";
 import { QuestionModel } from "../../../_models/test/question.model";
 import { SectionModel } from "../../../_models/test/section.model";
 import { ShortTestModel } from "../../../_models/test/short-test.model";
+import { DateUtil } from "src/app/_utils/date_util";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/test`;
 
@@ -15,7 +16,7 @@ const API_URL = `${environment.apiUrl}/spanish_platform/test`;
   providedIn: "root",
 })
 export class TestHttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private dateUtil: DateUtil) {}
 
   getTests$(
     searchTerm: string,
@@ -40,8 +41,13 @@ export class TestHttpService {
           if (response.success) {
             const tests: ShortTestModel[] = response.tests;
 
+            
+
             // Calculate and set the latestVersionNumber for each ShortTestModel
             tests.forEach((test) => {
+              test.versions.forEach((version) => {
+                version.createdAt = this.dateUtil.utcToPeruvianDate(version.createdAt);
+              })
               test.latestVersion = test.versions.reduce((prev, current) =>
                 prev.versionNumber > current.versionNumber ? prev : current
               );
@@ -80,7 +86,7 @@ export class TestHttpService {
               accessCode: {
                 code: test.accessCode.code,
               },
-              createdAt: new Date(test.createdAt),
+              createdAt: this.dateUtil.utcToPeruvianDate(test.createdAt),
 
               sections: test.sections.map((section: SectionModel) => ({
                 id: section.id,
@@ -136,7 +142,7 @@ export class TestHttpService {
             accessCode: {
               code: test.accessCode.code,
             },
-            createdAt: new Date(latestVersion.createdAt),
+            createdAt: this.dateUtil.utcToPeruvianDate(latestVersion.createdAt),
             sections: latestVersion.sections.map((section: SectionModel) => ({
               id: section.id,
               title: section.title,
@@ -195,7 +201,7 @@ export class TestHttpService {
               accessCode: {
                 code: null,
               },
-              createdAt: new Date(test.createdAt),
+              createdAt: this.dateUtil.utcToPeruvianDate(test.createdAt),
               sections:
                 test.sections &&
                 test.sections.map((section: SectionModel) => ({
@@ -255,7 +261,7 @@ export class TestHttpService {
             accessCode: {
               code: test.accessCode.code,
             },
-            createdAt: new Date(test.createdAt),
+            createdAt: this.dateUtil.utcToPeruvianDate(test.createdAt),
 
             sections: test.sections.map((section: SectionModel) => ({
               id: section.id,
@@ -330,7 +336,7 @@ export class TestHttpService {
             accessCode: {
               code: test.accessCode.code,
             },
-            createdAt: new Date(test.createdAt),
+            createdAt: this.dateUtil.utcToPeruvianDate(test.createdAt),
 
             sections: test.sections.map((section: SectionModel) => ({
               id: section.id,

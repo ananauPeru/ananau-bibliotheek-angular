@@ -64,7 +64,7 @@
                   >
                     <label>{{ question.questionText }}</label>
 
-                    <ng-container *ngIf="question.fileUrls.length > 0">
+                    <ng-container *ngIf="question.fileUrls.length > 0" class="row">
                       <ng-container
                         *ngIf="getImageUrls(question.fileUrls) as imageUrls"
                       >
@@ -89,7 +89,7 @@
                     </ng-container>
 
                     <!-- Multiple Choice Question -->
-                    <div *ngIf="question.type.name === 'Multiple Choice'">
+                    <div *ngIf="QuestionUtil.isQuestionType(question.type.name, QuestionUtil.types.MULTIPLE_CHOICE)">
                       <app-radio-button
                         [answers]="question.answers"
                         [questionId]="question.id"
@@ -107,7 +107,7 @@
                     </div>
 
                     <!-- Fill in the Blank Question -->
-                    <div *ngIf="question.type.name === 'Fill in the Blank'">
+                    <div *ngIf="QuestionUtil.isQuestionType(question.type.name, QuestionUtil.types.FILL_IN_THE_BLANK)">
                       <input
                         type="text"
                         class="form-control"
@@ -178,7 +178,7 @@
               <p>{{ question.questionText }}</p>
 
               <!-- Display Multiple Choice answers -->
-              <div *ngIf="question.type.name === 'Multiple Choice'">
+              <div *ngIf="QuestionUtil.isQuestionType(question.type.name, QuestionUtil.types.MULTIPLE_CHOICE)">
                 <ul>
                   <li *ngFor="let answer of question.answers">
                     <span
@@ -211,7 +211,7 @@
               </div>
 
               <!-- Display Fill in the Blank answers -->
-              <div *ngIf="question.type.name === 'Fill in the Blank'">
+              <div *ngIf="QuestionUtil.isQuestionType(question.type.name, QuestionUtil.types.FILL_IN_THE_BLANK)">
                 <p>
                   Your Answer:
                   {{

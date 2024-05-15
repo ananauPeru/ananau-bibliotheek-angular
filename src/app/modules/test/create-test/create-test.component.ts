@@ -21,6 +21,8 @@ import { ScansFile } from "src/app/shared/models/storage/scan-file.model";
 import { HttpClient } from "@angular/common/http";
 import { ItemStorageService } from "src/app/shared/services/file-storage/file-storage.service";
 import { FileUtil } from "src/app/_utils/file_util";
+import { QuestionUtil } from "../_types/QuestionUtil";
+import { QuestionType } from "../_types/QuestionType";
 
 function requireOneCorrectAnswer(
   answersArray: FormArray
@@ -60,7 +62,8 @@ export class CreateTestComponent implements OnInit {
     private http: HttpClient,
     private fileStorageService: ItemStorageService,
     private fileUtil: FileUtil,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public QuestionUtil: QuestionUtil
   ) {}
 
   ngOnInit() {
@@ -263,7 +266,6 @@ export class CreateTestComponent implements OnInit {
       // Update test
       this.testService.updateTest$(this.testId, testDto).subscribe(
         () => {
-          console.log("Test updated successfully!");
           this.toast.success("Test updated successfully!");
           this.router.navigate(["/test/list"]);
           this.isLoading$ = of(false);
@@ -278,7 +280,6 @@ export class CreateTestComponent implements OnInit {
       // Create test
       this.testService.createTest$(testDto).subscribe(
         () => {
-          console.log("Test created successfully!");
           this.toast.success("Test created successfully!");
           this.router.navigate(["/test/list"]);
           this.isLoading$ = of(false);
@@ -388,14 +389,14 @@ export class CreateTestComponent implements OnInit {
     // Add one blank answer based on the last question type
     if (lastQuestionType) {
       const answersArray = questionGroup.get("answers") as FormArray;
-      if (lastQuestionType.name === "Multiple Choice") {
+      if (this.QuestionUtil.isQuestionType(lastQuestionType.name, QuestionType.MULTIPLE_CHOICE)) {
         answersArray.push(
           this.formBuilder.group({
             answerText: ["", Validators.required],
             isCorrect: false,
           })
         );
-      } else if (lastQuestionType.name === "Fill In The Blank") {
+      } else if (this.QuestionUtil.isQuestionType(lastQuestionType.name, QuestionType.FILL_IN_THE_BLANK)) {
         answersArray.push(
           this.formBuilder.group({
             answerText: ["", Validators.required],
@@ -418,14 +419,14 @@ export class CreateTestComponent implements OnInit {
 
         // Add one blank answer based on the selected question type
         if (selectedType) {
-          if (selectedType.name === "Multiple Choice") {
+          if (this.QuestionUtil.isQuestionType(selectedType.name, QuestionType.MULTIPLE_CHOICE)) {
             answersArray.push(
               this.formBuilder.group({
                 answerText: ["", Validators.required],
                 isCorrect: false,
               })
             );
-          } else if (selectedType.name === "Fill In The Blank") {
+          } else if (this.QuestionUtil.isQuestionType(selectedType.name, QuestionType.FILL_IN_THE_BLANK)) { 
             answersArray.push(
               this.formBuilder.group({
                 answerText: ["", Validators.required],
