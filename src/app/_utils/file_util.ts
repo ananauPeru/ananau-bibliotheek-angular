@@ -17,13 +17,11 @@ export class FileUtil {
    * @returns an observable of the File object
    */
   public urlToFile(url: string): Observable<File> {
-    const fileName = url.split("/").pop();
     return from(fetch(url)).pipe(
       switchMap(res => from(res.blob())),
       switchMap(blob => {
         const mime = blob.type;
-        const ext = mime.slice(mime.lastIndexOf("/") + 1, mime.length);
-        const file = new File([blob], fileName, {
+        const file = new File([blob], this.getFileName(url), {
           type: mime,
         });
         return of(file);
@@ -49,7 +47,30 @@ export class FileUtil {
     return AUDIO_FILE_EXTENSIONS.includes(this.getFileExtension(fileUrl));
   }
 
-  private getFileExtension(fileUrl: string): string {
+  /**
+   * Returns the extension of the file
+   * @param fileUrl the url of the file to get the extension of
+   * @returns the extension of the file
+   */
+  public getFileExtension(fileUrl: string): string {
     return fileUrl.split('.').pop();
+  }
+
+  /**
+   * Returns the name of the file
+   * @param fileUrl the url of the file to get the name of
+   * @returns the name of the file
+   */
+  public getFileName(fileUrl: string): string {
+    return fileUrl.split('/').pop();
+  }
+
+  /**
+   * Returns the name of the file without the extension
+   * @param fileUrl the url of the file to get the name of
+   * @returns the name of the file without the extension
+   */
+  public getFileNameWithoutExtension(fileUrl: string): string {
+    return this.getFileName(fileUrl).split('.').slice(0, -1).join('.');
   }
 }
