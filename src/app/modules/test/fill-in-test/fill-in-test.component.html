@@ -64,7 +64,10 @@
                   >
                     <label>{{ question.questionText }}</label>
 
-                    <ng-container *ngIf="question.fileUrls.length > 0" class="row">
+                    <ng-container
+                      *ngIf="question.fileUrls.length > 0"
+                      class="row"
+                    >
                       <ng-container
                         *ngIf="getImageUrls(question.fileUrls) as imageUrls"
                       >
@@ -89,7 +92,14 @@
                     </ng-container>
 
                     <!-- Multiple Choice Question -->
-                    <div *ngIf="QuestionUtil.isQuestionType(question.type.name, QuestionUtil.types.MULTIPLE_CHOICE)">
+                    <div
+                      *ngIf="
+                        QuestionUtil.isQuestionType(
+                          question.type.name,
+                          QuestionUtil.types.MULTIPLE_CHOICE
+                        )
+                      "
+                    >
                       <app-radio-button
                         [answers]="question.answers"
                         [questionId]="question.id"
@@ -107,7 +117,14 @@
                     </div>
 
                     <!-- Fill in the Blank Question -->
-                    <div *ngIf="QuestionUtil.isQuestionType(question.type.name, QuestionUtil.types.FILL_IN_THE_BLANK)">
+                    <div
+                      *ngIf="
+                        QuestionUtil.isQuestionType(
+                          question.type.name,
+                          QuestionUtil.types.FILL_IN_THE_BLANK
+                        )
+                      "
+                    >
                       <input
                         type="text"
                         class="form-control"
@@ -122,6 +139,32 @@
                               .get(question.id.toString()).dirty
                         }"
                       />
+                    </div>
+
+                    <!-- Display open question -->
+                    <div
+                      *ngIf="
+                        QuestionUtil.isQuestionType(
+                          question.type.name,
+                          QuestionUtil.types.OPEN_QUESTION
+                        )
+                      "
+                    >
+                      <textarea
+                        class="form-control"
+                        [formControlName]="question.id"
+                        [ngClass]="{
+                          'is-invalid':
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).invalid &&
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).dirty
+                        }"
+                        rows="2"
+                        (input)="adjustTextareaHeight($event)"
+                      ></textarea>
                     </div>
 
                     <div class="invalid-feedback">This field is required.</div>
@@ -178,7 +221,14 @@
               <p>{{ question.questionText }}</p>
 
               <!-- Display Multiple Choice answers -->
-              <div *ngIf="QuestionUtil.isQuestionType(question.type.name, QuestionUtil.types.MULTIPLE_CHOICE)">
+              <div
+                *ngIf="
+                  QuestionUtil.isQuestionType(
+                    question.type.name,
+                    QuestionUtil.types.MULTIPLE_CHOICE
+                  )
+                "
+              >
                 <ul>
                   <li *ngFor="let answer of question.answers">
                     <span
@@ -211,7 +261,14 @@
               </div>
 
               <!-- Display Fill in the Blank answers -->
-              <div *ngIf="QuestionUtil.isQuestionType(question.type.name, QuestionUtil.types.FILL_IN_THE_BLANK)">
+              <div
+                *ngIf="
+                  QuestionUtil.isQuestionType(
+                    question.type.name,
+                    QuestionUtil.types.FILL_IN_THE_BLANK
+                  )
+                "
+              >
                 <p>
                   Your Answer:
                   {{

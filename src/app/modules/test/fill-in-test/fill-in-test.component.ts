@@ -87,18 +87,27 @@ export class FillInTestComponent implements OnInit {
       const sectionGroup = this.formBuilder.group({});
 
       section.questions.forEach((question) => {
-        let questionControl;
+        const questionControl = this.formBuilder.control(
+          "",
+          Validators.required
+        );
 
-        if(this.QuestionUtil.isQuestionType(question.type.name, QuestionType.FILL_IN_THE_BLANK)) {
-          questionControl = this.formBuilder.control("", Validators.required);
-        } else if(this.QuestionUtil.isQuestionType(question.type.name, QuestionType.MULTIPLE_CHOICE)) {
-          questionControl = this.formBuilder.control("", Validators.required);
-        }
         sectionGroup.addControl(question.id.toString(), questionControl);
       });
 
       this.testForm.addControl(section.id.toString(), sectionGroup);
     });
+  }
+
+  adjustTextareaHeight(event: any) {
+    const textarea = event.target;
+    const initialHeight = textarea.offsetHeight;
+
+    textarea.style.height = "auto";
+
+    const newHeight = textarea.scrollHeight + 2;
+    textarea.style.height =
+      (newHeight > initialHeight ? newHeight : initialHeight) + "px";
   }
 
   startTest(test: TestModel) {
