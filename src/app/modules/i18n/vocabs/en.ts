@@ -103,6 +103,7 @@ export const locale = {
         TEST_LIST: "Test list",
         CREATE_TEST: "Create test",
         TEST_OVERVIEW: "Test overview",
+        SUBMITTED_TESTS: "Submitted tests",
         EXERCISES: "Exercises",
         EXERCISE: "Exercise",
         EXERCISE_LIST: "Exercise list",
