@@ -148,29 +148,22 @@ export class CreateTestComponent implements OnInit {
     });
   }
 
-  private async patchQuestionsFormArray(
+  private patchQuestionsFormArray(
     sectionGroup: FormGroup,
     questions: QuestionModel[]
   ) {
     const questionsFormArray = sectionGroup.get("questions") as FormArray;
     questionsFormArray.clear();
 
-    for (const question of questions) {
-      const fileUrls = question.fileUrls || [];
-      const fileObservables = fileUrls.map((fileUrl) =>
-        this.fileUtil.urlToFile(fileUrl)
-      );
-      const files = await forkJoin(fileObservables).toPromise();
-
+    questions.forEach((question) => {
       const questionGroup = this.formBuilder.group({
         questionText: [question.questionText, Validators.required],
         type: [question.type, Validators.required],
         answers: this.formBuilder.array([], Validators.required),
-        fileUrls: this.formBuilder.array(files),
       });
       this.patchAnswersFormArray(questionGroup, question.answers);
       questionsFormArray.push(questionGroup);
-    }
+    });
   }
 
   private patchAnswersFormArray(questionGroup: FormGroup, answers: any[]) {
@@ -379,7 +372,7 @@ export class CreateTestComponent implements OnInit {
             isCorrect: false,
           })
         );
-      } else if (lastQuestionType.name === "Fill in the Blank") {
+      } else if (lastQuestionType.name === "Fill In The Blank") {
         answersArray.push(
           this.formBuilder.group({
             answerText: ["", Validators.required],
@@ -409,7 +402,7 @@ export class CreateTestComponent implements OnInit {
                 isCorrect: false,
               })
             );
-          } else if (selectedType.name === "Fill in the Blank") {
+          } else if (selectedType.name === "Fill In The Blank") {
             answersArray.push(
               this.formBuilder.group({
                 answerText: ["", Validators.required],
@@ -446,7 +439,7 @@ export class CreateTestComponent implements OnInit {
     optionsArray.updateValueAndValidity();
   }
 
-  // Blanks (Fill in the Blank)
+  // Blanks (Fill In The Blank)
   addBlank(questionGroup: FormGroup) {
     const answersArray = questionGroup.get("answers") as FormArray;
     answersArray.push(
