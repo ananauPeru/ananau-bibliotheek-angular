@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
 import {
   FormArray,
   FormBuilder,
@@ -71,7 +77,7 @@ export class CreateTestComponent implements OnInit {
     this.initializeAudioPreviewFile();
     this.checkEditMode();
   }
-  
+
   // Edit Mode
   private checkEditMode() {
     this.route.params.subscribe((params) => {
@@ -84,11 +90,11 @@ export class CreateTestComponent implements OnInit {
       }
     });
   }
-  
+
   private loadTestData() {
     this.testService.getLatestTestVersionById$(this.testId).subscribe(
       (test: TestModel) => {
-        this.initializeForm(); 
+        this.initializeForm();
         this.patchFormValues(test);
       },
       (error) => {
@@ -99,14 +105,16 @@ export class CreateTestComponent implements OnInit {
   }
 
   initializeAudioPreviewFile() {
-    this.http.get("/assets/images/audio.png", { responseType: "blob" }).subscribe(
-      (image) => {
-        this.audioPreviewFile = new File([image], "audio.png", {
-          type: "image/png",
-        });
-      },
-      (error) => console.error(error),
-    );
+    this.http
+      .get("/assets/images/audio.png", { responseType: "blob" })
+      .subscribe(
+        (image) => {
+          this.audioPreviewFile = new File([image], "audio.png", {
+            type: "image/png",
+          });
+        },
+        (error) => console.error(error)
+      );
   }
 
   // Form Initialization
@@ -160,7 +168,7 @@ export class CreateTestComponent implements OnInit {
   ) {
     const questionsFormArray = sectionGroup.get("questions") as FormArray;
     questionsFormArray.clear();
-  
+
     questions.forEach((question) => {
       const questionGroup = this.formBuilder.group({
         questionText: [question.questionText, Validators.required],
@@ -168,15 +176,15 @@ export class CreateTestComponent implements OnInit {
         answers: this.formBuilder.array([], Validators.required),
         fileUrls: this.formBuilder.array([]),
       });
-  
+
       const fileUrls = question.fileUrls || [];
       const fileObservables = fileUrls.map((fileUrl) =>
         this.fileUtil.urlToFile(fileUrl)
       );
-  
+
       forkJoin(fileObservables).subscribe(
         (files: File[]) => {
-          const fileUrlsFormArray = questionGroup.get('fileUrls') as FormArray;
+          const fileUrlsFormArray = questionGroup.get("fileUrls") as FormArray;
           files.forEach((file) => {
             fileUrlsFormArray.push(new FormControl(file));
           });
@@ -184,11 +192,11 @@ export class CreateTestComponent implements OnInit {
           this.cdr.detectChanges();
         },
         (error) => {
-          console.error('Error loading attachments:', error);
+          console.error("Error loading attachments:", error);
           this.cdr.detectChanges();
         }
       );
-  
+
       questionsFormArray.push(questionGroup);
     });
   }
@@ -205,11 +213,14 @@ export class CreateTestComponent implements OnInit {
       answersFormArray.push(answerGroup);
     });
 
-    // Apply the custom validator to the answers FormArray
-    answersFormArray.setValidators([
-      Validators.required,
-      requireOneCorrectAnswer,
-    ]);
+    if(!this.QuestionUtil.isQuestionType(questionGroup.get("type").value.name, QuestionType.OPEN_QUESTION)){
+      answersFormArray.setValidators([
+        Validators.required,
+        requireOneCorrectAnswer,
+      ]);
+    } else {
+      answersFormArray.setValidators([]);
+    }
     answersFormArray.updateValueAndValidity();
   }
 
@@ -244,16 +255,26 @@ export class CreateTestComponent implements OnInit {
     // Upload files and get their URLs
     for (const section of testDto.sections) {
       for (const question of section.questions) {
+
+        if(this.QuestionUtil.isQuestionType(question.type.name, QuestionType.OPEN_QUESTION)){
+          question.answers = question.answers = []
+        }
+
+
         const files = question.fileUrls as File[];
         const fileUrls: string[] = [];
 
         for (const file of files) {
           try {
-            const url = await this.fileStorageService.storeFile$(file, 'test-files', 'file');
+            const url = await this.fileStorageService.storeFile$(
+              file,
+              "test-files",
+              "file"
+            );
             fileUrls.push(url);
           } catch (error) {
-            console.error('Error uploading file:', error);
-            this.toast.error('Error uploading file');
+            console.error("Error uploading file:", error);
+            this.toast.error("Error uploading file");
             return;
           }
         }
@@ -298,27 +319,38 @@ export class CreateTestComponent implements OnInit {
    */
   isAllFieldsFilled(): boolean {
     if (this.testForm.invalid) {
+      console.log("Invalid form", this.testForm);
       return false;
     }
 
     const sections = this.sections.controls;
     for (const section of sections) {
       if (section.get("title").invalid || section.get("questions").invalid) {
+        console.log("Invalid section");
         return false;
       }
 
       const questions = section.get("questions").value;
       for (const question of questions) {
+        if (question.questionText.trim() === "" || question.type === null) {
+          console.log("Invalid question");
+          return false;
+        }
+
         if (
-          question.questionText.trim() === "" ||
-          question.type === null ||
-          question.answers.length === 0
+          question.answers.length === 0 &&
+          !this.QuestionUtil.isQuestionType(
+            question.type.name,
+            QuestionType.OPEN_QUESTION
+          )
         ) {
+          console.log("Invalid question length");
           return false;
         }
 
         for (const answer of question.answers) {
-          if (answer.answerText.trim() === "") {
+          if (answer.answerText.trim() === "" && !this.QuestionUtil.isQuestionType(question.type.name, QuestionType.OPEN_QUESTION)) {
+            console.log("Invalid answer", answer.answerText);
             return false;
           }
         }
@@ -376,30 +408,68 @@ export class CreateTestComponent implements OnInit {
       ? lastQuestion.get("type").value
       : null;
 
-    const questionGroup = this.formBuilder.group({
-      questionText: ["", Validators.required],
-      type: new FormControl(lastQuestionType, Validators.required),
-      answers: this.formBuilder.array(
-        [],
-        [Validators.required, requireOneCorrectAnswer]
-      ),
-      fileUrls: this.formBuilder.array([]),
-    });
+      let questionGroup;
+    if(lastQuestionType && this.QuestionUtil.isQuestionType(lastQuestionType.name, QuestionType.OPEN_QUESTION)){
+      questionGroup = this.formBuilder.group({
+        questionText: ["", Validators.required],
+        type: new FormControl(lastQuestionType, Validators.required),
+        answers: this.formBuilder.array(
+          [],
+          []
+        ),
+        fileUrls: this.formBuilder.array([]),
+      });
+    } else {
+      questionGroup = this.formBuilder.group({
+        questionText: ["", Validators.required],
+        type: new FormControl(lastQuestionType, Validators.required),
+        answers: this.formBuilder.array(
+          [],
+          [
+            Validators.required, 
+            requireOneCorrectAnswer
+          ]
+        ),
+        fileUrls: this.formBuilder.array([]),
+      });
+    }
 
     // Add one blank answer based on the last question type
     if (lastQuestionType) {
       const answersArray = questionGroup.get("answers") as FormArray;
-      if (this.QuestionUtil.isQuestionType(lastQuestionType.name, QuestionType.MULTIPLE_CHOICE)) {
+      if (
+        this.QuestionUtil.isQuestionType(
+          lastQuestionType.name,
+          QuestionType.MULTIPLE_CHOICE
+        )
+      ) {
         answersArray.push(
           this.formBuilder.group({
             answerText: ["", Validators.required],
             isCorrect: false,
           })
         );
-      } else if (this.QuestionUtil.isQuestionType(lastQuestionType.name, QuestionType.FILL_IN_THE_BLANK)) {
+      } else if (
+        this.QuestionUtil.isQuestionType(
+          lastQuestionType.name,
+          QuestionType.FILL_IN_THE_BLANK
+        )
+      ) {
         answersArray.push(
           this.formBuilder.group({
             answerText: ["", Validators.required],
+            isCorrect: true,
+          })
+        );
+      } else if (
+        this.QuestionUtil.isQuestionType(
+          lastQuestionType.name,
+          QuestionType.OPEN_QUESTION
+        )
+      ) {
+        answersArray.push(
+          this.formBuilder.group({
+            answerText: [""],
             isCorrect: true,
           })
         );
@@ -419,17 +489,39 @@ export class CreateTestComponent implements OnInit {
 
         // Add one blank answer based on the selected question type
         if (selectedType) {
-          if (this.QuestionUtil.isQuestionType(selectedType.name, QuestionType.MULTIPLE_CHOICE)) {
+          if (
+            this.QuestionUtil.isQuestionType(
+              selectedType.name,
+              QuestionType.MULTIPLE_CHOICE
+            )
+          ) {
             answersArray.push(
               this.formBuilder.group({
                 answerText: ["", Validators.required],
                 isCorrect: false,
               })
             );
-          } else if (this.QuestionUtil.isQuestionType(selectedType.name, QuestionType.FILL_IN_THE_BLANK)) { 
+          } else if (
+            this.QuestionUtil.isQuestionType(
+              selectedType.name,
+              QuestionType.FILL_IN_THE_BLANK
+            )
+          ) {
             answersArray.push(
               this.formBuilder.group({
                 answerText: ["", Validators.required],
+                isCorrect: true,
+              })
+            );
+          } else if (
+            this.QuestionUtil.isQuestionType(
+              selectedType.name,
+              QuestionType.OPEN_QUESTION
+            )
+          ) {
+            answersArray.push(
+              this.formBuilder.group({
+                answerText: [""],
                 isCorrect: true,
               })
             );
@@ -482,37 +574,42 @@ export class CreateTestComponent implements OnInit {
   adjustTextareaHeight(event: any) {
     const textarea = event.target;
     const initialHeight = textarea.offsetHeight;
-    
-    textarea.style.height = 'auto';
-    
+
+    textarea.style.height = "auto";
+
     const newHeight = textarea.scrollHeight + 2;
-    textarea.style.height = (newHeight > initialHeight ? newHeight : initialHeight) + 'px';
-  } 
+    textarea.style.height =
+      (newHeight > initialHeight ? newHeight : initialHeight) + "px";
+  }
 
   onAttachmentSelect(event: NgxDropzoneChangeEvent, questionGroup: FormGroup) {
-    const attachments = questionGroup.get('fileUrls') as FormArray;
+    const attachments = questionGroup.get("fileUrls") as FormArray;
     for (const file of event.addedFiles) {
       attachments.push(new FormControl(file));
     }
   }
 
   onAttachmentRemove(file: File, questionGroup: FormGroup) {
-    const attachments = questionGroup.get('fileUrls') as FormArray;
-    const index = attachments.controls.findIndex(control => control.value === file);
+    const attachments = questionGroup.get("fileUrls") as FormArray;
+    const index = attachments.controls.findIndex(
+      (control) => control.value === file
+    );
     if (index !== -1) {
       attachments.removeAt(index);
     }
   }
 
   getAttachments(questionGroup: FormGroup): File[] {
-    const attachments = questionGroup.get('fileUrls') as FormArray;
-    return attachments ? attachments.controls.map(control => control.value) : [];
+    const attachments = questionGroup.get("fileUrls") as FormArray;
+    return attachments
+      ? attachments.controls.map((control) => control.value)
+      : [];
   }
 
   getPreviewFile(file: ScansFile): File {
-    if (file.type.startsWith('image/')) {
+    if (file.type.startsWith("image/")) {
       return file;
-    } else if (file.type.startsWith('audio/')) {
+    } else if (file.type.startsWith("audio/")) {
       return this.audioPreviewFile;
     } else {
       return this.audioPreviewFile;
