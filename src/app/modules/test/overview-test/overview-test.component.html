@@ -180,16 +180,16 @@
                 <div
                 *ngFor="let fileUrl of getSortedFiles(question.fileUrls)"
               >
-                <ng-container *ngIf="isAudio(fileUrl)">
-                  <div class="mb-2">{{ getFileName(fileUrl) }}</div>
+                <ng-container *ngIf="fileUtil.isAudioFile(fileUrl)">
+                  <div class="mb-2">{{ fileUtil.getFileNameWithoutExtension(fileUrl) }}</div>
                   <div class="mb-4">
                     <app-audio-player
                       [audioSource]="fileUrl"
                     ></app-audio-player>
                   </div>
                 </ng-container>
-                <ng-container *ngIf="isImage(fileUrl)">
-                  <div class="mb-2">{{ getFileName(fileUrl) }}</div>
+                <ng-container *ngIf="fileUtil.isImageFile(fileUrl)">
+                  <div class="mb-2">{{ fileUtil.getFileNameWithoutExtension(fileUrl) }}</div>
                   <img [src]="fileUrl" class="img-fluid mb-4" />
                 </ng-container>
               </div>

@@ -5,6 +5,7 @@ import { TestModel } from "../_models/test/test.model";
 import { ShareModalComponent } from "../components/share-modal/share-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Observable } from "rxjs";
+import { FileUtil } from "src/app/_utils/file_util";
 
 @Component({
   selector: "app-overview-test",
@@ -23,9 +24,9 @@ export class OverviewTestComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private testService: TestService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public fileUtil: FileUtil
   ) {}
 
   ngOnInit() {
@@ -61,29 +62,14 @@ export class OverviewTestComponent implements OnInit {
 
   getSortedFiles(fileUrls: string[]): string[] {
     return fileUrls.sort((a, b) => {
-      if (this.isAudio(a) && this.isImage(b)) {
+      if(this.fileUtil.isAudioFile(a) && this.fileUtil.isImageFile(b)) {
         return -1;
-      } else if (this.isImage(a) && this.isAudio(b)) {
+      } else if(this.fileUtil.isImageFile(a) && this.fileUtil.isAudioFile(b)) {
         return 1;
-      } else {
+      }
+      else {
         return 0;
       }
     });
-  }
-
-  getFileName(fileUrl: string): string {
-    return fileUrl.split("/").pop();
-  }
-
-  isAudio(fileUrl: string): boolean {
-    return fileUrl.endsWith(".mp3");
-  }
-
-  isImage(fileUrl: string): boolean {
-    return (
-      fileUrl.endsWith(".png") ||
-      fileUrl.endsWith(".jpg") ||
-      fileUrl.endsWith(".jpeg")
-    );
   }
 }
