@@ -7,6 +7,7 @@ import { TestListComponent } from "./test-list/test-list.component";
 import { CreateTestComponent } from "./create-test/create-test.component";
 import { OverviewTestComponent } from "./overview-test/overview-test.component";
 import { FillInTestComponent } from "./fill-in-test/fill-in-test.component";
+import { OverviewSubmissionTestComponent } from "./overview-submission-test/overview-submission-test.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,14 @@ const routes: Routes = [
         data: {
           canActivate: [AuthGuard],
           permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
+        },
+      },
+      {
+        path: "submitted",
+        component: OverviewSubmissionTestComponent,
+        data: {
+          canActivate: [AuthGuard],
+          permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
         },
       },
       {
