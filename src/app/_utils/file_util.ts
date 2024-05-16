@@ -61,8 +61,14 @@ export class FileUtil {
    * @param fileUrl the url of the file to get the name of
    * @returns the name of the file
    */
-  public getFileName(fileUrl: string): string {
-    return fileUrl.split('/').pop();
+  public getFileName(fileUrl: string, filePrefix: string = "file"): string {
+
+    if (filePrefix) {
+      return fileUrl.split('/').pop().replace(filePrefix + '-', '');
+    } else {
+      return fileUrl.split('/').pop();
+    }
+
   }
 
   /**
