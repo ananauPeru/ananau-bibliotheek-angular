@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentTestSubmissionModel, TeacherTestSubmissionModel } from '../_models/test/test-submission.model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthUtil } from "src/app/_utils/auth_util";
 
 @Component({
@@ -10,7 +10,9 @@ import { AuthUtil } from "src/app/_utils/auth_util";
 })
 export class OverviewSubmissionTestComponent implements OnInit {
 
-  submissionTest$: Observable<TeacherTestSubmissionModel | StudentTestSubmissionModel>;
+  public submissionsTest$: Observable<TeacherTestSubmissionModel | StudentTestSubmissionModel>;
+  public searchTerm$ = new Subject<string>();
+
   constructor(
     public AuthUtil: AuthUtil
   ) { }
@@ -18,4 +20,15 @@ export class OverviewSubmissionTestComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSearchTermChange(searchTerm: string) {
+    this.searchTerm$.next(searchTerm);
+  }
+
+  getScoreManual(submissionTest: TeacherTestSubmissionModel | StudentTestSubmissionModel): string {
+    if(submissionTest.realScores != null) {
+      return submissionTest.realScores.totalAuto + "/" + submissionTest.testAttempt.possibleScores.maxAuto;
+    } else {
+      return "Not graded yet"
+    }
+  }
 }

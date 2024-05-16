@@ -89,7 +89,7 @@
                     {{ exercise.deadline | date : "medium" }}
                   </td>
                   <ng-template #noDeadline>
-                    <td>No {{ "EXERCISE.SHARED.NO_DEADLINE" | translate }}</td>
+                    <td>{{ "EXERCISE.SHARED.NO_DEADLINE" | translate }}</td>
                   </ng-template>
                   <td>{{ exercise.status }}</td>
                   <td>{{ getGradeText(exercise) }}</td>

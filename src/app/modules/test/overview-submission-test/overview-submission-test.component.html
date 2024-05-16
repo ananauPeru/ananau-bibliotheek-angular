@@ -1,194 +1,139 @@
-<ng-container *ngIf="submissionTest$ | async as submissionTest; else loading">
-  <div class="card card-custom">
-    <!-- Header -->
-    <div class="row">
-      <div class="col-12">
-        <div
-          class="card-header border-0 text-white"
-          style="background-color: white; padding: 2rem 2.25rem"
-        >
-          <div class="row">
-            <div class="col-12 d-flex justify-content-between">
-              <h3 class="card-title font-weight-bolder text-dark">
-                {{ "EXERCISE.SUBMISSION.SUBMISSION_DETAILS" | translate }}
-              </h3>
-              <div>
-                <button
-                  class="btn btn-secondary"
-                  routerLink="/exercise/submission/list"
-                >
-                  {{ "BUTTONS.BACK_TO_LIST" | translate }}
-                </button>
-              </div>
-            </div>
+<div class="card card-custom">
+  <!-- Header -->
+  <div class="row">
+    <div class="col-12">
+      <div
+        class="card-header border-0 text-white"
+        style="background-color: white; padding: 2rem 2.25rem"
+      >
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between">
+            <h3 class="card-title font-weight-bolder text-dark">
+              {{ "TEST.OVERVIEW_SUBMISSION.SUBMITTED_TESTS" | translate }}
+            </h3>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Body -->
-    <div class="card-body pt-2">
-      <div class="row">
-        <div class="col-12">
-          <p class="mb-4">
-            <strong>
-              {{ "EXERCISE.SUBMISSION.EXERCISE" | translate }}
-            </strong> {{ submissionTest.exercise.title }}
-          </p>
-          <p class="mb-4" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])"><strong>
-            {{ "EXERCISE.SUBMISSION.SUBMITTED_BY" | translate }}
-          </strong> {{ submissionTest.submittedBy.firstName }} {{ submissionTest.submittedBy.lastName }}</p>
-          <p class="mb-4">
-            <strong>
-              {{ "EXERCISE.SUBMISSION.SUBMISSION_DATE" | translate }}
-            </strong>
-            {{ submissionTest.submittedAt | date }}
-          </p>
-          <p class="mb-4"><strong>
-            {{ "EXERCISE.SUBMISSION.COMMENT" | translate }}
-          </strong> {{ submissionTest.comment }}</p>
-          <ng-container *ngIf="submissionTest.grade; else notGradedDetail">
-            <p class="mb-4">
-              <strong>
-                {{ "EXERCISE.SUBMISSION.GRADE" | translate }}
-              </strong> {{ submissionTest.grade }} /
-              {{ submissionTest.exercise.maxGrade }}
-            </p>
-            <p *ngIf="submissionTest.feedback; else noFeedback">
-              <strong>
-                {{ "EXERCISE.SUBMISSION.FEEDBACK" | translate }}
-              </strong> {{ submissionTest.feedback }}
-            </p>
-            <ng-template #noFeedback>
-              <p><strong>
-                {{ "EXERCISE.SUBMISSION.FEEDBACK" | translate }}
-              </strong> {{ "EXERCISE.SUBMISSION.NO_FEEDBACK" | translate }} </p>
-            </ng-template>
-          </ng-container>
-          <ng-template #notGradedDetail>
-            <p><strong>
-              {{ "EXERCISE.SUBMISSION.GRADE" | translate }}
-            </strong> {{ "EXERCISE.SUBMISSION.NO_GRADE" | translate }} </p>
-          </ng-template>
+  <!-- Body --->
+  <div class="card-body pt-2">
+    <!--begin::Form Group--->
+    <div class="form-group row mb-10">
+      <div class="col-12 col-md-12">
+        <div class="input-group input-group-lg input-group-solid mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+
+          <input
+            type="text"
+            class="form-control form-control-lg form-control-solid force-pl-5"
+            placeholder="{{ 'ORGANIZATION.ROLES.OVERVIEW.FILTER' | translate }}"
+            style="padding-left: 10px"
+            (input)="onSearchTermChange($event.target.value)"
+          />
+        </div>
+        <div class="feedback ml-2">
+          {{ "TEST.OVERVIEW_SUBMISSION.SEARCH_LEARNER" | translate }}
         </div>
       </div>
-<!--
-      <div class="row mb-4">
-        <div class="col-12">
-          <h4>
-            {{ "EXERCISE.SUBMISSION.FILES" | translate }}
-          </h4>
-          <ul class="list-group">
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-              *ngFor="let fileUrl of submissionTest.fileUrls"
+    </div>
+    <!--end::Form Group--->
+
+    <!--begin: Item--->
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex flex-wrap align-items-center mb-10 table-responsive">
+          <table class="table table-fit">
+            <thead>
+              <tr>
+                <th>{{ "TEST.CREATE.TITLE" | translate }}</th>
+                <th
+                  *ngIf="
+                    AuthUtil.permitted([
+                      AuthUtil.roles.SuperAdmin,
+                      AuthUtil.roles.SpanishTeacher
+                    ])
+                  "
+                >
+                  {{ "TEST.OVERVIEW_SUBMISSION.SUBMITTED_BY" | translate }}
+                </th>
+                <th>{{ "TEST.OVERVIEW_SUBMISSION.SUBMITTED_AT" | translate }}</th>
+                <th>{{ "TEST.OVERVIEW_SUBMISSION.SCORE_AUTO" | translate }}</th>
+                <th>{{ "TEST.OVERVIEW_SUBMISSION.SCORE_MANUAL" | translate }}</th>
+                <th class="text-right">{{ "TEST.OVERVIEW_SUBMISSION.ACTIONS" | translate }}</th>
+              </tr>
+            </thead>
+            <ng-container
+              *ngIf="
+                AuthUtil.permitted([
+                  AuthUtil.roles.SuperAdmin,
+                  AuthUtil.roles.SpanishTeacher
+                ]);
+                else student_t_body
+              "
             >
-              {{ fileUrlToName(fileUrl) }}
-              <button class="btn btn-primary" (click)="downloadFile(fileUrl)">
-                {{ "BUTTONS.DOWNLOAD" | translate }}
-              </button>
-            </li>
-          </ul>
+              <tbody>
+                <tr *ngFor="let submissionTest of submissionsTest$ | async">
+                  <td>{{ submissionTest.title }}</td>
+                  <td>
+                    {{ submissionTest.submittedBy.firstName }}
+                    {{ submissionTest.submittedBy.lastName }}
+                  </td>
+                  <td>{{ submissionTest.submittedAt }}</td>
+                  <td>{{ submissionTest.scoreAuto }}</td>
+                  <td>{{ getScoreManual(submissionTest) }}</td>
+                  <td class="text-right">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      placement="top"
+                      ngbTooltip="Overview"
+                      routerLink="/test/submitted_test/{{ submissionTest.id }}"
+                    >
+                      <i class="fas fa-sign-in-alt pr-0"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-container>
+            <ng-template #student_t_body>
+              <tbody>
+                <tr *ngFor="let submissionTest of submissionsTest$ | async">
+                  <td>{{ submissionTest.title }}</td>
+
+                  <td *ngIf="submissionTest.gradedBy; else noGraded">
+                    {{ submissionTest.gradedBy.firstName }}
+                    {{ submissionTest.gradedBy.lastName }}
+                  </td>
+                  <ng-template #noGraded>
+                    <td>{{ "TEST.OVERVIEW_SUBMISSION.NO_GRADE" | translate }}</td>
+                  </ng-template>
+
+                  <td>{{ submissionTest.submittedAt }}</td>
+                  <td>{{ submissionTest.scoreAuto }}</td>
+                  <td>{{ getScoreManual(submissionTest) }}</td>
+                  <td class="text-right">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      placement="top"
+                      ngbTooltip="Overview"
+                      routerLink="/test/my_submitted_test/{{ submissionTest.id }}"
+                    >
+                      <i class="fas fa-sign-in-alt pr-0"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
         </div>
       </div>
-
-      <div class="row" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">
-        <div class="col-12">
-          <h4>
-            {{ "EXERCISE.SUBMISSION.EDIT_GRADE" | translate }}
-          </h4>
-          <ng-container *ngIf="!isEditingGrade; else editGradeTemplate">
-            <p *ngIf="submissionTest.grade; else notGradedTemplate">
-              <strong>
-                {{ "EXERCISE.SUBMISSION.CURRENT_GRADE" | translate }}
-              </strong> {{ submissionTest.grade }} /
-              {{ submissionTest.exercise.maxGrade }}
-            </p>
-            <ng-template #notGradedTemplate>
-              <p>
-                {{ "EXERCISE.SUBMISSION.NO_GRADE" | translate }}
-              </p>
-            </ng-template>
-            <button class="btn btn-primary" (click)="isEditingGrade = true">
-              {{ "EXERCISE.SUBMISSION.EDIT_GRADE" | translate }}
-            </button>
-          </ng-container>
-          <ng-template #editGradeTemplate>
-            <form [formGroup]="gradeForm" (ngSubmit)="submitGrade()">
-              <div class="form-group">
-                <label for="grade">
-                  {{ "EXERCISE.SUBMISSION.GRADE" | translate }}
-                </label>
-                <div class="input-group">
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="grade"
-                    formControlName="grade"
-                    min="0"
-                    [max]="submissionTest.exercise.maxGrade"
-                    required
-                  />
-                  <div class="input-group-append">
-                    <span class="input-group-text"
-                      >/ {{ submissionTest.exercise.maxGrade }}</span
-                    >
-                  </div>
-                </div>
-                <div *ngIf="gradeForm.get('grade').invalid && gradeForm.get('grade').touched">
-                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.required">
-                    {{ "EXERCISE.SUBMISSION.GRADE_REQUIRED" | translate }}
-                  </small>
-                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.min">
-                    {{ "EXERCISE.SUBMISSION.GRADE_POSITIVE" | translate }}
-                  </small>
-                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.max">
-                    {{ "EXERCISE.SUBMISSION.GRADE_LESS_THAN" | translate }} {{ submissionTest.exercise.maxGrade }}.
-                  </small>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="feedback">
-                  {{ "EXERCISE.SUBMISSION.FEEDBACK" | translate }}
-                </label>
-                <textarea
-                  class="form-control"
-                  id="feedback"
-                  formControlName="feedback"
-                ></textarea>
-              </div>
-
-              <div class="form-group">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  [disabled]="gradeForm.invalid"
-                >
-                  {{ "EXERCISE.SUBMISSION.GRADE_SUBMIT" | translate }}
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary ml-2"
-                  (click)="isEditingGrade = false"
-                >
-                 {{ "BUTTONS.CANCEL" | translate }}
-                </button>
-              </div>
-            </form>
-          </ng-template>
-        </div>
-      </div> -->
     </div>
   </div>
-</ng-container>
-
-<ng-template #loading>
-  <div
-    class="d-flex justify-content-center align-items-center"
-    style="height: 100vh"
-  >
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
-    </div>
-  </div>
-</ng-template>
+</div>

@@ -1071,5 +1071,28 @@ export const locale = {
         ACTIONS: "Actions",
       },
     },
+    TEST: {
+      CREATE: {
+        TITLE: "Title",
+      },
+      FILL_IN_TEST: {
+
+      },
+      OVERVIEW_SUBMISSION: {
+        SUBMITTED_TESTS: "Submitted Tests",
+        SEARCH_LEARNER: "Search for learner",
+        SUBMITTED_BY: "Submitted By",
+        SUBMITTED_AT: "Submitted At",
+        SCORE_AUTO: "Score auto",
+        SCORE_MANUAL: "Score manual",
+        NO_GRADE: "Not graded yet",
+        ACTIONS: "Actions",
+      },
+      OVERVIEW: {
+
+      },
+      LIST: {
+      },
+    },
   },
 };
