@@ -1,11 +1,20 @@
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TestService } from "../_services/test/test.service";
 import { TestModel } from "../_models/test/test.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Observable, timer } from "rxjs";
+import { Observable, Subject, timer } from "rxjs";
 import { map } from "rxjs/operators";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { FileUtil } from "src/app/_utils/file_util";
+import { QuestionType } from "../_types/QuestionType";
+import { QuestionUtil } from "../_types/QuestionUtil";
 
 export enum TestState {
   NotStarted,
@@ -36,7 +45,10 @@ export class FillInTestComponent implements OnInit {
     private router: Router,
     private testService: TestService,
     private formBuilder: FormBuilder,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private fileUtil: FileUtil,
+    private cdr: ChangeDetectorRef,
+    public QuestionUtil: QuestionUtil
   ) {}
 
   ngOnInit() {
@@ -48,6 +60,14 @@ export class FillInTestComponent implements OnInit {
     return this.testService.getLatestTestVersionById$(testId);
   }
 
+  getImageUrls(fileUrls: string[]): string[] {
+    return fileUrls.filter((url) => this.fileUtil.isImageFile(url));
+  }
+
+  getAudioUrls(fileUrls: string[]): string[] {
+    return fileUrls.filter((url) => this.fileUtil.isAudioFile(url));
+  }
+
   getTestDetails() {
     const testId = this.route.snapshot.params["id"];
     const accessCode = this.route.snapshot.queryParams["AccessCode"];
@@ -57,7 +77,6 @@ export class FillInTestComponent implements OnInit {
       return;
     }
 
-    console.log("Fetching test details...");
     this.test$ = this.testService.getTestExaminationById$(testId, accessCode);
   }
 
@@ -68,19 +87,27 @@ export class FillInTestComponent implements OnInit {
       const sectionGroup = this.formBuilder.group({});
 
       section.questions.forEach((question) => {
-        let questionControl;
-
-        if (question.type.name === "Multiple Choice") {
-          questionControl = this.formBuilder.control("", Validators.required);
-        } else if (question.type.name === "Fill in the Blank") {
-          questionControl = this.formBuilder.control("", Validators.required);
-        }
+        const questionControl = this.formBuilder.control(
+          "",
+          Validators.required
+        );
 
         sectionGroup.addControl(question.id.toString(), questionControl);
       });
 
       this.testForm.addControl(section.id.toString(), sectionGroup);
     });
+  }
+
+  adjustTextareaHeight(event: any) {
+    const textarea = event.target;
+    const initialHeight = textarea.offsetHeight;
+
+    textarea.style.height = "auto";
+
+    const newHeight = textarea.scrollHeight + 2;
+    textarea.style.height =
+      (newHeight > initialHeight ? newHeight : initialHeight) + "px";
   }
 
   startTest(test: TestModel) {
@@ -96,6 +123,7 @@ export class FillInTestComponent implements OnInit {
         map(() => {
           if (this.timeLeft > 0) {
             this.timeLeft--;
+            this.cdr.detectChanges();
           } else {
             this.endTest();
           }
@@ -108,13 +136,17 @@ export class FillInTestComponent implements OnInit {
     this.currentState = TestState.Submitted;
   }
 
-  submitTest(test: TestModel, force: boolean = false) {
+  formatTime(time: number): string {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+  }
 
-    if(force || !this.testForm.invalid) {
+  submitTest(test: TestModel, force: boolean = false) {
+    if (force || !this.testForm.invalid) {
       this.currentState = TestState.Grading;
-      this.gradeTest(test); 
+      this.gradeTest(test);
       return;
-    
     }
 
     this.modalService.open(this.confirmationModal, { centered: true });
@@ -126,7 +158,6 @@ export class FillInTestComponent implements OnInit {
     const correctTest$: Observable<TestModel> = this.getCorrectTest();
 
     correctTest$.subscribe((correctTest) => {
-      console.log(correctTest);
       if (correctTest === null) return;
 
       test.sections.forEach((section) => {
@@ -172,7 +203,6 @@ export class FillInTestComponent implements OnInit {
         }
       });
 
-      console.log(this.currentState);
       this.currentState = TestState.Graded;
     });
   }

@@ -1,0 +1,11 @@
+<div class="audio-player">
+  <audio #audioPlayer [src]="audioSource" (timeupdate)="onTimeUpdate()"></audio>
+  <div class="audio-controls">
+    <button class="play-pause-btn" (click)="toggleAudio()">
+      <i class="fas color-green" [ngClass]="{'fa-play': !isPlaying, 'fa-pause': isPlaying}"></i>
+    </button>
+    <div class="progress-bar">
+      <div class="progress" [style.width]="progress + '%'"></div>
+    </div>
+  </div>
+</div>
