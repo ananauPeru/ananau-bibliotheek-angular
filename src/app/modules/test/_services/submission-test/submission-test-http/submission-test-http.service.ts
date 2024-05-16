@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DateUtil } from "src/app/_utils/date_util";
 import { environment } from 'src/environments/environment';
-import { StudentTestSubmissionModel, TeacherTestSubmissionModel } from '../../../_models/test/test-submission.model';
+import { StudentTestSubmissionModel, TeacherTestSubmissionModel, TestSubmissionModel } from '../../../_models/test/test-submission.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -77,6 +77,58 @@ export class SubmissionTestHttpService {
           } else {
             throwError(response.error);
             return [];
+          }
+        })
+      );
+  }
+
+  getTeacherSubmissionTestById$(id: number): Observable<TestSubmissionModel> {
+    return this.http
+      .get<TestSubmissionModel>(`${API_URL}/test_attemts/${id}`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): TestSubmissionModel => {
+          if (response.success) {
+            const testAttempt = response.testAttempt;
+            testAttempt.submittedAt = this.DateUtil.utcToPeruvianDate(testAttempt.submittedAt);
+            testAttempt.gradedAt = this.DateUtil.utcToPeruvianDate(testAttempt.gradedAt);
+            return testAttempt;
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
+  }
+
+  getStudentSubmissionTestById$(id: number): Observable<TestSubmissionModel> {
+    return this.http
+      .get<TestSubmissionModel>(`${API_URL}/my_test_attemts/${id}`, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): TestSubmissionModel => {
+          if (response.success) {
+            const testAttempt = response.testAttempt;
+            testAttempt.submittedAt = this.DateUtil.utcToPeruvianDate(testAttempt.submittedAt);
+            testAttempt.gradedAt = this.DateUtil.utcToPeruvianDate(testAttempt.gradedAt);
+            return testAttempt;
+          } else {
+            throwError(response.error);
+            return null;
           }
         })
       );
