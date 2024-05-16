@@ -23,13 +23,22 @@
                   <span class="d-none d-md-inline ml-1">Settings</span>
                 </button>
                 <button
+                  *ngIf="isLoading$ | async as isLoading; else saveButton"
                   class="btn btn-primary pr-1 pr-md-3"
-                  (click)="onSubmit()"
-                  [disabled]="isLoading$ | async"
+                  [disabled]="isLoading"
                 >
                   <i class="fas fa-save"></i>
-                  <span class="d-none d-md-inline ml-1">Save</span>
+                  <span class="d-none d-md-inline ml-1">Saving...</span>
                 </button>
+                <ng-template #saveButton>
+                  <button
+                    class="btn btn-primary pr-1 pr-md-3"
+                    (click)="onSubmit()"
+                  >
+                    <i class="fas fa-save"></i>
+                    <span class="d-none d-md-inline ml-1">Save</span>
+                  </button>
+                </ng-template>
               </div>
             </div>
           </div>
@@ -188,289 +197,290 @@
                 "
                 [formGroupName]="j"
               >
-                  <div class="row align-items-start mb-8">
-                    <!-- Question Title -->
-                    <div class="col-6 col-md-2 mb-2 mb-md-0 order-1">
-                      <label class="font-weight-bold mb-0 h3"
-                        >Question {{ j + 1 }}</label
-                      >
-                    </div>
-                    <!-- Question Type -->
-                    <div class="col-4 col-md-2 mb-2 mb-md-0 order-2 order-md-3">
-                      <select
-                        class="form-control form-control-solid"
-                        formControlName="type"
-                        [compareWith]="compareQuestionTypes"
-                      >
-                        <option [ngValue]="null">Select Type</option>
-                        <option
-                          *ngFor="let type of questionTypes$ | async"
-                          [ngValue]="type"
-                        >
-                          {{ type.name | translate }}
-                        </option>
-                      </select>
-                    </div>
-                    <!-- Remove Question -->
-                    <div
-                      class="col-2 col-md-1 mb-2 mb-md-0 order-3 order-md-4 d-flex justify-content-end"
+                <div class="row align-items-start mb-8">
+                  <!-- Question Title -->
+                  <div class="col-6 col-md-2 mb-2 mb-md-0 order-1">
+                    <label class="font-weight-bold mb-0 h3"
+                      >Question {{ j + 1 }}</label
                     >
-                      <button
-                        class="btn btn-icon btn-secondary btn-sm"
-                        (click)="removeQuestion(sectionGroup, j)"
-                        ngbTooltip="Remove Question"
+                  </div>
+                  <!-- Question Type -->
+                  <div class="col-4 col-md-2 mb-2 mb-md-0 order-2 order-md-3">
+                    <select
+                      class="form-control form-control-solid"
+                      formControlName="type"
+                      [compareWith]="compareQuestionTypes"
+                    >
+                      <option [ngValue]="null">Select Type</option>
+                      <option
+                        *ngFor="let type of questionTypes$ | async"
+                        [ngValue]="type"
                       >
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </div>
-                    <!-- Question text -->
-                    <div class="col-12 col-md-7 order-4 order-md-2">
-                      <div class="row">
-                        <div class="col-12">
-                          <textarea
-                            type="text"
-                            class="form-control form-control-solid"
-                            [class.is-invalid]="
-                              questionGroup.get('questionText').invalid &&
-                              (questionGroup.get('questionText').dirty ||
-                                questionGroup.get('questionText').touched)
-                            "
-                            placeholder="Enter question eg. 'Yo (trabajar) _______ en la oficina.'"
-                            formControlName="questionText"
-                            required
-                            rows="1"
-                            (input)="adjustTextareaHeight($event)"
-                          ></textarea>
-                        </div>
-                        <div class="col-12">
-                          <small
-                            class="text-danger"
-                            *ngIf="
-                              questionGroup.get('questionText').invalid &&
-                              (questionGroup.get('questionText').dirty ||
-                                questionGroup.get('questionText').touched)
-                            "
-                          >
-                            Question text is required.
-                          </small>
-                        </div>
-                      </div>
-                    </div>
+                        {{ type.name | translate }}
+                      </option>
+                    </select>
                   </div>
-                  <div class="row mb-8">
-                    <div class="col-12 col-md-2">
-                      <label class="font-weight-bold mb-0 h3">
-                        Attachment (Optional)
-                      </label>
-                    </div>
-                    <div class="col-12 col-md-10">
-                      <div class="row">
-                        <div class="col-12">
-                          <div
-                            class="custom-dropzone form-control form-control-solid border"
-                            ngx-dropzone
-                            [accept]="'image/*,audio/*'"
-                            (change)="onAttachmentSelect($event, questionGroup)"
-                          >
-                            <ngx-dropzone-label>
-                              <p class="form-text text-muted">
-                                {{
-                                  "REGISTRATION.SCANS.DROP_SELECT" | translate
-                                }}
-                              </p>
-                            </ngx-dropzone-label>
-                            <ngx-dropzone-image-preview
-                              ngProjectAs="ngx-dropzone-preview"
-                              *ngFor="let f of getAttachments(questionGroup)"
-                              [file]="getPreviewFile(f)"
-                              [removable]="true"
-                              (removed)="onAttachmentRemove(f, questionGroup)"
-                            >
-                            </ngx-dropzone-image-preview>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <ng-container
-                    *ngIf="questionGroup.get('type')?.value as selectedType"
+                  <!-- Remove Question -->
+                  <div
+                    class="col-2 col-md-1 mb-2 mb-md-0 order-3 order-md-4 d-flex justify-content-end"
                   >
-                    <!-- Display data about the question type selected -->
-                    <!-- Multiple Choice -->
-                    <ng-container
-                      *ngIf="QuestionUtil.isQuestionType(selectedType.name, QuestionUtil.types.MULTIPLE_CHOICE)"
+                    <button
+                      class="btn btn-icon btn-secondary btn-sm"
+                      (click)="removeQuestion(sectionGroup, j)"
+                      ngbTooltip="Remove Question"
                     >
-                      <div class="mb-12">
-                        <div class="row align-items-center">
-                          <div class="col-12 mb-2">
-                            <label class="font-weight-bold mb-4 h3"
-                              >Choices</label
-                            >
-                          </div>
-                          <div class="col-12">
-                            <div formArrayName="answers">
-                              <div
-                                class="form-group row align-items-center"
-                                *ngFor="
-                                  let optionGroup of questionGroup.get(
-                                    'answers'
-                                  )?.controls;
-                                  let k = index;
-                                  let last = last
-                                "
-                                [formGroupName]="k"
-                              >
-                                <h4 class="col-2">Choice {{ k + 1 }}</h4>
-                                <div class="col-10 d-flex align-items-start">
-                                  <div class="w-100">
-                                    <div class="row">
-                                      <div class="col-12">
-                                        <input
-                                          type="text"
-                                          class="form-control form-control-solid flex-grow-1"
-                                          [class.is-invalid]="
-                                            optionGroup.get('answerText')
-                                              .invalid &&
-                                            (optionGroup.get('answerText')
-                                              .dirty ||
-                                              optionGroup.get('answerText')
-                                                .touched)
-                                          "
-                                          placeholder="Enter answer option"
-                                          formControlName="answerText"
-                                          required
-                                        />
-                                      </div>
-                                      <div class="col-12">
-                                        <small
-                                          class="text-danger"
-                                          *ngIf="
-                                            optionGroup.get('answerText')
-                                              .invalid &&
-                                            (optionGroup.get('answerText')
-                                              .dirty ||
-                                              optionGroup.get('answerText')
-                                                .touched)
-                                          "
-                                        >
-                                          Answer option is required.
-                                        </small>
-                                      </div>
-                                      <div class="col-12" *ngIf="last">
-                                        <small
-                                          class="text-danger"
-                                          *ngIf="
-                                            questionGroup
-                                              .get('answers')
-                                              .hasError(
-                                                'requireOneCorrectAnswer'
-                                              )
-                                          "
-                                        >
-                                          At least one answer must be marked as
-                                          correct.
-                                        </small>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="ml-4">
-                                    <select
-                                      class="form-control form-control-solid"
-                                      formControlName="isCorrect"
-                                    >
-                                      <option [ngValue]="true">Correct</option>
-                                      <option [ngValue]="false">
-                                        Incorrect
-                                      </option>
-                                    </select>
-                                  </div>
-                                  <div class="d-flex justify-content-end ml-4">
-                                    <button
-                                      class="btn btn-icon btn-secondary btn-sm"
-                                      (click)="removeOption(questionGroup, k)"
-                                      ngbTooltip="Remove Option"
-                                    >
-                                      <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <button
-                              class="btn btn-icon btn-secondary btn-sm"
-                              (click)="addOption(questionGroup)"
-                              ngbTooltip="Add Option"
-                            >
-                              <i class="fas fa-plus"></i>
-                            </button>
-                          </div>
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                  <!-- Question text -->
+                  <div class="col-12 col-md-7 order-4 order-md-2">
+                    <div class="row">
+                      <div class="col-12">
+                        <textarea
+                          type="text"
+                          class="form-control form-control-solid"
+                          [class.is-invalid]="
+                            questionGroup.get('questionText').invalid &&
+                            (questionGroup.get('questionText').dirty ||
+                              questionGroup.get('questionText').touched)
+                          "
+                          placeholder="Enter question eg. 'Yo (trabajar) _______ en la oficina.'"
+                          formControlName="questionText"
+                          required
+                          rows="1"
+                          (input)="adjustTextareaHeight($event)"
+                        ></textarea>
+                      </div>
+                      <div class="col-12">
+                        <small
+                          class="text-danger"
+                          *ngIf="
+                            questionGroup.get('questionText').invalid &&
+                            (questionGroup.get('questionText').dirty ||
+                              questionGroup.get('questionText').touched)
+                          "
+                        >
+                          Question text is required.
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-8">
+                  <div class="col-12 col-md-2">
+                    <label class="font-weight-bold mb-0 h3">
+                      Attachment (Optional)
+                    </label>
+                  </div>
+                  <div class="col-12 col-md-10">
+                    <div class="row">
+                      <div class="col-12">
+                        <div
+                          class="custom-dropzone form-control form-control-solid border"
+                          ngx-dropzone
+                          [accept]="'image/*,audio/*'"
+                          (change)="onAttachmentSelect($event, questionGroup)"
+                        >
+                          <ngx-dropzone-label>
+                            <p class="form-text text-muted">
+                              {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
+                            </p>
+                          </ngx-dropzone-label>
+                          <ngx-dropzone-image-preview
+                            ngProjectAs="ngx-dropzone-preview"
+                            *ngFor="let f of getAttachments(questionGroup)"
+                            [file]="getPreviewFile(f)"
+                            [removable]="true"
+                            (removed)="onAttachmentRemove(f, questionGroup)"
+                          >
+                          </ngx-dropzone-image-preview>
                         </div>
                       </div>
-                    </ng-container>
-
-                    <!-- Fill in the Blank -->
-                    <ng-container
-                      *ngIf="QuestionUtil.isQuestionType(selectedType.name, QuestionUtil.types.FILL_IN_THE_BLANK)"
-                    >
-                      <div class="mb-12">
-                        <div class="row align-items-center">
-                          <div class="col-12">
-                            <div formArrayName="answers">
-                              <div
-                                class="form-group row align-items-center"
-                                *ngFor="
-                                  let blankGroup of questionGroup.get('answers')
-                                    ?.controls;
-                                  let k = index
-                                "
-                                [formGroupName]="k"
-                              >
-                                <h4 class="col-2">Answer</h4>
-                                <div class="col-10 d-flex align-items-start">
-                                  <div class="w-100">
-                                    <div class="row">
-                                      <div class="col-12">
-                                        <input
-                                          type="text"
-                                          class="form-control form-control-solid flex-grow-1"
-                                          [class.is-invalid]="
-                                            blankGroup.get('answerText')
-                                              .invalid &&
-                                            (blankGroup.get('answerText')
-                                              .dirty ||
-                                              blankGroup.get('answerText')
-                                                .touched)
-                                          "
-                                          placeholder="Enter correct answer"
-                                          formControlName="answerText"
-                                          required
-                                        />
-                                      </div>
-                                      <div class="col-12">
-                                        <small
-                                          class="text-danger"
-                                          *ngIf="
-                                            blankGroup.get('answerText')
-                                              .invalid &&
-                                            (blankGroup.get('answerText')
-                                              .dirty ||
-                                              blankGroup.get('answerText')
-                                                .touched)
-                                          "
-                                        >
-                                          Answer is required.
-                                        </small>
-                                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-container
+                  *ngIf="questionGroup.get('type')?.value as selectedType"
+                >
+                  <!-- Display data about the question type selected -->
+                  <!-- Multiple Choice -->
+                  <ng-container
+                    *ngIf="
+                      QuestionUtil.isQuestionType(
+                        selectedType.name,
+                        QuestionUtil.types.MULTIPLE_CHOICE
+                      )
+                    "
+                  >
+                    <div class="mb-12">
+                      <div class="row align-items-center">
+                        <div class="col-12 mb-2">
+                          <label class="font-weight-bold mb-4 h3"
+                            >Choices</label
+                          >
+                        </div>
+                        <div class="col-12">
+                          <div formArrayName="answers">
+                            <div
+                              class="form-group row align-items-center"
+                              *ngFor="
+                                let optionGroup of questionGroup.get('answers')
+                                  ?.controls;
+                                let k = index;
+                                let last = last
+                              "
+                              [formGroupName]="k"
+                            >
+                              <h4 class="col-2">Choice {{ k + 1 }}</h4>
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        [class.is-invalid]="
+                                          optionGroup.get('answerText')
+                                            .invalid &&
+                                          (optionGroup.get('answerText')
+                                            .dirty ||
+                                            optionGroup.get('answerText')
+                                              .touched)
+                                        "
+                                        placeholder="Enter answer option"
+                                        formControlName="answerText"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          optionGroup.get('answerText')
+                                            .invalid &&
+                                          (optionGroup.get('answerText')
+                                            .dirty ||
+                                            optionGroup.get('answerText')
+                                              .touched)
+                                        "
+                                      >
+                                        Answer option is required.
+                                      </small>
+                                    </div>
+                                    <div class="col-12" *ngIf="last">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          questionGroup
+                                            .get('answers')
+                                            .hasError('requireOneCorrectAnswer')
+                                        "
+                                      >
+                                        At least one answer must be marked as
+                                        correct.
+                                      </small>
                                     </div>
                                   </div>
                                 </div>
+                                <div class="ml-4">
+                                  <select
+                                    class="form-control form-control-solid"
+                                    formControlName="isCorrect"
+                                  >
+                                    <option [ngValue]="true">Correct</option>
+                                    <option [ngValue]="false">Incorrect</option>
+                                  </select>
+                                </div>
+                                <div class="d-flex justify-content-end ml-4">
+                                  <button
+                                    class="btn btn-icon btn-secondary btn-sm"
+                                    (click)="removeOption(questionGroup, k)"
+                                    ngbTooltip="Remove Option"
+                                  >
+                                    <i class="fas fa-trash-alt"></i>
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <button
+                            class="btn btn-icon btn-secondary btn-sm"
+                            (click)="addOption(questionGroup)"
+                            ngbTooltip="Add Option"
+                          >
+                            <i class="fas fa-plus"></i>
+                          </button>
                         </div>
                       </div>
-                    </ng-container>
+                    </div>
                   </ng-container>
+
+                  <!-- Fill in the Blank -->
+                  <ng-container
+                    *ngIf="
+                      QuestionUtil.isQuestionType(
+                        selectedType.name,
+                        QuestionUtil.types.FILL_IN_THE_BLANK
+                      )
+                    "
+                  >
+                    <div class="mb-12">
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <div formArrayName="answers">
+                            <div
+                              class="form-group row align-items-center"
+                              *ngFor="
+                                let blankGroup of questionGroup.get('answers')
+                                  ?.controls;
+                                let k = index
+                              "
+                              [formGroupName]="k"
+                            >
+                              <h4 class="col-2">Answer</h4>
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        [class.is-invalid]="
+                                          blankGroup.get('answerText')
+                                            .invalid &&
+                                          (blankGroup.get('answerText').dirty ||
+                                            blankGroup.get('answerText')
+                                              .touched)
+                                        "
+                                        placeholder="Enter correct answer"
+                                        formControlName="answerText"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          blankGroup.get('answerText')
+                                            .invalid &&
+                                          (blankGroup.get('answerText').dirty ||
+                                            blankGroup.get('answerText')
+                                              .touched)
+                                        "
+                                      >
+                                        Answer is required.
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
               </div>
             </div>
             <!-- Questions::End -->
