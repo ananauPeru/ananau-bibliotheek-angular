@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
             <h3 class="card-title font-weight-bolder text-dark">
-              {{ "EXERCISE.SHARED.SHARED_EXERCISES" | translate }}
+              {{ "TEST.OVERVIEW_SUBMISSION.SUBMITTED_TESTS" | translate }}
             </h3>
           </div>
         </div>
@@ -17,9 +17,9 @@
     </div>
   </div>
 
-  <!-- Body -->
+  <!-- Body --->
   <div class="card-body pt-2">
-    <!--begin::Form Group-->
+    <!--begin::Form Group--->
     <div class="form-group row mb-10">
       <div class="col-12 col-md-12">
         <div class="input-group input-group-lg input-group-solid mb-2">
@@ -38,20 +38,20 @@
           />
         </div>
         <div class="feedback ml-2">
-          {{ "EXERCISE.LIST.SEARCH_TITLE_AUTHOR" | translate }}
+          {{ "TEST.OVERVIEW_SUBMISSION.SEARCH_LEARNER" | translate }}
         </div>
       </div>
     </div>
-    <!--end::Form Group-->
+    <!--end::Form Group--->
 
-    <!--begin: Item-->
+    <!--begin: Item--->
     <div class="row">
       <div class="col-12">
         <div class="d-flex flex-wrap align-items-center mb-10 table-responsive">
           <table class="table table-fit">
             <thead>
               <tr>
-                <th>{{ "EXERCISE.CREATE.TITLE" | translate }}</th>
+                <th>{{ "TEST.CREATE.TITLE" | translate }}</th>
                 <th
                   *ngIf="
                     AuthUtil.permitted([
@@ -60,13 +60,12 @@
                     ])
                   "
                 >
-                  {{ "EXERCISE.ASSIGN.ASSIGN_TO" | translate }}
+                  {{ "TEST.OVERVIEW_SUBMISSION.SUBMITTED_BY" | translate }}
                 </th>
-                <th>{{ "EXERCISE.SHARED.DEADLINE" | translate }}</th>
-                <th>{{ "EXERCISE.SHARED.STATUS" | translate }}</th>
-                <th>{{ "EXERCISE.OVERVIEW.GRADE" | translate }}</th>
-                <th>{{ "EXERCISE.OVERVIEW.GRADED_BY" | translate }}</th>
-                <th class="text-right">{{ "EXERCISE.LIST.ACTIONS" | translate }}</th>
+                <th>{{ "TEST.OVERVIEW_SUBMISSION.SUBMITTED_AT" | translate }}</th>
+                <th>{{ "TEST.OVERVIEW_SUBMISSION.SCORE_AUTO" | translate }}</th>
+                <th>{{ "TEST.OVERVIEW_SUBMISSION.SCORE_MANUAL" | translate }}</th>
+                <th class="text-right">{{ "TEST.OVERVIEW_SUBMISSION.ACTIONS" | translate }}</th>
               </tr>
             </thead>
             <ng-container
@@ -79,28 +78,22 @@
               "
             >
               <tbody>
-                <tr *ngFor="let exercise of exercises$ | async">
-                  <td>{{ exercise.title }}</td>
+                <tr *ngFor="let submissionTest of submissionsTest$ | async">
+                  <td>{{ submissionTest.title }}</td>
                   <td>
-                    {{ exercise.assignedTo.firstName }}
-                    {{ exercise.assignedTo.lastName }}
+                    {{ submissionTest.submittedBy.firstName }}
+                    {{ submissionTest.submittedBy.lastName }}
                   </td>
-                  <td *ngIf="exercise.deadline; else noDeadline">
-                    {{ exercise.deadline | date : "medium" }}
-                  </td>
-                  <ng-template #noDeadline>
-                    <td>{{ "EXERCISE.SHARED.NO_DEADLINE" | translate }}</td>
-                  </ng-template>
-                  <td>{{ exercise.status }}</td>
-                  <td>{{ getGradeText(exercise) }}</td>
-                  <td>{{ getGradedByText(exercise) }}</td>
+                  <td>{{ submissionTest.submittedAt }}</td>
+                  <td>{{ submissionTest.scoreAuto }}</td>
+                  <td>{{ getScoreManual(submissionTest) }}</td>
                   <td class="text-right">
                     <button
                       type="button"
                       class="btn btn-primary"
                       placement="top"
                       ngbTooltip="Overview"
-                      routerLink="/exercise/overview/{{ exercise.exerciseId }}"
+                      routerLink="/test/submitted_test/{{ submissionTest.id }}"
                     >
                       <i class="fas fa-sign-in-alt pr-0"></i>
                     </button>
@@ -110,26 +103,27 @@
             </ng-container>
             <ng-template #student_t_body>
               <tbody>
-                <tr *ngFor="let exercise of exercises$ | async">
-                  <td>{{ exercise.title }}</td>
-                  <td *ngIf="exercise.deadline; else noDeadline">
-                    {{ exercise.deadline | date : "medium" }}
+                <tr *ngFor="let submissionTest of submissionsTest$ | async">
+                  <td>{{ submissionTest.title }}</td>
+
+                  <td *ngIf="submissionTest.gradedBy; else noGraded">
+                    {{ submissionTest.gradedBy.firstName }}
+                    {{ submissionTest.gradedBy.lastName }}
                   </td>
-                  <ng-template #noDeadline>
-                    <td>
-                      {{ "EXERCISE.SHARED.NO_DEADLINE" | translate }}
-                    </td>
+                  <ng-template #noGraded>
+                    <td>{{ "TEST.OVERVIEW_SUBMISSION.NO_GRADE" | translate }}</td>
                   </ng-template>
-                  <td>{{ exercise.status }}</td>
-                  <td>{{ getGradeText(exercise) }}</td>
-                  <td>{{ getGradedByText(exercise) }}</td>
+
+                  <td>{{ submissionTest.submittedAt }}</td>
+                  <td>{{ submissionTest.scoreAuto }}</td>
+                  <td>{{ getScoreManual(submissionTest) }}</td>
                   <td class="text-right">
                     <button
                       type="button"
                       class="btn btn-primary"
                       placement="top"
                       ngbTooltip="Overview"
-                      routerLink="/exercise/overview/{{ exercise.id }}"
+                      routerLink="/test/submitted_test/{{ submissionTest.id }}"
                     >
                       <i class="fas fa-sign-in-alt pr-0"></i>
                     </button>

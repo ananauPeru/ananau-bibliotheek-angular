@@ -103,6 +103,7 @@ export const locale = {
         TEST_LIST: "Test list",
         CREATE_TEST: "Create test",
         TEST_OVERVIEW: "Test overview",
+        SUBMITTED_TESTS: "Submitted tests",
         EXERCISES: "Exercises",
         EXERCISE: "Exercise",
         EXERCISE_LIST: "Exercise list",
@@ -1068,6 +1069,43 @@ export const locale = {
         GRADE_TABLE: "Grade",
         GRADE_DATE_TABLE: "Grade Date",
         ACTIONS: "Actions",
+      },
+    },
+    TEST: {
+      CREATE: {
+        TITLE: "Title",
+      },
+      FILL_IN_TEST: {
+
+      },
+      OVERVIEW_SUBMISSION: {
+        SUBMITTED_TESTS: "Submitted Tests",
+        SEARCH_LEARNER: "Search for learner",
+        SUBMITTED_BY: "Submitted By",
+        SUBMITTED_AT: "Submitted At",
+        SCORE_AUTO: "Score auto",
+        SCORE_MANUAL: "Score manual",
+        NO_GRADE: "Not graded yet",
+        ACTIONS: "Actions",
+      },
+      OVERVIEW: {
+
+      },
+      SUBMISSION_DETAILS: {
+        SUBMISSION_DETAILS: "Submission Test Details",
+        SUBMITTED_TEST: "Submitted Test:",
+        SUBMITTED_BY: "Submitted By:",
+        SUBMITTED_AT: "Submitted At:",
+        SCORE_AUTO: "Score Auto:",
+        SCORE_MANUAL: "Score Manual:",
+        NO_GRADE: "Not graded yet",
+        EDIT_SCORE: "Edit Score",
+        CURRENT_SCORE: "Current Score:",
+        SCORE: "Score:",
+        SCORE_SUBMIT: "Submit Score",
+
+      },
+      LIST: {
       },
     },
   },

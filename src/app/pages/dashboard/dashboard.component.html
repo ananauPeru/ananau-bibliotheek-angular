@@ -385,7 +385,7 @@
       else noRoles
     "
   >
-    <!-- <div
+    <div
       class="col-lg-3 menu-card one-small-child"
       *ngIf="
         AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin])
@@ -398,6 +398,13 @@
               <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
                 Test
               </h3>
+              <button
+                routerLink="/test/submitted"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+              >
+                <span>Submitted tests</span>
+                <i class="fas fa-list text-dark"></i>
+              </button>
               <button
                 routerLink="/test/list"
                 class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
@@ -416,7 +423,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <div
       class="col-lg-3 menu-card one-small-child"
       *ngIf="

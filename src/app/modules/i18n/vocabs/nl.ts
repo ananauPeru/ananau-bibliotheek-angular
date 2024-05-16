@@ -85,6 +85,7 @@ export const locale = {
         TEST_LIST: "Toetsenlijst",
         CREATE_TEST: "Toets aanmaken",
         TEST_OVERVIEW: "Toets overzicht",
+        SUBMITTED_TESTS: "Ingezonden testen",
         EXERCISES: "Oefeningen",
         EXERCISE: "Oefening",
         EXERCISE_LIST: "Oefeningenlijst",

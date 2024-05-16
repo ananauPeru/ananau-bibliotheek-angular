@@ -15,6 +15,9 @@ import { ShareModalComponent } from './components/share-modal/share-modal.compon
 import { FillInTestComponent } from './fill-in-test/fill-in-test.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
+import { OverviewSubmissionTestComponent } from './overview-submission-test/overview-submission-test.component';
+import { SubmissionTestDetailsComponent } from './submission-test-details/submission-test-details.component';
+
 
 @NgModule({
   imports: [
@@ -28,7 +31,8 @@ import { AudioPlayerComponent } from './components/audio-player/audio-player.com
     NgbModule,
     NgxDropzoneModule,
   ],
-  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, AudioPlayerComponent],
+  
+  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, AudioPlayerComponent, OverviewSubmissionTestComponent, SubmissionTestDetailsComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }
