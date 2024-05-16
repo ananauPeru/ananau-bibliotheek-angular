@@ -14,8 +14,10 @@ import { OverviewTestComponent } from './overview-test/overview-test.component';
 import { ShareModalComponent } from './components/share-modal/share-modal.component';
 import { FillInTestComponent } from './fill-in-test/fill-in-test.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
 import { OverviewSubmissionTestComponent } from './overview-submission-test/overview-submission-test.component';
 import { SubmissionTestDetailsComponent } from './submission-test-details/submission-test-details.component';
+
 
 @NgModule({
   imports: [
@@ -29,7 +31,8 @@ import { SubmissionTestDetailsComponent } from './submission-test-details/submis
     NgbModule,
     NgxDropzoneModule,
   ],
-  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, OverviewSubmissionTestComponent, SubmissionTestDetailsComponent],
+  
+  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, AudioPlayerComponent, OverviewSubmissionTestComponent, SubmissionTestDetailsComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }

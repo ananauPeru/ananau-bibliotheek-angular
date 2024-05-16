@@ -51,7 +51,6 @@
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Author</th>
                 <th>Creation Date</th>
                 <th>Version</th>
                 <th class="text-right">Actions</th>
@@ -60,7 +59,6 @@
             <tbody>
               <tr *ngFor="let test of tests$ | async">
                 <td>{{ test.latestVersion.title }}</td>
-                <td>null</td>
                 <td>
                   {{ test.latestVersion.createdAt | date : "dd-MM-yyyy" }}
                 </td>

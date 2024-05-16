@@ -167,6 +167,35 @@
                 </p>
               </div>
             </div>
+
+            <!-- Question Attachments -->
+            <div
+              class="row align-items-center mb-8"
+              *ngIf="question.fileUrls.length > 0"
+            >
+              <div class="col-12">
+                <h4>Attachments</h4>
+              </div>
+              <div class="col-12 col-md-6">
+                <div
+                *ngFor="let fileUrl of getSortedFiles(question.fileUrls)"
+              >
+                <ng-container *ngIf="fileUtil.isAudioFile(fileUrl)">
+                  <div class="mb-2">{{ fileUtil.getFileNameWithoutExtension(fileUrl) }}</div>
+                  <div class="mb-4">
+                    <app-audio-player
+                      [audioSource]="fileUrl"
+                    ></app-audio-player>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="fileUtil.isImageFile(fileUrl)">
+                  <div class="mb-2">{{ fileUtil.getFileNameWithoutExtension(fileUrl) }}</div>
+                  <img [src]="fileUrl" class="img-fluid mb-4" />
+                </ng-container>
+              </div>
+              </div>
+            </div>
+
             <!-- Answers -->
             <div class="row" *ngIf="question.type.name === 'Multiple Choice'">
               <div class="col-12">

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { TestModel } from "../../_models/test/test.model";
+import { TestEvaluatedModel, TestModel, TestSubmitDTO } from "../../_models/test/test.model";
 import { TestHttpService } from "./test-http/test-http.service";
 import { TestDTO } from "../../_dto/test-dto";
 import { ShortTestModel } from "../../_models/test/short-test.model";
@@ -44,5 +44,9 @@ export class TestService {
 
   updateTest$(id: number, testDto: TestDTO): Observable<TestModel> {
     return this.testHttpService.putTest$(id, testDto);
+  }
+
+  submitTest$(testId: number, testSubmitDto: TestSubmitDTO): Observable<TestEvaluatedModel> {
+    return this.testHttpService.submitTest$(testId, testSubmitDto);
   }
 }

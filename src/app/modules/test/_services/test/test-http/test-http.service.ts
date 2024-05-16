@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { TestModel } from "../../../_models/test/test.model";
+import { TestEvaluatedModel, TestModel, TestSubmitDTO } from "../../../_models/test/test.model";
 import { Observable, throwError } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
@@ -8,6 +8,7 @@ import { TestDTO } from "../../../_dto/test-dto";
 import { QuestionModel } from "../../../_models/test/question.model";
 import { SectionModel } from "../../../_models/test/section.model";
 import { ShortTestModel } from "../../../_models/test/short-test.model";
+import { DateUtil } from "src/app/_utils/date_util";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/test`;
 
@@ -15,7 +16,7 @@ const API_URL = `${environment.apiUrl}/spanish_platform/test`;
   providedIn: "root",
 })
 export class TestHttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private dateUtil: DateUtil) {}
 
   getTests$(
     searchTerm: string,
@@ -39,14 +40,19 @@ export class TestHttpService {
         map((response: any): ShortTestModel[] => {
           if (response.success) {
             const tests: ShortTestModel[] = response.tests;
+
             
+
             // Calculate and set the latestVersionNumber for each ShortTestModel
-            tests.forEach(test => {
+            tests.forEach((test) => {
+              test.versions.forEach((version) => {
+                version.createdAt = this.dateUtil.utcToPeruvianDate(version.createdAt);
+              })
               test.latestVersion = test.versions.reduce((prev, current) =>
                 prev.versionNumber > current.versionNumber ? prev : current
               );
             });
-            
+
             return tests;
           } else {
             throwError(response.error);
@@ -57,57 +63,60 @@ export class TestHttpService {
   }
 
   getTestById$(id: number, versionNumber: number): Observable<TestModel> {
-    return this.http.get<TestModel>(`${API_URL}/${id}/version/${versionNumber}`).pipe(
-      catchError((error) => {
-        if (error.status == 401) {
-          console.error("Login please...");
-        }
-        return throwError(error);
-      }),
-      map((response: any): TestModel => {
-        if (response.success) {
-          const test = response.test;
-          return {
-            id: test.id,
-            title: test.title,
-            description: test.description,
-            versionNumber: test.versionNumber,
-            totalAmountOfQuestions: test.totalAmountOfQuestions,
-            totalAmountOfSections: test.totalAmountOfSections,
-            timeLimitMinutes: test.timeLimitMinutes,
-            accessCode: {
-              code: test.accessCode.code,
-            },
-            createdAt: new Date(test.createdAt),
-
-            sections: test.sections.map((section: SectionModel) => ({
-              id: section.id,
-              title: section.title,
+    return this.http
+      .get<TestModel>(`${API_URL}/${id}/version/${versionNumber}`)
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): TestModel => {
+          if (response.success) {
+            const test = response.test;
+            return {
+              id: test.id,
+              title: test.title,
               description: test.description,
-              amountOfQuestions: section.amountOfQuestions,
+              versionNumber: test.versionNumber,
+              totalAmountOfQuestions: test.totalAmountOfQuestions,
+              totalAmountOfSections: test.totalAmountOfSections,
+              timeLimitMinutes: test.timeLimitMinutes,
+              accessCode: {
+                code: test.accessCode.code,
+              },
+              createdAt: this.dateUtil.utcToPeruvianDate(test.createdAt),
 
-              questions: section.questions.map((question: QuestionModel) => ({
-                id: question.id,
-                questionText: question.questionText,
-                type: {
-                  id: question.type.id,
-                  name: question.type.name,
-                },
-                amountOfAnswers: question.answers.length,
-                answers: question.answers.map((answer) => ({
-                  id: answer.id,
-                  answerText: answer.answerText,
-                  isCorrect: answer.isCorrect,
+              sections: test.sections.map((section: SectionModel) => ({
+                id: section.id,
+                title: section.title,
+                description: test.description,
+                amountOfQuestions: section.amountOfQuestions,
+
+                questions: section.questions.map((question: QuestionModel) => ({
+                  id: question.id,
+                  questionText: question.questionText,
+                  type: {
+                    id: question.type.id,
+                    name: question.type.name,
+                  },
+                  fileUrls: question.fileUrls,
+                  amountOfAnswers: question.answers.length,
+                  answers: question.answers.map((answer) => ({
+                    id: answer.id,
+                    answerText: answer.answerText,
+                    isCorrect: answer.isCorrect,
+                  })),
                 })),
               })),
-            })),
-          };
-        } else {
-          throwError(response.error);
-          return null;
-        }
-      })
-    );
+            };
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
   }
 
   getLatestTestVersionById$(id: number): Observable<TestModel> {
@@ -133,7 +142,7 @@ export class TestHttpService {
             accessCode: {
               code: test.accessCode.code,
             },
-            createdAt: new Date(latestVersion.createdAt),
+            createdAt: this.dateUtil.utcToPeruvianDate(latestVersion.createdAt),
             sections: latestVersion.sections.map((section: SectionModel) => ({
               id: section.id,
               title: section.title,
@@ -146,6 +155,8 @@ export class TestHttpService {
                   id: question.type.id,
                   name: question.type.name,
                 },
+
+                fileUrls: question.fileUrls,
                 amountOfAnswers: question.amountOfAnswers,
                 answers: question.answers.map((answer) => ({
                   id: answer.id,
@@ -190,26 +201,35 @@ export class TestHttpService {
               accessCode: {
                 code: null,
               },
-              createdAt: new Date(test.createdAt),
-              sections: test.sections && test.sections.map((section: SectionModel) => ({
-                id: section.id,
-                title: section.title,
-                description: section.description,
-                amountOfQuestions: section.questions ? section.questions.length : 0,
-                questions: section.questions && section.questions.map((question: QuestionModel) => ({
-                  id: question.id,
-                  questionText: question.questionText,
-                  type: {
-                    id: question.type.id,
-                    name: question.type.name,
-                  },
-                  amountOfAnswers: question.amountOfAnswers,
-                  answers: question.answers && question.answers.map((answer) => ({
-                    id: answer.id,
-                    answerText: answer.answerText,
-                  })),
+              createdAt: this.dateUtil.utcToPeruvianDate(test.createdAt),
+              sections:
+                test.sections &&
+                test.sections.map((section: SectionModel) => ({
+                  id: section.id,
+                  title: section.title,
+                  description: section.description,
+                  amountOfQuestions: section.questions
+                    ? section.questions.length
+                    : 0,
+                  questions:
+                    section.questions &&
+                    section.questions.map((question: QuestionModel) => ({
+                      id: question.id,
+                      questionText: question.questionText,
+                      type: {
+                        id: question.type.id,
+                        name: question.type.name,
+                      },
+                      fileUrls: question.fileUrls,
+                      amountOfAnswers: question.amountOfAnswers,
+                      answers:
+                        question.answers &&
+                        question.answers.map((answer) => ({
+                          id: answer.id,
+                          answerText: answer.answerText,
+                        })),
+                    })),
                 })),
-              })),
             };
           } else {
             throwError(response.error);
@@ -241,7 +261,7 @@ export class TestHttpService {
             accessCode: {
               code: test.accessCode.code,
             },
-            createdAt: new Date(test.createdAt),
+            createdAt: this.dateUtil.utcToPeruvianDate(test.createdAt),
 
             sections: test.sections.map((section: SectionModel) => ({
               id: section.id,
@@ -256,6 +276,8 @@ export class TestHttpService {
                   id: question.type.id,
                   name: question.type.name,
                 },
+
+                fileUrls: question.fileUrls,
                 amountOfAnswers: question.answers.length,
                 answers: question.answers.map((answer) => ({
                   id: answer.id,
@@ -314,7 +336,7 @@ export class TestHttpService {
             accessCode: {
               code: test.accessCode.code,
             },
-            createdAt: new Date(test.createdAt),
+            createdAt: this.dateUtil.utcToPeruvianDate(test.createdAt),
 
             sections: test.sections.map((section: SectionModel) => ({
               id: section.id,
@@ -329,6 +351,8 @@ export class TestHttpService {
                   id: question.type.id,
                   name: question.type.name,
                 },
+
+                fileUrls: question.fileUrls,
                 amountOfAnswers: question.answers.length,
                 answers: question.answers.map((answer) => ({
                   id: answer.id,
@@ -344,5 +368,28 @@ export class TestHttpService {
         }
       })
     );
+  }
+
+  submitTest$(testId: number, testSubmitDto: TestSubmitDTO): Observable<TestEvaluatedModel> {
+    console.log(testId);
+    return this.http.post<TestEvaluatedModel>(`${API_URL}/examination/${testId}/submit`, testSubmitDto).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }
+
+    ),
+    map((response: any): TestEvaluatedModel => {
+      if (response.success) {
+        return response.results;
+        }else {
+          throwError(response.error);
+          return null;
+        }}
+      )
+    );
+      
   }
 }
