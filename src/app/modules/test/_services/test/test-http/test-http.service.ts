@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { TestModel } from "../../../_models/test/test.model";
+import { TestEvaluatedModel, TestModel, TestSubmitDTO } from "../../../_models/test/test.model";
 import { Observable, throwError } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
@@ -368,5 +368,28 @@ export class TestHttpService {
         }
       })
     );
+  }
+
+  submitTest$(testId: number, testSubmitDto: TestSubmitDTO): Observable<TestEvaluatedModel> {
+    console.log(testId);
+    return this.http.post<TestEvaluatedModel>(`${API_URL}/examination/${testId}/submit`, testSubmitDto).pipe(
+      catchError((error) => {
+        if (error.status == 401) {
+          console.error("Login please...");
+        }
+        return throwError(error);
+      }
+
+    ),
+    map((response: any): TestEvaluatedModel => {
+      if (response.success) {
+        return response.results;
+        }else {
+          throwError(response.error);
+          return null;
+        }}
+      )
+    );
+      
   }
 }
