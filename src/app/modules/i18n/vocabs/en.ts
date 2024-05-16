@@ -1,3 +1,4 @@
+import { DELETE } from "@angular/cdk/keycodes";
 import { EducationalCourses } from "../../library/_models/educational-courses.enum";
 
 // USA
@@ -20,6 +21,7 @@ export const locale = {
     // BUTTONS
     BUTTONS: {
       SAVE: "Save",
+      SAVING:"Saving...",
       SAVE_CHANGES: "Save changes",
       SUBMIT: "Submit",
       CANCEL: "Cancel",
@@ -35,6 +37,7 @@ export const locale = {
       CREATE_ASSIGN: "Create assignment",
       BACK_TO_LIST: "Back to list",
       DETAILS: "Details",
+      DELETE: "Delete",
     },
     NEDERLANDS: "Dutch",
     ENGELS: "English",
@@ -1079,8 +1082,53 @@ export const locale = {
     },
     TEST: {
       CREATE: {
-        TITLE: "Title",
+        TITLE: "Create Test",
+        SETTINGS: "Settings",
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+          CHOICE: "Choice",
+          ANSWER: "Answer",
+          TEST_SETTINGS: "Test Settings",
+        },
+        LABELS: {
+          TITLE: "Title",
+          DESCRIPTION: "Description",
+          SECTION_TITLE: "Section Title",
+          SECTION_DESCRIPTION: "Section Description",
+          SELECT_TYPE: "Select Type",
+          ATTACHMENT: "Attachment (optional)",
+          CHOICES: "Choices",
+          CORRECT: "Correct",
+          INCORRECT: "Incorrect",
+          ADD_QUESTION: "Add Question",
+          ADD_SECTION: "Add Section",
+          TIME_LIMIT: "Time Limit (in seconds)",
+        },
+        PLACEHOLDERS: {
+          TITLE: "Enter title",
+          DESCRIPTION: "Enter description (optional)",
+          SECTION_TITLE: "Enter section title",
+          SECTION_DESCRIPTION: "Enter section description (optional)",
+          QUESTION_TEXT: "Enter question eg. 'Yo (trabajar) _______ en la oficina.'",
+          ANSWER_TEXT: "Enter answer text",
+          ANSWER_CORRECT_TEXT: "Enter correct answer",
+        },
+        TOOLTIPS: {
+          REMOVE_SECTION: "Remove this section",
+          REMOVE_QUESTION: "Remove this question",
+          REMOVE_OPTION: "Remove this option",
+          ADD_OPTION: "Add option",
+        },
+        ERRORS: {
+          TITLE_REQUIRED: "Title is required.",
+          SECTION_TITLE_REQUIRED: "Section title is required.",
+          QUESTION_TEXT_REQUIRED: "Question text is required.",
+          ANSWER_TEXT_REQUIRED: "Answer text is required.",
+          CORRECT_ANSWER_REQUIRED: "At least one answer must be marked as correct.",
+        }
       },
+      EDIT_TITLE: "Edit Test",
       FILL_IN_TEST: {
 
       },
