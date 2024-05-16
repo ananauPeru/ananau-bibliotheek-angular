@@ -182,20 +182,26 @@ export class CreateTestComponent implements OnInit {
         this.fileUtil.urlToFile(fileUrl)
       );
 
-      forkJoin(fileObservables).subscribe(
-        (files: File[]) => {
-          const fileUrlsFormArray = questionGroup.get("fileUrls") as FormArray;
-          files.forEach((file) => {
-            fileUrlsFormArray.push(new FormControl(file));
-          });
-          this.patchAnswersFormArray(questionGroup, question.answers);
-          this.cdr.detectChanges();
-        },
-        (error) => {
-          console.error("Error loading attachments:", error);
-          this.cdr.detectChanges();
-        }
-      );
+      if (fileObservables.length === 0) {
+        this.patchAnswersFormArray(questionGroup, question.answers);
+      } else {
+        forkJoin(fileObservables).subscribe(
+          (files: File[]) => {
+            const fileUrlsFormArray = questionGroup.get(
+              "fileUrls"
+            ) as FormArray;
+            files.forEach((file) => {
+              fileUrlsFormArray.push(new FormControl(file));
+            });
+            this.patchAnswersFormArray(questionGroup, question.answers);
+            this.cdr.detectChanges();
+          },
+          (error) => {
+            console.error("Error loading attachments:", error);
+            this.cdr.detectChanges();
+          }
+        );
+      }
 
       questionsFormArray.push(questionGroup);
     });
@@ -213,7 +219,12 @@ export class CreateTestComponent implements OnInit {
       answersFormArray.push(answerGroup);
     });
 
-    if(!this.QuestionUtil.isQuestionType(questionGroup.get("type").value.name, QuestionType.OPEN_QUESTION)){
+    if (
+      !this.QuestionUtil.isQuestionType(
+        questionGroup.get("type").value.name,
+        QuestionType.OPEN_QUESTION
+      )
+    ) {
       answersFormArray.setValidators([
         Validators.required,
         requireOneCorrectAnswer,
@@ -255,11 +266,14 @@ export class CreateTestComponent implements OnInit {
     // Upload files and get their URLs
     for (const section of testDto.sections) {
       for (const question of section.questions) {
-
-        if(this.QuestionUtil.isQuestionType(question.type.name, QuestionType.OPEN_QUESTION)){
-          question.answers = question.answers = []
+        if (
+          this.QuestionUtil.isQuestionType(
+            question.type.name,
+            QuestionType.OPEN_QUESTION
+          )
+        ) {
+          question.answers = question.answers = [];
         }
-
 
         const files = question.fileUrls as File[];
         const fileUrls: string[] = [];
@@ -319,21 +333,18 @@ export class CreateTestComponent implements OnInit {
    */
   isAllFieldsFilled(): boolean {
     if (this.testForm.invalid) {
-      console.log("Invalid form", this.testForm);
       return false;
     }
 
     const sections = this.sections.controls;
     for (const section of sections) {
       if (section.get("title").invalid || section.get("questions").invalid) {
-        console.log("Invalid section");
         return false;
       }
 
       const questions = section.get("questions").value;
       for (const question of questions) {
         if (question.questionText.trim() === "" || question.type === null) {
-          console.log("Invalid question");
           return false;
         }
 
@@ -344,13 +355,17 @@ export class CreateTestComponent implements OnInit {
             QuestionType.OPEN_QUESTION
           )
         ) {
-          console.log("Invalid question length");
           return false;
         }
 
         for (const answer of question.answers) {
-          if (answer.answerText.trim() === "" && !this.QuestionUtil.isQuestionType(question.type.name, QuestionType.OPEN_QUESTION)) {
-            console.log("Invalid answer", answer.answerText);
+          if (
+            answer.answerText.trim() === "" &&
+            !this.QuestionUtil.isQuestionType(
+              question.type.name,
+              QuestionType.OPEN_QUESTION
+            )
+          ) {
             return false;
           }
         }
@@ -408,15 +423,18 @@ export class CreateTestComponent implements OnInit {
       ? lastQuestion.get("type").value
       : null;
 
-      let questionGroup;
-    if(lastQuestionType && this.QuestionUtil.isQuestionType(lastQuestionType.name, QuestionType.OPEN_QUESTION)){
+    let questionGroup;
+    if (
+      lastQuestionType &&
+      this.QuestionUtil.isQuestionType(
+        lastQuestionType.name,
+        QuestionType.OPEN_QUESTION
+      )
+    ) {
       questionGroup = this.formBuilder.group({
         questionText: ["", Validators.required],
         type: new FormControl(lastQuestionType, Validators.required),
-        answers: this.formBuilder.array(
-          [],
-          []
-        ),
+        answers: this.formBuilder.array([], []),
         fileUrls: this.formBuilder.array([]),
       });
     } else {
@@ -425,10 +443,7 @@ export class CreateTestComponent implements OnInit {
         type: new FormControl(lastQuestionType, Validators.required),
         answers: this.formBuilder.array(
           [],
-          [
-            Validators.required, 
-            requireOneCorrectAnswer
-          ]
+          [Validators.required, requireOneCorrectAnswer]
         ),
         fileUrls: this.formBuilder.array([]),
       });
