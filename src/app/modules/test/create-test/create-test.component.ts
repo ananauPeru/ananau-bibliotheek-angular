@@ -52,7 +52,6 @@ export class CreateTestComponent implements OnInit {
   public questionTypes$: Observable<QuestionTypeModel[]>;
   public isEditMode = false;
   public testId: number;
-
   public isLoading$: Observable<boolean>;
 
   public audioPreviewFile: File;
