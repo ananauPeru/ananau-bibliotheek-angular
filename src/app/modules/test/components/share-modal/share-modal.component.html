@@ -34,41 +34,10 @@
         </div>
       </div>
     </div>
-    <div class="form-group row align-items-center">
-      <label class="col-12 col-md-3 font-weight-bold mb-2 mb-md-0"
-        >Share with Users</label
-      >
-      <div class="col-12 col-md-9">
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search users..."
-            [ngbTypeahead]="search"
-            (selectItem)="onUserSelected($event)"
-            [inputFormatter]="formatUser"
-            [resultFormatter]="formatUser"
-            #instance="ngbTypeahead"
-          />
-        </div>
-        <div class="mt-2">
-          <span
-            *ngFor="let user of selectedUsers"
-            class="badge badge-pill badge-primary mr-2 d-inline-flex align-items-center px-2 py-1"
-          >
-            {{ user.fullName }}
-            <i class="fas fa-times ml-2" (click)="removeUser(user)"></i>
-          </span>
-        </div>
-      </div>
-    </div>
   </form>
 </div>
 <div class="modal-footer d-flex">
   <button type="button" class="btn btn-secondary ml-auto" (click)="activeModal.dismiss()">
     {{ "BUTTONS.CANCEL" | translate }}
-  </button>
-  <button type="button" class="btn btn-primary" [disabled]="selectedUsers.length === 0" (click)="onShare()">
-    {{ "BUTTONS.SHARE" | translate }}
   </button>
 </div>

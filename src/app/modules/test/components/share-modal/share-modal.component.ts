@@ -11,11 +11,9 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 })
 export class ShareModalComponent implements OnInit{
   @Input() shareUrl: string;
-  @Input() users: any[];
   @Output() share = new EventEmitter<any[]>();
 
   shareForm: FormGroup;
-  selectedUsers: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,39 +38,7 @@ export class ShareModalComponent implements OnInit{
     document.body.removeChild(urlInput);
   }
 
-  formatUser = (user: any) => {
-    return user && user.fullName ? user.fullName : '';
-  };
-
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map((term) =>
-        term
-          ? this.users.filter((user) =>
-              user.fullName.toLowerCase().includes(term.toLowerCase())
-            )
-          : this.users.slice()
-      )
-    );
-
-  onUserSelected(event: any) {
-    const user = event.item;
-    if (!this.selectedUsers.find((u) => u.id === user.id)) {
-      this.selectedUsers.push(user);
-    }
-  }
-
-  removeUser(user: any) {
-    const index = this.selectedUsers.findIndex((u) => u.id === user.id);
-    if (index !== -1) {
-      this.selectedUsers.splice(index, 1);
-    }
-  }
-
   onShare() {
-    this.share.emit(this.selectedUsers);
     this.activeModal.close();
   }
 }

@@ -11,4 +11,5 @@ export class QuestionModel {
         answerText: string;
         isCorrect: boolean;
     }[];
+    fileUrls: string[];
 }

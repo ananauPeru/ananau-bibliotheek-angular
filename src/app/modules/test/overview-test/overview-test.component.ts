@@ -5,6 +5,7 @@ import { TestModel } from "../_models/test/test.model";
 import { ShareModalComponent } from "../components/share-modal/share-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Observable } from "rxjs";
+import { FileUtil } from "src/app/_utils/file_util";
 
 @Component({
   selector: "app-overview-test",
@@ -23,9 +24,9 @@ export class OverviewTestComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private testService: TestService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public fileUtil: FileUtil
   ) {}
 
   ngOnInit() {
@@ -46,7 +47,6 @@ export class OverviewTestComponent implements OnInit {
   }
 
   openShareModal(testModel: TestModel) {
-    console.log(testModel);
     const shareUrl = `${window.location.origin}/test/examination/${testModel.id}?AccessCode=${testModel.accessCode.code}`;
     const modalRef = this.modalService.open(ShareModalComponent, {
       centered: true,
@@ -54,8 +54,19 @@ export class OverviewTestComponent implements OnInit {
     modalRef.componentInstance.shareUrl = shareUrl;
     modalRef.componentInstance.users = this.users;
     modalRef.componentInstance.share.subscribe((selectedUsers: any[]) => {
-      console.log("Selected users:", selectedUsers);
-      // Perform the sharing logic here
+    });
+  }
+
+  getSortedFiles(fileUrls: string[]): string[] {
+    return fileUrls.sort((a, b) => {
+      if(this.fileUtil.isAudioFile(a) && this.fileUtil.isImageFile(b)) {
+        return -1;
+      } else if(this.fileUtil.isImageFile(a) && this.fileUtil.isAudioFile(b)) {
+        return 1;
+      }
+      else {
+        return 0;
+      }
     });
   }
 }

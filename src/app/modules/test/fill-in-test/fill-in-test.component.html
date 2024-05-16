@@ -64,8 +64,42 @@
                   >
                     <label>{{ question.questionText }}</label>
 
+                    <ng-container
+                      *ngIf="question.fileUrls.length > 0"
+                      class="row"
+                    >
+                      <ng-container
+                        *ngIf="getImageUrls(question.fileUrls) as imageUrls"
+                      >
+                        <div *ngFor="let imageUrl of imageUrls" class="mb-4">
+                          <img
+                            [src]="imageUrl"
+                            alt="Question Image"
+                            class="img-fluid"
+                          />
+                        </div>
+                      </ng-container>
+
+                      <ng-container
+                        *ngIf="getAudioUrls(question.fileUrls) as audioUrls"
+                      >
+                        <div *ngFor="let audioUrl of audioUrls" class="mb-4">
+                          <app-audio-player
+                            [audioSource]="audioUrl"
+                          ></app-audio-player>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+
                     <!-- Multiple Choice Question -->
-                    <div *ngIf="question.type.name === 'Multiple Choice'">
+                    <div
+                      *ngIf="
+                        QuestionUtil.isQuestionType(
+                          question.type.name,
+                          QuestionUtil.types.MULTIPLE_CHOICE
+                        )
+                      "
+                    >
                       <app-radio-button
                         [answers]="question.answers"
                         [questionId]="question.id"
@@ -83,7 +117,14 @@
                     </div>
 
                     <!-- Fill in the Blank Question -->
-                    <div *ngIf="question.type.name === 'Fill in the Blank'">
+                    <div
+                      *ngIf="
+                        QuestionUtil.isQuestionType(
+                          question.type.name,
+                          QuestionUtil.types.FILL_IN_THE_BLANK
+                        )
+                      "
+                    >
                       <input
                         type="text"
                         class="form-control"
@@ -98,6 +139,32 @@
                               .get(question.id.toString()).dirty
                         }"
                       />
+                    </div>
+
+                    <!-- Display open question -->
+                    <div
+                      *ngIf="
+                        QuestionUtil.isQuestionType(
+                          question.type.name,
+                          QuestionUtil.types.OPEN_QUESTION
+                        )
+                      "
+                    >
+                      <textarea
+                        class="form-control"
+                        [formControlName]="question.id"
+                        [ngClass]="{
+                          'is-invalid':
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).invalid &&
+                            testForm
+                              .get(section.id.toString())
+                              .get(question.id.toString()).dirty
+                        }"
+                        rows="2"
+                        (input)="adjustTextareaHeight($event)"
+                      ></textarea>
                     </div>
 
                     <div class="invalid-feedback">This field is required.</div>
@@ -120,7 +187,7 @@
         <!-- Timer::start -->
         <div class="row">
           <div class="col-12">
-            <p>Time Left: {{ timeLeft }} seconds</p>
+            <p>Time Left: {{ formatTime(timeLeft) }}</p>
           </div>
         </div>
         <!-- Timer::end -->
@@ -154,7 +221,14 @@
               <p>{{ question.questionText }}</p>
 
               <!-- Display Multiple Choice answers -->
-              <div *ngIf="question.type.name === 'Multiple Choice'">
+              <div
+                *ngIf="
+                  QuestionUtil.isQuestionType(
+                    question.type.name,
+                    QuestionUtil.types.MULTIPLE_CHOICE
+                  )
+                "
+              >
                 <ul>
                   <li *ngFor="let answer of question.answers">
                     <span
@@ -187,7 +261,14 @@
               </div>
 
               <!-- Display Fill in the Blank answers -->
-              <div *ngIf="question.type.name === 'Fill in the Blank'">
+              <div
+                *ngIf="
+                  QuestionUtil.isQuestionType(
+                    question.type.name,
+                    QuestionUtil.types.FILL_IN_THE_BLANK
+                  )
+                "
+              >
                 <p>
                   Your Answer:
                   {{
@@ -219,9 +300,7 @@
     <!-- Confirmation Modal -->
     <ng-template #confirmationModal let-modal>
       <div class="modal-header">
-        <h5 class="modal-title">
-          Test is not complete
-        </h5>
+        <h5 class="modal-title">Test is not complete</h5>
         <button
           type="button"
           class="close"
@@ -232,7 +311,8 @@
         </button>
       </div>
       <div class="modal-body">
-        You have not filled in all fields, are you sure you want to submit your test?
+        You have not filled in all fields, are you sure you want to submit your
+        test?
       </div>
       <div class="modal-footer">
         <button
