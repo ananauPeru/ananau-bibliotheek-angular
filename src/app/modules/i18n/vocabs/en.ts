@@ -1099,6 +1099,11 @@ export const locale = {
         SCORE_AUTO: "Score Auto:",
         SCORE_MANUAL: "Score Manual:",
         NO_GRADE: "Not graded yet",
+        EDIT_SCORE: "Edit Score",
+        CURRENT_SCORE: "Current Score:",
+        SCORE: "Score:",
+        SCORE_SUBMIT: "Submit Score",
+
       },
       LIST: {
       },

@@ -48,7 +48,7 @@
             <strong>
               {{ "TEST.SUBMISSION_DETAILS.SCORE_AUTO" | translate }}
             </strong> {{ submissionTest.scoreAuto }} /
-            {{ submissionTest.testAttempt.possibleScored.maxAuto }}
+            {{ submissionTest.testAttempt.possibleScores.maxAuto }}
           </p>
 
           <ng-container *ngIf="submissionTest.scoreManual; else notGradedDetail">
@@ -56,7 +56,7 @@
               <strong>
                 {{ "TEST.SUBMISSION_DETAILS.SCORE_MANUAL" | translate }}
               </strong> {{ submissionTest.scoreManual }} /
-              {{ submissionTest.testAttempt.possibleScored.maxNotAuto }}
+              {{ submissionTest.testAttempt.possibleScores.maxNotAuto }}
             </p>
           </ng-container>
           <ng-template #notGradedDetail>
@@ -66,61 +66,45 @@
           </ng-template>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-      <!-- <div class="row mb-4">
-        <div class="col-12">
-          <h4>
-            {{ "EXERCISE.SUBMISSION.FILES" | translate }}
-          </h4>
-          <ul class="list-group">
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-              *ngFor="let fileUrl of submissionTest.fileUrls"
-            >
-              {{ fileUrlToName(fileUrl) }}
-              <button class="btn btn-primary" (click)="downloadFile(fileUrl)">
-                {{ "BUTTONS.DOWNLOAD" | translate }}
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-
       <div class="row" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">
         <div class="col-12">
           <h4>
-            {{ "EXERCISE.SUBMISSION.EDIT_GRADE" | translate }}
+            {{ "TEST.SUBMISSION_DETAILS.EDIT_SCORE" | translate }}
           </h4>
-          <ng-container *ngIf="!isEditingGrade; else editGradeTemplate">
-            <p *ngIf="submissionTest.grade; else notGradedTemplate">
+          <ng-container *ngIf="!isEditingScore; else editScoreTemplate">
+            <p *ngIf="submissionTest.realScores; else notGradedTemplate">
               <strong>
-                {{ "EXERCISE.SUBMISSION.CURRENT_GRADE" | translate }}
-              </strong> {{ submissionTest.grade }} /
-              {{ submissionTest.exercise.maxGrade }}
+                {{ "TEST.SUBMISSION_DETAILS.CURRENT_SCORE" | translate }}
+              </strong> {{ submissionTest.realScores.total }} /
+              {{ submissionTest.testAttempt.possibleScores.max }}
             </p>
             <ng-template #notGradedTemplate>
               <p>
-                {{ "EXERCISE.SUBMISSION.NO_GRADE" | translate }}
+                {{ "TEST.SUBMISSION_DETAILS.NO_GRADE" | translate }}
               </p>
             </ng-template>
-            <button class="btn btn-primary" (click)="isEditingGrade = true">
-              {{ "EXERCISE.SUBMISSION.EDIT_GRADE" | translate }}
+            <button class="btn btn-primary" (click)="isEditingScore = true">
+              {{ "TEST.SUBMISSION_DETAILS.EDIT_SCORE" | translate }}
             </button>
           </ng-container>
-          <ng-template #editGradeTemplate>
-            <form [formGroup]="gradeForm" (ngSubmit)="submitGrade()">
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <ng-template #editScoreTemplate>
+            <form [formGroup]="gradeForm" (ngSubmit)="submitScore()">
               <div class="form-group">
                 <label for="grade">
-                  {{ "EXERCISE.SUBMISSION.GRADE" | translate }}
+                  {{ "TEST.SUBMISSION_DETAILS.SCORE" | translate }}
                 </label>
                 <div class="input-group">
                   <input
@@ -129,12 +113,12 @@
                     id="grade"
                     formControlName="grade"
                     min="0"
-                    [max]="submissionTest.exercise.maxGrade"
+                    [max]="submissionTest.testAttempt.possibleScores.max"
                     required
                   />
                   <div class="input-group-append">
                     <span class="input-group-text"
-                      >/ {{ submissionTest.exercise.maxGrade }}</span
+                      >/ {{ submissionTest.testAttempt.possibleScores.max }}</span
                     >
                   </div>
                 </div>
@@ -150,16 +134,6 @@
                   </small>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="feedback">
-                  {{ "EXERCISE.SUBMISSION.FEEDBACK" | translate }}
-                </label>
-                <textarea
-                  class="form-control"
-                  id="feedback"
-                  formControlName="feedback"
-                ></textarea>
-              </div>
 
               <div class="form-group">
                 <button
@@ -167,12 +141,12 @@
                   class="btn btn-primary"
                   [disabled]="gradeForm.invalid"
                 >
-                  {{ "EXERCISE.SUBMISSION.GRADE_SUBMIT" | translate }}
+                  {{ "TEST.SUBMISSION_DETAILS.SCORE_SUBMIT" | translate }}
                 </button>
                 <button
                   type="button"
                   class="btn btn-secondary ml-2"
-                  (click)="isEditingGrade = false"
+                  (click)="isEditingScore = false"
                 >
                  {{ "BUTTONS.CANCEL" | translate }}
                 </button>
@@ -180,7 +154,7 @@
             </form>
           </ng-template>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </ng-container>
