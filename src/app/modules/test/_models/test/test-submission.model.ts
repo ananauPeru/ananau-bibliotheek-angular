@@ -49,8 +49,13 @@ export class TeacherTestSubmissionModel extends BaseTestSubmissionModel {
  * GET test/my_test_attemts/{id}
  */
 
-
 /**
  * GET test/test_attemts/{id}
  */
 
+export class TestSubmissionModel extends BaseTestSubmissionModel {
+  testAttempt: TestAttemptModel;
+  submittedBy: UserModel;
+  gradedBy?: UserModel;
+  gradedAt?: Date;
+}
