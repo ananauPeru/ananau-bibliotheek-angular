@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { TestService } from "../_services/test/test.service";
 import { TestEvaluatedModel, TestModel, TestSubmitDTO } from "../_models/test/test.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Observable, timer } from "rxjs";
+import { Observable, Subscription, timer } from "rxjs";
 import { map } from "rxjs/operators";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FileUtil } from "src/app/_utils/file_util";
@@ -37,6 +37,8 @@ export class FillInTestComponent implements OnInit {
   timeLeft: number;
   currentState: TestState = TestState.NotStarted;
   testState = TestState;
+
+  timerSubscribtion: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -117,7 +119,7 @@ export class FillInTestComponent implements OnInit {
   }
 
   startTimer() {
-    timer(0, 1000)
+    this.timerSubscribtion = timer(0, 1000)
       .pipe(
         map(() => {
           if (this.timeLeft > 0) {
@@ -132,6 +134,7 @@ export class FillInTestComponent implements OnInit {
   }
 
   endTest() {
+    this.timerSubscribtion.unsubscribe();
     this.currentState = TestState.Submitted;
     const testId = this.route.snapshot.params["id"];
     console.log(testId);
@@ -171,7 +174,7 @@ export class FillInTestComponent implements OnInit {
                 questionId: parseInt(questionId),
                 answer: {
                   answerId: null,
-                  answerText: answer,
+                  answerText: answer === '' ? null : answer,
                 },
               });
             }
@@ -186,6 +189,7 @@ export class FillInTestComponent implements OnInit {
         this.toast.showSuccess("Success", "Test submitted successfully");
       },
       (error) => {
+        this.router.navigate([`/test/submission`]);
         this.toast.showError("Error", "Error submitting test");
       }
     );
