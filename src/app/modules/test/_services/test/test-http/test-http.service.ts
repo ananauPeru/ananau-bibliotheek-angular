@@ -371,7 +371,8 @@ export class TestHttpService {
   }
 
   submitTest$(testId: number, testSubmitDto: TestSubmitDTO): Observable<TestEvaluatedModel> {
-    return this.http.post<TestEvaluatedModel>(`${API_URL}/examination/submit/${testId}`, testSubmitDto).pipe(
+    console.log(testId);
+    return this.http.post<TestEvaluatedModel>(`${API_URL}/examination/${testId}/submit`, testSubmitDto).pipe(
       catchError((error) => {
         if (error.status == 401) {
           console.error("Login please...");

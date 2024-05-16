@@ -29,10 +29,11 @@ export class QuestionEvaluatedModel {
         answerText: string;
         isCorrect: boolean;
     }[];
+    // Learner Answer is null when there is no answer submitted
     learnerAnswer: {
         answerId: number;
         answerText: string;
         isCorrect: boolean;
-    };
+    } | null;
 
 }

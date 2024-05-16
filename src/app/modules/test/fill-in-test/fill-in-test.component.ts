@@ -7,14 +7,14 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TestService } from "../_services/test/test.service";
-import { TestEvaluatedModel, TestModel } from "../_models/test/test.model";
+import { TestEvaluatedModel, TestModel, TestSubmitDTO } from "../_models/test/test.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Observable, Subject, timer } from "rxjs";
+import { Observable, timer } from "rxjs";
 import { map } from "rxjs/operators";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FileUtil } from "src/app/_utils/file_util";
-import { QuestionType } from "../_types/QuestionType";
 import { QuestionUtil } from "../_types/QuestionUtil";
+import { ToastrUtil } from "src/app/_utils/toastr_util";
 
 export enum TestState {
   NotStarted,
@@ -35,11 +35,8 @@ export class FillInTestComponent implements OnInit {
   test$: Observable<TestModel>;
   testForm: FormGroup;
   timeLeft: number;
-  score = 0;
-  totalQuestions = 0;
   currentState: TestState = TestState.NotStarted;
   testState = TestState;
-  testId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,7 +46,8 @@ export class FillInTestComponent implements OnInit {
     private modalService: NgbModal,
     private fileUtil: FileUtil,
     private cdr: ChangeDetectorRef,
-    public QuestionUtil: QuestionUtil
+    public QuestionUtil: QuestionUtil,
+    private toast: ToastrUtil
   ) {}
 
   ngOnInit() {
@@ -71,7 +69,6 @@ export class FillInTestComponent implements OnInit {
 
   getTestDetails() {
     const testId = this.route.snapshot.params["id"];
-    this.testId = testId;
     const accessCode = this.route.snapshot.queryParams["AccessCode"];
 
     if (!testId || !accessCode) {
@@ -136,7 +133,9 @@ export class FillInTestComponent implements OnInit {
 
   endTest() {
     this.currentState = TestState.Submitted;
-    this.submitTest(this.testId, true);
+    const testId = this.route.snapshot.params["id"];
+    console.log(testId);
+    this.submitTest(testId, true);
   }
 
   formatTime(time: number): string {
@@ -144,97 +143,60 @@ export class FillInTestComponent implements OnInit {
     const seconds = time % 60;
     return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   }
+
+
   submitTest(testId: number, force: boolean = false) {
-    if (force || !this.testForm.invalid) {
-      this.testService.submitTest$(testId, this.testForm.value).subscribe((evaulatedTest: TestEvaluatedModel) => {
-        this.gradeTest(evaulatedTest);
-      })
-      return;
-    }
-
-    this.modalService.open(this.confirmationModal, { centered: true });
-  }
-
-  gradeTest(evaulatedTest: TestEvaluatedModel) {
-    console.log("Test graded!", evaulatedTest);
-    this.currentState = TestState.Graded;
-  }
-
-  isAnswerCorrect(answer: any, sectionId: number, questionId: number): boolean {
-    const correctTest$: Observable<TestModel> = this.getCorrectTest();
-    let isCorrect = false;
-
-    correctTest$.subscribe((correctTest) => {
-      if (correctTest === null) return;
-
-      const correctSection = correctTest.sections.find(
-        (s) => s.id === sectionId
-      );
-      if (correctSection) {
-        const correctQuestion = correctSection.questions.find(
-          (q) => q.id === questionId
-        );
-        if (correctQuestion) {
-          const correctAnswer = correctQuestion.answers.find(
-            (a) => a.isCorrect
-          );
-          if (correctAnswer && correctAnswer.id === answer.id) {
-            isCorrect = true;
+  if (force || !this.testForm.invalid) {
+    const testFormValue = this.testForm.value;
+    console.log(testFormValue);
+    const testSubmitDto: TestSubmitDTO = {
+      learnerAnswers: [],
+    };
+    for (const sectionId in testFormValue) {
+      if (testFormValue.hasOwnProperty(sectionId)) {
+        const section = testFormValue[sectionId];
+        for (const questionId in section) {
+          if (section.hasOwnProperty(questionId)) {
+            const answer = section[questionId];
+            if (typeof answer === 'number') {
+              testSubmitDto.learnerAnswers.push({
+                questionId: parseInt(questionId),
+                answer: {
+                  answerId: answer,
+                  answerText: null,
+                },
+              });
+            } else {
+              testSubmitDto.learnerAnswers.push({
+                questionId: parseInt(questionId),
+                answer: {
+                  answerId: null,
+                  answerText: answer,
+                },
+              });
+            }
           }
         }
       }
-    });
+    }
 
-    return isCorrect;
-  }
-
-  isAnswerSelected(
-    sectionId: number,
-    questionId: number,
-    answerId: number
-  ): boolean {
-    const selectedAnswerId = this.testForm
-      .get(sectionId.toString())
-      .get(questionId.toString()).value;
-    return selectedAnswerId === answerId;
-  }
-
-  getCorrectAnswer(sectionId: number, questionId: number): string {
-    const correctTest$: Observable<TestModel> = this.getCorrectTest();
-    let correctAnswer = "";
-
-    correctTest$.subscribe((correctTest) => {
-      if (correctTest === null) return;
-
-      const correctSection = correctTest.sections.find(
-        (s) => s.id === sectionId
-      );
-      if (correctSection) {
-        const correctQuestion = correctSection.questions.find(
-          (q) => q.id === questionId
-        );
-        if (
-          correctQuestion &&
-          correctQuestion.answers &&
-          correctQuestion.answers.length > 0
-        ) {
-          correctAnswer = correctQuestion.answers[0].answerText;
-        }
+    this.testService.submitTest$(testId, testSubmitDto).subscribe(
+      (evaulatedTest: TestEvaluatedModel) => {
+        this.router.navigate([`/test/submission/${evaulatedTest.id}`]);
+        this.toast.showSuccess("Success", "Test submitted successfully");
+      },
+      (error) => {
+        this.toast.showError("Error", "Error submitting test");
       }
-    });
-
-    return correctAnswer;
+    );
+    return;
   }
+  this.modalService.open(this.confirmationModal, { centered: true });
+}
 
-  retryTest(test: TestModel) {
-    this.resetTest();
-    this.startTest(test);
-  }
-
-  resetTest() {
-    this.score = 0;
-    this.totalQuestions = 0;
-    this.timeLeft = 0;
-    this.currentState = TestState.NotStarted;
+  gradeTest() {
+    const testId = this.route.snapshot.params["id"];
+    this.router.navigate([`/test/submission/${testId}`]);
+    this.currentState = TestState.Graded;
   }
 }

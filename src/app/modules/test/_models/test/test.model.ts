@@ -42,8 +42,8 @@ export class TestSubmitDTO {
   learnerAnswers: {
     questionId: number;
     answer: {
-      answerId: number;
-      answerText: string;
+      answerId: number | null;
+      answerText: string | null;
     }
   }[];
 }
