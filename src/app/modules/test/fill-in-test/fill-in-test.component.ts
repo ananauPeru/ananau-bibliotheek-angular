@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TestService } from "../_services/test/test.service";
-import { TestModel } from "../_models/test/test.model";
+import { TestEvaluatedModel, TestModel } from "../_models/test/test.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable, Subject, timer } from "rxjs";
 import { map } from "rxjs/operators";
@@ -39,6 +39,7 @@ export class FillInTestComponent implements OnInit {
   totalQuestions = 0;
   currentState: TestState = TestState.NotStarted;
   testState = TestState;
+  testId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,6 +71,7 @@ export class FillInTestComponent implements OnInit {
 
   getTestDetails() {
     const testId = this.route.snapshot.params["id"];
+    this.testId = testId;
     const accessCode = this.route.snapshot.queryParams["AccessCode"];
 
     if (!testId || !accessCode) {
@@ -134,6 +136,7 @@ export class FillInTestComponent implements OnInit {
 
   endTest() {
     this.currentState = TestState.Submitted;
+    this.submitTest(this.testId, true);
   }
 
   formatTime(time: number): string {
@@ -141,70 +144,20 @@ export class FillInTestComponent implements OnInit {
     const seconds = time % 60;
     return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   }
-
-  submitTest(test: TestModel, force: boolean = false) {
+  submitTest(testId: number, force: boolean = false) {
     if (force || !this.testForm.invalid) {
-      this.currentState = TestState.Grading;
-      this.gradeTest(test);
+      this.testService.submitTest$(testId, this.testForm.value).subscribe((evaulatedTest: TestEvaluatedModel) => {
+        this.gradeTest(evaulatedTest);
+      })
       return;
     }
 
     this.modalService.open(this.confirmationModal, { centered: true });
   }
 
-  gradeTest(test: TestModel) {
-    this.score = 0;
-    this.totalQuestions = 0;
-    const correctTest$: Observable<TestModel> = this.getCorrectTest();
-
-    correctTest$.subscribe((correctTest) => {
-      if (correctTest === null) return;
-
-      test.sections.forEach((section) => {
-        const correctSection = correctTest.sections.find(
-          (s) => s.id === section.id
-        );
-        if (correctSection) {
-          section.questions.forEach((question) => {
-            this.totalQuestions++;
-            const selectedAnswerId = this.testForm
-              .get(section.id.toString())
-              .get(question.id.toString()).value;
-
-            const correctQuestion = correctSection.questions.find(
-              (q) => q.id === question.id
-            );
-            if (correctQuestion) {
-              if (question.type.name === "Multiple Choice") {
-                const selectedAnswer = question.answers.find(
-                  (answer) => answer.id === selectedAnswerId
-                );
-                const correctAnswer = correctQuestion.answers.find(
-                  (answer) => answer.isCorrect
-                );
-
-                if (
-                  selectedAnswer &&
-                  correctAnswer &&
-                  selectedAnswer.id === correctAnswer.id
-                ) {
-                  this.score++;
-                }
-              } else if (question.type.name === "Fill in the Blank") {
-                const userAnswer = selectedAnswerId;
-                const correctAnswer = correctQuestion.answers[0].answerText;
-
-                if (userAnswer === correctAnswer) {
-                  this.score++;
-                }
-              }
-            }
-          });
-        }
-      });
-
-      this.currentState = TestState.Graded;
-    });
+  gradeTest(evaulatedTest: TestEvaluatedModel) {
+    console.log("Test graded!", evaulatedTest);
+    this.currentState = TestState.Graded;
   }
 
   isAnswerCorrect(answer: any, sectionId: number, questionId: number): boolean {

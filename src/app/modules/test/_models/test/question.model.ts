@@ -13,3 +13,26 @@ export class QuestionModel {
     }[];
     fileUrls: string[];
 }
+
+export class QuestionEvaluatedModel {
+    id: number;
+    questionText: string;
+    isAutoEvaluated: boolean;
+    type: {
+        id: number;
+        name: string;
+    };
+    fileUrls: string[];
+    amountOfAnswers: number;
+    answers: {
+        id: number;
+        answerText: string;
+        isCorrect: boolean;
+    }[];
+    learnerAnswer: {
+        answerId: number;
+        answerText: string;
+        isCorrect: boolean;
+    };
+
+}
