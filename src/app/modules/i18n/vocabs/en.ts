@@ -1090,6 +1090,7 @@ export const locale = {
           CHOICE: "Choice",
           ANSWER: "Answer",
           TEST_SETTINGS: "Test Settings",
+          CONFIRM_DELETE: "Confirm Delete",
         },
         LABELS: {
           TITLE: "Title",
@@ -1126,11 +1127,32 @@ export const locale = {
           QUESTION_TEXT_REQUIRED: "Question text is required.",
           ANSWER_TEXT_REQUIRED: "Answer text is required.",
           CORRECT_ANSWER_REQUIRED: "At least one answer must be marked as correct.",
+        },
+        MESSAGES: {
+          CONFIRM_DELETE: "Are you sure you want to delete this?",
         }
       },
       EDIT_TITLE: "Edit Test",
-      FILL_IN_TEST: {
-
+      FILL_IN: {
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+          NOT_COMPLETE: "Test is not complete",
+        },
+        LABELS: {
+          TIME_LIMIT: "Time limit",
+          TIME_LEFT: "Time left",
+          MINUTES: "minutes",
+          START_TEST: "Start Test",
+          GRADING: "Grading...",
+          LOADING: "Loading...",
+        },
+        MESSAGES: {
+          NOT_COMPLETE: "You have not filled in all fields, are you sure you want to submit your test?"
+        },
+        ERRORS: {
+          FIELD_REQUIRED: "This field is required.",
+        }
       },
       OVERVIEW_SUBMISSION: {
         SUBMITTED_TESTS: "Submitted Tests",
@@ -1164,3 +1186,5 @@ export const locale = {
     },
   },
 };
+
+

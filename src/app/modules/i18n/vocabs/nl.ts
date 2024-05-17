@@ -1069,6 +1069,7 @@ export const locale = {
           CHOICE: "Keuze",
           ANSWER: "Antwoord",
           TEST_SETTINGS: "Testinstellingen",
+          CONFIRM_DELETE: "Bevestig Verwijdering",
         },
         LABELS: {
           TITLE: "Titel",
@@ -1108,9 +1109,33 @@ export const locale = {
           CORRECT_ANSWER_REQUIRED:
             "Ten minste één antwoord moet als juist worden gemarkeerd.",
         },
+        MESSAGES: {
+          CONFIRM_DELETE: "Weet u zeker dat u deze sectie wilt verwijderen?",
+        },
       },
       EDIT_TITLE: "Test Bewerken",
-      FILL_IN_TEST: {},
+      FILL_IN: {
+        TITLES: {
+          SECTION: "Sectie",
+          QUESTION: "Vraag",
+          NOT_COMPLETE: "Test is niet voltooid",
+        },
+        LABELS: {
+          TIME_LIMIT: "Tijdslimiet",
+          TIME_LEFT: "Resterende tijd",
+          MINUTES: "minuten",
+          START_TEST: "Test starten",
+          GRADING: "Beoordelen...",
+          LOADING: "Laden...",
+        },
+        MESSAGES: {
+          NOT_COMPLETE:
+            "Je hebt niet alle velden ingevuld, weet je zeker dat je je test wilt inleveren?",
+        },
+        ERRORS: {
+          FIELD_REQUIRED: "Dit veld is verplicht.",
+        },
+      },
       OVERVIEW_SUBMISSION: {
         SUBMITTED_TESTS: "Ingediende Tests",
         SEARCH_LEARNER: "Zoek naar cursist",
@@ -1139,3 +1164,5 @@ export const locale = {
     },
   },
 };
+
+

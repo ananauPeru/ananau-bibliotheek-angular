@@ -1089,6 +1089,7 @@ export const locale = {
           CHOICE: "Opción",
           ANSWER: "Respuesta",
           TEST_SETTINGS: "Configuración de la Prueba",
+          CONFIRM_DELETE: "Confirmar Eliminación",
         },
         LABELS: {
           TITLE: "Título",
@@ -1129,9 +1130,33 @@ export const locale = {
           CORRECT_ANSWER_REQUIRED:
             "Al menos una respuesta debe marcarse como correcta.",
         },
+        MESSAGES: {
+          CONFIRM_DELETE: "¿Estás seguro de que deseas eliminar esta pregunta?",
+        },
       },
       EDIT_TITLE: "Editar Prueba",
-      FILL_IN_TEST: {},
+      FILL_IN: {
+        TITLES: {
+          SECTION: "Sección",
+          QUESTION: "Pregunta",
+          NOT_COMPLETE: "La prueba no está completa",
+        },
+        LABELS: {
+          TIME_LIMIT: "Límite de tiempo",
+          TIME_LEFT: "Tiempo restante",
+          MINUTES: "minutos",
+          START_TEST: "Comenzar prueba",
+          GRADING: "Calificando...",
+          LOADING: "Cargando...",
+        },
+        MESSAGES: {
+          NOT_COMPLETE:
+            "No has llenado todos los campos, ¿estás seguro de que quieres enviar tu prueba?",
+        },
+        ERRORS: {
+          FIELD_REQUIRED: "Este campo es obligatorio.",
+        },
+      },
       OVERVIEW_SUBMISSION: {
         SUBMITTED_TESTS: "Pruebas Enviadas",
         SEARCH_LEARNER: "Buscar estudiante",
