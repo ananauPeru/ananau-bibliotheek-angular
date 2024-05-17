@@ -1090,6 +1090,7 @@ export const locale = {
           CHOICE: "Choice",
           ANSWER: "Answer",
           TEST_SETTINGS: "Test Settings",
+          CONFIRM_DELETE: "Confirm Delete",
         },
         LABELS: {
           TITLE: "Title",
@@ -1126,6 +1127,9 @@ export const locale = {
           QUESTION_TEXT_REQUIRED: "Question text is required.",
           ANSWER_TEXT_REQUIRED: "Answer text is required.",
           CORRECT_ANSWER_REQUIRED: "At least one answer must be marked as correct.",
+        },
+        MESSAGES: {
+          CONFIRM_DELETE: "Are you sure you want to delete this?",
         }
       },
       EDIT_TITLE: "Edit Test",

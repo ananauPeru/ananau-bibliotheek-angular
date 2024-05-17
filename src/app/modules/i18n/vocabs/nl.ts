@@ -1069,6 +1069,7 @@ export const locale = {
           CHOICE: "Keuze",
           ANSWER: "Antwoord",
           TEST_SETTINGS: "Testinstellingen",
+          CONFIRM_DELETE: "Bevestig Verwijdering",
         },
         LABELS: {
           TITLE: "Titel",
@@ -1108,6 +1109,9 @@ export const locale = {
           CORRECT_ANSWER_REQUIRED:
             "Ten minste één antwoord moet als juist worden gemarkeerd.",
         },
+        MESSAGES: {
+          CONFIRM_DELETE: "Weet u zeker dat u deze sectie wilt verwijderen?",
+        }
       },
       EDIT_TITLE: "Test Bewerken",
       FILL_IN_TEST: {},

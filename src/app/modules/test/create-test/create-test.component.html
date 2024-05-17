@@ -529,7 +529,7 @@
   </div>
 </form>
 
-<!-- Confirmation Modal -->
+<!-- Settings modal -->
 <ng-template #settingsModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title">{{ "TEST.CREATE.TITLES.TEST_SETTINGS" | translate }}</h5>
@@ -561,7 +561,7 @@
     </form>
   </div>
   <div class="modal-footer d-flex">
-    <button type="button" class="btn btn-danger" (click)="modal.dismiss()">
+    <button type="button" class="btn btn-danger" (click)="deleteTest()" *ngIf="testId">
       {{ "BUTTONS.DELETE" | translate }}
     </button>
     <button
@@ -573,6 +573,36 @@
     </button>
     <button type="button" class="btn btn-primary" (click)="saveSettings()">
       {{ "BUTTONS.SAVE" | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<!-- Confirmation Modal -->
+<ng-template #confirmDeleteModal let-confirmmodal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "TEST.CREATE.TITLES.CONFIRM_DELETE" | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="confirmmodal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{ "TEST.CREATE.MESSAGES.CONFIRM_DELETE" | translate }}</p>
+  </div>
+  <div class="modal-footer d-flex">
+    <button
+      type="button"
+      class="btn btn-secondary mr-auto"
+      (click)="confirmmodal.dismiss()"
+    >
+      {{ "BUTTONS.CANCEL" | translate }}
+    </button>
+    <button type="button" class="btn btn-danger" (click)="deleteTest(true)">
+      {{ "BUTTONS.DELETE" | translate }}
     </button>
   </div>
 </ng-template>
