@@ -46,6 +46,7 @@ function requireOneCorrectAnswer(
 })
 export class CreateTestComponent implements OnInit {
   @ViewChild("settingsModal") settingsModal: TemplateRef<any>;
+  @ViewChild("confirmDeleteModal") confirmDeleteModal: TemplateRef<any>;
 
   public testForm: FormGroup;
   public settingsForm: FormGroup;
@@ -635,9 +636,32 @@ export class CreateTestComponent implements OnInit {
     this.modalService.open(this.settingsModal, { centered: true });
   }
 
+  openConfirmDeleteModal() {
+    this.modalService.open(this.confirmDeleteModal, { centered: true });
+  }
+
   saveSettings() {
     const timeLimitMinutes = this.settingsForm.get("timeLimitMinutes").value;
     this.testForm.patchValue({ timeLimitMinutes });
     this.modalService.dismissAll();
+  }
+
+  deleteTest(force: boolean = false) {
+    if(force) {
+      this.testService.deleteTest$(this.testId).subscribe(
+        () => {
+          this.modalService.dismissAll();
+          this.toast.success("Test deleted successfully!");
+          this.router.navigate(["/test/list"]);
+        },
+        (error) => {
+          console.error("Error deleting test: ", error);
+          this.toast.error("Error deleting test");
+        }
+      );
+    } else {
+      this.modalService.dismissAll();
+      this.openConfirmDeleteModal();
+    }
   }
 }
