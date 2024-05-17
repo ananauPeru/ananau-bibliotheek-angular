@@ -1,6 +1,6 @@
 <!-- share-modal.component.html -->
 <div class="modal-header">
-  <h5 class="modal-title">Share test</h5>
+  <h5 class="modal-title">{{"TEST.SHARE.TITLE" | translate}}</h5>
   <button type="button" class="close" (click)="activeModal.dismiss()" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -9,7 +9,7 @@
   <form [formGroup]="shareForm">
     <div class="form-group row align-items-center">
       <label class="col-12 col-md-3 font-weight-bold mb-2 mb-md-0"
-        >Share URL</label
+        >{{"TEST.SHARE.SHARE_LINK" | translate}}</label
       >
       <div class="col-12 col-md-9">
         <div class="input-group">
@@ -25,10 +25,10 @@
               type="button"
               class="btn btn-outline-secondary"
               (click)="copyUrl()"
-              ngbTooltip="Copied!"
+              [ngbTooltip]="'TEST.SHARE.COPIED' | translate"
               triggers="click:blur"
             >
-              Copy
+            {{"TEST.SHARE.COPY" | translate}}
             </button>
           </div>
         </div>

@@ -1161,6 +1161,12 @@ export const locale = {
         SCORE_SUBMIT: "Score Indienen",
       },
       LIST: {},
+      SHARE: {
+        TITLE: "Test Delen",
+        SHARE_LINK: "Deel link",
+        COPY: "Kopieer",
+        COPIED: "Gekopieerd",
+      },
     },
   },
 };

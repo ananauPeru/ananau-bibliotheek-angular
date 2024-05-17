@@ -1182,6 +1182,12 @@ export const locale = {
         SCORE_SUBMIT: "Enviar Puntaje",
       },
       LIST: {},
+      SHARE: {
+        TITLE: "Compartir Prueba",
+        SHARE_LINK: "Enlace de Compartir",
+        COPY: "Copiar",
+        COPIED: "Copiado!",
+      },
     },
   },
 };

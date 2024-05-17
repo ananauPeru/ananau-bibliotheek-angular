@@ -1183,6 +1183,12 @@ export const locale = {
       },
       LIST: {
       },
+      SHARE: {
+        TITLE: "Share Test",
+        SHARE_LINK: "Share Link",
+        COPY: "Copy",
+        COPIED: "Copied!",
+      },
     },
   },
 };
