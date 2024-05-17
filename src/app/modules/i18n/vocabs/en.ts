@@ -1165,6 +1165,27 @@ export const locale = {
         ACTIONS: "Actions",
       },
       OVERVIEW: {
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+        },
+        LABELS: {
+          TITLE: "Title",
+          DESCRIPTION: "Description",
+          TIME_LIMIT: "Time Limit",
+          MINUTES: "minutes",
+          NUMBER_OF_SECTIONS: "Number of Sections",
+          TOTAL_QUESTIONS: "Total Questions",
+          CREATED_AT: "Created At",
+          LAST_UPDATED: "Last Updated",
+          ATTACHMENTS: "Attachments",
+          CHOICE: "Choice",
+          ANSWER: "Answer",
+        },
+        MESSAGES: {
+          NO_DESCRIPTION: "No description",
+          LOADING: "Loading...",
+        }
 
       },
       SUBMISSION_DETAILS: {

@@ -1146,7 +1146,29 @@ export const locale = {
         NO_GRADE: "Nog niet beoordeeld",
         ACTIONS: "Acties",
       },
-      OVERVIEW: {},
+      OVERVIEW: {
+        TITLES: {
+          SECTION: "Sectie",
+          QUESTION: "Vraag",
+        },
+        LABELS: {
+          TITLE: "Titel",
+          DESCRIPTION: "Beschrijving",
+          TIME_LIMIT: "Tijdslimiet",
+          MINUTES: "minuten",
+          NUMBER_OF_SECTIONS: "Aantal secties",
+          TOTAL_QUESTIONS: "Totaal aantal vragen",
+          CREATED_AT: "Aangemaakt op",
+          LAST_UPDATED: "Laatst bijgewerkt",
+          ATTACHMENTS: "Bijlagen",
+          CHOICE: "Keuze",
+          ANSWER: "Antwoord",
+        },
+        MESSAGES: {
+          NO_DESCRIPTION: "Geen beschrijving",
+          LOADING: "Laden...",
+        },
+      },
       SUBMISSION_DETAILS: {
         SUBMISSION_DETAILS: "Inzendingsdetails Test",
         SUBMITTED_TEST: "Ingediende Test:",

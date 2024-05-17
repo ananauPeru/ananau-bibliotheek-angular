@@ -1167,7 +1167,29 @@ export const locale = {
         NO_GRADE: "Aún no calificado",
         ACTIONS: "Acciones",
       },
-      OVERVIEW: {},
+      OVERVIEW: {
+        TITLES: {
+          SECTION: "Sección",
+          QUESTION: "Pregunta",
+        },
+        LABELS: {
+          TITLE: "Título",
+          DESCRIPTION: "Descripción",
+          TIME_LIMIT: "Límite de tiempo",
+          MINUTES: "minutos",
+          NUMBER_OF_SECTIONS: "Número de secciones",
+          TOTAL_QUESTIONS: "Total de preguntas",
+          CREATED_AT: "Creado en",
+          LAST_UPDATED: "Última actualización",
+          ATTACHMENTS: "Archivos adjuntos",
+          CHOICE: "Opción",
+          ANSWER: "Respuesta",
+        },
+        MESSAGES: {
+          NO_DESCRIPTION: "Sin descripción",
+          LOADING: "Cargando...",
+        },
+      },
       SUBMISSION_DETAILS: {
         SUBMISSION_DETAILS: "Detalles de Envío de la Prueba",
         SUBMITTED_TEST: "Prueba Enviada:",
