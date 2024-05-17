@@ -85,7 +85,7 @@
                     {{ submissionTest.submittedBy.lastName }}
                   </td>
                   <td>{{ submissionTest.submittedAt }}</td>
-                  <td>{{ submissionTest.scoreAuto }}</td>
+                  <td>{{ getScoreAuto(submissionTest) }}</td>
                   <td>{{ getScoreManual(submissionTest) }}</td>
                   <td class="text-right">
                     <button
@@ -115,7 +115,7 @@
                   </ng-template>
 
                   <td>{{ submissionTest.submittedAt }}</td>
-                  <td>{{ submissionTest.scoreAuto }}</td>
+                  <td>{{ getScoreAuto(submissionTest) }}</td>
                   <td>{{ getScoreManual(submissionTest) }}</td>
                   <td class="text-right">
                     <button

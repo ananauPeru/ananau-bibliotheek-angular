@@ -5,7 +5,7 @@ class BaseTestSubmissionModel {
   realScores: {
     total: number,
     totalAuto: number,
-    totalNotAuto: number
+    totalNotAuto?: number
   };
 
 }
