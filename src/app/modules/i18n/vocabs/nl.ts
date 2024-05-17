@@ -1160,7 +1160,20 @@ export const locale = {
         SCORE: "Score:",
         SCORE_SUBMIT: "Score Indienen",
       },
-      LIST: {},
+      LIST: {
+        LABELS: {
+          SEARCH: "Zoeken op titel of auteur",
+          CREATE: "Test maken",
+          SHARE: "Test delen",
+          DETAILS: "Details",
+        },
+        TABLE: {
+          TITLE: "Titel",
+          CREATION_DATE: "Aanmaakdatum",
+          VERSION: "Versie",
+          ACTIONS: "Acties",
+        },
+      },
       SHARE: {
         TITLE: "Test Delen",
         SHARE_LINK: "Deel link",
@@ -1170,5 +1183,3 @@ export const locale = {
     },
   },
 };
-
-

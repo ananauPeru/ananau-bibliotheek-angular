@@ -1181,7 +1181,20 @@ export const locale = {
         SCORE: "Puntaje:",
         SCORE_SUBMIT: "Enviar Puntaje",
       },
-      LIST: {},
+      LIST: {
+        LABELS: {
+          SEARCH: "Buscar por título o autor",
+          CREATE: "Crear prueba",
+          SHARE: "Compartir prueba",
+          DETAILS: "Detalles",
+        },
+        TABLE: {
+          TITLE: "Título",
+          CREATION_DATE: "Fecha de creación",
+          VERSION: "Versión",
+          ACTIONS: "Acciones",
+        },
+      },
       SHARE: {
         TITLE: "Compartir Prueba",
         SHARE_LINK: "Enlace de Compartir",

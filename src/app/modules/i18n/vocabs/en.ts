@@ -1182,6 +1182,18 @@ export const locale = {
 
       },
       LIST: {
+        LABELS: {
+          SEARCH: "Search for title or author",
+          CREATE: "Create Test",
+          SHARE: "Share Test",
+          DETAILS: "Details",
+        },
+        TABLE: {
+          TITLE: "Title",
+          CREATION_DATE: "Creation Date",
+          VERSION: "Version",
+          ACTIONS: "Actions",
+        }
       },
       SHARE: {
         TITLE: "Share Test",
