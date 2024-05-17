@@ -17,7 +17,7 @@
                   routerLink="/test/list"
                 >
                   <i class="fas fa-arrow-left"></i>
-                  <span class="d-none d-md-inline ml-1">Back</span>
+                  <span class="d-none d-md-inline ml-1">{{"BUTTONS.BACK" | translate}}</span>
                 </button>
 
                 <div>
@@ -26,14 +26,14 @@
                     (click)="openShareModal(test)"
                   >
                     <i class="fas fa-share-alt"></i>
-                    <span class="d-none d-md-inline ml-1">Share</span>
+                    <span class="d-none d-md-inline ml-1">{{"BUTTONS.SHARE" | translate}}</span>
                   </button>
                   <button
                     class="btn btn-primary pr-1 pr-md-3"
                     routerLink="/test/edit/{{ test.id }}"
                   >
                     <i class="fas fa-edit"></i>
-                    <span class="d-none d-md-inline ml-1">Edit</span>
+                    <span class="d-none d-md-inline ml-1">{{"EDIT" | translate}}</span>
                   </button>
                 </div>
               </div>
@@ -54,11 +54,11 @@
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <label class="font-weight-bold mb-2 h3">Title</label>
+            <label class="font-weight-bold mb-2 h3">{{"TEST.OVERVIEW.LABELS.TITLE" | translate}}</label>
             <p class="form-control-plaintext">{{ test.title }}</p>
           </div>
           <div class="form-group">
-            <label class="font-weight-bold mb-2 h3">Description</label>
+            <label class="font-weight-bold mb-2 h3">{{"TEST.OVERVIEW.LABELS.DESCRIPTION" | translate}}</label>
             <p
               class="form-control-plaintext"
               *ngIf="test.description; else noTestDescription"
@@ -66,33 +66,33 @@
               {{ test.description }}
             </p>
             <ng-template #noTestDescription>
-              <p class="form-control-plaintext"><em>No description</em></p>
+              <p class="form-control-plaintext"><em>{{"TEST.OVERVIEW.MESSAGES.NO_DESCRIPTION" | translate}}</em></p>
             </ng-template>
           </div>
           <div class="form-group">
-            <label class="font-weight-bold mb-2 h3">Time Limit</label>
+            <label class="font-weight-bold mb-2 h3">{{"TEST.OVERVIEW.LABELS.TIME_LIMIT" | translate}}</label>
             <p class="form-control-plaintext">
               {{ test.timeLimitMinutes }} minutes
             </p>
           </div>
           <div class="form-group">
-            <label class="font-weight-bold mb-2 h3">Number of Sections</label>
+            <label class="font-weight-bold mb-2 h3">{{"TEST.OVERVIEW.LABELS.NUMBER_OF_SECTIONS" | translate}}</label>
             <p class="form-control-plaintext">{{ test.sections.length }}</p>
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <label class="font-weight-bold mb-2 h3">Total Questions</label>
+            <label class="font-weight-bold mb-2 h3">{{"TEST.OVERVIEW.LABELS.TOTAL_QUESTIONS" | translate}}</label>
             <p class="form-control-plaintext">{{ getTotalQuestions(test) }}</p>
           </div>
           <div class="form-group">
-            <label class="font-weight-bold mb-2 h3">Created At</label>
+            <label class="font-weight-bold mb-2 h3">{{"TEST.OVERVIEW.LABELS.CREATED_AT" | translate}}</label>
             <p class="form-control-plaintext">
               {{ test.createdAt | date : "medium" }}
             </p>
           </div>
           <div class="form-group">
-            <label class="font-weight-bold mb-2 h3">Last Updated</label>
+            <label class="font-weight-bold mb-2 h3">{{"TEST.OVERVIEW.LABELS.LAST_UPDATED" | translate}}</label>
             <p class="form-control-plaintext">
               {{ test.createdAt | date : "medium" }}
             </p>
@@ -122,7 +122,7 @@
                 class="card-title font-weight-bolder text-dark mr-3"
                 style="white-space: nowrap"
               >
-                Section {{ i + 1 }}: {{ section.title }}
+              {{"TEST.OVERVIEW.TITLES.SECTION" | translate}} {{ i + 1 }}: {{ section.title }}
               </h3>
             </div>
           </div>
@@ -135,7 +135,7 @@
       <div class="row mb-12" *ngIf="section.description">
         <div class="col-12">
           <div class="form-group">
-            <label class="font-weight-bold mb-2 h3">Description</label>
+            <label class="font-weight-bold mb-2 h3">{{"TEST.OVERVIEW.LABELS.DESCRIPTION" | translate}}</label>
             <p class="form-control-plaintext">{{ section.description }}</p>
           </div>
         </div>
@@ -151,7 +151,7 @@
               <!-- Question Title -->
               <div class="col-6 col-md-2 mb-2 mb-md-0">
                 <label class="font-weight-bold mb-0 h3"
-                  >Question {{ j + 1 }}</label
+                  >{{"TEST.OVERVIEW.TITLES.QUESTION" | translate}} {{ j + 1 }}</label
                 >
               </div>
               <!-- Question Type -->
@@ -174,7 +174,7 @@
               *ngIf="question.fileUrls.length > 0"
             >
               <div class="col-12">
-                <h4>Attachments</h4>
+                <h4>{{"TEST.OVERVIEW.LABELS.ATTACHMENTS" | translate}}</h4>
               </div>
               <div class="col-12 col-md-6">
                 <div
@@ -203,7 +203,7 @@
                   class="form-group row align-items-center"
                   *ngFor="let answer of question.answers; let k = index"
                 >
-                  <h4 class="col-2">Choice {{ k + 1 }}</h4>
+                  <h4 class="col-2">{{"TEST.OVERVIEW.LABELS.CHOICE" | translate}} {{ k + 1 }}</h4>
                   <div class="col-10">
                     <p
                       class="form-control-plaintext"
@@ -224,7 +224,7 @@
                   class="form-group row align-items-center"
                   *ngFor="let answer of question.answers; let k = index"
                 >
-                  <h4 class="col-2">Answer</h4>
+                  <h4 class="col-2">{{"TEST.OVERVIEW.LABELS.ANSWER" | translate}}</h4>
                   <div class="col-10">
                     <p class="form-control-plaintext text-success">
                       {{ answer.answerText }}
@@ -243,7 +243,7 @@
 <ng-template #loading>
   <div class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="sr-only">{{"TEST.OVERVIEW.MESSAGES.LOADING" | translate}}</span>
     </div>
   </div>
 </ng-template>

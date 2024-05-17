@@ -1111,10 +1111,31 @@ export const locale = {
         },
         MESSAGES: {
           CONFIRM_DELETE: "Weet u zeker dat u deze sectie wilt verwijderen?",
-        }
+        },
       },
       EDIT_TITLE: "Test Bewerken",
-      FILL_IN_TEST: {},
+      FILL_IN: {
+        TITLES: {
+          SECTION: "Sectie",
+          QUESTION: "Vraag",
+          NOT_COMPLETE: "Test is niet voltooid",
+        },
+        LABELS: {
+          TIME_LIMIT: "Tijdslimiet",
+          TIME_LEFT: "Resterende tijd",
+          MINUTES: "minuten",
+          START_TEST: "Test starten",
+          GRADING: "Beoordelen...",
+          LOADING: "Laden...",
+        },
+        MESSAGES: {
+          NOT_COMPLETE:
+            "Je hebt niet alle velden ingevuld, weet je zeker dat je je test wilt inleveren?",
+        },
+        ERRORS: {
+          FIELD_REQUIRED: "Dit veld is verplicht.",
+        },
+      },
       OVERVIEW_SUBMISSION: {
         SUBMITTED_TESTS: "Ingediende Tests",
         SEARCH_LEARNER: "Zoek naar cursist",
@@ -1125,7 +1146,29 @@ export const locale = {
         NO_GRADE: "Nog niet beoordeeld",
         ACTIONS: "Acties",
       },
-      OVERVIEW: {},
+      OVERVIEW: {
+        TITLES: {
+          SECTION: "Sectie",
+          QUESTION: "Vraag",
+        },
+        LABELS: {
+          TITLE: "Titel",
+          DESCRIPTION: "Beschrijving",
+          TIME_LIMIT: "Tijdslimiet",
+          MINUTES: "minuten",
+          NUMBER_OF_SECTIONS: "Aantal secties",
+          TOTAL_QUESTIONS: "Totaal aantal vragen",
+          CREATED_AT: "Aangemaakt op",
+          LAST_UPDATED: "Laatst bijgewerkt",
+          ATTACHMENTS: "Bijlagen",
+          CHOICE: "Keuze",
+          ANSWER: "Antwoord",
+        },
+        MESSAGES: {
+          NO_DESCRIPTION: "Geen beschrijving",
+          LOADING: "Laden...",
+        },
+      },
       SUBMISSION_DETAILS: {
         SUBMISSION_DETAILS: "Inzendingsdetails Test",
         SUBMITTED_TEST: "Ingediende Test:",
@@ -1139,7 +1182,26 @@ export const locale = {
         SCORE: "Score:",
         SCORE_SUBMIT: "Score Indienen",
       },
-      LIST: {},
+      LIST: {
+        LABELS: {
+          SEARCH: "Zoeken op titel of auteur",
+          CREATE: "Test maken",
+          SHARE: "Test delen",
+          DETAILS: "Details",
+        },
+        TABLE: {
+          TITLE: "Titel",
+          CREATION_DATE: "Aanmaakdatum",
+          VERSION: "Versie",
+          ACTIONS: "Acties",
+        },
+      },
+      SHARE: {
+        TITLE: "Test Delen",
+        SHARE_LINK: "Deel link",
+        COPY: "Kopieer",
+        COPIED: "Gekopieerd",
+      },
     },
   },
 };

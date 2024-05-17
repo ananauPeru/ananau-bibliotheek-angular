@@ -1133,8 +1133,26 @@ export const locale = {
         }
       },
       EDIT_TITLE: "Edit Test",
-      FILL_IN_TEST: {
-
+      FILL_IN: {
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+          NOT_COMPLETE: "Test is not complete",
+        },
+        LABELS: {
+          TIME_LIMIT: "Time limit",
+          TIME_LEFT: "Time left",
+          MINUTES: "minutes",
+          START_TEST: "Start Test",
+          GRADING: "Grading...",
+          LOADING: "Loading...",
+        },
+        MESSAGES: {
+          NOT_COMPLETE: "You have not filled in all fields, are you sure you want to submit your test?"
+        },
+        ERRORS: {
+          FIELD_REQUIRED: "This field is required.",
+        }
       },
       OVERVIEW_SUBMISSION: {
         SUBMITTED_TESTS: "Submitted Tests",
@@ -1147,6 +1165,27 @@ export const locale = {
         ACTIONS: "Actions",
       },
       OVERVIEW: {
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+        },
+        LABELS: {
+          TITLE: "Title",
+          DESCRIPTION: "Description",
+          TIME_LIMIT: "Time Limit",
+          MINUTES: "minutes",
+          NUMBER_OF_SECTIONS: "Number of Sections",
+          TOTAL_QUESTIONS: "Total Questions",
+          CREATED_AT: "Created At",
+          LAST_UPDATED: "Last Updated",
+          ATTACHMENTS: "Attachments",
+          CHOICE: "Choice",
+          ANSWER: "Answer",
+        },
+        MESSAGES: {
+          NO_DESCRIPTION: "No description",
+          LOADING: "Loading...",
+        }
 
       },
       SUBMISSION_DETAILS: {
@@ -1164,7 +1203,27 @@ export const locale = {
 
       },
       LIST: {
+        LABELS: {
+          SEARCH: "Search for title or author",
+          CREATE: "Create Test",
+          SHARE: "Share Test",
+          DETAILS: "Details",
+        },
+        TABLE: {
+          TITLE: "Title",
+          CREATION_DATE: "Creation Date",
+          VERSION: "Version",
+          ACTIONS: "Actions",
+        }
+      },
+      SHARE: {
+        TITLE: "Share Test",
+        SHARE_LINK: "Share Link",
+        COPY: "Copy",
+        COPIED: "Copied!",
       },
     },
   },
 };
+
+

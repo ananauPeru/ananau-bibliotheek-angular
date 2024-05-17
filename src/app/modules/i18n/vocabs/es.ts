@@ -1132,10 +1132,31 @@ export const locale = {
         },
         MESSAGES: {
           CONFIRM_DELETE: "¿Estás seguro de que deseas eliminar esta pregunta?",
-        }
+        },
       },
       EDIT_TITLE: "Editar Prueba",
-      FILL_IN_TEST: {},
+      FILL_IN: {
+        TITLES: {
+          SECTION: "Sección",
+          QUESTION: "Pregunta",
+          NOT_COMPLETE: "La prueba no está completa",
+        },
+        LABELS: {
+          TIME_LIMIT: "Límite de tiempo",
+          TIME_LEFT: "Tiempo restante",
+          MINUTES: "minutos",
+          START_TEST: "Comenzar prueba",
+          GRADING: "Calificando...",
+          LOADING: "Cargando...",
+        },
+        MESSAGES: {
+          NOT_COMPLETE:
+            "No has llenado todos los campos, ¿estás seguro de que quieres enviar tu prueba?",
+        },
+        ERRORS: {
+          FIELD_REQUIRED: "Este campo es obligatorio.",
+        },
+      },
       OVERVIEW_SUBMISSION: {
         SUBMITTED_TESTS: "Pruebas Enviadas",
         SEARCH_LEARNER: "Buscar estudiante",
@@ -1146,7 +1167,29 @@ export const locale = {
         NO_GRADE: "Aún no calificado",
         ACTIONS: "Acciones",
       },
-      OVERVIEW: {},
+      OVERVIEW: {
+        TITLES: {
+          SECTION: "Sección",
+          QUESTION: "Pregunta",
+        },
+        LABELS: {
+          TITLE: "Título",
+          DESCRIPTION: "Descripción",
+          TIME_LIMIT: "Límite de tiempo",
+          MINUTES: "minutos",
+          NUMBER_OF_SECTIONS: "Número de secciones",
+          TOTAL_QUESTIONS: "Total de preguntas",
+          CREATED_AT: "Creado en",
+          LAST_UPDATED: "Última actualización",
+          ATTACHMENTS: "Archivos adjuntos",
+          CHOICE: "Opción",
+          ANSWER: "Respuesta",
+        },
+        MESSAGES: {
+          NO_DESCRIPTION: "Sin descripción",
+          LOADING: "Cargando...",
+        },
+      },
       SUBMISSION_DETAILS: {
         SUBMISSION_DETAILS: "Detalles de Envío de la Prueba",
         SUBMITTED_TEST: "Prueba Enviada:",
@@ -1160,7 +1203,26 @@ export const locale = {
         SCORE: "Puntaje:",
         SCORE_SUBMIT: "Enviar Puntaje",
       },
-      LIST: {},
+      LIST: {
+        LABELS: {
+          SEARCH: "Buscar por título o autor",
+          CREATE: "Crear prueba",
+          SHARE: "Compartir prueba",
+          DETAILS: "Detalles",
+        },
+        TABLE: {
+          TITLE: "Título",
+          CREATION_DATE: "Fecha de creación",
+          VERSION: "Versión",
+          ACTIONS: "Acciones",
+        },
+      },
+      SHARE: {
+        TITLE: "Compartir Prueba",
+        SHARE_LINK: "Enlace de Compartir",
+        COPY: "Copiar",
+        COPIED: "Copiado!",
+      },
     },
   },
 };
