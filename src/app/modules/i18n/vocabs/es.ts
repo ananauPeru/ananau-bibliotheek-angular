@@ -1089,6 +1089,7 @@ export const locale = {
           CHOICE: "Opción",
           ANSWER: "Respuesta",
           TEST_SETTINGS: "Configuración de la Prueba",
+          CONFIRM_DELETE: "Confirmar Eliminación",
         },
         LABELS: {
           TITLE: "Título",
@@ -1129,6 +1130,9 @@ export const locale = {
           CORRECT_ANSWER_REQUIRED:
             "Al menos una respuesta debe marcarse como correcta.",
         },
+        MESSAGES: {
+          CONFIRM_DELETE: "¿Estás seguro de que deseas eliminar esta pregunta?",
+        }
       },
       EDIT_TITLE: "Editar Prueba",
       FILL_IN_TEST: {},
