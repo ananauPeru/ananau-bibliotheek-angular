@@ -33,7 +33,12 @@ class TestAttemptModel {
  * GET test/my_test_attempts
  */
 export class StudentTestSubmissionModel extends BaseTestSubmissionModel {
-  testAttempt: TestAttemptModel;
+  title: string;
+  possibleScores: {
+    max: number,
+    maxAuto: number,
+    maxNotAuto: number,
+  };
   gradedBy?: UserModel;
 }
 
@@ -41,7 +46,12 @@ export class StudentTestSubmissionModel extends BaseTestSubmissionModel {
  * GET test/test_attempts
  */
 export class TeacherTestSubmissionModel extends BaseTestSubmissionModel {
-  testAttempt: TestAttemptModel;
+  title: string;
+  possibleScores: {
+    max: number,
+    maxAuto: number,
+    maxNotAuto: number,
+  };
   submittedBy: UserModel;
 }
 

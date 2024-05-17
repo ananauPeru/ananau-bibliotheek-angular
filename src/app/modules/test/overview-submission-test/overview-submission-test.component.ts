@@ -34,13 +34,14 @@ export class OverviewSubmissionTestComponent implements OnInit {
   }
 
   getScoreAuto(submissionTest: TeacherTestSubmissionModel | StudentTestSubmissionModel): string {
-    console.log(submissionTest.realScores.totalAuto)
-    return submissionTest.realScores.totalAuto + "/" + submissionTest.testAttempt.possibleScores.maxAuto;
+    console.log(submissionTest.realScores.totalAuto);
+    console.log(submissionTest.possibleScores.maxAuto);
+    return submissionTest.realScores.totalAuto + "/" + submissionTest.possibleScores.maxAuto;
   }
 
   getScoreManual(submissionTest: TeacherTestSubmissionModel | StudentTestSubmissionModel): string {
     if(submissionTest.realScores.totalNotAuto != null) {
-      return submissionTest.realScores.totalNotAuto + "/" + submissionTest.testAttempt.possibleScores.maxNotAuto;
+      return submissionTest.realScores.totalNotAuto + "/" + submissionTest.possibleScores.maxNotAuto;
     } else {
       return "Not graded yet"
     }
