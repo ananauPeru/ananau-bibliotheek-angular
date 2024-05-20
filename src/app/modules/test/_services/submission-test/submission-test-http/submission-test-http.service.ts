@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { StudentTestSubmissionModel, TeacherTestSubmissionModel, TestSubmissionModel } from '../../../_models/test/test-submission.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { GradeSubmissionTestDto } from '../../../_dto/grade-submission-test-dto';
 
 const API_URL = `${environment.apiUrl}/spanish_platform/test`;
 
@@ -129,6 +130,32 @@ export class SubmissionTestHttpService {
           } else {
             throwError(response.error);
             return null;
+          }
+        })
+      );
+  }
+
+  gradeSubmission$(
+    id: number,
+    gradeSubmissionTestDto: GradeSubmissionTestDto
+  ): Observable<boolean> {
+    return this.http
+      .put<boolean>(`${API_URL}/test_attempts/${id}/evaluate`, gradeSubmissionTestDto, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): boolean => {
+          if (response.success) {
+            return response.success;
+          } else {
+            throwError(response.error);
+            return response.success;
           }
         })
       );

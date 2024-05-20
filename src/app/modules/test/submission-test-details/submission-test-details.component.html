@@ -15,7 +15,7 @@
               <div>
                 <button
                   class="btn btn-secondary"
-                  routerLink="/test/submitted/list"
+                  routerLink="/test/submitted"
                 >
                   {{ "BUTTONS.BACK_TO_LIST" | translate }}
                 </button>
@@ -47,16 +47,16 @@
           <p class="mb-4">
             <strong>
               {{ "TEST.SUBMISSION_DETAILS.SCORE_AUTO" | translate }}
-            </strong> {{ submissionTest.scoreAuto }} /
-            {{ submissionTest.testAttempt.possibleScores.maxAuto }}
+            </strong> {{ submissionTest.realScores.totalAuto }} /
+            {{ submissionTest.possibleScores.maxAuto }}
           </p>
 
-          <ng-container *ngIf="submissionTest.scoreManual; else notGradedDetail">
+          <ng-container *ngIf="submissionTest.realScores.totalNotAuto; else notGradedDetail">
             <p class="mb-4">
               <strong>
                 {{ "TEST.SUBMISSION_DETAILS.SCORE_MANUAL" | translate }}
-              </strong> {{ submissionTest.scoreManual }} /
-              {{ submissionTest.testAttempt.possibleScores.maxNotAuto }}
+              </strong> {{ submissionTest.realScores.totalNotAuto }} /
+              {{ submissionTest.possibleScores.maxNotAuto }}
             </p>
           </ng-container>
           <ng-template #notGradedDetail>
@@ -64,8 +64,128 @@
               {{ "TEST.SUBMISSION_DETAILS.SCORE_MANUAL" | translate }}
             </strong> {{ "TEST.SUBMISSION_DETAILS.NO_GRADE" | translate }} </p>
           </ng-template>
+
+          <p class="mb-4">
+            <strong>
+              {{ "TEST.SUBMISSION_DETAILS.SCORE_TOTAL" | translate }}
+            </strong> {{ submissionTest.realScores.total }} /
+            {{ submissionTest.possibleScores.max }}
+          </p>
         </div>
       </div>
+
+
+
+
+
+
+      <ng-container>
+
+        <div class="row">
+          <div class="col-12">
+            <form [formGroup]="testForm">
+              <ng-container *ngFor="let section of submissionTest.sections">
+                <div class="row">
+                  <div class="col-12">
+                    <h3>Section: {{ section.title }}</h3>
+                    <p>{{ section.description }}</p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <div formGroupName="{{ section.id }}">
+                      <div
+                        class="form-group"
+                        *ngFor="let question of section.questions; let i = index"
+                      >
+                        <label>{{ question.questionText }}</label>
+
+                        <ng-container
+                          *ngIf="question.fileUrls.length > 0"
+                          class="row"
+                        >
+                          <ng-container
+                            *ngIf="getImageUrls(question.fileUrls) as imageUrls"
+                          >
+                            <div *ngFor="let imageUrl of imageUrls" class="mb-4">
+                              <img
+                                [src]="imageUrl"
+                                alt="Question Image"
+                                class="img-fluid"
+                              />
+                            </div>
+                          </ng-container>
+
+                          <ng-container
+                            *ngIf="getAudioUrls(question.fileUrls) as audioUrls"
+                          >
+                            <div *ngFor="let audioUrl of audioUrls" class="mb-4">
+                              <app-audio-player
+                                [audioSource]="audioUrl"
+                              ></app-audio-player>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+
+                        <!-- Display Multiple Choice Question -->
+                        <div
+                          *ngIf="
+                            QuestionUtil.isQuestionTypeIgnoreCase(
+                              question.type.name,
+                              QuestionUtil.types.MULTIPLE_CHOICE
+                            )
+                          "
+                        >
+                          <span>
+                           {{ question.learnerAnswer.answerId }}
+                          </span>
+                        </div>
+
+                        <!-- Display Fill in the Blank Question -->
+                        <div
+                          *ngIf="
+                            QuestionUtil.isQuestionTypeIgnoreCase(
+                              question.type.name,
+                              QuestionUtil.types.FILL_IN_THE_BLANK
+                            )
+                          "
+                        >
+                          <span>
+                            {{ question.learnerAnswer.answerText }}
+                          </span>
+                        </div>
+
+                        <!-- Display Open Question -->
+                        <div
+                          *ngIf="
+                            QuestionUtil.isQuestionTypeIgnoreCase(
+                              question.type.name,
+                              QuestionUtil.types.OPEN_QUESTION
+                            )
+                          "
+                        >
+                          <span>
+                            {{ question.learnerAnswer.answerText }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </form>
+          </div>
+        </div>
+      </ng-container>
+
+
+
+
+
+
+
+
       <div class="row" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">
         <div class="col-12">
           <h4>
@@ -76,7 +196,7 @@
               <strong>
                 {{ "TEST.SUBMISSION_DETAILS.CURRENT_SCORE" | translate }}
               </strong> {{ submissionTest.realScores.total }} /
-              {{ submissionTest.testAttempt.possibleScores.max }}
+              {{ submissionTest.possibleScores.max }}
             </p>
             <ng-template #notGradedTemplate>
               <p>
@@ -88,49 +208,37 @@
             </button>
           </ng-container>
 
-
-
-
-
-
-
-
-
-
-
-
-
           <ng-template #editScoreTemplate>
             <form [formGroup]="gradeForm" (ngSubmit)="submitScore()">
               <div class="form-group">
-                <label for="grade">
+                <label for="score">
                   {{ "TEST.SUBMISSION_DETAILS.SCORE" | translate }}
                 </label>
                 <div class="input-group">
                   <input
                     type="number"
                     class="form-control"
-                    id="grade"
-                    formControlName="grade"
+                    id="score"
+                    formControlName="score"
                     min="0"
-                    [max]="submissionTest.testAttempt.possibleScores.max"
+                    [max]="submissionTest.possibleScores.max"
                     required
                   />
                   <div class="input-group-append">
                     <span class="input-group-text"
-                      >/ {{ submissionTest.testAttempt.possibleScores.max }}</span
+                      >/ {{ submissionTest.possibleScores.max }}</span
                     >
                   </div>
                 </div>
-                <div *ngIf="gradeForm.get('grade').invalid && gradeForm.get('grade').touched">
-                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.required">
+                <div *ngIf="gradeForm.get('score').invalid && gradeForm.get('score').touched">
+                  <small class="text-danger" *ngIf="gradeForm.get('score').errors.required">
                     {{ "EXERCISE.SUBMISSION.GRADE_REQUIRED" | translate }}
                   </small>
-                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.min">
+                  <small class="text-danger" *ngIf="gradeForm.get('score').errors.min">
                     {{ "EXERCISE.SUBMISSION.GRADE_POSITIVE" | translate }}
                   </small>
-                  <small class="text-danger" *ngIf="gradeForm.get('grade').errors.max">
-                    {{ "EXERCISE.SUBMISSION.GRADE_LESS_THAN" | translate }} {{ submissionTest.exercise.maxGrade }}.
+                  <small class="text-danger" *ngIf="gradeForm.get('score').errors.max">
+                    {{ "EXERCISE.SUBMISSION.GRADE_LESS_THAN" | translate }} {{ submissionTest.possibleScores.maxNotAuto }}.
                   </small>
                 </div>
               </div>

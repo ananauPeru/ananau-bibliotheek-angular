@@ -31,9 +31,9 @@ export class QuestionEvaluatedModel {
     }[];
     // Learner Answer is null when there is no answer submitted
     learnerAnswer: {
-        answerId: number;
-        answerText: string;
-        isCorrect: boolean;
+        answerId: number | null;
+        answerText: string | null;
+        isCorrect: boolean | null;
     } | null;
 
 }

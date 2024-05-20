@@ -34,8 +34,6 @@ export class OverviewSubmissionTestComponent implements OnInit {
   }
 
   getScoreAuto(submissionTest: TeacherTestSubmissionModel | StudentTestSubmissionModel): string {
-    console.log(submissionTest.realScores.totalAuto);
-    console.log(submissionTest.possibleScores.maxAuto);
     return submissionTest.realScores.totalAuto + "/" + submissionTest.possibleScores.maxAuto;
   }
 

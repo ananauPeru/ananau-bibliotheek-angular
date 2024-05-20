@@ -1,3 +1,5 @@
+import { QuestionEvaluatedModel } from "./question.model";
+
 // Base class for common properties
 class BaseTestSubmissionModel {
   id: number;
@@ -26,7 +28,13 @@ class TestAttemptModel {
     maxAuto: number,
     maxNotAuto: number
   };
+}
 
+class SectionModel {
+  id: number;
+  title: string;
+  description: string;
+  questions: QuestionEvaluatedModel[];
 }
 
 /**
@@ -63,9 +71,24 @@ export class TeacherTestSubmissionModel extends BaseTestSubmissionModel {
  * GET test/test_attemts/{id}
  */
 
-export class TestSubmissionModel extends BaseTestSubmissionModel {
-  testAttempt: TestAttemptModel;
+export class TestSubmissionModel {
+  id: number;
+  testId: number;
+  title: string;
+  description: string;
+  possibleScores: {
+    max: number,
+    maxAuto: number,
+    maxNotAuto: number,
+  };
+  realScores: {
+    total: number,
+    totalAuto: number,
+    totalNotAuto?: number
+  };
+  sections: SectionModel[];
   submittedBy: UserModel;
+  submittedAt: Date;
   gradedBy?: UserModel;
   gradedAt?: Date;
 }

@@ -3,6 +3,7 @@ import { AuthUtil, Roles } from "src/app/_utils/auth_util";
 import { SubmissionTestHttpService } from "./submission-test-http/submission-test-http.service";
 import { StudentTestSubmissionModel, TeacherTestSubmissionModel, TestSubmissionModel } from '../../_models/test/test-submission.model';
 import { Observable } from 'rxjs';
+import { GradeSubmissionTestDto } from '../../_dto/grade-submission-test-dto';
 
 
 @Injectable({
@@ -24,5 +25,13 @@ export class SubmissionTestService {
       return this.SubmissionTestHttpService.getTeacherSubmissionTestById$(id);
     }
     return this.SubmissionTestHttpService.getStudentSubmissionTestById$(id);
+  }
+
+  /* getSubmissionAnswers$(id: number): Observable<TestSubmissionModel> {
+    return this.SubmissionTestHttpService.getStudentAnswers$(id);
+  } */
+
+  gradeSubmission$(id: number, gradeSubmissionTestDto: GradeSubmissionTestDto): Observable<boolean> {
+    return this.SubmissionTestHttpService.gradeSubmission$(id, gradeSubmissionTestDto);
   }
 }
