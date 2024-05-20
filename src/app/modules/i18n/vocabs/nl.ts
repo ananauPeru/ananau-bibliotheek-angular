@@ -1025,6 +1025,7 @@ export const locale = {
         ASSIGN_TO: "Toewijzen aan",
         SELECT_LEARNER: "Selecteer Spaanse Leerling",
         LEARNER_REQUIRED: "Leerling is verplicht",
+        MY_EXERCISES: "Mijn oefeningen",
       },
       SHARED: {
         SHARED_EXERCISES: "Gedeelde Oefeningen",
@@ -1114,6 +1115,7 @@ export const locale = {
         },
       },
       EDIT_TITLE: "Test Bewerken",
+      MY_TESTS: "Mijn testen",
       FILL_IN: {
         TITLES: {
           SECTION: "Sectie",

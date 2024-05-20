@@ -1046,6 +1046,7 @@ export const locale = {
         ASSIGN_TO: "Assign to",
         SELECT_LEARNER: "Select Spanish Learner",
         LEARNER_REQUIRED: "Learner is required",
+        MY_EXERCISES: "My Exercises",
       },
       SHARED: {
         SHARED_EXERCISES: "Shared Exercises",
@@ -1133,6 +1134,7 @@ export const locale = {
         }
       },
       EDIT_TITLE: "Edit Test",
+      MY_TESTS: "My Tests",
       FILL_IN: {
         TITLES: {
           SECTION: "Section",

@@ -1086,7 +1086,7 @@
 
               <!-- Form Controls -->
               <!-- begin::2 Level -->
-              
+
               <li
                 class="menu-item menu-item-submenu"
                 aria-haspopup="true"
@@ -1193,7 +1193,7 @@
 
               <!-- Form Controls -->
               <!-- begin::2 Level -->
-              
+
               <li
                 class="menu-item menu-item-submenu"
                 aria-haspopup="true"
@@ -1259,8 +1259,8 @@
             {{ "MENU.LEARNING_PLATFORM.SPANISH" | translate }}
           </h4>
           <i class="menu-icon flaticon-more-v2"></i>
-        </li>  
-        
+        </li>
+
         <!-- List item with dropdown and childeren -->
         <li
           class="menu-item menu-item-submenu"
@@ -1384,6 +1384,31 @@
                 </span>
               </li>
 
+              <!-- Submitions -->
+              <li
+              class="menu-item menu-item-submenu"
+              aria-haspopup="true"
+              routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link"
+                  routerLink="/exercise/submission/list"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="
+                    './assets/media/svg/icons/Files/Selected-file.svg'
+                  "
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text"
+                    >{{ "MENU.LEARNING_PLATFORM.SUBMITIONS" | translate }}
+                  </span>
+                </a>
+              </li>
+
+               <!-- Assined Exercises -->
               <li
                 class="menu-item menu-item-submenu"
                 aria-haspopup="true"
@@ -1391,7 +1416,7 @@
                 routerLinkActive="menu-item-open"
               >
                 <a
-                  class="menu-link menu-toggle"
+                  class="menu-link"
                   routerLink="/exercise/shared"
                   routerLinkActive="active"
                 >
@@ -1408,6 +1433,7 @@
                 </a>
               </li>
 
+              <!-- Exercise List -->
               <li
                 class="menu-item menu-item-submenu"
                 aria-haspopup="true"
@@ -1432,6 +1458,7 @@
                 </a>
               </li>
 
+              <!-- Create Exercise -->
               <li
                 class="menu-item menu-item-submenu"
                 aria-haspopup="true"
@@ -1474,39 +1501,12 @@
                 cacheSVG="true"
                 class="svg-icon menu-icon"
               ></span>
-              <span class="menu-text">My Exercises</span>
+              <span class="menu-text">
+                {{ "EXERCISE.ASSIGN.MY_EXERCISES" | translate }}
+              </span>
             </a>
           </li>
         </ng-template>
-
-        <!-- Submitions -->
-        <li
-          class="menu-item"
-          aria-haspopup="true"
-          routerLinkActive="menu-item-active"
-          *ngIf="
-            AuthUtil.permitted([
-              AuthUtil.roles.SuperAdmin,
-              AuthUtil.roles.SpanishLearner,
-              AuthUtil.roles.SpanishTeacher
-            ])
-          "
-        >
-          <a
-            class="menu-link"
-            routerLink="/exercise/submission/list"
-            routerLinkActive="active"
-          >
-            <span
-              [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
-              cacheSVG="true"
-              class="svg-icon menu-icon"
-            ></span>
-            <span class="menu-text"
-              >{{ "MENU.LEARNING_PLATFORM.SUBMITIONS" | translate }}
-            </span>
-          </a>
-        </li>
       </ng-template>
 
       <!-- Test -->
@@ -1635,7 +1635,11 @@
               cacheSVG="true"
               class="svg-icon menu-icon"
             ></span>
-            <span class="menu-text">My Tests</span>
+            <span class="menu-text">
+              {{
+                "TEST.MY_TESTS" | translate
+              }}
+            </span>
           </a>
         </li>
       </ng-template>

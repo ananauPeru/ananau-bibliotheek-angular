@@ -1045,6 +1045,7 @@ export const locale = {
         ASSIGN_TO: "Asignar a",
         SELECT_LEARNER: "Seleccionar estudiante de español",
         LEARNER_REQUIRED: "Se requiere alumno",
+        MY_EXERCISES: "Mis ejercicios",
       },
       SHARED: {
         SHARED_EXERCISES: "Ejercicios compartidos",
@@ -1135,6 +1136,7 @@ export const locale = {
         },
       },
       EDIT_TITLE: "Editar Prueba",
+      MY_TESTS: "Mis pruebas",
       FILL_IN: {
         TITLES: {
           SECTION: "Sección",
