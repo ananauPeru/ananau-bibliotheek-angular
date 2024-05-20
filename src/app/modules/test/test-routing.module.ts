@@ -36,7 +36,7 @@ const routes: Routes = [
         },
       },
       {
-        path: "submitted_test/:id",
+        path: "submitted/:id",
         component: SubmissionTestDetailsComponent,
         data: {
           canActivate: [AuthGuard],
