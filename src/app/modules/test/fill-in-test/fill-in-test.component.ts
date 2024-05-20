@@ -182,7 +182,7 @@ export class FillInTestComponent implements OnInit {
 
     this.testService.submitTest$(testId, testSubmitDto).subscribe(
       (evaulatedTest: TestEvaluatedModel) => {
-        this.router.navigate([`/test/submission/${evaulatedTest.id}`]);
+        this.router.navigate([`/test/submitted/${evaulatedTest.id}`]);
         this.toast.showSuccess("Success", "Test submitted successfully");
       },
       (error) => {

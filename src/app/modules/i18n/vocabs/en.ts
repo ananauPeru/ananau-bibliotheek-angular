@@ -1093,20 +1093,49 @@ export const locale = {
       },
       SUBMISSION_DETAILS: {
         SUBMISSION_DETAILS: "Submission Test Details",
-        SUBMITTED_TEST: "Submitted Test:",
-        SUBMITTED_BY: "Submitted By:",
-        SUBMITTED_AT: "Submitted At:",
-        SCORE_AUTO: "Score Auto:",
-        SCORE_MANUAL: "Score Manual:",
-        SCORE_TOTAL: "Score Total:",
-        NO_GRADE: "Not graded yet",
-        EDIT_SCORE: "Edit Score",
-        CURRENT_SCORE: "Current Score:",
-        SCORE: "Score:",
         SCORE_SUBMIT: "Submit Score",
+
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+        },
+        LABELS: {
+          SUBMITTED_TEST: "Submitted Test",
+          SUBMITTED_BY: "Submitted By",
+          SUBMITTED_AT: "Submitted At",
+          SCORE_AUTO: "Score Auto",
+          SCORE_MANUAL: "Score Manual",
+          SCORE_TOTAL: "Score Total",
+          SCORE: "Score",
+          LEARNERS_ANSWER: "Learner's Answer",
+          CORRECT_ANSWER: "Correct Answer",
+        },
+        MESSAGES: {
+          NO_GRADE: "Not graded yet",
+          CORRECT: "Correct",
+          INCORRECT: "Incorrect",
+          NOT_AVAILABLE: "Not available",
+          GRADED_SUCCESFULLY: "Score has been submitted successfully.",
+        },
+        ERRORS: {
+          SCORE_REQUIRED: "Please provide a score.",
+          SCORE_POSITIVE: "Score must be greater than or equal to 0.",
+          SCORE_LESS_THAN: "Score must be less than or equal to 10.",
+          PROVIDE_VALID_SCORES: "Please provide valid scores for all open questions.",
+          FAILED_TO_GRADE: "Something went wrong while submitting the score. Please try again later.",
+        },
+        BUTTONS: {
+          EDIT_SCORE: "Edit Score",
+        }
       },
       LIST: {
       },
+      COMPONENTS: {
+        RADIO_BUTTON: {
+          CORRECT: "Correct",
+          LEARNERS_ANSWER: "Learner's Answer",
+        }
+      }
     },
   },
 };

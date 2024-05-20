@@ -29,7 +29,7 @@
             }"
           >
             {{ answer.answerText }}
-            <span *ngIf="showResults && answer.isCorrect"> (Correct)</span>
+            <span *ngIf="showResults && answer.isCorrect"> ({{"TEST.COMPONENTS.RADIO_BUTTON.CORRECT" | translate}})</span>
             <span
               *ngIf="
                 showResults &&
@@ -37,7 +37,7 @@
                 selectedAnswerId === answer.id
               "
             >
-              (Learner's Answer)</span
+              ({{"TEST.COMPONENTS.RADIO_BUTTON.LEARNERS_ANSWER" | translate}})</span
             >
           </label>
         </div>
