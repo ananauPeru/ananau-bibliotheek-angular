@@ -1170,17 +1170,47 @@ export const locale = {
         },
       },
       SUBMISSION_DETAILS: {
-        SUBMISSION_DETAILS: "Inzendingsdetails Test",
-        SUBMITTED_TEST: "Ingediende Test:",
-        SUBMITTED_BY: "Ingediend Door:",
-        SUBMITTED_AT: "Ingediend Op:",
-        SCORE_AUTO: "Score Auto:",
-        SCORE_MANUAL: "Score Handmatig:",
-        NO_GRADE: "Nog niet beoordeeld",
-        EDIT_SCORE: "Score Bewerken",
-        CURRENT_SCORE: "Huidige Score:",
-        SCORE: "Score:",
+        SUBMISSION_DETAILS: "Inzendingsdetails",
         SCORE_SUBMIT: "Score Indienen",
+
+        TITLES: {
+          SECTION: "Sectie",
+          QUESTION: "Vraag",
+        },
+        LABELS: {
+          SUBMITTED_TEST: "Ingediende Test",
+          SUBMITTED_BY: "Ingediend Door",
+          SUBMITTED_AT: "Ingediend Op",
+          SCORE_AUTO: "Automatische Score",
+          SCORE_MANUAL: "Handmatige Score",
+          SCORE_TOTAL: "Totale Score",
+          SCORE: "Score",
+          LEARNERS_ANSWER: "Antwoord van Leerling",
+          CORRECT_ANSWER: "Correct Antwoord",
+        },
+        MESSAGES: {
+          NO_GRADE: "Nog niet beoordeeld",
+          CORRECT: "Correct",
+          INCORRECT: "Onjuist",
+          NOT_AVAILABLE: "Niet beschikbaar",
+          GRADED_SUCCESFULLY: "Score is succesvol ingediend.",
+        },
+        ERRORS: {
+          SCORE_REQUIRED: "Gelieve een score in te voeren.",
+          SCORE_POSITIVE: "Score moet groter dan of gelijk aan 0 zijn.",
+          SCORE_LESS_THAN: "Score moet kleiner dan of gelijk aan 10 zijn.",
+          PROVIDE_VALID_SCORES: "Gelieve geldige scores in te voeren voor alle open vragen.",
+          FAILED_TO_GRADE: "Er is iets misgegaan bij het indienen van de score. Probeer het later opnieuw.",
+        },
+        BUTTONS: {
+          EDIT_SCORE: "Score Bewerken",
+        }
+      },
+      COMPONENTS: {
+        RADIO_BUTTON: {
+          CORRECT: "Correct",
+          LEARNERS_ANSWER: "Antwoord van Leerling",
+        }
       },
       LIST: {
         LABELS: {
