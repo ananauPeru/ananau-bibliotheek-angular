@@ -1078,6 +1078,7 @@ export const locale = {
         GRADE_TABLE: "Calificación",
         GRADE_DATE_TABLE: "Fecha de calificación",
         ACTIONS: "Acciones",
+        MY_SUBMISSIONS: "Mis envíos",
       },
     },
     TEST: {
@@ -1136,7 +1137,7 @@ export const locale = {
         },
       },
       EDIT_TITLE: "Editar Prueba",
-      MY_TESTS: "Mis pruebas",
+      MY_TESTS: "Mis pruebas enviadas",
       FILL_IN: {
         TITLES: {
           SECTION: "Sección",
@@ -1206,6 +1207,7 @@ export const locale = {
         SCORE_SUBMIT: "Enviar Puntaje",
       },
       LIST: {
+        TEST_LIST: "Lista de pruebas",
         LABELS: {
           SEARCH: "Buscar por título o autor",
           CREATE: "Crear prueba",
