@@ -30,7 +30,7 @@ class TestAttemptModel {
   };
 }
 
-class SectionModel {
+export class SectionModel {
   id: number;
   title: string;
   description: string;

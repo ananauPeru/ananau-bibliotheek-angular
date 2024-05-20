@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { StudentTestSubmissionModel, TeacherTestSubmissionModel, TestSubmissionModel } from '../_models/test/test-submission.model';
+import { SectionModel, StudentTestSubmissionModel, TeacherTestSubmissionModel, TestSubmissionModel } from '../_models/test/test-submission.model';
 import { Observable } from 'rxjs';
 import { AuthUtil } from "src/app/_utils/auth_util";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { TestModel, TestSubmitDTO } from '../_models/test/test.model';
 import { FileUtil } from 'src/app/_utils/file_util';
 import { QuestionUtil } from "../_types/QuestionUtil";
 import { QuestionEvaluatedModel } from '../_models/test/question.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-submission-test-details',
@@ -21,7 +22,6 @@ export class SubmissionTestDetailsComponent implements OnInit {
   submissionTest$: Observable<TestSubmissionModel>;
   isEditingScore = false;
   gradeForm: FormGroup;
-  isEditingGrade = false;
   testForm: FormGroup;
   testDto: TestSubmitDTO;
 
@@ -33,12 +33,14 @@ export class SubmissionTestDetailsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     private fileUtil: FileUtil,
-    public QuestionUtil: QuestionUtil
+    public QuestionUtil: QuestionUtil,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
     this.getSubmissionTestDetails();
     this.initializeGradeForm();
+    this.initializeOpenQuestionScores();
   }
 
   getSubmissionTestDetails() {
@@ -61,25 +63,21 @@ export class SubmissionTestDetailsComponent implements OnInit {
   }
 
   initializeGradeForm() {
-    this.gradeForm = this.formBuilder.group({
-      score: ["", [Validators.required, Validators.min(0)]],
-    });
+    this.gradeForm = this.formBuilder.group({});
+  }
 
+  initializeOpenQuestionScores() {
     this.submissionTest$.subscribe(
       (submissionTest: TestSubmissionModel) => {
-        this.gradeForm.patchValue({
-          totalNotAuto: submissionTest.realScores.totalNotAuto,
+        submissionTest.sections.forEach((section: SectionModel) => {
+          section.questions.forEach((question) => {
+            if (this.QuestionUtil.isQuestionTypeIgnoreCase(question.type.name, this.QuestionUtil.types.OPEN_QUESTION)) {
+              const controlName = 'question-' + question.id + '-score';
+              const initialScore = question.learnerAnswer && question.learnerAnswer.score !== null ? question.learnerAnswer.score : '';
+              this.gradeForm.addControl(controlName, this.formBuilder.control(initialScore, [Validators.required, Validators.min(0), Validators.max(10)]));
+            }
+          });
         });
-
-        // Update the max validator based on the max possible value
-        this.gradeForm
-          .get("score")
-          .setValidators([
-            Validators.required,
-            Validators.min(0),
-            Validators.max(submissionTest.possibleScores.maxNotAuto),
-          ]);
-        this.gradeForm.get("score").updateValueAndValidity();
       }
     );
   }
@@ -96,37 +94,49 @@ export class SubmissionTestDetailsComponent implements OnInit {
   }
 
   submitScore() {
+    this.gradeForm.markAllAsTouched();
     if (this.gradeForm.invalid) {
-      this.toast.error("Please provide a score.");
+      this.toast.error(this.translateService.instant("TEST.SUBMISSION_DETAILS.ERRORS.PROVIDE_VALID_SCORES"));
       return;
     }
-
+  
     const submissionId: number = this.route.snapshot.params["id"];
-    const score: number = this.gradeForm.get("score").value;
-    const questionId: number = this.route.snapshot.params["questionId"];
-
-    const gradeSubmissionTestDto: GradeSubmissionTestDto = new GradeSubmissionTestDto([
-      { questionId: questionId, score: score }
-    ]);
-
-    this.submissionTestService
-      .gradeSubmission$(submissionId, gradeSubmissionTestDto)
-      .subscribe(
-        (success) => {
-          if (success) {
-            this.toast.success("Submission graded successfully!");
-            this.getSubmissionTestDetails();
-            this.isEditingGrade = false;
-            this.cdr.detectChanges();
-          } else {
-            this.toast.error("Failed to grade submission");
+    const questionScores = [];
+  
+    this.submissionTest$.subscribe(
+      (submissionTest: TestSubmissionModel) => {
+        submissionTest.sections.forEach((section) => {
+          section.questions.forEach((question) => {
+            if (this.QuestionUtil.isQuestionTypeIgnoreCase(question.type.name, this.QuestionUtil.types.OPEN_QUESTION)) {
+              const controlName = 'question-' + question.id + '-score';
+              const score = this.gradeForm.get(controlName).value;
+              if (score !== '') {
+                questionScores.push({ questionId: question.id, score: score });
+              }
+            }
+          });
+        });
+  
+        const gradeSubmissionTestDto: GradeSubmissionTestDto = new GradeSubmissionTestDto(questionScores);
+  
+        this.submissionTestService.gradeSubmission$(submissionId, gradeSubmissionTestDto).subscribe(
+          (success) => {
+            if (success) {
+              this.toast.success(this.translateService.instant("TEST.SUBMISSION_DETAILS.MESSAGES.GRADED_SUCCESFULLY"));
+              this.getSubmissionTestDetails();
+              this.isEditingScore = false;
+              this.cdr.detectChanges();
+            } else {
+              this.toast.error(this.translateService.instant("TEST.SUBMISSION_DETAILS.ERRORS.FAILED_TO_GRADE"));
+            }
+          },
+          (error) => {
+            console.error("Error grading submission: ", error);
+            this.toast.error(this.translateService.instant("TEST.SUBMISSION_DETAILS.ERRORS.FAILED_TO_GRADE"));
           }
-        },
-        (error) => {
-          console.error("Error grading submission: ", error);
-          this.toast.error("Error grading submission");
-        }
-      );
+        );
+      }
+    );
   }
 
   getQuestionGradeText(question: QuestionEvaluatedModel): string {
@@ -135,23 +145,37 @@ export class SubmissionTestDetailsComponent implements OnInit {
     } else if(!question.isAutoEvaluated && question.learnerAnswer.score) {
       return `(${question.learnerAnswer.score}/10)`
     } else {
-      return "(Not graded yet)";
+      const translatedText = this.translateService.instant("TEST.SUBMISSION_DETAILS.MESSAGES.NO_GRADE");
+      return `(${translatedText})`;
     }
   }
 
   getFillInTheBlankAnswerText(question: QuestionEvaluatedModel): string {
-    if(question.learnerAnswer.isCorrect) {
-      return question.learnerAnswer.answerText + " (Correct)";
-    } else {
-      return question.learnerAnswer.answerText + " (Incorrect)";
+    let translatedText = this.translateService.instant("TEST.SUBMISSION_DETAILS.MESSAGES.CORRECT");
+    if(!question.learnerAnswer.isCorrect) {
+      translatedText = this.translateService.instant("TEST.SUBMISSION_DETAILS.MESSAGES.INCORRECT");
     }
+    return question.learnerAnswer.answerText + ` (${translatedText})`;
   }
 
   getCorrectAnswerText(question: QuestionEvaluatedModel): string {
     if(question.isAutoEvaluated) {
       return question.answers.find((answer) => answer.isCorrect).answerText;
     } else {
-      return "Not available";
+      return this.translateService.instant("TEST.SUBMISSION_DETAILS.MESSAGES.NOT_AVAILABLE"); 
     }
+  }
+
+  startEditing() {
+    this.isEditingScore = true;
+  }
+
+  cancelEditing() {
+    this.isEditingScore = false;
+  }
+
+  submitEditing() {
+    this.submitScore();
+    this.isEditingScore = false;
   }
 }
