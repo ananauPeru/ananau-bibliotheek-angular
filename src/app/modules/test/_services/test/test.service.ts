@@ -38,7 +38,7 @@ export class TestService {
     return this.testHttpService.postTest$(testDto);
   }
 
-  deleteTest$(id: number): Observable<any> {
+  deleteTest$(id: number): Observable<boolean> {
     return this.testHttpService.deleteTest$(id);
   }
 

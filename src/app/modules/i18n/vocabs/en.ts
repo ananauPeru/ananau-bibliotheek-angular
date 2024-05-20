@@ -1,3 +1,4 @@
+import { DELETE } from "@angular/cdk/keycodes";
 import { EducationalCourses } from "../../library/_models/educational-courses.enum";
 
 // USA
@@ -20,6 +21,7 @@ export const locale = {
     // BUTTONS
     BUTTONS: {
       SAVE: "Save",
+      SAVING:"Saving...",
       SAVE_CHANGES: "Save changes",
       SUBMIT: "Submit",
       CANCEL: "Cancel",
@@ -35,6 +37,7 @@ export const locale = {
       CREATE_ASSIGN: "Create assignment",
       BACK_TO_LIST: "Back to list",
       DETAILS: "Details",
+      DELETE: "Delete",
     },
     NEDERLANDS: "Dutch",
     ENGELS: "English",
@@ -84,17 +87,23 @@ export const locale = {
       },
       // We dont translate documentation (IT) to different languages
       DOCUMENTATION: {
-        TITLE: "IT - Documentation",
-        GETTING_STARTED: "Getting started",
-        S0_PREPARATIONS: "0 - Before starting",
-        S1_SETTING_UP: "1 - Setting up",
+        TITLE: 'IT - Documentation',
+        GETTING_STARTED: 'Getting started',
+        S0_PREPARATIONS: '0 - Before starting',
+        S1_SETTING_UP: '1 - Setting up',
         S2_BEST_PRACTICES: {
-          TITLE: "2 - Best practices",
-          MODELS_AND_TABLES: "Models and Tables",
-          GITHUB: "Working with GitHub",
+          TITLE: '2 - Best practices',
+          MODELS_AND_TABLES: 'Models and Tables',
+          GITHUB: 'Working with GitHub',
         },
-        S3_DEPLOYMENT_AND_AZURE: "3 - Deployment - Azure",
+        S3_DEPLOYMENT_AND_AZURE: '3 - Deployment - Azure',
         TODOS: "ToDo's",
+        WEBSITE: 'Website',
+        W1_PROJECTS: '1 - Projects',
+        W2_TEAM_MEMBERS: '2 - Team members',
+        W3_INVOLVED_COUNTRIES: '3 - Involved countries',
+        AUTOMATIC_EMAILS: 'Automatic emails',
+        INFO: '1 - Info',
       },
       LEARNING_PLATFORM: {
         SPANISH: "Spanish",
@@ -1073,10 +1082,77 @@ export const locale = {
     },
     TEST: {
       CREATE: {
-        TITLE: "Title",
+        TITLE: "Create Test",
+        SETTINGS: "Settings",
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+          CHOICE: "Choice",
+          ANSWER: "Answer",
+          TEST_SETTINGS: "Test Settings",
+          CONFIRM_DELETE: "Confirm Delete",
+        },
+        LABELS: {
+          TITLE: "Title",
+          DESCRIPTION: "Description",
+          SECTION_TITLE: "Section Title",
+          SECTION_DESCRIPTION: "Section Description",
+          SELECT_TYPE: "Select Type",
+          ATTACHMENT: "Attachment (optional)",
+          CHOICES: "Choices",
+          CORRECT: "Correct",
+          INCORRECT: "Incorrect",
+          ADD_QUESTION: "Add Question",
+          ADD_SECTION: "Add Section",
+          TIME_LIMIT: "Time Limit (in seconds)",
+        },
+        PLACEHOLDERS: {
+          TITLE: "Enter title",
+          DESCRIPTION: "Enter description (optional)",
+          SECTION_TITLE: "Enter section title",
+          SECTION_DESCRIPTION: "Enter section description (optional)",
+          QUESTION_TEXT: "Enter question eg. 'Yo (trabajar) _______ en la oficina.'",
+          ANSWER_TEXT: "Enter answer text",
+          ANSWER_CORRECT_TEXT: "Enter correct answer",
+        },
+        TOOLTIPS: {
+          REMOVE_SECTION: "Remove this section",
+          REMOVE_QUESTION: "Remove this question",
+          REMOVE_OPTION: "Remove this option",
+          ADD_OPTION: "Add option",
+        },
+        ERRORS: {
+          TITLE_REQUIRED: "Title is required.",
+          SECTION_TITLE_REQUIRED: "Section title is required.",
+          QUESTION_TEXT_REQUIRED: "Question text is required.",
+          ANSWER_TEXT_REQUIRED: "Answer text is required.",
+          CORRECT_ANSWER_REQUIRED: "At least one answer must be marked as correct.",
+        },
+        MESSAGES: {
+          CONFIRM_DELETE: "Are you sure you want to delete this?",
+        }
       },
-      FILL_IN_TEST: {
-
+      EDIT_TITLE: "Edit Test",
+      FILL_IN: {
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+          NOT_COMPLETE: "Test is not complete",
+        },
+        LABELS: {
+          TIME_LIMIT: "Time limit",
+          TIME_LEFT: "Time left",
+          MINUTES: "minutes",
+          START_TEST: "Start Test",
+          GRADING: "Grading...",
+          LOADING: "Loading...",
+        },
+        MESSAGES: {
+          NOT_COMPLETE: "You have not filled in all fields, are you sure you want to submit your test?"
+        },
+        ERRORS: {
+          FIELD_REQUIRED: "This field is required.",
+        }
       },
       OVERVIEW_SUBMISSION: {
         SUBMITTED_TESTS: "Submitted Tests",
@@ -1089,6 +1165,27 @@ export const locale = {
         ACTIONS: "Actions",
       },
       OVERVIEW: {
+        TITLES: {
+          SECTION: "Section",
+          QUESTION: "Question",
+        },
+        LABELS: {
+          TITLE: "Title",
+          DESCRIPTION: "Description",
+          TIME_LIMIT: "Time Limit",
+          MINUTES: "minutes",
+          NUMBER_OF_SECTIONS: "Number of Sections",
+          TOTAL_QUESTIONS: "Total Questions",
+          CREATED_AT: "Created At",
+          LAST_UPDATED: "Last Updated",
+          ATTACHMENTS: "Attachments",
+          CHOICE: "Choice",
+          ANSWER: "Answer",
+        },
+        MESSAGES: {
+          NO_DESCRIPTION: "No description",
+          LOADING: "Loading...",
+        }
 
       },
       SUBMISSION_DETAILS: {
@@ -1129,6 +1226,24 @@ export const locale = {
         }
       },
       LIST: {
+        LABELS: {
+          SEARCH: "Search for title or author",
+          CREATE: "Create Test",
+          SHARE: "Share Test",
+          DETAILS: "Details",
+        },
+        TABLE: {
+          TITLE: "Title",
+          CREATION_DATE: "Creation Date",
+          VERSION: "Version",
+          ACTIONS: "Actions",
+        }
+      },
+      SHARE: {
+        TITLE: "Share Test",
+        SHARE_LINK: "Share Link",
+        COPY: "Copy",
+        COPIED: "Copied!",
       },
       COMPONENTS: {
         RADIO_BUTTON: {
@@ -1139,3 +1254,5 @@ export const locale = {
     },
   },
 };
+
+

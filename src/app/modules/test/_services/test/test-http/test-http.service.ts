@@ -295,7 +295,7 @@ export class TestHttpService {
     );
   }
 
-  deleteTest$(id: number): Observable<any> {
+  deleteTest$(id: number): Observable<boolean> {
     return this.http.delete(`${API_URL}/${id}`).pipe(
       catchError((error) => {
         if (error.status == 401) {
@@ -305,10 +305,10 @@ export class TestHttpService {
       }),
       map((response: any) => {
         if (response.success) {
-          return response;
+          return true;
         } else {
           throwError(response.error);
-          return null;
+          return false;
         }
       })
     );

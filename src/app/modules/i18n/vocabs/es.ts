@@ -35,6 +35,7 @@ export const locale = {
       CREATE_ASSIGN: "Crear tarea",
       BACK_TO_LIST: "Volver a la lista",
       DETAILS: "Detalles",
+      DELETE: "Borrar",
     },
 
     // MENU
@@ -75,6 +76,12 @@ export const locale = {
         GETTING_STARTED: "Empezando",
         S0_PREPARATIONS: "0 - Antes de empezar",
         S1_SETTING_UP: "1 - Configuración",
+        WEBSITE: "Página web",
+        W1_PROJECTS: "1 - Proyectos",
+        W2_TEAM_MEMBERS: "2 - Miembros del equipo",
+        W3_INVOLVED_COUNTRIES: "3 - Países implicados",
+        AUTOMATIC_EMAILS: "Correos electrónicos automáticos",
+        INFO: "1 - Información",
       },
       ORGANIZATION: {
         TITLE: "Organización",
@@ -98,7 +105,7 @@ export const locale = {
         EXERCISE_OVERVIEW: "Resumen del ejercicio",
         SUBMITIONS: "Envíos",
         MY_STUDENTS: "Mis estudiantes",
-      }
+      },
     },
 
     // AUTH PAGES
@@ -342,9 +349,9 @@ export const locale = {
             "El período de ausencia excede la duración máxima de una visa normal.",
         },
         FLIGHT_INFORMATION: {
-          TITLE: 'Informacion de vuelo',
-          NUMBER: 'Número de vuelo',
-          DATE_ARRIVAL: 'Fecha de llegada',
+          TITLE: "Informacion de vuelo",
+          NUMBER: "Número de vuelo",
+          DATE_ARRIVAL: "Fecha de llegada",
         },
         SPANISH: {
           TITLE: "Español",
@@ -363,13 +370,15 @@ export const locale = {
             "Si aún no habla un nivel básico de español, le recomendamos que solicite 4 semanas de lecciones de español en el sitio.",
         },
         PAYMENTS: {
-          TITLE: 'Pagos',
-          INFO_PAYMENTS: 'Subir confirmación de pago de alojamiento (apartamento), garantía de apartamento, clases de español. Si estos pagos se realizaron en una sola transacción, cargue el documento del campo del apartamento y complete un campo de descripción debajo.',
-          PAYMENT_APARTMENT: 'Departamento',
-          PAYMENT_GUARANTEE: 'Garantizar',
-          PAYMENT_SPANISH: 'Lecciones de español',
-          PAYMENT_DESCRIPTION: 'Descripción de pago',
-          PAYMENT_DROP_SELECT: 'Suelte su(s) archivo(s) aquí o haga clic para seleccionarlo(s).',
+          TITLE: "Pagos",
+          INFO_PAYMENTS:
+            "Subir confirmación de pago de alojamiento (apartamento), garantía de apartamento, clases de español. Si estos pagos se realizaron en una sola transacción, cargue el documento del campo del apartamento y complete un campo de descripción debajo.",
+          PAYMENT_APARTMENT: "Departamento",
+          PAYMENT_GUARANTEE: "Garantizar",
+          PAYMENT_SPANISH: "Lecciones de español",
+          PAYMENT_DESCRIPTION: "Descripción de pago",
+          PAYMENT_DROP_SELECT:
+            "Suelte su(s) archivo(s) aquí o haga clic para seleccionarlo(s).",
         },
         MOTIVATION_LETTER: {
           TITLE: "Carta de motivación",
@@ -859,9 +868,9 @@ export const locale = {
           GOOD_CONDUCT_CERTIFICATE: "Certificado de buena conducta ",
           DIPLOMA: "Certificado educativo",
           PASSPORT_PHOTO: "Foto del pasaporte",
-          PAYMENT_APARTMENT: 'Apartamento de pago',
-          PAYMENT_GUARANTEE: 'Garantía de pago',
-          PAYMENT_SPANISH: 'Clases de español de pago',
+          PAYMENT_APARTMENT: "Apartamento de pago",
+          PAYMENT_GUARANTEE: "Garantía de pago",
+          PAYMENT_SPANISH: "Clases de español de pago",
         },
       },
       TOASTS: {
@@ -1057,10 +1066,10 @@ export const locale = {
         EDIT_GRADE: "Editar calificación",
         CURRENT_GRADE: "Calificación actual:",
         GRADE_REQUIRED: "La calificación es obligatoria.",
-        GRADE_POSITIVE:"La calificación debe ser mayor o igual a 0.",
+        GRADE_POSITIVE: "La calificación debe ser mayor o igual a 0.",
         GRADE_LESS_THAN: "La calificación debe ser menor o igual a",
         GRADE_SUBMIT: "Enviar calificación",
-        LIST:"Lista de envíos",
+        LIST: "Lista de envíos",
         SEARCH_USER_EXERCISE: "Buscar usuario o ejercicio",
         EXERCISE_TABLE: "Ejercicio",
         SUBMITTED_BY_TABLE: "Enviado por",
@@ -1068,6 +1077,151 @@ export const locale = {
         GRADE_TABLE: "Calificación",
         GRADE_DATE_TABLE: "Fecha de calificación",
         ACTIONS: "Acciones",
+      },
+    },
+    TEST: {
+      CREATE: {
+        TITLE: "Crear Prueba",
+        SETTINGS: "Configuración",
+        TITLES: {
+          SECTION: "Sección",
+          QUESTION: "Pregunta",
+          CHOICE: "Opción",
+          ANSWER: "Respuesta",
+          TEST_SETTINGS: "Configuración de la Prueba",
+          CONFIRM_DELETE: "Confirmar Eliminación",
+        },
+        LABELS: {
+          TITLE: "Título",
+          DESCRIPTION: "Descripción",
+          SECTION_TITLE: "Título de la Sección",
+          SECTION_DESCRIPTION: "Descripción de la Sección",
+          SELECT_TYPE: "Seleccionar Tipo",
+          ATTACHMENT: "Adjunto (opcional)",
+          CHOICES: "Opciones",
+          CORRECT: "Correcto",
+          INCORRECT: "Incorrecto",
+          ADD_QUESTION: "Agregar Pregunta",
+          ADD_SECTION: "Agregar Sección",
+          TIME_LIMIT: "Límite de Tiempo (en segundos)",
+        },
+        PLACEHOLDERS: {
+          TITLE: "Ingrese el título",
+          DESCRIPTION: "Ingrese la descripción (opcional)",
+          SECTION_TITLE: "Ingrese el título de la sección",
+          SECTION_DESCRIPTION:
+            "Ingrese la descripción de la sección (opcional)",
+          QUESTION_TEXT:
+            "Ingrese la pregunta, por ejemplo 'Yo (trabajar) _______ en la oficina.'",
+          ANSWER_TEXT: "Ingrese el texto de la respuesta",
+          ANSWER_CORRECT_TEXT: "Ingrese la respuesta correcta",
+        },
+        TOOLTIPS: {
+          REMOVE_SECTION: "Eliminar esta sección",
+          REMOVE_QUESTION: "Eliminar esta pregunta",
+          REMOVE_OPTION: "Eliminar esta opción",
+          ADD_OPTION: "Agregar opción",
+        },
+        ERRORS: {
+          TITLE_REQUIRED: "El título es obligatorio.",
+          SECTION_TITLE_REQUIRED: "El título de la sección es obligatorio.",
+          QUESTION_TEXT_REQUIRED: "El texto de la pregunta es obligatorio.",
+          ANSWER_TEXT_REQUIRED: "El texto de la respuesta es obligatorio.",
+          CORRECT_ANSWER_REQUIRED:
+            "Al menos una respuesta debe marcarse como correcta.",
+        },
+        MESSAGES: {
+          CONFIRM_DELETE: "¿Estás seguro de que deseas eliminar esta pregunta?",
+        },
+      },
+      EDIT_TITLE: "Editar Prueba",
+      FILL_IN: {
+        TITLES: {
+          SECTION: "Sección",
+          QUESTION: "Pregunta",
+          NOT_COMPLETE: "La prueba no está completa",
+        },
+        LABELS: {
+          TIME_LIMIT: "Límite de tiempo",
+          TIME_LEFT: "Tiempo restante",
+          MINUTES: "minutos",
+          START_TEST: "Comenzar prueba",
+          GRADING: "Calificando...",
+          LOADING: "Cargando...",
+        },
+        MESSAGES: {
+          NOT_COMPLETE:
+            "No has llenado todos los campos, ¿estás seguro de que quieres enviar tu prueba?",
+        },
+        ERRORS: {
+          FIELD_REQUIRED: "Este campo es obligatorio.",
+        },
+      },
+      OVERVIEW_SUBMISSION: {
+        SUBMITTED_TESTS: "Pruebas Enviadas",
+        SEARCH_LEARNER: "Buscar estudiante",
+        SUBMITTED_BY: "Enviado Por",
+        SUBMITTED_AT: "Enviado En",
+        SCORE_AUTO: "Puntaje auto",
+        SCORE_MANUAL: "Puntaje manual",
+        NO_GRADE: "Aún no calificado",
+        ACTIONS: "Acciones",
+      },
+      OVERVIEW: {
+        TITLES: {
+          SECTION: "Sección",
+          QUESTION: "Pregunta",
+        },
+        LABELS: {
+          TITLE: "Título",
+          DESCRIPTION: "Descripción",
+          TIME_LIMIT: "Límite de tiempo",
+          MINUTES: "minutos",
+          NUMBER_OF_SECTIONS: "Número de secciones",
+          TOTAL_QUESTIONS: "Total de preguntas",
+          CREATED_AT: "Creado en",
+          LAST_UPDATED: "Última actualización",
+          ATTACHMENTS: "Archivos adjuntos",
+          CHOICE: "Opción",
+          ANSWER: "Respuesta",
+        },
+        MESSAGES: {
+          NO_DESCRIPTION: "Sin descripción",
+          LOADING: "Cargando...",
+        },
+      },
+      SUBMISSION_DETAILS: {
+        SUBMISSION_DETAILS: "Detalles de Envío de la Prueba",
+        SUBMITTED_TEST: "Prueba Enviada:",
+        SUBMITTED_BY: "Enviado Por:",
+        SUBMITTED_AT: "Enviado En:",
+        SCORE_AUTO: "Puntaje Auto:",
+        SCORE_MANUAL: "Puntaje Manual:",
+        NO_GRADE: "Aún no calificado",
+        EDIT_SCORE: "Editar Puntaje",
+        CURRENT_SCORE: "Puntaje Actual:",
+        SCORE: "Puntaje:",
+        SCORE_SUBMIT: "Enviar Puntaje",
+      },
+      LIST: {
+        LABELS: {
+          SEARCH: "Buscar por título o autor",
+          CREATE: "Crear prueba",
+          SHARE: "Compartir prueba",
+          DETAILS: "Detalles",
+        },
+        TABLE: {
+          TITLE: "Título",
+          CREATION_DATE: "Fecha de creación",
+          VERSION: "Versión",
+          ACTIONS: "Acciones",
+        },
+      },
+      SHARE: {
+        TITLE: "Compartir Prueba",
+        SHARE_LINK: "Enlace de Compartir",
+        COPY: "Copiar",
+        COPIED: "Copiado!",
       },
     },
   },

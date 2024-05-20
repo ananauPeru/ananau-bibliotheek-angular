@@ -10,6 +10,11 @@ import { CreateComponent } from './todos/create/create.component'
 import { ToDosComponent } from './todos/todos.component'
 import { TodoResolver } from './_resolvers/todo.resolver'
 import { DeployComponent } from './getting-started/deploy/deploy.component'
+import { W1ProjectsComponent } from './website/w1-projects/w1-projects.component'
+import { W2TeamMembersComponent } from './website/w2-team-members/w2-team-members.component'
+import { W3InvolvedCountriesComponent } from './website/w3-involved-countries/w3-involved-countries.component'
+import { AutomaticEmailsComponent } from './automatic-emails/automatic-emails.component'
+
 
 const routes: Routes = [
   {
@@ -37,6 +42,22 @@ const routes: Routes = [
         component: DeployComponent,
       },
       {
+        path: 'website/1-projects',
+        component: W1ProjectsComponent,
+      },
+      {
+        path: 'website/2-team-members',
+        component: W2TeamMembersComponent,
+      },
+      {
+        path: 'website/3-involved-countries',
+        component: W3InvolvedCountriesComponent,
+      },
+      {
+        path: 'automatic-emails',
+        component: AutomaticEmailsComponent,
+      },
+      {
         path: 'todos',
         component: ToDosComponent,
       },
@@ -59,4 +80,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ITDocumentationRoutingModule {}
+export class ITDocumentationRoutingModule { }

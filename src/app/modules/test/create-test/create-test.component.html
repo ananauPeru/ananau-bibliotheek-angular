@@ -12,7 +12,7 @@
               class="col-12 w-100 d-flex justify-content-between align-items-center"
             >
               <h3 class="card-title font-weight-bolder text-dark mb-0">
-                {{ "MENU.LEARNING_PLATFORM.CREATE_TEST" | translate }}
+                {{ "TEST.CREATE.TITLE" | translate }}
               </h3>
               <div>
                 <button
@@ -20,16 +20,31 @@
                   (click)="openSettingsModal()"
                 >
                   <i class="fas fa-cog"></i>
-                  <span class="d-none d-md-inline ml-1">Settings</span>
+                  <span class="d-none d-md-inline ml-1">{{
+                    "TEST.CREATE.SETTINGS" | translate
+                  }}</span>
                 </button>
                 <button
+                  *ngIf="isLoading$ | async as isLoading; else saveButton"
                   class="btn btn-primary pr-1 pr-md-3"
-                  (click)="onSubmit()"
-                  [disabled]="isLoading$ | async"
+                  [disabled]="isLoading"
                 >
                   <i class="fas fa-save"></i>
-                  <span class="d-none d-md-inline ml-1">Save</span>
+                  <span class="d-none d-md-inline ml-1">{{
+                    "BUTTONS.SAVING" | translate
+                  }}</span>
                 </button>
+                <ng-template #saveButton>
+                  <button
+                    class="btn btn-primary pr-1 pr-md-3"
+                    (click)="onSubmit()"
+                  >
+                    <i class="fas fa-save"></i>
+                    <span class="d-none d-md-inline ml-1">{{
+                      "BUTTONS.SAVE" | translate
+                    }}</span>
+                  </button>
+                </ng-template>
               </div>
             </div>
           </div>
@@ -41,9 +56,9 @@
     <div class="card-body">
       <!--begin: Item-->
       <div class="form-group row align-items-start">
-        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
-          >Title</label
-        >
+        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0">{{
+          "TEST.CREATE.LABELS.TITLE" | translate
+        }}</label>
         <div class="col-12 col-md-10">
           <div class="row">
             <div class="col-12">
@@ -54,7 +69,7 @@
                   testForm.get('title').invalid &&
                   (testForm.get('title').dirty || testForm.get('title').touched)
                 "
-                placeholder="Enter title"
+                [placeholder]="'TEST.CREATE.PLACEHOLDERS.TITLE' | translate"
                 formControlName="title"
                 required
               />
@@ -67,20 +82,20 @@
                   (testForm.get('title').dirty || testForm.get('title').touched)
                 "
               >
-                Title is required.
+                {{ "TEST.CREATE.ERRORS.TITLE_REQUIRED" | translate }}
               </small>
             </div>
           </div>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
-          >Description</label
-        >
+        <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0">{{
+          "TEST.CREATE.LABELS.DESCRIPTION" | translate
+        }}</label>
         <div class="col-12 col-md-10">
           <textarea
             class="form-control form-control-solid"
-            placeholder="Enter description (optional)"
+            [placeholder]="'TEST.CREATE.PLACEHOLDERS.DESCRIPTION' | translate"
             formControlName="description"
             rows="3"
           ></textarea>
@@ -111,12 +126,14 @@
                   class="card-title font-weight-bolder text-dark mr-3"
                   style="white-space: nowrap"
                 >
-                  Section {{ i + 1 }}
+                  {{ "TEST.CREATE.TITLES.SECTION" | translate }} {{ i + 1 }}
                 </h3>
                 <button
                   class="btn btn-icon btn-secondary btn-sm"
                   (click)="removeSection(i)"
-                  ngbTooltip="Remove Section"
+                  [ngbTooltip]="
+                    'TEST.CREATE.TOOLTIPS.REMOVE_SECTION' | translate
+                  "
                 >
                   <i class="fas fa-trash-alt"></i>
                 </button>
@@ -129,9 +146,9 @@
       <!-- Body -->
       <div class="card-body pt-2">
         <div class="form-group row align-items-start mb-12">
-          <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
-            >Section title</label
-          >
+          <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0">{{
+            "TEST.CREATE.LABELS.SECTION_TITLE" | translate
+          }}</label>
           <div class="col-12 col-md-10">
             <div class="row">
               <div class="col-12">
@@ -143,7 +160,9 @@
                     (sectionGroup.get('title').dirty ||
                       sectionGroup.get('title').touched)
                   "
-                  placeholder="Enter section title"
+                  [placeholder]="
+                    'TEST.CREATE.PLACEHOLDERS.SECTION_TITLE' | translate
+                  "
                   formControlName="title"
                   required
                 />
@@ -157,20 +176,22 @@
                       sectionGroup.get('title').touched)
                   "
                 >
-                  Section title is required.
+                  {{ "TEST.CREATE.ERRORS.SECTION_TITLE_REQUIRED" | translate }}
                 </small>
               </div>
             </div>
           </div>
         </div>
         <div class="form-group row mb-12">
-          <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0"
-            >Section description</label
-          >
+          <label class="col-12 col-md-2 font-weight-bold mb-2 h3 mb-md-0">{{
+            "TEST.CREATE.LABELS.SECTION_DESCRIPTION" | translate
+          }}</label>
           <div class="col-12 col-md-10">
             <textarea
               class="form-control form-control-solid"
-              placeholder="Enter section description (optional)"
+              [placeholder]="
+                'TEST.CREATE.PLACEHOLDERS.SECTION_DESCRIPTION' | translate
+              "
               formControlName="description"
               rows="3"
             ></textarea>
@@ -188,289 +209,300 @@
                 "
                 [formGroupName]="j"
               >
-                  <div class="row align-items-start mb-8">
-                    <!-- Question Title -->
-                    <div class="col-6 col-md-2 mb-2 mb-md-0 order-1">
-                      <label class="font-weight-bold mb-0 h3"
-                        >Question {{ j + 1 }}</label
-                      >
-                    </div>
-                    <!-- Question Type -->
-                    <div class="col-4 col-md-2 mb-2 mb-md-0 order-2 order-md-3">
-                      <select
-                        class="form-control form-control-solid"
-                        formControlName="type"
-                        [compareWith]="compareQuestionTypes"
-                      >
-                        <option [ngValue]="null">Select Type</option>
-                        <option
-                          *ngFor="let type of questionTypes$ | async"
-                          [ngValue]="type"
-                        >
-                          {{ type.name | translate }}
-                        </option>
-                      </select>
-                    </div>
-                    <!-- Remove Question -->
-                    <div
-                      class="col-2 col-md-1 mb-2 mb-md-0 order-3 order-md-4 d-flex justify-content-end"
+                <div class="row align-items-start mb-8">
+                  <!-- Question Title -->
+                  <div class="col-6 col-md-2 mb-2 mb-md-0 order-1">
+                    <label class="font-weight-bold mb-0 h3"
+                      >{{ "TEST.CREATE.TITLES.QUESTION" | translate }}
+                      {{ j + 1 }}</label
                     >
-                      <button
-                        class="btn btn-icon btn-secondary btn-sm"
-                        (click)="removeQuestion(sectionGroup, j)"
-                        ngbTooltip="Remove Question"
+                  </div>
+                  <!-- Question Type -->
+                  <div class="col-4 col-md-2 mb-2 mb-md-0 order-2 order-md-3">
+                    <select
+                      class="form-control form-control-solid"
+                      formControlName="type"
+                      [compareWith]="compareQuestionTypes"
+                    >
+                      <option [ngValue]="null">
+                        {{ "TEST.CREATE.LABELS.SELECT_TYPE" | translate }}
+                      </option>
+                      <option
+                        *ngFor="let type of questionTypes$ | async"
+                        [ngValue]="type"
                       >
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </div>
-                    <!-- Question text -->
-                    <div class="col-12 col-md-7 order-4 order-md-2">
-                      <div class="row">
-                        <div class="col-12">
-                          <textarea
-                            type="text"
-                            class="form-control form-control-solid"
-                            [class.is-invalid]="
-                              questionGroup.get('questionText').invalid &&
-                              (questionGroup.get('questionText').dirty ||
-                                questionGroup.get('questionText').touched)
-                            "
-                            placeholder="Enter question eg. 'Yo (trabajar) _______ en la oficina.'"
-                            formControlName="questionText"
-                            required
-                            rows="1"
-                            (input)="adjustTextareaHeight($event)"
-                          ></textarea>
-                        </div>
-                        <div class="col-12">
-                          <small
-                            class="text-danger"
-                            *ngIf="
-                              questionGroup.get('questionText').invalid &&
-                              (questionGroup.get('questionText').dirty ||
-                                questionGroup.get('questionText').touched)
-                            "
-                          >
-                            Question text is required.
-                          </small>
-                        </div>
-                      </div>
-                    </div>
+                        {{ type.name | translate }}
+                      </option>
+                    </select>
                   </div>
-                  <div class="row mb-8">
-                    <div class="col-12 col-md-2">
-                      <label class="font-weight-bold mb-0 h3">
-                        Attachment (Optional)
-                      </label>
-                    </div>
-                    <div class="col-12 col-md-10">
-                      <div class="row">
-                        <div class="col-12">
-                          <div
-                            class="custom-dropzone form-control form-control-solid border"
-                            ngx-dropzone
-                            [accept]="'image/*,audio/*'"
-                            (change)="onAttachmentSelect($event, questionGroup)"
-                          >
-                            <ngx-dropzone-label>
-                              <p class="form-text text-muted">
-                                {{
-                                  "REGISTRATION.SCANS.DROP_SELECT" | translate
-                                }}
-                              </p>
-                            </ngx-dropzone-label>
-                            <ngx-dropzone-image-preview
-                              ngProjectAs="ngx-dropzone-preview"
-                              *ngFor="let f of getAttachments(questionGroup)"
-                              [file]="getPreviewFile(f)"
-                              [removable]="true"
-                              (removed)="onAttachmentRemove(f, questionGroup)"
-                            >
-                            </ngx-dropzone-image-preview>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <ng-container
-                    *ngIf="questionGroup.get('type')?.value as selectedType"
+                  <!-- Remove Question -->
+                  <div
+                    class="col-2 col-md-1 mb-2 mb-md-0 order-3 order-md-4 d-flex justify-content-end"
                   >
-                    <!-- Display data about the question type selected -->
-                    <!-- Multiple Choice -->
-                    <ng-container
-                      *ngIf="QuestionUtil.isQuestionType(selectedType.name, QuestionUtil.types.MULTIPLE_CHOICE)"
+                    <button
+                      class="btn btn-icon btn-secondary btn-sm"
+                      (click)="removeQuestion(sectionGroup, j)"
+                      [ngbTooltip]="
+                        'TEST.CREATE.TOOLTIPS.REMOVE_QUESTION' | translate
+                      "
                     >
-                      <div class="mb-12">
-                        <div class="row align-items-center">
-                          <div class="col-12 mb-2">
-                            <label class="font-weight-bold mb-4 h3"
-                              >Choices</label
-                            >
-                          </div>
-                          <div class="col-12">
-                            <div formArrayName="answers">
-                              <div
-                                class="form-group row align-items-center"
-                                *ngFor="
-                                  let optionGroup of questionGroup.get(
-                                    'answers'
-                                  )?.controls;
-                                  let k = index;
-                                  let last = last
-                                "
-                                [formGroupName]="k"
-                              >
-                                <h4 class="col-2">Choice {{ k + 1 }}</h4>
-                                <div class="col-10 d-flex align-items-start">
-                                  <div class="w-100">
-                                    <div class="row">
-                                      <div class="col-12">
-                                        <input
-                                          type="text"
-                                          class="form-control form-control-solid flex-grow-1"
-                                          [class.is-invalid]="
-                                            optionGroup.get('answerText')
-                                              .invalid &&
-                                            (optionGroup.get('answerText')
-                                              .dirty ||
-                                              optionGroup.get('answerText')
-                                                .touched)
-                                          "
-                                          placeholder="Enter answer option"
-                                          formControlName="answerText"
-                                          required
-                                        />
-                                      </div>
-                                      <div class="col-12">
-                                        <small
-                                          class="text-danger"
-                                          *ngIf="
-                                            optionGroup.get('answerText')
-                                              .invalid &&
-                                            (optionGroup.get('answerText')
-                                              .dirty ||
-                                              optionGroup.get('answerText')
-                                                .touched)
-                                          "
-                                        >
-                                          Answer option is required.
-                                        </small>
-                                      </div>
-                                      <div class="col-12" *ngIf="last">
-                                        <small
-                                          class="text-danger"
-                                          *ngIf="
-                                            questionGroup
-                                              .get('answers')
-                                              .hasError(
-                                                'requireOneCorrectAnswer'
-                                              )
-                                          "
-                                        >
-                                          At least one answer must be marked as
-                                          correct.
-                                        </small>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="ml-4">
-                                    <select
-                                      class="form-control form-control-solid"
-                                      formControlName="isCorrect"
-                                    >
-                                      <option [ngValue]="true">Correct</option>
-                                      <option [ngValue]="false">
-                                        Incorrect
-                                      </option>
-                                    </select>
-                                  </div>
-                                  <div class="d-flex justify-content-end ml-4">
-                                    <button
-                                      class="btn btn-icon btn-secondary btn-sm"
-                                      (click)="removeOption(questionGroup, k)"
-                                      ngbTooltip="Remove Option"
-                                    >
-                                      <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <button
-                              class="btn btn-icon btn-secondary btn-sm"
-                              (click)="addOption(questionGroup)"
-                              ngbTooltip="Add Option"
-                            >
-                              <i class="fas fa-plus"></i>
-                            </button>
-                          </div>
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                  <!-- Question text -->
+                  <div class="col-12 col-md-7 order-4 order-md-2">
+                    <div class="row">
+                      <div class="col-12">
+                        <textarea
+                          type="text"
+                          class="form-control form-control-solid"
+                          [class.is-invalid]="
+                            questionGroup.get('questionText').invalid &&
+                            (questionGroup.get('questionText').dirty ||
+                              questionGroup.get('questionText').touched)
+                          "
+                          [placeholder]="
+                            'TEST.CREATE.PLACEHOLDERS.QUESTION_TEXT' | translate
+                          "
+                          formControlName="questionText"
+                          required
+                          rows="1"
+                          (input)="adjustTextareaHeight($event)"
+                        ></textarea>
+                      </div>
+                      <div class="col-12">
+                        <small
+                          class="text-danger"
+                          *ngIf="
+                            questionGroup.get('questionText').invalid &&
+                            (questionGroup.get('questionText').dirty ||
+                              questionGroup.get('questionText').touched)
+                          "
+                        >
+                          {{ "TEST.CREATE.ERRORS.QUESTION_TEXT_REQUIRED" | translate }}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-8">
+                  <div class="col-12 col-md-2">
+                    <label class="font-weight-bold mb-0 h3">
+                      {{ "TEST.CREATE.LABELS.ATTACHMENT" | translate }}
+                    </label>
+                  </div>
+                  <div class="col-12 col-md-10">
+                    <div class="row">
+                      <div class="col-12">
+                        <div
+                          class="custom-dropzone form-control form-control-solid border"
+                          ngx-dropzone
+                          [accept]="'image/*,audio/*'"
+                          (change)="onAttachmentSelect($event, questionGroup)"
+                        >
+                          <ngx-dropzone-label>
+                            <p class="form-text text-muted">
+                              {{ "REGISTRATION.SCANS.DROP_SELECT" | translate }}
+                            </p>
+                          </ngx-dropzone-label>
+                          <ngx-dropzone-image-preview
+                            ngProjectAs="ngx-dropzone-preview"
+                            *ngFor="let f of getAttachments(questionGroup)"
+                            [file]="getPreviewFile(f)"
+                            [removable]="true"
+                            (removed)="onAttachmentRemove(f, questionGroup)"
+                          >
+                          </ngx-dropzone-image-preview>
                         </div>
                       </div>
-                    </ng-container>
-
-                    <!-- Fill in the Blank -->
-                    <ng-container
-                      *ngIf="QuestionUtil.isQuestionType(selectedType.name, QuestionUtil.types.FILL_IN_THE_BLANK)"
-                    >
-                      <div class="mb-12">
-                        <div class="row align-items-center">
-                          <div class="col-12">
-                            <div formArrayName="answers">
-                              <div
-                                class="form-group row align-items-center"
-                                *ngFor="
-                                  let blankGroup of questionGroup.get('answers')
-                                    ?.controls;
-                                  let k = index
-                                "
-                                [formGroupName]="k"
-                              >
-                                <h4 class="col-2">Answer</h4>
-                                <div class="col-10 d-flex align-items-start">
-                                  <div class="w-100">
-                                    <div class="row">
-                                      <div class="col-12">
-                                        <input
-                                          type="text"
-                                          class="form-control form-control-solid flex-grow-1"
-                                          [class.is-invalid]="
-                                            blankGroup.get('answerText')
-                                              .invalid &&
-                                            (blankGroup.get('answerText')
-                                              .dirty ||
-                                              blankGroup.get('answerText')
-                                                .touched)
-                                          "
-                                          placeholder="Enter correct answer"
-                                          formControlName="answerText"
-                                          required
-                                        />
-                                      </div>
-                                      <div class="col-12">
-                                        <small
-                                          class="text-danger"
-                                          *ngIf="
-                                            blankGroup.get('answerText')
-                                              .invalid &&
-                                            (blankGroup.get('answerText')
-                                              .dirty ||
-                                              blankGroup.get('answerText')
-                                                .touched)
-                                          "
-                                        >
-                                          Answer is required.
-                                        </small>
-                                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-container
+                  *ngIf="questionGroup.get('type')?.value as selectedType"
+                >
+                  <!-- Display data about the question type selected -->
+                  <!-- Multiple Choice -->
+                  <ng-container
+                    *ngIf="
+                      QuestionUtil.isQuestionType(
+                        selectedType.name,
+                        QuestionUtil.types.MULTIPLE_CHOICE
+                      )
+                    "
+                  >
+                    <div class="mb-12">
+                      <div class="row align-items-center">
+                        <div class="col-12 mb-2">
+                          <label class="font-weight-bold mb-4 h3"
+                            >{{"TEST.CREATE.LABELS.CHOICES" | translate}}</label
+                          >
+                        </div>
+                        <div class="col-12">
+                          <div formArrayName="answers">
+                            <div
+                              class="form-group row align-items-center"
+                              *ngFor="
+                                let optionGroup of questionGroup.get('answers')
+                                  ?.controls;
+                                let k = index;
+                                let last = last
+                              "
+                              [formGroupName]="k"
+                            >
+                              <h4 class="col-2">{{"TEST.CREATE.TITLES.CHOICE" | translate}} {{ k + 1 }}</h4>
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        [class.is-invalid]="
+                                          optionGroup.get('answerText')
+                                            .invalid &&
+                                          (optionGroup.get('answerText')
+                                            .dirty ||
+                                            optionGroup.get('answerText')
+                                              .touched)
+                                        "
+                                        [placeholder]="
+                                          'TEST.CREATE.PLACEHOLDERS.ANSWER_TEXT' | translate"
+                                        formControlName="answerText"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          optionGroup.get('answerText')
+                                            .invalid &&
+                                          (optionGroup.get('answerText')
+                                            .dirty ||
+                                            optionGroup.get('answerText')
+                                              .touched)
+                                        "
+                                      >
+                                        {{"TEST.CREATE.ERRORS.ANSWER_TEXT_REQUIRED" | translate}}
+                                      </small>
+                                    </div>
+                                    <div class="col-12" *ngIf="last">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          questionGroup
+                                            .get('answers')
+                                            .hasError('requireOneCorrectAnswer')
+                                        "
+                                      >
+                                        {{ "TEST.CREATE.ERRORS.CORRECT_ANSWER_REQUIRED" | translate }}
+                                      </small>
                                     </div>
                                   </div>
                                 </div>
+                                <div class="ml-4">
+                                  <select
+                                    class="form-control form-control-solid"
+                                    formControlName="isCorrect"
+                                  >
+                                    <option [ngValue]="true">{{"TEST.CREATE.LABELS.CORRECT" | translate}}</option>
+                                    <option [ngValue]="false">{{"TEST.CREATE.LABELS.INCORRECT" | translate}}</option>
+                                  </select>
+                                </div>
+                                <div class="d-flex justify-content-end ml-4">
+                                  <button
+                                    class="btn btn-icon btn-secondary btn-sm"
+                                    (click)="removeOption(questionGroup, k)"
+                                    [ngbTooltip]="
+                                      'TEST.CREATE.TOOLTIPS.REMOVE_OPTION' | translate"
+                                  >
+                                    <i class="fas fa-trash-alt"></i>
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <button
+                            class="btn btn-icon btn-secondary btn-sm"
+                            (click)="addOption(questionGroup)"
+                            [ngbTooltip]="
+                              'TEST.CREATE.TOOLTIPS.ADD_OPTION' | translate"
+                          >
+                            <i class="fas fa-plus"></i>
+                          </button>
                         </div>
                       </div>
-                    </ng-container>
+                    </div>
                   </ng-container>
+
+                  <!-- Fill in the Blank -->
+                  <ng-container
+                    *ngIf="
+                      QuestionUtil.isQuestionType(
+                        selectedType.name,
+                        QuestionUtil.types.FILL_IN_THE_BLANK
+                      )
+                    "
+                  >
+                    <div class="mb-12">
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <div formArrayName="answers">
+                            <div
+                              class="form-group row align-items-center"
+                              *ngFor="
+                                let blankGroup of questionGroup.get('answers')
+                                  ?.controls;
+                                let k = index
+                              "
+                              [formGroupName]="k"
+                            >
+                              <h4 class="col-2">{{"TEST.CREATE.TITLES.ANSWER" | translate}}</h4>
+                              <div class="col-10 d-flex align-items-start">
+                                <div class="w-100">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <input
+                                        type="text"
+                                        class="form-control form-control-solid flex-grow-1"
+                                        [class.is-invalid]="
+                                          blankGroup.get('answerText')
+                                            .invalid &&
+                                          (blankGroup.get('answerText').dirty ||
+                                            blankGroup.get('answerText')
+                                              .touched)
+                                        "
+                                        [placeholder]="
+                                          'TEST.CREATE.PLACEHOLDERS.ANSWER_CORRECT_TEXT' | translate"
+                                        formControlName="answerText"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="col-12">
+                                      <small
+                                        class="text-danger"
+                                        *ngIf="
+                                          blankGroup.get('answerText')
+                                            .invalid &&
+                                          (blankGroup.get('answerText').dirty ||
+                                            blankGroup.get('answerText')
+                                              .touched)
+                                        "
+                                      >
+                                        {{ "TEST.CREATE.ERRORS.ANSWER_TEXT_REQUIRED" | translate }}
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
               </div>
             </div>
             <!-- Questions::End -->
@@ -482,7 +514,7 @@
             class="btn btn-secondary px-12"
             (click)="addQuestion(sectionGroup)"
           >
-            <i class="fas fa-plus"></i> Add Question
+            <i class="fas fa-plus"></i> {{ "TEST.CREATE.LABELS.ADD_QUESTION" | translate }}
           </button>
         </div>
       </div>
@@ -492,15 +524,15 @@
 
   <div class="d-flex justify-content-center mb-24">
     <button class="btn btn-secondary px-12" (click)="addSection()">
-      <i class="fas fa-plus"></i> Add Section
+      <i class="fas fa-plus"></i> {{ "TEST.CREATE.LABELS.ADD_SECTION" | translate }}
     </button>
   </div>
 </form>
 
-<!-- Confirmation Modal -->
+<!-- Settings modal -->
 <ng-template #settingsModal let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">Test settings</h5>
+    <h5 class="modal-title">{{ "TEST.CREATE.TITLES.TEST_SETTINGS" | translate }}</h5>
     <button
       type="button"
       class="close"
@@ -514,7 +546,7 @@
     <form [formGroup]="settingsForm">
       <div class="form-group row align-items-center">
         <label class="col-12 col-md-5 font-weight-bold mb-2 mb-md-0"
-          >Time limit (in minutes)</label
+          >{{ "TEST.CREATE.LABELS.TIME_LIMIT" | translate }}</label
         >
         <div class="col-12 col-md-7">
           <input
@@ -529,8 +561,8 @@
     </form>
   </div>
   <div class="modal-footer d-flex">
-    <button type="button" class="btn btn-danger" (click)="modal.dismiss()">
-      {{ "BUTTONS.REMOVE" | translate }}
+    <button type="button" class="btn btn-danger" (click)="deleteTest()" *ngIf="testId">
+      {{ "BUTTONS.DELETE" | translate }}
     </button>
     <button
       type="button"
@@ -541,6 +573,36 @@
     </button>
     <button type="button" class="btn btn-primary" (click)="saveSettings()">
       {{ "BUTTONS.SAVE" | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<!-- Confirmation Modal -->
+<ng-template #confirmDeleteModal let-confirmmodal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "TEST.CREATE.TITLES.CONFIRM_DELETE" | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="confirmmodal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{ "TEST.CREATE.MESSAGES.CONFIRM_DELETE" | translate }}</p>
+  </div>
+  <div class="modal-footer d-flex">
+    <button
+      type="button"
+      class="btn btn-secondary mr-auto"
+      (click)="confirmmodal.dismiss()"
+    >
+      {{ "BUTTONS.CANCEL" | translate }}
+    </button>
+    <button type="button" class="btn btn-danger" (click)="deleteTest(true)">
+      {{ "BUTTONS.DELETE" | translate }}
     </button>
   </div>
 </ng-template>

@@ -1,0 +1,204 @@
+<div class="row">
+  <div class="col-12">
+      <h1 class="display-4">
+          3 - Involved countries
+      </h1>
+      <hr />
+      <p class="lead h6"> Created: 25/05/2023 | Last Update: 25/05/2023</p>
+  </div>
+  <div class="col-12 mt-3">
+      <p class="lead">
+          In order to manage the team members we need to go to the dashboard of the WordPress website. This can be found on the following link: <a
+          href="https://ananau.org/wp-admin/" target="_blank">https://ananau.org/wp-admin/</a>. Here you can log into your account. If you don't already have an account, please contact <strong>Ellen Bosh</strong> or <strong>Gilmourd Cardeña Pérez</strong>. They can create an account for you.
+      </p>
+      <p>
+          In the sidebar on the left, you will find multiple tabs to choose from. We are interested in the <strong>Participants, Partners and Countries</strong> tabs. In order to correctly add a new involved country, we will need to add potentional participants and partners first. If the new country doesn't have any participant or partners, skip to <a (click)="scrollToElement(addcountry)">Add a country</a>.
+      </p>
+
+      <h2 #participants class="display">Participants</h2>
+
+      <h3 class="display">Add a participant</h3>
+      <p>The first step is creating a participant. Participants can be:</p>
+
+      <ul>
+          <li>Volunteers;</li>
+          <li>Interns;</li>
+          <li>Online interns;</li>
+      </ul>
+
+      <p>To add a participants, from the dashboard go to the participants tab. Press on "Add New" on the top of the page. Here you can fill in all the necessary properties.</p>
+
+      <h4 class="display">Properties</h4>
+      
+      <h5 class="display">Page title</h5>
+      <p>The page title will be used as the name of the participant.</p>
+
+      <h5 class="display">Function</h5>
+      <p>Select the function of the participant within the organisation from the dropdown.</p>
+
+      <h5 class="display">Participant Picture</h5>
+      <p>A picture of the participant. It is recommended that the face of the participant is visible.</p>
+
+      <h5 class="display">Quote</h5>
+      <p>The quote is a small text that will be shown on the participant. This can be something he/she said during the stay or an experience he/she had. This is optional and will not be shown on the page when left empty.</p>
+
+      <h5 class="display">Video testimonial</h5>
+      <p>This is a link to a youtube video where the participant talks about his/her experiences during the stay. This is optional and will not be shown on the page when left empty.</p>
+
+      <h4 class="display warning">Note</h4>
+      <p>As the participants follow the same principles as blog posts there are a few things to keep in mind.</p>
+
+      <ul>
+          <li>You can update the slug (this is the url it navigates to (eg. /participants/new-participant);</li>
+          <li>After adding al the properties, you have to create the participant for the other languages (This is possible in the right sidebar);</li>
+      </ul>
+
+      <h3 class="display">Update a participant</h3>
+      <p>On the page where all the participants are listed, you navigate to the participant you want to edit and click "edit". You will be redirected to a new page with the wordpress editor. On this page you can update all the properties needed.</p>
+
+      <h4 class="display warning">Note</h4>
+      <p>Make sure to update the properties in all the available languages.</p>
+
+      <h3 class="display">Delete a participant</h3>
+      <p>To delete a participant, search it in the list and press "Trash". This will move the participant to the trash, where it will be archived for 30 days. When you unintentionally delete a participant, you can recover it in the 'trash' tab.</p>
+
+      <h4 class="display warning">Note</h4>
+      <p>Make sure to delete the participant in all the available languages.</p>
+
+      <h2 class="display">Partners</h2>
+
+      <h3 class="display">Managing partners</h3>
+      <p>Partners are organisations that support Añañau. Managing partners is the same proces as managing participants (Instructions are <a (click)="scrollToElement(participants)">here</a>). The only difference is the available properties, which are listed below.</p>
+      
+      <h4 class="display">Properties</h4>
+      
+      <h5 class="display">Page title</h5>
+      <p>In the partners, the page title is not used as the name of the partner. There is a seperate field provided for the organisation name.</p>
+
+      <h5 class="display">Name</h5>
+      <p>This is the name of the organisation and is shown on the website.</p>
+
+      <h5 class="display">Website</h5>
+      <p>This is a link to the website of the organisation. People can use this to navigate to their website.</p>
+
+      <h4 class="display warning">Note</h4>
+      <p>Partners share their names in different languages. This means that you don't have to add the partners in different translations.</p>
+
+      <h2 #addcountry class="display">Countries</h2>
+
+      <h3 class="display">Managing countries</h3>
+      <p>Managing Countries is the same proces as managing participants (Instructions are <a (click)="scrollToElement(participants)">here</a>). The only difference is the available properties, which are listed below.</p>
+      
+      <h4 class="display">Properties</h4>
+      
+      <h5 class="display">Page title</h5>
+      <p>In the country, the page title is used as the name of the country that apears in the tab on top of the browser.</p>
+
+      <h5 #slugrules class="display">Slug</h5>
+      <p>The slug of the country is very important and we will need it later on within the <a (click)="scrollToElement(addcountrytomap)"></a>. When assigning a slug to the country make sure that it is the same as the "Display Name" and the following requirements are met:</p>
+
+      <ul>
+          <li>
+              <span>It is lowercase;</span>
+              <div class="example">
+                  <div class="original">
+                      <span>Display name</span>
+                      <p>Belgium</p>
+                  </div>
+                  <div class="slug">
+                      <span>Slug</span>
+                      <p>belgium</p>
+                  </div>
+              </div>
+          </li>
+          <li>
+              <span>Spaces in the name are replaced with a <kbd>_</kbd>;</span>
+              <div class="example">
+                  <div class="original">
+                      <span>Display name</span>
+                      <p>United Kingdom</p>
+                  </div>
+                  <div class="slug">
+                      <span>Slug</span>
+                      <p>united_kingdom</p>
+                  </div>
+              </div>
+          </li>
+          <li>
+              <span>Special characters are replaced with the normalized characters;</span>
+              <div class="example">
+                  <div class="original">
+                      <span>Display name</span>
+                      <p>Italië</p>
+                  </div>
+                  <div class="slug">
+                      <span>Slug</span>
+                      <p>italie</p>
+                  </div>
+              </div>
+          </li>
+          <li>
+              <span><kbd>'</kbd> is removed;</span>
+              <div class="example">
+                  <div class="original">
+                      <span>Display name</span>
+                      <p>Côte d'Ivoire</p>
+                  </div>
+                  <div class="slug">
+                      <span>Slug</span>
+                      <p>cote_divoire</p>
+                  </div>
+              </div>
+          </li>
+      </ul>
+
+      <h5 class="display">Country relationship</h5>
+      <p>In this section you can select the participants and partners from the country you are creating. These particpants and partners are shown on the country page.</p>
+
+      <h5 class="display">Display Name</h5>
+      <p>This is the display name of the country. This will be used as the name on the country page.</p>
+
+      <h5 class="display">About country</h5>
+      <p>This is a text of more or less two paragraphs that gives the visiter some information about the country.</p>
+
+      <h5 class="display">Country facts</h5>
+      <p>This section provides fields for 4 facts about the country. This can be anything you want, the only rule is that the value should be very short or a number. This is used on the country page below the about text. Popular facts are: population, total area, gdp...</p>
+
+      <h5 class="display">Featured image</h5>
+      <p>The featured image is the banner of the country. This image is shown on the country page. It is recommended to chosse an image where the country is recognizable.</p>
+
+      <h5 class="display">Display language - IMPORTANT</h5>
+      <p>To correctly display the country pages on the website, you must insert the correct display language. When creating/editing the english version of the country, please select <kbd>English</kbd>. The same goes for <kbd>Dutch</kbd> or <kbd>Español</kbd>. Without the display language selected, there is a possibility that the information is not shown correctly.</p>
+
+      <h4 class="display warning">Note</h4>
+      <p>As the countries follow the same principles as blog posts it's important to add the country in the available languages. It is recommended to completely create a country in one language. When creating a the country in another language by pressing the <kbd>+</kbd> next to the flag, most of the properties will then be transfered.</p>
+
+      <h3 #addcountrytomap class="display">Add country to the interactive map</h3>
+
+      <p>Now that the country has been succesfully created, the last step is adding the country to the map. In the pages section of the dashboard, in the 'Involved Countries' folder you will find <kbd>Map</kbd> and <kbd>Map - NL</kbd>. The next step is a little technical, so make sure to follow the instructions closely.</p>
+
+      <h4 class="display">1. Add country marker</h4>
+      <p>The first step is adding the country as a marker on the map. Press <kbd>Enter</kbd> after the last colon and paste this example <kbd>&#123; name: '&lt;Country name&gt;', coords: [&lt;latitude&gt;, &lt;longitude&gt;] &#125;,</kbd> into the markers. Change the values to the ones of the new country, you can find the latitude and longitude via <a href="https://www.latlong.net/">latlong.net</a>.</p>
+
+      <img src="../../../../../assets/images/it-documentation/involved-countries/add-marker.png"
+              class="center-image d-block" alt="" />
+
+      <h4 class="display">2. Add country line</h4>
+      <p>The second step is adding the line on the map between the newly created country and Peru. Press <kbd>Enter</kbd> after the last <kbd>&#125;</kbd> you find before <kbd>&#93;</kbd> and paste this example <kbd>&#123; 
+          from: '&lt; Country name &gt;',
+          to: 'Peru'   
+          &#125;,</kbd> into the lines. Change the values to the ones of the new country, you can find the latitude and longitude via <a href="https://www.latlong.net/">latlong.net</a>.</p>
+
+      <img src="../../../../../assets/images/it-documentation/involved-countries/add-line.png"
+              class="center-image d-block" alt="" />
+
+      <h4 class="display">3. Special characters - Optional</h4>
+      <p>When there is a special character in the name of the country, for example <strong>ë</strong>, You must add this to the special characters. To do this scroll to the top of the map code until you find <kbd>// Add special characters if needed</kbd>. You can see that there are already a few special characters in there. If the new country contains any of the ones present, skip this step. To add a new special character, simply <kbd>Enter</kbd> after the last colon and paste the following example <kbd>&#91;"&lt;Special character&gt;", "&lt;replacement&gt;"&#93;,</kbd>. Change the values and you're good to go!</p>
+
+      <img src="../../../../../assets/images/it-documentation/involved-countries/special-chars.png"
+              class="center-image d-block" alt="" />
+
+      <h2 class="display">Result</h2>
+      <p>When everything is done correctly you should now see the country on the interactive map (<a href="https://ananau.org/sustainable-volunteering-in-peru/" target="_blank">Check it out</a>). You should be able to click on the marker to get redirected to the automatically created country page with all the information.</p>
+  </div>
+</div>

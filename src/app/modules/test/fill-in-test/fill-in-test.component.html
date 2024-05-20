@@ -17,8 +17,8 @@
           <div class="row" *ngIf="currentState === testState.NotStarted">
             <div class="text-dark col-12 col-md-8 w-100">
               <span
-                >Time Limit:
-                <strong>{{ test.timeLimitMinutes }}</strong> minutes</span
+                >{{ "TEST.FILL_IN.LABELS.TIME_LIMIT" | translate }}:
+                <strong>{{ test.timeLimitMinutes }}</strong> {{ "TEST.FILL_IN.LABELS.MINUTES" | translate }}</span
               >
             </div>
           </div>
@@ -38,7 +38,7 @@
         <div class="row">
           <div class="col-12">
             <button class="btn btn-primary" (click)="startTest(test)">
-              Start Test
+              {{ "TEST.FILL_IN.LABELS.START_TEST" | translate }}
             </button>
           </div>
         </div>
@@ -50,7 +50,7 @@
           <ng-container *ngFor="let section of test.sections">
             <div class="row">
               <div class="col-12">
-                <h3>Section: {{ section.title }}</h3>
+                <h3>{{ "TEST.FILL_IN.TITLES.SECTION" | translate }}: {{ section.title }}</h3>
                 <p>{{ section.description }}</p>
               </div>
             </div>
@@ -167,7 +167,7 @@
                       ></textarea>
                     </div>
 
-                    <div class="invalid-feedback">This field is required.</div>
+                    <div class="invalid-feedback">{{ "TEST.FILL_IN.ERRORS.FIELD_REQUIRED" | translate }}</div>
                   </div>
                 </div>
               </div>
@@ -177,7 +177,7 @@
           <div class="row">
             <div class="col-12 text-right">
               <button class="btn btn-primary" (click)="submitTest(test.id)">
-                Submit
+                {{"BUTTONS.SUBMIT" | translate}}
               </button>
             </div>
           </div>
@@ -187,21 +187,21 @@
         <!-- Timer::start -->
         <div class="row">
           <div class="col-12">
-            <p>Time Left: {{ formatTime(timeLeft) }}</p>
+            <p>{{ "TEST.FILL_IN.LABELS.TIME_LEFT" | translate }}: {{ formatTime(timeLeft) }}</p>
           </div>
         </div>
         <!-- Timer::end -->
       </ng-container>
 
       <ng-container *ngIf="currentState === testState.Grading">
-        Grading...
+        {{ "TEST.FILL_IN.LABELS.GRADING" | translate }}
       </ng-container>
     </div>
 
     <!-- Confirmation Modal -->
     <ng-template #confirmationModal let-modal>
       <div class="modal-header">
-        <h5 class="modal-title">Test is not complete</h5>
+        <h5 class="modal-title">{{ "TEST.FILL_IN.TITLES.NOT_COMPLETE" | translate }}</h5>
         <button
           type="button"
           class="close"
@@ -212,8 +212,7 @@
         </button>
       </div>
       <div class="modal-body">
-        You have not filled in all fields, are you sure you want to submit your
-        test?
+        {{ "TEST.FILL_IN.MESSAGES.NOT_COMPLETE" | translate }}
       </div>
       <div class="modal-footer">
         <button
@@ -237,7 +236,7 @@
   <ng-template #loading>
     <div class="text-center">
       <i class="fas fa-spinner fa-spin fa-3x"></i>
-      <p>Loading...</p>
+      <p>{{ "TEST.FILL_IN.LABELS.LOADING" | translate }}</p>
     </div>
   </ng-template>
 </div>
