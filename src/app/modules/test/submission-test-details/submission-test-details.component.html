@@ -3,7 +3,10 @@
     <!-- Header -->
     <div class="row">
       <div class="col-12">
-        <div class="card-header border-0 text-white" style="background-color: white; padding: 2rem 2.25rem">
+        <div
+          class="card-header border-0 text-white"
+          style="background-color: white; padding: 2rem 2.25rem"
+        >
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
               <h3 class="card-title font-weight-bolder text-dark">
@@ -27,12 +30,15 @@
           <p class="mb-4">
             <strong>
               {{ "TEST.SUBMISSION_DETAILS.SUBMITTED_TEST" | translate }}
-            </strong> {{ submissionTest.title }}
+            </strong>
+            {{ submissionTest.title }}
           </p>
           <p class="mb-4">
             <strong>
               {{ "TEST.SUBMISSION_DETAILS.SUBMITTED_BY" | translate }}
-            </strong> {{ submissionTest.submittedBy.firstName }} {{ submissionTest.submittedBy.lastName }}
+            </strong>
+            {{ submissionTest.submittedBy.firstName }}
+            {{ submissionTest.submittedBy.lastName }}
           </p>
           <p class="mb-4">
             <strong>
@@ -43,15 +49,19 @@
           <p class="mb-4">
             <strong>
               {{ "TEST.SUBMISSION_DETAILS.SCORE_AUTO" | translate }}
-            </strong> {{ submissionTest.realScores.totalAuto }} /
+            </strong>
+            {{ submissionTest.realScores.totalAuto }} /
             {{ submissionTest.possibleScores.maxAuto }}
           </p>
 
-          <ng-container *ngIf="submissionTest.realScores.totalNotAuto; else notGradedDetail">
+          <ng-container
+            *ngIf="submissionTest.realScores.totalNotAuto; else notGradedDetail"
+          >
             <p class="mb-4">
               <strong>
                 {{ "TEST.SUBMISSION_DETAILS.SCORE_MANUAL" | translate }}
-              </strong> {{ submissionTest.realScores.totalNotAuto }} /
+              </strong>
+              {{ submissionTest.realScores.totalNotAuto }} /
               {{ submissionTest.possibleScores.maxNotAuto }}
             </p>
           </ng-container>
@@ -59,14 +69,16 @@
             <p>
               <strong>
                 {{ "TEST.SUBMISSION_DETAILS.SCORE_MANUAL" | translate }}
-              </strong> {{ "TEST.SUBMISSION_DETAILS.NO_GRADE" | translate }}
+              </strong>
+              {{ "TEST.SUBMISSION_DETAILS.NO_GRADE" | translate }}
             </p>
           </ng-template>
 
           <p class="mb-4">
             <strong>
               {{ "TEST.SUBMISSION_DETAILS.SCORE_TOTAL" | translate }}
-            </strong> {{ submissionTest.realScores.total }} /
+            </strong>
+            {{ submissionTest.realScores.total }} /
             {{ submissionTest.possibleScores.max }}
           </p>
         </div>
@@ -76,47 +88,116 @@
         <div class="row">
           <div class="col-12">
             <form [formGroup]="testForm">
-              <ng-container *ngFor="let section of submissionTest.sections; let sectionIndex = index">
+              <ng-container
+                *ngFor="
+                  let section of submissionTest.sections;
+                  let sectionIndex = index
+                "
+              >
                 <div class="row">
                   <div class="col-12 mb-8">
-                    <label class="font-weight-bold h3">Section {{sectionIndex + 1}}: {{ section.title }}</label>
-                    <p *ngIf="section.description" >{{ section.description }}</p>
+                    <label class="h3"
+                      ><strong>Section {{ sectionIndex + 1 }}:</strong>
+                      {{ section.title }}</label
+                    >
+                    <p *ngIf="section.description">{{ section.description }}</p>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-12">
                     <div formGroupName="{{ section.id }}">
-                      <div class="form-group" *ngFor="let question of section.questions; let i = index">
-                        <label class="mb-4 h4"><strong>Question {{i + 1}}:</strong> {{ question.questionText }}</label>
+                      <div
+                        class="form-group"
+                        *ngFor="
+                          let question of section.questions;
+                          let i = index
+                        "
+                      >
+                        <label class="mb-4 h5"
+                          ><strong>Question {{ i + 1 }}:</strong>
+                          {{ question.questionText }}
+                          {{ getQuestionGradeText(question) }}</label
+                        >
 
-                        <ng-container *ngIf="question.fileUrls.length > 0" class="row">
-                          <ng-container *ngIf="getImageUrls(question.fileUrls) as imageUrls">
-                            <div *ngFor="let imageUrl of imageUrls" class="mb-4">
-                              <img [src]="imageUrl" alt="Question Image" class="img-fluid" />
+                        <ng-container
+                          *ngIf="question.fileUrls.length > 0"
+                          class="row"
+                        >
+                          <ng-container
+                            *ngIf="getImageUrls(question.fileUrls) as imageUrls"
+                          >
+                            <div
+                              *ngFor="let imageUrl of imageUrls"
+                              class="mb-4"
+                            >
+                              <img
+                                [src]="imageUrl"
+                                alt="Question Image"
+                                class="img-fluid"
+                              />
                             </div>
                           </ng-container>
 
-                          <ng-container *ngIf="getAudioUrls(question.fileUrls) as audioUrls">
-                            <div *ngFor="let audioUrl of audioUrls" class="mb-4">
-                              <app-audio-player [audioSource]="audioUrl"></app-audio-player>
+                          <ng-container
+                            *ngIf="getAudioUrls(question.fileUrls) as audioUrls"
+                          >
+                            <div
+                              *ngFor="let audioUrl of audioUrls"
+                              class="mb-4"
+                            >
+                              <app-audio-player
+                                [audioSource]="audioUrl"
+                              ></app-audio-player>
                             </div>
                           </ng-container>
                         </ng-container>
 
                         <!-- Display Multiple Choice Question -->
-                        <div *ngIf="QuestionUtil.isQuestionTypeIgnoreCase(question.type.name, QuestionUtil.types.MULTIPLE_CHOICE)">
-                          <app-radio-button [answers]="question.answers" [questionId]="question.id" [showResults]="true" [selectedAnswerId]="question.learnerAnswer.answerId"></app-radio-button>
+                        <div
+                          *ngIf="
+                            QuestionUtil.isQuestionTypeIgnoreCase(
+                              question.type.name,
+                              QuestionUtil.types.MULTIPLE_CHOICE
+                            )
+                          "
+                        >
+                          <app-radio-button
+                            [answers]="question.answers"
+                            [questionId]="question.id"
+                            [showResults]="true"
+                            [selectedAnswerId]="question.learnerAnswer.answerId"
+                          ></app-radio-button>
                         </div>
 
                         <!-- Display Fill in the Blank Question -->
-                        <div *ngIf="QuestionUtil.isQuestionTypeIgnoreCase(question.type.name, QuestionUtil.types.FILL_IN_THE_BLANK)">
-                          <p><strong>Learner's Answer:</strong> {{ question.learnerAnswer.answerText }}</p>
-                          <p><strong>Correct Answer:</strong> {{ question.answers[0].answerText }}</p>
+                        <div
+                          *ngIf="
+                            QuestionUtil.isQuestionTypeIgnoreCase(
+                              question.type.name,
+                              QuestionUtil.types.FILL_IN_THE_BLANK
+                            )
+                          "
+                        >
+                          <p>
+                            <strong>Learner's Answer:</strong>
+                            {{ getFillInTheBlankAnswerText(question) }}
+                          </p>
+                          <p *ngIf="!question.learnerAnswer.isCorrect">
+                            <strong>Correct Answer:</strong>
+                            {{ getCorrectAnswerText(question) }}
+                          </p>
                         </div>
 
                         <!-- Display Open Question -->
-                        <div *ngIf="QuestionUtil.isQuestionTypeIgnoreCase(question.type.name, QuestionUtil.types.OPEN_QUESTION)">
+                        <div
+                          *ngIf="
+                            QuestionUtil.isQuestionTypeIgnoreCase(
+                              question.type.name,
+                              QuestionUtil.types.OPEN_QUESTION
+                            )
+                          "
+                        >
                           <p><strong>Learner's Answer:</strong></p>
                           <p>{{ question.learnerAnswer.answerText }}</p>
                         </div>
@@ -130,7 +211,15 @@
         </div>
       </ng-container>
 
-      <div class="row" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher])">
+      <div
+        class="row"
+        *ngIf="
+          AuthUtil.permitted([
+            AuthUtil.roles.SuperAdmin,
+            AuthUtil.roles.SpanishTeacher
+          ])
+        "
+      >
         <div class="col-12">
           <h4>
             {{ "TEST.SUBMISSION_DETAILS.EDIT_SCORE" | translate }}
@@ -139,7 +228,8 @@
             <p *ngIf="submissionTest.realScores; else notGradedTemplate">
               <strong>
                 {{ "TEST.SUBMISSION_DETAILS.CURRENT_SCORE" | translate }}
-              </strong> {{ submissionTest.realScores.total }} /
+              </strong>
+              {{ submissionTest.realScores.total }} /
               {{ submissionTest.possibleScores.max }}
             </p>
             <ng-template #notGradedTemplate>
@@ -159,29 +249,62 @@
                   {{ "TEST.SUBMISSION_DETAILS.SCORE" | translate }}
                 </label>
                 <div class="input-group">
-                  <input type="number" class="form-control" id="score" formControlName="score" min="0" [max]="submissionTest.possibleScores.max" required />
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="score"
+                    formControlName="score"
+                    min="0"
+                    [max]="submissionTest.possibleScores.max"
+                    required
+                  />
                   <div class="input-group-append">
-                    <span class="input-group-text">/ {{ submissionTest.possibleScores.max }}</span>
+                    <span class="input-group-text"
+                      >/ {{ submissionTest.possibleScores.max }}</span
+                    >
                   </div>
                 </div>
-                <div *ngIf="gradeForm.get('score').invalid && gradeForm.get('score').touched">
-                  <small class="text-danger" *ngIf="gradeForm.get('score').errors.required">
+                <div
+                  *ngIf="
+                    gradeForm.get('score').invalid &&
+                    gradeForm.get('score').touched
+                  "
+                >
+                  <small
+                    class="text-danger"
+                    *ngIf="gradeForm.get('score').errors.required"
+                  >
                     {{ "EXERCISE.SUBMISSION.GRADE_REQUIRED" | translate }}
                   </small>
-                  <small class="text-danger" *ngIf="gradeForm.get('score').errors.min">
+                  <small
+                    class="text-danger"
+                    *ngIf="gradeForm.get('score').errors.min"
+                  >
                     {{ "EXERCISE.SUBMISSION.GRADE_POSITIVE" | translate }}
                   </small>
-                  <small class="text-danger" *ngIf="gradeForm.get('score').errors.max">
-                    {{ "EXERCISE.SUBMISSION.GRADE_LESS_THAN" | translate }} {{ submissionTest.possibleScores.maxNotAuto }}.
+                  <small
+                    class="text-danger"
+                    *ngIf="gradeForm.get('score').errors.max"
+                  >
+                    {{ "EXERCISE.SUBMISSION.GRADE_LESS_THAN" | translate }}
+                    {{ submissionTest.possibleScores.maxNotAuto }}.
                   </small>
                 </div>
               </div>
 
               <div class="form-group">
-                <button type="submit" class="btn btn-primary" [disabled]="gradeForm.invalid">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="gradeForm.invalid"
+                >
                   {{ "TEST.SUBMISSION_DETAILS.SCORE_SUBMIT" | translate }}
                 </button>
-                <button type="button" class="btn btn-secondary ml-2" (click)="isEditingScore = false">
+                <button
+                  type="button"
+                  class="btn btn-secondary ml-2"
+                  (click)="isEditingScore = false"
+                >
                   {{ "BUTTONS.CANCEL" | translate }}
                 </button>
               </div>
@@ -194,7 +317,10 @@
 </ng-container>
 
 <ng-template #loading>
-  <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+  <div
+    class="d-flex justify-content-center align-items-center"
+    style="height: 100vh"
+  >
     <div class="spinner-border text-primary" role="status">
       <span class="sr-only"> {{ "MENU.LOADING_DOTS" | translate }} </span>
     </div>

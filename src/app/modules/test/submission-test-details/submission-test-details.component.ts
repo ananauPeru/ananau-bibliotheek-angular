@@ -10,6 +10,7 @@ import { SubmissionTestService } from '../_services/submission-test/submission-t
 import { TestModel, TestSubmitDTO } from '../_models/test/test.model';
 import { FileUtil } from 'src/app/_utils/file_util';
 import { QuestionUtil } from "../_types/QuestionUtil";
+import { QuestionEvaluatedModel } from '../_models/test/question.model';
 
 @Component({
   selector: 'app-submission-test-details',
@@ -126,5 +127,31 @@ export class SubmissionTestDetailsComponent implements OnInit {
           this.toast.error("Error grading submission");
         }
       );
+  }
+
+  getQuestionGradeText(question: QuestionEvaluatedModel): string {
+    if(question.isAutoEvaluated) {
+      return `(${question.learnerAnswer.score}/1)`
+    } else if(!question.isAutoEvaluated && question.learnerAnswer.score) {
+      return `(${question.learnerAnswer.score}/10)`
+    } else {
+      return "(Not graded yet)";
+    }
+  }
+
+  getFillInTheBlankAnswerText(question: QuestionEvaluatedModel): string {
+    if(question.learnerAnswer.isCorrect) {
+      return question.learnerAnswer.answerText + " (Correct)";
+    } else {
+      return question.learnerAnswer.answerText + " (Incorrect)";
+    }
+  }
+
+  getCorrectAnswerText(question: QuestionEvaluatedModel): string {
+    if(question.isAutoEvaluated) {
+      return question.answers.find((answer) => answer.isCorrect).answerText;
+    } else {
+      return "Not available";
+    }
   }
 }

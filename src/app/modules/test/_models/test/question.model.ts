@@ -34,6 +34,7 @@ export class QuestionEvaluatedModel {
         answerId: number | null;
         answerText: string | null;
         isCorrect: boolean | null;
+        score: number | null;
     } | null;
 
 }
