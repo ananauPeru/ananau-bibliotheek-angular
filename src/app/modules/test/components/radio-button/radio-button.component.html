@@ -17,7 +17,7 @@
           }">
             {{ answer.answerText }}
             <span *ngIf="showResults && answer.isCorrect"> (Correct)</span>
-            <span *ngIf="showResults && !answer.isCorrect && selectedAnswerId === answer.id"> (Your Answer)</span>
+            <span *ngIf="showResults && !answer.isCorrect && selectedAnswerId === answer.id"> (Learner's Answer)</span>
           </label>
         </div>
       </div>

@@ -17,16 +17,12 @@ import { QuestionUtil } from "../_types/QuestionUtil";
   styleUrls: ['./submission-test-details.component.scss']
 })
 export class SubmissionTestDetailsComponent implements OnInit {
-    //The grading part of this page, should only be visable to the teacher
-
-    //test$: Observable<TestModel>;
-    submissionTest$: Observable<TestSubmissionModel>;
-    isEditingScore = false;
-    gradeForm: FormGroup;
-    isEditingGrade = false;
-    testForm: FormGroup;
-    testDto: TestSubmitDTO
-
+  submissionTest$: Observable<TestSubmissionModel>;
+  isEditingScore = false;
+  gradeForm: FormGroup;
+  isEditingGrade = false;
+  testForm: FormGroup;
+  testDto: TestSubmitDTO;
 
   constructor(
     public AuthUtil: AuthUtil,
@@ -42,13 +38,7 @@ export class SubmissionTestDetailsComponent implements OnInit {
   ngOnInit() {
     this.getSubmissionTestDetails();
     this.initializeGradeForm();
-   // this.getSubmittedTestAnswers();
   }
-
-  /* getSubmittedTestAnswers() {
-    const submittedTestId: number = this.route.snapshot.params["id"];
-    this.submissionTest$ = this.submissionTestService.getSubmissionAnswers$(submittedTestId);
-  } */
 
   getSubmissionTestDetails() {
     const submittedTestId: number = this.route.snapshot.params["id"];
@@ -126,7 +116,7 @@ export class SubmissionTestDetailsComponent implements OnInit {
             this.toast.success("Submission graded successfully!");
             this.getSubmissionTestDetails();
             this.isEditingGrade = false;
-            this.cdr.detectChanges(); // Trigger change detection
+            this.cdr.detectChanges();
           } else {
             this.toast.error("Failed to grade submission");
           }
