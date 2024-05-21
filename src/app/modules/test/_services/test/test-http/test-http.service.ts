@@ -1,5 +1,9 @@
 import { Injectable } from "@angular/core";
-import { TestEvaluatedModel, TestModel, TestSubmitDTO } from "../../../_models/test/test.model";
+import {
+  TestEvaluatedModel,
+  TestModel,
+  TestSubmitDTO,
+} from "../../../_models/test/test.model";
 import { Observable, throwError } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
@@ -9,6 +13,8 @@ import { QuestionModel } from "../../../_models/test/question.model";
 import { SectionModel } from "../../../_models/test/section.model";
 import { ShortTestModel } from "../../../_models/test/short-test.model";
 import { DateUtil } from "src/app/_utils/date_util";
+import { QuestionUtil } from "../../../_types/QuestionUtil";
+import { QuestionType } from "../../../_types/QuestionType";
 
 const API_URL = `${environment.apiUrl}/spanish_platform/test`;
 
@@ -16,7 +22,8 @@ const API_URL = `${environment.apiUrl}/spanish_platform/test`;
   providedIn: "root",
 })
 export class TestHttpService {
-  constructor(private http: HttpClient, private dateUtil: DateUtil) {}
+  constructor(private http: HttpClient, private dateUtil: DateUtil, 
+    private questionUtil: QuestionUtil) {}
 
   getTests$(
     searchTerm: string,
@@ -41,13 +48,13 @@ export class TestHttpService {
           if (response.success) {
             const tests: ShortTestModel[] = response.tests;
 
-
-
             // Calculate and set the latestVersionNumber for each ShortTestModel
             tests.forEach((test) => {
               test.versions.forEach((version) => {
-                version.createdAt = this.dateUtil.utcToPeruvianDate(version.createdAt);
-              })
+                version.createdAt = this.dateUtil.utcToPeruvianDate(
+                  version.createdAt
+                );
+              });
               test.latestVersion = test.versions.reduce((prev, current) =>
                 prev.versionNumber > current.versionNumber ? prev : current
               );
@@ -190,7 +197,7 @@ export class TestHttpService {
         map((response: any): TestModel => {
           if (response.success) {
             const test = response.test;
-            return {
+            const returnValue: TestModel = {
               id: test.id,
               title: test.title,
               description: test.description,
@@ -231,12 +238,28 @@ export class TestHttpService {
                     })),
                 })),
             };
+            return this.shuffleAnswersForTest(returnValue);
           } else {
             throwError(response.error);
             return null;
           }
         })
       );
+  }
+
+  private shuffleAnswersForTest(test: TestModel): TestModel {
+    test.sections.forEach((section: SectionModel) => {
+      section.questions.filter((question: QuestionModel) => {
+        return this.questionUtil.isQuestionTypeIgnoreCase(question.type.name, QuestionType.MULTIPLE_CHOICE);
+      }).forEach((question: QuestionModel) => {
+        // Shuffle the answers array using Fisher-Yates algorithm
+        for (let i = question.answers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [question.answers[i], question.answers[j]] = [question.answers[j], question.answers[i]];
+        }
+      });
+    });
+    return test;
   }
 
   postTest$(testDto: TestDTO): Observable<TestModel> {
@@ -370,27 +393,31 @@ export class TestHttpService {
     );
   }
 
-  submitTest$(testId: number, testSubmitDto: TestSubmitDTO): Observable<TestEvaluatedModel> {
+  submitTest$(
+    testId: number,
+    testSubmitDto: TestSubmitDTO
+  ): Observable<TestEvaluatedModel> {
     console.log(testId);
-    return this.http.post<TestEvaluatedModel>(`${API_URL}/examination/${testId}/submit`, testSubmitDto).pipe(
-      catchError((error) => {
-        if (error.status == 401) {
-          console.error("Login please...");
-        }
-        return throwError(error);
-      }
-
-    ),
-    map((response: any): TestEvaluatedModel => {
-      if (response.success) {
-        return response.results;
-        }else {
-          throwError(response.error);
-          return null;
-        }}
+    return this.http
+      .post<TestEvaluatedModel>(
+        `${API_URL}/examination/${testId}/submit`,
+        testSubmitDto
       )
-    );
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): TestEvaluatedModel => {
+          if (response.success) {
+            return response.results;
+          } else {
+            throwError(response.error);
+            return null;
+          }
+        })
+      );
   }
-
-  
 }
