@@ -940,6 +940,9 @@ export const locale = {
         LAST_NAME: "Last name",
         CHECK_IN_STATUS: "Check in status",
         DETAILS: "Details",
+        BUTTONS: {
+          HOW_IT_WORKS: "How it works",
+        }
       },
     },
     GENERAL_INFORMATION: {

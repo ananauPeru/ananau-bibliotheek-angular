@@ -923,6 +923,9 @@ export const locale = {
         LAST_NAME: "Apellido",
         CHECK_IN_STATUS: "Estado de registro",
         DETAILS: "Detalles",
+        BUTTONS: {
+          HOW_IT_WORKS: "¿Cómo funciona?",
+        }
       },
     },
 
