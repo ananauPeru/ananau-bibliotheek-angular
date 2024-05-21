@@ -1086,7 +1086,7 @@
 
               <!-- Form Controls -->
               <!-- begin::2 Level -->
-              
+
               <li
                 class="menu-item menu-item-submenu"
                 aria-haspopup="true"
@@ -1193,7 +1193,7 @@
 
               <!-- Form Controls -->
               <!-- begin::2 Level -->
-              
+
               <li
                 class="menu-item menu-item-submenu"
                 aria-haspopup="true"
@@ -1268,13 +1268,6 @@
           aria-haspopup="true"
           data-menu-toggle="hover"
           routerLinkActive="menu-item-open"
-          *ngIf="
-            AuthUtil.permitted([
-              AuthUtil.roles.SpanishTeacher,
-              AuthUtil.roles.SuperAdmin
-            ]);
-            else exerciseStudentContent
-          "
         >
           <a class="menu-link menu-toggle" routerLinkActive="active">
             <span
@@ -1287,6 +1280,7 @@
             >
             <i class="menu-arrow"></i>
           </a>
+
           <div class="menu-submenu">
             <i class="menu-arrow"></i>
             <ul class="menu-subnav">
@@ -1298,75 +1292,105 @@
                 </span>
               </li>
 
-              <li
-                class="menu-item menu-item-submenu"
-                aria-haspopup="true"
-                data-menu-toggle="hover"
-                routerLinkActive="menu-item-open"
-              >
-                <a
-                  class="menu-link menu-toggle"
-                  routerLink="/exercise/shared"
-                  routerLinkActive="active"
-                >
-                  <span
-                    [inlineSVG]="
+              <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else exerciseStudentContent">
+
+                <!-- Submitions -->
+                <li
+                  class="menu-item menu-item-submenu"
+                  aria-haspopup="true"
+                  routerLinkActive="menu-item-open"
+                  >
+                    <a
+                      class="menu-link"
+                      routerLink="/exercise/submission/list"
+                      routerLinkActive="active"
+                    >
+                    <span
+                      [inlineSVG]="
                       './assets/media/svg/icons/Files/Selected-file.svg'
                     "
-                    cacheSVG="true"
-                    class="svg-icon menu-icon"
-                  ></span>
-                  <span class="menu-text">{{
-                    "MENU.LEARNING_PLATFORM.ASSIGNED_EXERCISES" | translate
-                  }}</span>
-                </a>
-              </li>
+                      cacheSVG="true"
+                      class="svg-icon menu-icon"
+                    ></span>
+                    <span class="menu-text"
+                      >{{ "MENU.LEARNING_PLATFORM.SUBMITIONS" | translate }}
+                    </span>
+                  </a>
+                </li>
 
-              <li
-                class="menu-item menu-item-submenu"
-                aria-haspopup="true"
-                data-menu-toggle="hover"
-                routerLinkActive="menu-item-open"
-              >
-                <a
-                  class="menu-link menu-toggle"
-                  routerLink="/exercise/list"
-                  routerLinkActive="active"
+                <!-- Assined Exercises -->
+                <li
+                  class="menu-item menu-item-submenu"
+                  aria-haspopup="true"
+                  data-menu-toggle="hover"
+                  routerLinkActive="menu-item-open"
                 >
-                  <span
-                    [inlineSVG]="
-                      './assets/media/svg/icons/Files/Selected-file.svg'
-                    "
-                    cacheSVG="true"
-                    class="svg-icon menu-icon"
-                  ></span>
-                  <span class="menu-text">{{
-                    "MENU.LEARNING_PLATFORM.EXERCISE_LIST" | translate
-                  }}</span>
-                </a>
-              </li>
+                  <a
+                    class="menu-link"
+                    routerLink="/exercise/shared"
+                    routerLinkActive="active"
+                  >
+                    <span
+                      [inlineSVG]="
+                        './assets/media/svg/icons/Files/Selected-file.svg'
+                      "
+                      cacheSVG="true"
+                      class="svg-icon menu-icon"
+                    ></span>
+                    <span class="menu-text">{{
+                      "MENU.LEARNING_PLATFORM.ASSIGNED_EXERCISES" | translate
+                    }}</span>
+                  </a>
+                </li>
 
-              <li
-                class="menu-item menu-item-submenu"
-                aria-haspopup="true"
-                data-menu-toggle="hover"
-                routerLinkActive="menu-item-open"
-              >
-                <a
-                  class="menu-link menu-toggle"
-                  routerLink="/exercise/create"
-                  routerLinkActive="active"
+                <!-- Exercise List -->
+                <li
+                  class="menu-item menu-item-submenu"
+                  aria-haspopup="true"
+                  data-menu-toggle="hover"
+                  routerLinkActive="menu-item-open"
                 >
-                  <span
-                    [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
-                    cacheSVG="true"
-                    class="svg-icon menu-icon"
-                  ></span>
-                  <span class="menu-text">{{
-                    "MENU.LEARNING_PLATFORM.CREATE_EXERCISE" | translate
-                  }}</span>
-                </a>
-              </li>
+                  <a
+                    class="menu-link menu-toggle"
+                    routerLink="/exercise/list"
+                    routerLinkActive="active"
+                  >
+                    <span
+                      [inlineSVG]="
+                        './assets/media/svg/icons/Files/Selected-file.svg'
+                      "
+                      cacheSVG="true"
+                      class="svg-icon menu-icon"
+                    ></span>
+                    <span class="menu-text">{{
+                      "MENU.LEARNING_PLATFORM.EXERCISE_LIST" | translate
+                    }}</span>
+                  </a>
+                </li>
+
+                <!-- Create Exercise -->
+                <li
+                  class="menu-item menu-item-submenu"
+                  aria-haspopup="true"
+                  data-menu-toggle="hover"
+                  routerLinkActive="menu-item-open"
+                >
+                  <a
+                    class="menu-link menu-toggle"
+                    routerLink="/exercise/create"
+                    routerLinkActive="active"
+                  >
+                    <span
+                      [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                      cacheSVG="true"
+                      class="svg-icon menu-icon"
+                    ></span>
+                    <span class="menu-text">{{
+                      "MENU.LEARNING_PLATFORM.CREATE_EXERCISE" | translate
+                    }}</span>
+                  </a>
+                </li>
+              </ng-container>
             </ul>
           </div>
         </li>
@@ -1388,39 +1412,33 @@
                 cacheSVG="true"
                 class="svg-icon menu-icon"
               ></span>
-              <span class="menu-text">My Exercises</span>
+              <span class="menu-text">
+                {{ "EXERCISE.ASSIGN.MY_EXERCISES" | translate }}
+              </span>
+            </a>
+          </li>
+          <li
+            class="menu-item"
+            aria-haspopup="true"
+            routerLinkActive="menu-item-active"
+            *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishLearner])"
+          >
+            <a
+              class="menu-link menu-toggle"
+              routerLink="/exercise/submission/list"
+              routerLinkActive="active"
+            >
+              <span
+                [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
+                cacheSVG="true"
+                class="svg-icon menu-icon"
+              ></span>
+              <span class="menu-text">
+                {{ "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate }}
+              </span>
             </a>
           </li>
         </ng-template>
-
-        <!-- Submitions -->
-        <li
-          class="menu-item"
-          aria-haspopup="true"
-          routerLinkActive="menu-item-active"
-          *ngIf="
-            AuthUtil.permitted([
-              AuthUtil.roles.SuperAdmin,
-              AuthUtil.roles.SpanishLearner,
-              AuthUtil.roles.SpanishTeacher
-            ])
-          "
-        >
-          <a
-            class="menu-link"
-            routerLink="/exercise/submission/list"
-            routerLinkActive="active"
-          >
-            <span
-              [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
-              cacheSVG="true"
-              class="svg-icon menu-icon"
-            ></span>
-            <span class="menu-text"
-              >{{ "MENU.LEARNING_PLATFORM.SUBMITIONS" | translate }}
-            </span>
-          </a>
-        </li>
       </ng-template>
 
       <!-- Test -->
@@ -1429,13 +1447,6 @@
         aria-haspopup="true"
         data-menu-toggle="hover"
         routerLinkActive="menu-item-open"
-        *ngIf="
-          AuthUtil.permitted([
-            AuthUtil.roles.SpanishTeacher,
-            AuthUtil.roles.SuperAdmin
-          ]);
-          else exerciseStudentContent
-        "
       >
         <a class="menu-link menu-toggle" routerLinkActive="active">
           <span
@@ -1459,80 +1470,82 @@
               </span>
             </li>
 
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/test/submitted"
-                routerLinkActive="active"
+            <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else testStudentContent">
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
               >
-                <span
-                  [inlineSVG]="
-                    './assets/media/svg/icons/Files/Selected-file.svg'
-                  "
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LEARNING_PLATFORM.SUBMITTED_TESTS" | translate
-                }}</span>
-              </a>
-            </li>
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/test/submitted"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/svg/icons/Files/Selected-file.svg'
+                    "
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.SUBMITTED_TESTS" | translate
+                  }}</span>
+                </a>
+              </li>
 
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/test/list"
-                routerLinkActive="active"
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
               >
-                <span
-                  [inlineSVG]="
-                    './assets/media/svg/icons/Files/Selected-file.svg'
-                  "
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LEARNING_PLATFORM.TEST_LIST" | translate
-                }}</span>
-              </a>
-            </li>
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/test/list"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/svg/icons/Files/Selected-file.svg'
+                    "
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.TEST_LIST" | translate
+                  }}</span>
+                </a>
+              </li>
 
-            <li
-              class="menu-item menu-item-submenu"
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              routerLinkActive="menu-item-open"
-            >
-              <a
-                class="menu-link menu-toggle"
-                routerLink="/test/create"
-                routerLinkActive="active"
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
               >
-                <span
-                  [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
-                  cacheSVG="true"
-                  class="svg-icon menu-icon"
-                ></span>
-                <span class="menu-text">{{
-                  "MENU.LEARNING_PLATFORM.CREATE_TEST" | translate
-                }}</span>
-              </a>
-            </li>
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/test/create"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.CREATE_TEST" | translate
+                  }}</span>
+                </a>
+              </li>
+            </ng-container>
           </ul>
         </div>
       </li>
 
-      <ng-template #exerciseStudentContent>
+      <ng-template #testStudentContent>
         <li
           class="menu-item"
           aria-haspopup="true"
@@ -1545,11 +1558,15 @@
             routerLinkActive="active"
           >
             <span
-              [inlineSVG]="'./assets/media/svg/icons/Files/Selected-file.svg'"
+              [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
               cacheSVG="true"
               class="svg-icon menu-icon"
             ></span>
-            <span class="menu-text">My Tests</span>
+            <span class="menu-text">
+              {{
+                "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate
+              }}
+            </span>
           </a>
         </li>
       </ng-template>

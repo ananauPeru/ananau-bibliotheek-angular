@@ -1025,6 +1025,7 @@ export const locale = {
         ASSIGN_TO: "Toewijzen aan",
         SELECT_LEARNER: "Selecteer Spaanse Leerling",
         LEARNER_REQUIRED: "Leerling is verplicht",
+        MY_EXERCISES: "Mijn oefeningen",
       },
       SHARED: {
         SHARED_EXERCISES: "Gedeelde Oefeningen",
@@ -1057,6 +1058,7 @@ export const locale = {
         GRADE_TABLE: "Cijfer",
         GRADE_DATE_TABLE: "Cijferdatum",
         ACTIONS: "Acties",
+        MY_SUBMISSIONS: "Mijn bijdragen",
       },
     },
     TEST: {
@@ -1114,6 +1116,7 @@ export const locale = {
         },
       },
       EDIT_TITLE: "Test Bewerken",
+      MY_TESTS: "Mijn ingediende tests",
       FILL_IN: {
         TITLES: {
           SECTION: "Sectie",
@@ -1213,6 +1216,7 @@ export const locale = {
         }
       },
       LIST: {
+        TEST_LIST: "Testlijst",
         LABELS: {
           SEARCH: "Zoeken op titel of auteur",
           CREATE: "Test maken",

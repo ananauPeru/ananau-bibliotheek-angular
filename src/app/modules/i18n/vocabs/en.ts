@@ -1046,6 +1046,7 @@ export const locale = {
         ASSIGN_TO: "Assign to",
         SELECT_LEARNER: "Select Spanish Learner",
         LEARNER_REQUIRED: "Learner is required",
+        MY_EXERCISES: "My Exercises",
       },
       SHARED: {
         SHARED_EXERCISES: "Shared Exercises",
@@ -1078,6 +1079,7 @@ export const locale = {
         GRADE_TABLE: "Grade",
         GRADE_DATE_TABLE: "Grade Date",
         ACTIONS: "Actions",
+        MY_SUBMISSIONS: "My Submissions",
       },
     },
     TEST: {
@@ -1133,6 +1135,7 @@ export const locale = {
         }
       },
       EDIT_TITLE: "Edit Test",
+      MY_TESTS: "My Submitted Tests",
       FILL_IN: {
         TITLES: {
           SECTION: "Section",
@@ -1226,6 +1229,7 @@ export const locale = {
         }
       },
       LIST: {
+        TEST_LIST: "Test List",
         LABELS: {
           SEARCH: "Search for title or author",
           CREATE: "Create Test",
