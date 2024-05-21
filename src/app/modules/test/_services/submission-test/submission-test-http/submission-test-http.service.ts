@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { StudentTestSubmissionModel, TeacherTestSubmissionModel, TestSubmissionModel } from '../../../_models/test/test-submission.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { GradeSubmissionTestDto } from '../../../_dto/grade-submission-test-dto';
 
 const API_URL = `${environment.apiUrl}/spanish_platform/test`;
 
@@ -36,9 +37,9 @@ export class SubmissionTestHttpService {
         }),
         map((response: any): TeacherTestSubmissionModel[] => {
           if (response.success) {
-            return response.testAttempt.map((testAttempt: TeacherTestSubmissionModel) => {
-              testAttempt.submittedAt = this.DateUtil.utcToPeruvianDate(testAttempt.submittedAt);
-              return testAttempt;
+            return response.attempts.map((attempts: TeacherTestSubmissionModel) => {
+              attempts.submittedAt = this.DateUtil.utcToPeruvianDate(attempts.submittedAt);
+              return attempts;
             });
           } else {
             throwError(response.error);
@@ -69,9 +70,9 @@ export class SubmissionTestHttpService {
         }),
         map((response: any): any => {
           if (response.success) {
-            return response.testAttempt.map((testAttempt: StudentTestSubmissionModel) => {
-              testAttempt.submittedAt = this.DateUtil.utcToPeruvianDate(testAttempt.submittedAt);
-              return testAttempt;
+            return response.attempts.map((attempts: StudentTestSubmissionModel) => {
+              attempts.submittedAt = this.DateUtil.utcToPeruvianDate(attempts.submittedAt);
+              return attempts;
             }
             );
           } else {
@@ -96,10 +97,10 @@ export class SubmissionTestHttpService {
         }),
         map((response: any): TestSubmissionModel => {
           if (response.success) {
-            const testAttempt = response.testAttempt;
-            testAttempt.submittedAt = this.DateUtil.utcToPeruvianDate(testAttempt.submittedAt);
-            testAttempt.gradedAt = this.DateUtil.utcToPeruvianDate(testAttempt.gradedAt);
-            return testAttempt;
+            const attempt = response.attempt;
+            attempt.submittedAt = this.DateUtil.utcToPeruvianDate(attempt.submittedAt);
+            attempt.gradedAt = this.DateUtil.utcToPeruvianDate(attempt.gradedAt);
+            return attempt;
           } else {
             throwError(response.error);
             return null;
@@ -122,13 +123,39 @@ export class SubmissionTestHttpService {
         }),
         map((response: any): TestSubmissionModel => {
           if (response.success) {
-            const testAttempt = response.testAttempt;
-            testAttempt.submittedAt = this.DateUtil.utcToPeruvianDate(testAttempt.submittedAt);
-            testAttempt.gradedAt = this.DateUtil.utcToPeruvianDate(testAttempt.gradedAt);
-            return testAttempt;
+            const attempt = response.attempt;
+            attempt.submittedAt = this.DateUtil.utcToPeruvianDate(attempt.submittedAt);
+            attempt.gradedAt = this.DateUtil.utcToPeruvianDate(attempt.gradedAt);
+            return attempt;
           } else {
             throwError(response.error);
             return null;
+          }
+        })
+      );
+  }
+
+  gradeSubmission$(
+    id: number,
+    gradeSubmissionTestDto: GradeSubmissionTestDto
+  ): Observable<boolean> {
+    return this.http
+      .put<boolean>(`${API_URL}/test_attempts/${id}/evaluate`, gradeSubmissionTestDto, {
+        responseType: "json",
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            console.error("Login please...");
+          }
+          return throwError(error);
+        }),
+        map((response: any): boolean => {
+          if (response.success) {
+            return response.success;
+          } else {
+            throwError(response.error);
+            return response.success;
           }
         })
       );

@@ -1191,17 +1191,47 @@ export const locale = {
         },
       },
       SUBMISSION_DETAILS: {
-        SUBMISSION_DETAILS: "Detalles de Envío de la Prueba",
-        SUBMITTED_TEST: "Prueba Enviada:",
-        SUBMITTED_BY: "Enviado Por:",
-        SUBMITTED_AT: "Enviado En:",
-        SCORE_AUTO: "Puntaje Auto:",
-        SCORE_MANUAL: "Puntaje Manual:",
-        NO_GRADE: "Aún no calificado",
-        EDIT_SCORE: "Editar Puntaje",
-        CURRENT_SCORE: "Puntaje Actual:",
-        SCORE: "Puntaje:",
-        SCORE_SUBMIT: "Enviar Puntaje",
+        SUBMISSION_DETAILS: "Detalles de la Presentación",
+        SCORE_SUBMIT: "Enviar Puntuación",
+
+        TITLES: {
+          SECTION: "Sección",
+          QUESTION: "Pregunta",
+        },
+        LABELS: {
+          SUBMITTED_TEST: "Prueba Presentada",
+          SUBMITTED_BY: "Presentado Por",
+          SUBMITTED_AT: "Presentado En",
+          SCORE_AUTO: "Puntuación Automática",
+          SCORE_MANUAL: "Puntuación Manual",
+          SCORE_TOTAL: "Puntuación Total",
+          SCORE: "Puntuación",
+          LEARNERS_ANSWER: "Respuesta del Alumno",
+          CORRECT_ANSWER: "Respuesta Correcta",
+        },
+        MESSAGES: {
+          NO_GRADE: "Aún no calificado",
+          CORRECT: "Correcto",
+          INCORRECT: "Incorrecto",
+          NOT_AVAILABLE: "No disponible",
+          GRADED_SUCCESFULLY: "La puntuación ha sido enviada exitosamente.",
+        },
+        ERRORS: {
+          SCORE_REQUIRED: "Por favor proporcione una puntuación.",
+          SCORE_POSITIVE: "La puntuación debe ser mayor o igual a 0.",
+          SCORE_LESS_THAN: "La puntuación debe ser menor o igual a 10.",
+          PROVIDE_VALID_SCORES: "Por favor proporcione puntuaciones válidas para todas las preguntas abiertas.",
+          FAILED_TO_GRADE: "Algo salió mal al enviar la puntuación. Por favor intente de nuevo más tarde.",
+        },
+        BUTTONS: {
+          EDIT_SCORE: "Editar Puntuación",
+        }
+      },
+      COMPONENTS: {
+        RADIO_BUTTON: {
+          CORRECT: "Correcto",
+          LEARNERS_ANSWER: "Respuesta del Alumno",
+        }
       },
       LIST: {
         LABELS: {

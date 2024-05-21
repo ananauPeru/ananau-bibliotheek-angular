@@ -41,7 +41,7 @@ export class TestHttpService {
           if (response.success) {
             const tests: ShortTestModel[] = response.tests;
 
-            
+
 
             // Calculate and set the latestVersionNumber for each ShortTestModel
             tests.forEach((test) => {
@@ -390,6 +390,7 @@ export class TestHttpService {
         }}
       )
     );
-      
   }
+
+  
 }

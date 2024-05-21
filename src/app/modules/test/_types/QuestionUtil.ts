@@ -25,4 +25,10 @@ export class QuestionUtil {
   public isQuestionType(input: string, type: QuestionType): boolean {
     return this.fromString(input) === type;
   }
+
+  public isQuestionTypeIgnoreCase(input: string, type: QuestionType): boolean {
+    const normalizedInput = input.replace(/_/g, " ").toLocaleLowerCase();
+    const normalizedType = type.toString().toLocaleLowerCase();
+    return normalizedInput === normalizedType;
+  }
 }

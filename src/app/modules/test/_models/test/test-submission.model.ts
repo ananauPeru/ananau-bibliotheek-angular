@@ -1,3 +1,5 @@
+import { QuestionEvaluatedModel } from "./question.model";
+
 // Base class for common properties
 class BaseTestSubmissionModel {
   id: number;
@@ -5,7 +7,7 @@ class BaseTestSubmissionModel {
   realScores: {
     total: number,
     totalAuto: number,
-    totalNotAuto: number
+    totalNotAuto?: number
   };
 
 }
@@ -26,14 +28,25 @@ class TestAttemptModel {
     maxAuto: number,
     maxNotAuto: number
   };
+}
 
+export class SectionModel {
+  id: number;
+  title: string;
+  description: string;
+  questions: QuestionEvaluatedModel[];
 }
 
 /**
  * GET test/my_test_attempts
  */
 export class StudentTestSubmissionModel extends BaseTestSubmissionModel {
-  testAttempt: TestAttemptModel;
+  title: string;
+  possibleScores: {
+    max: number,
+    maxAuto: number,
+    maxNotAuto: number,
+  };
   gradedBy?: UserModel;
 }
 
@@ -41,7 +54,12 @@ export class StudentTestSubmissionModel extends BaseTestSubmissionModel {
  * GET test/test_attempts
  */
 export class TeacherTestSubmissionModel extends BaseTestSubmissionModel {
-  testAttempt: TestAttemptModel;
+  title: string;
+  possibleScores: {
+    max: number,
+    maxAuto: number,
+    maxNotAuto: number,
+  };
   submittedBy: UserModel;
 }
 
@@ -53,9 +71,24 @@ export class TeacherTestSubmissionModel extends BaseTestSubmissionModel {
  * GET test/test_attemts/{id}
  */
 
-export class TestSubmissionModel extends BaseTestSubmissionModel {
-  testAttempt: TestAttemptModel;
+export class TestSubmissionModel {
+  id: number;
+  testId: number;
+  title: string;
+  description: string;
+  possibleScores: {
+    max: number,
+    maxAuto: number,
+    maxNotAuto: number,
+  };
+  realScores: {
+    total: number,
+    totalAuto: number,
+    totalNotAuto?: number
+  };
+  sections: SectionModel[];
   submittedBy: UserModel;
+  submittedAt: Date;
   gradedBy?: UserModel;
   gradedAt?: Date;
 }
