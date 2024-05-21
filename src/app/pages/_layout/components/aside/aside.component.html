@@ -1393,6 +1393,7 @@
                     }}</span>
                   </a>
                 </li>
+
                 <!-- Documentation Exercise -->
                 <li
                   class="menu-item"
@@ -1579,6 +1580,34 @@
                   }}</span>
                 </a>
               </li>
+
+              <!-- Documentation Test -->
+              <li
+              class="menu-item"
+              aria-haspopup="true"
+              routerLinkActive="menu-item-active"
+              *ngIf="
+                AuthUtil.permitted([
+                  AuthUtil.roles.SpanishTeacher,
+                  AuthUtil.roles.SuperAdmin
+                ])
+              "
+            >
+              <a
+                class="menu-link"
+                routerLink="/test/documentation"
+                routerLinkActive="active"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/svg/icons/Code/Question-circle.svg'"
+                  cacheSVG="true"
+                  class="svg-icon menu-icon"
+                ></span>
+                <span class="menu-text"
+                  >{{ "MENU.LEARNING_PLATFORM.DOCUMENTATION" | translate }}
+                </span>
+              </a>
+            </li>
             </ng-container>
           </ul>
         </div>
