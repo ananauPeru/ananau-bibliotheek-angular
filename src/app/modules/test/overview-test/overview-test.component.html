@@ -190,7 +190,7 @@
                 </ng-container>
                 <ng-container *ngIf="fileUtil.isImageFile(fileUrl)">
                   <div class="mb-2">{{ fileUtil.getFileNameWithoutExtension(fileUrl) }}</div>
-                  <img [src]="fileUrl" class="img-fluid mb-4" />
+                  <app-image-wrapper [src]="fileUrl"></app-image-wrapper>
                 </ng-container>
               </div>
               </div>
