@@ -105,6 +105,7 @@ export const locale = {
         EXERCISE_OVERVIEW: "Resumen del ejercicio",
         SUBMISSIONS: "Envíos",
         MY_STUDENTS: "Mis estudiantes",
+        DOCUMENTATION: "Documentación",
       },
     },
 

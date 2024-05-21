@@ -101,6 +101,7 @@ export const locale = {
         EXERCISE_OVERVIEW: "Oefening overzicht",
         SUBMISSIONS: "Inzendingen",
         MY_STUDENTS: "Mijn studenten",
+        DOCUMENTATION: "Documentatie",
       },
       // We dont translate documentation (IT) to different languages
     },

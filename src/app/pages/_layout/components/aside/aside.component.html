@@ -1393,6 +1393,34 @@
                     }}</span>
                   </a>
                 </li>
+                <!-- Documentation Exercise -->
+                <li
+                  class="menu-item"
+                  aria-haspopup="true"
+                  routerLinkActive="menu-item-active"
+                  *ngIf="
+                    AuthUtil.permitted([
+                      AuthUtil.roles.SpanishTeacher,
+                      AuthUtil.roles.SuperAdmin
+                    ])
+                  "
+                >
+                  <a
+                    class="menu-link"
+                    routerLink="/exercise/documentation"
+                    routerLinkActive="active"
+                  >
+                    <span
+                      [inlineSVG]="'./assets/media/svg/icons/Code/Question-circle.svg'"
+                      cacheSVG="true"
+                      class="svg-icon menu-icon"
+                    ></span>
+                    <span class="menu-text"
+                      >{{ "MENU.LEARNING_PLATFORM.DOCUMENTATION" | translate }}
+                    </span>
+                  </a>
+                </li>
+
               </ng-container>
             </ul>
           </div>
@@ -1482,8 +1510,6 @@
                 else testStudentContent
               "
             >
-              
-
               <li
                 class="menu-item menu-item-submenu"
                 aria-haspopup="true"
