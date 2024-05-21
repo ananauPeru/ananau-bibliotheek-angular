@@ -6,6 +6,8 @@ import { ShareModalComponent } from "../components/share-modal/share-modal.compo
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Observable } from "rxjs";
 import { FileUtil } from "src/app/_utils/file_util";
+import { QuestionType } from "../_types/QuestionType";
+import { QuestionUtil } from "../_types/QuestionUtil";
 
 @Component({
   selector: "app-overview-test",
@@ -14,19 +16,13 @@ import { FileUtil } from "src/app/_utils/file_util";
 })
 export class OverviewTestComponent implements OnInit {
   public test$: Observable<TestModel>;
-  public users = [
-    { id: 1, fullName: "John Doe" },
-    { id: 2, fullName: "Jane Smith" },
-    { id: 3, fullName: "Alice Johnson" },
-    { id: 4, fullName: "Bob Williams" },
-    { id: 5, fullName: "Emma Davis" },
-  ];
 
   constructor(
     private route: ActivatedRoute,
     private testService: TestService,
     private modalService: NgbModal,
-    public fileUtil: FileUtil
+    public fileUtil: FileUtil,
+    public QuestionUtil: QuestionUtil
   ) {}
 
   ngOnInit() {
@@ -52,9 +48,6 @@ export class OverviewTestComponent implements OnInit {
       centered: true,
     });
     modalRef.componentInstance.shareUrl = shareUrl;
-    modalRef.componentInstance.users = this.users;
-    modalRef.componentInstance.share.subscribe((selectedUsers: any[]) => {
-    });
   }
 
   getSortedFiles(fileUrls: string[]): string[] {

@@ -197,7 +197,7 @@
             </div>
 
             <!-- Answers -->
-            <div class="row" *ngIf="question.type.name === 'Multiple Choice'">
+            <div class="row" *ngIf="QuestionUtil.isQuestionTypeIgnoreCase(question.type.name, QuestionUtil.types.MULTIPLE_CHOICE)">
               <div class="col-12">
                 <div
                   class="form-group row align-items-center"
@@ -218,7 +218,7 @@
                 </div>
               </div>
             </div>
-            <div class="row" *ngIf="question.type.name === 'Fill in the Blank'">
+            <div class="row" *ngIf="QuestionUtil.isQuestionTypeIgnoreCase(question.type.name, QuestionUtil.types.FILL_IN_THE_BLANK)">
               <div class="col-12">
                 <div
                   class="form-group row align-items-center"
