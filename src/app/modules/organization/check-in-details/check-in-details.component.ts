@@ -14,7 +14,7 @@ export class CheckInDetailsComponent implements OnInit {
   isLoading: boolean = true;
 
   id: number;
-  checkInUser: CheckInUser;
+  checkInUser$: Observable<CheckInUser>;
   startDate: Date;
   endDate: Date;
   checkInHistory$: Observable<CheckInHistory[]>;
@@ -46,7 +46,7 @@ export class CheckInDetailsComponent implements OnInit {
       })
     );
 
-    this.route.params.pipe(
+    this.checkInUser$ = this.route.params.pipe(
       switchMap(params => {
         this.id = parseInt(params['id']);
         if (isNaN(this.id)) {
@@ -55,15 +55,7 @@ export class CheckInDetailsComponent implements OnInit {
         }
         return this.checkInService.getCheckInUser(this.id);
       })
-    ).subscribe(checkInUser => {
-      if (checkInUser) {
-        this.checkInUser = checkInUser;
-      } else {
-        console.error('No matching CheckInUser found');
-      }
-      this.isLoading = false;
-      this.cdr.detectChanges();
-    });
+    )
   }
 
   calculateTotalCheckedInTime(checkInHistory: CheckInHistory[], startDate: Date, endDate: Date): number {
