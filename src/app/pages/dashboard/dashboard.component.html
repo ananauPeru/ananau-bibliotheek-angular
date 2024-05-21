@@ -394,7 +394,7 @@
       "
     >
       <div>
-        <div class="card card-custom h-100">
+        <div class="card card-custom h-150">
           <div class="card-body text-white d-flex align-items-center">
             <div class="w-100">
               <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
@@ -402,44 +402,62 @@
               </h3>
               <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else exercise_buttons_learner">
                 <button
-                routerLink="/exercise/list"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.LIST.LIST" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
-              <button
-                routerLink="/exercise/create"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.LIST.CREATE_EXERCISE" | translate }}
-                </span>
-                <i class="fas fa-plus text-dark"></i>
-              </button>
-              </ng-container>
-
-              <ng-template #exercise_buttons_learner>
+                  routerLink="/exercise/submission/list"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "MENU.LEARNING_PLATFORM.SUBMITIONS" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
                 <button
-                routerLink="/exercise/shared"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.ASSIGN.MY_EXERCISES" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
-              <button
-                routerLink="/exercise/submission/list"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
+                  routerLink="/exercise/shared"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "MENU.LEARNING_PLATFORM.ASSIGNED_EXERCISES" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
+                <button
+                  routerLink="/exercise/list"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "EXERCISE.LIST.LIST" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
+                <button
+                  routerLink="/exercise/create"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "EXERCISE.LIST.CREATE_EXERCISE" | translate }}
+                  </span>
+                  <i class="fas fa-plus text-dark"></i>
+                </button>
+                </ng-container>
+
+                <ng-template #exercise_buttons_learner>
+                  <button
+                  routerLink="/exercise/shared"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "EXERCISE.ASSIGN.MY_EXERCISES" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
+                <button
+                  routerLink="/exercise/submission/list"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
               </ng-template>
             </div>
           </div>
