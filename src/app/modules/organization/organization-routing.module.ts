@@ -12,6 +12,7 @@ import { CheckInComponent } from "./check-in/check-in.component";
 import { CheckInListComponent } from "./check-in-list/check-in-list.component";
 import { CheckInDetailsComponent } from "./check-in-details/check-in-details.component";
 import { Roles } from "../../_utils/auth_util";
+import { CheckInDocumentationComponent } from "./documentation/check-in-documentation/check-in-documentation.component";
 
 const routes: Routes = [
   {
@@ -91,8 +92,16 @@ const routes: Routes = [
             },
           },
           {
-            path: ":id",
+            path: "details/:id",
             component: CheckInDetailsComponent,
+            canActivate: [AuthGuard],
+            data: {
+              permittedRoles: [Roles.Admin, Roles.SuperAdmin],
+            },
+          },
+          {
+            path: "documentation",
+            component: CheckInDocumentationComponent,
             canActivate: [AuthGuard],
             data: {
               permittedRoles: [Roles.Admin, Roles.SuperAdmin],

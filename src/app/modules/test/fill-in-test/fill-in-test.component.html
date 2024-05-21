@@ -72,11 +72,7 @@
                         *ngIf="getImageUrls(question.fileUrls) as imageUrls"
                       >
                         <div *ngFor="let imageUrl of imageUrls" class="mb-4">
-                          <img
-                            [src]="imageUrl"
-                            alt="Question Image"
-                            class="img-fluid"
-                          />
+                          <app-image-wrapper [src]="imageUrl" [height]="300"></app-image-wrapper>
                         </div>
                       </ng-container>
 

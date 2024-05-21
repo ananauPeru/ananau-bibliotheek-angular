@@ -919,6 +919,9 @@ export const locale = {
         LAST_NAME: "Familienaam",
         CHECK_IN_STATUS: "Check-in status",
         DETAILS: "Details",
+        BUTTONS: {
+          HOW_IT_WORKS: "Hoe werkt het?",
+        }
       },
     },
 

@@ -7,11 +7,13 @@
         style="background-color: white; padding: 2rem 2.25rem"
       >
         <div class="row">
-          <div class="col-12 col-md-8 w-100">
+          <div
+            class="col-12 w-100 d-flex justify-content-between align-items-center"
+          >
             <h3 class="card-title font-weight-bolder text-dark">
-              <!-- {{ "REGISTRATIONS.OVERVIEW.TITLE" | translate }} -->
               {{ "CHECK_IN.LIST.PAGE_TITLE" | translate }}
             </h3>
+            <button class="btn btn-primary ml-auto" routerLink="/organization/check-in/documentation">{{"CHECK_IN.LIST.BUTTONS.HOW_IT_WORKS" | translate}}</button>
           </div>
         </div>
       </div>
@@ -53,16 +55,20 @@
             <th>{{ "CHECK_IN.LIST.FIRST_NAME" | translate }}</th>
             <th>{{ "CHECK_IN.LIST.LAST_NAME" | translate }}</th>
             <th>{{ "CHECK_IN.LIST.CHECK_IN_STATUS" | translate }}</th>
-            <th class="text-right">{{ "CHECK_IN.LIST.DETAILS" | translate }}</th>
+            <th class="text-right">
+              {{ "CHECK_IN.LIST.DETAILS" | translate }}
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of checkInService.checkInList | async">
-
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
             <td>
-              <span class="label label-lg label-light-primary label-inline" *ngIf="user.isCheckedIn; else checkedOut">
+              <span
+                class="label label-lg label-light-primary label-inline"
+                *ngIf="user.isCheckedIn; else checkedOut"
+              >
                 {{ "CHECK_IN.CHECKED_IN" | translate }}
               </span>
               <ng-template #checkedOut>
@@ -72,11 +78,11 @@
               </ng-template>
             </td>
             <td class="text-right">
-              <button 
-              routerLink="/organization/check-in/{{ user.userId }}"
-              type="button" 
-              class="btn btn-primary mr-2" 
-              placement="top" 
+              <button
+                routerLink="/organization/check-in/details/{{ user.userId }}"
+                type="button"
+                class="btn btn-primary mr-2"
+                placement="top"
               >
                 <i class="fas fa-sign-in-alt pr-0"></i>
               </button>

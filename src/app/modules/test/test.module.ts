@@ -18,6 +18,7 @@ import { AudioPlayerComponent } from './components/audio-player/audio-player.com
 import { OverviewSubmissionTestComponent } from './overview-submission-test/overview-submission-test.component';
 import { SubmissionTestDetailsComponent } from './submission-test-details/submission-test-details.component';
 import { TestDocumentationComponent } from './documentation/test-documentation/test-documentation.component';
+import { ImageWrapperComponent } from './components/image-wrapper/image-wrapper.component';
 
 
 @NgModule({
@@ -32,8 +33,7 @@ import { TestDocumentationComponent } from './documentation/test-documentation/t
     NgbModule,
     NgxDropzoneModule,
   ],
-  
-  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, AudioPlayerComponent, OverviewSubmissionTestComponent, SubmissionTestDetailsComponent, TestDocumentationComponent],
+  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, AudioPlayerComponent, OverviewSubmissionTestComponent, SubmissionTestDetailsComponent, TestDocumentationComponent, ImageWrapperComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }
