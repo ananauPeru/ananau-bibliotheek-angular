@@ -99,7 +99,7 @@ export const locale = {
         CREATE_EXERCISE: "Oefening aanmaken",
         ASSIGNED_EXERCISES: "Toegewezen oefeningen",
         EXERCISE_OVERVIEW: "Oefening overzicht",
-        SUBMITIONS: "Inzendingen",
+        SUBMISSIONS: "Inzendingen",
         MY_STUDENTS: "Mijn studenten",
       },
       // We dont translate documentation (IT) to different languages

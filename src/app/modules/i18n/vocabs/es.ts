@@ -103,7 +103,7 @@ export const locale = {
         CREATE_EXERCISE: "Crear ejercicio",
         ASSIGNED_EXERCISES: "Ejercicios asignados",
         EXERCISE_OVERVIEW: "Resumen del ejercicio",
-        SUBMITIONS: "Envíos",
+        SUBMISSIONS: "Envíos",
         MY_STUDENTS: "Mis estudiantes",
       },
     },
