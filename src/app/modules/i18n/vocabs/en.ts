@@ -119,7 +119,7 @@ export const locale = {
         CREATE_EXERCISE: "Create exercise",
         ASSIGNED_EXERCISES: "Assigned exercises",
         EXERCISE_OVERVIEW: "Exercise overview",
-        SUBMITIONS: "Submitions",
+        SUBMISSIONS: "Submissions",
         MY_STUDENTS: "My students",
       }
     },

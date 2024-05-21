@@ -1067,9 +1067,7 @@
               class="svg-icon menu-icon"
             ></span>
             <span class="menu-text">
-              {{
-                "MENU.DOCUMENTATION.WEBSITE" | translate
-              }}</span
+              {{ "MENU.DOCUMENTATION.WEBSITE" | translate }}</span
             >
             <i class="menu-arrow"></i>
           </a>
@@ -1174,9 +1172,7 @@
               class="svg-icon menu-icon"
             ></span>
             <span class="menu-text">
-              {{
-                "MENU.DOCUMENTATION.AUTOMATIC_EMAILS" | translate
-              }}</span
+              {{ "MENU.DOCUMENTATION.AUTOMATIC_EMAILS" | translate }}</span
             >
             <i class="menu-arrow"></i>
           </a>
@@ -1292,29 +1288,37 @@
                 </span>
               </li>
 
-              <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else exerciseStudentContent">
-
-                <!-- Submitions -->
+              <ng-container
+                *ngIf="
+                  AuthUtil.permitted([
+                    AuthUtil.roles.SpanishTeacher,
+                    AuthUtil.roles.SuperAdmin
+                  ]);
+                  else exerciseStudentContent
+                "
+              >
+                <!-- Exercise List -->
                 <li
                   class="menu-item menu-item-submenu"
                   aria-haspopup="true"
+                  data-menu-toggle="hover"
                   routerLinkActive="menu-item-open"
+                >
+                  <a
+                    class="menu-link menu-toggle"
+                    routerLink="/exercise/list"
+                    routerLinkActive="active"
                   >
-                    <a
-                      class="menu-link"
-                      routerLink="/exercise/submission/list"
-                      routerLinkActive="active"
-                    >
                     <span
                       [inlineSVG]="
-                      './assets/media/svg/icons/Files/Selected-file.svg'
-                    "
+                        './assets/media/svg/icons/Files/Selected-file.svg'
+                      "
                       cacheSVG="true"
                       class="svg-icon menu-icon"
                     ></span>
-                    <span class="menu-text"
-                      >{{ "MENU.LEARNING_PLATFORM.SUBMITIONS" | translate }}
-                    </span>
+                    <span class="menu-text">{{
+                      "MENU.LEARNING_PLATFORM.EXERCISE_LIST" | translate
+                    }}</span>
                   </a>
                 </li>
 
@@ -1343,28 +1347,25 @@
                   </a>
                 </li>
 
-                <!-- Exercise List -->
+                <!-- Submitions -->
                 <li
                   class="menu-item menu-item-submenu"
                   aria-haspopup="true"
-                  data-menu-toggle="hover"
                   routerLinkActive="menu-item-open"
                 >
                   <a
-                    class="menu-link menu-toggle"
-                    routerLink="/exercise/list"
+                    class="menu-link"
+                    routerLink="/exercise/submission/list"
                     routerLinkActive="active"
                   >
                     <span
-                      [inlineSVG]="
-                        './assets/media/svg/icons/Files/Selected-file.svg'
-                      "
+                      [inlineSVG]="'./assets/media/svg/icons/Files/File.svg'"
                       cacheSVG="true"
                       class="svg-icon menu-icon"
                     ></span>
-                    <span class="menu-text">{{
-                      "MENU.LEARNING_PLATFORM.EXERCISE_LIST" | translate
-                    }}</span>
+                    <span class="menu-text"
+                      >{{ "MENU.LEARNING_PLATFORM.SUBMISSIONS" | translate }}
+                    </span>
                   </a>
                 </li>
 
@@ -1381,7 +1382,9 @@
                     routerLinkActive="active"
                   >
                     <span
-                      [inlineSVG]="'./assets/media/svg/icons/Files/File-plus.svg'"
+                      [inlineSVG]="
+                        './assets/media/svg/icons/Files/File-plus.svg'
+                      "
                       cacheSVG="true"
                       class="svg-icon menu-icon"
                     ></span>
@@ -1470,30 +1473,16 @@
               </span>
             </li>
 
-            <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else testStudentContent">
-              <li
-                class="menu-item menu-item-submenu"
-                aria-haspopup="true"
-                data-menu-toggle="hover"
-                routerLinkActive="menu-item-open"
-              >
-                <a
-                  class="menu-link menu-toggle"
-                  routerLink="/test/submitted"
-                  routerLinkActive="active"
-                >
-                  <span
-                    [inlineSVG]="
-                      './assets/media/svg/icons/Files/Selected-file.svg'
-                    "
-                    cacheSVG="true"
-                    class="svg-icon menu-icon"
-                  ></span>
-                  <span class="menu-text">{{
-                    "MENU.LEARNING_PLATFORM.SUBMITTED_TESTS" | translate
-                  }}</span>
-                </a>
-              </li>
+            <ng-container
+              *ngIf="
+                AuthUtil.permitted([
+                  AuthUtil.roles.SpanishTeacher,
+                  AuthUtil.roles.SuperAdmin
+                ]);
+                else testStudentContent
+              "
+            >
+              
 
               <li
                 class="menu-item menu-item-submenu"
@@ -1515,6 +1504,30 @@
                   ></span>
                   <span class="menu-text">{{
                     "MENU.LEARNING_PLATFORM.TEST_LIST" | translate
+                  }}</span>
+                </a>
+              </li>
+
+              <li
+                class="menu-item menu-item-submenu"
+                aria-haspopup="true"
+                data-menu-toggle="hover"
+                routerLinkActive="menu-item-open"
+              >
+                <a
+                  class="menu-link menu-toggle"
+                  routerLink="/test/submitted"
+                  routerLinkActive="active"
+                >
+                  <span
+                    [inlineSVG]="
+                      './assets/media/svg/icons/Files/File.svg'
+                    "
+                    cacheSVG="true"
+                    class="svg-icon menu-icon"
+                  ></span>
+                  <span class="menu-text">{{
+                    "MENU.LEARNING_PLATFORM.SUBMITTED_TESTS" | translate
                   }}</span>
                 </a>
               </li>
@@ -1563,9 +1576,7 @@
               class="svg-icon menu-icon"
             ></span>
             <span class="menu-text">
-              {{
-                "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate
-              }}
+              {{ "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate }}
             </span>
           </a>
         </li>
