@@ -388,7 +388,7 @@
 
   <!-- Exercise -->
   <div
-      class="col-lg-3 menu-card one-small-child"
+      class="col-lg-3 menu-card one-large-child"
       *ngIf="
         AuthUtil.permitted([AuthUtil.roles.SpanishLearner, AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin])
       "
@@ -407,6 +407,24 @@
               >
                 <span>
                   {{ "EXERCISE.LIST.LIST" | translate }}
+                </span>
+                <i class="fas fa-list text-dark"></i>
+              </button>
+              <button
+                routerLink="/exercise/shared"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+              >
+                <span>
+                  {{ "MENU.LEARNING_PLATFORM.ASSIGNED_EXERCISES" | translate }}
+                </span>
+                <i class="fas fa-list text-dark"></i>
+              </button>
+              <button
+                routerLink="/exercise/submission/list"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+              >
+                <span>
+                  {{ "MENU.LEARNING_PLATFORM.SUBMISSIONS" | translate }}
                 </span>
                 <i class="fas fa-list text-dark"></i>
               </button>
@@ -449,7 +467,7 @@
 
     <!-- Test -->
     <div
-      class="col-lg-3 menu-card one-small-child"
+      class="col-lg-3 menu-card one-large-child"
       *ngIf="
         AuthUtil.permitted([AuthUtil.roles.SpanishLearner, AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin])
       "
