@@ -20,7 +20,7 @@
         <p>If you have successfully finished the previous guide, you should have access to the Github repo's of Añañau.
             Clone them locally to a desired place within your computer. For the purpose of this tutorial i created a new
             map called <kbd>ananau-tutorial</kbd>.</p>
-        <pre>DESKTOP /ananau-tutorial<br>$ git clone https://github.com/ananauPeru/ananau-bibliotheek-angular.git<br>$ git clone https://github.com/ananauPeru/ananau-bibliotheek-api.git</pre>
+        <pre>DESKTOP /ananau-tutorial<br>$ git clone https://github.com/ananauPeru/ananau-bibliotheek-angular.git<br>$ git clone https://github.com/ananauPeru/ananau-api-2024.git</pre>
 
         <p>If everything went correctly you should now have two directories.</p>
 
@@ -31,7 +31,7 @@
 
         <p>For the frontend we use <kbd>Visual Studio Code</kbd>, for the backend we use <kbd>Visual Studio
                 2019</kbd> and for DB Management we use <kbd>MySQL Workbench</kbd>. The frontend is written in Angular
-            11.0.9 and for the backend we use .NET Core 5.0.3</p>
+            11.0.9 and for the backend we use .NET Core 5.0.3. The frontend required Node.js version 14.15.0. You can use software like Node Version Manager to manage the version of Node.js.</p>
         <p>So next, you need to install:</p>
         <ul>
             <li>Visual Studio Code</li>
@@ -67,8 +67,9 @@
 
         <p>Now, run the following command to see if our project builds. Don't worry about the backend for now... we just
             want to see if our project builds and runs.</p>
-        <pre>DESKTOP /ananau-tutorial/ananau-bibliotheek-frontend<br>$ ng serve</pre>
-        <p>It should compile without issues and should be live on your localhost. The login screen should look something
+        <pre>DESKTOP /ananau-tutorial/ananau-bibliotheek-frontend<br>$ ng serve --host 0.0.0.0 --disable-host-check</pre>
+        <p>We use <kbd>--host 0.0.0.0 --disable-host-check</kbd> to make sure we can use subdomains in our localhost.</p>
+        <p>It should compile without issues and should be live on <kbd>http://team.localhost:4200</kbd>. The login screen should look something
             like
             this:</p>
 
