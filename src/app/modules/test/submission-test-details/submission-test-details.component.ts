@@ -169,13 +169,4 @@ export class SubmissionTestDetailsComponent implements OnInit {
   startEditing() {
     this.isEditingScore = true;
   }
-
-  cancelEditing() {
-    this.isEditingScore = false;
-  }
-
-  submitEditing() {
-    this.submitScore();
-    this.isEditingScore = false;
-  }
 }
