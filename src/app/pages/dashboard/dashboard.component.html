@@ -404,39 +404,48 @@
                 <button
                 routerLink="/exercise/list"
                 class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.LIST.LIST" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
-              <button
-                routerLink="/exercise/shared"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "MENU.LEARNING_PLATFORM.ASSIGNED_EXERCISES" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
-              <button
-                routerLink="/exercise/submission/list"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "MENU.LEARNING_PLATFORM.SUBMISSIONS" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
-              <button
-                routerLink="/exercise/create"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.LIST.CREATE_EXERCISE" | translate }}
-                </span>
-                <i class="fas fa-plus text-dark"></i>
-              </button>
+                >
+                  <span>
+                    {{ "EXERCISE.LIST.LIST" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
+                <button
+                  routerLink="/exercise/shared"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "MENU.LEARNING_PLATFORM.ASSIGNED_EXERCISES" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
+                <button
+                  routerLink="/exercise/submission/list"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "MENU.LEARNING_PLATFORM.SUBMISSIONS" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
+                <button
+                  routerLink="/exercise/create"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "EXERCISE.LIST.CREATE_EXERCISE" | translate }}
+                  </span>
+                  <i class="fas fa-plus text-dark"></i>
+                </button>
+                <button
+                  routerLink="/exercise/documentation"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "MENU.LEARNING_PLATFORM.DOCUMENTATION" | translate }}
+                  </span>
+                  <i class="fas fa-question text-dark"></i>
+                </button>
               </ng-container>
 
               <ng-template #exercise_buttons_learner>
@@ -506,6 +515,15 @@
                     {{ "TEST.LIST.LABELS.CREATE" | translate }}
                   </span>
                   <i class="fas fa-plus text-dark"></i>
+                </button>
+                <button
+                  routerLink="/test/documentation"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
+                >
+                  <span>
+                    {{ "MENU.LEARNING_PLATFORM.DOCUMENTATION" | translate }}
+                  </span>
+                  <i class="fas fa-question text-dark"></i>
                 </button>
               </ng-container>
 

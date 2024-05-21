@@ -15,6 +15,7 @@ import { SubmissionListComponent } from "./submission-list/submission-list.compo
 import { OverviewSubmissionComponent } from "./overview-submission/overview-submission.component";
 import { SharedExercisesListComponent } from "./shared-exercises-list/shared-exercises-list.component";
 import { AssignModalComponent } from "./components/assign-modal/assign-modal.component";
+import { ExerciseDocumentationComponent } from './documentation/exercise-documentation/exercise-documentation.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { AssignModalComponent } from "./components/assign-modal/assign-modal.com
     OverviewSubmissionComponent,
     SharedExercisesListComponent,
     AssignModalComponent,
+    ExerciseDocumentationComponent,
   ],
   providers: [DatePipe, AsyncPipe],
 })

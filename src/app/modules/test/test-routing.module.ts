@@ -9,6 +9,7 @@ import { OverviewTestComponent } from "./overview-test/overview-test.component";
 import { FillInTestComponent } from "./fill-in-test/fill-in-test.component";
 import { OverviewSubmissionTestComponent } from "./overview-submission-test/overview-submission-test.component";
 import { SubmissionTestDetailsComponent } from "./submission-test-details/submission-test-details.component";
+import { TestDocumentationComponent } from "./documentation/test-documentation/test-documentation.component";
 
 const routes: Routes = [
   {
@@ -74,6 +75,10 @@ const routes: Routes = [
         data: {
           permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher],
         },
+      },
+      {
+        path: 'documentation',
+        component: TestDocumentationComponent,
       },
       {
         path: "",

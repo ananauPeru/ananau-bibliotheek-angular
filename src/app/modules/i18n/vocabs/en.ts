@@ -121,6 +121,7 @@ export const locale = {
         EXERCISE_OVERVIEW: "Exercise overview",
         SUBMISSIONS: "Submissions",
         MY_STUDENTS: "My students",
+        DOCUMENTATION: "Documentation",
       }
     },
 

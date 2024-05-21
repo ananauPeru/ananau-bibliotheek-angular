@@ -9,6 +9,7 @@ import { OverviewExerciseComponent } from "./overview-exercise/overview-exercise
 import { SubmissionListComponent } from "./submission-list/submission-list.component";
 import { OverviewSubmissionComponent } from "./overview-submission/overview-submission.component";
 import { SharedExercisesListComponent } from "./shared-exercises-list/shared-exercises-list.component";
+import { ExerciseDocumentationComponent } from "./documentation/exercise-documentation/exercise-documentation.component";
 
 const routes: Routes = [
   {
@@ -74,6 +75,10 @@ const routes: Routes = [
         data: {
           permittedRoles: [Roles.SuperAdmin, Roles.SpanishTeacher, Roles.SpanishLearner],
         },
+      },
+      {
+        path: 'documentation',
+        component: ExerciseDocumentationComponent,
       },
       {
         path: "",

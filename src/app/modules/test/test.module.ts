@@ -17,6 +17,7 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
 import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
 import { OverviewSubmissionTestComponent } from './overview-submission-test/overview-submission-test.component';
 import { SubmissionTestDetailsComponent } from './submission-test-details/submission-test-details.component';
+import { TestDocumentationComponent } from './documentation/test-documentation/test-documentation.component';
 import { ImageWrapperComponent } from './components/image-wrapper/image-wrapper.component';
 
 
@@ -32,8 +33,7 @@ import { ImageWrapperComponent } from './components/image-wrapper/image-wrapper.
     NgbModule,
     NgxDropzoneModule,
   ],
-  
-  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, AudioPlayerComponent, OverviewSubmissionTestComponent, SubmissionTestDetailsComponent, ImageWrapperComponent],
+  declarations: [TestComponent, TestListComponent, CreateTestComponent, OverviewTestComponent, ShareModalComponent, FillInTestComponent, RadioButtonComponent, AudioPlayerComponent, OverviewSubmissionTestComponent, SubmissionTestDetailsComponent, TestDocumentationComponent, ImageWrapperComponent],
   providers: [DatePipe, AsyncPipe],
 })
 export class TestModule { }
