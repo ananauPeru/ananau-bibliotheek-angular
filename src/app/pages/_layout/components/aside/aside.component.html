@@ -1246,12 +1246,6 @@
       <ng-template #learningContent>
         <li
           class="menu-section"
-          *ngIf="
-            AuthUtil.permitted([
-              AuthUtil.roles.SuperAdmin,
-              AuthUtil.roles.Admin
-            ])
-          "
         >
           <h4 class="menu-text">
             {{ "MENU.LEARNING_PLATFORM.SPANISH" | translate }}
