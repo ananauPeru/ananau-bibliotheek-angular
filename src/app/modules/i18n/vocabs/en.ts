@@ -1224,7 +1224,7 @@ export const locale = {
         ERRORS: {
           SCORE_REQUIRED: "Please provide a score.",
           SCORE_POSITIVE: "Score must be greater than or equal to 0.",
-          SCORE_LESS_THAN: "Score must be less than or equal to 10.",
+          SCORE_LESS_THAN: "Score must be less than or equal to 20.",
           PROVIDE_VALID_SCORES: "Please provide valid scores for all open questions.",
           FAILED_TO_GRADE: "Something went wrong while submitting the score. Please try again later.",
         },

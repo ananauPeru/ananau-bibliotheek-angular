@@ -1226,7 +1226,7 @@ export const locale = {
         ERRORS: {
           SCORE_REQUIRED: "Por favor proporcione una puntuación.",
           SCORE_POSITIVE: "La puntuación debe ser mayor o igual a 0.",
-          SCORE_LESS_THAN: "La puntuación debe ser menor o igual a 10.",
+          SCORE_LESS_THAN: "La puntuación debe ser menor o igual a 20.",
           PROVIDE_VALID_SCORES: "Por favor proporcione puntuaciones válidas para todas las preguntas abiertas.",
           FAILED_TO_GRADE: "Algo salió mal al enviar la puntuación. Por favor intente de nuevo más tarde.",
         },

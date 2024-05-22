@@ -74,7 +74,7 @@ export class SubmissionTestDetailsComponent implements OnInit {
             if (this.QuestionUtil.isQuestionTypeIgnoreCase(question.type.name, this.QuestionUtil.types.OPEN_QUESTION)) {
               const controlName = 'question-' + question.id + '-score';
               const initialScore = question.learnerAnswer && question.learnerAnswer.score !== null ? question.learnerAnswer.score : '';
-              this.gradeForm.addControl(controlName, this.formBuilder.control(initialScore, [Validators.required, Validators.min(0), Validators.max(10)]));
+              this.gradeForm.addControl(controlName, this.formBuilder.control(initialScore, [Validators.required, Validators.min(0), Validators.max(20)]));
             }
           });
         });
@@ -143,7 +143,7 @@ export class SubmissionTestDetailsComponent implements OnInit {
     if(question.isAutoEvaluated) {
       return `(${question.learnerAnswer.score}/1)`
     } else if(!question.isAutoEvaluated && question.learnerAnswer.score) {
-      return `(${question.learnerAnswer.score}/10)`
+      return `(${question.learnerAnswer.score}/20)`
     } else {
       const translatedText = this.translateService.instant("TEST.SUBMISSION_DETAILS.MESSAGES.NO_GRADE");
       return `(${translatedText})`;
