@@ -91,9 +91,16 @@
   <button
     type="button"
     class="btn btn-primary"
-    [disabled]="assignForm.invalid"
+    [disabled]="assignForm.invalid || isLoading"
     (click)="onAssign()"
   >
-    {{ "BUTTONS.ASSIGN" | translate }}
+    <span
+      *ngIf="!isLoading; else loadingSpan"
+      class="d-none d-md-inline ml-1"
+      >{{ "BUTTONS.ASSIGN" | translate }}</span
+    >
+    <ng-template #loadingSpan>
+      <span class="d-none d-md-inline ml-1"> {{ "MENU.LOADING_DOTS" | translate }} </span>
+    </ng-template>
   </button>
 </div>

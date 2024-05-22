@@ -24,6 +24,7 @@ export class AssignModalComponent implements OnInit {
   @Input() exerciseId: number;
   @Input() learners: LearnerModel[];
   assignForm: FormGroup;
+  public isLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,6 +49,7 @@ export class AssignModalComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
     const assignExerciseRequest: AssignExerciseRequest = {
       learnerId: this.assignForm.value.learner,
       exerciseId: this.exerciseId,
@@ -57,11 +59,13 @@ export class AssignModalComponent implements OnInit {
     this.exerciseService.assignExercise$(assignExerciseRequest).subscribe(
       (response) => {
         this.toast.success("Exercise assigned successfully");
+        this.isLoading = false;
         this.activeModal.close();
       },
       (error) => {
         this.toast.error("Failed to assign exercise");
         console.error(error);
+        this.isLoading = false;
       }
     );
   }
