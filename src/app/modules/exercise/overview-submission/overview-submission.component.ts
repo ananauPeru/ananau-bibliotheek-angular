@@ -23,6 +23,7 @@ export class OverviewSubmissionComponent implements OnInit {
   submission$: Observable<TeacherSubmissionModel | StudentSubmissionModel>;
   gradeForm: FormGroup;
   isEditingGrade = false;
+  public isLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -90,6 +91,7 @@ export class OverviewSubmissionComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
     const submissionId: number = this.route.snapshot.params["id"];
     const grade: number = this.gradeForm.get("grade").value;
     const feedback: string = this.gradeForm.get("feedback").value;
@@ -107,6 +109,7 @@ export class OverviewSubmissionComponent implements OnInit {
             this.toast.success("Submission graded successfully!");
             this.getSubmissionDetails();
             this.isEditingGrade = false;
+            this.isLoading = false;
             this.cdr.detectChanges(); // Trigger change detection
           } else {
             this.toast.error("Failed to grade submission");
@@ -115,6 +118,7 @@ export class OverviewSubmissionComponent implements OnInit {
         (error) => {
           console.error("Error grading submission: ", error);
           this.toast.error("Error grading submission");
+          this.isLoading = false;
         }
       );
   }

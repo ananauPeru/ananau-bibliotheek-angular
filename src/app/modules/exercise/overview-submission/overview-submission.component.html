@@ -162,9 +162,16 @@
                 <button
                   type="submit"
                   class="btn btn-primary"
-                  [disabled]="gradeForm.invalid"
+                  [disabled]="gradeForm.invalid || isLoading"
                 >
-                  {{ "EXERCISE.SUBMISSION.GRADE_SUBMIT" | translate }}
+                  <span
+                    *ngIf="!isLoading; else loadingSpan"
+                    class="d-none d-md-inline ml-1"
+                    >{{ "EXERCISE.SUBMISSION.GRADE_SUBMIT" | translate }}</span
+                  >
+                  <ng-template #loadingSpan>
+                    <span class="d-none d-md-inline ml-1"> {{ "MENU.LOADING_DOTS" | translate }} </span>
+                  </ng-template>
                 </button>
                 <button
                   type="button"
