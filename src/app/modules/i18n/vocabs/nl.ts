@@ -1205,7 +1205,7 @@ export const locale = {
         ERRORS: {
           SCORE_REQUIRED: "Gelieve een score in te voeren.",
           SCORE_POSITIVE: "Score moet groter dan of gelijk aan 0 zijn.",
-          SCORE_LESS_THAN: "Score moet kleiner dan of gelijk aan 10 zijn.",
+          SCORE_LESS_THAN: "Score moet kleiner dan of gelijk aan 20 zijn.",
           PROVIDE_VALID_SCORES: "Gelieve geldige scores in te voeren voor alle open vragen.",
           FAILED_TO_GRADE: "Er is iets misgegaan bij het indienen van de score. Probeer het later opnieuw.",
         },
