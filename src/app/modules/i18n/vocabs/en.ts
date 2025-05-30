@@ -21,7 +21,7 @@ export const locale = {
     // BUTTONS
     BUTTONS: {
       SAVE: "Save",
-      SAVING:"Saving...",
+      SAVING: "Saving...",
       SAVE_CHANGES: "Save changes",
       SUBMIT: "Submit",
       CANCEL: "Cancel",
@@ -103,6 +103,7 @@ export const locale = {
         W2_TEAM_MEMBERS: '2 - Team members',
         W3_INVOLVED_COUNTRIES: '3 - Involved countries',
         AUTOMATIC_EMAILS: 'Automatic emails',
+        EDUCATIONAL_APP: 'Educational App',
         INFO: '1 - Info',
       },
       LEARNING_PLATFORM: {
@@ -842,6 +843,11 @@ export const locale = {
       },
     },
 
+    EDUCATIONAPP: {
+      TITLE: "Educational App",
+      BUTTON: "Start Exercises",
+    },
+
     // REGISTRATIONS OVERVIEW & DETAILS
     REGISTRATIONS: {
       STUDENT: "Student",
@@ -1072,10 +1078,10 @@ export const locale = {
         EDIT_GRADE: "Edit Grade",
         CURRENT_GRADE: "Current Grade:",
         GRADE_REQUIRED: "Grade is required.",
-        GRADE_POSITIVE:"Grade must be greater than or equal to 0.",
+        GRADE_POSITIVE: "Grade must be greater than or equal to 0.",
         GRADE_LESS_THAN: "Grade must be less than or equal to",
         GRADE_SUBMIT: "Submit Grade",
-        LIST:"Submission List",
+        LIST: "Submission List",
         SEARCH_USER_EXERCISE: "Search for user or exercise",
         EXERCISE_TABLE: "Exercise",
         SUBMITTED_BY_TABLE: "Submitted By",

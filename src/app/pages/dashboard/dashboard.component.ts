@@ -9,9 +9,11 @@ import { AuthService } from "src/app/modules/auth";
   styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
-  constructor(public AuthUtil: AuthUtil, private authService: AuthService, public DomainUtil: DomainUtil) {}
+  token: string;
+  constructor(public AuthUtil: AuthUtil, private authService: AuthService, public DomainUtil: DomainUtil) { }
 
   ngOnInit(): void {
     this.authService.logoutIfTokenExpired();
+    this.token = this.authService.getAuthFromLocalStorage()?.token;
   }
 }

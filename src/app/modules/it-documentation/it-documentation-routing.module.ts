@@ -14,6 +14,7 @@ import { W1ProjectsComponent } from './website/w1-projects/w1-projects.component
 import { W2TeamMembersComponent } from './website/w2-team-members/w2-team-members.component'
 import { W3InvolvedCountriesComponent } from './website/w3-involved-countries/w3-involved-countries.component'
 import { AutomaticEmailsComponent } from './automatic-emails/automatic-emails.component'
+import { EducationalAppComponent } from './educational-app/educational-app/educational-app.component'
 
 
 const routes: Routes = [
@@ -56,6 +57,10 @@ const routes: Routes = [
       {
         path: 'automatic-emails',
         component: AutomaticEmailsComponent,
+      },
+      {
+        path: 'educational-app',
+        component: EducationalAppComponent,
       },
       {
         path: 'todos',

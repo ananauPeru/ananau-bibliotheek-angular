@@ -56,7 +56,8 @@ import { ModelsAndTablesComponent } from './getting-started/s2-best-practices/mo
 import { ToDosComponent } from './todos/todos.component';
 import { OverviewComponent } from './todos/overview/overview.component';
 import { CreateComponent } from './todos/create/create.component';
-import { DeployComponent } from './getting-started/deploy/deploy.component'
+import { DeployComponent } from './getting-started/deploy/deploy.component';
+import { EducationalAppComponent } from './educational-app/educational-app/educational-app.component'
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { DeployComponent } from './getting-started/deploy/deploy.component'
     OverviewComponent,
     CreateComponent,
     DeployComponent,
+    EducationalAppComponent,
   ],
   imports: [
     CommonModule,

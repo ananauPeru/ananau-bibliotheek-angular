@@ -81,6 +81,7 @@ export const locale = {
         W2_TEAM_MEMBERS: "2 - Miembros del equipo",
         W3_INVOLVED_COUNTRIES: "3 - Países implicados",
         AUTOMATIC_EMAILS: "Correos electrónicos automáticos",
+        EDUCATIONAL_APP: 'App de Aprendizaje',
         INFO: "1 - Información",
       },
       ORGANIZATION: {
@@ -461,6 +462,11 @@ export const locale = {
           "En el caso de incumplimiento de todo lo anterior, usted estará sujeto a responsabilidad civil y penal, por los posibles daños ocasionados a la asociación, de acuerdo con la ley peruana. Este acuerdo de confidencialidad se mantendrá indefinidamente, ahora y en el futuro, hasta que la asociación lo considere terminado, o por disolución del mismo.",
         AGREE: "Estoy de acuerdo con los términos mencionados anteriormente.",
       },
+    },
+
+    EDUCATIONAPP: {
+      TITLE: "App de Aprendizaje",
+      BUTTON: "Empieza con los ejercicios",
     },
 
     LIBRARY: {
