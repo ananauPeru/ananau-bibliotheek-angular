@@ -83,6 +83,7 @@ export const locale = {
         W2_TEAM_MEMBERS: "2 - Teamleden",
         W3_INVOLVED_COUNTRIES: "3 - Betrokken landen",
         AUTOMATIC_EMAILS: "Automatische e-mails",
+        EDUCATIONAL_APP: 'Educatieve App',
         INFO: "1 - Informatie",
       },
       LEARNING_PLATFORM: {
@@ -449,6 +450,11 @@ export const locale = {
           "In geval van niet-naleving van al het bovenstaande, bent u onderworpen aan burgerlijke en strafrechtelijke aansprakelijkheid voor mogelijke schade die aan de vereniging is toegebracht, volgens de Peruaanse wet. Deze vertrouwelijkheidsovereenkomst zal voor onbepaalde tijd worden gehandhaafd, nu en in de toekomst, totdat de vereniging deze als beëindigd beschouwt, of door ontbinding ervan.",
         AGREE: "Ik ga akkoord met de bovenstaande voorwaarden.",
       },
+    },
+
+    EDUCATIONAPP: {
+      TITLE: "Educatieve App",
+      BUTTON: "Start Oefeningen",
     },
 
     LIBRARY: {

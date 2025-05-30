@@ -1,12 +1,9 @@
-<ng-container
-  *ngIf="
+<ng-container *ngIf="
     DomainUtil.isSubdomain(DomainUtil.Subdomain.Team);
     else learningDashboard
-  "
->
-  <div
-    class="row"
-    *ngIf="
+  ">
+
+  <div class="row" *ngIf="
       AuthUtil.permitted([
         AuthUtil.roles.SuperAdmin,
         AuthUtil.roles.Admin,
@@ -16,18 +13,14 @@
         AuthUtil.roles.QRCodeReader
       ]);
       else noRoles
-    "
-  >
+    ">
     <!--LIBRARY-->
-    <div
-      class="col-lg-3 menu-card one-big-child"
-      *ngIf="
+    <div class="col-lg-3 menu-card one-big-child" *ngIf="
         AuthUtil.permitted([
           AuthUtil.roles.Librarian,
           AuthUtil.roles.SuperAdmin
         ])
-      "
-    >
+      ">
       <div>
         <!--begin::Card-->
         <div class="card card-custom h-100">
@@ -40,42 +33,24 @@
               <h5 class="font-weight-bold line-height-lg">
                 {{ "MENU.LIBRARY.BOOKS" | translate }}
               </h5>
-              <a
-                routerLink="/library/books/overview"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
-              >
-              <a
-                routerLink="/library/books/add-book"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.LIBRARY.ADD_BOOK" | translate }}</a
-              >
+              <a routerLink="/library/books/overview" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.LIBRARY.OVERVIEW" | translate }}</a>
+              <a routerLink="/library/books/add-book" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.LIBRARY.ADD_BOOK" | translate }}</a>
               <h5 class="font-weight-bold line-height-lg mt-lg-2 mt-4">
                 {{ "MENU.LIBRARY.ITEMS" | translate }}
               </h5>
-              <a
-                routerLink="/library/items/files"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
-              >
-              <a
-                routerLink="/library/items/add-item"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.LIBRARY.ADD_ITEM" | translate }}</a
-              >
+              <a routerLink="/library/items/files" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.LIBRARY.OVERVIEW" | translate }}</a>
+              <a routerLink="/library/items/add-item" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.LIBRARY.ADD_ITEM" | translate }}</a>
               <h5 class="font-weight-bold line-height-lg mt-lg-2 mt-4">
                 {{ "MENU.LIBRARY.LOANING" | translate }}
               </h5>
-              <a
-                routerLink="/library/loans/overview"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
-              >
-              <a
-                routerLink="/library/loans/new-loan"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.LIBRARY.NEW_LOAN" | translate }}</a
-              >
+              <a routerLink="/library/loans/overview" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.LIBRARY.OVERVIEW" | translate }}</a>
+              <a routerLink="/library/loans/new-loan" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.LIBRARY.NEW_LOAN" | translate }}</a>
             </div>
           </div>
           <!--end::Body-->
@@ -83,17 +58,15 @@
         <!--end::Card-->
       </div>
     </div>
+
     <!--STUDENT & VOLUNTEER-->
-    <div
-      class="col-lg-3 menu-card"
-      *ngIf="
+    <div class="col-lg-3 menu-card" *ngIf="
         AuthUtil.permitted([
           AuthUtil.roles.Student,
           AuthUtil.roles.Volunteer,
           AuthUtil.roles.SuperAdmin
         ])
-      "
-      [ngClass]="
+      " [ngClass]="
         AuthUtil.permitted([
           AuthUtil.roles.Student,
           AuthUtil.roles.SuperAdmin
@@ -104,16 +77,13 @@
         ])
           ? 'two-small-children'
           : 'one-small-child'
-      "
-    >
-      <div
-        *ngIf="
+      ">
+      <div *ngIf="
           AuthUtil.permitted([
             AuthUtil.roles.Student,
             AuthUtil.roles.SuperAdmin
           ])
-        "
-      >
+        ">
         <!--begin::Card-->
         <div class="card card-custom h-100">
           <!--begin::Body-->
@@ -122,25 +92,20 @@
               <h3 class="font-weight-bolder line-height-lg mb-lg-3 mb-5">
                 {{ "REGISTRATION.GENERAL.STUDENT" | translate }}
               </h3>
-              <a
-                routerLink="/registration-form/student"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.MANAGEMENT.REGISTRATION" | translate }}</a
-              >
+              <a routerLink="/registration-form/student" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.MANAGEMENT.REGISTRATION" | translate }}</a>
             </div>
           </div>
           <!--end::Body-->
         </div>
         <!--end::Card-->
       </div>
-      <div
-        *ngIf="
+      <div *ngIf="
           AuthUtil.permitted([
             AuthUtil.roles.Volunteer,
             AuthUtil.roles.SuperAdmin
           ])
-        "
-      >
+        ">
         <!--begin::Card-->
         <div class="card card-custom h-100">
           <!--begin::Body-->
@@ -149,11 +114,8 @@
               <h3 class="font-weight-bolder line-height-lg mb-lg-3 mb-5">
                 {{ "REGISTRATION.GENERAL.VOLUNTEER" | translate }}
               </h3>
-              <a
-                routerLink="/registration-form/volunteer"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.MANAGEMENT.REGISTRATION" | translate }}</a
-              >
+              <a routerLink="/registration-form/volunteer" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.MANAGEMENT.REGISTRATION" | translate }}</a>
             </div>
           </div>
           <!--end::Body-->
@@ -162,23 +124,17 @@
       </div>
     </div>
 
-    <div
-      class="col-lg-3 menu-card"
-      *ngIf="
+    <div class="col-lg-3 menu-card" *ngIf="
         AuthUtil.permitted([
           AuthUtil.roles.Student,
           AuthUtil.roles.Volunteer,
           AuthUtil.roles.Admin,
           AuthUtil.roles.SuperAdmin
         ])
-      "
-      [ngClass]="'one-big-child'"
-    >
-      <div
-        *ngIf="
+      " [ngClass]="'one-big-child'">
+      <div *ngIf="
           AuthUtil.permitted([AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin])
-        "
-      >
+        ">
         <!--begin::Card-->
         <div class="card card-custom h-200">
           <!--begin::Body-->
@@ -187,31 +143,17 @@
               <h3 class="font-weight-bolder line-height-lg mb-lg-3 mb-5">
                 {{ "MENU.ORGANIZATION.TITLE" | translate }}
               </h3>
-              <a
-                routerLink="/organization/roles"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.ORGANIZATION.ROLES" | translate }}</a
-              >
-              <a
-                routerLink="/organization/registrations"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.ORGANIZATION.REGISTRATIONS" | translate }}</a
-              >
-              <a
-                routerLink="/organization/check-in/list"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.ORGANIZATION.CHECK_IN_LIST" | translate }}</a
-              >
-              <a
-                routerLink="/organization/general-information"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.ORGANIZATION.GENERAL_INFORMATION" | translate }}</a
-              >
-              <a
-                routerLink="/organization/calendar"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.KAL" | translate }}</a
-              >
+              <a routerLink="/organization/roles" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.ORGANIZATION.ROLES" | translate }}</a>
+              <a routerLink="/organization/registrations" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.ORGANIZATION.REGISTRATIONS" | translate }}</a>
+              <a routerLink="/organization/check-in/list" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.ORGANIZATION.CHECK_IN_LIST" | translate }}</a>
+              <a routerLink="/organization/general-information"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{ "MENU.ORGANIZATION.GENERAL_INFORMATION" |
+                translate }}</a>
+              <a routerLink="/organization/calendar" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.KAL" | translate }}</a>
             </div>
           </div>
           <!--end::Body-->
@@ -220,10 +162,7 @@
       </div>
     </div>
     <!-- IT - DOCUMENTATION -->
-    <div
-      class="col-lg-3 menu-card one-big-child"
-      *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])"
-    >
+    <div class="col-lg-3 menu-card one-big-child" *ngIf="AuthUtil.permitted([AuthUtil.roles.SuperAdmin])">
       <div>
         <!--begin::Card-->
         <div class="card card-custom h-100">
@@ -236,36 +175,22 @@
               <h5 class="font-weight-bold line-height-lg">
                 {{ "MENU.DOCUMENTATION.GETTING_STARTED" | translate }}
               </h5>
-              <a
-                routerLink="/documentation/getting-started/0-preparations"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.DOCUMENTATION.S0_PREPARATIONS" | translate }}</a
-              >
-              <a
-                routerLink="/documentation/getting-started/1-setting-up"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.DOCUMENTATION.S1_SETTING_UP" | translate }}</a
-              >
-              <a
-                routerLink="/documentation//getting-started/2-best-practices/models-and-tables"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{
-                  "MENU.DOCUMENTATION.S2_BEST_PRACTICES.TITLE" | translate
-                }}</a
-              >
-              <a
-                routerLink="/documentation/getting-started/3-deployment-azure"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{
-                  "MENU.DOCUMENTATION.S3_DEPLOYMENT_AND_AZURE" | translate
-                }}</a
-              >
+              <a routerLink="/documentation/getting-started/0-preparations"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{ "MENU.DOCUMENTATION.S0_PREPARATIONS" |
+                translate }}</a>
+              <a routerLink="/documentation/getting-started/1-setting-up"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{ "MENU.DOCUMENTATION.S1_SETTING_UP" |
+                translate }}</a>
+              <a routerLink="/documentation//getting-started/2-best-practices/models-and-tables"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.DOCUMENTATION.S2_BEST_PRACTICES.TITLE" | translate
+                }}</a>
+              <a routerLink="/documentation/getting-started/3-deployment-azure"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.DOCUMENTATION.S3_DEPLOYMENT_AND_AZURE" | translate
+                }}</a>
               <h5 class="font-weight-bold line-height-lg mt-lg-2 mt-4">TODO</h5>
-              <a
-                routerLink="/documentation/todos"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >Todo</a
-              >
+              <a routerLink="/documentation/todos" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">Todo</a>
             </div>
           </div>
           <!--end::Body-->
@@ -274,23 +199,18 @@
       </div>
     </div>
 
-    <div
-      class="col-lg-3 menu-card one-small-child"
-      *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])"
-    >
+    <div class="col-lg-3 menu-card one-small-child" *ngIf="AuthUtil.permitted([AuthUtil.roles.QRCodeReader])">
       <div>
         <!--begin::Card-->
         <div class="card card-custom h-100">
           <!--begin::Body-->
           <div class="card-body text-white d-flex align-items-center">
             <div class="w-100">
-              <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
+              <h3 class="font-weight-bolder line-height-lg mb-lg-2">
                 {{ "MENU.ORGANIZATION.CHECK_IN" | translate }}
               </h3>
-              <button
-                routerLink="/organization/check-in/scan"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
+              <button routerLink="/organization/check-in/scan"
+                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                 <span>{{ "CHECK_IN.SCAN_QR_CODE" | translate }}</span>
                 <i class="fas fa-qrcode text-dark"></i>
               </button>
@@ -302,9 +222,7 @@
       </div>
     </div>
 
-    <div
-      class="col-lg-3 menu-card one-big-child"
-      *ngIf="
+    <div class="col-lg-3 menu-card one-big-child" *ngIf="
         AuthUtil.permitted([
           AuthUtil.roles.Admin,
           AuthUtil.roles.SuperAdmin,
@@ -312,13 +230,10 @@
           AuthUtil.roles.Student,
           AuthUtil.roles.Volunteer
         ])
-      "
-    >
+      ">
       <div>
         <!--begin::Card-->
-        <div
-          class="card card-custom h-200"
-          *ngIf="
+        <div class="card card-custom h-200" *ngIf="
             AuthUtil.permitted([
               AuthUtil.roles.Admin,
               AuthUtil.roles.SuperAdmin,
@@ -326,35 +241,22 @@
               AuthUtil.roles.Student,
               AuthUtil.roles.Volunteer
             ])
-          "
-        >
+          ">
           <!--begin::Body-->
           <div class="card-body text-white d-flex align-items-center">
             <div>
               <h3 class="font-weight-bold line-height-lg">
                 {{ "MENU.LIBRARY.LES" | translate }}
               </h3>
-              <a
-                routerLink="/class/files"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.LIBRARY.OVERVIEW" | translate }}</a
-              >
-              <a
-                routerLink="/class/overview"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.ZOEK" | translate }}</a
-              >
-              <a
-                routerLink="/class/add-class"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "MENU.LIBRARY.ADD_LES" | translate }}</a
-              >
+              <a routerLink="/class/files" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.LIBRARY.OVERVIEW" | translate }}</a>
+              <a routerLink="/class/overview" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{ "MENU.ZOEK" |
+                translate }}</a>
+              <a routerLink="/class/add-class" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "MENU.LIBRARY.ADD_LES" | translate }}</a>
 
-              <a
-                routerLink="/class/documentation"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0"
-                >{{ "LIBRARY.CLASS.HELP" | translate }}</a
-              >
+              <a routerLink="/class/documentation" class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0">{{
+                "LIBRARY.CLASS.HELP" | translate }}</a>
             </div>
           </div>
           <!--end::Body-->
@@ -366,33 +268,24 @@
   <ng-template #noRoles>
     <div class="w-100 mt-5 text-center">
       <p class="font-weight-bold">{{ "MENU.NO_ROLES" | translate }}</p>
-      <a
-        href="mailto:info@ananau.org"
-        class="btn btn-primary font-weight-bold mt-2"
-      >
-        <i class="socicon-mail"></i
-        ><span class="text-white">info@ananau.org</span>
+      <a href="mailto:info@ananau.org" class="btn btn-primary font-weight-bold mt-2">
+        <i class="socicon-mail"></i><span class="text-white">info&#64;ananau.org</span>
       </a>
     </div>
+
   </ng-template>
 </ng-container>
 
 <ng-template #learningDashboard>
-  <div
-    class="row"
-    *ngIf="
+  <div class="row" *ngIf="
       AuthUtil.permitted([AuthUtil.roles.SuperAdmin, AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SpanishLearner]);
       else noRoles
-    "
-  >
+    ">
 
-  <!-- Exercise -->
-  <div
-      class="col-lg-3 menu-card one-large-child"
-      *ngIf="
+    <!-- Exercise -->
+    <div class="col-lg-3 menu-card one-large-child" *ngIf="
         AuthUtil.permitted([AuthUtil.roles.SpanishLearner, AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin])
-      "
-    >
+      ">
       <div>
         <div class="card card-custom h-100">
           <div class="card-body text-white d-flex align-items-center">
@@ -400,47 +293,38 @@
               <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
                 {{ "MENU.LEARNING_PLATFORM.EXERCISE" | translate }}
               </h3>
-              <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else exercise_buttons_learner">
-                <button
-                routerLink="/exercise/list"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+              <ng-container
+                *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else exercise_buttons_learner">
+                <button routerLink="/exercise/list"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "EXERCISE.LIST.LIST" | translate }}
                   </span>
                   <i class="fas fa-list text-dark"></i>
                 </button>
-                <button
-                  routerLink="/exercise/shared"
-                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+                <button routerLink="/exercise/shared"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "MENU.LEARNING_PLATFORM.ASSIGNED_EXERCISES" | translate }}
                   </span>
                   <i class="fas fa-list text-dark"></i>
                 </button>
-                <button
-                  routerLink="/exercise/submission/list"
-                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+                <button routerLink="/exercise/submission/list"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "MENU.LEARNING_PLATFORM.SUBMISSIONS" | translate }}
                   </span>
                   <i class="fas fa-list text-dark"></i>
                 </button>
-                <button
-                  routerLink="/exercise/create"
-                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+                <button routerLink="/exercise/create"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "EXERCISE.LIST.CREATE_EXERCISE" | translate }}
                   </span>
                   <i class="fas fa-plus text-dark"></i>
                 </button>
-                <button
-                  routerLink="/exercise/documentation"
-                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+                <button routerLink="/exercise/documentation"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "MENU.LEARNING_PLATFORM.DOCUMENTATION" | translate }}
                   </span>
@@ -449,24 +333,20 @@
               </ng-container>
 
               <ng-template #exercise_buttons_learner>
-                <button
-                routerLink="/exercise/shared"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.ASSIGN.MY_EXERCISES" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
-              <button
-                routerLink="/exercise/submission/list"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
+                <button routerLink="/exercise/shared"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
+                  <span>
+                    {{ "EXERCISE.ASSIGN.MY_EXERCISES" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
+                <button routerLink="/exercise/submission/list"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
+                  <span>
+                    {{ "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
               </ng-template>
             </div>
           </div>
@@ -475,12 +355,9 @@
     </div>
 
     <!-- Test -->
-    <div
-      class="col-lg-3 menu-card one-large-child"
-      *ngIf="
+    <div class="col-lg-3 menu-card one-large-child" *ngIf="
         AuthUtil.permitted([AuthUtil.roles.SpanishLearner, AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin])
-      "
-    >
+      ">
       <div>
         <div class="card card-custom h-100">
           <div class="card-body text-white d-flex align-items-center">
@@ -488,38 +365,31 @@
               <h3 class="font-weight-bolder line-height-lg mb-lg-2 mb-5">
                 {{ "MENU.LEARNING_PLATFORM.TEST" | translate }}
               </h3>
-              <ng-container *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else test_buttons_learner">
-                <button
-                  routerLink="/test/submitted"
-                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+              <ng-container
+                *ngIf="AuthUtil.permitted([AuthUtil.roles.SpanishTeacher, AuthUtil.roles.SuperAdmin]); else test_buttons_learner">
+                <button routerLink="/test/submitted"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "TEST.OVERVIEW_SUBMISSION.SUBMITTED_TESTS" | translate }}
                   </span>
                   <i class="fas fa-list text-dark"></i>
                 </button>
-                <button
-                  routerLink="/test/list"
-                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+                <button routerLink="/test/list"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "TEST.LIST.TEST_LIST" | translate }}
                   </span>
                   <i class="fas fa-list text-dark"></i>
                 </button>
-                <button
-                  routerLink="/test/create"
-                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+                <button routerLink="/test/create"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "TEST.LIST.LABELS.CREATE" | translate }}
                   </span>
                   <i class="fas fa-plus text-dark"></i>
                 </button>
-                <button
-                  routerLink="/test/documentation"
-                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-                >
+                <button routerLink="/test/documentation"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
                   <span>
                     {{ "MENU.LEARNING_PLATFORM.DOCUMENTATION" | translate }}
                   </span>
@@ -528,15 +398,13 @@
               </ng-container>
 
               <ng-template #test_buttons_learner>
-              <button
-                routerLink="/test/submitted_test"
-                class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100"
-              >
-                <span>
-                  {{ "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate }}
-                </span>
-                <i class="fas fa-list text-dark"></i>
-              </button>
+                <button routerLink="/test/submitted_test"
+                  class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
+                  <span>
+                    {{ "EXERCISE.SUBMISSION.MY_SUBMISSIONS" | translate }}
+                  </span>
+                  <i class="fas fa-list text-dark"></i>
+                </button>
               </ng-template>
             </div>
           </div>
@@ -548,13 +416,35 @@
   <ng-template #noRoles>
     <div class="w-100 mt-5 text-center">
       <p class="font-weight-bold">{{ "MENU.NO_ROLES" | translate }}</p>
-      <a
-        href="mailto:info@ananau.org"
-        class="btn btn-primary font-weight-bold mt-2"
-      >
-        <i class="socicon-mail"></i
-        ><span class="text-white">info@ananau.org</span>
+      <a href="mailto:info@ananau.org" class="btn btn-primary font-weight-bold mt-2">
+        <i class="socicon-mail"></i><span class="text-white">info&#64;ananau.org</span>
       </a>
     </div>
   </ng-template>
 </ng-template>
+
+<!-- EDUCATIONAL APP -->
+<div class="col-lg-3 menu-card one-big-child"
+  *ngIf="AuthUtil.permitted([AuthUtil.roles.Admin, AuthUtil.roles.SuperAdmin])">
+  <div>
+    <!--begin::Card-->
+    <div class="card card-custom h-40" style="margin-top: -27rem;
+    margin-left: -1.3rem;">
+      <!--begin::Body-->
+      <div class="card-body text-white d-flex align-items-center">
+        <div class="w-100">
+          <h3 class="font-weight-bolder line-height-lg ">
+            {{ "EDUCATIONAPP.TITLE" | translate }}
+          </h3>
+          <a [href]="'https://team.ananau.org/education/data?token=' + token" target="_blank" rel="noopener noreferrer"
+            class="btn font-weight-bold px-6 py-3 mb-2 mr-2 mr-lg-0 d-flex justify-content-between w-100">
+            <span>{{ "EDUCATIONAPP.BUTTON" | translate }}</span>
+            <i class="fas fa-graduation-cap text-dark"></i>
+          </a>
+        </div>
+      </div>
+      <!--end::Body-->
+    </div>
+    <!--end::Card-->
+  </div>
+</div>

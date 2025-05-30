@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-12">
+    <h1 class="display-4">
+      1 - Info: How to Run + Best Practices Regarding Expansion
+    </h1>
+    <hr />
+    <p class="lead h6"> Created: 29/05/2025 | Last Update: 29/05/2025</p>
+  </div>
+  <div class="col-12 mt-3">
+    <h4 class="display">Step 1 - Clone the Repo</h4>
+    <p>If you’ve successfully completed the previous guides, you should have access to Añañau's GitHub repositories.
+      Clone the educational app locally to a desired location on your computer. This allows you to review the
+      implemented functionalities and make future changes.</p>
+
+    <h4 class="display">Step 2 - Use the Back-End and MySQL Database</h4>
+    <p>This app uses the same back-end and MySQL setup as the other previously implemented projects, so check the
+      earlier guides for instructions on running them locally.</p>
+
+    <h4 class="display">Step 3 - Make Your Changes (Best Practices)</h4>
+    <h5 class="display">A - Overview of Implemented Functionalities</h5>
+    <ul>
+      <li>
+        <strong>Students:</strong> List-overview + Create + Delete
+      </li>
+      <li>
+        <strong>Exercises:</strong> List-overview + Create + Edit + Delete
+      </li>
+      <li>
+        <strong>Making exercises:</strong> A student can complete a minimum of one and a maximum of all exercises at a
+        given moment. At the end of the session, the student will see how many questions they answered correctly.
+      </li>
+      <li>
+        <strong>Results:</strong> List-overview + Delete
+      </li>
+    </ul>
+    <h5 class="display">B - Expanding Exercises</h5>
+    <p>Currently, the logic for exercises is tailored to the specific structure requested by the customer. If they wish
+      to
+      introduce more variables or change how exercises are modeled (e.g., more images, sounds, no option buttons,
+      etc.), this can be done fairly easily.
+      Exercises inherit from a parent class that contains common variables (e.g., question, ID). To implement a new type
+      of exercise, create a new object that inherits from the parent and add any specific properties required.
+    </p>
+    <p>After updating the controller, service, and other layers to work with the new exercise via a new DTO, you’ll need
+      to reflect these variables in the relevant component to ensure they’re visible on the screen.
+
+      As a developer, you’ll likely know how to manage this process, but documenting how to expand the exercises was
+      part of my task—so let’s keep it clear.
+
+      Also, don’t hesitate to check resources like Stack Overflow, YouTube tutorials, etc.—this takes part of a
+      developer's workflow.
+
+      Good luck!</p>
+  </div>
